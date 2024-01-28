@@ -1,8 +1,20 @@
 @import "reset";
-@import "variables/variables";
+@import "variables/global";
 @import "themes/light";
 @import "themes/dark";
 
 .app{
+  background: var(--background-color);
+  color:var(--primary-color);
+}
+.fill{
+  width:200px;
+  fill: red;
+}
+.app_wrapper{
+  display: flex;
 
+}
+.content_wrapper{
+  padding: 20px;
 }
