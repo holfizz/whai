@@ -4,5 +4,6 @@
   height: var(--navbar-height);
   width: 100vw;
   background:var(--elements-color);
-
+  position: fixed;
+  z-index: 10;
 }

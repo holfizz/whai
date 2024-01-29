@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
 	webpack(config) {
 		const fileLoaderRule = config.module.rules.find((rule) =>
@@ -23,7 +24,8 @@ const nextConfig = {
 
 		return config
 	},
-	reactStrictMode:true
+	reactStrictMode:true,
+
 };
 
 export default nextConfig;

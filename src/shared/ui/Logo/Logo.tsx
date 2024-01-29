@@ -1,8 +1,10 @@
+'use client'
 import { FC, memo } from 'react'
 import { classNames, Mods } from '@/shared/lib/classNames/classNames'
 import cls from './Logo.module.scss'
 import { Poppins } from 'next/font/google'
-import LogoIcon from '../../assets/Whai.svg'
+import LogoIcon from '@/shared/assets/Whai.svg'
+import { useRouter } from 'next/navigation'
 
 export enum LogoSize{
 	S='small',
@@ -19,8 +21,11 @@ const Logo: FC<LogoProps> = memo(({className, logoSize = LogoSize.S}) => {
   const mods:Mods= {
     [cls[logoSize]]:true
   }
+  const router = useRouter()
   return (
-    <LogoIcon className={classNames(cls.Logo, mods, [className , poppins.className])}/>
+    <button type={'button'} onClick={()=>router.push('/')}>
+      <LogoIcon className={classNames(cls.Logo, mods, [className , poppins.className])}/>
+    </button>
   )
 })
 

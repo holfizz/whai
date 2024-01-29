@@ -1,13 +1,9 @@
 'use client'
-import { type FC, type PropsWithChildren, useMemo, useState } from 'react'
+import { type FC, type PropsWithChildren, useEffect, useMemo, useState } from 'react'
 import { ThemeContext } from '@/shared/lib/context/ThemeContext'
 import { Theme } from '@/shared/const/theme'
+import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme'
 import { LOCAL_STORAGE_THEME_KEY } from '@/shared/const/localStorage'
-
-let defaultTheme:Theme
-if (typeof window !== 'undefined') {
-  defaultTheme = (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT
-}
 
 
 interface ThemeProviderProps {
@@ -17,7 +13,14 @@ const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   children,
   initialTheme,
 }) => {
-  const [theme, setTheme] = useState<Theme>(initialTheme || defaultTheme )
+
+  const {theme:Theme} = useTheme()
+  const [theme, setTheme] = useState<Theme>()
+
+  useEffect(() => {
+    setTheme(initialTheme || (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme)
+  }, [initialTheme, Theme])
+
   const defaultProps = useMemo(
     () => ({
       theme: theme,
