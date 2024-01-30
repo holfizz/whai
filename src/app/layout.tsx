@@ -17,7 +17,7 @@ function RootLayout({
 }>) {
   return (
     <ThemeProvider>
-      <html className={montserrat.className} lang="en">
+      <html className={montserrat.className} lang="ru">
         <head>
           <link rel="icon" href="/whai.png" sizes="any" />
         </head>

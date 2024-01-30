@@ -9,12 +9,12 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = memo(({ className }) => {
   return (
-    <div className={classNames(cls.Navbar, {}, [className])}>
+    <header className={classNames(cls.Navbar, {}, [className])}>
       <div className={cls.logo}>
         <Logo />
       </div>
 
-    </div>
+    </header>
   )
 })
 
