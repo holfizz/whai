@@ -1,10 +1,10 @@
 'use client'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme'
 import { Suspense, useState } from 'react'
-import { LOCAL_STORAGE_THEME_KEY } from '@/shared/const/localStorage'
 import Sidebar from '@/widgets/Sidebar'
 import Navbar from '@/widgets/Navbar'
+import TanstackProvider from '@/app/(providers)/TanstackProvider'
+import { ThemeProvider } from 'next-themes'
 
 export default function Body({
   children, className
@@ -12,23 +12,29 @@ export default function Body({
 	children: React.ReactNode,
 	className?:string
 }) {
-  const { theme } = useTheme()
-  const defaultTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) || theme
+
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   return (
-    <body  className={classNames('app', {}, [defaultTheme, className])}>
-      <Suspense fallback={null}>
-        <Navbar />
-        <div className={'app_wrapper'}>
-          <div className={'asd'}>
-            <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}/>
-          </div>
-          <div className={classNames('content_wrapper', {['isCollapsed']: isCollapsed}, [])}>
-            {children}
-          </div>
-        </div>
-      </Suspense>
+    <body  className={classNames('app', {}, [ className])}>
+      <ThemeProvider
+        themes={['app_dark_theme', 'app_light_theme']}
+        attribute="class"
+        defaultTheme="app_light_theme"
+        disableTransitionOnChange
+      >
+        <TanstackProvider>
+          <Suspense fallback={null}>
+            <Navbar />
+            <div className={'app_wrapper'}>
+              <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}/>
+              <div className={classNames('content_wrapper', {['isCollapsed']: isCollapsed}, [])}>
+                {children}
+              </div>
+            </div>
+          </Suspense>
+        </TanstackProvider>
+      </ThemeProvider>
     </body>
   )
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import '@/app/(styles)/index.scss'
-import { ThemeProvider } from '@/app/(providers)/ThemeProvider'
 import Body from '@/app/body'
 import '../shared/config/i18n/i18n'
 
@@ -16,18 +15,14 @@ function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ThemeProvider>
-      <html className={montserrat.className} lang="ru">
-        <head>
-          <link rel="icon" href="/whai.png" sizes="any" />
-        </head>
-        <Body className={montserrat.className}>
-
-          {children}
-
-        </Body>
-      </html>
-    </ThemeProvider>
+    <html lang="ru" >
+      <head>
+        <link rel="icon" href="/whai.png" sizes="any" />
+      </head>
+      <Body className={montserrat.className}>
+        {children}
+      </Body>
+    </html>
   )
 }
 

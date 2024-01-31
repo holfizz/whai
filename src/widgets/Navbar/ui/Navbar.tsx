@@ -13,7 +13,6 @@ const Navbar: FC<NavbarProps> = memo(({ className }) => {
       <div className={cls.logo}>
         <Logo />
       </div>
-
     </header>
   )
 })
