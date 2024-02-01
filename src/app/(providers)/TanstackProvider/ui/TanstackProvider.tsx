@@ -10,7 +10,7 @@ const TanstackProvider = ({children}:{children:ReactNode} )=>{
 			  refetchOnWindowFocus: false,
 			  refetchOnReconnect: false,
 			  refetchOnMount:false,
-			  retry: 1,
+			  retry:1,
 			  staleTime: 5 * 1000,
 		  },
 	  },
