@@ -2,13 +2,6 @@
 @import "variables/global";
 @import "themes/light";
 @import "themes/dark";
-.fill{
-  width:200px;
-  fill: red;
-}
-body{
-}
-
 .app_wrapper{
   position: relative;
   background: var(--elements-color);

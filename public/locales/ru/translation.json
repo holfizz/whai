@@ -1,3 +1,7 @@
 {
-  "asd": "1123123123"
+  "log in": "Войти",
+  "register": "Регистрация",
+  "You entered an incorrect email or password": "Вы ввели неправильный адрес электронной почты или пароль",
+  "Authorization": "Авторизация",
+  "logout": "Выйти"
 }

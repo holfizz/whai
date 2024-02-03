@@ -7,3 +7,17 @@
   position: fixed;
   z-index: 10;
 }
+.navigation{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.authPanel{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+  height: 100%;
+}

@@ -1,10 +1,9 @@
 :root{
   //colors
-  --light-red: #942140;
-  --red:#63051e;
   --white:#fff;
   --black:#000;
 
+  //s
   --font-size-s: 12px;
   --font-line-s: 20px;
   --font-s: var(--font-size-s) / var(--font-line-s) ;
@@ -20,8 +19,8 @@
   --font-l: var(--font-size-l) / var(--font-line-l);
 
   // xl
-  --font-size-xl: 32px;
-  --font-line-xl: 40px;
+  --font-size-xl: 40px;
+  --font-line-xl: 48px;
   --font-xl: var(--font-size-xl) / var(--font-line-xl);
 
   //size

@@ -1,3 +1,7 @@
 {
-  "asd": "1123"
+  "log in": "Log in",
+  "register": "Register",
+  "You entered an incorrect email or password": "You entered an incorrect email or password",
+  "Authorization": "Authorization",
+  "logout": "Logout"
 }

@@ -1,1 +1,2 @@
-export { default } from "./ui/Navbar"
+export { default } from '@/widgets/Navbar/ui/Navbar'
+

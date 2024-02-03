@@ -6,6 +6,7 @@ import { getContentType } from '@/shared/api/api.helper'
 import { axiosClassic } from '@/shared/api/api.interceptor'
 import { saveToStorage } from '@/shared/api/auth/auth.helper'
 import { IAuthResponse, IEmailPassword } from '@/entities/Profile/model/profile.types'
+import { ProfileData } from '@/entities/Profile/model/profile.contracts'
 
 export const AuthService = {
   async main(
@@ -18,9 +19,10 @@ export const AuthService = {
       data,
     })
 	  console.log(response)
-    if (response.data.accessToken) await saveToStorage(response.data)
+    if (response.data.accessToken)  saveToStorage(response.data)
 
-    return response.data
+    return ProfileData.parse(response.data)
+    // return ProfileData.parse(response.data)
   },
   async getNewTokens() {
     const refreshToken = Cookies.get(REFRESH_TOKEN)

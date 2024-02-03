@@ -1,46 +1,63 @@
-import { FC, PropsWithChildren } from "react"
-import { classNames, Mods } from "@/shared/lib/classNames/classNames"
-import cls from "./Modal.module.scss"
-import Portal from '../Portal/Portal'
-import { useModal } from "@/shared/lib/hooks/useModal/useModal"
+import { Dispatch, FC, PropsWithChildren, SetStateAction, useEffect } from 'react'
+import { classNames, Mods } from '@/shared/lib/classNames/classNames'
+import cls from './Modal.module.scss'
+import dynamic from 'next/dynamic'
+import { IoClose } from 'react-icons/io5'
 
 interface ModalProps {
   className?: string;
   isOpen: boolean;
-  onClose?: () => void;
-  lazy?: boolean;
+  onClose: Dispatch<SetStateAction<boolean>>;
+	isSuccess?:boolean;
+	isError?:boolean;
+	setIsSuccess?:Dispatch<SetStateAction<boolean>>
+	setIsError?:Dispatch<SetStateAction<boolean>>
 }
 
-const ANIMATION_DELAY = 400
+const DynamicComponentWithNoSSR = dynamic(() => import('@/shared/ui/Portal/Portal'), {
+  ssr: false
+})
+
+
 
 const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
-    const { className, children, isOpen, onClose, lazy } = props
-    const { isClosing, isMounted, close } = useModal({
-        onClose,
-        isOpen,
-        animationDelay: ANIMATION_DELAY,
-    })
+  const { className, children, isOpen, onClose, setIsSuccess, isSuccess, setIsError, isError } = props
+  const mods: Mods = {
+    [cls.opened]: isOpen,
+	  [cls.success]:isSuccess,
+	  [cls.error]:isError,
 
-    const mods: Mods = {
-        [cls.opened]: isOpen,
-        [cls.isClosing]: isClosing,
+  }
+  const handleEscape = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose(false)
     }
+  }
 
-    if (lazy && !isMounted) {
-        return null
+  useEffect(() => {
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
     }
-
-    return (
-        <Portal>
-            <div className={classNames(cls.Modal, mods, [className])}>
-                <div onClick={close} className={cls.overlay}>
-                    <div onClick={(e) => e.stopPropagation()} className={cls.content}>
-                        {children}
-                    </div>
-                </div>
-            </div>
-        </Portal>
-    )
+  }, [onClose])
+  return (
+    <DynamicComponentWithNoSSR>
+      { isOpen && <>
+        <div onClick={() => {
+				  onClose(false)
+	        setIsSuccess?.(false)
+	        setIsError?.(false)
+			  }} className={classNames(cls.Modal, mods, [className])}>
+          <div onClick={(e) => e.stopPropagation()} className={classNames(cls.content, mods, [])}>
+            <IoClose onClick={()=>onClose(false)} className={classNames(cls.closeModal, {[cls.successElement]:isSuccess,
+	            [cls.errorElement]:isError,}, [])} />
+            {children}
+          </div>
+        </div>
+      </>
+		  }</DynamicComponentWithNoSSR>
+  )
 }
 
 export default Modal
