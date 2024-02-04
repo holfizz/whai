@@ -35,7 +35,7 @@ const Navbar: FC<NavbarProps> = memo(({ className }) => {
 		<header className={classNames(cls.Navbar, {}, [className])}>
 			<Logo />
 			<div className={cls.navigation}>
-				<h1>asdasds</h1>
+				<h1></h1>
 				<div className={cls.authPanel}>
 					{user?.user.email ? (
 						<Button onClick={logout}>

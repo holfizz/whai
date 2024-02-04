@@ -4,7 +4,6 @@ import cls from './AuthForm.module.scss'
 import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
 import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
-import Loader from '@/shared/ui/Loader/Loader'
 import { authConstants } from '@/shared/const/auth'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '@/features/auth/model/auth.model'
@@ -20,12 +19,13 @@ export interface AuthFormProps {
 	setIsSuccess: Dispatch<SetStateAction<boolean>>
 	setIsError: Dispatch<SetStateAction<boolean>>
 	success: boolean
+	onClose: Dispatch<SetStateAction<boolean>>
 }
 
 const AuthForm: FC<AuthFormProps> = memo(
-	({ className, type, setIsSuccess, setIsError, success }) => {
+	({ className, type, setIsSuccess, setIsError, success, onClose }) => {
 		const { t } = useTranslation()
-		const { setIsLoading, setUser, isLoading } = useAuth()
+		const { setUser } = useAuth()
 
 		const [formErrors, setFormErrors] = useState<
 			z.ZodFormattedError<
@@ -43,20 +43,18 @@ const AuthForm: FC<AuthFormProps> = memo(
 		} = useMutation<
 			any,
 			AxiosError<{
-				message: string[]
+				message: string
 			}>
 		>({
 			mutationKey: ['user'],
 			mutationFn: (formData: any) => AuthService.main(type, formData),
 			onSuccess: () => {
-				setIsLoading(false)
-
 				setIsSuccess(true)
 				setIsError(false)
 				if (type === authConstants.LOGIN) {
 					setUser(data)
+					window.location.reload()
 				}
-				window.location.reload()
 			},
 			onError: () => {
 				setIsSuccess(true)
@@ -71,7 +69,6 @@ const AuthForm: FC<AuthFormProps> = memo(
 		})
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()
-			setIsLoading(true)
 			const form = new FormData(e.currentTarget)
 			const formData = Object.fromEntries(form.entries())
 			const validationResult = formSchema.safeParse(formData)
@@ -83,18 +80,13 @@ const AuthForm: FC<AuthFormProps> = memo(
 				setFormErrors({ _errors: [] })
 				authMutate(validationResult.data as any)
 			}
-
-			console.log(validationResult)
-			setIsLoading(false)
-		}
-		if (isLoading) {
-			return (
-				<div className={cls.loaderWrapper}>
-					<Loader />
-				</div>
-			)
 		}
 
+		const onCloseModal = () => {
+			setTimeout(() => {
+				onClose(false)
+			}, 800)
+		}
 		return (
 			<form
 				onSubmit={onSubmit}
@@ -114,7 +106,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 				{error && (
 					<Text
 						theme={TextTheme.ERROR}
-						text={error?.response?.data?.message.join(', ')}
+						text={error?.response?.data?.message}
 						size={TextSize.L}
 					/>
 				)}
@@ -156,14 +148,16 @@ const AuthForm: FC<AuthFormProps> = memo(
 					/>
 				</label>
 				<Button
+					onClick={data && onCloseModal}
 					type={'submit'}
-					disabled={isLoading}
 					size={ButtonSize.FULL}
 					theme={ButtonTheme.OUTLINE}
 				>
 					{type === authConstants.LOGIN ? t('log in') : t('register')}
 				</Button>
-				<AppLink href={'forgotPassword'}>{t('Forgot your password?')}</AppLink>
+				<AppLink onClick={onCloseModal} href={'/forgotPassword'}>
+					{t('Forgot your password?')}
+				</AppLink>
 			</form>
 		)
 	},

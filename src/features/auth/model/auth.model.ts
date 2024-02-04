@@ -5,12 +5,10 @@ import { persist } from 'zustand/middleware'
 
 interface useAuthState {
 	user: IAuthResponse | undefined | null
-	isLoading: boolean
 }
 
 interface useAuthActions {
 	setUser: (user: IAuthResponse | undefined | null) => void
-	setIsLoading: (isLoading: boolean) => void
 	logout: () => void
 }
 
@@ -20,9 +18,7 @@ export const useAuth = create<useAuthProps>()(
 	persist(
 		set => ({
 			user: getLocalStorage('user'),
-			isLoading: false,
 			setUser: user => set(() => ({ user: user })),
-			setIsLoading: isLoading => set(() => ({ isLoading: isLoading })),
 			logout: () => set(() => ({ user: null })),
 		}),
 		{ name: 'authData' },

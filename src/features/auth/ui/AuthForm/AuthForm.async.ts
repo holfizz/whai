@@ -1,12 +1,5 @@
 import { FC, lazy } from 'react'
 import { AuthFormProps } from './AuthForm'
 
-const AuthFormAsync = lazy<FC<AuthFormProps>>(
-  () =>
-    new Promise((res) => {
-      setTimeout(() => {
-        res(import("./AuthForm"))
-      }, 1500)
-    })
-)
+const AuthFormAsync = lazy<FC<AuthFormProps>>(() => import('./AuthForm'))
 export default AuthFormAsync

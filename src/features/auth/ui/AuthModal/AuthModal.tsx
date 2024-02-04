@@ -28,6 +28,7 @@ export const AuthModal: FC<LoginModalProps> = ({ onClose, type, isOpen }) => {
 			<div className={classNames(cls.wrapper, {}, [])}>
 				<Suspense fallback={<Loader />}>
 					<AuthFormAsync
+						onClose={onClose}
 						success={isSuccess}
 						setIsError={setIsError}
 						setIsSuccess={setIsSuccess}
