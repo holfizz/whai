@@ -1,7 +1,7 @@
 {
   "log in": "Войти",
   "register": "Регистрация",
-  "You entered an incorrect email or password": "Вы ввели неправильный адрес электронной почты или пароль",
-  "Authorization": "Авторизация",
-  "logout": "Выйти"
+  "logout": "Выйти",
+  "Confirm your email": "Confirm your email",
+  "Forgot your password?": "Забыли пароль?"
 }

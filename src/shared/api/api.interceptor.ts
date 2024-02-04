@@ -1,11 +1,14 @@
 import axios from 'axios'
 import { errorCatch, getContentType } from './api.helper'
-import { getAccessToken, removeFromStorage } from '@/shared/api/auth/auth.helper'
+import {
+	getAccessToken,
+	removeFromStorage,
+} from '@/shared/api/auth/auth.helper'
 import { AuthService } from '@/shared/api/auth/auth.service'
 
 const axiosOptions = {
-  baseURL: 'http://localhost:8800/api',
-  headers: getContentType(),
+	baseURL: 'http://localhost:8800/api',
+	headers: getContentType(),
 }
 
 export const axiosClassic = axios.create(axiosOptions)
@@ -13,33 +16,33 @@ export const axiosClassic = axios.create(axiosOptions)
 export const instance = axios.create(axiosOptions)
 
 instance.interceptors.request.use(async config => {
-  const accessToken = getAccessToken()
-  if (config.headers && accessToken)
-    config.headers.Authorization = `Bearer ${accessToken}`
+	const accessToken = getAccessToken()
+	if (config.headers && accessToken)
+		config.headers.Authorization = `Bearer ${accessToken}`
 
-  return config
+	return config
 })
 instance.interceptors.response.use(
-  config => config,
-  async error => {
-    const originalRequest = error.config
+	config => config,
+	async error => {
+		const originalRequest = error.config
 
-    if (
-      (error?.response?.status === 401 ||
+		if (
+			(error?.response?.status === 401 ||
 				errorCatch(error) === 'jwt expired' ||
 				errorCatch(error) === 'jwt must be provided') &&
 			error.config &&
 			!error.config._isRetry
-    ) {
-      originalRequest._isRetry = true
-      try {
-        await AuthService.getNewTokens()
-        return instance.request(originalRequest)
-      } catch (error) {
-        if (errorCatch(error) === 'jwt expired') removeFromStorage()
-      }
-    }
+		) {
+			originalRequest._isRetry = true
+			try {
+				await AuthService.getNewTokens()
+				return instance.request(originalRequest)
+			} catch (error) {
+				if (errorCatch(error) === 'jwt expired') removeFromStorage()
+			}
+		}
 
-    throw error
-  },
+		throw error
+	},
 )
