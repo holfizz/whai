@@ -14,10 +14,11 @@ import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { authConstants } from '@/shared/const/auth'
 import { useTranslation } from 'react-i18next'
-import { z } from 'zod'
 import AppLink from '@/shared/ui/AppLink/AppLink'
-import { useAuthMutate } from '@/features/auth/model/auth.queries'
-import { useAuthStatus } from '@/features/auth/model/auth.model'
+import { useAuthMutate } from '../../model/auth.queries'
+import { formSchema } from '../../model/auth.contracts'
+import { useAuthStatus } from '../../model/auth.model'
+import { z } from 'zod'
 
 export interface AuthFormProps {
 	className?: string
@@ -27,9 +28,8 @@ export interface AuthFormProps {
 
 const AuthForm: FC<AuthFormProps> = memo(({ className, type, onClose }) => {
 	const { t } = useTranslation()
-	const { mutate: authMutate, error } = useAuthMutate(type)
+	const { mutate: authMutate, error, data } = useAuthMutate(type)
 	const { isError, isSuccess } = useAuthStatus()
-
 	const [formErrors, setFormErrors] = useState<
 		z.ZodFormattedError<
 			{
@@ -39,12 +39,6 @@ const AuthForm: FC<AuthFormProps> = memo(({ className, type, onClose }) => {
 			string
 		>
 	>({ _errors: [] })
-	const formSchema = z.object({
-		email: z.string().email('Email is not correct'),
-		password: z
-			.string()
-			.min(6, { message: 'The password must be at least 6 characters' }),
-	})
 	const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const form = new FormData(e.currentTarget)
@@ -59,17 +53,9 @@ const AuthForm: FC<AuthFormProps> = memo(({ className, type, onClose }) => {
 			authMutate(validationResult.data as any)
 		}
 	}
-	const onCloseModal = () => {
-		if (isSuccess) {
-			setTimeout(() => {
-				onClose(false)
-			}, 800)
-		}
-	}
 	useEffect(() => {
-		console.log(isError)
-		console.log(isSuccess)
-	}, [isError, isSuccess])
+		console.log(data)
+	}, [data])
 	return (
 		<form
 			onSubmit={onSubmit}
@@ -131,14 +117,13 @@ const AuthForm: FC<AuthFormProps> = memo(({ className, type, onClose }) => {
 				/>
 			</label>
 			<Button
-				onClick={onCloseModal}
 				type={'submit'}
 				size={ButtonSize.FULL}
 				theme={ButtonTheme.OUTLINE}
 			>
 				{type === authConstants.LOGIN ? t('log in') : t('register')}
 			</Button>
-			<AppLink onClick={onCloseModal} href={'/forgotPassword'}>
+			<AppLink onClick={() => onClose(false)} href={'/forgotPassword'}>
 				{t('Forgot your password?')}
 			</AppLink>
 		</form>

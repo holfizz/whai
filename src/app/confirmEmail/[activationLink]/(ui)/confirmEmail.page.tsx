@@ -1,10 +1,10 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
-import { AuthService } from '@/shared/api/auth/auth.service'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { useTranslation } from 'react-i18next'
 import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import { usePathname } from 'next/navigation'
+import { AuthApi } from '@/features/auth'
 
 export default function ConfirmEmailPage() {
 	useAuthRedirect()
@@ -12,11 +12,12 @@ export default function ConfirmEmailPage() {
 	function getLastSegmentFromURL() {
 		const url = usePathname()
 		const segments = url.split('/')
+		console.log(segments[segments.length - 1])
 		return segments[segments.length - 1]
 	}
 	const activateEmailUrl = getLastSegmentFromURL() || ''
 	const { data, isError } = useQuery({
-		queryFn: () => AuthService.activateEmail(activateEmailUrl),
+		queryFn: () => AuthApi.activateEmail(activateEmailUrl),
 		queryKey: [activateEmailUrl],
 	})
 	return (
@@ -27,7 +28,7 @@ export default function ConfirmEmailPage() {
 						size={TextSize.XL}
 						theme={TextTheme.SUCCESS}
 						title={t(
-							'Mail has been successfully activated. You can close the link',
+							'Mail has been successfully activated. You can close the page',
 						)}
 					/>
 				</>

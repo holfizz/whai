@@ -1,13 +1,13 @@
 'use client'
 import { create } from 'zustand'
-import { IAuthResponse } from '@/entities/Profile/model/profile.types'
 import { persist } from 'zustand/middleware'
 import {
 	getUserFromStorage,
 	removeFromStorage,
 } from '@/shared/api/auth/auth.helper'
-import { AuthService } from '@/shared/api/auth/auth.service'
+import { AuthApi } from '@/features/auth'
 import { errorCatch } from '@/shared/api/api.helper'
+import { IAuthResponse } from '@/entities/Auth'
 
 interface IUseAuthState {
 	user: IAuthResponse | unknown | null | undefined
@@ -30,7 +30,7 @@ export const useAuth = create<useAuthProps>()(
 			},
 			checkAuth: async () => {
 				try {
-					const response = await AuthService.getNewTokens()
+					const response = await AuthApi.getNewTokens()
 					set(() => ({ user: response.user }))
 					return response
 				} catch (error) {

@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/shared/const/token'
-import { IAuthResponse, ITokens } from '@/entities/Profile/model/profile.types'
+import { IAuthResponse, ITokens } from '@/entities/Auth'
 
 export const getAccessToken = () => {
 	const accessToken = Cookies.get(ACCESS_TOKEN)

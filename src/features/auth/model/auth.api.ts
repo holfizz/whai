@@ -5,13 +5,9 @@ import { REFRESH_TOKEN } from '@/shared/const/token'
 import { getContentType } from '@/shared/api/api.helper'
 import { axiosClassic } from '@/shared/api/api.interceptor'
 import { saveToStorage } from '@/shared/api/auth/auth.helper'
-import {
-	IAuthResponse,
-	IEmailPassword,
-} from '@/entities/Profile/model/profile.types'
-import { ProfileData } from '@/entities/Profile/model/profile.contracts'
+import { IAuthResponse, IEmailPassword, ProfileData } from '@/entities/Auth'
 
-export const AuthService = {
+export const AuthApi = {
 	async main(type: authConstants, data: IEmailPassword) {
 		const response = await axiosClassic<IAuthResponse>({
 			url: `/auth/${type}`,

@@ -6,7 +6,7 @@ export const ProfileData = z.object({
 		email: z.string(),
 		isAdmin: z.boolean(),
 		isActivated: z.boolean(),
-		activationLink: z.string(),
+		activationLink: z.string().nullable(),
 	}),
 	accessToken: z.string(),
 	refreshToken: z.string(),

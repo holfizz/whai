@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { NO_INDEX_PAGE } from '@/shared/const/seo'
-import ForgotPasswordPageAsync from './forgotPassword.async'
+import ForgotPasswordPageAsync from './ui/forgotPassword.async'
 
 export const metadata: Metadata = {
 	title: 'Восстановить пароль - whai',

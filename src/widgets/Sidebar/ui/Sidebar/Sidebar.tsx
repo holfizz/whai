@@ -3,9 +3,9 @@ import { FC, memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import cls from './Sidebar.module.scss'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
-import { LangSwitcher } from '@/features/langSwitcher'
-import { ThemeSwitcher } from '@/features/themeSwitcher'
 import { useSidebar } from '@/widgets/Sidebar/module/sidebar.module'
+import LangSwitcher from '@/features/langSwitcher'
+import ThemeSwitcher from '@/features/themeSwitcher'
 
 interface SidebarProps {
 	className?: string

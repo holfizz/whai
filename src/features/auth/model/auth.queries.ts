@@ -1,12 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { AuthService } from '@/shared/api/auth/auth.service'
+import { AuthApi } from '@/features/auth'
 import { useAuthStatus } from './auth.model'
 import { authConstants } from '@/shared/const/auth'
 
 export const useAuthMutate = (type: authConstants) => {
 	const { setIsError, setIsSuccess } = useAuthStatus()
-
 	return useMutation<
 		any,
 		AxiosError<{
@@ -16,7 +15,7 @@ export const useAuthMutate = (type: authConstants) => {
 		mutationKey: ['user'],
 		mutationFn: (formData: any) => {
 			const { email, password } = formData
-			return AuthService.main(type, { email, password })
+			return AuthApi.main(type, { email, password })
 		},
 		onSuccess: () => {
 			setIsSuccess(true)

@@ -8,7 +8,7 @@ import { FormEvent, useState } from 'react'
 import { z } from 'zod'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { AuthService } from '@/shared/api/auth/auth.service'
+import { AuthApi } from '@/features/auth'
 import { useTranslation } from 'next-i18next'
 import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 
@@ -34,7 +34,7 @@ export default function ForgotPasswordPage() {
 		}>
 	>({
 		mutationKey: ['user'],
-		mutationFn: (formData: any) => AuthService.forgotPassword(formData),
+		mutationFn: (formData: any) => AuthApi.forgotPassword(formData),
 	})
 	const formSchema = z.object({
 		email: z.string().email('Email is not correct'),

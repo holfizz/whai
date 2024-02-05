@@ -4,7 +4,7 @@ import {
 	getAccessToken,
 	removeFromStorage,
 } from '@/shared/api/auth/auth.helper'
-import { AuthService } from '@/shared/api/auth/auth.service'
+import { AuthApi } from '@/features/auth'
 
 const axiosOptions = {
 	baseURL: 'http://localhost:8800/api',
@@ -36,7 +36,7 @@ instance.interceptors.response.use(
 		) {
 			originalRequest._isRetry = true
 			try {
-				await AuthService.getNewTokens()
+				await AuthApi.getNewTokens()
 				return instance.request(originalRequest)
 			} catch (error) {
 				if (errorCatch(error) === 'jwt expired') removeFromStorage()
