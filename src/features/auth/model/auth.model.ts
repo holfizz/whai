@@ -1,3 +1,4 @@
+'use client'
 import { create } from 'zustand'
 import { IAuthResponse } from '@/entities/Profile/model/profile.types'
 import { persist } from 'zustand/middleware'
@@ -9,12 +10,12 @@ import { AuthService } from '@/shared/api/auth/auth.service'
 import { errorCatch } from '@/shared/api/api.helper'
 
 interface IUseAuthState {
-	user: IAuthResponse | unknown | null
+	user: IAuthResponse | unknown | null | undefined
 }
 
 interface IUseAuthActions {
 	logout: () => void
-	checkAuth: any
+	checkAuth: () => void
 }
 
 type useAuthProps = IUseAuthState & IUseAuthActions

@@ -1,4 +1,12 @@
-import { Dispatch, FC, FormEvent, memo, SetStateAction, useState } from 'react'
+import {
+	Dispatch,
+	FC,
+	FormEvent,
+	memo,
+	SetStateAction,
+	useEffect,
+	useState,
+} from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import cls from './AuthForm.module.scss'
 import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
@@ -19,7 +27,7 @@ export interface AuthFormProps {
 
 const AuthForm: FC<AuthFormProps> = memo(({ className, type, onClose }) => {
 	const { t } = useTranslation()
-	const { mutate: authMutate, data, error } = useAuthMutate(type)
+	const { mutate: authMutate, error } = useAuthMutate(type)
 	const { isError, isSuccess } = useAuthStatus()
 
 	const [formErrors, setFormErrors] = useState<
@@ -51,12 +59,17 @@ const AuthForm: FC<AuthFormProps> = memo(({ className, type, onClose }) => {
 			authMutate(validationResult.data as any)
 		}
 	}
-
 	const onCloseModal = () => {
-		setTimeout(() => {
-			onClose(false)
-		}, 800)
+		if (isSuccess) {
+			setTimeout(() => {
+				onClose(false)
+			}, 800)
+		}
 	}
+	useEffect(() => {
+		console.log(isError)
+		console.log(isSuccess)
+	}, [isError, isSuccess])
 	return (
 		<form
 			onSubmit={onSubmit}
@@ -66,7 +79,7 @@ const AuthForm: FC<AuthFormProps> = memo(({ className, type, onClose }) => {
 				theme={
 					isError
 						? TextTheme.ERROR
-						: !!data
+						: isSuccess
 							? TextTheme.SUCCESS
 							: TextTheme.PRIMARY
 				}
@@ -118,7 +131,7 @@ const AuthForm: FC<AuthFormProps> = memo(({ className, type, onClose }) => {
 				/>
 			</label>
 			<Button
-				onClick={data && onCloseModal}
+				onClick={onCloseModal}
 				type={'submit'}
 				size={ButtonSize.FULL}
 				theme={ButtonTheme.OUTLINE}

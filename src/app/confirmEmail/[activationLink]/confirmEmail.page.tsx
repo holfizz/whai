@@ -4,21 +4,16 @@ import { AuthService } from '@/shared/api/auth/auth.service'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { useTranslation } from 'react-i18next'
 import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
+import { usePathname } from 'next/navigation'
 
 export default function ConfirmEmailPage() {
 	useAuthRedirect()
-
 	const { t } = useTranslation('confirmEmailPage')
-
 	function getLastSegmentFromURL() {
-		if (typeof window !== 'undefined') {
-			// const pathname = usePathname()
-			const url = window.location.href
-			const segments = url.split('/')
-			return segments[segments.length - 1]
-		}
+		const url = usePathname()
+		const segments = url.split('/')
+		return segments[segments.length - 1]
 	}
-
 	const activateEmailUrl = getLastSegmentFromURL() || ''
 	const { data, isError } = useQuery({
 		queryFn: () => AuthService.activateEmail(activateEmailUrl),

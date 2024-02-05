@@ -18,18 +18,13 @@ export const AuthService = {
 			method: 'post',
 			data,
 		})
-		if (response.data.accessToken) saveToStorage(response.data)
+		if (response.data.accessToken && type === authConstants.LOGIN)
+			saveToStorage(response.data)
 		return ProfileData.parse(response.data)
 	},
 	async getNewTokens() {
 		const refreshToken = Cookies.get(REFRESH_TOKEN)
-
-		const response = await axiosClassic.post<
-			string,
-			{
-				data: IAuthResponse
-			}
-		>(
+		const response = await axiosClassic.post<string, { data: IAuthResponse }>(
 			'/auth/login/access-token',
 			{ refreshToken },
 			{ headers: getContentType() },
