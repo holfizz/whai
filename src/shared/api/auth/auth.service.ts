@@ -12,19 +12,13 @@ import {
 import { ProfileData } from '@/entities/Profile/model/profile.contracts'
 
 export const AuthService = {
-	async main(
-		type: authConstants.LOGIN | authConstants.REGISTER,
-		data: IEmailPassword,
-	) {
+	async main(type: authConstants, data: IEmailPassword) {
 		const response = await axiosClassic<IAuthResponse>({
 			url: `/auth/${type}`,
 			method: 'post',
 			data,
 		})
-		console.log(response)
 		if (response.data.accessToken) saveToStorage(response.data)
-
-		// return response.data
 		return ProfileData.parse(response.data)
 	},
 	async getNewTokens() {

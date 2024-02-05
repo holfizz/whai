@@ -1,14 +1,13 @@
-import { FC, memo, useCallback, useState } from 'react'
+import React, { FC, memo, useCallback, useState } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import cls from './Navbar.module.scss'
 import Logo from '@/shared/ui/Logo/Logo'
 import { useTranslation } from 'react-i18next'
-import Button from '@/shared/ui/Button/Button'
-import { AuthModal } from '@/features/auth/ui/AuthModal/AuthModal'
 import { authConstants } from '@/shared/const/auth'
-import { useAuth } from '@/features/auth/model/auth.model'
-import Icon from '@/shared/ui/Icon/Icon'
+import { AuthModal, useAuth } from '@/features/auth'
+import Button from '@/shared/ui/Button/Button'
 import { MdLogout } from 'react-icons/md'
+import Icon from '@/shared/ui/Icon/Icon'
 
 interface NavbarProps {
 	className?: string
@@ -17,9 +16,9 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = memo(({ className }) => {
 	const { t } = useTranslation()
 	const [isOpenModal, setIsOpenModal] = useState(false)
-	const [isFormType, setIsFormType] = useState<
-		authConstants.LOGIN | authConstants.REGISTER
-	>(authConstants.REGISTER)
+	const [isFormType, setIsFormType] = useState<authConstants>(
+		authConstants.REGISTER,
+	)
 	const { user, logout } = useAuth()
 
 	const onOpenModalLogin = useCallback(() => {
@@ -37,7 +36,7 @@ const Navbar: FC<NavbarProps> = memo(({ className }) => {
 			<div className={cls.navigation}>
 				<h1></h1>
 				<div className={cls.authPanel}>
-					{user?.user.email ? (
+					{user ? (
 						<Button onClick={logout}>
 							<Icon fontSize={30} SVG={MdLogout} />
 						</Button>

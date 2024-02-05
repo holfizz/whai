@@ -12,6 +12,7 @@ export default function ConfirmEmailPage() {
 
 	function getLastSegmentFromURL() {
 		if (typeof window !== 'undefined') {
+			// const pathname = usePathname()
 			const url = window.location.href
 			const segments = url.split('/')
 			return segments[segments.length - 1]

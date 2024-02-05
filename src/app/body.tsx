@@ -1,32 +1,39 @@
 'use client'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { Suspense, useState } from 'react'
+import { Suspense } from 'react'
 import Sidebar from '@/widgets/Sidebar'
 import Navbar from '@/widgets/Navbar'
 import { AppProvider } from '@/app/app-provider'
+import { useSidebar } from '@/widgets/Sidebar/module/sidebar.module'
 
 export default function Body({
-  children, className
+	children,
+	className,
 }: {
-	children: React.ReactNode,
-	className?:string
+	children: React.ReactNode
+	className?: string
 }) {
+	const { isCollapsed } = useSidebar()
 
-  const [isCollapsed, setIsCollapsed] = useState(false)
-
-  return (
-    <body  className={classNames('app', {}, [ className])}>
-      <AppProvider>
-        <Suspense fallback={null}>
-          <Navbar />
-          <div className={'app_wrapper'}>
-            <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
-            <div className={classNames('content_wrapper', { ['isCollapsed']: isCollapsed }, [])}>
-              {children}
-            </div>
-          </div>
-        </Suspense>
-      </AppProvider>
-    </body>
-  )
+	return (
+		<body className={classNames('app', {}, [className])}>
+			<AppProvider>
+				<Suspense fallback={null}>
+					<Navbar />
+					<div className={'app_wrapper'}>
+						<Sidebar />
+						<div
+							className={classNames(
+								'content_wrapper',
+								{ ['isCollapsed']: isCollapsed },
+								[],
+							)}
+						>
+							{children}
+						</div>
+					</div>
+				</Suspense>
+			</AppProvider>
+		</body>
+	)
 }
