@@ -34,15 +34,7 @@
   justify-content: center;
 }
 
-.LangSwitcher:hover {
-  transition: all 0.4s;
-  color: var(--secondary-color);
 
-  div {
-    color: var(--secondary-color);
-    transition: all 0.4s;
-  }
-}
 
 @keyframes lang-switch {
   0% {
@@ -51,5 +43,11 @@
 
   100% {
     transform: rotateZ(540deg);
+  }
+}
+@media screen and (max-width: 768px) {
+  .LangSwitcher{
+    color: var(--accent-color);
+
   }
 }

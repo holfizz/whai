@@ -3,21 +3,79 @@
   align-content: center;
   height: var(--navbar-height);
   width: 100vw;
-  background:var(--elements-color);
+  background: var(--elements-color);
   position: fixed;
   z-index: 10;
 }
-.navigation{
+
+.navigation {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.authPanel{
+.authPanel {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: auto;
   height: 100%;
+}
+.burger {
+  display: none;
+}
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+    width: 32px;
+    height: 24px;
+    cursor: pointer;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    z-index: 20;
+  }
+
+  .burger span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+    display: block;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .burger span::before,
+  .burger span::after {
+    content: "";
+    width: 100%;
+    background-color: var(--accent-color);
+    display: block;
+    transition: all 0.2s ease-in-out;
+    height: 3px;
+  }
+
+  .burger span::before {
+    transform: translateY(-10px);
+
+  }
+
+  .burger span::after {
+    transform: translateY(10px);
+    margin-top: -3px;
+  }
+
+
+  .burger.active span {
+    background-color: transparent;
+  }
+
+  .burger.active span::before {
+    transform: rotateZ(45deg) translateY(0);
+  }
+
+  .burger.active span::after {
+    transform: rotateZ(-45deg) translateY(0);
+  }
+
 }

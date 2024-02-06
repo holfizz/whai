@@ -11,7 +11,9 @@ export const getRefreshToken = () => {
 	return refreshToken || null
 }
 export const getUserFromStorage = () => {
-	return JSON.parse(localStorage.getItem('user') || '{}')
+	if (typeof window !== 'undefined') {
+		return JSON.parse(localStorage.getItem('user') || '{}')
+	}
 }
 
 export const saveTokenStorage = (data: ITokens) => {

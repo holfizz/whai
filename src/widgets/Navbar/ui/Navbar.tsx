@@ -16,6 +16,7 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = memo(({ className }) => {
 	const { t } = useTranslation()
 	const [isOpenModal, setIsOpenModal] = useState(false)
+	const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false) // New state variable
 	const [isFormType, setIsFormType] = useState<authConstants>(
 		authConstants.REGISTER,
 	)
@@ -25,11 +26,11 @@ const Navbar: FC<NavbarProps> = memo(({ className }) => {
 		setIsOpenModal(true)
 		setIsFormType(authConstants.LOGIN)
 	}, [])
+
 	const onOpenModalRegister = useCallback(() => {
 		setIsOpenModal(true)
 		setIsFormType(authConstants.REGISTER)
 	}, [])
-
 	return (
 		<header className={classNames(cls.Navbar, {}, [className])}>
 			<Logo />
@@ -46,6 +47,16 @@ const Navbar: FC<NavbarProps> = memo(({ className }) => {
 							<Button onClick={onOpenModalRegister}>{t('register')}</Button>
 						</>
 					)}
+				</div>
+				<div
+					onClick={() => setIsBurgerMenuOpen(prevState => !prevState)}
+					className={classNames(
+						cls.burger,
+						{ [cls.active]: isBurgerMenuOpen },
+						[],
+					)}
+				>
+					<span></span>
 				</div>
 			</div>
 			<AuthModal

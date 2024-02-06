@@ -2,16 +2,18 @@
   background: var(--elements-color);
   transition: width .4s;
   width: var(--sidebar-width);
-  height: calc(100vh - var(--navbar-height) );
+  height: calc(100vh - var(--navbar-height));
   position: fixed;
   left: 0;
   top: var(--navbar-height);
 }
+
 .collapsed {
   transition: width .4s;
   width: var(--sidebar-width-collapsed);
 }
-.SidebarCollapsed{
+
+.SidebarCollapsed {
   width: 100%;
   display: flex;
   justify-content: right;
@@ -20,7 +22,7 @@
   color: var(--elements-color);
 }
 
-.buttonCollapsed{
+.buttonCollapsed {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,6 +36,7 @@
   top: 30px;
   font-size: 24px;
 }
+
 .switchers {
   width: 100%;
   display: flex;
@@ -42,10 +45,66 @@
   margin-top: auto;
   align-items: center;
   justify-content: space-around;
-  button{
+
+  button {
     padding: 0;
     width: auto;
     height: auto;
     margin: 0;
   }
+}
+
+.blur {
+  z-index: 11;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: initial .4s;
+  backdrop-filter: blur(10px);
+
+}
+.SidebarMobile {
+  position: absolute;
+  height: 100%;
+  z-index: 12;
+  background: var(--elements-color);
+  width: var(--sidebar-mobile-width);
+  transform:translateX(-100%);
+  transition: all .4s;
+}
+
+.openMobileSidebar {
+  position: absolute;
+  transform:translateX(0);
+  transition: all .4s;
+}
+
+.buttonCollapsedMobile {
+  width: 16px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  right: -20px;
+  z-index: 100;
+  top: calc(50vh - 20px);
+  align-items: center;
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  padding: 0 2px;
+  box-sizing: initial;
+  transition: right .4s
+
+}
+
+
+.buttonCollapsedMobile div {
+  width: 2px;
+  height: 20px;
+  background: var(--accent-color);
+  margin: 0 1px;
 }

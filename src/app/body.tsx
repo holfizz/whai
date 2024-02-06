@@ -25,7 +25,12 @@ export default function Body({
 						<div
 							className={classNames(
 								'content_wrapper',
-								{ ['isCollapsed']: isCollapsed },
+								{
+									['isCollapsed']:
+										isCollapsed && document.documentElement.scrollWidth > 768,
+									['isCollapsedMobile']:
+										document.documentElement.scrollWidth <= 768,
+								},
 								[],
 							)}
 						>
