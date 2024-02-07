@@ -31,6 +31,12 @@
   animation: blow-up-modal 0.4s ease forwards ;
   color: var(--secondary-color);
 }
+@media screen and (max-width: 435px) {
+  .content{
+    width: 350px;
+    padding: 0;
+  }
+}
 .success{
   border:solid 1px var(--green);
 }

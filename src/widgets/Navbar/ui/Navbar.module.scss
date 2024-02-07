@@ -22,60 +22,32 @@
   width: auto;
   height: 100%;
 }
-.burger {
+.loginIcon{
+  height: 70px;
+  width: 70px;
+  display: none;
+  font-size: 30px;
+}
+
+.logoutDescription{
   display: none;
 }
-@media (max-width: 768px) {
-  .burger {
+@media screen and (max-width: 450px) {
+  .loginIcon{
     display: block;
-    width: 32px;
-    height: 24px;
-    cursor: pointer;
-    position: absolute;
-    right: 2rem;
-    top: 2rem;
-    z-index: 20;
   }
-
-  .burger span {
-    width: 100%;
-    height: 3px;
-    background-color: var(--accent-color);
+  .authButton{
+    display: none;
+  }
+  .buttonLogout{
+    padding: 0;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    width: 100px;
+    flex-direction: row
+  }
+  .logoutDescription{
     display: block;
-    transition: background-color 0.2s ease-in-out;
   }
-
-  .burger span::before,
-  .burger span::after {
-    content: "";
-    width: 100%;
-    background-color: var(--accent-color);
-    display: block;
-    transition: all 0.2s ease-in-out;
-    height: 3px;
-  }
-
-  .burger span::before {
-    transform: translateY(-10px);
-
-  }
-
-  .burger span::after {
-    transform: translateY(10px);
-    margin-top: -3px;
-  }
-
-
-  .burger.active span {
-    background-color: transparent;
-  }
-
-  .burger.active span::before {
-    transform: rotateZ(45deg) translateY(0);
-  }
-
-  .burger.active span::after {
-    transform: rotateZ(-45deg) translateY(0);
-  }
-
 }

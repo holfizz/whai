@@ -24,3 +24,11 @@
 .success{
   border: 1px solid var(--green);
 }
+.changeModeButton{
+  display: none;
+}
+@media screen and (max-width: 450px) {
+  .changeModeButton{
+    display: block;
+  }
+}

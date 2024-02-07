@@ -6,8 +6,9 @@ import { useTranslation } from 'react-i18next'
 import { authConstants } from '@/shared/const/auth'
 import { AuthModal, useAuth } from '@/features/auth'
 import Button from '@/shared/ui/Button/Button'
-import { MdLogout } from 'react-icons/md'
+import { MdLogin, MdLogout } from 'react-icons/md'
 import Icon from '@/shared/ui/Icon/Icon'
+import Text from '@/shared/ui/Text/Text'
 
 interface NavbarProps {
 	className?: string
@@ -16,7 +17,6 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = memo(({ className }) => {
 	const { t } = useTranslation()
 	const [isOpenModal, setIsOpenModal] = useState(false)
-	const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false) // New state variable
 	const [isFormType, setIsFormType] = useState<authConstants>(
 		authConstants.REGISTER,
 	)
@@ -38,28 +38,27 @@ const Navbar: FC<NavbarProps> = memo(({ className }) => {
 				<h1></h1>
 				<div className={cls.authPanel}>
 					{user ? (
-						<Button onClick={logout}>
+						<Button className={cls.buttonLogout} onClick={logout}>
 							<Icon fontSize={30} SVG={MdLogout} />
+							<Text className={cls.logoutDescription} text={t('logout')} />
 						</Button>
 					) : (
 						<>
-							<Button onClick={onOpenModalLogin}>{t('log in')}</Button>
-							<Button onClick={onOpenModalRegister}>{t('register')}</Button>
+							<Button className={cls.authButton} onClick={onOpenModalLogin}>
+								{t('log in')}
+							</Button>
+							<Button className={cls.authButton} onClick={onOpenModalRegister}>
+								{t('register')}
+							</Button>
+							<button className={cls.loginIcon} onClick={onOpenModalLogin}>
+								<Icon SVG={MdLogin} />
+							</button>
 						</>
 					)}
 				</div>
-				<div
-					onClick={() => setIsBurgerMenuOpen(prevState => !prevState)}
-					className={classNames(
-						cls.burger,
-						{ [cls.active]: isBurgerMenuOpen },
-						[],
-					)}
-				>
-					<span></span>
-				</div>
 			</div>
 			<AuthModal
+				setIsFormType={setIsFormType}
 				isOpen={isOpenModal}
 				onClose={setIsOpenModal}
 				type={isFormType}
