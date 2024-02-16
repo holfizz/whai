@@ -1,6 +1,7 @@
 :root{
   //colors
   --white:#fff;
+  --opacity-white: rgba(255, 255, 255, 0.50);
   --black:#000;
 
   //s
@@ -24,7 +25,6 @@
   --font-xl: var(--font-size-xl) / var(--font-line-xl);
 
   //size
-  --navbar-height:100px;
   --sidebar-width: 250px;
   --sidebar-mobile-width: 300px;
   --sidebar-width-collapsed:100px;

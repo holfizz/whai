@@ -11,7 +11,7 @@ export const useSidebar = create<IUseSidebar>()(
 	persist(
 		set => ({
 			isCollapsed: getLocalStorage('sidebarCollapsed'),
-			setIsCollapsed: isCollapsed => set(() => ({ isCollapsed: !isCollapsed })),
+			setIsCollapsed: isCollapsed => set(() => ({ isCollapsed: isCollapsed })),
 		}),
 		{ name: 'sidebarCollapsed' },
 	),

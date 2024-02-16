@@ -3,5 +3,7 @@
   "register": "Регистрация",
   "logout": "Выйти",
   "Confirm your email": "Confirm your email",
-  "Forgot your password?": "Забыли пароль?"
+  "Forgot your password?": "Забыли пароль?",
+  "Close": "Закрыть",
+  "Open": "Открыть"
 }

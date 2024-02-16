@@ -2,23 +2,10 @@
 @import "variables/global";
 @import "themes/light";
 @import "themes/dark";
-.app_wrapper{
-  position: relative;
-  background: var(--elements-color);
-  display: flex;
-}
-.content_wrapper{
-  border-top-left-radius:20px;
-  border-top: 2px solid var(--secondary-color);
-  border-left: 2px solid var(--secondary-color);
+html, body{
+  min-height: 100%;
   color:var(--primary-color);
   background: var(--background-color);
-  width: 100%;
-  transition: margin-left .4s;
-  margin-top: var(--navbar-height);
-  margin-left: var(--sidebar-width);
-  padding: 20px;
-  min-height:calc(100vh - var(--navbar-height));
 }
 .isCollapsed{
   transition: margin-left .4s;
@@ -27,9 +14,4 @@
 .isCollapsedMobile{
   margin-left: 0;
 }
-@media screen and (max-width: 450px) {
-  .content_wrapper{
-    border: 0;
-    border-radius: 20px 20px 0 0;
-  }
-}
+@media screen and (max-width: 450px) {}
