@@ -1,4 +1,4 @@
-.ThemeSwitcher{
+.ThemeSwitcher {
   width: 50px;
   height: 50px;
   font-size: var(--font-size-l);
@@ -6,19 +6,14 @@
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  transition: ease-in-out .4s;
+  transition: ease-in-out var(--animation-delay);
+  color: var(--inverted-color);
 
-  svg{
+  svg {
     position: absolute;
-  }
-
-  color:var(--primary-color);
-}
-
-
-@media screen and (max-width: 768px) {
-  .ThemeSwitcher{
-    color: var(--accent-color);
+    color: var(--inverted-color);
 
   }
 }
+
+

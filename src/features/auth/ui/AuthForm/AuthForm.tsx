@@ -125,7 +125,11 @@ const AuthForm: FC<AuthFormProps> = memo(
 				>
 					{type === authConstants.LOGIN ? t('log in') : t('register')}
 				</Button>
-				<AppLink onClick={() => onClose(false)} href={'/forgotPassword'}>
+				<AppLink
+					className={cls.forgotPasswordButton}
+					onClick={() => onClose(false)}
+					href={'/forgotPassword'}
+				>
 					{t('Forgot your password?')}
 				</AppLink>
 				<Button

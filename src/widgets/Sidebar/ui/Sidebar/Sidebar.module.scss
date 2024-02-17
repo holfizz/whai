@@ -1,6 +1,6 @@
 .Sidebar {
   background: var(--elements-color);
-  transition: width .4s;
+  transition: width var(--animation-delay);
   width: var(--sidebar-width);
   height: 100vh;
   position: fixed;
@@ -9,14 +9,27 @@
 }
 
 .collapsed {
-  transition: all .2s;
+  transition: all var(--animation-delay);
   width: var(--sidebar-width-collapsed);
 }
 
 .isHovered {
   opacity: 0.8;
 }
-
+.sidebarHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.addButton{
+  margin: auto;
+  .addIcon{
+    font-weight: 100;
+    color: var(--inverted-color);
+  }
+}
 .SidebarCollapsed {
   width: 100%;
   display: flex;
@@ -38,12 +51,19 @@
   top: 50%;
 }
 
+.sidebarControl {
+  display: flex;
+  position: absolute;
+  margin-top: auto;
+  bottom: 20px;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
 .switchers {
   width: 100%;
   display: flex;
-  position: absolute;
-  bottom: 20px;
-  margin-top: auto;
   align-items: center;
   justify-content: space-around;
 
@@ -58,9 +78,10 @@
 .arrow {
   width: 0.25rem;
   height: 0.7rem;
-  transition: all .3s;
+  transition: all var(--animation-delay);
 
-  background: var(--opacity-white);
+  background: var(--primary-color);
+  opacity: 0.5;
 }
 
 .arrowTop {
@@ -74,7 +95,7 @@
 .tooltiptext {
   width: 100px;
   background-color: var(--elements-color);
-  color: var(--white);
+  color: var(--primary-color);
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
@@ -100,17 +121,18 @@
 
 .sidebarHovered:hover {
   .arrow {
-    transition: all .3s;
+    transition: all var(--animation-delay);
     border-radius: 10px;
+    opacity: 1;
   }
 
   .arrowTop {
-    background: #fff;
+    background: var(--primary-color);
     transform: translateY(0.15rem) rotate(15deg);
   }
 
   .arrowBottom {
-    background: #fff;
+    background: var(--primary-color);
 
     transform: translateY(-0.15rem) rotate(-15deg);
   }
@@ -123,5 +145,49 @@
 .isCollapsed {
   .arrowHovered {
     transform: rotateY(180deg);
+  }
+}
+.authButton{
+  width: 100%;
+}
+.userProfile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.avatar {
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .userIcon {
+    color: var(--white);
+  }
+}
+.email{
+  width: 150px;
+
+  p{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.authControl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--animation-delay);
+
+  svg {
+    margin-right: 10px;
   }
 }

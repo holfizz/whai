@@ -10,7 +10,7 @@ import { errorCatch } from '@/shared/api/api.helper'
 import { IAuthResponse } from '@/entities/Auth'
 
 interface IUseAuthState {
-	user: IAuthResponse | unknown | null | undefined
+	user: IAuthResponse | unknown | undefined | null
 }
 
 interface IUseAuthActions {

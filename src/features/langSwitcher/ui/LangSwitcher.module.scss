@@ -4,15 +4,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary-color);
-  transition: all 0.4s;
+  color: var(--inverted-color);
+  transition: all var(--animation-delay);
   font-size: var(--font-size-l);
   user-select: none;
+
+  svg {
+    color: var(--inverted-color);
+
+  }
 }
 
 .changeLang {
   svg {
     position: absolute;
+
   }
 
   width: 30px;
@@ -23,10 +29,10 @@
 }
 
 .active {
-  animation: ease .4s infinite lang-switch;
+  animation: ease var(--animation-delay) infinite lang-switch;
 }
 
-.icon{
+.icon {
   width: 30px;
   height: 30px;
   display: flex;
@@ -34,7 +40,12 @@
   justify-content: center;
 }
 
+.lang {
+  p {
 
+    color: var(--inverted-color);
+  }
+}
 
 @keyframes lang-switch {
   0% {
@@ -43,11 +54,5 @@
 
   100% {
     transform: rotateZ(540deg);
-  }
-}
-@media screen and (max-width: 768px) {
-  .LangSwitcher{
-    color: var(--accent-color);
-
   }
 }

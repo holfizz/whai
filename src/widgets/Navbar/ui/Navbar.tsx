@@ -1,10 +1,10 @@
-import React, { FC, memo, useCallback, useState } from 'react'
+import React, { FC, memo, useCallback } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import cls from './Navbar.module.scss'
 import Logo from '@/shared/ui/Logo/Logo'
 import { useTranslation } from 'react-i18next'
 import { authConstants } from '@/shared/const/auth'
-import { AuthModal, useAuth } from '@/features/auth'
+import { useAuth } from '@/features/auth'
 import Button from '@/shared/ui/Button/Button'
 import { MdLogin, MdLogout } from 'react-icons/md'
 import Icon from '@/shared/ui/Icon/Icon'
@@ -16,10 +16,7 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = memo(({ className }) => {
 	const { t } = useTranslation()
-	const [isOpenModal, setIsOpenModal] = useState(false)
-	const [isFormType, setIsFormType] = useState<authConstants>(
-		authConstants.REGISTER,
-	)
+
 	const { user, logout } = useAuth()
 
 	const onOpenModalLogin = useCallback(() => {
@@ -57,12 +54,6 @@ const Navbar: FC<NavbarProps> = memo(({ className }) => {
 					)}
 				</div>
 			</div>
-			<AuthModal
-				setIsFormType={setIsFormType}
-				isOpen={isOpenModal}
-				onClose={setIsOpenModal}
-				type={isFormType}
-			/>
 		</header>
 	)
 })

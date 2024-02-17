@@ -1,9 +1,9 @@
 .AppLink{
   color: var(--primary-color);
-  transition: all .3s;
+  transition: all var(--animation-delay);
 
   &:hover{
-    transition: all .3s;
+    transition: all var(--animation-delay);
     opacity: 0.7;
   }
 }

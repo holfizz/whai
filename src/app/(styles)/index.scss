@@ -7,11 +7,21 @@ html, body{
   color:var(--primary-color);
   background: var(--background-color);
 }
-.isCollapsed{
-  transition: margin-left .4s;
-  margin-left: var(--sidebar-width-collapsed);
-}
 .isCollapsedMobile{
   margin-left: 0;
 }
-@media screen and (max-width: 450px) {}
+.wrapper{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+.sidebar_wrapper{
+  position: relative;
+  transition: width var(--animation-delay);
+}
+.errorPage{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

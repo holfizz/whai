@@ -1,20 +1,14 @@
 .Logo {
-  fill: var(--primary-color);
+  fill: var(--inverted-color);
   font-weight: 800;
-  width: auto;
+  height: auto;
 }
 .small{
-  height: 100px;
+  width: var(--sidebar-width-collapsed);
 }
 .medium{
-  height: 200px;
+  width: calc(var(--sidebar-width) - 80px);
 }
 .large{
-  height: 300px;
-}
-@media screen and (max-width: 768px) {
-  .Logo{
-    fill: var(--accent-color);
-
-  }
+  width: 300px;
 }

@@ -18,8 +18,17 @@ export default function Body({
 		<body className={classNames('app', {}, [className])}>
 			<AppProvider>
 				<Suspense fallback={null}>
-					{children}
-					<Sidebar />
+					<div className={'wrapper'}>
+						<div
+							style={{
+								width: `var(${isCollapsed ? '--sidebar-width-collapsed' : '--sidebar-width'})`,
+							}}
+							className={'sidebar_wrapper'}
+						>
+							<Sidebar />
+						</div>
+						{children}
+					</div>
 				</Suspense>
 			</AppProvider>
 		</body>

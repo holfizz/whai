@@ -49,7 +49,11 @@ export const AuthModal: FC<LoginModalProps> = ({
 		>
 			<div className={classNames(cls.wrapper, {}, [])}>
 				<Suspense fallback={<Loader />}>
-					<AuthFormAsync onClose={onClose} type={type} />
+					<AuthFormAsync
+						setIsFormType={setIsFormType}
+						onClose={onClose}
+						type={type}
+					/>
 				</Suspense>
 			</div>
 		</Modal>
