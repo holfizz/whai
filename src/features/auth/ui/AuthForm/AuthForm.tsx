@@ -1,12 +1,4 @@
-import {
-	Dispatch,
-	FC,
-	FormEvent,
-	memo,
-	SetStateAction,
-	useEffect,
-	useState,
-} from 'react'
+import { Dispatch, FC, FormEvent, memo, SetStateAction, useState } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import cls from './AuthForm.module.scss'
 import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
@@ -33,7 +25,7 @@ export interface AuthFormProps {
 const AuthForm: FC<AuthFormProps> = memo(
 	({ className, type, onClose, setIsFormType }) => {
 		const { t } = useTranslation()
-		const { mutate: authMutate, error, data } = useAuthMutate(type)
+		const { mutate: authMutate, error } = useAuthMutate(type)
 		const { isError, isSuccess } = useAuthStatus()
 		const [formErrors, setFormErrors] = useState<
 			z.ZodFormattedError<
@@ -59,9 +51,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 				authMutate(validationResult.data as any)
 			}
 		}
-		useEffect(() => {
-			console.log(data)
-		}, [data])
+
 		return (
 			<form
 				onSubmit={onSubmit}
@@ -124,7 +114,10 @@ const AuthForm: FC<AuthFormProps> = memo(
 						/>
 						<button
 							className={cls.changeVisiblePasswordButton}
-							onClick={() => setIsShowPassword(prevState => !prevState)}
+							onClick={e => {
+								e.preventDefault()
+								setIsShowPassword(prevState => !prevState)
+							}}
 						>
 							<Icon
 								fontSize={20}
