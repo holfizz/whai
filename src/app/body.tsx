@@ -27,7 +27,7 @@ export default function Body({
 						>
 							<Sidebar />
 						</div>
-						{children}
+						<div className={'content_wrapper'}>{children}</div>
 					</div>
 				</Suspense>
 			</AppProvider>

@@ -6,13 +6,32 @@
   justify-content: center;
 
   label {
+    display: flex;
     width: 100%;
+    height: auto;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
+}
+
+.passwordLabel {
+  height: 70px;
+
+}
+
+.passwordInput {
+  width: 100%;
+  position: relative;
+  height: 70px;
 }
 
 .input {
   width: 100%;
   margin: 10px 0;
+
+
 }
 
 .loaderWrapper {
@@ -32,8 +51,17 @@
 
 }
 
+.submitButton {
+  margin-top: 10px;
+}
+
 .forgotPasswordButton {
   margin-top: 15px;
   color: var(--accent-color);
 
+}
+.changeVisiblePasswordButton{
+  position: absolute;
+  top: 25px;
+  right: 15px;
 }

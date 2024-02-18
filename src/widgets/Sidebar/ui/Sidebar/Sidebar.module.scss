@@ -16,20 +16,26 @@
 .isHovered {
   opacity: 0.8;
 }
-.sidebarHeader{
+
+.sidebarHeader {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+  overflow: hidden;
 }
-.addButton{
+
+.addButton {
   margin: auto;
-  .addIcon{
+
+  .addIcon {
     font-weight: 100;
     color: var(--inverted-color);
   }
 }
+
 .SidebarCollapsed {
   width: 100%;
   display: flex;
@@ -92,32 +98,6 @@
   border-radius: 0 0 10px 10px;
 }
 
-.tooltiptext {
-  width: 100px;
-  background-color: var(--elements-color);
-  color: var(--primary-color);
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-  left: 205%;
-  margin-left: -60px;
-  display: none;
-}
-
-.tooltiptext::after {
-  content: "";
-  position: absolute;
-  margin-top: auto;
-  margin-bottom: auto;
-  left: -9px;
-  top: 8px;
-  margin-left: -5px;
-  border-width: 7px;
-  border-style: solid;
-  border-color: transparent var(--elements-color) transparent transparent;
-}
 
 .sidebarHovered:hover {
   .arrow {
@@ -147,9 +127,11 @@
     transform: rotateY(180deg);
   }
 }
-.authButton{
+
+.authButton {
   width: 100%;
 }
+
 .userProfile {
   display: flex;
   align-items: center;
@@ -171,10 +153,11 @@
     color: var(--white);
   }
 }
-.email{
+
+.email {
   width: 150px;
 
-  p{
+  p {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -190,4 +173,28 @@
   svg {
     margin-right: 10px;
   }
+}
+
+.isVisible {
+  display: flex;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+}
+
+.search {
+  height: 30px !important;
+  border-radius: 10px !important;
 }

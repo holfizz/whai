@@ -19,6 +19,9 @@ import { useAuthMutate } from '../../model/auth.queries'
 import { formSchema } from '../../model/auth.contracts'
 import { useAuthStatus } from '../../model/auth.model'
 import { z } from 'zod'
+import Icon from '@/shared/ui/Icon/Icon'
+import { HiOutlineEye } from 'react-icons/hi'
+import { PiEyeClosedBold } from 'react-icons/pi'
 
 export interface AuthFormProps {
 	className?: string
@@ -41,6 +44,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 				string
 			>
 		>({ _errors: [] })
+		const [isShowPassword, setIsShowPassword] = useState<boolean>(false)
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()
 			const form = new FormData(e.currentTarget)
@@ -103,25 +107,37 @@ const AuthForm: FC<AuthFormProps> = memo(
 						type='text'
 					/>
 				</label>
-				<label>
+				<label className={cls.passwordLabel}>
 					<Text
 						size={TextSize.S}
 						theme={TextTheme.ERROR}
 						text={formErrors.password?._errors.join(', ')}
 					/>
-					<Input
-						name={'password'}
-						size={InputSize.FULL}
-						theme={InputTheme.OUTLINE}
-						className={cls.input}
-						placeholder={t('Enter password...')}
-						type='password'
-					/>
+					<div className={cls.passwordInput}>
+						<Input
+							name={'password'}
+							size={InputSize.FULL}
+							theme={InputTheme.OUTLINE}
+							className={cls.input}
+							placeholder={t('Enter password...')}
+							type={isShowPassword ? 'text' : 'password'}
+						/>
+						<button
+							className={cls.changeVisiblePasswordButton}
+							onClick={() => setIsShowPassword(prevState => !prevState)}
+						>
+							<Icon
+								fontSize={20}
+								SVG={isShowPassword ? HiOutlineEye : PiEyeClosedBold}
+							/>
+						</button>
+					</div>
 				</label>
 				<Button
 					type={'submit'}
 					size={ButtonSize.FULL}
 					theme={ButtonTheme.OUTLINE}
+					className={cls.submitButton}
 				>
 					{type === authConstants.LOGIN ? t('log in') : t('register')}
 				</Button>

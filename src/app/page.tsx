@@ -6,7 +6,6 @@ import Input, { InputTheme } from '@/shared/ui/Input/Input'
 export default function Page() {
 	return (
 		<div>
-			asdasdadasdad
 			<Button theme={ButtonTheme.OUTLINE}>sdsd</Button>
 			<Button theme={ButtonTheme.FILL}>sdsd</Button>
 			<Button theme={ButtonTheme.CLEAR}>sdsd</Button>
