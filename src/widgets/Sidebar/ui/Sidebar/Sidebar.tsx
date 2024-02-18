@@ -5,7 +5,8 @@ import cls from './Sidebar.module.scss'
 import { useSidebar } from '@/widgets/Sidebar/module/sidebar.module'
 import SidebarControl from './SidebarControl'
 import SidebarCollapsedButton from './SidebarCollapsedButton'
-import SidebarHeader from '@/widgets/Sidebar/ui/Sidebar/SidebarHeader'
+import SidebarHeader from './SidebarHeader'
+import Workspace from '@/features/workSpace'
 
 interface SidebarProps {
 	className?: string
@@ -29,6 +30,8 @@ const Sidebar: FC<SidebarProps> = memo(({ className }) => {
 				isCollapsed={isCollapsed}
 				setIsHovered={setIsHovered}
 			/>
+			<Workspace />
+
 			<SidebarControl isCollapsed={isCollapsed} />
 		</aside>
 	)

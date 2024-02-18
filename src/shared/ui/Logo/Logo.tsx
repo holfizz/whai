@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 export enum LogoSize {
 	S = 'small',
 	M = 'medium',
-	L = 'large',
+	FULL = 'full',
 }
 
 interface LogoProps {

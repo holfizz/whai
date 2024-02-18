@@ -1,46 +1,55 @@
 .title {
   color: var(--primary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--secondary-color);
 }
-.error{
-  .title{
+
+.error {
+  .title {
     color: var(--red);
   }
 
-  .text{
+  .text {
     color: var(--light-red);
   }
 }
 
-.success{
-  .title{
+.success {
+  .title {
     color: var(--green);
   }
 
-  .text{
+  .text {
     color: var(--green);
   }
 }
 
-.center{
+.center {
   text-align: center;
 }
 
-.left{
+.left {
   text-align: left;
 }
 
-.right{
+.right {
   text-align: right;
 }
+
 .size_s {
   .title {
     font-size: var(--font-size-m);
     line-height: var(--font-line-m);
   }
+
   .text {
     font-size: var(--font-size-s);
     line-height: var(--font-line-s);
@@ -52,6 +61,7 @@
     font-size: var(--font-size-l);
     line-height: var(--font-line-l);
   }
+
   .text {
     font-size: var(--font-size-s);
     line-height: var(--font-line-s);
@@ -63,6 +73,7 @@
     font-size: var(--font-size-l);
     line-height: var(--font-line-l);
   }
+
   .text {
     font-size: var(--font-size-m);
     line-height: var(--font-line-m);
@@ -74,6 +85,7 @@
     font-size: var(--font-size-xl);
     line-height: var(--font-line-xl);
   }
+
   .text {
     font-size: var(--font-size-l);
     line-height: var(--font-line-l);

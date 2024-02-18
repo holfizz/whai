@@ -2,29 +2,42 @@
   background: var(--elements-color);
   transition: width var(--animation-delay);
   width: var(--sidebar-width);
-  height: 100vh;
   position: fixed;
   left: 0;
+  height: 100vh;
   top: var(--navbar-height);
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .collapsed {
   transition: all var(--animation-delay);
   width: var(--sidebar-width-collapsed);
+
+  .sidebarHeader {
+    flex-direction: column;
+  }
+
 }
 
 .isHovered {
   opacity: 0.8;
 }
 
+.sidebarCollapsed {
+
+}
+
 .sidebarHeader {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  overflow: hidden;
+  height: auto;
 }
 
 .addButton {
@@ -59,12 +72,11 @@
 
 .sidebarControl {
   display: flex;
-  position: absolute;
   margin-top: auto;
-  bottom: 20px;
   align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
   flex-direction: column;
-  width: 100%;
 }
 
 .switchers {
@@ -135,11 +147,12 @@
 .userProfile {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
 }
 
 .avatar {
+  margin: 0 10px;
   min-width: 50px;
   width: 50px;
   height: 50px;
@@ -183,7 +196,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: auto;
   width: 100%;
 }
@@ -191,10 +204,20 @@
 .searchIcon {
   position: absolute;
   top: 6px;
-  left: 12px;
+  left: 8px;
 }
 
 .search {
+  width: 100% !important;
+  box-sizing: border-box;
   height: 30px !important;
   border-radius: 10px !important;
+}
+
+.line {
+  margin: 20px 0;
+  width: 30px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--primary-color);
 }

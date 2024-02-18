@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import cls from './Sidebar.module.scss'
 import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
-import Button, { ButtonTheme } from '@/shared/ui/Button/Button'
 import Icon from '@/shared/ui/Icon/Icon'
 import { HiOutlinePencilAlt } from 'react-icons/hi'
 import Input, { InputTheme } from '@/shared/ui/Input/Input'
@@ -17,13 +16,13 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
 	return (
 		<div className={cls.sidebarHeader}>
 			{isCollapsed ? (
-				<Logo logoSize={LogoSize.S} />
+				<Logo logoSize={LogoSize.FULL} />
 			) : (
 				<Logo logoSize={LogoSize.M} />
 			)}
-			<Button theme={ButtonTheme.CLEAR} className={cls.addButton}>
+			<button className={cls.addButton}>
 				<Icon className={cls.addIcon} fontSize={23} SVG={HiOutlinePencilAlt} />
-			</Button>
+			</button>
 
 			{!isCollapsed && (
 				<div className={cls.searchWrapper}>

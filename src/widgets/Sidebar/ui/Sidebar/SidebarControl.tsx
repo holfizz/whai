@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react'
 import cls from './Sidebar.module.scss'
 import LangSwitcher from '@/features/langSwitcher'
 import ThemeSwitcher from '@/features/themeSwitcher'
-import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
 import Icon from '@/shared/ui/Icon/Icon'
 import { RiUser4Line } from 'react-icons/ri'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
@@ -29,12 +28,7 @@ const SidebarControl = ({ isCollapsed }: { isCollapsed: boolean }) => {
 					<ThemeSwitcher />
 				</div>
 			)}
-			<Button
-				onClick={authActionButton}
-				size={ButtonSize.FULL}
-				theme={ButtonTheme.CLEAR}
-				className={cls.authButton}
-			>
+			<button onClick={authActionButton} className={cls.authButton}>
 				{user ? (
 					<div className={cls.userProfile}>
 						<div className={cls.avatar}>
@@ -61,7 +55,7 @@ const SidebarControl = ({ isCollapsed }: { isCollapsed: boolean }) => {
 						)}
 					</div>
 				)}
-			</Button>
+			</button>
 			<AuthModal
 				setIsFormType={setIsFormType}
 				isOpen={isOpenModal}
