@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import cls from './Sidebar.module.scss'
 import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
 import Icon from '@/shared/ui/Icon/Icon'
-import { HiOutlinePencilAlt } from 'react-icons/hi'
 import Input, { InputTheme } from '@/shared/ui/Input/Input'
 import { useTranslation } from 'react-i18next'
 import { LuSearch } from 'react-icons/lu'
@@ -20,9 +19,9 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
 			) : (
 				<Logo logoSize={LogoSize.M} />
 			)}
-			<button className={cls.addButton}>
-				<Icon className={cls.addIcon} fontSize={23} SVG={HiOutlinePencilAlt} />
-			</button>
+			{/*<button className={cls.addButton}>*/}
+			{/*	<Icon className={cls.addIcon} fontSize={23} SVG={HiOutlinePencilAlt} />*/}
+			{/*</button>*/}
 
 			{!isCollapsed && (
 				<div className={cls.searchWrapper}>
