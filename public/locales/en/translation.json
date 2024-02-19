@@ -9,5 +9,7 @@
   "User": "User",
   "New chat": "New chat",
   "Search": "Search",
-  "Workspace": "Workspace"
+  "Workspace": "Workspace",
+  "Light": "Light",
+  "Dark": "Dark"
 }

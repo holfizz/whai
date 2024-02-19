@@ -2,29 +2,36 @@
 @import "variables/global";
 @import "themes/light";
 @import "themes/dark";
-html, body{
+
+html, body {
   min-height: 100%;
-  color:var(--primary-color);
+  color: var(--primary-color);
   background: var(--background-color);
 }
-.isCollapsedMobile{
+
+.isCollapsedMobile {
   margin-left: 0;
 }
-.wrapper{
+
+.wrapper {
   display: flex;
   width: 100%;
   height: 100vh;
 }
-.sidebar_wrapper{
+
+.sidebar_wrapper {
   position: relative;
   transition: width var(--animation-delay);
 }
-.errorPage{
+
+.errorPage {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.content_wrapper{
+
+.content_wrapper {
   width: 100%;
   padding: 20px;
+  flex-shrink: 999;
 }

@@ -22,12 +22,10 @@ const SidebarControl = ({ isCollapsed }: { isCollapsed: boolean }) => {
 	const toggleAuthModal = useCallback(() => setIsOpenModal(prev => !prev), [])
 	return (
 		<div className={cls.sidebarControl}>
-			{!!user && (
-				<div className={cls.switchers}>
-					<LangSwitcher />
-					<ThemeSwitcher />
-				</div>
-			)}
+			<div className={cls.switchers}>
+				<LangSwitcher />
+				<ThemeSwitcher />
+			</div>
 			<button onClick={authActionButton} className={cls.authButton}>
 				{user ? (
 					<div className={cls.userProfile}>
