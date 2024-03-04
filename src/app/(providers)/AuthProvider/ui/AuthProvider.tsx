@@ -1,8 +1,8 @@
 'use client'
-import { FC, PropsWithChildren, useEffect } from 'react'
 import { useAuth } from '@/features/auth/model/auth.model'
-import { usePathname } from 'next/navigation'
 import { getAccessToken, getRefreshToken } from '@/shared/api/auth/auth.helper'
+import { usePathname } from 'next/navigation'
+import { FC, PropsWithChildren, useEffect } from 'react'
 
 const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 	const { user } = useAuth()

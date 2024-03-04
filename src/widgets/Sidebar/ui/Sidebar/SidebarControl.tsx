@@ -1,14 +1,8 @@
-import React, { useCallback, useState } from 'react'
-import cls from './Sidebar.module.scss'
-import LangSwitcher from '@/features/langSwitcher'
-import ThemeSwitcher from '@/features/themeSwitcher'
-import Icon from '@/shared/ui/Icon/Icon'
-import { RiUser4Line } from 'react-icons/ri'
-import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
-import { HiLogin } from 'react-icons/hi'
-import { AuthModal, useAuth } from '@/features/auth'
+import { useAuth } from '@/features/auth'
 import { authConstants } from '@/shared/const/auth'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import cls from './Sidebar.module.scss'
 
 const SidebarControl = ({ isCollapsed }: { isCollapsed: boolean }) => {
 	const [isOpenModal, setIsOpenModal] = useState(false)
@@ -22,7 +16,7 @@ const SidebarControl = ({ isCollapsed }: { isCollapsed: boolean }) => {
 	const toggleAuthModal = useCallback(() => setIsOpenModal(prev => !prev), [])
 	return (
 		<div className={cls.sidebarControl}>
-			<div className={cls.switchers}>
+			{/* <div className={cls.switchers}>
 				<LangSwitcher />
 				<ThemeSwitcher />
 			</div>
@@ -59,7 +53,7 @@ const SidebarControl = ({ isCollapsed }: { isCollapsed: boolean }) => {
 				isOpen={isOpenModal}
 				onClose={toggleAuthModal}
 				type={isFormType}
-			/>
+			/> */}
 		</div>
 	)
 }

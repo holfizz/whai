@@ -1,14 +1,14 @@
 .Logo {
-  fill: var(--inverted-color);
-  font-weight: 800;
-  height: auto;
+	fill: var(--inverted-color);
+	font-weight: 800;
+	height: auto;
 }
-.small{
-  width: var(--sidebar-width-collapsed);
+.small {
+	width: 80px;
 }
-.medium{
-  width: calc(var(--sidebar-width) - 80px);
+.medium {
+	width: calc(var(--sidebar-width) - 80px);
 }
-.full{
-  width:100%;
+.full {
+	width: 100%;
 }

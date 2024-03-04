@@ -1,13 +1,13 @@
 'use client'
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { IUser } from '@/entities/Auth'
+import { AuthApi } from '@/features/auth'
+import { errorCatch } from '@/shared/api/api.helper'
 import {
 	getUserFromStorage,
 	removeFromStorage,
 } from '@/shared/api/auth/auth.helper'
-import { AuthApi } from '@/features/auth'
-import { errorCatch } from '@/shared/api/api.helper'
-import { IUser } from '@/entities/Auth'
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 interface IUseAuthState {
 	user: IUser | null

@@ -1,12 +1,16 @@
-.app_dark_theme{
-  --background-color: #232323;
-  --inverted-color:#ffffff;
-  --primary-color: #4f4f4f;
-  --secondary-color: #3f494d;
-  --elements-color: #121212;
-  --accent-color: #9966cc;
-  --text-color: #e0e0e0;
-  --light-red: #942140;
-  --red:#63051e;
-  --green: #5ea95e;
+.app_dark_theme {
+	--background-color: #000;
+	--inverted-color: #c0c0c0;
+	--primary-color: #ffffff;
+	--secondary-color: #999999;
+	--elements-color: #111111;
+	--accent-color: #9966cc;
+	--text-color: #e0e0e0;
+	--light-red: #942140;
+	--red: #63051e;
+	--green: #5ea95e;
+	--grey-700: #171717;
+	--grey-500: #1b1b1b;
+	--grey-300: #1e1e1e;
+	--grey-100: #313131;
 }

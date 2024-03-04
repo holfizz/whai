@@ -1,93 +1,95 @@
 .title {
-  color: var(--primary-color);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	color: var(--primary-color);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: 500;
 }
 
 .text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--secondary-color);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: var(--secondary-color);
+	font-weight: 300;
 }
 
 .error {
-  .title {
-    color: var(--red);
-  }
+	.title {
+		color: var(--red);
+	}
 
-  .text {
-    color: var(--light-red);
-  }
+	.text {
+		color: var(--light-red);
+	}
 }
 
 .success {
-  .title {
-    color: var(--green);
-  }
+	.title {
+		color: var(--green);
+	}
 
-  .text {
-    color: var(--green);
-  }
+	.text {
+		color: var(--green);
+	}
 }
 
 .center {
-  text-align: center;
+	text-align: center;
 }
 
 .left {
-  text-align: left;
+	text-align: left;
 }
 
 .right {
-  text-align: right;
+	text-align: right;
 }
 
 .size_s {
-  .title {
-    font-size: var(--font-size-m);
-    line-height: var(--font-line-m);
-  }
+	.title {
+		font-size: var(--font-size-m);
+		line-height: var(--font-line-m);
+	}
 
-  .text {
-    font-size: var(--font-size-s);
-    line-height: var(--font-line-s);
-  }
+	.text {
+		font-size: var(--font-size-s);
+		line-height: var(--font-line-s);
+	}
 }
 
 .size_m {
-  .title {
-    font-size: var(--font-size-l);
-    line-height: var(--font-line-l);
-  }
+	.title {
+		font-size: var(--font-size-l);
+		line-height: var(--font-line-l);
+	}
 
-  .text {
-    font-size: var(--font-size-s);
-    line-height: var(--font-line-s);
-  }
+	.text {
+		font-size: var(--font-size-s);
+		line-height: var(--font-line-s);
+	}
 }
 
 .size_l {
-  .title {
-    font-size: var(--font-size-l);
-    line-height: var(--font-line-l);
-  }
+	.title {
+		font-size: var(--font-size-l);
+		line-height: var(--font-line-l);
+	}
 
-  .text {
-    font-size: var(--font-size-m);
-    line-height: var(--font-line-m);
-  }
+	.text {
+		font-size: var(--font-size-m);
+		line-height: var(--font-line-m);
+	}
 }
 
 .size_xl {
-  .title {
-    font-size: var(--font-size-xl);
-    line-height: var(--font-line-xl);
-  }
+	.title {
+		font-size: var(--font-size-xl);
+		line-height: var(--font-line-xl);
+	}
 
-  .text {
-    font-size: var(--font-size-l);
-    line-height: var(--font-line-l);
-  }
+	.text {
+		font-size: var(--font-size-l);
+		line-height: var(--font-line-l);
+	}
 }

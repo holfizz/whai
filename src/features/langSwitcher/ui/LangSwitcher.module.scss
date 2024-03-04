@@ -1,58 +1,51 @@
 .LangSwitcher {
-  width: 55px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--inverted-color);
-  transition: all var(--animation-delay);
-  font-size: var(--font-size-l);
-  user-select: none;
+	width: 55px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--inverted-color);
+	transition: all var(--animation-delay);
+	font-size: var(--font-size-l);
+	user-select: none;
 
-  svg {
-    color: var(--inverted-color);
-
-  }
+	svg {
+		color: var(--inverted-color);
+	}
 }
 
 .changeLang {
-  svg {
-    position: absolute;
+	svg {
+		position: absolute;
+	}
 
-  }
-
-  width: 30px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.active {
-  animation: ease var(--animation-delay) infinite lang-switch;
+	width: 30px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .icon {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .lang {
-  p {
-
-    color: var(--inverted-color);
-  }
+	p {
+		color: var(--inverted-color);
+	}
 }
 
 @keyframes lang-switch {
-  0% {
-    transform: rotateZ(0deg);
-  }
+	0% {
+		transform: rotateZ(0deg);
+	}
 
-  100% {
-    transform: rotateZ(540deg);
-  }
+	100% {
+		transform: rotateZ(540deg);
+	}
 }

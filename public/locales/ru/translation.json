@@ -1,15 +1,15 @@
 {
-  "log in": "Войти",
-  "register": "Регистрация",
-  "logout": "Выйти",
-  "Confirm your email": "Confirm your email",
-  "Forgot your password?": "Забыли пароль?",
-  "Close": "Закрыть",
-  "Open": "Открыть",
-  "User": "Пользователь",
-  "New chat": "Новый чат",
-  "Search": "Поиск",
-  "Workspace": "Рабочее пространство",
-  "Light": "Светлая",
-  "Dark": "Темная"
+	"sign in": "Войти",
+	"sign up": "Регистрация",
+	"logout": "Выйти",
+	"Confirm your email": "Confirm your email",
+	"Forgot your password?": "Забыли пароль?",
+	"Close": "Закрыть",
+	"Open": "Открыть",
+	"User": "Пользователь",
+	"New chat": "Новый чат",
+	"Search": "Поиск",
+	"Workspace": "Рабочее пространство",
+	"Light": "Светлая",
+	"Dark": "Темная"
 }

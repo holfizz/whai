@@ -1,11 +1,11 @@
 import Cookies from 'js-cookie'
 
-import { authConstants } from '@/shared/const/auth'
-import { REFRESH_TOKEN } from '@/shared/const/token'
+import { IAuthResponse, IEmailPassword, ProfileData } from '@/entities/Auth'
 import { getContentType } from '@/shared/api/api.helper'
 import { axiosClassic } from '@/shared/api/api.interceptor'
 import { saveToStorage } from '@/shared/api/auth/auth.helper'
-import { IAuthResponse, IEmailPassword, ProfileData } from '@/entities/Auth'
+import { authConstants } from '@/shared/const/auth'
+import { REFRESH_TOKEN } from '@/shared/const/token'
 
 export const AuthApi = {
 	async main(type: authConstants, data: IEmailPassword) {

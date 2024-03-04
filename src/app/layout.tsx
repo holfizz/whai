@@ -1,16 +1,16 @@
-import type { Metadata } from 'next'
-import { Montserrat } from 'next/font/google'
 import '@/app/(styles)/index.scss'
 import Body from '@/app/body'
+import type { Metadata } from 'next'
+import { Poppins } from 'next/font/google'
 import '../shared/config/i18n/i18n'
 
-const montserrat = Montserrat({
-	subsets: ['latin', 'cyrillic-ext'],
+const fontClass = Poppins({
+	subsets: ['latin', 'latin-ext'],
 	weight: ['200', '300', '400', '500', '600', '700', '800'],
 })
 export const metadata: Metadata = {
 	title: 'wh? - whai',
-	description: 'New generation artificial intelligence',
+	description: 'Образовательная платформа на основе ИИ',
 }
 function RootLayout({
 	children,
@@ -22,7 +22,7 @@ function RootLayout({
 			<head>
 				<link rel='icon' href='/whai.png' sizes='any' />
 			</head>
-			<Body className={montserrat.className}>{children}</Body>
+			<Body className={fontClass.className}>{children}</Body>
 		</html>
 	)
 }

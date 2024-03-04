@@ -2,7 +2,7 @@
 
 const nextConfig = {
 	webpack(config) {
-		const fileLoaderRule = config.module.rules.find((rule) =>
+		const fileLoaderRule = config.module.rules.find(rule =>
 			rule.test?.test?.('.svg'),
 		)
 
@@ -24,8 +24,7 @@ const nextConfig = {
 
 		return config
 	},
-	reactStrictMode:true,
-};
+	reactStrictMode: true,
+}
 
-export default nextConfig;
-
+export default nextConfig

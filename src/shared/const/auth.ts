@@ -1,4 +1,4 @@
 export const enum authConstants {
 	LOGIN = 'login',
-	REGISTER = 'register',
+	SIGNUP = 'sign_up',
 }

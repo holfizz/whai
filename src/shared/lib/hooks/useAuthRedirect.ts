@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import { useAuth } from '@/features/auth/model/auth.model'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export const useAuthRedirect = () => {
 	const { user } = useAuth()

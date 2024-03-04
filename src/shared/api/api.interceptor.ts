@@ -1,10 +1,10 @@
-import axios from 'axios'
-import { errorCatch, getContentType } from './api.helper'
+import { AuthApi } from '@/features/auth'
 import {
 	getAccessToken,
 	removeFromStorage,
 } from '@/shared/api/auth/auth.helper'
-import { AuthApi } from '@/features/auth'
+import axios from 'axios'
+import { errorCatch, getContentType } from './api.helper'
 
 const axiosOptions = {
 	baseURL: 'http://localhost:8800/api',

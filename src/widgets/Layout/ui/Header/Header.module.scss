@@ -1,0 +1,7 @@
+.Header {
+	position: fixed;
+	background: var(--elements-color);
+	transition: width var(--animation-delay);
+	height: var(--navbar-height);
+	right: 0;
+}

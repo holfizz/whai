@@ -1,74 +1,75 @@
 .Button {
-  display: flex;
-  width: auto;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: var(--button-border-radius);
-  box-sizing: inherit;
-  padding: 10px 20px;
-  &:hover{
-    transition: all var(--animation-delay);
-    opacity: 0.85;
-    fill-opacity: 0.85;
-  }
+	display: flex;
+	width: auto;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	border-radius: var(--button-border-radius);
+	box-sizing: inherit;
+	padding: 10px 20px;
+	&:hover {
+		transition: all var(--animation-delay);
+	}
 }
 
 .clear {
-  border: none;
-  background: none;
-  outline: none;
-  color: var(--primary-color);
+	border: none;
+	background: none;
+	outline: none;
+	color: var(--secondary-color);
+	&:hover {
+		color: var(--primary-color);
+	}
 }
 
-.outline{
-  border: var(--primary-color) 1px solid;
-  color:var(--primary-color);
-  background: none;
+.outline {
+	border: var(--primary-color) 1px solid;
+	color: var(--primary-color);
+	background: none;
 }
 
-.outline_secondary{
-  border: var(--secondary-color) 1px solid;
-  color:var(--secondary-color);
-  background: none;
+.outline_secondary {
+	border: var(--secondary-color) 1px solid;
+	color: var(--secondary-color);
+	background: none;
 }
 
-.fill{
-  background: var(--elements-color);
-  color: var(--grey);
+.fill {
+	background: var(--elements-color);
+	color: var(--grey);
 }
-.red{
-  color: var(--red);
-  border: var(--red) 2px solid;
+.red {
+	color: var(--red);
+	border: var(--red) 2px solid;
 }
-.size_m{
-  width:auto;
-  height: 50px;
-}
-
-.size_l{
-  width:auto;
-  height: 55px;
-  padding: 0 50px;
+.size_m {
+	width: auto;
+	height: 50px;
+	font: var(--font-m);
 }
 
-.size_xl{
-  width:auto;
-  height: 50px;
-  font-weight: 400;
-  padding: 0 90px;
-
+.size_l {
+	width: auto;
+	height: 55px;
+	padding: 0 50px;
 }
 
-.size_full{
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 50px;
-  height: auto;
-  font-size: 20px;
+.size_xl {
+	width: auto;
+	height: 50px;
+	font-weight: 400;
+	padding: 0 90px;
 }
 
-.disabled{
-  opacity: 0.7;
+.size_full {
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 50px;
+	height: auto;
+	font: var(--font-m);
+}
+
+.disabled {
+	opacity: 0.7;
 }

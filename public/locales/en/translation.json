@@ -1,15 +1,15 @@
 {
-  "log in": "Log in",
-  "register": "Register",
-  "logout": "Logout",
-  "Confirm your email": "Confirm your email",
-  "Forgot your password?": "Forgot your password?",
-  "Close": "Close",
-  "Open": "Open",
-  "User": "User",
-  "New chat": "New chat",
-  "Search": "Search",
-  "Workspace": "Workspace",
-  "Light": "Light",
-  "Dark": "Dark"
+	"sign in": "Sign in",
+	"sign up": "Sign up",
+	"logout": "Logout",
+	"Confirm your email": "Confirm your email",
+	"Forgot your password?": "Forgot your password?",
+	"Close": "Close",
+	"Open": "Open",
+	"User": "User",
+	"New chat": "New chat",
+	"Search": "Search",
+	"Workspace": "Workspace",
+	"Light": "Light",
+	"Dark": "Dark"
 }

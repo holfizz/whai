@@ -1,17 +1,16 @@
-import React, { Dispatch, FC, SetStateAction } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import cls from './Sidebar.module.scss'
 import Tooltip from '@/shared/ui/Tooltip/Tooltip'
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import cls from './Sidebar.module.scss'
 
 interface SidebarCollapsedButtonProps {
 	setIsCollapsed: (isCollapsed: boolean) => void
 	isCollapsed: boolean
-	setIsHovered: Dispatch<SetStateAction<boolean>>
 }
 
 const SidebarCollapsedButton: FC<SidebarCollapsedButtonProps> = props => {
-	const { setIsCollapsed, isCollapsed, setIsHovered } = props
+	const { setIsCollapsed, isCollapsed } = props
 	const { t } = useTranslation()
 
 	const toggleSidebar = () => setIsCollapsed(!isCollapsed)
@@ -21,8 +20,6 @@ const SidebarCollapsedButton: FC<SidebarCollapsedButtonProps> = props => {
 			className={classNames(cls.sidebarHovered, {
 				[cls.isCollapsed]: isCollapsed,
 			})}
-			onMouseEnter={() => setIsHovered(true)}
-			onMouseLeave={() => setIsHovered(false)}
 		>
 			<div className={classNames(cls.arrowHovered, {}, [])}>
 				<div className={classNames(cls.arrow, {}, [cls.arrowTop])}></div>

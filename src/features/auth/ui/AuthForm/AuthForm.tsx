@@ -1,19 +1,19 @@
-import { Dispatch, FC, FormEvent, memo, SetStateAction, useState } from 'react'
+import { authConstants } from '@/shared/const/auth'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import cls from './AuthForm.module.scss'
+import AppLink from '@/shared/ui/AppLink/AppLink'
 import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
+import Icon from '@/shared/ui/Icon/Icon'
 import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
-import { authConstants } from '@/shared/const/auth'
+import { Dispatch, FC, FormEvent, SetStateAction, memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import AppLink from '@/shared/ui/AppLink/AppLink'
-import { useAuthMutate } from '../../model/auth.queries'
-import { formSchema } from '../../model/auth.contracts'
-import { useAuthStatus } from '../../model/auth.model'
-import { z } from 'zod'
-import Icon from '@/shared/ui/Icon/Icon'
 import { HiOutlineEye } from 'react-icons/hi'
 import { PiEyeClosedBold } from 'react-icons/pi'
+import { z } from 'zod'
+import { formSchema } from '../../model/auth.contracts'
+import { useAuthStatus } from '../../model/auth.model'
+import { useAuthMutate } from '../../model/auth.queries'
+import cls from './AuthForm.module.scss'
 
 export interface AuthFormProps {
 	className?: string
@@ -62,11 +62,11 @@ const AuthForm: FC<AuthFormProps> = memo(
 						isError
 							? TextTheme.ERROR
 							: isSuccess
-								? TextTheme.SUCCESS
-								: TextTheme.PRIMARY
+							? TextTheme.SUCCESS
+							: TextTheme.PRIMARY
 					}
 					size={TextSize.L}
-					title={type === authConstants.LOGIN ? t('log in') : t('register')}
+					title={type === authConstants.LOGIN ? t('log in') : t('sign-up')}
 				/>
 				{error && (
 					<Text
@@ -75,7 +75,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 						size={TextSize.L}
 					/>
 				)}
-				{type === authConstants.REGISTER && isSuccess && (
+				{type === authConstants.SIGNUP && isSuccess && (
 					<Text
 						theme={TextTheme.SUCCESS}
 						text={t('Confirm your email')}
@@ -132,7 +132,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 					theme={ButtonTheme.OUTLINE}
 					className={cls.submitButton}
 				>
-					{type === authConstants.LOGIN ? t('log in') : t('register')}
+					{type === authConstants.LOGIN ? t('log in') : t('sign_up')}
 				</Button>
 				<AppLink
 					className={cls.forgotPasswordButton}
@@ -146,13 +146,13 @@ const AuthForm: FC<AuthFormProps> = memo(
 						setIsFormType &&
 						setIsFormType(
 							type === authConstants.LOGIN
-								? authConstants.REGISTER
+								? authConstants.SIGNUP
 								: authConstants.LOGIN,
 						)
 					}
 					className={cls.changeModeButton}
 				>
-					{type === authConstants.LOGIN ? t('register') : t('log in')}
+					{type === authConstants.LOGIN ? t('sign_up') : t('log in')}
 				</Button>
 			</form>
 		)
