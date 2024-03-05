@@ -20,7 +20,7 @@ function RootLayout({
 	return (
 		<html lang='ru'>
 			<head>
-				<link rel='icon' href='/whai.png' sizes='any' />
+				<link rel='icon' href={'/whai.svg'} sizes='any' />
 			</head>
 			<Body className={fontClass.className}>{children}</Body>
 		</html>

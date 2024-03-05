@@ -2,10 +2,10 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useSidebar } from '@/widgets/Sidebar/module/sidebar.module'
 import { FC, memo } from 'react'
+import SidebarControl from '../SidebarControl/SidebarControl'
 import SidebarHeader from '../SidebarHeader/SidebarHeader'
 import cls from './Sidebar.module.scss'
 import SidebarCollapsedButton from './SidebarCollapsedButton'
-import SidebarControl from './SidebarControl'
 
 interface SidebarProps {
 	className?: string

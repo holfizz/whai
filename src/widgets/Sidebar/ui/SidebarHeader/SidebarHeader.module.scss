@@ -3,10 +3,9 @@
 	justify-content: space-between;
 	flex-direction: row;
 	flex-wrap: wrap;
-
 	border: 1px solid var(--grey-500);
 	width: 100%;
-	height: 250px;
+	height: auto;
 	border-radius: 10px;
 	background: var(--grey-700);
 }
@@ -33,6 +32,10 @@
 	justify-content: center;
 	border-radius: 13px;
 	background: var(--main-color);
+}
+.logo {
+	width: 65px;
+	height: 65px;
 }
 .profileData {
 	padding: 0 10px;
@@ -87,5 +90,4 @@
 	border-radius: 50%;
 	width: 15px;
 	height: 15px;
-	border: 0.1px solid var(--inverted-color);
 }

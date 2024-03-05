@@ -16,7 +16,9 @@
 	transition: all var(--animation-delay);
 	width: var(--sidebar-width-collapsed);
 }
-
+.wrapper {
+	height: 100%;
+}
 .SidebarCollapsed {
 	width: 100%;
 	display: flex;
@@ -36,17 +38,6 @@
 	margin-left: 20px;
 	right: -35px;
 	top: 50%;
-}
-
-.sidebarControl {
-	display: flex;
-	margin-top: auto;
-	align-items: center;
-	justify-content: center;
-	height: auto;
-	flex: 0 0 auto;
-	flex-direction: column;
-	gap: 10px;
 }
 
 .switchers {

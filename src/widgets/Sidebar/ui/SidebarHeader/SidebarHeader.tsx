@@ -29,11 +29,15 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
 		>
 			<div className={cls.profileBlock}>
 				<div className={cls.avatar}>
-					<Logo />
+					<Logo logoType='short' />
 				</div>
 				{!isCollapsed && (
 					<div className={cls.profileData}>
-						<Text size={TextSize.S} title='Mode' text='Creator'></Text>
+						<Text
+							size={TextSize.S}
+							title={t('Mode')}
+							text={t('Creator')}
+						></Text>
 					</div>
 				)}
 				<Button
@@ -48,12 +52,6 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
 			</div>
 			<div className={cls.coursesBlock}>
 				<div className={cls.coursesItem}>
-					<SidebarHeaderItem color={'#ef9590'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#e8f99b'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#ff7343'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#2f311d'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#514665'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#ddc6e9'} isCollapsed={isCollapsed} />
 					<SidebarHeaderItem color={'#ef9590'} isCollapsed={isCollapsed} />
 					<SidebarHeaderItem color={'#e8f99b'} isCollapsed={isCollapsed} />
 					<SidebarHeaderItem color={'#ff7343'} isCollapsed={isCollapsed} />

@@ -11,5 +11,8 @@
 	"Search": "Search",
 	"Workspace": "Workspace",
 	"Light": "Light",
-	"Dark": "Dark"
+	"Dark": "Dark",
+	"Creator": "Creator",
+	"Student": "Student",
+	"Mode": "Mode"
 }

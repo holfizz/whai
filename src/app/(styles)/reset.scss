@@ -31,7 +31,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px transparent;
+	-webkit-box-shadow: inset 0 0 6px var(--background-color);
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 }
@@ -39,10 +39,9 @@ body {
 ::-webkit-scrollbar-thumb {
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	background: var(--primary-color);
-	-webkit-box-shadow: inset 0 0 6px var(--background-color);
+	background: var(--main-color);
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-	background: var(--primary-color);
+	background: var(--main-color);
 }

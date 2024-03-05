@@ -1,0 +1,18 @@
+.sidebarControl {
+	display: flex;
+	margin-top: auto;
+	align-items: center;
+	justify-content: center;
+	height: auto;
+	flex: 0 0 auto;
+	flex-direction: column;
+	gap: 10px;
+}
+.changeAccountModeButton {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	font-size: 20px;
+	color: var(--secondary-color);
+}
