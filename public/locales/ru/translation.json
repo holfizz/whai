@@ -1,6 +1,6 @@
 {
-	"sign in": "Войти",
-	"sign up": "Регистрация",
+	"Log in": "Войти",
+	"Sign up": "Регистрация",
 	"logout": "Выйти",
 	"Confirm your email": "Confirm your email",
 	"Forgot your password?": "Забыли пароль?",
@@ -14,5 +14,6 @@
 	"Dark": "Темная",
 	"Creator": "Создатель",
 	"Student": "Студент",
-	"Mode": "Режим"
+	"Mode": "Режим",
+	"Start for free": "Начать бесплатно"
 }

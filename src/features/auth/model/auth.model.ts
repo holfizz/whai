@@ -3,27 +3,34 @@ import { IUser } from '@/entities/Auth'
 import { AuthApi } from '@/features/auth'
 import { errorCatch } from '@/shared/api/api.helper'
 import {
+	getAccessToken,
 	getUserFromStorage,
 	removeFromStorage,
 } from '@/shared/api/auth/auth.helper'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+export type TypeAuthUser = IUser | null
+
 interface IUseAuthState {
-	user: IUser | null
+	user: TypeAuthUser
+	accessToken: string | null
 }
 
 interface IUseAuthActions {
 	logout: () => void
 	checkAuth: () => void
+	setAccessToken: (accessToken: string | null) => void
+	setAuthUser: (user: TypeAuthUser) => void
 }
 
-type useAuthProps = IUseAuthState & IUseAuthActions
+export type useAuthProps = IUseAuthState & IUseAuthActions
 
 export const useAuth = create<useAuthProps>()(
 	persist(
 		set => ({
 			user: getUserFromStorage(),
+			accessToken: getAccessToken(),
 			logout: () => {
 				set(() => ({ user: null }))
 				removeFromStorage()
@@ -39,6 +46,12 @@ export const useAuth = create<useAuthProps>()(
 						removeFromStorage()
 					}
 				}
+			},
+			setAccessToken: (accessToken: string | null) => {
+				set(() => ({ accessToken: accessToken }))
+			},
+			setAuthUser: (user: TypeAuthUser) => {
+				set(() => ({ user: user }))
 			},
 		}),
 		{ name: 'user' },

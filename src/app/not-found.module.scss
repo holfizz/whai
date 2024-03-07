@@ -1,0 +1,29 @@
+.header {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	display: flex;
+}
+.errorPage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: #e8f99b;
+	height: 100vh;
+}
+.errorImage {
+	position: relative;
+	margin: auto 0;
+	width: 70vw;
+	min-width: 300px;
+	height: auto;
+}
+.errorTitle {
+	position: absolute;
+	top: 100px;
+	width: auto;
+	font-size: 1.5em;
+	color: #000;
+	font-weight: 900;
+}

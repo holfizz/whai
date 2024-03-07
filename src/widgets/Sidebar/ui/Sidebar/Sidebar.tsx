@@ -1,5 +1,6 @@
 'use client'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import Line, { LineSize } from '@/shared/ui/Line/Line'
 import { useSidebar } from '@/widgets/Sidebar/module/sidebar.module'
 import { FC, memo } from 'react'
 import SidebarControl from '../SidebarControl/SidebarControl'
@@ -29,6 +30,11 @@ const Sidebar: FC<SidebarProps> = memo(({ className }) => {
 				{/*<Workspace />*/}
 
 				<SidebarControl isCollapsed={isCollapsed} />
+				<Line
+					className={cls.line}
+					lineSize={LineSize.LONG}
+					color={'var(--grey-100)'}
+				/>
 			</div>
 		</aside>
 	)

@@ -1,121 +1,28 @@
 'use client'
+import Button from '@/shared/ui/Button/Button'
+import cls from './mainPage.module.scss'
 
-import Button, { ButtonTheme } from '@/shared/ui/Button/Button'
-import { Layout } from '@/widgets/Layout'
+import { Navbar } from '@/widgets/Navbar'
 
 export default function Page() {
 	return (
-		<Layout>
-			<div>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.FILL}>dasdasdadasadadas</Button>
-				<Button theme={ButtonTheme.OUTLINE}>dasdasdadasadadas</Button>
+		<>
+			<div className={cls.navbarWrapper}>
+				<Navbar />
 			</div>
-		</Layout>
+			<div className={cls.welcomeBlock}>
+				<h1 className={cls.mainPageTitle}>
+					{String('The internet is your education').toUpperCase()}
+				</h1>
+			</div>
+			<Button>dasdasdasda</Button>
+			<Button>dasdasdasda</Button>
+			<Button>dasdasdasda</Button>
+			<Button>dasdasdasda</Button>
+			<Button>dasdasdasda</Button>
+			<Button>dasdasdasda</Button>
+			<Button>dasdasdasda</Button>
+			<Button>dasdasdasda</Button>
+		</>
 	)
 }

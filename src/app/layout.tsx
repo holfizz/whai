@@ -1,10 +1,15 @@
 import '@/app/(styles)/index.scss'
 import Body from '@/app/body'
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Mulish, Poppins } from 'next/font/google'
 import '../shared/config/i18n/i18n'
 
-const fontClass = Poppins({
+const poppinsClass = Poppins({
+	subsets: ['latin', 'latin-ext'],
+	weight: ['200', '300', '400', '500', '600', '700', '800'],
+})
+
+const mulishFont = Mulish({
 	subsets: ['latin', 'latin-ext'],
 	weight: ['200', '300', '400', '500', '600', '700', '800'],
 })
@@ -22,7 +27,11 @@ function RootLayout({
 			<head>
 				<link rel='icon' href={'/whai.svg'} sizes='any' />
 			</head>
-			<Body className={fontClass.className}>{children}</Body>
+			<Body
+				className={[poppinsClass.className, mulishFont.className].join(' ')}
+			>
+				{children}
+			</Body>
 		</html>
 	)
 }

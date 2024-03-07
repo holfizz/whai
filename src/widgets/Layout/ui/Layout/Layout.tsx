@@ -13,6 +13,7 @@ interface LayoutProps {
 
 export const Layout: FC<LayoutProps> = ({ children, className }) => {
 	const { isCollapsed } = useSidebar()
+
 	return (
 		<div className={classNames(cls.wrapper, {}, [className])}>
 			<div className={cls.layout}>

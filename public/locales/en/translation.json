@@ -1,6 +1,6 @@
 {
-	"sign in": "Sign in",
-	"sign up": "Sign up",
+	"Log in": "Log in",
+	"Sign up": "Sign up",
 	"logout": "Logout",
 	"Confirm your email": "Confirm your email",
 	"Forgot your password?": "Forgot your password?",
@@ -14,5 +14,6 @@
 	"Dark": "Dark",
 	"Creator": "Creator",
 	"Student": "Student",
-	"Mode": "Mode"
+	"Mode": "Mode",
+	"Start for free": "Start for free"
 }

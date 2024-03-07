@@ -1,5 +1,5 @@
 export { AuthApi } from './model/auth.api'
 
-export { useAuthStatus } from './model/auth.model'
+export { useAuth, useAuthStatus } from './model/auth.model'
+export { GET_AUTH } from './model/auth.queries'
 export { AuthModal } from './ui/AuthModal/AuthModal'
-export { useAuth } from './model/auth.model'

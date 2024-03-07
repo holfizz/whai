@@ -2,30 +2,25 @@
 @import 'variables/global';
 @import 'themes/light';
 @import 'themes/dark';
-
+@import url(https://db.onlinewebfonts.com/c/d4f20dfedfdf197ed0ac52b09bf25551?family=GT+Walsheim+Pro+Medium+Regular);
 html,
 body {
 	min-height: 100%;
 	color: var(--primary-color);
-	background: repeating-linear-gradient(
-			var(--background-color),
-			var(--background-color) 20px,
-			transparent 22px
-		),
-		repeating-linear-gradient(
-			90deg,
-			var(--background-color),
-			var(--background-color) 20px,
-			transparent 22px
-		);
+	// background: repeating-linear-gradient(
+	// 		var(--background-color),
+	// 		var(--background-color) 20px,
+	// 		transparent 22px
+	// 	),
+	// 	repeating-linear-gradient(
+	// 		90deg,
+	// 		var(--background-color),
+	// 		var(--background-color) 20px,
+	// 		transparent 22px
+	// 	);
+	background: var(--background-color);
 }
 
 .isCollapsedMobile {
 	margin-left: 0;
-}
-
-.errorPage {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }

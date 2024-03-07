@@ -1,11 +1,12 @@
-import { type ButtonHTMLAttributes, type FC, memo, ReactNode } from 'react'
-import { classNames, Mods } from '@/shared/lib/classNames/classNames'
+import { Mods, classNames } from '@/shared/lib/classNames/classNames'
+import { ReactNode, memo, type ButtonHTMLAttributes, type FC } from 'react'
 import cls from './Button.module.scss'
 
 export enum ButtonTheme {
 	CLEAR = 'clear',
 	OUTLINE = 'outline',
 	FILL = 'fill',
+	FILL_MAIN = 'fill_main',
 }
 
 export enum ButtonSize {

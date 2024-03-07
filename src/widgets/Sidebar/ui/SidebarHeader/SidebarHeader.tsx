@@ -2,7 +2,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
 import Icon from '@/shared/ui/Icon/Icon'
 import Line, { LineSize } from '@/shared/ui/Line/Line'
-import Logo from '@/shared/ui/Logo/Logo'
+import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
 import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -29,7 +29,7 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
 		>
 			<div className={cls.profileBlock}>
 				<div className={cls.avatar}>
-					<Logo logoType='short' />
+					<Logo logoSize={LogoSize.FULL} logoType='short' />
 				</div>
 				{!isCollapsed && (
 					<div className={cls.profileData}>
@@ -70,7 +70,7 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
 					size={ButtonSize.FULL}
 				>
 					{!isCollapsed && 'Create a Course '}
-					<Icon fontSize={20} SVG={IoAddCircleOutline} />
+					<IoAddCircleOutline fontSize={20} />
 				</Button>
 			</div>
 		</div>

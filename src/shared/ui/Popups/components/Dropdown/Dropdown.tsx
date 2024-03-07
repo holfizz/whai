@@ -1,3 +1,4 @@
+'use client'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import AppLink from '@/shared/ui/AppLink/AppLink'
 import { ReactNode, useState } from 'react'
@@ -22,7 +23,7 @@ interface DropdownProps {
 
 export function Dropdown(props: DropdownProps) {
 	const { className, trigger, items, direction = 'bottom right' } = props
-	const [menuOpen, setMenuOpen] = useState(false) // Состояние для открытия меню
+	const [menuOpen, setMenuOpen] = useState(false)
 
 	const menuClasses = [mapDirectionClass[direction]]
 

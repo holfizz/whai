@@ -1,8 +1,9 @@
+import { AuthApi } from '@/features/auth'
+import { authConstants } from '@/shared/const/auth'
+import { gql } from '@apollo/client'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { AuthApi } from '@/features/auth'
 import { useAuthStatus } from './auth.model'
-import { authConstants } from '@/shared/const/auth'
 
 export const useAuthMutate = (type: authConstants) => {
 	const { setIsError, setIsSuccess } = useAuthStatus()
@@ -30,3 +31,15 @@ export const useAuthMutate = (type: authConstants) => {
 		},
 	})
 }
+
+export const GET_AUTH = gql`
+	mutation GetNewTokens($dto: RefreshTokenInput!) {
+		getNewTokens(dto: $dto) {
+			accessToken
+			user {
+				email
+				isActivated
+			}
+		}
+	}
+`

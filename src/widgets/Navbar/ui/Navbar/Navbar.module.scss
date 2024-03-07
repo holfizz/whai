@@ -3,12 +3,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: fixed;
+	width: 100%;
+	height: var(--navbar-height);
+	background: var(--background-color);
 }
 .wrapper {
 	display: flex;
-	backdrop-filter: blur(5px);
 	width: 90%;
-	height: var(--navbar-height);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-radius: 15px;
 }
 
 @media (min-width: 1400px) {
@@ -18,4 +24,16 @@
 }
 .links {
 	display: flex;
+}
+.signButtons {
+	width: auto;
+	display: flex;
+	justify-content: space-between;
+	a {
+		height: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 10px;
+	}
 }

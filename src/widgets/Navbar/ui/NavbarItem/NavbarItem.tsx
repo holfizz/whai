@@ -1,3 +1,4 @@
+'use client'
 import Button, { ButtonTheme } from '@/shared/ui/Button/Button'
 import { Dropdown } from '@/shared/ui/Popups'
 import { DropdownItem } from '@/shared/ui/Popups/components/Dropdown/Dropdown'

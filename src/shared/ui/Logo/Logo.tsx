@@ -26,18 +26,22 @@ const Logo: FC<LogoProps> = memo(
 		color = '#2E311D',
 		logoType = 'small',
 	}) => {
-		const mods: Mods = {}
+		const mods: Mods = {
+			[cls[logoSize]]: true,
+		}
 		const router = useRouter()
 		const LOGO_TYPE = logoType === 'short' ? SmallLogoIcon : BigLogoIcon
 		return (
 			<button
-				className={cls.logoButton}
+				className={classNames(cls.logoButton, mods, [])}
 				type={'button'}
 				onClick={() => router.push('/')}
 			>
 				<LOGO_TYPE
-					style={{ fill: color }}
-					className={classNames(cls.Logo, mods, [className])}
+					style={{
+						fill: color,
+					}}
+					className={classNames(cls.Logo, {}, [className])}
 				/>
 			</button>
 		)

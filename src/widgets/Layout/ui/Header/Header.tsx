@@ -21,7 +21,6 @@ export function Header({}: INavbar) {
 		>
 			<div className={cls.wrapper}>
 				<div className={cls.links}></div>
-				<div className={cls.signButtons}></div>
 			</div>
 		</header>
 	)
