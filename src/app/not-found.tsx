@@ -1,6 +1,6 @@
 'use client'
 
-import ErrorImage from '@/shared/assets/404.webp'
+import ErrorImage from '@/shared/assets/images/404.webp'
 import { NO_INDEX_PAGE } from '@/shared/const/seo'
 import Logo from '@/shared/ui/Logo/Logo'
 import type { Metadata } from 'next'

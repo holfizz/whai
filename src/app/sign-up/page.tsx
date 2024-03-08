@@ -1,8 +1,6 @@
-import authFunnyPersonPicture from '@/shared/assets/authFunnyPerson.png'
 import Logo from '@/shared/ui/Logo/Logo'
 import type { Metadata } from 'next'
-import Image from 'next/image'
-import cls from './SignIn.module.scss'
+import cls from './SignUp.module.scss'
 
 export const metadata: Metadata = {
 	title: 'Войти в аккаунт | Whai',
@@ -12,16 +10,14 @@ export const metadata: Metadata = {
 export default function Page() {
 	return (
 		<div className={cls.SignInPage}>
-			<Logo color='var(--main-color)' className={cls.logo}></Logo>
+			<div className={cls.wrapper}>
+				<header className={cls.header}>
+					<Logo className={cls.logo} color='var(--main-color)' />
+				</header>
+			</div>
 			<div className={cls.mainScreen}>
 				<div className={cls.LeftSide}></div>
-				<div className={cls.RightSide}>
-					<Image
-						src={authFunnyPersonPicture}
-						width={700}
-						alt='Сheerful little man'
-					/>
-				</div>
+				<div className={cls.RightSide}></div>
 			</div>
 		</div>
 	)

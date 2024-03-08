@@ -7,16 +7,64 @@
 	position: relative;
 	height: var(--navbar-height);
 }
+.welcomeBlock {
+	margin-top: 50px;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+}
 .mainPageTitle {
 	font-family: 'Namata Medium', sans-serif;
 
 	color: var(--primary-color);
-	font-size: 5rem;
+	font-size: 10rem;
 	width: 50%;
 	display: flex;
 	align-items: center;
+	position: relative;
+	width: max-content;
+	line-height: 130px;
 }
-.welcomeBlock {
+.mainPageTitle_one {
+	left: 32%;
+}
+.mainPageTitle_two {
+	left: 18%;
+}
+.mainPageTitle_three {
+	left: 0;
+}
+.mainPageTitle_four {
+	left: 18%;
+}
+.logoSmall {
+	height: auto;
+	width: 90px;
+}
+.textBlock {
 	width: 100%;
-	height: 200vh;
+	height: 490px;
+	background: var(--main-secondary-color);
+	display: flex;
+}
+.titleBlock {
+	width: -webkit-fill-available;
+}
+.asterisk {
+	width: 250px;
+	position: relative;
+	height: 250px;
+	top: 200px;
+	right: 20vw;
+	fill: var(--primary-color);
+	animation: asteriskRotate 20s infinite linear;
+}
+
+@keyframes asteriskRotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }

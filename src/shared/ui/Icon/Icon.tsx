@@ -15,7 +15,7 @@ const Icon: FC<IconProps> = memo(
 	({ className, SVG, fontSize, margin, color, ...otherProps }) => {
 		return (
 			<SVG
-				style={{ fontSize: fontSize, margin: margin, color }}
+				style={{ fontSize: fontSize, margin: margin, fill: color }}
 				className={classNames(cls.Icon, {}, [className])}
 				{...otherProps}
 			/>

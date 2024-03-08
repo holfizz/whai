@@ -1,6 +1,6 @@
 'use client'
-import BigLogoIcon from '@/shared/assets/WhaiBig.svg'
-import SmallLogoIcon from '@/shared/assets/WhaiSmall.svg'
+import BigLogoIcon from '@/shared/assets/logo/WhaiBig.svg'
+import SmallLogoIcon from '@/shared/assets/logo/WhaiSmall.svg'
 import { Mods, classNames } from '@/shared/lib/classNames/classNames'
 import { useRouter } from 'next/navigation'
 import { FC, memo } from 'react'
