@@ -25,7 +25,7 @@ function RootLayout({
 	return (
 		<html lang='ru'>
 			<head>
-				<link rel='icon' href={'/whai.svg'} sizes='any' />
+				<link rel='icon' href={'/Whai.svg'} sizes='any' />
 			</head>
 			<Body
 				className={[poppinsClass.className, mulishFont.className].join(' ')}

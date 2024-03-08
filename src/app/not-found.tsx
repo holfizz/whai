@@ -19,7 +19,9 @@ export default function Page() {
 	return (
 		<div className={cls.errorPage}>
 			<header className={cls.header}>
-				<Logo></Logo>
+				<div className={cls.headerContainer}>
+					<Logo className={cls.logo}></Logo>
+				</div>
 			</header>
 			<h1 className={cls.errorTitle}>{t("This page doesn't exist")}</h1>
 			<Image className={cls.errorImage} src={ErrorImage} alt='404' />

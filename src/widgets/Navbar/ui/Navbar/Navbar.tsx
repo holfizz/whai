@@ -16,7 +16,7 @@ export function Navbar({}: INavbar) {
 	return (
 		<header className={cls.Navbar}>
 			<div className={cls.wrapper}>
-				<Logo color='var(--main-color)' />
+				<Logo className={cls.logo} color='var(--main-color)' />
 				<div className={cls.links}>
 					<NavbarItem
 						label={t('Resources')}
