@@ -30,14 +30,13 @@ const RootLayout: FC<Props> = ({ children, params: { locale } }) => {
 			<head>
 				<link rel='icon' href={'/Whai.svg'} sizes='any' />
 			</head>
-			<NextIntlClientProvider locale={locale} messages={messages}>
-				<Body
-					locale={locale}
-					className={[poppinsClass.className, mulishFont.className].join(' ')}
-				>
+			<Body
+				className={[poppinsClass.className, mulishFont.className].join(' ')}
+			>
+				<NextIntlClientProvider locale={locale} messages={messages}>
 					{children}
-				</Body>
-			</NextIntlClientProvider>
+				</NextIntlClientProvider>
+			</Body>
 		</html>
 	)
 }

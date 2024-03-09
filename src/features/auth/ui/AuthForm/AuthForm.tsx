@@ -12,13 +12,20 @@ import Button from '@/shared/ui/Button/Button'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { Input } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { Dispatch, FC, FormEvent, SetStateAction, memo, useState } from 'react'
+import {
+	Dispatch,
+	FC,
+	FormEvent,
+	SetStateAction,
+	memo,
+	useEffect,
+	useState,
+} from 'react'
 import { HiOutlineEye } from 'react-icons/hi'
 import { PiEyeClosedBold } from 'react-icons/pi'
 import { z } from 'zod'
 import { formSchema } from '../../model/auth.contracts'
-import { useAuthStatus } from '../../model/auth.model'
-import { useAuthMutate } from '../../model/auth.queries'
+import useSignUpMutation from '../../model/auth.queries'
 import InputField from '../AuthLabel/InputField'
 import cls from './AuthForm.module.scss'
 
@@ -31,8 +38,6 @@ export interface AuthFormProps {
 const AuthForm: FC<AuthFormProps> = memo(
 	({ className, type, setIsFormType }) => {
 		const t = useTranslations('auth')
-		const { mutate: authMutate, error } = useAuthMutate(type)
-		const { isError, isSuccess } = useAuthStatus()
 		const [formErrors, setFormErrors] = useState<
 			z.ZodFormattedError<
 				{
@@ -46,8 +51,13 @@ const AuthForm: FC<AuthFormProps> = memo(
 			>
 		>({ _errors: [] })
 		const [isVisible, setIsVisible] = useState(false)
+		const [signUp, { error, data }] = useSignUpMutation()
 
 		const toggleVisibility = () => setIsVisible(!isVisible)
+
+		useEffect(() => {
+			console.log(data)
+		}, [data])
 
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()
@@ -60,7 +70,12 @@ const AuthForm: FC<AuthFormProps> = memo(
 				setFormErrors(errors)
 			} else {
 				setFormErrors({ _errors: [] })
-				authMutate(validationResult.data as any)
+				// authMutate(validationResult.data as any)
+				signUp({
+					variables: {
+						input: validationResult.data,
+					},
+				})
 			}
 		}
 
@@ -71,9 +86,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 			>
 				<Text
 					theme={
-						isError
+						error?.message
 							? TextTheme.ERROR
-							: isSuccess
+							: data
 							? TextTheme.SUCCESS
 							: TextTheme.PRIMARY
 					}
@@ -83,11 +98,11 @@ const AuthForm: FC<AuthFormProps> = memo(
 				{error && (
 					<Text
 						theme={TextTheme.ERROR}
-						text={error?.response?.data?.message}
+						text={error?.message}
 						size={TextSize.L}
 					/>
 				)}
-				{type === authConstants.SIGNUP && isSuccess && (
+				{type === authConstants.SIGNUP && data && (
 					<Text
 						theme={TextTheme.SUCCESS}
 						text={t('Confirm your email')}

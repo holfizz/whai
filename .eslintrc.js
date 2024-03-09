@@ -21,9 +21,6 @@ module.exports = {
 		'unused-imports',
 	],
 	rules: {
-		indent: [2, 'tab'],
-		'react/jsx-indent': [2, 'tab'],
-		'react/jsx-indent-props': [2, 'tab'],
 		'unused-imports/no-unused-imports': 'error',
 		'react/jsx-no-undef': 'off',
 		semi: [2, 'never'],

@@ -4,8 +4,10 @@ export const ProfileData = z.object({
 	user: z.object({
 		id: z.number(),
 		email: z.string(),
-		isAdmin: z.boolean(),
-		isActivated: z.boolean(),
+		firstName: z.string(),
+		lastName: z.string(),
+		phoneNumber: z.string(),
+		isVerified: z.boolean(),
 		activationLink: z.string().nullable(),
 	}),
 	accessToken: z.string(),
@@ -13,5 +15,5 @@ export const ProfileData = z.object({
 })
 export const ProfileState = z.object({
 	email: z.string(),
-	password: z.string().optional(),
+	password: z.string(),
 })

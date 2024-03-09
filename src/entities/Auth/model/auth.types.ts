@@ -4,8 +4,8 @@ import { ProfileData, ProfileState } from './auth.contracts'
 export interface IUser {
 	id: number
 	email: string
-	isAdmin: boolean
-	isActivated: boolean
+	roles: string[]
+	isVerified: boolean
 	activationLink: string
 }
 export type IUserData = z.infer<typeof ProfileData>

@@ -26,6 +26,8 @@ const nextConfig = {
 
 		return config
 	},
+	swcMinify: true,
+
 	reactStrictMode: true,
 }
 
