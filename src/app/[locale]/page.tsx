@@ -2,20 +2,18 @@
 import cls from './mainPage.module.scss'
 
 import LangSwitcher from '@/features/langSwitcher'
-import Asterisk from '@/shared/assets/icons/asterisk.svg'
-import LogoSmall from '@/shared/assets/logo/WhaiSmall.svg'
-import { classNames } from '@/shared/lib/classNames/classNames'
-import Icon from '@/shared/ui/Icon/Icon'
 import { Navbar } from '@/widgets/Navbar'
+
 import { useTranslations } from 'next-intl'
 export default function Page() {
 	const t = useTranslations('mainPage')
+
 	return (
 		<>
 			<div className={cls.navbarWrapper}>
 				<Navbar />
 			</div>
-			<div className={cls.welcomeBlock}>
+			{/* <div className={cls.welcomeBlock}>
 				<div className={cls.textBlock}>
 					<div className={cls.titleBlock}>
 						<h1
@@ -69,7 +67,7 @@ export default function Page() {
 					</div>
 					<Icon className={cls.asterisk} SVG={Asterisk} />
 				</div>
-			</div>
+			</div> */}
 			<LangSwitcher />
 		</>
 	)

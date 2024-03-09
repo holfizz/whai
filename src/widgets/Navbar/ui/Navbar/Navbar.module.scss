@@ -1,45 +1,6 @@
-.Navbar {
-	height: calc(var(--navbar-height) + 50px);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: fixed;
-	width: 100%;
-	height: var(--navbar-height);
-	background: var(--background-color);
-	z-index: 2;
+.LoginButton {
+	color: var(--primary-color);
 }
-.wrapper {
-	display: flex;
-	width: 90%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	border-radius: 15px;
-}
-.logo {
-	width: 125px;
-}
-@media (min-width: 1400px) {
-	.wrapper {
-		max-width: 1400px;
-	}
-}
-.links {
-	display: flex;
-}
-.signButtons {
-	width: auto;
-	display: flex;
-	justify-content: space-between;
-	a {
-		height: auto;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 0 10px;
-	}
-}
-.button {
+.SignUpButton {
 	color: var(--background-color);
 }

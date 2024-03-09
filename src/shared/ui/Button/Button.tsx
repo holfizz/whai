@@ -4,7 +4,8 @@ import { Button as UiButton, extendVariants } from '@nextui-org/react'
 const Button = extendVariants(UiButton, {
 	variants: {
 		color: {
-			main: 'text-[#000] bg-[#e8f99b]',
+			main: 'text-[var(--main-color)]',
+			mainFill: 'text-[var(--background-color)] bg-[var(--main-color)]',
 			secondary: 'bg-[#2f311d] text-[#fff]',
 			clear: 'bg-transparent text-[var(--primary-color)]',
 		},

@@ -166,7 +166,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 						/>
 					</div>
 				</label>
-				<Button color='main' type={'submit'} className={cls.submitButton}>
+				<Button color='mainFill' type={'submit'} className={cls.submitButton}>
 					{type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
 				</Button>
 				<AppLink
