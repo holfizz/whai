@@ -1,21 +1,21 @@
 'use client'
-import { useMutation } from '@tanstack/react-query'
-import { AuthApi } from '@/features/auth'
-import { useTranslation } from 'react-i18next'
-import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
-import { classNames } from '@/shared/lib/classNames/classNames'
 import cls from '@/app/forgotPassword/ui/forgotPassword.module.scss'
-import Text, { TextAlign, TextSize, TextTheme } from '@/shared/ui/Text/Text'
+import { AuthApi } from '@/features/auth'
+import { classNames } from '@/shared/lib/classNames/classNames'
+import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
-import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
+import Text, { TextAlign, TextSize, TextTheme } from '@/shared/ui/Text/Text'
+import { Button } from '@nextui-org/react'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
+import { useTranslations } from 'next-intl'
+import { usePathname } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 import { z } from 'zod'
-import { AxiosError } from 'axios'
-import { usePathname } from 'next/navigation'
 
 export default function ResetPasswordPage() {
 	useAuthRedirect()
-	const { t } = useTranslation('resetPasswordPage')
+	const t = useTranslations('resetPasswordPage')
 	function getLastSegmentFromURL() {
 		const url = usePathname()
 		const segments = url.split('/')
@@ -120,13 +120,7 @@ export default function ResetPasswordPage() {
 						type='password'
 					/>
 				</label>
-				<Button
-					type={'submit'}
-					size={ButtonSize.FULL}
-					theme={ButtonTheme.OUTLINE}
-				>
-					{t('Reset the password')}
-				</Button>
+				<Button type={'submit'}>{t('Reset the password')}</Button>
 			</form>
 		</div>
 	)

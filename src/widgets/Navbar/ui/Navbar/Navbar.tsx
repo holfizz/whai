@@ -1,10 +1,11 @@
 'use client'
-import { getRouteLogin, getRouteSignUp } from '@/shared/const/router'
+import { getRouteLogin } from '@/shared/const/router'
 import AppLink from '@/shared/ui/AppLink/AppLink'
-import Button, { ButtonTheme } from '@/shared/ui/Button/Button'
 import Icon from '@/shared/ui/Icon/Icon'
 import Logo from '@/shared/ui/Logo/Logo'
-import { useTranslation } from 'react-i18next'
+// import { Button } from '@nextui-org/react'
+import Button from '@/shared/ui/Button/Button'
+import { useTranslations } from 'next-intl'
 import { LuActivity } from 'react-icons/lu'
 import { NavbarItem } from '../NavbarItem/NavbarItem'
 import cls from './Navbar.module.scss'
@@ -12,7 +13,7 @@ import cls from './Navbar.module.scss'
 interface INavbar {}
 
 export function Navbar({}: INavbar) {
-	const { t } = useTranslation()
+	const t = useTranslations()
 	return (
 		<header className={cls.Navbar}>
 			<div className={cls.wrapper}>
@@ -89,10 +90,17 @@ export function Navbar({}: INavbar) {
 					></NavbarItem>
 				</div>
 				<div className={cls.signButtons}>
-					<AppLink href={getRouteLogin()}>{t('Log in')}</AppLink>
+					<AppLink href={getRouteLogin()}>
+						<Button size='md' color='clear'>
+							{t('Log in')}
+						</Button>
+					</AppLink>
 
-					<AppLink href={getRouteSignUp()}>
-						<Button theme={ButtonTheme.FILL_MAIN}>{t('Start for free')}</Button>
+					<AppLink href={'/sign-up'}>
+						<Button className={cls.button} size='md' color='main'>
+							{t('Start for free')}
+						</Button>
+						{/* <Button theme={ButtonTheme.FILL_MAIN}></Button> */}
 					</AppLink>
 				</div>
 			</div>

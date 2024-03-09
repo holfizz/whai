@@ -1,0 +1,61 @@
+{
+	"auth": {
+		"Phone Number": "Phone Number",
+		"First Name": "First Name",
+		"Last Name": "Last Name",
+		"Email": "Email",
+		"Password": "Password",
+		"Enter your phone number": "Enter your phone number",
+		"Enter your first name": "Enter your first name",
+		"Enter your last name": "Enter your last name",
+		"Enter your email": "Enter your email",
+		"Enter your password": "Enter your password",
+		"Sign up": "Sign up",
+		"Log in": "Log in",
+		"Forgot your password?": "Forgot your password?",
+		"Confirm your email": "Confirm your email"
+	},
+	"confirmEmailPage.json": {
+		"Mail has been successfully activated. You can close the page": "Mail has been successfully activated. You can close the page",
+		"Mail is not activated. The link may have expired": "Mail is not activated. The link may have expired"
+	},
+	"errorPage": {
+		"This page doesn't exist": "This page doesn't exist"
+	},
+	"forgotPasswordPage": {
+		"Password recovery form": "Password recovery form",
+		"Confirm your email": "Confirm your email",
+		"Message in your mail": "Message in your mail",
+		"If it's not there, check your spam folder": {
+			"": "If it's not there, check your spam folder."
+		}
+	},
+	"mainPage": {
+		"The internet": "The internet",
+		"and AI": "and AI",
+		"is your": "is your",
+		"education": "education"
+	},
+	"resetPassword": {
+		"Reset the password": "Reset the password",
+		"Password recovery form": "Password recovery form",
+		"The password must be at least 6 characters": "The password must be at least 6 characters",
+		"The passwords must match": "The password must match",
+		"Password changed successfully": "Password changed successfully"
+	},
+	"Log in": "Log in",
+	"Sign up": "Sign up",
+	"logout": "Logout",
+	"Close": "Close",
+	"Open": "Open",
+	"User": "User",
+	"New chat": "New chat",
+	"Search": "Search",
+	"Workspace": "Workspace",
+	"Light": "Light",
+	"Dark": "Dark",
+	"Creator": "Creator",
+	"Student": "Student",
+	"Mode": "Mode",
+	"Start for free": "Start for free"
+}

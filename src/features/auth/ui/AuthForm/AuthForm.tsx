@@ -1,30 +1,36 @@
+'use client'
+
 import { authConstants } from '@/shared/const/auth'
+import {
+	getRouteForgotPassword,
+	getRouteLogin,
+	getRouteSignUp,
+} from '@/shared/const/router'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import AppLink from '@/shared/ui/AppLink/AppLink'
-import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
-import Icon from '@/shared/ui/Icon/Icon'
-import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
+import Button from '@/shared/ui/Button/Button'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
+import { Input } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
 import { Dispatch, FC, FormEvent, SetStateAction, memo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { HiOutlineEye } from 'react-icons/hi'
 import { PiEyeClosedBold } from 'react-icons/pi'
 import { z } from 'zod'
 import { formSchema } from '../../model/auth.contracts'
 import { useAuthStatus } from '../../model/auth.model'
 import { useAuthMutate } from '../../model/auth.queries'
+import InputField from '../AuthLabel/InputField'
 import cls from './AuthForm.module.scss'
 
 export interface AuthFormProps {
 	className?: string
 	type: authConstants
-	onClose: Dispatch<SetStateAction<boolean>>
 	setIsFormType?: Dispatch<SetStateAction<authConstants>>
 }
 
 const AuthForm: FC<AuthFormProps> = memo(
-	({ className, type, onClose, setIsFormType }) => {
-		const { t } = useTranslation()
+	({ className, type, setIsFormType }) => {
+		const t = useTranslations('auth')
 		const { mutate: authMutate, error } = useAuthMutate(type)
 		const { isError, isSuccess } = useAuthStatus()
 		const [formErrors, setFormErrors] = useState<
@@ -32,17 +38,23 @@ const AuthForm: FC<AuthFormProps> = memo(
 				{
 					email: string
 					password: string
+					phoneNumber?: string
+					firstName?: string
+					lastName?: string
 				},
 				string
 			>
 		>({ _errors: [] })
-		const [isShowPassword, setIsShowPassword] = useState<boolean>(false)
+		const [isVisible, setIsVisible] = useState(false)
+
+		const toggleVisibility = () => setIsVisible(!isVisible)
+
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()
 			const form = new FormData(e.currentTarget)
 			const formData = Object.fromEntries(form.entries())
 			const validationResult = formSchema.safeParse(formData)
-
+			console.log(formData)
 			if (!validationResult.success) {
 				const errors = validationResult.error.format()
 				setFormErrors(errors)
@@ -66,7 +78,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 							: TextTheme.PRIMARY
 					}
 					size={TextSize.L}
-					title={type === authConstants.LOGIN ? t('log in') : t('sign-up')}
+					title={type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
 				/>
 				{error && (
 					<Text
@@ -82,66 +94,90 @@ const AuthForm: FC<AuthFormProps> = memo(
 						size={TextSize.L}
 					/>
 				)}
-				<label>
-					<Text
-						size={TextSize.S}
-						theme={TextTheme.ERROR}
-						text={formErrors.email?._errors.join(', ')}
-					/>
-					<Input
-						size={InputSize.FULL}
-						name={'email'}
-						theme={InputTheme.OUTLINE}
-						className={cls.input}
-						placeholder={t('Enter email...')}
-						type='text'
-					/>
-				</label>
-				<label className={cls.passwordLabel}>
-					<Text
-						size={TextSize.S}
-						theme={TextTheme.ERROR}
-						text={formErrors.password?._errors.join(', ')}
-					/>
+
+				{type === authConstants.SIGNUP && (
+					<>
+						<InputField
+							className={cls.label}
+							name={'phoneNumber'}
+							label={t('Phone Number')}
+							type='number'
+							color={
+								formErrors.phoneNumber?._errors.length ? 'danger' : 'default'
+							}
+							errorMessage={formErrors.phoneNumber?._errors.join(', ')}
+							placeholder={t('Enter your phone number')}
+						/>
+						<InputField
+							className={cls.label}
+							name={'firstName'}
+							label={t('First Name')}
+							type='text'
+							color={
+								formErrors.firstName?._errors.length ? 'danger' : 'default'
+							}
+							errorMessage={formErrors.firstName?._errors.join(', ')}
+							placeholder={t('Enter your first name')}
+						/>
+						<InputField
+							className={cls.label}
+							name={'lastName'}
+							label={t('Last Name')}
+							type='text'
+							color={formErrors.lastName?._errors.length ? 'danger' : 'default'}
+							errorMessage={formErrors.lastName?._errors.join(', ')}
+							placeholder={t('Enter your last name')}
+						/>
+					</>
+				)}
+				<InputField
+					className={cls.label}
+					name={'email'}
+					type='email'
+					label={t('Email')}
+					color={formErrors.email?._errors.length ? 'danger' : 'default'}
+					errorMessage={formErrors.email?._errors.join(', ')}
+					placeholder={t('Enter your email')}
+				/>
+				<label className={cls.label}>
 					<div className={cls.passwordInput}>
 						<Input
-							name={'password'}
-							size={InputSize.FULL}
-							theme={InputTheme.OUTLINE}
-							className={cls.input}
-							placeholder={t('Enter password...')}
-							type={isShowPassword ? 'text' : 'password'}
+							label={t('Password')}
+							variant='bordered'
+							placeholder={t('Enter your password')}
+							isRequired
+							endContent={
+								<button
+									className='focus:outline-none'
+									type='button'
+									onClick={toggleVisibility}
+								>
+									{isVisible ? (
+										<HiOutlineEye className='text-2xl text-default-400 pointer-events-none' />
+									) : (
+										<PiEyeClosedBold className='text-2xl text-default-400 pointer-events-none' />
+									)}
+								</button>
+							}
+							color={formErrors.password?._errors.length ? 'danger' : 'default'}
+							errorMessage={formErrors.password?._errors.join(', ')}
+							type={isVisible ? 'text' : 'password'}
+							name='password'
 						/>
-						<button
-							className={cls.changeVisiblePasswordButton}
-							onClick={e => {
-								e.preventDefault()
-								setIsShowPassword(prevState => !prevState)
-							}}
-						>
-							<Icon
-								fontSize={20}
-								SVG={isShowPassword ? HiOutlineEye : PiEyeClosedBold}
-							/>
-						</button>
 					</div>
 				</label>
-				<Button
-					type={'submit'}
-					size={ButtonSize.FULL}
-					theme={ButtonTheme.OUTLINE}
-					className={cls.submitButton}
-				>
-					{type === authConstants.LOGIN ? t('log in') : t('sign_up')}
+				<Button color='main' type={'submit'} className={cls.submitButton}>
+					{type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
 				</Button>
 				<AppLink
 					className={cls.forgotPasswordButton}
-					onClick={() => onClose(false)}
-					href={'/forgotPassword'}
+					href={getRouteForgotPassword()}
 				>
-					{t('Forgot your password?')}
+					<Button color='danger' variant='light'>
+						{t('Forgot your password?')}
+					</Button>
 				</AppLink>
-				<Button
+				<AppLink
 					onClick={() =>
 						setIsFormType &&
 						setIsFormType(
@@ -151,9 +187,14 @@ const AuthForm: FC<AuthFormProps> = memo(
 						)
 					}
 					className={cls.changeModeButton}
+					href={
+						type === authConstants.LOGIN ? getRouteSignUp() : getRouteLogin()
+					}
 				>
-					{type === authConstants.LOGIN ? t('sign_up') : t('log in')}
-				</Button>
+					<Button variant='light' color='warning'>
+						{type === authConstants.LOGIN ? t('Sign up') : t('Log in')}
+					</Button>
+				</AppLink>
 			</form>
 		)
 	},

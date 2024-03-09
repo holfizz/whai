@@ -1,7 +1,7 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
 import Tooltip from '@/shared/ui/Tooltip/Tooltip'
+import { useTranslations } from 'next-intl'
 import { FC } from 'react'
-import { useTranslation } from 'react-i18next'
 import cls from './Sidebar.module.scss'
 
 interface SidebarCollapsedButtonProps {
@@ -11,7 +11,7 @@ interface SidebarCollapsedButtonProps {
 
 const SidebarCollapsedButton: FC<SidebarCollapsedButtonProps> = props => {
 	const { setIsCollapsed, isCollapsed } = props
-	const { t } = useTranslation()
+	const t = useTranslations()
 
 	const toggleSidebar = () => setIsCollapsed(!isCollapsed)
 	return (

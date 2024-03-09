@@ -1,0 +1,28 @@
+.SignInPage {
+	display: flex;
+	flex-direction: column;
+}
+.wrapper {
+	width: 100%;
+	height: var(--navbar-height);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.header {
+	width: 90%;
+	max-width: 1400px;
+	display: flex;
+	align-items: center;
+}
+.mainScreen {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100vh;
+}
+.authFormWrapper {
+	width: 50vw;
+	min-width: 300px;
+}

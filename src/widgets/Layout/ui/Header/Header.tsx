@@ -1,11 +1,11 @@
 import { useSidebar } from '@/widgets/Sidebar'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 import cls from './Header.module.scss'
 
 interface INavbar {}
 
 export function Header({}: INavbar) {
-	const { t } = useTranslation()
+	const t = useTranslations()
 	const { isCollapsed } = useSidebar()
 
 	return (

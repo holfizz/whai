@@ -1,54 +1,25 @@
-import { Mods, classNames } from '@/shared/lib/classNames/classNames'
-import { ReactNode, memo, type ButtonHTMLAttributes, type FC } from 'react'
-import cls from './Button.module.scss'
+'use client'
+import { Button as UiButton, extendVariants } from '@nextui-org/react'
 
-export enum ButtonTheme {
-	CLEAR = 'clear',
-	OUTLINE = 'outline',
-	FILL = 'fill',
-	FILL_MAIN = 'fill_main',
-}
-
-export enum ButtonSize {
-	M = 'size_m',
-	L = 'size_l',
-	XL = 'size_xl',
-	FULL = 'size_full',
-}
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	className?: string
-	theme?: ButtonTheme
-	size?: ButtonSize
-	disabled?: boolean
-	children?: ReactNode
-}
-
-const Button: FC<ButtonProps> = memo(
-	({
-		className,
-		children,
-		theme = ButtonTheme.CLEAR,
-		size = ButtonSize.M,
-		disabled,
-		...otherProps
-	}) => {
-		const mods: Mods = {
-			[cls[theme]]: true,
-			[cls[size]]: true,
-			[cls.disabled]: disabled,
-		}
-		return (
-			<button
-				disabled={disabled}
-				type={'button'}
-				className={classNames(cls.Button, mods, [className, cls[theme]])}
-				{...otherProps}
-			>
-				{children}
-			</button>
-		)
+const Button = extendVariants(UiButton, {
+	variants: {
+		color: {
+			main: 'text-[#000] bg-[#e8f99b]',
+			secondary: 'bg-[#2f311d] text-[#fff]',
+			clear: 'bg-transparent text-[var(--primary-color)]',
+		},
+		isDisabled: {
+			true: 'bg-[#89925F] text-[#000] opacity-10 cursor-not-allowed',
+		},
+		size: {
+			xs: 'px-unit-2 min-w-unit-12 h-unit-6 text-tiny gap-unit-1 rounded-small',
+			md: 'px-unit-4 min-w-unit-20 h-unit-10 text-small gap-unit-2 rounded-small',
+			xl: 'px-unit-8 min-w-unit-28 h-unit-14 text-large gap-unit-4 rounded-medium',
+		},
 	},
-)
-
+	defaultVariants: {
+		color: 'clear',
+		size: 'md',
+	},
+})
 export default Button

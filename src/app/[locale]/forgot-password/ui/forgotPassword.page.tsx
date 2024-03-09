@@ -1,20 +1,20 @@
 'use client'
-import cls from './forgotPassword.module.scss'
+import { AuthApi } from '@/features/auth'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import Text, { TextAlign, TextSize, TextTheme } from '@/shared/ui/Text/Text'
+import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
-import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
-import { FormEvent, useState } from 'react'
-import { z } from 'zod'
+import Text, { TextAlign, TextSize, TextTheme } from '@/shared/ui/Text/Text'
+import { Button } from '@nextui-org/react'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { AuthApi } from '@/features/auth'
-import { useTranslation } from 'next-i18next'
-import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
+import { useTranslations } from 'next-intl'
+import { FormEvent, useState } from 'react'
+import { z } from 'zod'
+import cls from './forgotPassword.module.scss'
 
 export default function ForgotPasswordPage() {
 	useAuthRedirect()
-	const { t } = useTranslation('forgotPasswordPage')
+	const t = useTranslations('forgotPasswordPage')
 	const [formErrors, setFormErrors] = useState<
 		z.ZodFormattedError<
 			{
@@ -92,13 +92,7 @@ export default function ForgotPasswordPage() {
 						type='text'
 					/>
 				</label>
-				<Button
-					type={'submit'}
-					size={ButtonSize.FULL}
-					theme={ButtonTheme.OUTLINE}
-				>
-					{t('Confirm your email')}
-				</Button>
+				<Button type={'submit'}>{t('Confirm your email')}</Button>
 			</form>
 		</div>
 	)

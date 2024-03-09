@@ -4,8 +4,8 @@ import Icon from '@/shared/ui/Icon/Icon'
 import Line, { LineSize } from '@/shared/ui/Line/Line'
 import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
 import Text, { TextSize } from '@/shared/ui/Text/Text'
+import { useTranslations } from 'next-intl'
 import { FC, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs'
 import { IoAddCircleOutline } from 'react-icons/io5'
 import cls from './SidebarHeader.module.scss'
@@ -16,7 +16,7 @@ interface SidebarHeaderProps {
 }
 
 const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
-	const { t } = useTranslation()
+	const t = useTranslations()
 	const [isCollapsedCourseMenu, setIsCollapsedCourseMenu] =
 		useState<boolean>(false)
 	return (

@@ -22,7 +22,7 @@ export const useAuthMutate = (type: authConstants) => {
 			setIsSuccess(true)
 			setIsError(false)
 			if (type === authConstants.LOGIN) {
-				window.location.reload()
+				// window.location.reload()
 			}
 		},
 		onError: () => {

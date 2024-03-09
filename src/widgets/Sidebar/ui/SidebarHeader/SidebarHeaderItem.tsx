@@ -1,8 +1,8 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
 import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
 import Text, { TextSize } from '@/shared/ui/Text/Text'
+import { useTranslations } from 'next-intl'
 import { FC } from 'react'
-import { useTranslation } from 'react-i18next'
 import cls from './SidebarHeader.module.scss'
 
 interface SidebarHeaderItemProps {
@@ -16,7 +16,7 @@ const SidebarHeaderItem: FC<SidebarHeaderItemProps> = ({
 	color = 'red',
 	title = 'New Course',
 }) => {
-	const { t } = useTranslation()
+	const t = useTranslations()
 
 	return (
 		<Button

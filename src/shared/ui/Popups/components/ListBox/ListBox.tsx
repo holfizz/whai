@@ -1,7 +1,7 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { DropdownDirection } from '@/shared/types/ui'
-import Button from '@/shared/ui/Button/Button'
 import { Listbox as HListBox } from '@headlessui/react'
+import { Button } from '@nextui-org/react'
 import { Fragment, ReactNode } from 'react'
 import { HStack } from '../../../Stack'
 import { mapDirectionClass } from '../../styles/consts'

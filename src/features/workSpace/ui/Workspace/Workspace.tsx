@@ -1,14 +1,13 @@
-import React from 'react'
-import Text, { TextSize } from '@/shared/ui/Text/Text'
-import { useTranslation } from 'react-i18next'
-import cls from './Workspace.module.scss'
 import WorkspaceItem from '@/features/workSpace/ui/WorkspaceItem/WorkspaceItem'
 import Icon from '@/shared/ui/Icon/Icon'
-import { MdWorkspacesOutline } from 'react-icons/md'
+import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { useSidebar } from '@/widgets/Sidebar/module/sidebar.module'
+import { useTranslations } from 'next-intl'
+import { MdWorkspacesOutline } from 'react-icons/md'
+import cls from './Workspace.module.scss'
 
 const Workspace = () => {
-	const { t } = useTranslation()
+	const t = useTranslations()
 	const { isCollapsed } = useSidebar()
 	const data = [
 		{

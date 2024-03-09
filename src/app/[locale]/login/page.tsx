@@ -1,10 +1,12 @@
+import AuthForm from '@/features/auth/ui/AuthForm/AuthForm'
+import { authConstants } from '@/shared/const/auth'
 import Logo from '@/shared/ui/Logo/Logo'
 import type { Metadata } from 'next'
-import cls from './SignUp.module.scss'
+import cls from './Login.module.scss'
 
 export const metadata: Metadata = {
 	title: 'Войти в аккаунт | Whai',
-	description: 'Войти на образовательной платформе Whai',
+	description: 'Войти в аккаунт на образовательной платформе Whai',
 }
 
 export default function Page() {
@@ -16,8 +18,9 @@ export default function Page() {
 				</header>
 			</div>
 			<div className={cls.mainScreen}>
-				<div className={cls.LeftSide}></div>
-				<div className={cls.RightSide}></div>
+				<div className={cls.authFormWrapper}>
+					<AuthForm type={authConstants.LOGIN} />
+				</div>
 			</div>
 		</div>
 	)

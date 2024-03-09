@@ -1,5 +1,5 @@
 'use client'
-import Button, { ButtonTheme } from '@/shared/ui/Button/Button'
+import Button from '@/shared/ui/Button/Button'
 import { Dropdown } from '@/shared/ui/Popups'
 import { DropdownItem } from '@/shared/ui/Popups/components/Dropdown/Dropdown'
 import { useState } from 'react'
@@ -31,7 +31,7 @@ export function NavbarItem({ label, menuItems }: NavbarItemProps) {
 			<Dropdown
 				items={menuItems}
 				trigger={
-					<Button className={cls.menuButton} theme={ButtonTheme.CLEAR}>
+					<Button color='clear' className={cls.menuButton}>
 						{label}
 					</Button>
 				}

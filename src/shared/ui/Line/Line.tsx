@@ -1,6 +1,5 @@
 'use client'
 import { Mods, classNames } from '@/shared/lib/classNames/classNames'
-import { useRouter } from 'next/navigation'
 import { FC, memo } from 'react'
 import cls from './Line.module.scss'
 export enum LineSize {
@@ -18,7 +17,6 @@ const Line: FC<LineProps> = memo(
 		const mods: Mods = {
 			[cls[lineSize]]: true,
 		}
-		const router = useRouter()
 		return (
 			<div
 				style={{ background: color }}

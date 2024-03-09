@@ -1,14 +1,14 @@
 'use client'
-import { useQuery } from '@tanstack/react-query'
-import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
-import { useTranslation } from 'react-i18next'
-import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
-import { usePathname } from 'next/navigation'
 import { AuthApi } from '@/features/auth'
+import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
+import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
+import { useQuery } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
+import { usePathname } from 'next/navigation'
 
 export default function ConfirmEmailPage() {
 	useAuthRedirect()
-	const { t } = useTranslation('confirmEmailPage')
+	const t = useTranslations('confirmEmailPage')
 	function getLastSegmentFromURL() {
 		const url = usePathname()
 		const segments = url.split('/')

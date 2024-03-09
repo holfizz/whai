@@ -3,6 +3,10 @@
 @import 'themes/light';
 @import 'themes/dark';
 @import url(https://db.onlinewebfonts.com/c/d4f20dfedfdf197ed0ac52b09bf25551?family=GT+Walsheim+Pro+Medium+Regular);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
 	min-height: 100%;

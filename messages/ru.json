@@ -1,0 +1,62 @@
+{
+	"auth": {
+		"Phone Number": "Номер телефона",
+		"First Name": "Имя",
+		"Last Name": "Фамилия",
+		"Email": "Электронная почта",
+		"Password": "Пароль",
+		"Enter your phone number": "Введите номер телефона",
+		"Enter your first name": "Введите ваше имя",
+		"Enter your last name": "Введите вашу фамилию",
+		"Enter your email": "Введите вашу электронную почту",
+		"Enter your password": "Введите ваш пароль",
+		"Sign up": "Регистрация",
+		"Log in": "Войти",
+		"Confirm your email": "Confirm your email",
+		"Forgot your password?": "Забыли пароль?"
+	},
+	"confirmEmailPage.json": {
+		"Mail has been successfully activated. You can close the page": "Почта успешно активирована. Вы можете закрыть страницу",
+		"Mail is not activated. The link may have expired": "Почта не активирована. Возможно, срок действия ссылки истек"
+	},
+	"errorPage": {
+		"This page doesn't exist": "Эта страничка не существует"
+	},
+	"forgotPasswordPage": {
+		"Password recovery form": "Форма восстановления пароля",
+		"Confirm your email": "Подтвердите ваш email",
+		"Message in your mail": "Сообщение на вашей почте",
+		"If it's not there, check your spam folder": {
+			"": "Если его там нет, проверьте папку «Спам»."
+		}
+	},
+	"mainPage": {
+		"The internet": "Интернет",
+		"and AI": "и AI",
+		"is your": "твое",
+		"education": "образование"
+	},
+	"resetPassword": {
+		"Reset the password": "Сбросить пароль",
+		"Password recovery form": "Форма восстановления пароля",
+		"The password must be at least 6 characters": "Пароль должен быть не менее 6 символов",
+		"The passwords must match": "Пароли должны совпадать",
+		"Password changed successfully": "Пароль успешно изменен"
+	},
+	"Log in": "Войти",
+	"Sign up": "Регистрация",
+	"logout": "Выйти",
+
+	"Close": "Закрыть",
+	"Open": "Открыть",
+	"User": "Пользователь",
+	"New chat": "Новый чат",
+	"Search": "Поиск",
+	"Workspace": "Рабочее пространство",
+	"Light": "Светлая",
+	"Dark": "Темная",
+	"Creator": "Создатель",
+	"Student": "Студент",
+	"Mode": "Режим",
+	"Start for free": "Начать бесплатно"
+}

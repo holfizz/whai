@@ -16,7 +16,6 @@ interface DrawerProps {
 	onClose?: () => void
 }
 
-// const height = window.innerHeight - 100
 const height = 100
 export const DrawerContent = memo((props: DrawerProps) => {
 	const { Spring, Gesture } = useAnimationLibs()
