@@ -5,10 +5,10 @@ import { useEffect } from 'react'
 
 export const useAuthRedirect = () => {
 	const { user } = useAuth()
+
 	const { replace } = useRouter()
+
 	useEffect(() => {
-		if (user) {
-			replace('/')
-		}
+		if (!!user?.email) replace('/')
 	}, [replace, user])
 }

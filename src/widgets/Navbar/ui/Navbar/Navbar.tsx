@@ -1,11 +1,19 @@
 'use client'
 import Logo from '@/shared/ui/Logo/Logo'
 // import { Button } from '@nextui-org/react'
+import { useAuth } from '@/features/auth'
 import { Link } from '@/navigation'
-import { getRouteLogin, getRouteSignUp } from '@/shared/const/router'
+import {
+	getDashboardRoute,
+	getRouteLogin,
+	getRouteSignUp,
+	getSettingsRoute,
+	getSupportRoute,
+} from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import { LogoSize } from '@/shared/ui/Logo/Logo'
 import {
+	Avatar,
 	Dropdown,
 	DropdownItem,
 	DropdownMenu,
@@ -23,9 +31,8 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import cls from './Navbar.module.scss'
-interface INavbar {}
 
-export function Navbar({}: INavbar) {
+export function Navbar() {
 	const t = useTranslations()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const menuItems = [
@@ -40,6 +47,7 @@ export function Navbar({}: INavbar) {
 		'Help & Feedback',
 		'Log Out',
 	]
+	const { user, logout } = useAuth()
 
 	return (
 		<UINavbar onMenuOpenChange={setIsMenuOpen}>
@@ -130,21 +138,64 @@ export function Navbar({}: INavbar) {
 				</NavbarItem>
 			</NavbarContent>
 			<NavbarContent justify='end'>
-				<NavbarItem className='hidden lg:flex'>
-					<Link className={cls.LoginButton} href={getRouteLogin()}>
-						{t('Log in')}
-					</Link>
-				</NavbarItem>
-				<NavbarItem>
-					<Button
-						as={Link}
-						color='mainFill'
-						href={getRouteSignUp()}
-						className={cls.SignUpButton}
-					>
-						{t('Sign up')}
-					</Button>
-				</NavbarItem>
+				{user ? (
+					<>
+						<Dropdown placement='bottom-end'>
+							<DropdownTrigger>
+								<Avatar
+									isBordered
+									as='button'
+									className='transition-transform'
+									src={user.avatarPath}
+								/>
+							</DropdownTrigger>
+							<DropdownMenu aria-label='Profile Actions' variant='flat'>
+								<DropdownItem
+									color='secondary'
+									key='profile'
+									className='h-14 gap-2'
+								>
+									<p className='font-semibold'>Signed in as</p>
+									<p className='font-semibold'>{user.email}</p>
+								</DropdownItem>
+								<DropdownItem key='dashboard'>
+									<Link href={getDashboardRoute()}>{t('Dashboard')}</Link>
+								</DropdownItem>
+								<DropdownItem key='settings'>
+									<Link href={getSettingsRoute()}>{t('Settings')}</Link>
+								</DropdownItem>
+								<DropdownItem color='warning' key='help_and_feedback'>
+									<Link href={getSupportRoute()}>{t('Help & Feedback')}</Link>
+								</DropdownItem>
+								<DropdownItem
+									onClick={() => logout()}
+									key='logout'
+									color='danger'
+								>
+									Log Out
+								</DropdownItem>
+							</DropdownMenu>
+						</Dropdown>
+					</>
+				) : (
+					<>
+						<NavbarItem className='hidden lg:flex'>
+							<Link className={cls.LoginButton} href={getRouteLogin()}>
+								{t('Log in')}
+							</Link>
+						</NavbarItem>
+						<NavbarItem>
+							<Button
+								as={Link}
+								color='mainFill'
+								href={getRouteSignUp()}
+								className={cls.SignUpButton}
+							>
+								{t('Sign up')}
+							</Button>
+						</NavbarItem>
+					</>
+				)}
 			</NavbarContent>
 			<NavbarMenu>
 				{menuItems.map((item, index) => (

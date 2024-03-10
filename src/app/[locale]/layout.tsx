@@ -1,7 +1,6 @@
 import { NextIntlClientProvider, useLocale, useMessages } from 'next-intl'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import { Mulish, Poppins } from 'next/font/google'
-import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import '../(styles)/index.scss'
 import Body from './body'
@@ -43,9 +42,6 @@ const RootLayout: FC<Props> = ({ children, params: { locale } }) => {
 	const messages = useMessages()
 	const Local = useLocale()
 	unstable_setRequestLocale(locale)
-	if (locale !== Local) {
-		notFound()
-	}
 	return (
 		<html lang={locale}>
 			<head>

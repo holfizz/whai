@@ -33,14 +33,30 @@ export const useAuth = create<useAuthProps>()(
 				set(() => ({ user: null }))
 				removeFromStorage()
 			},
-			checkAuth: async () => {
-				try {
-				} catch (error) {
-					if ("errorCatch(error) === 'Internal server error'") {
-						set(() => ({ user: null }))
-						removeFromStorage()
-					}
-				}
+			checkAuth: () => {
+				// try {
+				// 	const refreshToken = CookieService.getRefreshToken()
+				// 	if (!refreshToken) {
+				// 		return console.log('refresh token не существует')
+				// 	}
+				// 	const { data, error } = useQuery<
+				// 		{ getNewTokens: IUserData },
+				// 		getUserInput
+				// 	>(GET_USER, {
+				// 		variables: {
+				// 			input: { refreshToken },
+				// 		},
+				// 	})
+				// 	console.log(1112312321312312, data?.getNewTokens.user)
+				// 	console.log(1112312321312312)
+				// 	set(() => ({ user: data?.getNewTokens.user }))
+				// 	if (error?.message) {
+				// 		set(() => ({ user: null }))
+				// 		removeFromStorage()
+				// 	}
+				// } catch (error) {
+				// 	console.log(111, error)
+				// }
 			},
 			setAccessToken: (accessToken: TypeAccessToken) => {
 				set(() => ({ accessToken: accessToken }))

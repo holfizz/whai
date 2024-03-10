@@ -1,5 +1,6 @@
 'use client'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import Loader from '@/shared/ui/Loader/Loader'
 import { Suspense } from 'react'
 import { AppProvider } from './app-provider'
 
@@ -13,7 +14,7 @@ export default function Body({
 	return (
 		<body className={classNames('app', {}, [className])}>
 			<AppProvider>
-				<Suspense fallback={null}>{children}</Suspense>
+				<Suspense fallback={<Loader />}>{children}</Suspense>
 			</AppProvider>
 		</body>
 	)

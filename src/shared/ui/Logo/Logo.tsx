@@ -26,10 +26,11 @@ const Logo: FC<LogoProps> = memo(
 		color = '#2E311D',
 		logoType = 'small',
 	}) => {
+		const router = useRouter()
+
 		const mods: Mods = {
 			[cls[logoSize]]: true,
 		}
-		const router = useRouter()
 		const LOGO_TYPE = logoType === 'short' ? SmallLogoIcon : BigLogoIcon
 		return (
 			<button

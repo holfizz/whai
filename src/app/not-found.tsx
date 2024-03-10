@@ -1,8 +1,5 @@
-'use client'
-
 import ErrorImage from '@/shared/assets/images/404.webp'
 import { NO_INDEX_PAGE } from '@/shared/const/seo'
-import Logo from '@/shared/ui/Logo/Logo'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import cls from './not-found.module.scss'
@@ -17,9 +14,7 @@ export default function Page() {
 	return (
 		<div className={cls.errorPage}>
 			<header className={cls.header}>
-				<div className={cls.headerContainer}>
-					<Logo className={cls.logo}></Logo>
-				</div>
+				<div className={cls.headerContainer}></div>
 			</header>
 			<h1 className={cls.errorTitle}>{"t('This page doesn't exist')"}</h1>
 			<Image className={cls.errorImage} src={ErrorImage} alt='404' />

@@ -32,9 +32,11 @@
 }
 .authFormWrapper {
 	height: auto;
-	border: 1px solid var(--grey-100);
 	border-radius: 15px;
 	width: 50vw;
 	min-width: 300px;
 	max-width: 500px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

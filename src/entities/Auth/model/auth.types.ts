@@ -6,6 +6,7 @@ export interface IUser {
 	firstName: string
 	lastName: string
 	phoneNumber: string
+	avatarPath: string
 }
 export type IUserData = z.infer<typeof ProfileData>
 

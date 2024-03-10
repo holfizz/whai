@@ -67,13 +67,13 @@ export const useLoginMutation = () => {
 	)
 	return { auth, data: data?.login, error }
 }
-interface getUserInput {
+export interface getUserInput {
 	input: {
 		refreshToken: string
 	}
 }
 
-const GET_USER = gql`
+export const GET_USER = gql`
 	mutation getNewTokens($dto: RefreshTokenInput!) {
 		getNewTokens(dto: $dto) {
 			accessToken
@@ -91,6 +91,6 @@ const GET_USER = gql`
 `
 
 export const useGetUserMutation = () => {
-	return useMutation<getUserInput>(GET_USER)
+	return useMutation<{ getNewTokens: IUserData }, getUserInput>(GET_USER)
 	// return { auth, data: data.login, error }
 }

@@ -1,9 +1,14 @@
+'use client'
 import { AuthForm } from '@/features/auth'
 import { authConstants } from '@/shared/const/auth'
+import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Logo from '@/shared/ui/Logo/Logo'
 import cls from '../../Auth.module.scss'
+import { Suspense } from 'react'
+import Loader from '@/shared/ui/Loader/Loader'
 
 export default function LoginPage() {
+	useAuthRedirect()
 	return (
 		<div className={cls.SignInPage}>
 			<div className={cls.wrapper}>
@@ -13,7 +18,9 @@ export default function LoginPage() {
 			</div>
 			<div className={cls.mainScreen}>
 				<div className={cls.authFormWrapper}>
-					<AuthForm type={authConstants.LOGIN} />
+					<Suspense fallback={<Loader />}>
+						<AuthForm type={authConstants.LOGIN} />
+					</Suspense>
 				</div>
 			</div>
 		</div>

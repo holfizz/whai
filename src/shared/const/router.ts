@@ -4,3 +4,6 @@ export const getRouteProfile = () => `/profile`
 export const getRouteLogin = () => `/login`
 export const getRouteSignUp = () => `/sign-up`
 export const getRouteForgotPassword = () => `/forgot-password`
+export const getSettingsRoute = () => `/settings`
+export const getDashboardRoute = () => `/dashboard`
+export const getSupportRoute = () => `/support`
