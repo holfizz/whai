@@ -1,5 +1,6 @@
 'use client'
 
+import { saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import { authConstants } from '@/shared/const/auth'
 import {
 	getRouteForgotPassword,
@@ -24,8 +25,9 @@ import {
 import { HiOutlineEye } from 'react-icons/hi'
 import { PiEyeClosedBold } from 'react-icons/pi'
 import { z } from 'zod'
-import { formSchema } from '../../model/auth.contracts'
-import useSignUpMutation from '../../model/auth.queries'
+import { formLoginSchema, formSignUpSchema } from '../../model/auth.contracts'
+import { useAuth } from '../../model/auth.model'
+import { useLoginMutation, useSignUpMutation } from '../../model/auth.queries'
 import InputField from '../AuthLabel/InputField'
 import cls from './AuthForm.module.scss'
 
@@ -51,27 +53,32 @@ const AuthForm: FC<AuthFormProps> = memo(
 			>
 		>({ _errors: [] })
 		const [isVisible, setIsVisible] = useState(false)
-		const [signUp, { error, data }] = useSignUpMutation()
+		const { setAuthUser, setAccessToken, accessToken } = useAuth()
+		const { auth, data, error } =
+			type === authConstants.SIGNUP ? useSignUpMutation() : useLoginMutation()
 
 		const toggleVisibility = () => setIsVisible(!isVisible)
-
 		useEffect(() => {
-			console.log(data)
-		}, [data])
+			if (data) {
+				setAuthUser(data.user)
+				setAccessToken(data.accessToken)
+				saveTokenStorage(data)
+			}
+		}, [data, setAuthUser, setAccessToken])
 
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()
 			const form = new FormData(e.currentTarget)
 			const formData = Object.fromEntries(form.entries())
+			const formSchema =
+				type === authConstants.SIGNUP ? formSignUpSchema : formLoginSchema
 			const validationResult = formSchema.safeParse(formData)
-			console.log(formData)
 			if (!validationResult.success) {
 				const errors = validationResult.error.format()
 				setFormErrors(errors)
 			} else {
 				setFormErrors({ _errors: [] })
-				// authMutate(validationResult.data as any)
-				signUp({
+				auth({
 					variables: {
 						input: validationResult.data,
 					},

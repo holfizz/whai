@@ -1,7 +1,5 @@
 'use client'
 import { IUser } from '@/entities/Auth'
-import { AuthApi } from '@/features/auth'
-import { errorCatch } from '@/shared/api/api.helper'
 import {
 	getAccessToken,
 	getUserFromStorage,
@@ -9,18 +7,18 @@ import {
 } from '@/shared/api/auth/auth.helper'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-
-export type TypeAuthUser = IUser | null
+export type TypeAuthUser = IUser | null | undefined
+type TypeAccessToken = string | null | undefined
 
 interface IUseAuthState {
 	user: TypeAuthUser
-	accessToken: string | null
+	accessToken: TypeAccessToken
 }
 
 interface IUseAuthActions {
 	logout: () => void
 	checkAuth: () => void
-	setAccessToken: (accessToken: string | null) => void
+	setAccessToken: (accessToken: TypeAccessToken) => void
 	setAuthUser: (user: TypeAuthUser) => void
 }
 
@@ -37,17 +35,14 @@ export const useAuth = create<useAuthProps>()(
 			},
 			checkAuth: async () => {
 				try {
-					const response = await AuthApi.getNewTokens()
-					set(() => ({ user: response.user }))
-					return response
 				} catch (error) {
-					if (errorCatch(error) === 'Internal server error') {
+					if ("errorCatch(error) === 'Internal server error'") {
 						set(() => ({ user: null }))
 						removeFromStorage()
 					}
 				}
 			},
-			setAccessToken: (accessToken: string | null) => {
+			setAccessToken: (accessToken: TypeAccessToken) => {
 				set(() => ({ accessToken: accessToken }))
 			},
 			setAuthUser: (user: TypeAuthUser) => {

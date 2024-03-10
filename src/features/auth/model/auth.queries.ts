@@ -1,39 +1,12 @@
 import { IUserData } from '@/entities/Auth'
 import { gql, useMutation } from '@apollo/client'
 
-// export const useAuthMutate = (type: authConstants) => {
-// 	const { setIsError, setIsSuccess } = useAuthStatus()
-// 	return useMutation<
-// 		any,
-// 		AxiosError<{
-// 			message: string
-// 		}>
-// 	>({
-// 		mutationKey: ['user'],
-// 		mutationFn: (formData: any) => {
-// 			const { email, password } = formData
-// 			return AuthApi.main(type, { email, password })
-// 		},
-// 		onSuccess: () => {
-// 			setIsSuccess(true)
-// 			setIsError(false)
-// 			if (type === authConstants.LOGIN) {
-// 				// window.location.reload()
-// 			}
-// 		},
-// 		onError: () => {
-// 			setIsSuccess(false)
-// 			setIsError(true)
-// 		},
-// 	})
-// }
-
 interface SignUpInput {
 	input: {
 		email: string
-		firstName: string
-		lastName: string
-		phoneNumber: string
+		firstName?: string
+		lastName?: string
+		phoneNumber?: string
 		password: string
 	}
 }
@@ -41,18 +14,83 @@ interface SignUpInput {
 const SIGN_UP = gql`
 	mutation signUp($input: SignUpInput!) {
 		signUp(signUpInput: $input) {
+			accessToken
+			refreshToken
 			user {
 				email
+				# roles
 				firstName
 				lastName
 				phoneNumber
+				avatarPath
 			}
-			accessToken
 		}
 	}
 `
 
-const useSignUpMutation = () => {
-	return useMutation<IUserData, SignUpInput>(SIGN_UP)
+export const useSignUpMutation = () => {
+	const [auth, { data, error }] = useMutation<
+		{ signUp: IUserData },
+		SignUpInput
+	>(SIGN_UP)
+	return { auth, data: data?.signUp, error }
 }
-export default useSignUpMutation
+
+//     LOGIN
+interface LoginInput {
+	input: {
+		email: string
+		password: string
+	}
+}
+
+const LOGIN = gql`
+	mutation login($input: loginInput!) {
+		login(loginInput: $input) {
+			refreshToken
+			accessToken
+			user {
+				email
+				# roles
+				firstName
+				lastName
+				phoneNumber
+				avatarPath
+			}
+		}
+	}
+`
+
+export const useLoginMutation = () => {
+	const [auth, { data, error }] = useMutation<{ login: IUserData }, LoginInput>(
+		LOGIN,
+	)
+	return { auth, data: data?.login, error }
+}
+interface getUserInput {
+	input: {
+		refreshToken: string
+	}
+}
+
+const GET_USER = gql`
+	mutation getNewTokens($dto: RefreshTokenInput!) {
+		getNewTokens(dto: $dto) {
+			accessToken
+			refreshToken
+			user {
+				email
+				# roles
+				firstName
+				lastName
+				phoneNumber
+				avatarPath
+			}
+		}
+	}
+`
+
+export const useGetUserMutation = () => {
+	return useMutation<getUserInput>(GET_USER)
+	// return { auth, data: data.login, error }
+}

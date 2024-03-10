@@ -2,11 +2,10 @@ import { z } from 'zod'
 import { ProfileData, ProfileState } from './auth.contracts'
 
 export interface IUser {
-	id: number
 	email: string
-	roles: string[]
-	isVerified: boolean
-	activationLink: string
+	firstName: string
+	lastName: string
+	phoneNumber: string
 }
 export type IUserData = z.infer<typeof ProfileData>
 

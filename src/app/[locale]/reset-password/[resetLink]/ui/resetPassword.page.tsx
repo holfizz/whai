@@ -1,13 +1,10 @@
 'use client'
 import cls from '@/app/forgotPassword/ui/forgotPassword.module.scss'
-import { AuthApi } from '@/features/auth'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
 import Text, { TextAlign, TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { Button } from '@nextui-org/react'
-import { useMutation } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import { FormEvent, useState } from 'react'
@@ -22,14 +19,7 @@ export default function ResetPasswordPage() {
 		return segments[segments.length - 1]
 	}
 	const resetPasswordUrl = getLastSegmentFromURL() || ''
-	const {
-		mutate: resetPasswordMutation,
-		error,
-		data,
-	} = useMutation<any, AxiosError<{ message: string }>>({
-		mutationFn: (data: any) => AuthApi.resetPassword(resetPasswordUrl, data),
-		mutationKey: [resetPasswordUrl],
-	})
+
 	const [formErrors, setFormErrors] = useState<
 		z.ZodFormattedError<
 			{
@@ -60,7 +50,7 @@ export default function ResetPasswordPage() {
 				})
 			} else {
 				setFormErrors({ _errors: [] })
-				resetPasswordMutation(validationResult.data as any)
+				// resetPasswordMutation(validationResult.data as any)
 			}
 		}
 	}

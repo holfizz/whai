@@ -1,4 +1,4 @@
-import AuthForm from '@/features/auth/ui/AuthForm/AuthForm'
+import { AuthForm } from '@/features/auth'
 import { authConstants } from '@/shared/const/auth'
 import Logo from '@/shared/ui/Logo/Logo'
 import cls from '../../Auth.module.scss'

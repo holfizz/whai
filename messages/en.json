@@ -15,9 +15,9 @@
 		"Forgot your password?": "Forgot your password?",
 		"Confirm your email": "Confirm your email"
 	},
-	"confirmEmailPage.json": {
-		"Mail has been successfully activated. You can close the page": "Mail has been successfully activated. You can close the page",
-		"Mail is not activated. The link may have expired": "Mail is not activated. The link may have expired"
+	"confirmEmailPage": {
+		"Mail has been successfully activated You can close the page": "Mail has been successfully activated. You can close the page",
+		"Mail is not activated The link may have expired": "Mail is not activated. The link may have expired"
 	},
 	"errorPage": {
 		"This page doesn't exist": "This page doesn't exist"
@@ -25,10 +25,9 @@
 	"forgotPasswordPage": {
 		"Password recovery form": "Password recovery form",
 		"Confirm your email": "Confirm your email",
+		"Enter email": "Enter email...",
 		"Message in your mail": "Message in your mail",
-		"If it's not there, check your spam folder": {
-			"": "If it's not there, check your spam folder."
-		}
+		"If its not there check your spam folder": "If it's not there, check your spam folder."
 	},
 	"mainPage": {
 		"The internet": "The internet",

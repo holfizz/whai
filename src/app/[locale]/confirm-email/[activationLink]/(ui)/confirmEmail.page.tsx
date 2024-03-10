@@ -28,7 +28,7 @@ export default function ConfirmEmailPage() {
 						size={TextSize.XL}
 						theme={TextTheme.SUCCESS}
 						title={t(
-							'Mail has been successfully activated. You can close the page',
+							'Mail has been successfully activated You can close the page',
 						)}
 					/>
 				</>
@@ -39,7 +39,7 @@ export default function ConfirmEmailPage() {
 					<Text
 						size={TextSize.XL}
 						theme={TextTheme.ERROR}
-						title={t('Mail is not activated. The link may have expired')}
+						title={t('Mail is not activated The link may have expired')}
 					/>
 				</>
 			)}

@@ -1,12 +1,9 @@
 'use client'
-import { AuthApi } from '@/features/auth'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
 import Text, { TextAlign, TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { Button } from '@nextui-org/react'
-import { useMutation } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import { useTranslations } from 'next-intl'
 import { FormEvent, useState } from 'react'
 import { z } from 'zod'
@@ -23,19 +20,7 @@ export default function ForgotPasswordPage() {
 			string
 		>
 	>({ _errors: [] })
-	const {
-		mutate: forgotPasswordMutate,
-		error,
-		data,
-	} = useMutation<
-		any,
-		AxiosError<{
-			message: string
-		}>
-	>({
-		mutationKey: ['user'],
-		mutationFn: (formData: any) => AuthApi.forgotPassword(formData),
-	})
+
 	const formSchema = z.object({
 		email: z.string().email('Email is not correct'),
 	})
@@ -50,7 +35,6 @@ export default function ForgotPasswordPage() {
 			setFormErrors(errors)
 		} else {
 			setFormErrors({ _errors: [] })
-			forgotPasswordMutate(validationResult.data as any)
 		}
 	}
 	return (
@@ -61,19 +45,19 @@ export default function ForgotPasswordPage() {
 					size={TextSize.L}
 					title={t('Password recovery form')}
 				/>
-				{error && (
+				{'error' && (
 					<Text
 						theme={TextTheme.ERROR}
-						text={error?.response?.data?.message}
+						text={'error?.response?.data?.message'}
 						size={TextSize.L}
 					/>
 				)}
-				{data && (
+				{'data' && (
 					<Text
 						align={TextAlign.CENTER}
 						theme={TextTheme.SUCCESS}
 						title={t('Message in your mail')}
-						text={t("If it's not there, check your spam folder.")}
+						text={t('If its not there check your spam folder')}
 						size={TextSize.S}
 					/>
 				)}
@@ -88,7 +72,7 @@ export default function ForgotPasswordPage() {
 						name={'email'}
 						theme={InputTheme.OUTLINE}
 						className={cls.input}
-						placeholder={t('Enter email...')}
+						placeholder={t('Enter email')}
 						type='text'
 					/>
 				</label>
