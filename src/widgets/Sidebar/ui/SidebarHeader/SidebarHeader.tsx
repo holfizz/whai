@@ -1,5 +1,5 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
-import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
+import Button from '@/shared/ui/Button/Button'
 import Icon from '@/shared/ui/Icon/Icon'
 import Line, { LineSize } from '@/shared/ui/Line/Line'
 import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
@@ -42,7 +42,6 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
 				)}
 				<Button
 					onClick={() => setIsCollapsedCourseMenu(prevState => !prevState)}
-					theme={ButtonTheme.CLEAR}
 				>
 					<Icon
 						fontSize={20}
@@ -64,11 +63,7 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
 					lineSize={LineSize.LONG}
 					color={'var(--grey-100)'}
 				/>
-				<Button
-					className={cls.createCourseButton}
-					theme={ButtonTheme.CLEAR}
-					size={ButtonSize.FULL}
-				>
+				<Button className={cls.createCourseButton} size='lg' color='clear'>
 					{!isCollapsed && 'Create a Course '}
 					<IoAddCircleOutline fontSize={20} />
 				</Button>

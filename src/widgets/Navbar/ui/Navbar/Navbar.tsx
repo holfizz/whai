@@ -1,6 +1,7 @@
 'use client'
 import Logo from '@/shared/ui/Logo/Logo'
 // import { Button } from '@nextui-org/react'
+import { Link } from '@/navigation'
 import { getRouteLogin, getRouteSignUp } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import { LogoSize } from '@/shared/ui/Logo/Logo'
@@ -9,20 +10,19 @@ import {
 	DropdownItem,
 	DropdownMenu,
 	DropdownTrigger,
-	Link,
 	NavbarBrand,
 	NavbarContent,
 	NavbarItem,
 	NavbarMenu,
 	NavbarMenuItem,
 	NavbarMenuToggle,
+	Link as UILink,
 	Navbar as UINavbar,
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import cls from './Navbar.module.scss'
-
 interface INavbar {}
 
 export function Navbar({}: INavbar) {
@@ -149,8 +149,10 @@ export function Navbar({}: INavbar) {
 			<NavbarMenu>
 				{menuItems.map((item, index) => (
 					<NavbarMenuItem key={`${item}-${index}`}>
-						<Link color='foreground' className='w-full' href='#' size='lg'>
-							{item}
+						<Link href={'#'}>
+							<UILink color='foreground' className='w-full' href='#' size='lg'>
+								{item}
+							</UILink>
 						</Link>
 					</NavbarMenuItem>
 				))}

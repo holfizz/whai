@@ -1,6 +1,5 @@
-import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev'
-
 import { ApolloProvider } from '@apollo/client'
+import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev'
 import apolloClient from './apollo-client'
 
 type Props = {

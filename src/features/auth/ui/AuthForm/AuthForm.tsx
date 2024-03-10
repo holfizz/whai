@@ -1,5 +1,6 @@
 'use client'
 
+import { Link } from '@/navigation'
 import { saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import { authConstants } from '@/shared/const/auth'
 import {
@@ -8,7 +9,6 @@ import {
 	getRouteSignUp,
 } from '@/shared/const/router'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import AppLink from '@/shared/ui/AppLink/AppLink'
 import Button from '@/shared/ui/Button/Button'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { Input } from '@nextui-org/react'
@@ -191,15 +191,15 @@ const AuthForm: FC<AuthFormProps> = memo(
 				<Button color='mainFill' type={'submit'} className={cls.submitButton}>
 					{type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
 				</Button>
-				<AppLink
+				<Link
 					className={cls.forgotPasswordButton}
 					href={getRouteForgotPassword()}
 				>
 					<Button color='danger' variant='light'>
 						{t('Forgot your password?')}
 					</Button>
-				</AppLink>
-				<AppLink
+				</Link>
+				<Link
 					onClick={() =>
 						setIsFormType &&
 						setIsFormType(
@@ -216,7 +216,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 					<Button variant='light' color='warning'>
 						{type === authConstants.LOGIN ? t('Sign up') : t('Log in')}
 					</Button>
-				</AppLink>
+				</Link>
 			</form>
 		)
 	},

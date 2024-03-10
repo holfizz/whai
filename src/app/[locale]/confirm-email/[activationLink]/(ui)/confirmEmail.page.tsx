@@ -1,10 +1,8 @@
 'use client'
-import { AuthApi } from '@/features/auth'
+import { usePathname } from '@/navigation'
 import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
-import { useQuery } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
-import { usePathname } from 'next/navigation'
 
 export default function ConfirmEmailPage() {
 	useAuthRedirect()
@@ -16,13 +14,13 @@ export default function ConfirmEmailPage() {
 		return segments[segments.length - 1]
 	}
 	const activateEmailUrl = getLastSegmentFromURL() || ''
-	const { data, isError } = useQuery({
-		queryFn: () => AuthApi.activateEmail(activateEmailUrl),
-		queryKey: [activateEmailUrl],
-	})
+	// const { data, isError } = useQuery({
+	// 	queryFn: () => AuthApi.activateEmail(activateEmailUrl),
+	// 	queryKey: [activateEmailUrl],
+	// })
 	return (
 		<div>
-			{data && (
+			{'data' && (
 				<>
 					<Text
 						size={TextSize.XL}
@@ -34,7 +32,7 @@ export default function ConfirmEmailPage() {
 				</>
 			)}
 
-			{isError && (
+			{'isError' && (
 				<>
 					<Text
 						size={TextSize.XL}

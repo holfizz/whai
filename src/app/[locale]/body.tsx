@@ -1,3 +1,4 @@
+'use client'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Suspense } from 'react'
 import { AppProvider } from './app-provider'

@@ -1,6 +1,6 @@
 'use client'
 import { useAuth } from '@/features/auth/model/auth.model'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/navigation'
 import { useEffect } from 'react'
 
 export const useAuthRedirect = () => {

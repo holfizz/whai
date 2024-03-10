@@ -42,6 +42,10 @@
 		"The passwords must match": "Пароли должны совпадать",
 		"Password changed successfully": "Пароль успешно изменен"
 	},
+	"Metadata":{
+		"title":"Наш сайт"
+	},
+
 	"Log in": "Войти",
 	"Sign up": "Регистрация",
 	"logout": "Выйти",

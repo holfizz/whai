@@ -42,6 +42,9 @@
 		"The passwords must match": "The password must match",
 		"Password changed successfully": "Password changed successfully"
 	},
+	"Metadata": {
+		"title": "Our site"
+	},
 	"Log in": "Log in",
 	"Sign up": "Sign up",
 	"logout": "Logout",

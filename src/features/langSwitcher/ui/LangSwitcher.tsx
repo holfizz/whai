@@ -1,6 +1,8 @@
+import { usePathname, useRouter } from '@/navigation'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import Text from '@/shared/ui/Text/Text'
 import { Button } from '@nextui-org/react'
+import { useLocale } from 'next-intl'
 import { memo, useState, type FC } from 'react'
 import { FiGlobe } from 'react-icons/fi'
 import cls from './LangSwitcher.module.scss'
@@ -11,10 +13,14 @@ interface LangSwitcherProps {
 
 const LangSwitcher: FC<LangSwitcherProps> = memo(({ className }) => {
 	const [isActive, setIsActive] = useState(false)
+	const locale = useLocale()
+	const router = useRouter()
+	const pathName = usePathname()
 
-	const handleClick = () => {
+	const handleClick = (e: any) => {
 		setIsActive(true)
-
+		const nextLocale = e.target.value
+		router.push(pathName, { locale: locale === 'en' ? 'ru' : 'en' })
 		setTimeout(() => {
 			setIsActive(false)
 		}, 400)
@@ -23,7 +29,7 @@ const LangSwitcher: FC<LangSwitcherProps> = memo(({ className }) => {
 	return (
 		<Button
 			className={classNames(cls.LangSwitcher, {}, [className])}
-			onClick={handleClick}
+			onClick={e => handleClick(e)}
 		>
 			<div
 				className={classNames(cls.icon, { [cls.active]: isActive }, [
@@ -32,7 +38,7 @@ const LangSwitcher: FC<LangSwitcherProps> = memo(({ className }) => {
 			>
 				<FiGlobe />
 			</div>
-			<Text text={'En'} className={cls.lang}></Text>
+			<Text text={locale} className={cls.lang}></Text>
 		</Button>
 	)
 })

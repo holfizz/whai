@@ -1,12 +1,10 @@
 'use client'
-import cls from '@/app/forgotPassword/ui/forgotPassword.module.scss'
-import { classNames } from '@/shared/lib/classNames/classNames'
+import { usePathname } from '@/navigation'
 import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
 import Text, { TextAlign, TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { Button } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { usePathname } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 import { z } from 'zod'
 
@@ -55,8 +53,8 @@ export default function ResetPasswordPage() {
 		}
 	}
 	return (
-		<div className={cls.wrapper}>
-			<form onSubmit={onSubmit} className={classNames(cls.RecoverForm, {}, [])}>
+		<div>
+			<form onSubmit={onSubmit}>
 				<Text
 					align={TextAlign.CENTER}
 					size={TextSize.L}
@@ -76,14 +74,14 @@ export default function ResetPasswordPage() {
 						text={formErrors?._errors.join(', ')}
 					/>
 				)}
-				{error && (
+				{'error' && (
 					<Text
 						size={TextSize.S}
 						theme={TextTheme.ERROR}
 						text={formErrors?._errors.join(', ')}
 					/>
 				)}
-				{data && (
+				{'data' && (
 					<Text
 						size={TextSize.S}
 						theme={TextTheme.SUCCESS}
@@ -95,7 +93,6 @@ export default function ResetPasswordPage() {
 						size={InputSize.FULL}
 						name={'password'}
 						theme={InputTheme.OUTLINE}
-						className={cls.input}
 						placeholder={t('Password...')}
 						type='password'
 					/>
@@ -105,7 +102,6 @@ export default function ResetPasswordPage() {
 						size={InputSize.FULL}
 						name={'passwordRepeat'}
 						theme={InputTheme.OUTLINE}
-						className={cls.input}
 						placeholder={t('Repeat password...')}
 						type='password'
 					/>

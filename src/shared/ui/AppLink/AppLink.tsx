@@ -1,5 +1,6 @@
+import { Link } from '@/navigation'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import Link, { LinkProps } from 'next/link'
+import { LinkProps } from 'next/link'
 import { memo, type FC, type PropsWithChildren } from 'react'
 import cls from './AppLink.module.scss'
 
@@ -10,11 +11,7 @@ interface AppLinkProps extends LinkProps {
 const AppLink: FC<PropsWithChildren<AppLinkProps>> = memo(
 	({ className, children, href, ...otherProps }) => {
 		return (
-			<Link
-				href={href}
-				className={classNames(cls.AppLink, {}, [className])}
-				{...otherProps}
-			>
+			<Link href={href} className={classNames(cls.AppLink, {}, [className])}>
 				{children}
 			</Link>
 		)

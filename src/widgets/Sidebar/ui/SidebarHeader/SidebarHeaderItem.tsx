@@ -1,5 +1,5 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
-import Button, { ButtonSize, ButtonTheme } from '@/shared/ui/Button/Button'
+import Button from '@/shared/ui/Button/Button'
 import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { useTranslations } from 'next-intl'
 import { FC } from 'react'
@@ -19,11 +19,7 @@ const SidebarHeaderItem: FC<SidebarHeaderItemProps> = ({
 	const t = useTranslations()
 
 	return (
-		<Button
-			theme={ButtonTheme.CLEAR}
-			size={ButtonSize.FULL}
-			className={classNames(cls.sidebarHeaderItem, {}, [])}
-		>
+		<Button size='lg' className={classNames(cls.sidebarHeaderItem, {}, [])}>
 			<div className={cls.Sphere} style={{ background: color }} />
 			{!isCollapsed && (
 				<Text size={TextSize.L} className={cls.title} text={title} />

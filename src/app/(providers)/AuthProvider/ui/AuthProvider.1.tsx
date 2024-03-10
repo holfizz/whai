@@ -1,7 +1,7 @@
 'use client'
 import { useAuth } from '@/features/auth/model/auth.model'
+import { usePathname } from '@/navigation'
 import { getAccessToken, getRefreshToken } from '@/shared/api/auth/auth.helper'
-import { usePathname } from 'next/navigation'
 import { FC, PropsWithChildren, useEffect } from 'react'
 
 export const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
