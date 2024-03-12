@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
 import LoginPageAsync from './ui/Login.async'
 
 export const metadata: Metadata = {

@@ -1,5 +1,4 @@
-import { useAuth } from '@/features/auth'
-import { useGetUserMutation } from '@/features/auth/model/auth.queries'
+import { getAccessToken } from '@/shared/api/auth/auth.helper'
 import { EnumTokens } from '@/shared/types/auth'
 import {
 	ApolloClient,
@@ -12,9 +11,8 @@ import {
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { GraphQLError } from 'graphql'
-import { CookieService } from './cookie.service'
 const authLink = setContext((_, { headers }) => {
-	const accessToken = CookieService.getAccessToken()
+	const accessToken = getAccessToken()
 
 	return {
 		headers: {
@@ -35,8 +33,7 @@ const errorLink = onError(
 							observer => {
 								;(async () => {
 									try {
-										const accessToken = await refreshToken()
-
+										const accessToken = 'await refreshToken()'
 										if (!accessToken) {
 											throw new GraphQLError('Empty AccessToken')
 										}
@@ -71,35 +68,24 @@ const httpLink = new HttpLink({
 
 const client = new ApolloClient({
 	cache: new InMemoryCache(),
-	link: ApolloLink.from([errorLink, httpLink]),
+	link: ApolloLink.from([authLink, errorLink, httpLink]),
 	connectToDevTools: true,
 })
 
 export default client
 const refreshToken = async () => {
-	const { setAccessToken, setAuthUser } = useAuth()
-
-	try {
-		const refreshToken = CookieService.getRefreshToken()
-
-		const [getUser, { data }] = useGetUserMutation()
-		if (refreshToken) {
-			getUser({
-				variables: {
-					input: { refreshToken },
-				},
-			})
-		}
-
-		if (data?.getNewTokens.accessToken) {
-			CookieService.setAccessToken(data?.getNewTokens.accessToken)
-			setAccessToken(data?.getNewTokens.accessToken)
-		}
-
-		return data?.getNewTokens.accessToken
-	} catch (err) {
-		setAuthUser(null)
-		CookieService.removeAccessToken()
-		throw err
-	}
+	// const { user, setAuthUser, accessToken } = useAuth()
+	// const fetchData = async () => {
+	// 	const userData = await ApolloClient.mutate<
+	// 		{ getNewTokens: IUserData },
+	// 		getUserInput
+	// 	>({
+	// 		mutation: GET_USER,
+	// 		variables: {
+	// 			input: { refreshToken: accessToken },
+	// 		},
+	// 	})
+	// 	setAuthUser(userData.data?.getNewTokens.user)
+	// }
+	// fetchData()
 }

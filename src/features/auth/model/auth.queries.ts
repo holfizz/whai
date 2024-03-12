@@ -72,10 +72,9 @@ export interface getUserInput {
 		refreshToken: string
 	}
 }
-
 export const GET_USER = gql`
-	mutation getNewTokens($dto: RefreshTokenInput!) {
-		getNewTokens(dto: $dto) {
+	mutation getNewTokens($input: RefreshTokenInput!) {
+		getNewTokens(dto: $input) {
 			accessToken
 			refreshToken
 			user {
@@ -91,6 +90,9 @@ export const GET_USER = gql`
 `
 
 export const useGetUserMutation = () => {
-	return useMutation<{ getNewTokens: IUserData }, getUserInput>(GET_USER)
-	// return { auth, data: data.login, error }
+	const [checkAuth, { data, error }] = useMutation<
+		{ getNewTokens: IUserData },
+		getUserInput
+	>(GET_USER)
+	return { checkAuth, data: data?.getNewTokens, error }
 }

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
 import SignUpPageAsync from './ui/SignUp.async'
 
 export const metadata: Metadata = {

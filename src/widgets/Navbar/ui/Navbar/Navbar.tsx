@@ -47,7 +47,7 @@ export function Navbar() {
 		'Help & Feedback',
 		'Log Out',
 	]
-	const { user, logout } = useAuth()
+	const { user, logout, accessToken } = useAuth()
 
 	return (
 		<UINavbar onMenuOpenChange={setIsMenuOpen}>

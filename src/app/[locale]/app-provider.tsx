@@ -2,7 +2,6 @@
 import { ThemeProvider } from 'next-themes'
 import { ReactNode } from 'react'
 import { ApolloProviders } from '../(providers)/ApolloProvider'
-import { AuthProvider } from '../(providers)/AuthProvider'
 
 export function AppProvider({ children }: { children: ReactNode }) {
 	return (
@@ -13,7 +12,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 				defaultTheme='light'
 				disableTransitionOnChange
 			>
-				<AuthProvider>{children}</AuthProvider>
+				{children}
 			</ThemeProvider>
 		</ApolloProviders>
 	)

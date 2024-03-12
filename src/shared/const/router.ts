@@ -1,9 +1,9 @@
 export const getRouteMain = () => '/'
 export const getRouteAbout = () => '/about'
 export const getRouteProfile = () => `/profile`
-export const getRouteLogin = () => `/login`
-export const getRouteSignUp = () => `/sign-up`
-export const getRouteForgotPassword = () => `/forgot-password`
-export const getSettingsRoute = () => `/settings`
-export const getDashboardRoute = () => `/dashboard`
+export const getRouteLogin = () => `/auth/login`
+export const getRouteSignUp = () => `/auth/sign-up`
+export const getRouteForgotPassword = () => `/auth/forgot-password`
+export const getSettingsRoute = () => `/i/settings`
+export const getDashboardRoute = () => `/i`
 export const getSupportRoute = () => `/support`
