@@ -1,4 +1,6 @@
+import { LOGOUT } from '@/entities/Auth/model/auth.queries'
 import Button from '@/shared/ui/Button/Button'
+import { useLazyQuery } from '@apollo/client'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { PiStudentBold } from 'react-icons/pi'
@@ -6,16 +8,11 @@ import { SiSpringCreators } from 'react-icons/si'
 import cls from './SidebarControl.module.scss'
 
 const SidebarControl = ({ isCollapsed }: { isCollapsed: boolean }) => {
-	// const [isOpenModal, setIsOpenModal] = useState(false)
-	// const [isFormType, setIsFormType] = useState(authConstants.LOGIN)
-	// const { user, logout } = useAuth()
 	const t = useTranslations()
 	const [isCreator, setIsCreator] = useState<boolean>(false)
-
-	// const authActionButton = () => (user ? logout() : toggleAuthModal())
-	// const maskEmail = (email: string) =>
-	// email ? `${email.charAt(0)}...${email.split('@').pop()}` : 'User'
-	// const toggleAuthModal = useCallback(() => setIsOpenModal(prev => !prev), [])
+	const [logoutQuery] = useLazyQuery(LOGOUT, {
+		fetchPolicy: 'network-only',
+	})
 	return (
 		<div className={cls.sidebarControl}>
 			<Button

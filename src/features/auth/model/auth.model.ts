@@ -3,7 +3,6 @@ import { IUser } from '@/entities/Auth'
 import {
 	getAccessToken,
 	getUserFromStorage,
-	removeFromStorage,
 } from '@/shared/api/auth/auth.helper'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
@@ -16,7 +15,6 @@ interface IUseAuthState {
 }
 
 interface IUseAuthActions {
-	logout: () => void
 	setAccessToken: (accessToken: TypeAccessToken) => void
 	setAuthUser: (user: TypeAuthUser) => void
 }
@@ -28,10 +26,6 @@ export const useAuth = create<useAuthProps>()(
 		set => ({
 			user: getUserFromStorage(),
 			accessToken: getAccessToken(),
-			logout: () => {
-				set(() => ({ user: null }))
-				removeFromStorage()
-			},
 			setAccessToken: (accessToken: TypeAccessToken) => {
 				set(() => ({ accessToken: accessToken }))
 			},

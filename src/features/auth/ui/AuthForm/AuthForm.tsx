@@ -28,7 +28,7 @@ import { z } from 'zod'
 import { formLoginSchema, formSignUpSchema } from '../../model/auth.contracts'
 import { useAuth } from '../../model/auth.model'
 import { useLoginMutation, useSignUpMutation } from '../../model/auth.queries'
-import InputField from '../AuthLabel/InputField'
+import InputField from '../InputLabel/InputField'
 import cls from './AuthForm.module.scss'
 
 export interface AuthFormProps {
@@ -62,7 +62,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 			if (data) {
 				setAuthUser(data.user)
 				setAccessToken(data.accessToken)
-				saveTokenStorage(data)
+				saveTokenStorage(data.accessToken)
 			}
 		}, [data, setAuthUser, setAccessToken])
 

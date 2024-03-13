@@ -1,9 +1,13 @@
-import { getAccessToken } from '@/shared/api/auth/auth.helper'
-import { EnumTokens } from '@/shared/types/auth'
+import { REFRESH_TOKEN } from '@/features/auth/model/auth.queries'
+import {
+	getAccessToken,
+	removeFromStorage,
+} from '@/shared/api/auth/auth.helper'
 import {
 	ApolloClient,
 	ApolloLink,
 	FetchResult,
+	GraphQLRequest,
 	HttpLink,
 	InMemoryCache,
 	Observable,
@@ -11,29 +15,40 @@ import {
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { GraphQLError } from 'graphql'
-const authLink = setContext((_, { headers }) => {
-	const accessToken = getAccessToken()
 
+function isRefreshRequest(operation: GraphQLRequest) {
+	return operation.operationName === 'refreshToken'
+}
+
+function returnTokenDependingOnOperation(operation: GraphQLRequest) {
+	if (isRefreshRequest(operation)) return getAccessToken() || ''
+	else return getAccessToken() || ''
+}
+
+const authLink = setContext((operation, { headers }) => {
+	let token = returnTokenDependingOnOperation(operation)
 	return {
 		headers: {
 			...headers,
-			authorization: accessToken ? `Bearer ${accessToken}` : '',
+			authorization: token ? `Bearer ${token}` : '',
 		},
 	}
 })
+
 const errorLink = onError(
 	({ graphQLErrors, networkError, operation, forward }) => {
 		if (graphQLErrors) {
-			for (const err of graphQLErrors) {
+			for (let err of graphQLErrors) {
 				switch (err.extensions.code) {
 					case 'UNAUTHENTICATED':
-						if (operation.operationName === EnumTokens.REFRESH_TOKEN) return
+						if (operation.operationName === 'refreshToken') return
 
 						const observable = new Observable<FetchResult<Record<string, any>>>(
 							observer => {
 								;(async () => {
 									try {
-										const accessToken = 'await refreshToken()'
+										const accessToken = await refreshToken()
+
 										if (!accessToken) {
 											throw new GraphQLError('Empty AccessToken')
 										}
@@ -60,32 +75,36 @@ const errorLink = onError(
 		if (networkError) console.log(`[Network error]: ${networkError}`)
 	},
 )
+interface AccessToken {
+	accessToken: string
+}
 
 const httpLink = new HttpLink({
 	uri: 'http://localhost:8800/api/graphql',
 	credentials: 'include',
 })
-
-const client = new ApolloClient({
+export const client = new ApolloClient({
+	link: ApolloLink.from([errorLink, authLink, httpLink]),
 	cache: new InMemoryCache(),
-	link: ApolloLink.from([authLink, errorLink, httpLink]),
-	connectToDevTools: true,
 })
 
-export default client
 const refreshToken = async () => {
-	// const { user, setAuthUser, accessToken } = useAuth()
-	// const fetchData = async () => {
-	// 	const userData = await ApolloClient.mutate<
-	// 		{ getNewTokens: IUserData },
-	// 		getUserInput
-	// 	>({
-	// 		mutation: GET_USER,
-	// 		variables: {
-	// 			input: { refreshToken: accessToken },
-	// 		},
-	// 	})
-	// 	setAuthUser(userData.data?.getNewTokens.user)
-	// }
-	// fetchData()
+	try {
+		const refreshResolverResponse = await client.mutate<{
+			getNewToken: AccessToken
+		}>({
+			mutation: REFRESH_TOKEN,
+		})
+
+		const accessToken = refreshResolverResponse.data
+		console.log(1231312321, accessToken)
+		if (accessToken) {
+			// saveTokenStorage(accessToken)
+		}
+		return accessToken
+	} catch (err) {
+		removeFromStorage()
+		throw err
+	}
 }
+export default client

@@ -15,7 +15,6 @@ const SIGN_UP = gql`
 	mutation signUp($input: SignUpInput!) {
 		signUp(signUpInput: $input) {
 			accessToken
-			refreshToken
 			user {
 				email
 				# roles
@@ -47,11 +46,10 @@ interface LoginInput {
 const LOGIN = gql`
 	mutation login($input: loginInput!) {
 		login(loginInput: $input) {
-			refreshToken
 			accessToken
 			user {
 				email
-				# roles
+				roles
 				firstName
 				lastName
 				phoneNumber
@@ -72,19 +70,10 @@ export interface getUserInput {
 		refreshToken: string
 	}
 }
-export const GET_USER = gql`
-	mutation getNewTokens($input: RefreshTokenInput!) {
-		getNewTokens(dto: $input) {
+export const REFRESH_TOKEN = gql`
+	mutation getNewToken {
+		getNewTokens {
 			accessToken
-			refreshToken
-			user {
-				email
-				# roles
-				firstName
-				lastName
-				phoneNumber
-				avatarPath
-			}
 		}
 	}
 `
@@ -93,6 +82,6 @@ export const useGetUserMutation = () => {
 	const [checkAuth, { data, error }] = useMutation<
 		{ getNewTokens: IUserData },
 		getUserInput
-	>(GET_USER)
+	>(REFRESH_TOKEN)
 	return { checkAuth, data: data?.getNewTokens, error }
 }

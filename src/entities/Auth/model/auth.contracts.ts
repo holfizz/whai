@@ -9,7 +9,6 @@ export const ProfileData = z.object({
 		avatarPath: z.string(),
 	}),
 	accessToken: z.string(),
-	refreshToken: z.string(),
 })
 export const ProfileState = z.object({
 	email: z.string(),

@@ -1,6 +1,7 @@
 'use client'
 import Logo from '@/shared/ui/Logo/Logo'
 // import { Button } from '@nextui-org/react'
+import { logout } from '@/entities/Auth/model/auth.queries'
 import { useAuth } from '@/features/auth'
 import { Link } from '@/navigation'
 import {
@@ -47,7 +48,7 @@ export function Navbar() {
 		'Help & Feedback',
 		'Log Out',
 	]
-	const { user, logout, accessToken } = useAuth()
+	const { user, setAuthUser } = useAuth()
 
 	return (
 		<UINavbar onMenuOpenChange={setIsMenuOpen}>
@@ -138,7 +139,7 @@ export function Navbar() {
 				</NavbarItem>
 			</NavbarContent>
 			<NavbarContent justify='end'>
-				{user ? (
+				{user?.email ? (
 					<>
 						<Dropdown placement='bottom-end'>
 							<DropdownTrigger>
@@ -168,7 +169,10 @@ export function Navbar() {
 									<Link href={getSupportRoute()}>{t('Help & Feedback')}</Link>
 								</DropdownItem>
 								<DropdownItem
-									onClick={() => logout()}
+									onClick={() => {
+										logout()
+										setAuthUser(null)
+									}}
 									key='logout'
 									color='danger'
 								>

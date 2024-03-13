@@ -14,7 +14,6 @@ export type IUserState = z.infer<typeof ProfileState>
 
 export interface ITokens {
 	accessToken: string
-	refreshToken: string
 }
 
 export interface IInitialState {
