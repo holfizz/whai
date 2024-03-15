@@ -53,7 +53,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 			>
 		>({ _errors: [] })
 		const [isVisible, setIsVisible] = useState(false)
-		const { setAuthUser, setAccessToken, accessToken } = useAuth()
+		const { setAuthUser } = useAuth()
 		const { auth, data, error } =
 			type === authConstants.SIGNUP ? useSignUpMutation() : useLoginMutation()
 
@@ -61,10 +61,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 		useEffect(() => {
 			if (data) {
 				setAuthUser(data.user)
-				setAccessToken(data.accessToken)
 				saveTokenStorage(data.accessToken)
 			}
-		}, [data, setAuthUser, setAccessToken])
+		}, [data, setAuthUser])
 
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()

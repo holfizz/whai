@@ -43,7 +43,7 @@ interface LoginInput {
 	}
 }
 
-const LOGIN = gql`
+export const LOGIN = gql`
 	mutation login($input: loginInput!) {
 		login(loginInput: $input) {
 			accessToken
@@ -72,7 +72,7 @@ export interface getUserInput {
 }
 export const REFRESH_TOKEN = gql`
 	mutation getNewToken {
-		getNewTokens {
+		getNewToken {
 			accessToken
 		}
 	}

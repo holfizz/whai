@@ -1,8 +1,6 @@
+import { useAuth } from '@/features/auth'
 import { REFRESH_TOKEN } from '@/features/auth/model/auth.queries'
-import {
-	getAccessToken,
-	removeFromStorage,
-} from '@/shared/api/auth/auth.helper'
+import { getAccessToken, saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import {
 	ApolloClient,
 	ApolloLink,
@@ -48,7 +46,6 @@ const errorLink = onError(
 								;(async () => {
 									try {
 										const accessToken = await refreshToken()
-
 										if (!accessToken) {
 											throw new GraphQLError('Empty AccessToken')
 										}
@@ -94,16 +91,19 @@ const refreshToken = async () => {
 			getNewToken: AccessToken
 		}>({
 			mutation: REFRESH_TOKEN,
+			variables: {
+				offset: 0,
+			},
 		})
 
-		const accessToken = refreshResolverResponse.data
-		console.log(1231312321, accessToken)
+		const accessToken = refreshResolverResponse.data?.getNewToken.accessToken
 		if (accessToken) {
-			// saveTokenStorage(accessToken)
+			saveTokenStorage(accessToken)
 		}
 		return accessToken
 	} catch (err) {
-		removeFromStorage()
+		const { setAuthUser, logout } = useAuth()
+		logout()
 		throw err
 	}
 }

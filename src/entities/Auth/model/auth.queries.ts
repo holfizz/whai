@@ -1,28 +1,27 @@
 'use client'
-import client from '@/app/(providers)/ApolloProvider/ui/apollo-client'
-import { removeFromStorage } from '@/shared/api/auth/auth.helper'
-import { gql } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
+import { IUser } from '..'
 
-export const PING = gql`
-	query ping {
-		ping
-	}
-`
 export const LOGOUT = gql`
 	query Logout {
 		logout
 	}
 `
 
-export const logout = () => {
-	client.query({
-		query: LOGOUT,
+export const GET_PROFILE = gql`
+	query {
+		getProfile {
+			email
+			firstName
+			lastName
+			avatarPath
+			phoneNumber
+		}
+	}
+`
+export const useGetProfile = () => {
+	const { data, error } = useQuery<{ getProfile: IUser }>(GET_PROFILE, {
+		fetchPolicy: 'cache-first',
 	})
-	removeFromStorage()
-}
-
-export const ping = () => {
-	client.query({
-		query: PING,
-	})
+	return { user: data?.getProfile, error }
 }

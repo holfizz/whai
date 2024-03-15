@@ -13,7 +13,6 @@ export default function MainPage() {
 	useEffect(() => {
 		setIsClient(true)
 	}, [])
-
 	return (
 		<>
 			<div className={cls.navbarWrapper}>{isClient && <Navbar />}</div>

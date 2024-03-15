@@ -1,7 +1,6 @@
 'use client'
 import Logo from '@/shared/ui/Logo/Logo'
 // import { Button } from '@nextui-org/react'
-import { logout } from '@/entities/Auth/model/auth.queries'
 import { useAuth } from '@/features/auth'
 import { Link } from '@/navigation'
 import {
@@ -34,7 +33,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md'
 import cls from './Navbar.module.scss'
 
 export function Navbar() {
-	const t = useTranslations()
+	const t = useTranslations('Navbar')
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const menuItems = [
 		'Profile',
@@ -48,8 +47,7 @@ export function Navbar() {
 		'Help & Feedback',
 		'Log Out',
 	]
-	const { user, setAuthUser } = useAuth()
-
+	const { user, setAuthUser, logout } = useAuth()
 	return (
 		<UINavbar onMenuOpenChange={setIsMenuOpen}>
 			<NavbarContent>
@@ -156,7 +154,7 @@ export function Navbar() {
 									key='profile'
 									className='h-14 gap-2'
 								>
-									<p className='font-semibold'>Signed in as</p>
+									<p className='font-semibold'>{t('Signed in as')}</p>
 									<p className='font-semibold'>{user.email}</p>
 								</DropdownItem>
 								<DropdownItem key='dashboard'>
@@ -166,7 +164,7 @@ export function Navbar() {
 									<Link href={getSettingsRoute()}>{t('Settings')}</Link>
 								</DropdownItem>
 								<DropdownItem color='warning' key='help_and_feedback'>
-									<Link href={getSupportRoute()}>{t('Help & Feedback')}</Link>
+									<Link href={getSupportRoute()}>{t('Help Feedback')}</Link>
 								</DropdownItem>
 								<DropdownItem
 									onClick={() => {
@@ -176,7 +174,7 @@ export function Navbar() {
 									key='logout'
 									color='danger'
 								>
-									Log Out
+									{t('Log Out')}
 								</DropdownItem>
 							</DropdownMenu>
 						</Dropdown>

@@ -42,14 +42,22 @@
 		"The passwords must match": "Пароли должны совпадать",
 		"Password changed successfully": "Пароль успешно изменен"
 	},
-	"Metadata":{
-		"title":"Наш сайт"
+	"Metadata": {
+		"title": "Наш сайт"
 	},
-
-	"Log in": "Войти",
-	"Sign up": "Регистрация",
-	"logout": "Выйти",
-
+	"Navbar": {
+		"Start for free": "Начать бесплатно",
+		"Features": "Функции",
+		"Integrations": "Интеграции",
+		"Customers": "Клиенты",
+		"Signed in as": "Авторизировался как",
+		"Help Feedback": "Помощь & Обратная связь",
+		"Dashboard": "Панель управления",
+		"Settings": "Настройки",
+		"Log Out": "Выйти",
+		"Log in": "Войти",
+		"Sign up": "Регистрация"
+	},
 	"Close": "Закрыть",
 	"Open": "Открыть",
 	"User": "Пользователь",
@@ -60,9 +68,5 @@
 	"Dark": "Темная",
 	"Creator": "Создатель",
 	"Student": "Студент",
-	"Mode": "Режим",
-	"Start for free": "Начать бесплатно",
-	"Features": "Функции",
-	"Integrations": "Интеграции",
-	"Customers": "Клиенты"
+	"Mode": "Режим"
 }

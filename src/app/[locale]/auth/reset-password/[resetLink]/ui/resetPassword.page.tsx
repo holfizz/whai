@@ -1,5 +1,6 @@
 'use client'
 import { usePathname } from '@/navigation'
+import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Input, { InputSize, InputTheme } from '@/shared/ui/Input/Input'
 import Text, { TextAlign, TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { Button } from '@nextui-org/react'
@@ -8,6 +9,8 @@ import { FormEvent, useState } from 'react'
 import { z } from 'zod'
 
 export default function ResetPasswordPage() {
+	useAuthRedirect()
+
 	const t = useTranslations('resetPasswordPage')
 	function getLastSegmentFromURL() {
 		const url = usePathname()

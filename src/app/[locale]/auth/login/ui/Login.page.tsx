@@ -5,8 +5,11 @@ import Loader from '@/shared/ui/Loader/Loader'
 import Logo from '@/shared/ui/Logo/Logo'
 import { Suspense } from 'react'
 import cls from '../../Auth.module.scss'
+import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 
 export default function LoginPage() {
+	useAuthRedirect()
+
 	return (
 		<div className={cls.SignInPage}>
 			<div className={cls.wrapper}>

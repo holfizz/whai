@@ -45,9 +45,20 @@
 	"Metadata": {
 		"title": "Our site"
 	},
-	"Log in": "Log in",
-	"Sign up": "Sign up",
-	"logout": "Logout",
+	"Navbar": {
+		"Start for free": "Start for free",
+		"Features": "Features",
+		"Integrations": "Integrations",
+		"Customers": "Customers",
+		"Signed in as": "Signed in as",
+		"Help Feedback": "Help & Feedback",
+		"Dashboard": "Dashboard",
+		"Settings": "Settings",
+		"Log Out": "Log Out",
+		"Log in": "Log in",
+		"Sign up": "Sign up"
+	},
+
 	"Close": "Close",
 	"Open": "Open",
 	"User": "User",
@@ -58,9 +69,5 @@
 	"Dark": "Dark",
 	"Creator": "Creator",
 	"Student": "Student",
-	"Mode": "Mode",
-	"Start for free": "Start for free",
-	"Features": "Features",
-	"Integrations": "Integrations",
-	"Customers": "Customers"
+	"Mode": "Mode"
 }
