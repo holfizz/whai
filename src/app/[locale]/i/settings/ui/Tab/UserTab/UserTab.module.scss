@@ -1,0 +1,54 @@
+.UserTab {
+	min-height: 100vh;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	flex-direction: column;
+}
+.avatarBlock {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+.header {
+	width: 90%;
+	height: 200px;
+	border-radius: 30px 0 0 0;
+	background: var(--gradient);
+}
+.avatar {
+	width: 175px;
+	height: 175px;
+	position: relative;
+	border: 3px solid var(--background-color);
+}
+.avatar {
+	background: var(--gradient);
+}
+.underHeaderBlock {
+	width: 90%;
+	display: flex;
+	justify-content: space-evenly;
+}
+.profileControl {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	top: -75px;
+}
+.profileTitle {
+	width: 250px;
+	white-space: pre-wrap;
+}
+.controlButton {
+	width: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+.actionButton {
+	padding: 5px;
+}

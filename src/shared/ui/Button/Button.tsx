@@ -6,11 +6,12 @@ const Button = extendVariants(UiButton, {
 		color: {
 			main: 'text-[var(--main-color)]',
 			mainFill: 'text-[var(--background-color)] bg-[var(--main-color)]',
-			secondary: 'bg-[#2f311d] text-[#fff]',
+			secondary: 'bg-[var(--secondary-color)] text-[var(--background-color)]',
+			default: 'bg-[var(--primary-color)] text-[var(--background-color)]',
 			clear: 'bg-transparent text-[var(--primary-color)]',
 		},
 		isDisabled: {
-			true: 'bg-[#89925F] text-[#000] opacity-10 cursor-not-allowed',
+			true: 'opacity-30  cursor-not-allowed',
 		},
 		size: {
 			xs: 'px-unit-2 min-w-unit-12 h-unit-6 text-tiny gap-unit-1 rounded-small',

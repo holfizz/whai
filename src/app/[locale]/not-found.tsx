@@ -16,7 +16,7 @@ export default function Page() {
 			</header>
 			<h1 className={cls.errorTitle}>{"t('This page doesn't exist')"}</h1>
 			<Image className={cls.errorImage} src={ErrorImage} alt='404' /> */}
-			non
+			not found
 		</div>
 	)
 }

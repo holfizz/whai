@@ -142,9 +142,9 @@ export function Navbar() {
 						<Dropdown placement='bottom-end'>
 							<DropdownTrigger>
 								<Avatar
+									className={cls.avatar}
 									isBordered
 									as='button'
-									className='transition-transform'
 									src={user.avatarPath}
 								/>
 							</DropdownTrigger>

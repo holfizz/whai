@@ -27,12 +27,10 @@ module.exports = {
 					},
 				},
 				dark: {
-					// ...
 					colors: {
 						primary: '#e8f99b',
 					},
 				},
-				// ... custom themes
 			},
 		}),
 	],
