@@ -28,7 +28,7 @@ import {
 	Navbar as UINavbar,
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import cls from './Navbar.module.scss'
 
@@ -48,6 +48,10 @@ export function Navbar() {
 		'Log Out',
 	]
 	const { user, setAuthUser, logout } = useAuth()
+	const [isClient, setIsClient] = useState(false)
+	useEffect(() => {
+		setIsClient(true)
+	}, [])
 	return (
 		<UINavbar onMenuOpenChange={setIsMenuOpen}>
 			<NavbarContent>
@@ -68,9 +72,8 @@ export function Navbar() {
 								disableRipple
 								className='p-0 bg-transparent data-[hover=true]:bg-transparent'
 								radius='sm'
-								variant='light'
+								color='clear'
 								size='lg'
-								color='default'
 							>
 								{t('Features')}
 								<MdKeyboardArrowDown />
@@ -181,21 +184,25 @@ export function Navbar() {
 					</>
 				) : (
 					<>
-						<NavbarItem className='hidden lg:flex'>
-							<Link className={cls.LoginButton} href={getRouteLogin()}>
-								{t('Log in')}
-							</Link>
-						</NavbarItem>
-						<NavbarItem>
-							<Button
-								as={Link}
-								color='mainFill'
-								href={getRouteSignUp()}
-								className={cls.SignUpButton}
-							>
-								{t('Sign up')}
-							</Button>
-						</NavbarItem>
+						{isClient && (
+							<>
+								<NavbarItem className='hidden lg:flex'>
+									<Link className={cls.LoginButton} href={getRouteLogin()}>
+										{t('Log in')}
+									</Link>
+								</NavbarItem>
+								<NavbarItem>
+									<Button
+										as={Link}
+										color='mainFill'
+										href={getRouteSignUp()}
+										className={cls.SignUpButton}
+									>
+										{t('Sign up')}
+									</Button>
+								</NavbarItem>
+							</>
+						)}
 					</>
 				)}
 			</NavbarContent>

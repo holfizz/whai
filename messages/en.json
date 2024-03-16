@@ -79,7 +79,10 @@
 		"Last name": "Last name",
 		"User data": "User data",
 		"Field": "Field",
-		"Action": "Action"
+		"Action": "Action",
+		"Edit field": "Edit field",
+		"Clear the field": "Clear the field",
+		"Return": "Return"
 	},
 
 	"Close": "Close",

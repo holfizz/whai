@@ -9,7 +9,6 @@ import {
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 export type TypeAuthUser = IUser | null | undefined
-type TypeAccessToken = string | null | undefined
 
 interface IUseAuthState {
 	user: TypeAuthUser
@@ -35,7 +34,6 @@ export const useAuth = create<useAuthProps>()(
 				})
 				set(() => ({ user: null, accessToken: null }))
 				removeFromStorage()
-				
 			},
 		}),
 		{ name: 'user' },

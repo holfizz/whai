@@ -1,5 +1,5 @@
 'use client'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { IUser } from '..'
 
 export const LOGOUT = gql`
@@ -21,7 +21,25 @@ export const GET_PROFILE = gql`
 `
 export const useGetProfile = () => {
 	const { data, error } = useQuery<{ getProfile: IUser }>(GET_PROFILE, {
-		fetchPolicy: 'cache-first',
+		fetchPolicy: 'network-only',
 	})
-	return { user: data?.getProfile, error }
+	return { userData: data?.getProfile, errorProfile: error }
+}
+
+export const UPDATE_PROFILE = gql`
+	mutation ($input: UpdateUserInput!, $picture: Upload) {
+		updateProfile(dto: $input, picture: $picture) {
+			email
+			firstName
+			lastName
+			avatarPath
+			phoneNumber
+		}
+	}
+`
+export const useUpdateProfile = () => {
+	const [updateProfile, { data, error }] = useMutation<{
+		updateProfile: IUser
+	}>(UPDATE_PROFILE)
+	return { updateProfile, updateData: data?.updateProfile, errorUpdate: error }
 }
