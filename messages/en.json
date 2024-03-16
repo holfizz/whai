@@ -84,6 +84,13 @@
 		"Clear the field": "Clear the field",
 		"Return": "Return"
 	},
+	"authValidation": {
+		"Email is not correct": "Email is not correct",
+		"The password must be at least 6 characters": "The password must be at least 6 characters",
+		"First name must be at least 2 characters": "First name must be at least 2 characters",
+		"Last name must be at least 2 characters": "Last name must be at least 2 characters",
+		"Phone number must be at least 10 characters": "Phone number must be at least 10 characters"
+	},
 
 	"Close": "Close",
 	"Open": "Open",

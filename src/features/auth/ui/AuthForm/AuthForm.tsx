@@ -40,6 +40,7 @@ export interface AuthFormProps {
 const AuthForm: FC<AuthFormProps> = memo(
 	({ className, type, setIsFormType }) => {
 		const t = useTranslations('auth')
+		const tAuthValidation = useTranslations('authValidation')
 		const [formErrors, setFormErrors] = useState<
 			z.ZodFormattedError<
 				{
@@ -126,7 +127,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 							color={
 								formErrors.phoneNumber?._errors.length ? 'danger' : 'default'
 							}
-							errorMessage={formErrors.phoneNumber?._errors.join(', ')}
+							errorMessage={formErrors.phoneNumber?._errors
+								?.map(error => tAuthValidation(error))
+								.join(', ')}
 							placeholder={t('Enter your phone number')}
 						/>
 						<InputField
@@ -137,7 +140,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 							color={
 								formErrors.firstName?._errors.length ? 'danger' : 'default'
 							}
-							errorMessage={formErrors.firstName?._errors.join(', ')}
+							errorMessage={formErrors.firstName?._errors
+								?.map(error => tAuthValidation(error))
+								.join(', ')}
 							placeholder={t('Enter your first name')}
 						/>
 						<InputField
@@ -146,7 +151,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 							label={t('Last Name')}
 							type='text'
 							color={formErrors.lastName?._errors.length ? 'danger' : 'default'}
-							errorMessage={formErrors.lastName?._errors.join(', ')}
+							errorMessage={formErrors.lastName?._errors
+								?.map(error => tAuthValidation(error))
+								.join(', ')}
 							placeholder={t('Enter your last name')}
 						/>
 					</>
@@ -157,7 +164,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 					type='email'
 					label={t('Email')}
 					color={formErrors.email?._errors.length ? 'danger' : 'default'}
-					errorMessage={formErrors.email?._errors.join(', ')}
+					errorMessage={formErrors.email?._errors
+						?.map(error => tAuthValidation(error))
+						.join(', ')}
 					placeholder={t('Enter your email')}
 				/>
 				<label className={cls.label}>
@@ -181,7 +190,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 								</button>
 							}
 							color={formErrors.password?._errors.length ? 'danger' : 'default'}
-							errorMessage={formErrors.password?._errors.join(', ')}
+							errorMessage={formErrors.password?._errors
+								?.map(error => tAuthValidation(error))
+								.join(', ')}
 							type={isVisible ? 'text' : 'password'}
 							name='password'
 						/>

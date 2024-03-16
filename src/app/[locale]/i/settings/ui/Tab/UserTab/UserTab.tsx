@@ -1,4 +1,3 @@
-'use client'
 import {
 	useGetProfile,
 	useUpdateProfile,
@@ -19,12 +18,14 @@ import {
 	Tooltip,
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { FaCheck } from 'react-icons/fa'
-import { HiMail, HiPhone } from 'react-icons/hi' // Make sure you're using HiPhone for the phone icon
+import { HiMail, HiPhone } from 'react-icons/hi'
 import { IoClose } from 'react-icons/io5'
 import { MdEdit } from 'react-icons/md'
 import { TbReload } from 'react-icons/tb'
+import * as z from 'zod' // Import zod for schema validation
+import { settingsFormSchema } from '../../../model/sidebarListItem.contracts'
 import cls from './UserTab.module.scss'
 
 interface IUserField {
@@ -37,9 +38,11 @@ interface IUserField {
 export function UserTab() {
 	const { user, setAuthUser } = useAuth()
 	const t = useTranslations('SidebarSetting')
+	const tAuth = useTranslations('auth')
+	const tAuthValidation = useTranslations('authValidation')
 	const { userData, errorProfile } = useGetProfile()
 	const { updateProfile, updateData, errorUpdate } = useUpdateProfile()
-	const tAuth = useTranslations('auth')
+
 	const [editingField, setEditingField] = useState<string | null>(null)
 	const [fieldValues, setFieldValues] = useState<{
 		[key: string]: string | null
@@ -47,8 +50,20 @@ export function UserTab() {
 	const [initialFieldValues, setInitialFieldValues] = useState<{
 		[key: string]: string | null
 	}>({})
+	const [formErrors, setFormErrors] = useState<{
+		[key: string]: string
+	}>({})
+
 	useEffect(() => {
 		setAuthUser(userData)
+		const initialValues = {
+			email: userData?.email || '',
+			firstName: userData?.firstName || '',
+			lastName: userData?.lastName || '',
+			phoneNumber: userData?.phoneNumber || '',
+		}
+		setInitialFieldValues(initialValues)
+		setFieldValues(initialValues)
 	}, [setAuthUser, userData])
 
 	useEffect(() => {
@@ -65,6 +80,106 @@ export function UserTab() {
 			setInitialFieldValues(updatedFieldValues)
 		}
 	}, [setAuthUser, updateData])
+
+	const convertStringToNull = (value: any) => {
+		if (value === 'null') {
+			return null
+		}
+		return value
+	}
+
+	const handleCancelClick = () => {
+		setFieldValues(initialFieldValues)
+		setEditingField(null)
+		setFormErrors({})
+	}
+
+	const handleEditClick = (key: string) => {
+		setEditingField(editingField === key ? null : key)
+		setFormErrors({})
+	}
+
+	const handleReturnClick = (key: string) => {
+		setFieldValues(prev => ({ ...prev, [key]: initialFieldValues[key] || '' }))
+		setFormErrors({})
+	}
+
+	const handleClearClick = (key: string) => {
+		setFieldValues(prev => ({ ...prev, [key]: '' }))
+		setEditingField(key)
+		setFormErrors({})
+	}
+
+	const renderTableCell = (field: string, value: string | undefined) => {
+		const fieldConfig = userFields.find(f => f.key === field)
+		if (!fieldConfig) return null
+
+		return (
+			<Input
+				key={field}
+				isRequired
+				name={field}
+				label={fieldConfig.label}
+				defaultValue={value || ''}
+				isClearable
+				placeholder={fieldConfig.label}
+				value={String(fieldValues[field])}
+				onChange={e =>
+					setFieldValues(prev => ({ ...prev, [field]: e.target.value }))
+				}
+				errorMessage={
+					(formErrors[field] && tAuthValidation(formErrors[field])) || ''
+				}
+				startContent={fieldConfig.icon}
+				isDisabled={editingField !== field}
+				onClear={() => setFieldValues(prev => ({ ...prev, [field]: '' }))}
+			/>
+		)
+	}
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+
+		try {
+			const validationResult = settingsFormSchema.safeParse(fieldValues)
+
+			console.log('validationResult', validationResult)
+			if (validationResult.success) {
+				const { __typename, avatarPath, ...fieldContent } = fieldValues
+				updateProfile({
+					variables: {
+						input: { ...fieldContent },
+						picture: avatarPath || null,
+					},
+				})
+				setEditingField(null)
+			} else {
+				const fieldErrors: Record<string, string> = {}
+				validationResult.error.errors.forEach(err => {
+					const field = err.path[0]
+					const message = err.message
+					fieldErrors[field] = message
+				})
+				setFormErrors(fieldErrors)
+			}
+		} catch (error) {
+			if (error instanceof z.ZodError) {
+				const fieldErrors: Record<string, string> = {}
+				error.errors.forEach(err => {
+					const field = err.path[0]
+					const message = err.message
+					fieldErrors[field] = message
+				})
+				setFormErrors(fieldErrors)
+			}
+		}
+	}
+
+	const isFormChanged = useMemo(() => {
+		return Object.keys(initialFieldValues).some(
+			key => fieldValues[key] !== initialFieldValues[key],
+		)
+	}, [fieldValues, initialFieldValues])
 
 	const userFields: IUserField[] = useMemo(
 		() => [
@@ -85,77 +200,7 @@ export function UserTab() {
 		],
 		[tAuth],
 	)
-	useEffect(() => {
-		setAuthUser(userData)
-		const initialValues = {
-			email: userData?.email || '',
-			firstName: userData?.firstName || '',
-			lastName: userData?.lastName || '',
-			phoneNumber: userData?.phoneNumber || '',
-		}
-		setInitialFieldValues(initialValues)
-		setFieldValues(initialValues)
-	}, [setAuthUser, userData])
 
-	const handleCancelClick = () => {
-		setFieldValues(initialFieldValues)
-		setEditingField(null)
-	}
-	function convertStringToNull(value: any) {
-		if (value === 'null') {
-			return null
-		}
-		return value
-	}
-	const isFormChanged = useMemo(() => {
-		return Object.keys(initialFieldValues).some(
-			key => fieldValues[key] !== initialFieldValues[key],
-		)
-	}, [fieldValues, initialFieldValues])
-
-	const handleEditClick = (key: string) => {
-		setEditingField(editingField === key ? null : key)
-	}
-
-	const handleReturnClick = (key: string) => {
-		setFieldValues(prev => ({ ...prev, [key]: initialFieldValues[key] || '' }))
-	}
-	const handleClearClick = (key: string) => {
-		setFieldValues(prev => ({ ...prev, [key]: '' }))
-		setEditingField(key)
-	}
-	const renderTableCell = (field: string, value: string | undefined) => {
-		const fieldConfig = userFields.find(f => f.key === field)
-		if (!fieldConfig) return null
-
-		return (
-			<Input
-				isRequired
-				label={fieldConfig.label}
-				defaultValue={value || ''}
-				isClearable
-				placeholder={fieldConfig.label}
-				value={String(fieldValues[field])}
-				onChange={e =>
-					setFieldValues(prev => ({ ...prev, [field]: e.target.value }))
-				}
-				startContent={fieldConfig.icon}
-				isDisabled={editingField !== field}
-				onClear={() => setFieldValues(prev => ({ ...prev, [field]: '' }))}
-			/>
-		)
-	}
-	const handleSubmit = (e: any) => {
-		e.preventDefault()
-		const { __typename, avatarPath, ...fieldContent } = fieldValues
-		updateProfile({
-			variables: {
-				input: { ...fieldContent },
-				picture: avatarPath || null,
-			},
-		})
-		setEditingField(null)
-	}
 	if (!user) {
 		return (
 			<div className={cls.UserTab}>
@@ -227,12 +272,11 @@ export function UserTab() {
 											{editingField === key ? <FaCheck /> : <MdEdit />}
 										</span>
 									</Tooltip>
-									<Tooltip
-										onClick={() => handleClearClick(key)}
-										color='danger'
-										content={t('Clear the field')}
-									>
-										<span className='text-lg text-danger cursor-pointer active:opacity-50'>
+									<Tooltip color='danger' content={t('Clear the field')}>
+										<span
+											onClick={() => handleClearClick(key)}
+											className='text-lg text-danger cursor-pointer active:opacity-50'
+										>
 											<IoClose />
 										</span>
 									</Tooltip>

@@ -84,7 +84,13 @@
 		"Clear the field": "Отчистить поле",
 		"Return": "Вернуть"
 	},
-
+	"authValidation": {
+		"Email is not correct": "Неправильный адрес электронной почты",
+		"The password must be at least 6 characters": "Пароль должен быть не менее 6 символов",
+		"First name must be at least 2 characters": "Имя должно содержать не менее 2 символов",
+		"Last name must be at least 2 characters": "Фамилия должна содержать не менее 2 символов",
+		"Phone number must be at least 10 characters": "Номер телефона должен содержать не менее 10 символов"
+	},
 	"Close": "Закрыть",
 	"Open": "Открыть",
 	"User": "Пользователь",
