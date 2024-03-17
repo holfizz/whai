@@ -1,0 +1,117 @@
+{
+	"auth": {
+		"Phone Number": "电话号码",
+		"First Name": "名字",
+		"Last Name": "姓氏",
+		"Email": "电子邮件",
+		"Password": "密码",
+		"Enter your phone number": "输入您的电话号码",
+		"Enter your first name": "输入您的名字",
+		"Enter your last name": "输入您的姓氏",
+		"Enter your email": "输入您的电子邮件",
+		"Enter your password": "输入您的密码",
+		"Sign up": "注册",
+		"Log in": "登录",
+		"Forgot your password?": "忘记密码？",
+		"Confirm your email": "确认您的电子邮件"
+	},
+	"confirmEmailPage": {
+		"Mail has been successfully activated You can close the page": "邮件已成功激活。您可以关闭页面",
+		"Mail is not activated The link may have expired": "邮件未激活。链接可能已过期"
+	},
+	"errorPage": {
+		"This page doesn't exist": "此页面不存在"
+	},
+	"forgotPasswordPage": {
+		"Password recovery form": "密码恢复表格",
+		"Confirm your email": "确认您的电子邮件",
+		"Enter email": "输入电子邮件...",
+		"Message in your mail": "邮件中的消息",
+		"If its not there check your spam folder": "如果没有，请检查您的垃圾邮件文件夹。"
+	},
+	"mainPage": {
+		"The internet": "互联网",
+		"and AI": "和人工智能",
+		"is your": "是你的",
+		"education": "教育"
+	},
+	"resetPassword": {
+		"Reset the password": "重置密码",
+		"Password recovery form": "密码恢复表单",
+		"The password must be at least 6 characters": "密码至少要有6个字符",
+		"The passwords must match": "密码必须匹配",
+		"Password changed successfully": "密码修改成功"
+	},
+	"Metadata": {
+		"title": "我们的网站"
+	},
+	"Navbar": {
+		"Start for free": "免费开始",
+		"Features": "特点",
+		"Integrations": "整合",
+		"Customers": "客户",
+		"Signed in as": "登录为",
+		"Help Feedback": "帮助与反馈",
+		"Dashboard": "仪表板",
+		"Settings": "设置",
+		"Log Out": "登出",
+		"Log in": "登录",
+		"Sign up": "注册"
+	},
+	"SidebarSetting": {
+		"User settings": "用户设置",
+		"My account": "我的账户",
+		"Integrations": "整合",
+		"Privacy & safety": "隐私与安全",
+		"App settings": "应用设置",
+		"Appearance": "外观",
+		"Accessibility": "辅助功能",
+		"Language": "语言",
+		"Notifications": "通知",
+		"Advanced": "高级",
+		"Profile": "简介",
+		"Update your photo and personal details": "更新您的照片和个人详情。",
+		"Cancel": "取消",
+		"Save": "保存",
+		"Name": "名称",
+		"Email": "电子邮件",
+		"Phone number": "电话号码",
+		"First name": "名字",
+		"Last name": "姓氏",
+		"User data": "用户数据",
+		"Field": "字段",
+		"Action": "操作",
+		"Edit field": "编辑字段",
+		"Clear the field": "清除字段",
+		"Return": "返回",
+		"Select an option": "选择一个选项"
+	},
+	"authValidation": {
+		"Email is not correct": "电子邮件不正确",
+		"The password must be at least 6 characters": "密码至少要有6个字符",
+		"First name must be at least 2 characters": "名字至少要有2个字符",
+		"Last name must be at least 2 characters": "姓氏至少要有2个字符",
+		"Phone number must be at least 10 characters": "电话号码至少要有10个字符"
+	},
+	"Appearance": {
+		"Theme Mode": "主题模式",
+		"Enjoy Dark Light mode": "享受暗黑模式与亮色模式",
+		"Dark": "暗黑",
+		"Light": "亮色",
+		"System": "系统",
+		"Recommended": "推荐",
+		"For vibrant and active learning": "适合充满活力和积极的学习",
+		"For comfortable work at night": "适合夜间舒适工作"
+	},
+	"Close": "关闭",
+	"Open": "打开",
+	"User": "用户",
+	"New chat": "新聊天",
+	"Search": "搜索",
+	"Workspace": "工作区",
+	"Light": "亮色",
+	"Dark": "暗黑",
+	"Creator": "创建者",
+	"Student": "学生",
+	"Mode": "模式"
+}

@@ -1,6 +1,5 @@
 import createIntlMiddleware from 'next-intl/middleware'
-
-const locales = ['en', 'ru']
+import { locales } from './navigation'
 
 export default createIntlMiddleware({
 	locales,

@@ -37,7 +37,7 @@
 	max-width: 30vw;
 	min-width: 300px;
 	cursor: pointer;
-	border-radius: 0.5rem;
+	border-radius: 1rem;
 	gap: 1rem;
 	padding: 1rem;
 	border: 2px solid transparent;
@@ -58,7 +58,7 @@
 	min-width: 250px;
 
 	padding: 1rem;
-	border-radius: 0.5rem;
+	border-radius: 1rem;
 	display: flex;
 	flex-direction: column;
 	gap: 1.25rem;
@@ -114,4 +114,7 @@
 .dividerSystemSmallTwo {
 	@extend .splitColorSmallTwo;
 	width: 80%;
+}
+[data-selected='true'].radioBase {
+	border: 2px solid var(--main-color);
 }

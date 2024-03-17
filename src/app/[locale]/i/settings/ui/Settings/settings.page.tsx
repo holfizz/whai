@@ -6,12 +6,12 @@ import Text from '@/shared/ui/Text/Text'
 import { Navbar } from '@/widgets/Navbar'
 import { Select, SelectItem } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
-import { sidebarListItems } from '../../model/sidebaListItem'
+import { useEffect, useState } from 'react'
+import { sidebarListItems } from '../../model/sidebar-settings.data'
 import { AccessibilityTab } from '../Tab/AccessibilityTab/AccessibilityTab'
 import { AdvancedTab } from '../Tab/AdvancedTab/AdvancedTab'
 import { AppearanceTab } from '../Tab/AppearanceTab/AppearanceTab'
-import { IntegrationsTab } from '../Tab/Integrations/IntegrationsTab'
+import { IntegrationsTab } from '../Tab/IntegrationsTab/IntegrationsTab'
 import { LanguageTab } from '../Tab/LanguageTab/LanguageTab'
 import { NotificationsTab } from '../Tab/NotificationsTab/NotificationsTab'
 import { SecureTab } from '../Tab/SecureTab/SecureTab'
@@ -20,9 +20,19 @@ import cls from './settings.module.scss'
 
 export default function Page() {
 	const t = useTranslations('SidebarSetting')
-	const [tabId, setTabId] = useState<number>(1)
 	const { width } = useWindowSize()
-
+	const [tabId, setTabId] = useState<number>(() => {
+		if (typeof window !== 'undefined') {
+			const savedTabId = sessionStorage.getItem('tabId')
+			return savedTabId ? parseInt(savedTabId, 10) : 1
+		}
+		return 1
+	})
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			sessionStorage.setItem('tabId', tabId.toString())
+		}
+	}, [tabId])
 	return (
 		<div className={cls.SettingsPage}>
 			<Navbar />

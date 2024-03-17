@@ -1,0 +1,117 @@
+{
+	"auth": {
+		"Phone Number": "رقم الهاتف",
+		"First Name": "الاسم الأول",
+		"Last Name": "الاسم الأخير",
+		"Email": "البريد الإلكتروني",
+		"Password": "كلمة المرور",
+		"Enter your phone number": "أدخل رقم هاتفك",
+		"Enter your first name": "أدخل اسمك الأول",
+		"Enter your last name": "أدخل اسمك الأخير",
+		"Enter your email": "أدخل بريدك الإلكتروني",
+		"Enter your password": "أدخل كلمة المرور الخاصة بك",
+		"Sign up": "سجل",
+		"Log in": "تسجيل الدخول",
+		"Forgot your password?": "هل نسيت كلمة المرور؟",
+		"Confirm your email": "قم بتأكيد بريدك الإلكتروني"
+	},
+	"confirmEmailPage": {
+		"Mail has been successfully activated You can close the page": "تم تنشيط البريد بنجاح. يمكنك إغلاق الصفحة",
+		"Mail is not activated The link may have expired": "البريد غير مفعّل. قد يكون الرابط قد انتهى"
+	},
+	"errorPage": {
+		"This page doesn't exist": "هذه الصفحة غير موجودة"
+	},
+	"forgotPasswordPage": {
+		"Password recovery form": "نموذج استعادة كلمة المرور",
+		"Confirm your email": "قم بتأكيد بريدك الإلكتروني",
+		"Enter email": "أدخل البريد الإلكتروني...",
+		"Message in your mail": "رسالة في بريدك",
+		"If its not there check your spam folder": "إذا لم يكن هناك، تحقق من مجلد البريد العشوائي الخاص بك"
+	},
+	"mainPage": {
+		"The internet": "الإنترنت",
+		"and AI": "والذكاء الاصطناعي",
+		"is your": "هو لك",
+		"education": "تعليم"
+	},
+	"resetPassword": {
+		"Reset the password": "إعادة تعيين كلمة المرور",
+		"Password recovery form": "نموذج استعادة كلمة المرور",
+		"The password must be at least 6 characters": "يجب أن تكون كلمة المرور على الأقل 6 أحرف",
+		"The passwords must match": "يجب أن تتطابق كلمتا المرور",
+		"Password changed successfully": "تم تغيير كلمة المرور بنجاح"
+	},
+	"Metadata": {
+		"title": "موقعنا"
+	},
+	"Navbar": {
+		"Start for free": "ابدأ مجانًا",
+		"Features": "الميزات",
+		"Integrations": "التكاملات",
+		"Customers": "العملاء",
+		"Signed in as": "مسجل كـ",
+		"Help Feedback": "مساعدة وتعليقات",
+		"Dashboard": "لوحة التحكم",
+		"Settings": "الإعدادات",
+		"Log Out": "تسجيل الخروج",
+		"Log in": "تسجيل الدخول",
+		"Sign up": "سجل"
+	},
+	"SidebarSetting": {
+		"User settings": "إعدادات المستخدم",
+		"My account": "حسابي",
+		"Integrations": "التكاملات",
+		"Privacy & safety": "الخصوصية والسلامة",
+		"App settings": "إعدادات التطبيق",
+		"Appearance": "المظهر",
+		"Accessibility": "إمكانية الوصول",
+		"Language": "اللغة",
+		"Notifications": "الإشعارات",
+		"Advanced": "متقدم",
+		"Profile": "الملف الشخصي",
+		"Update your photo and personal details": "قم بتحديث صورتك وتفاصيلك الشخصية.",
+		"Cancel": "إلغاء",
+		"Save": "حفظ",
+		"Name": "الاسم",
+		"Email": "البريد الإلكتروني",
+		"Phone number": "رقم الهاتف",
+		"First name": "الاسم الأول",
+		"Last name": "الاسم الأخير",
+		"User data": "بيانات المستخدم",
+		"Field": "حقل",
+		"Action": "الإجراء",
+		"Edit field": "تحرير الحقل",
+		"Clear the field": "مسح الحقل",
+		"Return": "العودة",
+		"Select an option": "اختر خيارًا"
+	},
+	"authValidation": {
+		"Email is not correct": "البريد الإلكتروني غير صحيح",
+		"The password must be at least 6 characters": "يجب أن تكون كلمة المرور على الأقل 6 أحرف",
+		"First name must be at least 2 characters": "يجب أن يتكون الاسم الأول من 2 أحرف على الأقل",
+		"Last name must be at least 2 characters": "يجب أن يتكون الاسم الأخير من 2 أحرف على الأقل",
+		"Phone number must be at least 10 characters": "يجب أن يكون رقم الهاتف على الأقل 10 أحرف"
+	},
+	"Appearance": {
+		"Theme Mode": "وضع السمة",
+		"Enjoy Dark Light mode": "استمتع بالوضع الداكن والوضع الفاتح",
+		"Dark": "داكن",
+		"Light": "فاتح",
+		"System": "النظام",
+		"Recommended": "موصى به",
+		"For vibrant and active learning": "لتعلم نشط وحيوي",
+		"For comfortable work at night": "للعمل المريح في الليل"
+	},
+	"Close": "إغلاق",
+	"Open": "فتح",
+	"User": "المستخدم",
+	"New chat": "محادثة جديدة",
+	"Search": "بحث",
+	"Workspace": "مساحة العمل",
+	"Light": "فاتح",
+	"Dark": "داكن",
+	"Creator": "المبتكر",
+	"Student": "طالب",
+	"Mode": "الوضع"
+}

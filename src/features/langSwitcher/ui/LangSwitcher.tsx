@@ -1,45 +1,47 @@
 import { usePathname, useRouter } from '@/navigation'
-import { classNames } from '@/shared/lib/classNames/classNames'
-import Text from '@/shared/ui/Text/Text'
-import { Button } from '@nextui-org/react'
+import { Avatar, Select, SelectItem } from '@nextui-org/react'
 import { useLocale } from 'next-intl'
-import { memo, useState, type FC } from 'react'
-import { FiGlobe } from 'react-icons/fi'
-import cls from './LangSwitcher.module.scss'
+import { memo, type FC } from 'react'
+import { languages } from '../module/lang.data'
 
 interface LangSwitcherProps {
 	className?: string
 }
 
 const LangSwitcher: FC<LangSwitcherProps> = memo(({ className }) => {
-	const [isActive, setIsActive] = useState(false)
 	const locale = useLocale()
 	const router = useRouter()
 	const pathName = usePathname()
 
-	const handleClick = (e: any) => {
-		setIsActive(true)
-		const nextLocale = e.target.value
-		router.push(pathName, { locale: locale === 'en' ? 'ru' : 'en' })
-		setTimeout(() => {
-			setIsActive(false)
-		}, 400)
+	const handleChange = (value: string) => {
+		router.push(pathName, { locale: value })
 	}
 
 	return (
-		<Button
-			className={classNames(cls.LangSwitcher, {}, [className])}
-			onClick={e => handleClick(e)}
+		<Select
+			label='Chose language'
+			placeholder='Select an animal'
+			className='max-w-xs'
+			defaultSelectedKeys={[locale]}
+			value={locale}
+			onChange={e => handleChange(e.target.value)}
 		>
-			<div
-				className={classNames(cls.icon, { [cls.active]: isActive }, [
-					className,
-				])}
-			>
-				<FiGlobe />
-			</div>
-			<Text text={locale} className={cls.lang}></Text>
-		</Button>
+			{languages.map(lang => (
+				<SelectItem
+					startContent={
+						<Avatar
+							alt='Mexico'
+							className='w-6 h-6'
+							src={`https://flagcdn.com/${lang.code}.svg`}
+						/>
+					}
+					key={lang.short}
+					value={lang.full}
+				>
+					{lang.full}
+				</SelectItem>
+			))}
+		</Select>
 	)
 })
 

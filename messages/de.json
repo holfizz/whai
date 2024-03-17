@@ -1,0 +1,117 @@
+{
+	"auth": {
+		"Phone Number": "Telefonnummer",
+		"First Name": "Vorname",
+		"Last Name": "Nachname",
+		"Email": "E-Mail",
+		"Password": "Passwort",
+		"Enter your phone number": "Gib deine Telefonnummer ein",
+		"Enter your first name": "Gib deinen Vornamen ein",
+		"Enter your last name": "Gib deinen Nachnamen ein",
+		"Enter your email": "Gib deine E-Mail-Adresse ein",
+		"Enter your password": "Gib dein Passwort ein",
+		"Sign up": "Registrieren",
+		"Log in": "Einloggen",
+		"Forgot your password?": "Passwort vergessen?",
+		"Confirm your email": "Bestätige deine E-Mail"
+	},
+	"confirmEmailPage": {
+		"Mail has been successfully activated You can close the page": "Die E-Mail wurde erfolgreich aktiviert. Du kannst die Seite schließen.",
+		"Mail is not activated The link may have expired": "Die E-Mail wurde nicht aktiviert. Der Link ist möglicherweise abgelaufen."
+	},
+	"errorPage": {
+		"This page doesn't exist": "Diese Seite existiert nicht"
+	},
+	"forgotPasswordPage": {
+		"Password recovery form": "Formular zur Passwortwiederherstellung",
+		"Confirm your email": "Bestätige deine E-Mail",
+		"Enter email": "E-Mail eingeben...",
+		"Message in your mail": "Nachricht in deiner E-Mail",
+		"If its not there check your spam folder": "Wenn sie dort nicht ist, überprüfe deinen Spam-Ordner."
+	},
+	"mainPage": {
+		"The internet": "Das Internet",
+		"and AI": "und KI",
+		"is your": "ist dein",
+		"education": "Bildung"
+	},
+	"resetPassword": {
+		"Reset the password": "Passwort zurücksetzen",
+		"Password recovery form": "Formular zur Passwortwiederherstellung",
+		"The password must be at least 6 characters": "Das Passwort muss mindestens 6 Zeichen lang sein",
+		"The passwords must match": "Die Passwörter müssen übereinstimmen",
+		"Password changed successfully": "Passwort erfolgreich geändert"
+	},
+	"Metadata": {
+		"title": "Unsere Seite"
+	},
+	"Navbar": {
+		"Start for free": "Kostenlos starten",
+		"Features": "Funktionen",
+		"Integrations": "Integrationen",
+		"Customers": "Kunden",
+		"Signed in as": "Angemeldet als",
+		"Help Feedback": "Hilfe & Feedback",
+		"Dashboard": "Dashboard",
+		"Settings": "Einstellungen",
+		"Log Out": "Ausloggen",
+		"Log in": "Einloggen",
+		"Sign up": "Registrieren"
+	},
+	"SidebarSetting": {
+		"User settings": "Benutzereinstellungen",
+		"My account": "Mein Konto",
+		"Integrations": "Integrationen",
+		"Privacy & safety": "Datenschutz & Sicherheit",
+		"App settings": "App-Einstellungen",
+		"Appearance": "Aussehen",
+		"Accessibility": "Barrierefreiheit",
+		"Language": "Sprache",
+		"Notifications": "Benachrichtigungen",
+		"Advanced": "Erweitert",
+		"Profile": "Profil",
+		"Update your photo and personal details": "Aktualisiere dein Foto und deine persönlichen Daten.",
+		"Cancel": "Abbrechen",
+		"Save": "Speichern",
+		"Name": "Name",
+		"Email": "E-Mail",
+		"Phone number": "Telefonnummer",
+		"First name": "Vorname",
+		"Last name": "Nachname",
+		"User data": "Benutzerdaten",
+		"Field": "Feld",
+		"Action": "Aktion",
+		"Edit field": "Feld bearbeiten",
+		"Clear the field": "Feld löschen",
+		"Return": "Zurück",
+		"Select an option": "Wähle eine Option"
+	},
+	"authValidation": {
+		"Email is not correct": "E-Mail ist nicht korrekt",
+		"The password must be at least 6 characters": "Das Passwort muss mindestens 6 Zeichen lang sein",
+		"First name must be at least 2 characters": "Vorname muss mindestens 2 Zeichen lang sein",
+		"Last name must be at least 2 characters": "Nachname muss mindestens 2 Zeichen lang sein",
+		"Phone number must be at least 10 characters": "Telefonnummer muss mindestens 10 Zeichen lang sein"
+	},
+	"Appearance": {
+		"Theme Mode": "Design-Modus",
+		"Enjoy Dark Light mode": "Genieße den Dunkel- & Hellmodus",
+		"Dark": "Dunkel",
+		"Light": "Hell",
+		"System": "System",
+		"Recommended": "Empfohlen",
+		"For vibrant and active learning": "Für lebendiges und aktives Lernen",
+		"For comfortable work at night": "Für bequemes Arbeiten in der Nacht"
+	},
+	"Close": "Schließen",
+	"Open": "Öffnen",
+	"User": "Benutzer",
+	"New chat": "Neuer Chat",
+	"Search": "Suche",
+	"Workspace": "Arbeitsbereich",
+	"Light": "Hell",
+	"Dark": "Dunkel",
+	"Creator": "Schöpfer",
+	"Student": "Schüler",
+	"Mode": "Modus"
+}

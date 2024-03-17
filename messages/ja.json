@@ -1,0 +1,117 @@
+{
+	"auth": {
+		"Phone Number": "電話番号",
+		"First Name": "名",
+		"Last Name": "姓",
+		"Email": "メール",
+		"Password": "パスワード",
+		"Enter your phone number": "電話番号を入力してください",
+		"Enter your first name": "名を入力してください",
+		"Enter your last name": "姓を入力してください",
+		"Enter your email": "メールアドレスを入力してください",
+		"Enter your password": "パスワードを入力してください",
+		"Sign up": "サインアップ",
+		"Log in": "ログイン",
+		"Forgot your password?": "パスワードをお忘れですか？",
+		"Confirm your email": "メールアドレスを確認してください"
+	},
+	"confirmEmailPage": {
+		"Mail has been successfully activated You can close the page": "メールが正常にアクティブ化されました。ページを閉じることができます",
+		"Mail is not activated The link may have expired": "メールがアクティブ化されていません。リンクの有効期限が切れている可能性があります"
+	},
+	"errorPage": {
+		"This page doesn't exist": "このページは存在しません"
+	},
+	"forgotPasswordPage": {
+		"Password recovery form": "パスワード回復フォーム",
+		"Confirm your email": "メールアドレスを確認してください",
+		"Enter email": "メールアドレスを入力してください...",
+		"Message in your mail": "メールにメッセージがあります",
+		"If its not there check your spam folder": "そこにない場合は、スパムフォルダを確認してください"
+	},
+	"mainPage": {
+		"The internet": "インターネット",
+		"and AI": "および人工知能",
+		"is your": "はあなたのものです",
+		"education": "教育"
+	},
+	"resetPassword": {
+		"Reset the password": "パスワードをリセットする",
+		"Password recovery form": "パスワード回復フォーム",
+		"The password must be at least 6 characters": "パスワードは6文字以上である必要があります",
+		"The passwords must match": "パスワードが一致する必要があります",
+		"Password changed successfully": "パスワードが正常に変更されました"
+	},
+	"Metadata": {
+		"title": "当サイト"
+	},
+	"Navbar": {
+		"Start for free": "無料で開始",
+		"Features": "特徴",
+		"Integrations": "統合",
+		"Customers": "お客様",
+		"Signed in as": "サインイン済み",
+		"Help Feedback": "ヘルプとフィードバック",
+		"Dashboard": "ダッシュボード",
+		"Settings": "設定",
+		"Log Out": "ログアウト",
+		"Log in": "ログイン",
+		"Sign up": "サインアップ"
+	},
+	"SidebarSetting": {
+		"User settings": "ユーザー設定",
+		"My account": "マイアカウント",
+		"Integrations": "統合",
+		"Privacy & safety": "プライバシーとセキュリティ",
+		"App settings": "アプリ設定",
+		"Appearance": "外観",
+		"Accessibility": "アクセシビリティ",
+		"Language": "言語",
+		"Notifications": "通知",
+		"Advanced": "高度",
+		"Profile": "プロフィール",
+		"Update your photo and personal details": "写真と個人情報を更新してください。",
+		"Cancel": "キャンセル",
+		"Save": "保存",
+		"Name": "名前",
+		"Email": "メール",
+		"Phone number": "電話番号",
+		"First name": "名",
+		"Last name": "姓",
+		"User data": "ユーザーデータ",
+		"Field": "フィールド",
+		"Action": "アクション",
+		"Edit field": "フィールドの編集",
+		"Clear the field": "フィールドをクリアする",
+		"Return": "戻る",
+		"Select an option": "オプションを選択"
+	},
+	"authValidation": {
+		"Email is not correct": "メールが正しくありません",
+		"The password must be at least 6 characters": "パスワードは6文字以上である必要があります",
+		"First name must be at least 2 characters": "名は2文字以上である必要があります",
+		"Last name must be at least 2 characters": "姓は2文字以上である必要があります",
+		"Phone number must be at least 10 characters": "電話番号は10文字以上である必要があります"
+	},
+	"Appearance": {
+		"Theme Mode": "テーマモード",
+		"Enjoy Dark Light mode": "ダーク＆ライトモードをお楽しみください",
+		"Dark": "ダーク",
+		"Light": "ライト",
+		"System": "システム",
+		"Recommended": "おすすめ",
+		"For vibrant and active learning": "活気ある学びのために",
+		"For comfortable work at night": "夜間の快適な作業のために"
+	},
+	"Close": "閉じる",
+	"Open": "開く",
+	"User": "ユーザー",
+	"New chat": "新しいチャット",
+	"Search": "検索",
+	"Workspace": "ワークスペース",
+	"Light": "ライト",
+	"Dark": "ダーク",
+	"Creator": "作成者",
+	"Student": "学生",
+	"Mode": "モード"
+}
