@@ -160,14 +160,27 @@ export function Navbar() {
 									<p className='font-semibold'>{t('Signed in as')}</p>
 									<p className='font-semibold'>{user.email}</p>
 								</DropdownItem>
-								<DropdownItem key='dashboard'>
-									<Link href={getDashboardRoute()}>{t('Dashboard')}</Link>
+								<DropdownItem
+									as={Link}
+									href={getDashboardRoute()}
+									key='dashboard'
+								>
+									{t('Dashboard')}
 								</DropdownItem>
-								<DropdownItem key='settings'>
-									<Link href={getSettingsRoute()}>{t('Settings')}</Link>
+								<DropdownItem
+									href={getSettingsRoute()}
+									as={Link}
+									key='settings'
+								>
+									{t('Settings')}
 								</DropdownItem>
-								<DropdownItem color='warning' key='help_and_feedback'>
-									<Link href={getSupportRoute()}>{t('Help Feedback')}</Link>
+								<DropdownItem
+									href={getSupportRoute()}
+									as={Link}
+									color='warning'
+									key='help_and_feedback'
+								>
+									{t('Help Feedback')}
 								</DropdownItem>
 								<DropdownItem
 									onClick={() => {

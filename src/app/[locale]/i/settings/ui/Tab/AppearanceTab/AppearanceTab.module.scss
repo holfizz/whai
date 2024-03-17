@@ -34,8 +34,8 @@
 	align-items: center;
 	justify-content: space-between;
 	flex-direction: row-reverse;
-	max-width: 30vw;
-	min-width: 300px;
+	width: 30vw;
+	min-width: 350px;
 	cursor: pointer;
 	border-radius: 1rem;
 	gap: 1rem;
@@ -117,4 +117,14 @@
 }
 [data-selected='true'].radioBase {
 	border: 2px solid var(--main-color);
+}
+@media screen and (max-width: 425px) {
+	.radioBase {
+		min-width: 280px;
+	}
+	.cardLight,
+	.cardDark,
+	.cardSystem {
+		min-width: 200px;
+	}
 }
