@@ -41,7 +41,7 @@ export function generateStaticParams() {
 const RootLayout: FC<Props> = ({ children, params: { locale } }) => {
 	const messages = useMessages()
 	return (
-		<html lang={locale}>
+		<html lang={locale} suppressHydrationWarning>
 			<head>
 				<link rel='icon' href={'/Whai.svg'} sizes='any' />
 			</head>

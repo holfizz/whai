@@ -60,3 +60,17 @@
 		font-weight: 600;
 	}
 }
+@media (max-width: 1440px) {
+	.sidebar {
+		height: fit-content;
+		border: none;
+	}
+	.SettingsPageWrapper {
+		flex-direction: column;
+	}
+}
+@media (max-width: 1024px) {
+	.SettingsPageWrapper {
+		width: 100vw;
+	}
+}

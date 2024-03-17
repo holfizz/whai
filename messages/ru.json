@@ -60,6 +60,7 @@
 	},
 	"SidebarSetting": {
 		"My account": "Мой аккаунт ",
+		"Integrations": "Интеграции",
 		"Privacy & safety": "Конф. & Безопасность",
 		"User settings": "Настройки пользователя",
 		"App settings": "Настройки приложения",
@@ -82,7 +83,8 @@
 		"Action": "Действие",
 		"Edit field": "Редактировать поле",
 		"Clear the field": "Отчистить поле",
-		"Return": "Вернуть"
+		"Return": "Вернуть",
+		"Select an option": "Выберите опцию"
 	},
 	"authValidation": {
 		"Email is not correct": "Неправильный адрес электронной почты",
@@ -90,6 +92,16 @@
 		"First name must be at least 2 characters": "Имя должно содержать не менее 2 символов",
 		"Last name must be at least 2 characters": "Фамилия должна содержать не менее 2 символов",
 		"Phone number must be at least 10 characters": "Номер телефона должен содержать не менее 10 символов"
+	},
+	"Appearance": {
+		"Theme Mode": "Режим Темы",
+		"Enjoy Dark Light mode": "Наслаждайтесь темной & светлой темой",
+		"Dark": "Темная",
+		"Light": "Светлая",
+		"System": "Системная",
+		"Recommended": "Рекомендуемая",
+		"For vibrant and active learning": "Для яркого и активного обучения",
+		"For comfortable work at night": "Для комфортной работы ночью"
 	},
 	"Close": "Закрыть",
 	"Open": "Открыть",

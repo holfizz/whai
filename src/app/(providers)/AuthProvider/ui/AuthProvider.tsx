@@ -12,7 +12,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 	useEffect(() => {
 		if (!accessToken) {
 			logout()
-			setAuthUser(null)
 		}
 	}, [accessToken, logout, setAuthUser])
 	useEffect(() => {

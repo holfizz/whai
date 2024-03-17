@@ -61,6 +61,7 @@
 	"SidebarSetting": {
 		"User settings": "User settings",
 		"My account": "My account",
+		"Integrations": "Integrations",
 		"Privacy & safety": "Privacy & safety",
 		"App settings": "App settings",
 		"Appearance": "Appearance",
@@ -82,7 +83,8 @@
 		"Action": "Action",
 		"Edit field": "Edit field",
 		"Clear the field": "Clear the field",
-		"Return": "Return"
+		"Return": "Return",
+		"Select an option": "Select an option"
 	},
 	"authValidation": {
 		"Email is not correct": "Email is not correct",
@@ -91,7 +93,16 @@
 		"Last name must be at least 2 characters": "Last name must be at least 2 characters",
 		"Phone number must be at least 10 characters": "Phone number must be at least 10 characters"
 	},
-
+	"Appearance": {
+		"Theme Mode": "Theme Mode",
+		"Enjoy Dark Light mode": "Enjoy Dark & Light mode",
+		"Dark": "Dark",
+		"Light": "Light",
+		"System": "System",
+		"Recommended": "Recommended",
+		"For vibrant and active learning": "For vibrant and active learning",
+		"For comfortable work at night": "For comfortable work at night"
+	},
 	"Close": "Close",
 	"Open": "Open",
 	"User": "User",

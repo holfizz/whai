@@ -1,0 +1,117 @@
+.AppearanceTab {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+}
+
+.radioGroup {
+	display: flex;
+	padding: 20px;
+	flex-direction: row;
+}
+
+.splitColorCard {
+	background: linear-gradient(to left, #18181b 50%, #ececec 50%);
+}
+
+.splitColorBig {
+	background: linear-gradient(to left, #3f3f46 50%, #fff 50%);
+}
+
+.splitColorSmallOne {
+	background: linear-gradient(to left, #313131 16.8%, #cecece 0%);
+}
+
+.splitColorSmallTwo {
+	background: linear-gradient(to left, #313131 37.45%, #cecece 0%);
+}
+
+.radioBase {
+	display: inline-flex;
+	margin: 0;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row-reverse;
+	max-width: 30vw;
+	min-width: 300px;
+	cursor: pointer;
+	border-radius: 0.5rem;
+	gap: 1rem;
+	padding: 1rem;
+	border: 2px solid transparent;
+	&.light,
+	&.dark,
+	&.system {
+		background-color: transparent;
+	}
+	&.selected {
+		border-color: var(--border-primary);
+	}
+}
+
+.cardLight,
+.cardDark,
+.cardSystem {
+	width: 25vw;
+	min-width: 250px;
+
+	padding: 1rem;
+	border-radius: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.cardLight {
+	background-color: #ececec;
+}
+
+.cardDark {
+	background-color: #18181b;
+}
+
+.cardSystem {
+	@extend .splitColorCard;
+}
+
+.dividerLight,
+.dividerDark,
+.dividerSystemBig,
+.dividerSystemSmallOne,
+.dividerSystemSmallTwo {
+	height: 6rem;
+	border-radius: 0.5rem;
+}
+
+.dividerLight,
+.dividerLightSmall {
+	background-color: #fff;
+}
+.dividerDark,
+.dividerDarkSmall {
+	background: #3f3f46;
+}
+
+.dividerSystemBig {
+	@extend .splitColorBig;
+}
+
+.dividerSystemSmallOne,
+.dividerSystemSmallTwo,
+.dividerLightSmall,
+.dividerDarkSmall {
+	height: 0.75rem;
+	border-radius: 0.5rem;
+}
+
+.dividerSystemSmallOne {
+	@extend .splitColorSmallOne;
+	width: 60%;
+}
+
+.dividerSystemSmallTwo {
+	@extend .splitColorSmallTwo;
+	width: 80%;
+}

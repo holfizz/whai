@@ -3,6 +3,7 @@ import {
 	useUpdateProfile,
 } from '@/entities/Auth/model/auth.queries'
 import { useAuth } from '@/features/auth'
+import { useWindowSize } from '@/shared/lib/hooks/useWindowSize'
 import Button from '@/shared/ui/Button/Button'
 import Loader from '@/shared/ui/Loader/Loader'
 import Text from '@/shared/ui/Text/Text'
@@ -40,6 +41,7 @@ export function UserTab() {
 	const t = useTranslations('SidebarSetting')
 	const tAuth = useTranslations('auth')
 	const tAuthValidation = useTranslations('authValidation')
+	const { width } = useWindowSize()
 	const { userData, errorProfile } = useGetProfile()
 	const { updateProfile, updateData, errorUpdate } = useUpdateProfile()
 
@@ -245,9 +247,12 @@ export function UserTab() {
 				</div>
 			</div>
 			<div className={cls.userInfoBlock}>
-				<Table aria-label='User data table'>
+				<Table className={cls.table} aria-label='User data table'>
 					<TableHeader>
-						<TableColumn>{t('User data')}</TableColumn>
+						<TableColumn className={cls.desktopVersion}>
+							{t('User data')}
+						</TableColumn>
+
 						<TableColumn>{t('Field')}</TableColumn>
 						<TableColumn>{t('Action')}</TableColumn>
 					</TableHeader>

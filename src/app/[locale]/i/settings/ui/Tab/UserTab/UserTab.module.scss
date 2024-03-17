@@ -5,6 +5,7 @@
 	height: 100%;
 	align-items: center;
 	flex-direction: column;
+	overflow: hidden;
 }
 .avatarBlock {
 	width: 100%;
@@ -61,4 +62,41 @@
 	justify-content: space-evenly;
 	align-items: center;
 	height: 72px;
+}
+.table {
+	min-width: 500px;
+}
+@media screen and (max-width: 768px) {
+	.userInfoBlock {
+		overflow: auto;
+	}
+	.avatarBlock {
+		width: 100vw;
+	}
+	.profileControl {
+		left: 20px;
+		top: 0;
+	}
+
+	.avatar {
+		width: 100px;
+		height: 100px;
+	}
+	.underHeaderBlock {
+		width: 100vw;
+		width: 100vw;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		top: -40px;
+		position: relative;
+	}
+	.controlButton {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		flex-wrap: wrap;
+		padding: 20px;
+	}
 }

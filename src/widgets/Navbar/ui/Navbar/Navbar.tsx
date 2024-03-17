@@ -172,7 +172,6 @@ export function Navbar() {
 								<DropdownItem
 									onClick={() => {
 										logout()
-										setAuthUser(null)
 									}}
 									key='logout'
 									color='danger'
