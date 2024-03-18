@@ -1,40 +1,30 @@
 'use client'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import Line, { LineSize } from '@/shared/ui/Line/Line'
-import { useSidebar } from '@/widgets/Sidebar/module/sidebar.module'
 import { FC, memo } from 'react'
-import SidebarControl from '../SidebarControl/SidebarControl'
 import SidebarHeader from '../SidebarHeader/SidebarHeader'
 import cls from './Sidebar.module.scss'
-import SidebarCollapsedButton from './SidebarCollapsedButton'
 
 interface SidebarProps {
 	className?: string
 }
 
 const Sidebar: FC<SidebarProps> = memo(({ className }) => {
-	const { isCollapsed, setIsCollapsed } = useSidebar()
-
 	return (
-		<aside
-			className={classNames(cls.Sidebar, { [cls.collapsed]: isCollapsed }, [
-				className,
-			])}
-		>
+		<aside className={classNames(cls.Sidebar, {}, [className])}>
 			<div className={cls.wrapper}>
-				<SidebarHeader isCollapsed={isCollapsed} />
-				<SidebarCollapsedButton
+				<SidebarHeader />
+				{/* <SidebarCollapsedButton
 					setIsCollapsed={setIsCollapsed}
 					isCollapsed={isCollapsed}
 				/>
-				{/*<Workspace />*/}
+				<Workspace /> */}
 
-				<SidebarControl isCollapsed={isCollapsed} />
+				{/* <SidebarControl isCollapsed={isCollapsed} />
 				<Line
 					className={cls.line}
 					lineSize={LineSize.LONG}
 					color={'var(--grey-100)'}
-				/>
+				/> */}
 			</div>
 		</aside>
 	)

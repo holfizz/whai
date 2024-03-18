@@ -1,71 +1,32 @@
+import { Link } from '@/navigation'
 import Logo from '@/shared/assets/logo/WhaiSmall.svg'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import Button from '@/shared/ui/Button/Button'
 import Icon from '@/shared/ui/Icon/Icon'
-import Line, { LineSize } from '@/shared/ui/Line/Line'
 import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { useTranslations } from 'next-intl'
-import { FC, useState } from 'react'
-import { BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs'
-import { IoAddCircleOutline } from 'react-icons/io5'
+import { useState } from 'react'
+import { PiArrowsCounterClockwiseBold } from 'react-icons/pi'
 import cls from './SidebarHeader.module.scss'
-import SidebarHeaderItem from './SidebarHeaderItem'
 
-interface SidebarHeaderProps {
-	isCollapsed: boolean
-}
-
-const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
+const SidebarHeader = () => {
 	const t = useTranslations()
-	const [isCollapsedCourseMenu, setIsCollapsedCourseMenu] =
-		useState<boolean>(false)
+	useState<boolean>(false)
 	return (
-		<div
-			className={classNames(
-				cls.sidebarHeader,
-				{ [cls.collapsed]: isCollapsed },
-				[],
-			)}
-		>
+		<div className={classNames(cls.sidebarHeader, {}, [])}>
 			<div className={cls.profileBlock}>
-				<div className={cls.avatar}>
-					<Icon  SVG={Logo} />
+				<Link className={cls.avatar} href={'/'}>
+					<Icon className={cls.logo} SVG={Logo} />
+				</Link>
+				<div className={cls.profileData}>
+					<Text size={TextSize.S} title={t('Mode')} text={t('Creator')}></Text>
 				</div>
-				{!isCollapsed && (
-					<div className={cls.profileData}>
-						<Text
-							size={TextSize.S}
-							title={t('Mode')}
-							text={t('Creator')}
-						></Text>
-					</div>
-				)}
-				<Button
-					onClick={() => setIsCollapsedCourseMenu(prevState => !prevState)}
-				>
+				<Button className={cls.changeModeButton} color='clear'>
 					<Icon
-						fontSize={20}
-						SVG={isCollapsedCourseMenu ? BsArrowsExpand : BsArrowsCollapse}
+						fontSize={24}
+						className={cls.changeModeIcon}
+						SVG={PiArrowsCounterClockwiseBold}
 					/>
-				</Button>
-			</div>
-			<div className={cls.coursesBlock}>
-				<div className={cls.coursesItem}>
-					<SidebarHeaderItem color={'#ef9590'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#e8f99b'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#ff7343'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#2f311d'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#514665'} isCollapsed={isCollapsed} />
-					<SidebarHeaderItem color={'#ddc6e9'} isCollapsed={isCollapsed} />
-				</div>
-				<Line
-					className={cls.line}
-					lineSize={LineSize.LONG}
-					color={'var(--grey-100)'}
-				/>
-				<Button className={cls.createCourseButton} size='lg' color='clear'>
-					{!isCollapsed && 'Create a Course '}
-					<IoAddCircleOutline fontSize={20} />
 				</Button>
 			</div>
 		</div>

@@ -1,1 +1,1 @@
-export { Layout } from './ui/DashboardLayout/DashboardLayout'
+export { DashboardLayout } from './ui/DashboardLayout/DashboardLayout'

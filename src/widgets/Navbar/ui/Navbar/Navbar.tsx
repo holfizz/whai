@@ -53,7 +53,7 @@ export function Navbar() {
 		setIsClient(true)
 	}, [])
 	return (
-		<UINavbar onMenuOpenChange={setIsMenuOpen}>
+		<UINavbar className='h-full' onMenuOpenChange={setIsMenuOpen}>
 			<NavbarContent>
 				<NavbarMenuToggle
 					aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}

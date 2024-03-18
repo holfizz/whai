@@ -1,5 +1,5 @@
 import { NO_INDEX_PAGE } from '@/shared/const/seo'
-import { DashboardLayout } from '@/widgets/DashboardLayout/ui/DashboardLayout/DashboardLayout'
+import { DashboardLayout } from '@/widgets/DashboardLayout'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
