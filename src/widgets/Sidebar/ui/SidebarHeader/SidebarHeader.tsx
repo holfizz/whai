@@ -1,8 +1,8 @@
+import Logo from '@/shared/assets/logo/WhaiSmall.svg'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import Button from '@/shared/ui/Button/Button'
 import Icon from '@/shared/ui/Icon/Icon'
 import Line, { LineSize } from '@/shared/ui/Line/Line'
-import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
 import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { useTranslations } from 'next-intl'
 import { FC, useState } from 'react'
@@ -29,7 +29,7 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ isCollapsed }) => {
 		>
 			<div className={cls.profileBlock}>
 				<div className={cls.avatar}>
-					<Logo logoSize={LogoSize.FULL} logoType='short' />
+					<Icon  SVG={Logo} />
 				</div>
 				{!isCollapsed && (
 					<div className={cls.profileData}>

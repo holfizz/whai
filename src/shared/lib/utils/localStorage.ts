@@ -1,3 +1,4 @@
+'use client'
 export const getLocalStorage = (name: string) => {
 	if (typeof localStorage !== 'undefined') {
 		const ls = localStorage.getItem(name)

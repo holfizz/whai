@@ -1,6 +1,7 @@
+'use client'
+import { getLocalStorage } from '@/shared/lib/utils/localStorage'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { getLocalStorage } from '@/shared/lib/utils/localStorage'
 
 interface IUseSidebar {
 	setIsCollapsed: (isCollapsed: boolean) => void

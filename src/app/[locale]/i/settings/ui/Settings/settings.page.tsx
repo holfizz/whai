@@ -42,13 +42,13 @@ export default function Page() {
 						{!!width && (
 							<>
 								{width <= 1440 ? (
-									<div>
+									<div className={cls.SettingsContainer}>
 										<Text title={t('Select an option')}></Text>
 										<Select
 											label={t('Select an option')}
 											items={sidebarListItems}
 											placeholder={t('Select an option')}
-											className='max-w-xs'
+											className={cls.settingsSelect}
 											defaultSelectedKeys={[sidebarListItems[0].text]}
 											startContent={
 												<Icon SVG={sidebarListItems[tabId - 1].Icon} />

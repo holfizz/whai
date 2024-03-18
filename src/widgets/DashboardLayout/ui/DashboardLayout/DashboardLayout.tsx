@@ -1,17 +1,16 @@
-'use client '
+'use client'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import Sidebar from '@/widgets/Sidebar'
+import Sidebar, { useSidebar } from '@/widgets/Sidebar'
 import { FC, ReactNode } from 'react'
-import { useSidebar } from '../../../Sidebar'
 import { Header } from '../Header/Header'
-import cls from './Layout.module.scss'
+import cls from './DashboardLayout.module.scss'
 
 interface LayoutProps {
 	children: ReactNode
 	className?: string
 }
 
-export const Layout: FC<LayoutProps> = ({ children, className }) => {
+export const DashboardLayout: FC<LayoutProps> = ({ children, className }) => {
 	const { isCollapsed } = useSidebar()
 
 	return (
