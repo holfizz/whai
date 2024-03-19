@@ -10,6 +10,10 @@ const Button = extendVariants(UiButton, {
 			default: 'bg-[var(--primary-color)] text-[var(--background-color)]',
 			clear: 'bg-transparent text-[var(--primary-color)]',
 		},
+		variant: {
+			sidebar:
+				'bg-transparent text-[var(--primary-color)] flex justify-center items-center',
+		},
 		isDisabled: {
 			true: 'opacity-30  cursor-not-allowed',
 		},

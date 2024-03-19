@@ -32,3 +32,27 @@
 	width: 100%;
 	height: 100vh;
 }
+.wrapper {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+}
+.contentWrapper {
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+	margin-top: var(--navbar-height);
+}
+.layout {
+	display: flex;
+	flex-direction: column;
+}
+.sidebarWrapper {
+	position: relative;
+	height: 100%;
+}
+@media (min-width: 1400px) {
+	.contentWrapper {
+		max-width: 1400px;
+	}
+}

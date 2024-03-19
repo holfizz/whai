@@ -1,4 +1,6 @@
 'use client'
+import { classNames } from '@/shared/lib/classNames/classNames'
+import { useWindowSize } from '@/shared/lib/hooks/useWindowSize'
 import {
 	ResizableHandle,
 	ResizablePanel,
@@ -17,6 +19,7 @@ interface LayoutProps {
 export const DashboardLayout: FC<LayoutProps> = ({ children, className }) => {
 	const { isCollapsed, setIsCollapsed } = useSidebar()
 	const [sidebarSize, setSidebarSize] = useState(50)
+	const { width } = useWindowSize()
 
 	const onCollapse = useCallback(() => {
 		setIsCollapsed(!isCollapsed)
@@ -44,7 +47,34 @@ export const DashboardLayout: FC<LayoutProps> = ({ children, className }) => {
 		},
 		[isCollapsed, setIsCollapsed],
 	)
-
+	if (width < 768) {
+		return (
+			<div className={classNames(cls.wrapper, {}, [className])}>
+				<div className={cls.layout}>
+					<div
+						style={{
+							width: `var(${
+								isCollapsed ? '--sidebar-width-collapsed' : '--sidebar-width'
+							})`,
+						}}
+						className={cls.sidebarWrapper}
+					>
+						<Sidebar />
+					</div>
+				</div>
+				<div
+					style={{
+						marginLeft: `var(${
+							isCollapsed ? '--sidebar-width-collapsed' : '--sidebar-width'
+						})`,
+					}}
+					className={cls.contentWrapper}
+				>
+					{children}Nd
+				</div>
+			</div>
+		)
+	}
 	return (
 		<ResizablePanelGroup direction='horizontal' className={cls.DashboardLayout}>
 			<ResizablePanel

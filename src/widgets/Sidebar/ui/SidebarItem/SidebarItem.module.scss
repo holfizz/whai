@@ -1,22 +1,22 @@
-
-.link{
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  font-size: 20px;
-  svg{
-    transition: none;
-  }
-
+.link {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	font-size: 20px;
+	svg {
+		transition: none;
+	}
 }
 
-.linkName{
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: start;
+.linkName {
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: start;
 }
 
-.collapsedLink{
-  display: none;
+.collapsedLink {
+	display: none;
+}
+.SidebarItem {
 }

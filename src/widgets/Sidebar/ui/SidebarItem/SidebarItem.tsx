@@ -1,27 +1,28 @@
+import { Link } from '@/navigation'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import AppLink from '@/shared/ui/AppLink/AppLink'
+import Button from '@/shared/ui/Button/Button'
+import Icon from '@/shared/ui/Icon/Icon'
 import { FC, memo } from 'react'
-import { IconType } from 'react-icons'
+import { SidebarItem } from '../../module/sidebar-items.data'
 import cls from './SidebarItem.module.scss'
 
-interface ItemProps {
-	title: string
-	link: string
-	Icon: IconType
-}
 interface SidebarItemProps {
 	className?: string
-	item: ItemProps
+	item: SidebarItem
 }
 
 const SidebarItem: FC<SidebarItemProps> = memo(({ item, className }) => {
 	return (
-		<AppLink href={item.link} className={cls.link}>
-			<item.Icon />
-			<div className={classNames('', {}, [className])}>
-				<div>{item.title}</div>
-			</div>
-		</AppLink>
+		<Button variant='sidebar'>
+			<Icon SVG={item.icon} />
+
+			<Link href={item.link} className={cls.link}>
+				<div className={classNames('', {}, [className])}>
+					<p>{item.text}</p>
+				</div>
+			</Link>
+			<Icon SVG={item.icon} />
+		</Button>
 	)
 })
 

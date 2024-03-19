@@ -22,6 +22,7 @@ body {
 	// 		var(--background-color) 20px,
 	// 		transparent 22px
 	// 	);
+	font-size: calc(10px + 4 * (100vw - 320px) / 880);
 	background: var(--background-color);
 }
 
