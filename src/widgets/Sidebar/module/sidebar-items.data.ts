@@ -1,3 +1,4 @@
+import { getAiChatRoute, getDashboardRoute } from '@/shared/const/router'
 import { IconType } from 'react-icons'
 import { FaChartLine } from 'react-icons/fa6'
 import { LuFolderDot, LuLayoutDashboard } from 'react-icons/lu'
@@ -21,12 +22,12 @@ interface Project {
 export type SidebarItem = SidebarSimpleItem | CoursesItem
 export const sidebarItems: SidebarItem[] = [
 	{
-		link: '/i/dashboard',
+		link: getDashboardRoute(),
 		icon: LuLayoutDashboard,
 		text: 'Dashboard',
 	},
 	{
-		link: '/i/chat',
+		link: getAiChatRoute(),
 		icon: TbBrandHipchat,
 		text: 'Chat',
 	},

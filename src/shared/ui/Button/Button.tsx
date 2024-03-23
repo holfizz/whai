@@ -5,7 +5,8 @@ const Button = extendVariants(UiButton, {
 	variants: {
 		color: {
 			main: 'text-[var(--main-color)]',
-			mainFill: 'text-[var(--background-color)] bg-[var(--main-color)]',
+			mainFill:
+				'text-[var(--background-color)] bg-[var(--main-color)] fill-[var(--background-color)]',
 			secondary: 'bg-[var(--secondary-color)] text-[var(--background-color)]',
 			default: 'bg-[var(--primary-color)] text-[var(--background-color)]',
 			clear: 'bg-transparent text-[var(--primary-color)]',

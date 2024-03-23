@@ -1,0 +1,39 @@
+.Chat {
+	height: 100%;
+	overflow: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100%;
+	width: 70%;
+}
+.ChatMessagesBlock {
+	width: -webkit-fill-available;
+	flex: 1 1 auto;
+}
+.requestInputBlock {
+	margin-top: 50px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: auto;
+	min-height: min-content;
+	position: relative;
+}
+.requestInput {
+	flex: 0 1 auto;
+	width: 100%;
+	min-width: 320px;
+}
+.requestButton {
+	position: relative;
+	margin-top: auto;
+	margin-left: 10px;
+}

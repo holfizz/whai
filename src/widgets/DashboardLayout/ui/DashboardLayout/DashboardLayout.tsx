@@ -97,7 +97,12 @@ export const DashboardLayout: FC<LayoutProps> = ({ children, className }) => {
 						<Navbar />
 					</ResizablePanel>
 					<ResizableHandle withHandle className='bg-[var(--secondary-color)]' />
-					<ResizablePanel defaultSize={75}></ResizablePanel>
+					<ResizablePanel
+						defaultSize={75}
+						className={classNames('', {}, [className])}
+					>
+						{children}
+					</ResizablePanel>
 				</ResizablePanelGroup>
 			</ResizablePanel>
 		</ResizablePanelGroup>

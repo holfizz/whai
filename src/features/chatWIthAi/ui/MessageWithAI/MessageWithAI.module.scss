@@ -1,0 +1,29 @@
+.messageBlock {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+}
+.avatar {
+	margin-right: 10px;
+	margin-bottom: auto;
+}
+.message {
+	width: auto;
+	max-width: 700px;
+	min-width: 150px;
+}
+.messageBody {
+	width: 100%;
+	flex-direction: row;
+	height: auto;
+}
+.snippet {
+	border: none;
+	width: min-content;
+	height: auto;
+	padding: 0;
+}
+.messageWithAction {
+	display: flex;
+	flex-direction: column;
+}
