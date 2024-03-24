@@ -1,18 +1,15 @@
 'use client'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import Icon from '@/shared/ui/Icon/Icon'
-import { Avatar, Card, CardBody, Snippet } from '@nextui-org/react'
-import { RiRobot2Fill } from 'react-icons/ri'
-import { MessageWithAIFrom } from '../../module/chat.contracts'
-import { MessageWithAiType } from '../../module/message.types'
+import { Avatar, Button, Card, CardBody, Snippet } from '@nextui-org/react'
+import { RiDeleteBin7Line, RiRobot2Fill } from 'react-icons/ri'
+import { MessageWithAIFrom } from '../model/message.contracts'
+import { MessageWithAiType } from '../model/message.types'
 import cls from './MessageWithAI.module.scss'
 
-export default function MessageWithAI({
-	file,
-	from,
-	text,
-	type,
-}: MessageWithAiType) {
+export default function MessageWithAI({ data }: { data: MessageWithAiType }) {
+	const { from, file, text } = data
+
 	return (
 		<div className={cls.messageBlock}>
 			<Avatar
@@ -30,12 +27,18 @@ export default function MessageWithAI({
 						{text}
 					</CardBody>
 				</Card>
-				<Snippet
-					codeString={text}
-					className={cls.snippet}
-					hideSymbol
-					variant='bordered'
-				/>
+				<div className='flex'>
+					{' '}
+					<Snippet
+						codeString={text}
+						className={cls.snippet}
+						hideSymbol
+						variant='bordered'
+					/>
+					<Button variant='light' isIconOnly>
+						<Icon SVG={RiDeleteBin7Line} />
+					</Button>
+				</div>
 			</div>
 		</div>
 	)

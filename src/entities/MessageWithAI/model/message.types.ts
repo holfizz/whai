@@ -1,4 +1,4 @@
 import { z } from 'zod'
-import { MessageWithAISchema } from './chat.contracts'
+import { MessageWithAISchema } from './message.contracts'
 
 export type MessageWithAiType = z.infer<typeof MessageWithAISchema>

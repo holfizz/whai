@@ -12,8 +12,8 @@ import {
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
+import { WebSocketLink } from '@apollo/client/link/ws'
 import { GraphQLError } from 'graphql'
-
 function isRefreshRequest(operation: GraphQLRequest) {
 	return operation.operationName === 'refreshToken'
 }
@@ -80,8 +80,14 @@ const httpLink = new HttpLink({
 	uri: 'http://localhost:8800/api/graphql',
 	credentials: 'include',
 })
+const wsLink = new WebSocketLink({
+	uri: `ws://localhost:8800/api/graphql`,
+	options: {
+		reconnect: true,
+	},
+})
 export const client = new ApolloClient({
-	link: ApolloLink.from([errorLink, authLink, httpLink]),
+	link: ApolloLink.from([authLink, errorLink, httpLink, wsLink]),
 	cache: new InMemoryCache(),
 })
 

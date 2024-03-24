@@ -1,5 +1,5 @@
-import { ChatWithAI } from '@/features/chatWIthAi'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
+import { ChatWithAI } from '@/widgets/СhatWithAI'
 
 const ChatWithAIPage = () => {
 	return (
