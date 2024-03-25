@@ -23,27 +23,46 @@ export const useChatWithAIMutation = () => {
 	return { chatWithAi, data: data?.createMessageWithAi, error, loading }
 }
 
+interface GetAllMessagesInterface {
+	dto: {
+		chatId: number
+		perPage?: string
+		page?: string
+	}
+}
+
 const GET_ALL_MESSAGES_IN_CHAT_WITH_AI = gql`
-	query getAllMessagesInChatWithAI($chatWithAIId: Float!) {
-		getAllMessageInChatWithAI(chatWithAIId: $chatWithAIId) {
+	query ($dto: GetAllMessagesInput!) {
+		getAllMessageInChatWithAI(dto: $dto) {
 			text
+			id
 			from
 		}
 	}
 `
-export const useGetAllMessagesInChatWithAIQuery = (chatWithAIId: number) => {
+export const useGetAllMessagesInChatWithAIQuery = (
+	chatId: number,
+	page?: string,
+	perPage?: string,
+) => {
 	const { data, error } = useQuery<
 		{ getAllMessageInChatWithAI: MessageWithAiType[] },
-		{ chatWithAIId: number }
+		GetAllMessagesInterface
 	>(GET_ALL_MESSAGES_IN_CHAT_WITH_AI, {
-		variables: { chatWithAIId },
+		variables: {
+			dto: {
+				chatId,
+				perPage,
+				page,
+			},
+		},
 	})
 	return { data: data?.getAllMessageInChatWithAI, error }
 }
 
 const SUBSCRIPTION_TO_CHAT_WITH_AI = gql`
-	subscription {
-		messageWithAiCreate(chatWithAIId: 2) {
+	subscription ($chatWithAIId: Int!) {
+		messageWithAiCreate(chatWithAIId: $chatWithAIId) {
 			text
 			from
 			id

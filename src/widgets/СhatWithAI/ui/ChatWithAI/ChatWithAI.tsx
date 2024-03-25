@@ -1,6 +1,5 @@
 'use client'
-import { MessageWithAI, MessageWithAiType } from '@/entities/MessageWithAI'
-import { MessageWithAIFrom } from '@/entities/MessageWithAI/'
+import { MessageWithAI, MessageWithAiType } from '@/entities/MessageWithAI/'
 import Button from '@/shared/ui/Button/Button'
 import Icon from '@/shared/ui/Icon/Icon'
 import { Skeleton, Textarea } from '@nextui-org/react'
@@ -8,7 +7,6 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { GoArrowUp } from 'react-icons/go'
 import { PiPaperclipBold } from 'react-icons/pi'
-
 import {
 	useChatWithAIMutation,
 	useChatWithAISubscription,
@@ -21,58 +19,62 @@ const ChatWithAi = () => {
 	const [messages, setMessages] = useState<MessageWithAiType[]>([])
 	const t = useTranslations('ChatWithAI')
 	const { chatWithAi, data, loading } = useChatWithAIMutation()
-	const { data: getAllMessageData } = useGetAllMessagesInChatWithAIQuery(2)
-	const { data: getMessages } = useChatWithAISubscription(2)
+	const { data: getMessages } = useChatWithAISubscription(5)
+	const [currentPage, setCurrentPage] = useState(1)
+	const [fetching, setFetching] = useState(true)
+	const { data: getAllMessageData } = useGetAllMessagesInChatWithAIQuery(
+		5,
+		String(currentPage),
+		'300',
+	)
 
 	useEffect(() => {
 		if (getAllMessageData) {
 			setMessages(prevMessages => [...prevMessages, ...getAllMessageData])
 		}
 	}, [getAllMessageData])
+
+	useEffect(() => {
+		const scrollHandler = (e: any) => {
+			if (e.target.documentElement.scrollTop === 0) {
+				setCurrentPage(prevPage => prevPage + 1)
+				setFetching(true)
+			}
+		}
+		document.addEventListener('scroll', scrollHandler)
+		return () => document.removeEventListener('scroll', scrollHandler)
+	}, [])
+
 	useEffect(() => {
 		if (getMessages) {
-			setMessages(prevMessages => [...prevMessages, ...getMessages])
+			setMessages(prevMessages => [...getMessages, ...prevMessages])
 		}
 	}, [getMessages])
+
 	const handleSendMessage = () => {
 		setText('')
-		const newMessage: MessageWithAiType = {
-			from: MessageWithAIFrom.USER,
-			text,
-			id: Date.now(),
-		}
 
-		setMessages(prevMessages => [...prevMessages, newMessage])
 		chatWithAi({
 			variables: {
 				input: {
 					text,
-					chatWithAIId: 2,
+					chatWithAIId: 5,
 				},
 			},
 		})
 	}
 
-	useEffect(() => {
-		if (data) {
-			setMessages(prevMessages => [...prevMessages, data])
-		}
-	}, [data])
 	return (
 		<div className={cls.Chat}>
 			<div className={cls.content}>
 				<div className={cls.ChatMessagesBlock}>
-					{messages.map((message: any, index: number) => (
-						<MessageWithAI key={index} data={message} />
-					))}
+					{messages.map((message, index) => {
+						return <MessageWithAI key={index} data={message} />
+					})}
 					{loading && (
 						<div className='max-w-[300px] w-full flex items-center gap-3'>
-							<div>
-								<Skeleton className='flex rounded-full w-12 h-12' />
-							</div>
-							<div className='w-[250px] flex flex-col gap-2'>
-								<Skeleton className='h-[50px] w-full rounded-lg' />
-							</div>
+							<Skeleton className='flex rounded-full w-12 h-12' />
+							<Skeleton className='h-[50px] w-full rounded-lg' />
 						</div>
 					)}
 				</div>
@@ -81,25 +83,20 @@ const ChatWithAi = () => {
 						onChange={e => setText(e.target.value)}
 						value={text}
 						size='lg'
+						isDisabled={loading}
 						maxRows={10}
 						minRows={0}
-						isDisabled={loading}
 						maxLength={4096}
 						variant='bordered'
 						placeholder={t('Enter your request')}
 						disableAnimation
 						startContent={
-							<Button className={'mt-auto mb-1'} isIconOnly variant='light'>
+							<Button isIconOnly variant='light'>
 								<Icon SVG={PiPaperclipBold} fontSize={22} />
 							</Button>
 						}
 						endContent={
-							<Button
-								onClick={handleSendMessage}
-								color='mainFill'
-								isIconOnly
-								className={cls.requestButton}
-							>
+							<Button onClick={handleSendMessage} color='mainFill' isIconOnly>
 								<Icon
 									color='var(--background-color)'
 									SVG={GoArrowUp}
@@ -108,9 +105,6 @@ const ChatWithAi = () => {
 							</Button>
 						}
 						className={cls.requestInput}
-						classNames={{
-							input: 'resize-y min-h-[40px]',
-						}}
 					/>
 				</div>
 			</div>
