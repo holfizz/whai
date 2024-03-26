@@ -19,7 +19,7 @@ const ChatWithAi = () => {
 	const [messages, setMessages] = useState<MessageWithAiType[]>([])
 	const t = useTranslations('ChatWithAI')
 	const { chatWithAi, data, loading } = useChatWithAIMutation()
-	const { data: getMessages } = useChatWithAISubscription(5)
+	const { data: getMessages, error } = useChatWithAISubscription(5)
 	const [currentPage, setCurrentPage] = useState(1)
 	const [fetching, setFetching] = useState(true)
 	const { data: getAllMessageData } = useGetAllMessagesInChatWithAIQuery(
@@ -46,10 +46,10 @@ const ChatWithAi = () => {
 	}, [])
 
 	useEffect(() => {
-		if (getMessages) {
-			setMessages(prevMessages => [...getMessages, ...prevMessages])
+		if (getMessages && !error) {
+			setMessages(prevMessages => [...prevMessages, getMessages])
 		}
-	}, [getMessages])
+	}, [error, getMessages])
 
 	const handleSendMessage = () => {
 		setText('')

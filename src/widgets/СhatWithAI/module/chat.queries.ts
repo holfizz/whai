@@ -71,7 +71,7 @@ const SUBSCRIPTION_TO_CHAT_WITH_AI = gql`
 `
 export const useChatWithAISubscription = (chatWithAIId: number) => {
 	const { data, error, loading } = useSubscription<
-		{ messageWithAiCreate: MessageWithAiType[] },
+		{ messageWithAiCreate: MessageWithAiType },
 		{ chatWithAIId: number }
 	>(SUBSCRIPTION_TO_CHAT_WITH_AI, {
 		variables: { chatWithAIId },
