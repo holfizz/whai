@@ -32,7 +32,7 @@ const Sidebar: FC<SidebarProps> = memo(({ className }) => {
 						isCollapsed={isCollapsed}
 					/>
 					{/*<Workspace />*/}
-
+						
 					<SidebarControl isCollapsed={isCollapsed} />
 					<Line className={cls.line} color={'var(--grey-100)'} />
 				</div>
