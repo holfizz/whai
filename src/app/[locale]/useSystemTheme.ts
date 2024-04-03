@@ -8,7 +8,7 @@ const useSystemTheme = () => {
 			'(prefers-color-scheme: dark)',
 		)
 
-		const updateTheme = e => {
+		const updateTheme = (e: any) => {
 			setTheme(e.matches ? 'dark' : 'light')
 		}
 

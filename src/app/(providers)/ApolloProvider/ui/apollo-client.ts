@@ -2,6 +2,10 @@ import { useAuth } from '@/features/auth'
 import { REFRESH_TOKEN } from '@/features/auth/model/auth.queries'
 import { getAccessToken, saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import {
+	GRAPHQL_SERVER_URL,
+	GRAPHQL_WS_SERVER_URL,
+} from '@/shared/const/constants'
+import {
 	ApolloClient,
 	ApolloLink,
 	FetchResult,
@@ -79,11 +83,11 @@ interface AccessToken {
 }
 
 const httpLink = new HttpLink({
-	uri: 'http://localhost:8800/api/graphql',
+	uri: GRAPHQL_SERVER_URL,
 	credentials: 'include',
 })
 const wsLink = new WebSocketLink({
-	uri: `ws://localhost:8800/api/graphql`,
+	uri: GRAPHQL_WS_SERVER_URL,
 	options: {
 		reconnect: true,
 	},

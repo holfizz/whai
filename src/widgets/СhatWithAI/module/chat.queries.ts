@@ -7,9 +7,9 @@ interface chatWithAIInput {
 		text: string
 	}
 }
-const CHAT_WITH_AI = gql`
-	mutation CreateMessageWithAi($input: ChatWithAiRequestInput!) {
-		createMessageWithAi(chatWithAIRequestDto: $input) {
+const CREATE_CHAT_WITH_AI = gql`
+	mutation CreateMessageWithAI($input: ChatWithAiRequestInput!) {
+		createMessageWithAI(chatWithAIRequestDto: $input) {
 			from
 			text
 		}
@@ -17,10 +17,10 @@ const CHAT_WITH_AI = gql`
 `
 export const useChatWithAIMutation = () => {
 	const [chatWithAi, { data, error, loading }] = useMutation<
-		{ createMessageWithAi: MessageWithAiType },
+		{ createMessageWithAI: MessageWithAiType },
 		chatWithAIInput
-	>(CHAT_WITH_AI)
-	return { chatWithAi, data: data?.createMessageWithAi, error, loading }
+	>(CREATE_CHAT_WITH_AI)
+	return { chatWithAi, data: data?.createMessageWithAI, error, loading }
 }
 
 interface GetAllMessagesInterface {
@@ -77,4 +77,25 @@ export const useChatWithAISubscription = (chatWithAIId: number) => {
 		variables: { chatWithAIId },
 	})
 	return { data: data?.messageWithAiCreate, error, loading }
+}
+
+interface ChatWithAiProps {
+	title: string
+	id: number
+}
+
+const GET_ALL_CHATS_WITH_AI = gql`
+	query {
+		getAllChatsWithAI {
+			title
+			id
+		}
+	}
+`
+export const useGetAllChatsWithAI = () => {
+	const { data, error, loading } = useQuery<
+		{ getAllChatsWithAI: ChatWithAiProps[] },
+		ChatWithAiProps
+	>(GET_ALL_CHATS_WITH_AI)
+	return { data: data?.getAllChatsWithAI, error, loading }
 }

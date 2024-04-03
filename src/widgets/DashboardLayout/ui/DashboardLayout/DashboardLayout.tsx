@@ -14,9 +14,14 @@ import cls from './DashboardLayout.module.scss'
 interface LayoutProps {
 	children: ReactNode
 	className?: string
+	sidebarChildren?: ReactNode
 }
 
-export const DashboardLayout: FC<LayoutProps> = ({ children, className }) => {
+export const DashboardLayout: FC<LayoutProps> = ({
+	children,
+	sidebarChildren,
+	className,
+}) => {
 	const { isCollapsed, setIsCollapsed } = useSidebar()
 	const [sidebarSize, setSidebarSize] = useState(50)
 	const { width } = useWindowSize()
@@ -88,7 +93,7 @@ export const DashboardLayout: FC<LayoutProps> = ({ children, className }) => {
 				collapsedSize={5.7}
 				onResize={onResize}
 			>
-				<Sidebar />
+				<Sidebar>{sidebarChildren}</Sidebar>
 			</ResizablePanel>
 			<ResizableHandle withHandle className='bg-[var(--secondary-color)]' />
 			<ResizablePanel defaultSize={250}>
