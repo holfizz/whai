@@ -2,6 +2,10 @@ import { useAuth } from '@/features/auth'
 import { REFRESH_TOKEN } from '@/features/auth/model/auth.queries'
 import { getAccessToken, saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import {
+	GRAPHQL_SERVER_URL,
+	GRAPHQL_WS_SERVER_URL,
+} from '@/shared/const/constants'
+import {
 	ApolloClient,
 	ApolloLink,
 	FetchResult,
@@ -9,10 +13,12 @@ import {
 	HttpLink,
 	InMemoryCache,
 	Observable,
+	split,
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { WebSocketLink } from '@apollo/client/link/ws'
+import { getMainDefinition } from '@apollo/client/utilities'
 import { GraphQLError } from 'graphql'
 function isRefreshRequest(operation: GraphQLRequest) {
 	return operation.operationName === 'refreshToken'
@@ -77,17 +83,28 @@ interface AccessToken {
 }
 
 const httpLink = new HttpLink({
-	uri: 'http://localhost:8800/api/graphql',
+	uri: GRAPHQL_SERVER_URL,
 	credentials: 'include',
 })
 const wsLink = new WebSocketLink({
-	uri: `ws://localhost:8800/api/graphql`,
+	uri: GRAPHQL_WS_SERVER_URL,
 	options: {
 		reconnect: true,
 	},
 })
+const link = split(
+	({ query }) => {
+		const definition = getMainDefinition(query)
+		return (
+			definition.kind === 'OperationDefinition' &&
+			definition.operation === 'subscription'
+		)
+	},
+	wsLink,
+	httpLink,
+)
 export const client = new ApolloClient({
-	link: ApolloLink.from([authLink, errorLink, httpLink, wsLink]),
+	link: ApolloLink.from([authLink, errorLink, link]),
 	cache: new InMemoryCache(),
 })
 

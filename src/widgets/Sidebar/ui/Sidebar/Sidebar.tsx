@@ -2,7 +2,7 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useWindowSize } from '@/shared/lib/hooks/useWindowSize'
 import Line from '@/shared/ui/Line/Line'
-import { FC, memo } from 'react'
+import { FC, ReactNode, memo } from 'react'
 import { useSidebar } from '../..'
 import { sidebarItems } from '../../module/sidebar-items.data'
 import SidebarControl from '../SidebarControl/SidebarControl'
@@ -13,9 +13,10 @@ import SidebarCollapsedButton from './SidebarCollapsedButton'
 
 interface SidebarProps {
 	className?: string
+	children?: ReactNode
 }
 
-const Sidebar: FC<SidebarProps> = memo(({ className }) => {
+const Sidebar: FC<SidebarProps> = memo(({ className, children }) => {
 	const { width } = useWindowSize()
 	const { isCollapsed, setIsCollapsed } = useSidebar()
 	if (width < 768) {
@@ -56,9 +57,15 @@ const Sidebar: FC<SidebarProps> = memo(({ className }) => {
 					color={'var(--grey-100)'}
 				/>  */}
 				<div className={cls.SidebarListItems}>
-					{sidebarItems.map((item, index) => {
-						return <SidebarItem item={item} key={index} />
-					})}
+					{children ? (
+						<>{children}</>
+					) : (
+						<>
+							{sidebarItems.map((item, index) => {
+								return <SidebarItem item={item} key={index} />
+							})}
+						</>
+					)}
 				</div>
 			</div>
 		</aside>

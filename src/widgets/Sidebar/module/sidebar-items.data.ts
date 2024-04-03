@@ -4,7 +4,6 @@ import { FaChartLine } from 'react-icons/fa6'
 import { LuFolderDot, LuLayoutDashboard } from 'react-icons/lu'
 import { TbBrandHipchat } from 'react-icons/tb'
 
-// Определение интерфейса для общего элемента сайдбара
 export interface SidebarSimpleItem {
 	link: string
 	icon: IconType
