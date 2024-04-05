@@ -9,6 +9,7 @@ export const getRouteForgotPassword = () => `/auth/forgot-password`
 export const getDashboardRoute = () => `/i`
 export const getSettingsRoute = () => `/i/settings`
 export const getCurrentChatRoute = (id: number) => `/i/chat/${id}`
+export const getCurrentChatWithAIRoute = (id: number) => `/i/chat/ai/${id}`
 export const getChatRoute = () => `/i/chat`
 export const getAiChatRoute = () => `/i/chat/ai`
 export const getRoute = () => `/i/settings`

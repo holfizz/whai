@@ -20,11 +20,11 @@ import { formLoginSchema, formSignUpSchema } from '../../model/auth.contracts'
 import { useAuth } from '../../model/auth.model'
 import { useLoginMutation, useSignUpMutation } from '../../model/auth.queries'
 
-import cls from './AuthForm.module.scss'
-import InfoMessage from '../InfoMessage/InfoMessage'
-import RegistraionInputs from '../RegistrInputs/RegistrInputs'
 import BasicInputs from '../BasicInputs/BasicInputs'
 import ButtonsForm from '../ButtonsForm/ButtonsForm'
+import InfoMessage from '../InfoMessage/InfoMessage'
+import RegistraionInputs from '../RegistrInputs/RegistrInputs'
+import cls from './AuthForm.module.scss'
 
 export interface AuthFormProps {
 	className?: string
@@ -32,23 +32,24 @@ export interface AuthFormProps {
 	setIsFormType?: Dispatch<SetStateAction<authConstants>>
 }
 
-
 const AuthForm: FC<AuthFormProps> = memo(
 	({ className, type, setIsFormType }) => {
+		const [formErrors, setFormErrors] = useState<
+			z.ZodFormattedError<
+				{
+					email: string
+					password: string
+					phoneNumber?: string
+					firstName?: string
+					lastName?: string
+				},
+				string
+			>
+		>({ _errors: [] })
 
-		const [formErrors, setFormErrors] = useState<z.ZodFormattedError<{
-			email: string;
-			password: string;
-			phoneNumber?: string;
-			firstName?: string;
-			lastName?: string;
-		}, string>>({ _errors: [] });
-
-		
 		const { setAuthUser } = useAuth()
 		const { auth, data, error } =
 			type === authConstants.SIGNUP ? useSignUpMutation() : useLoginMutation()
-
 
 		useEffect(() => {
 			if (data) {
@@ -62,16 +63,14 @@ const AuthForm: FC<AuthFormProps> = memo(
 
 			const form = new FormData(e.currentTarget)
 			const formData = Object.fromEntries(form.entries())
-			const formSchema = type === authConstants.SIGNUP ? formSignUpSchema : formLoginSchema
+			const formSchema =
+				type === authConstants.SIGNUP ? formSignUpSchema : formLoginSchema
 			const validationResult = formSchema.safeParse(formData)
-
 
 			if (!validationResult.success) {
 				const errors = validationResult.error.format()
 				setFormErrors(errors)
-			} 
-			else 
-			{
+			} else {
 				setFormErrors({ _errors: [] })
 				auth({
 					variables: {
@@ -79,7 +78,6 @@ const AuthForm: FC<AuthFormProps> = memo(
 					},
 				})
 			}
-
 		}
 
 		return (
@@ -87,8 +85,6 @@ const AuthForm: FC<AuthFormProps> = memo(
 				onSubmit={onSubmit}
 				className={classNames(cls.LoginForm, {}, [className])}
 			>
-
-
 				{/* Информация над формой  регистрации / логина */}
 				<InfoMessage error={error} data={data} type={type} />
 
@@ -100,7 +96,6 @@ const AuthForm: FC<AuthFormProps> = memo(
 
 				{/* Кнопки для формы */}
 				<ButtonsForm type={type} setIsFormType={setIsFormType} />
-
 			</form>
 		)
 	},
