@@ -78,6 +78,7 @@ export function Navbar() {
 								{t('Features')}
 								<MdKeyboardArrowDown />
 							</Button>
+							
 						</DropdownTrigger>
 					</NavbarItem>
 					<DropdownMenu
