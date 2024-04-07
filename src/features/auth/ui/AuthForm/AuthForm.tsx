@@ -55,6 +55,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 			if (data) {
 				setAuthUser(data.user)
 				saveTokenStorage(data.accessToken)
+				console.log(data.accessToken)
 			}
 		}, [data, setAuthUser])
 

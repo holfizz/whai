@@ -1,4 +1,3 @@
-import { useAuth } from '@/features/auth'
 import { REFRESH_TOKEN } from '@/features/auth/model/auth.queries'
 import { getAccessToken, saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import {
@@ -15,6 +14,8 @@ import {
 	Observable,
 	split,
 } from '@apollo/client'
+import Cookies from 'js-cookie'
+
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { WebSocketLink } from '@apollo/client/link/ws'
@@ -110,23 +111,24 @@ export const client = new ApolloClient({
 
 const refreshToken = async () => {
 	try {
+		const refreshToken = Cookies.get('refreshToken')
 		const refreshResolverResponse = await client.mutate<{
 			getNewToken: AccessToken
 		}>({
 			mutation: REFRESH_TOKEN,
 			variables: {
-				offset: 0,
+				refreshToken,
 			},
 		})
 
-		const accessToken = refreshResolverResponse.data?.getNewToken.accessToken
+		const accessToken =
+			refreshResolverResponse.data?.getNewToken.accessToken || null
 		if (accessToken) {
 			saveTokenStorage(accessToken)
 		}
+		console.log(123123123123)
 		return accessToken
 	} catch (err) {
-		const { setAuthUser, logout } = useAuth()
-		logout()
 		throw err
 	}
 }
