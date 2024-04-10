@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import dynamic from 'next/dynamic'
 
-const MainPageAsync = lazy(() => import('./main.page'))
+const MainPageAsync = dynamic(() => import('./main.page'))
 export default MainPageAsync

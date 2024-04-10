@@ -20,6 +20,7 @@ import { formLoginSchema, formSignUpSchema } from '../../model/auth.contracts'
 import { useAuth } from '../../model/auth.model'
 import { useLoginMutation, useSignUpMutation } from '../../model/auth.queries'
 
+import { useRouter } from '@/navigation'
 import BasicInputs from '../BasicInputs/BasicInputs'
 import ButtonsForm from '../ButtonsForm/ButtonsForm'
 import InfoMessage from '../InfoMessage/InfoMessage'
@@ -34,6 +35,7 @@ export interface AuthFormProps {
 
 const AuthForm: FC<AuthFormProps> = memo(
 	({ className, type, setIsFormType }) => {
+		const router = useRouter()
 		const [formErrors, setFormErrors] = useState<
 			z.ZodFormattedError<
 				{
@@ -55,10 +57,15 @@ const AuthForm: FC<AuthFormProps> = memo(
 			if (data) {
 				setAuthUser(data.user)
 				saveTokenStorage(data.accessToken)
-				console.log(data.accessToken)
 			}
 		}, [data, setAuthUser])
-
+		useEffect(() => {
+			if (data && type === authConstants.LOGIN) {
+				setTimeout(() => {
+					router.push('/')
+				}, 2000)
+			}
+		}, [data, router, type])
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()
 

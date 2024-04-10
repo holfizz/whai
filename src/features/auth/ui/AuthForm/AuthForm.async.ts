@@ -1,5 +1,5 @@
-import { FC, lazy } from 'react'
-import { AuthFormProps } from './AuthForm'
+import dynamic from 'next/dynamic'
 
-const AuthFormAsync = lazy<FC<AuthFormProps>>(() => import('./AuthForm'))
+const AuthFormAsync = dynamic(() => import('./AuthForm'))
+
 export default AuthFormAsync

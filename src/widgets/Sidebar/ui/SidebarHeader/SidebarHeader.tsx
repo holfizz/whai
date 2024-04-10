@@ -1,5 +1,5 @@
 import { Link } from '@/navigation'
-import Logo from '@/shared/assets/logo/WhaiSmall.svg'
+import { WhaiSmall } from '@/shared/assets/logo/WhaiSmall'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import Button from '@/shared/ui/Button/Button'
 import Icon from '@/shared/ui/Icon/Icon'
@@ -26,7 +26,7 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ width, isCollapsed }) => {
 			>
 				<div className={cls.profileBlock}>
 					<Link className={cls.avatar} href={'/'}>
-						<Icon className={cls.logo} SVG={Logo} />
+						<WhaiSmall className={cls.logo} />
 					</Link>
 					<div className={cls.profileData}>
 						<Text
@@ -50,7 +50,7 @@ const SidebarHeader: FC<SidebarHeaderProps> = ({ width, isCollapsed }) => {
 		<div className={classNames(cls.sidebarHeader, {}, [])}>
 			<div className={cls.profileBlock}>
 				<Link className={cls.avatar} href={'/'}>
-					<Icon className={cls.logo} SVG={Logo} />
+					<WhaiSmall className={cls.logo} />
 				</Link>
 				<div className={cls.profileData}>
 					<Text size={TextSize.S} title={t('Mode')} text={t('Creator')}></Text>

@@ -13,15 +13,13 @@ export default function (req: NextRequest) {
 	const localeMatch = url.match(/^\/([a-z]{2})\//)
 	const locale = localeMatch ? localeMatch[1] : 'ru'
 	const isHomePage = url === `http://localhost:3000/${locale}`
-	const refreshToken = cookies.get(EnumTokens.ACCESS_TOKEN)?.value
+	const accessToken = cookies.get(EnumTokens.ACCESS_TOKEN)?.value
 	const isAuthPage = url.includes('auth')
 	if (isHomePage) {
 		return NextResponse.next()
 	}
 
-	if (isAuthPage && refreshToken) {
-		console.log(123123)
-
+	if (isAuthPage && accessToken) {
 		return NextResponse.redirect(new URL(`/${locale}/`, url))
 	}
 
@@ -29,8 +27,8 @@ export default function (req: NextRequest) {
 		return NextResponse.next()
 	}
 
-	if (!refreshToken) {
-		return NextResponse.redirect(new URL(`/${locale}/auth/sign-up`, url))
+	if (!accessToken) {
+		return NextResponse.redirect(new URL(`/${locale}/auth/login`, url))
 	}
 	return nextIntlMiddleware(req)
 }

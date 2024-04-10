@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import dynamic from 'next/dynamic'
 
-const ConfirmEmailPageAsync = lazy(() => import('./confirmEmail.page'))
+const ConfirmEmailPageAsync = dynamic(() => import('./confirmEmail.page'))
 export default ConfirmEmailPageAsync

@@ -16,6 +16,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 			}
 		}
 	}, [])
+
 	return (
 		<ApolloProviders>
 			<ThemeProvider

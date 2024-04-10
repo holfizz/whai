@@ -25,9 +25,10 @@ interface Props {
 export function generateStaticParams() {
 	return locales.map(locale => ({ locale }))
 }
+
 const LocaleLayout: FC<Props> = ({ children, params: { locale } }) => {
 	unstable_setRequestLocale(locale)
-	console.log(locale)
+
 	const messages = useMessages()
 	return (
 		<html lang={locale} suppressHydrationWarning>
@@ -45,3 +46,6 @@ const LocaleLayout: FC<Props> = ({ children, params: { locale } }) => {
 	)
 }
 export default LocaleLayout
+function createGraphiQLFetcher(arg0: { url: string }) {
+	throw new Error('Function not implemented.')
+}

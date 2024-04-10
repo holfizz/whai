@@ -11,6 +11,9 @@ dependencies:
   '@headlessui/react':
     specifier: ^1.7.18
     version: 1.7.18(react-dom@18.2.0)(react@18.2.0)
+  '@hugeicons/react-pro':
+    specifier: ^0.2.3
+    version: 0.2.3(react@18.2.0)
   '@million/lint':
     specifier: ^0.0.73
     version: 0.0.73(@types/react-dom@18.2.18)(@types/react@18.2.48)
@@ -1832,6 +1835,16 @@ packages:
       client-only: 0.0.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@hugeicons/react-pro@0.2.3(react@18.2.0):
+    resolution: {integrity: sha512-ZRqfqeZtHv+/Bt3KGx94XzTDqHBG8pHq9e8C5f4tnuhvviteKR1Q6Y8AChSrfY3d0e+tQ9aN5cSrauS2u4t1rA==}
+    peerDependencies:
+      react: '>=16.0.0'
+    dependencies:
+      js-base64: 3.7.7
+      js-md5: 0.8.3
+      react: 18.2.0
     dev: false
 
   /@humanwhocodes/config-array@0.11.14:
@@ -7093,9 +7106,17 @@ packages:
     resolution: {integrity: sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==}
     hasBin: true
 
+  /js-base64@3.7.7:
+    resolution: {integrity: sha512-7rCnleh0z2CkXhH67J8K1Ytz0b2Y+yxTPL+/KOJoa20hfnVQ/3/T6W/KflYI4bRHRagNeXeU2bkNGI3v1oS/lw==}
+    dev: false
+
   /js-cookie@3.0.5:
     resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
     engines: {node: '>=14'}
+    dev: false
+
+  /js-md5@0.8.3:
+    resolution: {integrity: sha512-qR0HB5uP6wCuRMrWPTrkMaev7MJZwJuuw4fnwAzRgP4J4/F8RwtodOKpGp4XpqsLBFzzgqIO42efFAyz2Et6KQ==}
     dev: false
 
   /js-tokens@4.0.0:

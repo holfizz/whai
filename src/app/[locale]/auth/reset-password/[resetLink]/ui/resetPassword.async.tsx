@@ -1,4 +1,5 @@
-import { lazy } from 'react'
+import dynamic from 'next/dynamic'
 
-const ResetPasswordPageAsync = lazy(() => import('./resetPassword.page'))
+const ResetPasswordPageAsync = dynamic(() => import('./resetPassword.page'))
+
 export default ResetPasswordPageAsync

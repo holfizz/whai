@@ -51,7 +51,6 @@ export function Header({}: INavbar) {
 								<Avatar
 									className={cls.avatar}
 									isBordered
-									as='button'
 									src={user.avatarPath}
 								/>
 							</DropdownTrigger>

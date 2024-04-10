@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 	title: 'Зарегистрировать аккаунт | Whai',
 	description: 'Зарегистрировать аккаунт на образовательной платформе Whai',
 }
+export const dynamic = 'auto'
 
 export default function Page({
 	params: { locale },

@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import dynamic from 'next/dynamic'
 
-const SettingsPageAsync = lazy(() => import('./settings.page'))
+const SettingsPageAsync = dynamic(() => import('./settings.page'))
 export default SettingsPageAsync

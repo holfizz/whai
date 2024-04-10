@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import dynamic from 'next/dynamic'
 
-const ChatWithAIAsync = lazy(() => import('./ChatWithAI'))
+const ChatWithAIAsync = dynamic(() => import('./ChatWithAI'))
 export default ChatWithAIAsync

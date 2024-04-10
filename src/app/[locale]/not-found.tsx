@@ -1,6 +1,5 @@
 import { NO_INDEX_PAGE } from '@/shared/const/seo'
 import type { Metadata } from 'next'
-import { unstable_setRequestLocale } from 'next-intl/server'
 import cls from './not-found.module.scss'
 
 export const metadata: Metadata = {
@@ -9,20 +8,6 @@ export const metadata: Metadata = {
 	...NO_INDEX_PAGE,
 }
 
-export default function Page({
-	params: { locale },
-}: {
-	params: { locale: string }
-}) {
-	unstable_setRequestLocale(locale)
-	return (
-		<div className={cls.errorPage}>
-			{/* <header className={cls.header}>
-				<div className={cls.headerContainer}></div>
-			</header>
-			<h1 className={cls.errorTitle}>{"t('This page doesn't exist')"}</h1>
-			<Image className={cls.errorImage} src={ErrorImage} alt='404' /> */}
-			not found
-		</div>
-	)
+export default function Page() {
+	return <div className={cls.errorPage}>not found</div>
 }

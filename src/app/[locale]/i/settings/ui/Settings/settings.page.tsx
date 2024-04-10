@@ -68,16 +68,16 @@ export default function Page() {
 								) : (
 									<div className={cls.SidebarItems}>
 										<Text className={cls.title} text={t('User settings')} />
-										{sidebarListItems.map(item => (
+										{sidebarListItems.map((item, index) => (
 											<>
 												{item.text === 'Appearance' && (
-													<>
+													<div key={item.id}>
 														<div className={cls.line} />
 														<Text
 															className={cls.title}
 															text={t('App settings')}
 														/>
-													</>
+													</div>
 												)}
 												<Button
 													onClick={() => setTabId(item.id)}

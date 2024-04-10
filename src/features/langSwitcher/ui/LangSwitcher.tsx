@@ -3,7 +3,6 @@ import { Avatar, Select, SelectItem } from '@nextui-org/react'
 import { useLocale } from 'next-intl'
 import { memo, type FC } from 'react'
 import { languages } from '../module/lang.data'
-
 interface LangSwitcherProps {
 	className?: string
 }
@@ -30,7 +29,7 @@ const LangSwitcher: FC<LangSwitcherProps> = memo(({ className }) => {
 				<SelectItem
 					startContent={
 						<Avatar
-							alt='Mexico'
+							alt='country flag'
 							className='w-6 h-6'
 							src={`https://flagcdn.com/${lang.code}.svg`}
 						/>

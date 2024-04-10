@@ -1,9 +1,9 @@
 'use client'
 import { useRouter } from '@/navigation'
+import { WhaiBig } from '@/shared/assets/logo/WhaiBig'
+import { WhaiSmall } from '@/shared/assets/logo/WhaiSmall'
 import { Mods, classNames } from '@/shared/lib/classNames/classNames'
 import { FC, memo } from 'react'
-import BigLogoIcon from '../../assets/logo/WhaiBig.svg'
-import SmallLogoIcon from '../../assets/logo/WhaiSmall.svg'
 import cls from './Logo.module.scss'
 
 export enum LogoSize {
@@ -31,7 +31,7 @@ const Logo: FC<LogoProps> = memo(
 		const mods: Mods = {
 			[cls[logoSize]]: true,
 		}
-		const LOGO_TYPE = logoType === 'short' ? SmallLogoIcon : BigLogoIcon
+		const LOGO_TYPE = logoType === 'short' ? WhaiSmall : WhaiBig
 		return (
 			<button
 				className={classNames(cls.logoButton, mods, [])}
@@ -39,6 +39,7 @@ const Logo: FC<LogoProps> = memo(
 				onClick={() => router.push('/')}
 			>
 				{/* <LogoIcon width={300} style={{ fill: color, width: '100px' }} /> */}
+				{/* ERROR*/}
 				<LOGO_TYPE
 					style={{
 						fill: color,

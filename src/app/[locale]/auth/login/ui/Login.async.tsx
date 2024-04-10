@@ -1,4 +1,5 @@
-import { lazy } from 'react'
+import dynamic from 'next/dynamic'
 
-const LoginPageAsync = lazy(() => import('./Login.page'))
+const LoginPageAsync = dynamic(() => import('./Login.page'))
+
 export default LoginPageAsync

@@ -3,9 +3,9 @@ import cls from './mainPage.module.scss'
 
 import LangSwitcher from '@/features/langSwitcher'
 import { Navbar } from '@/widgets/Navbar'
+import { AccountSetting03Icon } from '@hugeicons/react-pro'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-
 export default function MainPage() {
 	const t = useTranslations('mainPage')
 	const [isClient, setIsClient] = useState(false)
@@ -71,6 +71,7 @@ export default function MainPage() {
 					<Icon className={cls.asterisk} SVG={Asterisk} />
 				</div>
 			</div> */}
+			<AccountSetting03Icon />
 			<LangSwitcher />
 		</>
 	)
