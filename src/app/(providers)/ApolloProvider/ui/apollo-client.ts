@@ -14,24 +14,25 @@ import {
 	Observable,
 	split,
 } from '@apollo/client'
-import Cookies from 'js-cookie'
-
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { GraphQLError } from 'graphql'
-function isRefreshRequest(operation: GraphQLRequest) {
-	return operation.operationName === 'refreshToken'
+import Cookies from 'js-cookie'
+interface AccessToken {
+	accessToken: string
 }
+// Проверка является ли операция запросом на обновление токена
+const isRefreshRequest = (operation: GraphQLRequest) =>
+	operation.operationName === 'refreshToken'
 
-function returnTokenDependingOnOperation(operation: GraphQLRequest) {
-	if (isRefreshRequest(operation)) return getAccessToken() || ''
-	else return getAccessToken() || ''
-}
+// Возвращение токена для операции
+const returnToken = () => getAccessToken() || ''
 
+// Установка контекста авторизации
 const authLink = setContext((operation, { headers }) => {
-	let token = returnTokenDependingOnOperation(operation)
+	const token = returnToken()
 	return {
 		headers: {
 			...headers,
@@ -40,59 +41,67 @@ const authLink = setContext((operation, { headers }) => {
 	}
 })
 
+// Обработка ошибок Apollo
 const errorLink = onError(
 	({ graphQLErrors, networkError, operation, forward }) => {
 		if (graphQLErrors) {
-			for (let err of graphQLErrors) {
-				switch (err.extensions.code) {
-					case 'UNAUTHENTICATED':
-						if (operation.operationName === 'refreshToken') return
-
-						const observable = new Observable<FetchResult<Record<string, any>>>(
-							observer => {
-								;(async () => {
-									try {
-										const accessToken = await refreshToken()
-										if (!accessToken) {
-											throw new GraphQLError('Empty AccessToken')
-										}
-
-										const subscriber = {
-											next: observer.next.bind(observer),
-											error: observer.error.bind(observer),
-											complete: observer.complete.bind(observer),
-										}
-
-										forward(operation).subscribe(subscriber)
-									} catch (err) {
-										observer.error(err)
+			for (const err of graphQLErrors) {
+				if (
+					err.extensions.code === 'UNAUTHENTICATED' &&
+					!isRefreshRequest(operation)
+				) {
+					const observable = new Observable<FetchResult<Record<string, any>>>(
+						observer => {
+							;(async () => {
+								try {
+									const accessToken = await refreshToken()
+									if (!accessToken) {
+										throw new GraphQLError('Empty AccessToken')
 									}
-								})()
-							},
-						)
 
-						return observable
+									const subscriber = {
+										next: observer.next.bind(observer),
+										error: observer.error.bind(observer),
+										complete: observer.complete.bind(observer),
+									}
+
+									forward(operation).subscribe(subscriber)
+								} catch (err) {
+									observer.error(err)
+								}
+							})()
+						},
+					)
+
+					return observable
 				}
 			}
 		}
 
-		if (networkError) console.log(`[Network error]: ${networkError}`)
+		if (networkError) {
+			console.error(`[Network error]: ${networkError}`)
+		}
 	},
 )
-interface AccessToken {
-	accessToken: string
-}
 
+// Настройка HTTP-ссылки
 const httpLink = new HttpLink({
 	uri: GRAPHQL_SERVER_URL,
 	credentials: 'include',
 })
+
+// Настройка WebSocket-ссылки
 const wsLink = new WebSocketLink({
 	uri: GRAPHQL_WS_SERVER_URL,
 	options: {
 		reconnect: true,
+		connectionParams: {
+			authToken: getAccessToken(),
+		},
 	},
 })
+
+// Разделение ссылок для подписок и других запросов
 const link = split(
 	({ query }) => {
 		const definition = getMainDefinition(query)
@@ -104,11 +113,14 @@ const link = split(
 	wsLink,
 	httpLink,
 )
+
+// Создание Apollo клиента
 export const client = new ApolloClient({
 	link: ApolloLink.from([authLink, errorLink, link]),
 	cache: new InMemoryCache(),
 })
 
+// Функция для обновления токена
 const refreshToken = async () => {
 	try {
 		const refreshToken = Cookies.get('refreshToken')
@@ -116,9 +128,7 @@ const refreshToken = async () => {
 			getNewToken: AccessToken
 		}>({
 			mutation: REFRESH_TOKEN,
-			variables: {
-				refreshToken,
-			},
+			variables: { refreshToken },
 		})
 
 		const accessToken =
@@ -126,10 +136,11 @@ const refreshToken = async () => {
 		if (accessToken) {
 			saveTokenStorage(accessToken)
 		}
-		console.log(123123123123)
 		return accessToken
 	} catch (err) {
+		console.error('Error refreshing token:', err)
 		throw err
 	}
 }
+
 export default client

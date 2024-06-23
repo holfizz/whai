@@ -1,6 +1,9 @@
-import { IUserData } from '@/entities/Auth'
-import { gql, useMutation } from '@apollo/client'
+import { IAuthResponse } from '@/entities/Auth'
 
+import { gql, useMutation } from '@apollo/client'
+import { authUserVar } from './auth.model'
+
+// SIGN UP
 interface SignUpInput {
 	input: {
 		email: string
@@ -11,13 +14,14 @@ interface SignUpInput {
 	}
 }
 
-const SIGN_UP = gql`
+export const SIGN_UP = gql`
 	mutation signUp($input: SignUpInput!) {
 		signUp(signUpInput: $input) {
 			accessToken
+			refreshToken
 			user {
 				email
-				# roles
+				roles
 				firstName
 				lastName
 				phoneNumber
@@ -26,16 +30,19 @@ const SIGN_UP = gql`
 		}
 	}
 `
-
 export const useSignUpMutation = () => {
-	const [auth, { data, error }] = useMutation<
-		{ signUp: IUserData },
+	const [signUpMutation, { data, error }] = useMutation<
+		{ signUp: IAuthResponse },
 		SignUpInput
-	>(SIGN_UP)
-	return { auth, data: data?.signUp, error }
+	>(SIGN_UP, {
+		onCompleted: data => {
+			authUserVar(data.signUp)
+		},
+	})
+	return { signUpMutation, data: data?.signUp, error }
 }
 
-//     LOGIN
+// LOGIN
 interface LoginInput {
 	input: {
 		email: string
@@ -47,6 +54,7 @@ export const LOGIN = gql`
 	mutation login($input: loginInput!) {
 		login(loginInput: $input) {
 			accessToken
+			refreshToken
 			user {
 				email
 				roles
@@ -60,28 +68,46 @@ export const LOGIN = gql`
 `
 
 export const useLoginMutation = () => {
-	const [auth, { data, error }] = useMutation<{ login: IUserData }, LoginInput>(
-		LOGIN,
-	)
-	return { auth, data: data?.login, error }
+	const [loginMutation, { data, error }] = useMutation<
+		{ login: IAuthResponse },
+		LoginInput
+	>(LOGIN, {
+		onCompleted: data => {
+			authUserVar(data.login)
+		},
+	})
+	return { loginMutation, data: data?.login, error }
 }
+// REFRESH TOKEN
 export interface getUserInput {
 	input: {
 		refreshToken: string
 	}
 }
+
 export const REFRESH_TOKEN = gql`
-	mutation getNewToken {
-		getNewToken {
+	mutation getNewToken($input: RefreshTokenInput!) {
+		getNewToken(refreshTokenInput: $input) {
 			accessToken
+			refreshToken
 		}
 	}
 `
 
 export const useGetUserMutation = () => {
-	const [checkAuth, { data, error }] = useMutation<
-		{ getNewTokens: IUserData },
+	const [refreshTokenMutation, { data, error }] = useMutation<
+		{ getNewToken: IAuthResponse },
 		getUserInput
-	>(REFRESH_TOKEN)
-	return { checkAuth, data: data?.getNewTokens, error }
+	>(REFRESH_TOKEN, {
+		onCompleted: data => {
+			authUserVar(data.getNewToken)
+		},
+	})
+	return { refreshTokenMutation, data: data?.getNewToken, error }
 }
+
+export const LOGOUT = gql`
+	mutation logout {
+		logout
+	}
+`

@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-import MillionCompiler from '@million/lint'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 const withNextIntl = createNextIntlPlugin('./src/shared/config/i18n/i18n.ts')
@@ -11,11 +10,6 @@ const nextConfig = {
 	},
 
 	swcMinify: true,
-	reactStrictMode: true,
 }
 
-export default withNextIntl(
-	MillionCompiler.next({
-		rsc: true,
-	})(nextConfig),
-)
+export default withNextIntl(nextConfig)

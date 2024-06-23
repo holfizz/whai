@@ -19,10 +19,10 @@ const LangSwitcher: FC<LangSwitcherProps> = memo(({ className }) => {
 	return (
 		<Select
 			label='Chose language'
-			placeholder='Select an animal'
 			className='max-w-xs'
 			defaultSelectedKeys={[locale]}
 			value={locale}
+			required={true}
 			onChange={e => handleChange(e.target.value)}
 		>
 			{languages.map(lang => (

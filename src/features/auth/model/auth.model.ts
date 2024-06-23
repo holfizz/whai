@@ -1,41 +1,37 @@
 'use client'
-import client from '@/app/(providers)/ApolloProvider/ui/apollo-client'
-import { IUser } from '@/entities/Auth'
+import { client } from '@/app/(providers)/ApolloProvider/ui/apollo-client'
+import { IAuthResponse, IUser } from '@/entities/Auth'
 import { LOGOUT } from '@/entities/Auth/model/auth.queries'
-import {
-	getUserFromStorage,
-	removeFromStorage,
-} from '@/shared/api/auth/auth.helper'
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { makeVar } from '@apollo/client'
 export type TypeAuthUser = IUser | null | undefined
 
-interface IUseAuthState {
-	user: TypeAuthUser
+export const authUserVar = makeVar<IAuthResponse | null>(null)
+
+export function setAuthUser(authResponse: IAuthResponse | null) {
+	authUserVar(authResponse)
+	if (authResponse) saveAuthStateToStorage(authResponse)
+	else logout()
 }
 
-interface IUseAuthActions {
-	setAuthUser: (user: TypeAuthUser) => void
-	logout: () => void
+export async function logout() {
+	try {
+		await client.mutate({ mutation: LOGOUT })
+		authUserVar(null)
+	} catch (error) {
+		console.error('Logout error:', error)
+	}
 }
 
-export type useAuthProps = IUseAuthState & IUseAuthActions
+export function getCurrentUser(): IUser | null | undefined {
+	const authState = authUserVar()
+	return authState ? authState.user : null
+}
 
-export const useAuth = create<useAuthProps>()(
-	persist(
-		set => ({
-			user: getUserFromStorage(),
-			setAuthUser: (user: TypeAuthUser) => {
-				set(() => ({ user: user }))
-			},
-			logout: () => {
-				client.query({
-					query: LOGOUT,
-				})
-				set(() => ({ user: null, accessToken: null }))
-				removeFromStorage()
-			},
-		}),
-		{ name: 'user' },
-	),
-)
+export function saveAuthStateToStorage(authResponse: IAuthResponse) {
+	localStorage.setItem('authState', JSON.stringify(authResponse))
+}
+
+export function loadAuthStateFromStorage(): IAuthResponse | null {
+	const storedState = localStorage.getItem('authState')
+	return storedState ? JSON.parse(storedState) : null
+}
