@@ -1,7 +1,7 @@
 'use client'
-import { Navbar } from '@/widgets/Navbar'
-import Sidebar from '@/widgets/Sidebar'
+import Sidebar from '@/widgets/DashboardLayout/ui/Sidebar'
 import { FC, ReactNode } from 'react'
+import { DashboardNavbar } from '../DashboardNavbar/ui/DashboardNavbar/DashboardNavbar'
 import cls from './DashboardLayout.module.scss'
 
 interface LayoutProps {
@@ -22,9 +22,9 @@ export const DashboardLayout: FC<LayoutProps> = ({
 					<Sidebar />
 				</div>
 				<div className={cls.navbarWrapper}>
-					<Navbar />
+					<DashboardNavbar />
+					<div className={cls.contentWrapper}>{children}</div>
 				</div>
-				<div className={cls.contentWrapper}>{children}</div>
 			</div>
 		</div>
 	)

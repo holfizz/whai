@@ -106,6 +106,9 @@
 	"ChatWithAI": {
 		"Enter your request": "Enter your request"
 	},
+	"Navbar": {
+		"Subscription": "Subscription"
+	},
 	"Close": "Close",
 	"Open": "Open",
 	"User": "User",

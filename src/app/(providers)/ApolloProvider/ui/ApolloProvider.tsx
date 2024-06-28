@@ -6,7 +6,6 @@ type Props = {
 	children?: React.ReactNode
 }
 if (true) {
-	// Adds messages only in a dev environment
 	loadDevMessages()
 	loadErrorMessages()
 }

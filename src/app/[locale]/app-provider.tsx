@@ -1,9 +1,8 @@
 'use client'
+import { NextUIProvider } from '@nextui-org/react'
 import { ThemeProvider } from 'next-themes'
 import { ReactNode, useEffect, useState } from 'react'
 import { ApolloProviders } from '../(providers)/ApolloProvider'
-import AuthProvider from '../(providers)/AuthProvider'
-
 export function AppProvider({ children }: { children: ReactNode }) {
 	const [systemTheme, setSystemTheme] = useState<string | undefined>(undefined)
 	useEffect(() => {
@@ -19,15 +18,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
 	return (
 		<ApolloProviders>
-			<ThemeProvider
-				themes={['dark', 'light']}
-				attribute='class'
-				disableTransitionOnChange
-				defaultTheme={systemTheme && systemTheme}
-				enableSystem={true}
-			>
-				<AuthProvider>{children}</AuthProvider>
-			</ThemeProvider>
+			<NextUIProvider>
+				<ThemeProvider
+					themes={['dark', 'light']}
+					attribute='class'
+					disableTransitionOnChange
+					defaultTheme={systemTheme && systemTheme}
+					enableSystem={true}
+				>
+					{children}
+				</ThemeProvider>
+			</NextUIProvider>
 		</ApolloProviders>
 	)
 }

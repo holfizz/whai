@@ -24,6 +24,8 @@ export enum TextSize {
 
 interface TextProps {
 	className?: string
+	classNameText?: string
+	classNameTitle?: string
 	title?: string
 	text?: string
 	theme?: TextTheme
@@ -34,6 +36,8 @@ interface TextProps {
 const Text: FC<TextProps> = memo(props => {
 	const {
 		className,
+		classNameText,
+		classNameTitle,
 		text,
 		title,
 		theme = TextTheme.PRIMARY,
@@ -56,8 +60,12 @@ const Text: FC<TextProps> = memo(props => {
 	const HeaderTag = mapSizeToHeaderTag[size]
 	return (
 		<div className={classNames('', mods, [className])}>
-			{title && <HeaderTag className={cls.title}>{title}</HeaderTag>}
-			{text && <p className={cls.text}>{text}</p>}
+			{title && (
+				<HeaderTag className={[cls.title, classNameTitle].join(' ')}>
+					{title}
+				</HeaderTag>
+			)}
+			{text && <p className={[cls.text, classNameText].join(' ')}>{text}</p>}
 		</div>
 	)
 })

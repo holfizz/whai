@@ -6,7 +6,7 @@ export const getRouteSignUp = () => `/auth/sign-up`
 export const getRouteForgotPassword = () => `/auth/forgot-password`
 
 //i
-export const getDashboardRoute = () => `/i`
+export const getDashboardRoute = () => `/d`
 export const getSettingsRoute = () => `/i/settings`
 export const getCurrentChatRoute = (id: number) => `/i/chat/${id}`
 export const getCurrentChatWithAIRoute = (id: number) => `/i/chat/ai/${id}`

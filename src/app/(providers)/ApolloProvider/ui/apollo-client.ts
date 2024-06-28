@@ -1,5 +1,5 @@
-import { REFRESH_TOKEN } from '@/features/auth/model/auth.queries'
-import { getAccessToken, saveTokenStorage } from '@/shared/api/auth/auth.helper'
+import { useGetNewTokenMutation } from '@/features/auth/model/auth.queries'
+import { getAccessToken } from '@/shared/api/auth/auth.helper'
 import {
 	GRAPHQL_SERVER_URL,
 	GRAPHQL_WS_SERVER_URL,
@@ -19,13 +19,14 @@ import { onError } from '@apollo/client/link/error'
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { GraphQLError } from 'graphql'
-import Cookies from 'js-cookie'
+
 interface AccessToken {
 	accessToken: string
 }
+
 // Проверка является ли операция запросом на обновление токена
 const isRefreshRequest = (operation: GraphQLRequest) =>
-	operation.operationName === 'refreshToken'
+	operation.operationName === 'getNewToken'
 
 // Возвращение токена для операции
 const returnToken = () => getAccessToken() || ''
@@ -54,10 +55,25 @@ const errorLink = onError(
 						observer => {
 							;(async () => {
 								try {
-									const accessToken = await refreshToken()
-									if (!accessToken) {
+									const { refreshAccessToken, data, error } =
+										useGetNewTokenMutation()
+									refreshAccessToken()
+									if (error || !data) {
+										throw new GraphQLError('Failed to refresh token')
+									}
+
+									const newAccessToken = data.getNewToken.accessToken
+									if (!newAccessToken) {
 										throw new GraphQLError('Empty AccessToken')
 									}
+
+									// Обновляем заголовок авторизации
+									operation.setContext(({ headers = {} }) => ({
+										headers: {
+											...headers,
+											authorization: `Bearer ${newAccessToken}`,
+										},
+									}))
 
 									const subscriber = {
 										next: observer.next.bind(observer),
@@ -119,28 +135,5 @@ export const client = new ApolloClient({
 	link: ApolloLink.from([authLink, errorLink, link]),
 	cache: new InMemoryCache(),
 })
-
-// Функция для обновления токена
-const refreshToken = async () => {
-	try {
-		const refreshToken = Cookies.get('refreshToken')
-		const refreshResolverResponse = await client.mutate<{
-			getNewToken: AccessToken
-		}>({
-			mutation: REFRESH_TOKEN,
-			variables: { refreshToken },
-		})
-
-		const accessToken =
-			refreshResolverResponse.data?.getNewToken.accessToken || null
-		if (accessToken) {
-			saveTokenStorage(accessToken)
-		}
-		return accessToken
-	} catch (err) {
-		console.error('Error refreshing token:', err)
-		throw err
-	}
-}
 
 export default client

@@ -1,10 +1,9 @@
 'use client'
 
+import { useRouter } from '@/navigation'
 import { saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import { authConstants } from '@/shared/const/auth'
-
 import { classNames } from '@/shared/lib/classNames/classNames'
-
 import {
 	Dispatch,
 	FC,
@@ -14,17 +13,19 @@ import {
 	useEffect,
 	useState,
 } from 'react'
-
 import { z } from 'zod'
 import { formLoginSchema, formSignUpSchema } from '../../model/auth.contracts'
-import { useAuth } from '../../model/auth.model'
-import { useLoginMutation, useSignUpMutation } from '../../model/auth.queries'
-
-import { useRouter } from '@/navigation'
+import { setAuthUser } from '../../model/auth.model'
+import {
+	LoginInput,
+	SignUpInput,
+	useLoginMutation,
+	useSignUpMutation,
+} from '../../model/auth.queries'
 import BasicInputs from '../BasicInputs/BasicInputs'
 import ButtonsForm from '../ButtonsForm/ButtonsForm'
 import InfoMessage from '../InfoMessage/InfoMessage'
-import RegistraionInputs from '../RegistrInputs/RegistrInputs'
+import RegistrationInputs from '../RegistrInputs/RegistrInputs'
 import cls from './AuthForm.module.scss'
 
 export interface AuthFormProps {
@@ -49,23 +50,39 @@ const AuthForm: FC<AuthFormProps> = memo(
 			>
 		>({ _errors: [] })
 
-		const { setAuthUser } = useAuth()
-		const { auth, data, error } =
-			type === authConstants.SIGNUP ? useSignUpMutation() : useLoginMutation()
+		const {
+			login,
+			data: loginData,
+			loading: loginLoading,
+			error: loginError,
+		} = useLoginMutation()
+		const {
+			signUp,
+			data: signUpData,
+			loading: signUpLoading,
+			error: signUpError,
+		} = useSignUpMutation()
+
+		const data = type === authConstants.SIGNUP ? signUpData : loginData
+		const loading = type === authConstants.SIGNUP ? signUpLoading : loginLoading
+		const error = type === authConstants.SIGNUP ? signUpError : loginError
 
 		useEffect(() => {
-			if (data) {
-				setAuthUser(data.user)
-				saveTokenStorage(data.accessToken)
+			if (loginData) {
+				const userData = loginData.login
+				setAuthUser(userData)
+				saveTokenStorage(userData.accessToken)
 			}
-		}, [data, setAuthUser])
+		}, [loginData])
+
 		useEffect(() => {
-			if (data && type === authConstants.LOGIN) {
+			if (loginData && type === authConstants.LOGIN) {
 				setTimeout(() => {
 					router.push('/')
 				}, 2000)
 			}
-		}, [data, router, type])
+		}, [loginData, router, type])
+
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()
 
@@ -73,18 +90,20 @@ const AuthForm: FC<AuthFormProps> = memo(
 			const formData = Object.fromEntries(form.entries())
 			const formSchema =
 				type === authConstants.SIGNUP ? formSignUpSchema : formLoginSchema
-			const validationResult = formSchema.safeParse(formData)
+			const validationResult = formSchema.safeParse(formData) as any
 
 			if (!validationResult.success) {
 				const errors = validationResult.error.format()
 				setFormErrors(errors)
 			} else {
 				setFormErrors({ _errors: [] })
-				auth({
-					variables: {
-						input: validationResult.data,
-					},
-				})
+				const variables = { input: validationResult.data }
+
+				if (type === authConstants.SIGNUP) {
+					signUp({ variables: variables as SignUpInput })
+				} else {
+					login({ variables: variables as LoginInput })
+				}
 			}
 		}
 
@@ -93,16 +112,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 				onSubmit={onSubmit}
 				className={classNames(cls.LoginForm, {}, [className])}
 			>
-				{/* Информация над формой  регистрации / логина */}
 				<InfoMessage error={error} data={data} type={type} />
-
-				{/* Инпуты которые используется при регистрации */}
-				<RegistraionInputs type={type} formErrors={formErrors} />
-
-				{/* Инпуты логина(email) и пароля(password) */}
+				<RegistrationInputs type={type} formErrors={formErrors} />
 				<BasicInputs formErrors={formErrors} />
-
-				{/* Кнопки для формы */}
 				<ButtonsForm type={type} setIsFormType={setIsFormType} />
 			</form>
 		)

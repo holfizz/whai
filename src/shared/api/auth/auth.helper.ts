@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie'
 
-export const getUserFromStorage = () => {
+export const getAuthStateFromStorage = () => {
 	if (typeof window !== 'undefined') {
-		return JSON.parse(localStorage.getItem('user') || '{}')
+		return JSON.parse(localStorage.getItem('authState') || '{}')
 	}
 }
 

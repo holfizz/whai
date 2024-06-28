@@ -56,7 +56,8 @@
 		"Settings": "Настройки",
 		"Log Out": "Выйти",
 		"Log in": "Войти",
-		"Sign up": "Регистрация"
+		"Sign up": "Регистрация",
+		"Subscription": "Подписка"
 	},
 	"SidebarSetting": {
 		"My account": "Мой аккаунт ",
@@ -105,6 +106,14 @@
 	},
 	"ChatWithAI": {
 		"Enter your request": "Введите ваш запрос"
+	},
+
+	"Sidebar": {
+		"Main": "Главная",
+		"Courses": "Курсы",
+		"Chat with AI": "Чат с ИИ",
+		"Statistics": "Статистика",
+		"Settings": "Настройки"
 	},
 	"Close": "Закрыть",
 	"Open": "Открыть",

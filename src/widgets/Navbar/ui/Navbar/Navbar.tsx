@@ -1,7 +1,6 @@
 'use client'
-import Logo from '@/shared/ui/Logo/Logo'
-// import { Button } from '@nextui-org/react'
-import { useAuth } from '@/features/auth'
+import { useGetProfile } from '@/entities/Auth/model/auth.queries'
+import { logout } from '@/features/auth/model/auth.model'
 import { Link } from '@/navigation'
 import {
 	getDashboardRoute,
@@ -11,12 +10,14 @@ import {
 	getSupportRoute,
 } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
-import { LogoSize } from '@/shared/ui/Logo/Logo'
 import {
-	Avatar,
 	Dropdown,
 	DropdownItem,
 	DropdownMenu,
+} from '@/shared/ui/Dropdown/Dropdown'
+import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
+import {
+	Avatar,
 	DropdownTrigger,
 	NavbarBrand,
 	NavbarContent,
@@ -47,13 +48,16 @@ export function Navbar() {
 		'Help & Feedback',
 		'Log Out',
 	]
-	const { user, setAuthUser, logout } = useAuth()
+
 	const [isClient, setIsClient] = useState(false)
+	const { userData } = useGetProfile()
+
 	useEffect(() => {
 		setIsClient(true)
 	}, [])
+
 	return (
-		<UINavbar className='h-full' onMenuOpenChange={setIsMenuOpen}>
+		<UINavbar className={cls.navbar} onMenuOpenChange={setIsMenuOpen}>
 			<NavbarContent>
 				<NavbarMenuToggle
 					aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -65,7 +69,7 @@ export function Navbar() {
 			</NavbarContent>
 
 			<NavbarContent className='hidden sm:flex gap-4' justify='center'>
-				<Dropdown>
+				<Dropdown color='peach'>
 					<NavbarItem>
 						<DropdownTrigger>
 							<Button
@@ -80,55 +84,46 @@ export function Navbar() {
 							</Button>
 						</DropdownTrigger>
 					</NavbarItem>
-					<DropdownMenu
-						variant='faded'
-						aria-label='ACME features'
-						className='w-[340px]'
-						itemClasses={{
-							base: 'gap-4',
-						}}
-					>
+					<DropdownMenu className='w-[340px]' color='peach'>
 						<DropdownItem
-							variant='faded'
 							key='autoscaling'
 							description='ACME scales apps to meet user demand, automagically, based on load.'
+							color='peach'
 						>
 							Autoscaling
 						</DropdownItem>
 						<DropdownItem
-							variant='faded'
 							key='usage_metrics'
 							description='Real-time metrics to debug issues. Slow query added? We’ll show you exactly where.'
+							color='peach'
 						>
 							Usage Metrics
 						</DropdownItem>
 						<DropdownItem
-							variant='faded'
-							color='secondary'
 							key='production_ready'
 							description='ACME runs on ACME, join us and others serving requests at web scale.'
+							color='peach'
 						>
 							Production Ready
 						</DropdownItem>
 						<DropdownItem
-							color='warning'
 							key='99_uptime'
 							description='Applications stay on the grid with high availability and high uptime guarantees.'
+							color='peach'
 						>
 							+99% Uptime
 						</DropdownItem>
 						<DropdownItem
-							variant='faded'
-							color='danger'
 							isSelected
 							key='supreme_support'
 							description='Overcome any challenge with a supporting team ready to respond.'
+							color='peach'
 						>
 							+Supreme Support
 						</DropdownItem>
 					</DropdownMenu>
 				</Dropdown>
-				<NavbarItem isActive>
+				<NavbarItem>
 					<Link color='foreground' href='#'>
 						{t('Customers')}
 					</Link>
@@ -140,25 +135,21 @@ export function Navbar() {
 				</NavbarItem>
 			</NavbarContent>
 			<NavbarContent justify='end'>
-				{user?.email ? (
+				{userData?.email ? (
 					<>
-						<Dropdown placement='bottom-end'>
+						<Dropdown color='peach'>
 							<DropdownTrigger>
 								<Avatar
 									className={cls.avatar}
 									isBordered
 									as='button'
-									src={user.avatarPath}
+									src={userData.avatarPath}
 								/>
 							</DropdownTrigger>
-							<DropdownMenu aria-label='Profile Actions' variant='flat'>
-								<DropdownItem
-									color='secondary'
-									key='profile'
-									className='h-14 gap-2'
-								>
+							<DropdownMenu color='peach' aria-label='Profile Actions'>
+								<DropdownItem key='profile' className='h-14 gap-2'>
 									<p className='font-semibold'>{t('Signed in as')}</p>
-									<p className='font-semibold'>{user.email}</p>
+									<p className='font-semibold'>{userData.email}</p>
 								</DropdownItem>
 								<DropdownItem
 									as={Link}
@@ -177,7 +168,6 @@ export function Navbar() {
 								<DropdownItem
 									href={getSupportRoute()}
 									as={Link}
-									color='warning'
 									key='help_and_feedback'
 								>
 									{t('Help Feedback')}
@@ -206,7 +196,7 @@ export function Navbar() {
 								<NavbarItem>
 									<Button
 										as={Link}
-										color='mainFill'
+										color='accent'
 										href={getRouteSignUp()}
 										className={cls.SignUpButton}
 									>

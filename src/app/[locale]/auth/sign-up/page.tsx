@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { unstable_setRequestLocale } from 'next-intl/server'
-import SignUpPageAsync from './ui/SignUp.async'
+import SignUpPageAsync from './(ui)/SignUp.async'
 
 export const metadata: Metadata = {
 	title: 'Зарегистрировать аккаунт | Whai',

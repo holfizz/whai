@@ -1,10 +1,10 @@
+import client from '@/app/(providers)/ApolloProvider/ui/apollo-client'
 import { IAuthResponse } from '@/entities/Auth'
+import { gql, useLazyQuery, useMutation } from '@apollo/client'
+import { authUserVar, logout } from './auth.model'
 
-import { gql, useMutation } from '@apollo/client'
-import { authUserVar } from './auth.model'
-
-// SIGN UP
-interface SignUpInput {
+//==========input=======================================//
+export interface SignUpInput {
 	input: {
 		email: string
 		firstName?: string
@@ -14,11 +14,38 @@ interface SignUpInput {
 	}
 }
 
-export const SIGN_UP = gql`
+export interface LoginInput {
+	input: {
+		email: string
+		password: string
+	}
+}
+
+export interface GetNewTokenInput {
+	input: {
+		accessToken: string
+	}
+}
+
+//==========response=======================================//
+export interface GetNewTokenMutationResponse {
+	getNewToken: {
+		accessToken: string
+	}
+}
+export interface SignUpMutationResponse {
+	signUp: IAuthResponse
+}
+
+export interface LoginMutationResponse {
+	login: IAuthResponse
+}
+
+// GraphQL мутации
+const SIGN_UP = gql`
 	mutation signUp($input: SignUpInput!) {
 		signUp(signUpInput: $input) {
 			accessToken
-			refreshToken
 			user {
 				email
 				roles
@@ -31,30 +58,17 @@ export const SIGN_UP = gql`
 	}
 `
 export const useSignUpMutation = () => {
-	const [signUpMutation, { data, error }] = useMutation<
-		{ signUp: IAuthResponse },
+	const [mutate, { data, loading, error }] = useMutation<
+		SignUpMutationResponse,
 		SignUpInput
-	>(SIGN_UP, {
-		onCompleted: data => {
-			authUserVar(data.signUp)
-		},
-	})
-	return { signUpMutation, data: data?.signUp, error }
+	>(SIGN_UP)
+	return { signUp: mutate, data, loading, error }
 }
 
-// LOGIN
-interface LoginInput {
-	input: {
-		email: string
-		password: string
-	}
-}
-
-export const LOGIN = gql`
+const LOGIN = gql`
 	mutation login($input: loginInput!) {
 		login(loginInput: $input) {
 			accessToken
-			refreshToken
 			user {
 				email
 				roles
@@ -68,46 +82,56 @@ export const LOGIN = gql`
 `
 
 export const useLoginMutation = () => {
-	const [loginMutation, { data, error }] = useMutation<
-		{ login: IAuthResponse },
+	const [mutate, { data, loading, error }] = useMutation<
+		LoginMutationResponse,
 		LoginInput
 	>(LOGIN, {
 		onCompleted: data => {
 			authUserVar(data.login)
 		},
 	})
-	return { loginMutation, data: data?.login, error }
-}
-// REFRESH TOKEN
-export interface getUserInput {
-	input: {
-		refreshToken: string
-	}
+	return { login: mutate, data, loading, error }
 }
 
-export const REFRESH_TOKEN = gql`
-	mutation getNewToken($input: RefreshTokenInput!) {
-		getNewToken(refreshTokenInput: $input) {
+export const GET_NEW_TOKEN = gql`
+	mutation getNewToken {
+		getNewToken {
 			accessToken
-			refreshToken
 		}
 	}
 `
 
-export const useGetUserMutation = () => {
-	const [refreshTokenMutation, { data, error }] = useMutation<
-		{ getNewToken: IAuthResponse },
-		getUserInput
-	>(REFRESH_TOKEN, {
+export const useGetNewTokenMutation = () => {
+	const [mutate, { data, loading, error }] = useMutation<
+		GetNewTokenMutationResponse,
+		GetNewTokenInput
+	>(GET_NEW_TOKEN, {
 		onCompleted: data => {
-			authUserVar(data.getNewToken)
+			const currentState = authUserVar()
+			if (currentState && currentState.user) {
+				const updatedAuthState = {
+					...currentState,
+					accessToken: data.getNewToken.accessToken,
+				}
+				authUserVar(updatedAuthState)
+			}
+			client.reFetchObservableQueries()
 		},
 	})
-	return { refreshTokenMutation, data: data?.getNewToken, error }
+	return { refreshAccessToken: mutate, data, loading, error }
 }
 
-export const LOGOUT = gql`
-	mutation logout {
+const LOGOUT = gql`
+	query logout {
 		logout
 	}
 `
+
+export const useLogoutQuery = () => {
+	const [query, { loading, error }] = useLazyQuery<any>(LOGOUT, {
+		onCompleted: () => {
+			logout()
+		},
+	})
+	return { logout: query, loading, error }
+}

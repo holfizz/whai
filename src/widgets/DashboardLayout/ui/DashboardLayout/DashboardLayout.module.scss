@@ -7,14 +7,21 @@
 	height: 100vh;
 	display: flex;
 }
-
 .layout {
 	display: flex;
-	flex-direction: column;
 }
 .sidebarWrapper {
+	display: flex;
 	position: relative;
 	height: 100%;
+}
+@media screen and (max-width: 639px) {
+	.sidebarWrapper {
+		display: none;
+	}
+}
+.contentWrapper {
+	padding: 20px;
 }
 .navbarWrapper {
 	position: relative;

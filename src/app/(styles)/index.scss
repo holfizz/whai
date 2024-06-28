@@ -10,23 +10,11 @@
 html,
 body {
 	min-height: 100%;
-	color: var(--primary-color);
+	color: var(--color-accent);
 	height: auto;
-	// background: repeating-linear-gradient(
-	// 		var(--background-color),
-	// 		var(--background-color) 20px,
-	// 		transparent 22px
-	// 	),
-	// 	repeating-linear-gradient(
-	// 		90deg,
-	// 		var(--background-color),
-	// 		var(--background-color) 20px,
-	// 		transparent 22px
-	// 	);
 	font-size: calc(10px + 4 * (100vw - 320px) / 880);
-	background: var(--background-color);
+	background: var(--color-background-1);
 }
-
-.isCollapsedMobile {
-	margin-left: 0;
+.bg-content1 {
+	background: none;
 }

@@ -3,21 +3,14 @@ import { FC } from 'react'
 
 import { authConstants } from '@/shared/const/auth'
 import { useTranslations } from 'next-intl'
+import {
+	LoginMutationResponse,
+	SignUpMutationResponse,
+} from '../../model/auth.queries'
 
 interface InfoMessageProps {
 	error?: any
-	data:
-		| {
-				user: {
-					email: string
-					firstName: string
-					lastName: string
-					phoneNumber: string
-					avatarPath: string
-				}
-				accessToken: string
-		  }
-		| undefined
+	data: LoginMutationResponse | SignUpMutationResponse
 	type: authConstants
 }
 
