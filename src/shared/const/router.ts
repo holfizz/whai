@@ -7,11 +7,10 @@ export const getRouteForgotPassword = () => `/auth/forgot-password`
 
 //i
 export const getDashboardRoute = () => `/d`
-export const getSettingsRoute = () => `/i/settings`
-export const getCurrentChatRoute = (id: number) => `/i/chat/${id}`
-export const getCurrentChatWithAIRoute = (id: number) => `/i/chat/ai/${id}`
-export const getChatRoute = () => `/i/chat`
-export const getAiChatRoute = () => `/i/chat/ai`
-export const getRoute = () => `/i/settings`
+export const getCoursesRoute = () => `/d/courses`
+export const getChatWithAIRoute = () => `/d/chat-ai`
+export const getStatisticsRoute = () => `/statistics`
+
+export const getSettingsRoute = () => `/d/settings`
 
 export const getSupportRoute = () => `/support`

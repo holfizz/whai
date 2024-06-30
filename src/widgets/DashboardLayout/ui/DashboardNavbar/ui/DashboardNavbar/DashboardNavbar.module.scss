@@ -1,18 +1,62 @@
 .DashboardNavbar {
-	background: var(--color-decor-1);
-	height: (--navbar-height);
+  background: var(--color-decor-1);
+  height: (--navbar-height);
 }
+
 .MenuDark {
-	padding: 0;
+  padding: 0;
 }
+
 .Menu {
-	width: 80%;
-	height: 100%;
-	top: 0;
-	margin-left: auto;
-	background: var(--color-decor-1);
+  width: 80%;
+  height: 100%;
+  top: 0;
+  margin-left: auto;
+  background: var(--color-decor-1);
 }
+
 .MenuItem {
-	width: 100%;
-	height: 50px;
+  width: 100%;
+  height: 50px;
+}
+
+.logoBlock {
+  display: none;
+  margin-right: auto;
+}
+
+.logo {
+  height: 30px;
+}
+
+.logoTitle {
+  font-size: 16px !important;
+  color: var(--color-decor-8);
+}
+
+@media screen and (max-width: 640px) {
+  .logoBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--navbar-height);
+    padding: 0 20px;
+    width: 116px;
+  }
+  .subscriptionButton {
+    display: none;
+  }
+}
+
+.popoverContent {
+  padding: 10px;
+  min-width: 200px;
+  min-height: 300px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.popoverButton {
+  margin-top: 10px;
 }

@@ -1,4 +1,11 @@
 import {
+	getChatWithAIRoute,
+	getCoursesRoute,
+	getDashboardRoute,
+	getSettingsRoute,
+	getStatisticsRoute,
+} from '@/shared/const/router'
+import {
 	BarChartBig,
 	BookHeart,
 	Brain,
@@ -16,27 +23,27 @@ export const sidebarItems: ISidebarItem[] = [
 	{
 		text: 'Main',
 		icon: House,
-		link: '/main',
+		link: getDashboardRoute(),
 	},
 	{
 		text: 'Courses',
 		icon: BookHeart,
-		link: '/courses',
+		link: getCoursesRoute(),
 	},
 	{
 		text: 'Chat with AI',
 		icon: Brain,
-		link: '/',
+		link: getChatWithAIRoute(),
 	},
 	{
 		text: 'Statistics',
 		icon: BarChartBig,
-		link: '/statistics',
+		link: getStatisticsRoute(),
 	},
 
 	{
 		text: 'Settings',
 		icon: Settings,
-		link: '/settings',
+		link: getSettingsRoute(),
 	},
 ]

@@ -9,12 +9,13 @@
 
 html,
 body {
-	min-height: 100%;
-	color: var(--color-accent);
-	height: auto;
-	font-size: calc(10px + 4 * (100vw - 320px) / 880);
-	background: var(--color-background-1);
+  min-height: 100vh;
+  color: var(--color-accent);
+  height: auto;
+  font-size: calc(10px + 4 * (100vw - 320px) / 880);
+  background: var(--color-background-1);
 }
+
 .bg-content1 {
-	background: none;
+  background: none;
 }

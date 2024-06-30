@@ -115,6 +115,10 @@
 		"Statistics": "Статистика",
 		"Settings": "Настройки"
 	},
+	"Dashboard": {
+		"Continue education": "Продолжить обучение",
+		"Welcome back": "С возвращением"
+	},
 	"Close": "Закрыть",
 	"Open": "Открыть",
 	"User": "Пользователь",

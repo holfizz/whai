@@ -1,35 +1,44 @@
 .DashboardLayout {
-	width: 100%;
-	height: 100vh;
+  width: 100%;
+  height: 100vh;
 }
+
 .wrapper {
-	width: 100%;
-	height: 100vh;
-	display: flex;
+  width: 100%;
+  height: 100vh;
+  display: flex;
 }
+
 .layout {
-	display: flex;
+  display: flex;
 }
+
 .sidebarWrapper {
-	display: flex;
-	position: relative;
-	height: 100%;
+  display: flex;
+  position: relative;
+  height: 100%;
 }
+
 @media screen and (max-width: 639px) {
-	.sidebarWrapper {
-		display: none;
-	}
+  .sidebarWrapper {
+    display: none;
+  }
 }
+
 .contentWrapper {
-	padding: 20px;
+  padding: 20px;
 }
+
 .navbarWrapper {
-	position: relative;
-	width: 100%;
-	height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
 }
+
 @media (min-width: 1400px) {
-	.contentWrapper {
-		max-width: 1400px;
-	}
+  .contentWrapper {
+    max-width: 1400px;
+  }
 }
