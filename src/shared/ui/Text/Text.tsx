@@ -1,6 +1,7 @@
-import { Mods, classNames } from '@/shared/lib/classNames/classNames'
-import { FC, memo } from 'react'
+import {classNames, Mods} from '@/shared/lib/classNames/classNames'
+import {FC, memo} from 'react'
 import cls from './Text.module.scss'
+import {Skeleton} from "@nextui-org/react";
 
 export enum TextTheme {
 	PRIMARY = 'primary',
@@ -31,6 +32,7 @@ interface TextProps {
 	theme?: TextTheme
 	align?: TextAlign
 	size?: TextSize
+	isLoading?: boolean
 }
 
 const Text: FC<TextProps> = memo(props => {
@@ -43,6 +45,7 @@ const Text: FC<TextProps> = memo(props => {
 		theme = TextTheme.PRIMARY,
 		align = TextAlign.LEFT,
 		size = TextSize.L,
+		isLoading
 	} = props
 
 	const mods: Mods = {
@@ -58,6 +61,12 @@ const Text: FC<TextProps> = memo(props => {
 		[TextSize.XL]: 'h1',
 	}
 	const HeaderTag = mapSizeToHeaderTag[size]
+	if (isLoading) {
+		return <div>
+			{title && <Skeleton className="rounded-2xl w-[150px] h-4"/>}
+			{text && <Skeleton className="rounded-2xl mt-3 w-[200px] h-4"/>}
+		</div>
+	}
 	return (
 		<div className={classNames('', mods, [className])}>
 			{title && (

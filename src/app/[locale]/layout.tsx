@@ -1,10 +1,10 @@
-import { locales } from '@/navigation'
-import { NextIntlClientProvider, useMessages } from 'next-intl'
-import { unstable_setRequestLocale } from 'next-intl/server'
-import { Ubuntu } from 'next/font/google'
-import { FC } from 'react'
+import {NextIntlClientProvider, useMessages} from 'next-intl'
+import {unstable_setRequestLocale} from 'next-intl/server'
+import {Ubuntu} from 'next/font/google'
+import {FC} from 'react'
 import '../(styles)/index.scss'
 import Body from './body'
+import {locales} from "@/navigation";
 
 const UbuntuSans = Ubuntu({
 	subsets: ['latin', 'latin-ext', 'cyrillic'],
@@ -17,6 +17,7 @@ interface Props {
 export function generateStaticParams() {
 	return locales.map(locale => ({ locale }))
 }
+
 
 const LocaleLayout: FC<Props> = ({ children, params: { locale } }) => {
 	unstable_setRequestLocale(locale)

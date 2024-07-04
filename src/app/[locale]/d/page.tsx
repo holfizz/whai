@@ -1,5 +1,5 @@
-import { Metadata } from 'next'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import {Metadata} from 'next'
+import {unstable_setRequestLocale} from 'next-intl/server'
 import DMainAsync from './(ui)/DMain.async'
 
 export const metadata: Metadata = {

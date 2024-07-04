@@ -1,7 +1,7 @@
 .sidebar {
   height: 100%;
 
-  background: var(--color-decor-1);
+  background: var(--color-decor-4);
 }
 
 @media screen and (max-width: 768px) {
@@ -33,7 +33,7 @@
 }
 
 .logoTitle {
-  color: var(--color-decor-8);
+  color: var(--color-accent);
 }
 
 .sidebarCollapsedButton {

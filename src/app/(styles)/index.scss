@@ -1,7 +1,5 @@
 @import 'reset';
-@import 'variables/global';
-@import 'themes/light';
-@import 'themes/dark';
+@import 'global';
 
 @tailwind base;
 @tailwind components;
@@ -13,7 +11,7 @@ body {
   color: var(--color-accent);
   height: auto;
   font-size: calc(10px + 4 * (100vw - 320px) / 880);
-  background: var(--color-background-1);
+  background: var(--color-white);
 }
 
 .bg-content1 {

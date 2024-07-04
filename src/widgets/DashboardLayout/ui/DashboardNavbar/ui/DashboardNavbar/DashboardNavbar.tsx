@@ -9,7 +9,6 @@ import Text from '@/shared/ui/Text/Text'
 import {
   Avatar,
   DropdownTrigger,
-  Link,
   Navbar,
   NavbarContent,
   NavbarMenu,
@@ -25,6 +24,7 @@ import cls from './DashboardNavbar.module.scss'
 import {FaRegBell} from "react-icons/fa"
 import {Popover, PopoverContent} from "@/shared/ui/Popover/Popover"
 import {X} from "lucide-react"
+import {Link} from "@/navigation";
 
 interface IDashboardNavbar {
 }
@@ -55,7 +55,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
         <Button className={cls.subscriptionButton} color='accent'>
           {t('Subscription')}
         </Button>
-        <Popover color={'peach'} placement="bottom">
+        <Popover color={'peach'} placement="bottom-end">
           <PopoverTrigger>
             <Button color={'peach'} isIconOnly={true} startContent={<FaRegBell/>}/>
           </PopoverTrigger>
@@ -66,7 +66,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
           </PopoverContent>
         </Popover>
         {userData?.email && (
-          <Dropdown color='peach' placement='bottom-end'>
+          <Dropdown color='white' placement='bottom-end'>
             <DropdownTrigger>
               <Avatar
                 className={cls.avatar}
@@ -75,16 +75,16 @@ export function DashboardNavbar({}: IDashboardNavbar) {
               />
             </DropdownTrigger>
             <DropdownMenu
-              color='peach'
+              color='white'
               aria-label='Profile Actions'
               variant='flat'
             >
-              <DropdownItem color='peach' key='profile' className='h-14 gap-2'>
+              <DropdownItem color='white' key='profile' className='h-14 gap-2'>
                 <p className='font-semibold'>{t('Signed in as')}</p>
                 <p className='font-semibold'>{userData.email}</p>
               </DropdownItem>
               <DropdownItem
-                color='peach'
+                color='white'
                 as={Link}
                 href={getDashboardRoute()}
                 key='dashboard'
@@ -92,7 +92,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
                 {t('Dashboard')}
               </DropdownItem>
               <DropdownItem
-                color='peach'
+                color='white'
                 href={getSettingsRoute()}
                 as={Link}
                 key='settings'
@@ -100,7 +100,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
                 {t('Settings')}
               </DropdownItem>
               <DropdownItem
-                color='peach'
+                color='white'
                 href={getSupportRoute()}
                 as={Link}
                 key='help_and_feedback'

@@ -33,7 +33,7 @@ const Sidebar = () => {
     >
       <div className={cls.logoBlock}>
         <Logo
-          color='var(--color-decor-8)'
+          color='var(--color-accent)'
           logoType={'short'}
           className={cls.logo}
         />

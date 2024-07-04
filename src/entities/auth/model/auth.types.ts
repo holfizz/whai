@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import { ProfileData, ProfileState } from './auth.contracts'
+import {z} from 'zod'
+import {ProfileData, ProfileState} from './auth.contracts'
 
 export interface IUser {
 	email: string

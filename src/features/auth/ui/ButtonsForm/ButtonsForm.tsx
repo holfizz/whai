@@ -1,19 +1,14 @@
-import { FC, Dispatch, SetStateAction } from 'react'
+import {Dispatch, FC, SetStateAction} from 'react'
 import cls from '../AuthForm/AuthForm.module.scss'
 
-import { authConstants } from '@/shared/const/auth'
+import {authConstants} from '@/shared/const/auth'
 
 import Button from '@/shared/ui/Button/Button'
-import { Link } from '@/navigation'
+import {Link} from '@/navigation'
 
-import {
-	getRouteForgotPassword,
-	getRouteLogin,
-	getRouteSignUp,
-} from '@/shared/const/router'
+import {getRouteForgotPassword, getRouteLogin, getRouteSignUp,} from '@/shared/const/router'
 
-import { useTranslations } from 'next-intl'
-import { z } from 'zod'
+import {useTranslations} from 'next-intl'
 
 interface ButtonsFormProps {
     type:authConstants
@@ -30,7 +25,7 @@ const ButtonsForm: FC<ButtonsFormProps> = ({
 
     return (
         <>
-				<Button color='mainFill' type={'submit'} className={cls.submitButton}>
+					<Button color='warning' type={'submit'} className={cls.submitButton}>
 					{type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
 				</Button>
 
