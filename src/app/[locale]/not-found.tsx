@@ -1,5 +1,5 @@
-import { NO_INDEX_PAGE } from '@/shared/const/seo'
-import type { Metadata } from 'next'
+import {NO_INDEX_PAGE} from '@/shared/const/seo'
+import type {Metadata} from 'next'
 import cls from './not-found.module.scss'
 
 export const metadata: Metadata = {
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 	...NO_INDEX_PAGE,
 }
 
-export default function Page() {
+export default function IndexPage() {
 	return <div className={cls.errorPage}>not found</div>
 }

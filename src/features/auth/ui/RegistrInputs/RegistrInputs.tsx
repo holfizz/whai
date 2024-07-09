@@ -1,11 +1,11 @@
-import { FC } from 'react'
+import {FC} from 'react'
 import cls from '../AuthForm/AuthForm.module.scss'
 
-import { authConstants } from '@/shared/const/auth'
+import {authConstants} from '@/shared/const/auth'
 import InputField from '../InputLabel/InputField'
 
-import { useTranslations } from 'next-intl'
-import { z } from 'zod'
+import {useTranslations} from 'next-intl'
+import {z} from 'zod'
 
 interface RegistrationInputsProps {
     type: authConstants,
@@ -42,7 +42,7 @@ const RegistraionInputs: FC<RegistrationInputsProps> = ({
                             formErrors.phoneNumber?._errors.length ? 'danger' : 'default'
                         }
                         errorMessage={formErrors.phoneNumber?._errors
-                            ?.map((error: string) => tAuthValidation(error))
+                          ?.map((error: any) => tAuthValidation(error))
                             .join(', ')}
                         placeholder={t('Enter your phone number')}
                     />
@@ -55,7 +55,7 @@ const RegistraionInputs: FC<RegistrationInputsProps> = ({
                             formErrors.firstName?._errors.length ? 'danger' : 'default'
                         }
                         errorMessage={formErrors.firstName?._errors
-                            ?.map((error: string) => tAuthValidation(error))
+                          ?.map((error: any) => tAuthValidation(error))
                             .join(', ')}
                         placeholder={t('Enter your first name')}
                     />
@@ -66,7 +66,7 @@ const RegistraionInputs: FC<RegistrationInputsProps> = ({
                         type='text'
                         color={formErrors.lastName?._errors.length ? 'danger' : 'default'}
                         errorMessage={formErrors.lastName?._errors
-                            ?.map((error: string) => tAuthValidation(error))
+                          ?.map((error: any) => tAuthValidation(error))
                             .join(', ')}
                         placeholder={t('Enter your last name')}
                     />

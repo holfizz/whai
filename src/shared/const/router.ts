@@ -5,7 +5,7 @@ export const getRouteLogin = () => `/auth/login`
 export const getRouteSignUp = () => `/auth/sign-up`
 export const getRouteForgotPassword = () => `/auth/forgot-password`
 
-//i
+//dashboard - d
 export const getDashboardRoute = () => `/d`
 export const getCoursesRoute = () => `/d/courses`
 export const getCourseByIdRoute = (id: string) => `/d/course/${id}`

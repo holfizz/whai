@@ -1,6 +1,7 @@
 .DashboardNavbar {
-  background: var(--color-white);
-  height: (--navbar-height);
+  background: transparent;
+  backdrop-filter: none;
+  height: var(--navbar-height);
 }
 
 .MenuDark {

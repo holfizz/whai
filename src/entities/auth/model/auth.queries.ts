@@ -1,6 +1,6 @@
 'use client'
 import {gql, useMutation, useQuery} from '@apollo/client'
-import {IUser} from '..'
+import {IUser} from "./auth.types"
 
 export const LOGOUT = gql`
     query Logout {

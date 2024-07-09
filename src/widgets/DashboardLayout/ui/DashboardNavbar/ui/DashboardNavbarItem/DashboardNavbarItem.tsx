@@ -1,6 +1,6 @@
-import { Link } from '@/navigation'
-import { DropdownItem } from '@/shared/ui/Dropdown/Dropdown'
-import { dashboardNavbarItems } from '../../module/dashboard-navbar-items.data'
+import {Link} from '@/navigation'
+import {DropdownItem} from '@/shared/ui/Dropdown/Dropdown'
+import {dashboardNavbarItems} from '../../module/dashboard-navbar-items.data'
 
 const DashboardNavbarItems = ({ userData }) => {
 	return (

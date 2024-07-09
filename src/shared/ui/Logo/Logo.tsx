@@ -1,9 +1,9 @@
 'use client'
-import { useRouter } from '@/navigation'
-import { WhaiBig } from '@/shared/assets/logo/WhaiBig'
-import { WhaiSmall } from '@/shared/assets/logo/WhaiSmall'
-import { Mods, classNames } from '@/shared/lib/classNames/classNames'
-import { FC, memo } from 'react'
+import {useRouter} from '@/navigation'
+import {WhaiBig} from '@/shared/assets/logo/WhaiBig'
+import {WhaiSmall} from '@/shared/assets/logo/WhaiSmall'
+import {classNames, Mods} from '@/shared/lib/classNames/classNames'
+import {FC, memo} from 'react'
 import cls from './Logo.module.scss'
 
 export enum LogoSize {

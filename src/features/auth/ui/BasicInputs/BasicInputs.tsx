@@ -1,13 +1,13 @@
-import { Input } from '@nextui-org/react'
-import { FC, useState } from 'react'
+import {Input} from '@nextui-org/react'
+import {FC, useState} from 'react'
 
 import cls from '../AuthForm/AuthForm.module.scss'
 import InputField from '../InputLabel/InputField'
-import { useTranslations } from 'next-intl'
-import { z } from 'zod'
+import {useTranslations} from 'next-intl'
+import {z} from 'zod'
 
-import { HiOutlineEye } from 'react-icons/hi'
-import { PiEyeClosedBold } from 'react-icons/pi'
+import {HiOutlineEye} from 'react-icons/hi'
+import {PiEyeClosedBold} from 'react-icons/pi'
 
 interface BasicInputsProps {
     formErrors: z.ZodFormattedError<{
@@ -40,7 +40,7 @@ const BasicInputs: FC<BasicInputsProps> = ({
                 label={t('Email')}
                 color={formErrors.email?._errors.length ? 'danger' : 'default'}
                 errorMessage={formErrors.email?._errors
-                    ?.map((error: string) => tAuthValidation(error))
+                  ?.map((error: any) => tAuthValidation(error))
                     .join(', ')}
                 placeholder={t('Enter your email')}
             />
@@ -67,7 +67,7 @@ const BasicInputs: FC<BasicInputsProps> = ({
                         }
                         color={formErrors.password?._errors.length ? 'danger' : 'default'}
                         errorMessage={formErrors.password?._errors
-                            ?.map((error: string) => tAuthValidation(error))
+                          ?.map((error: any) => tAuthValidation(error))
                             .join(', ')}
                         type={isVisible ? 'text' : 'password'}
                         name='password'

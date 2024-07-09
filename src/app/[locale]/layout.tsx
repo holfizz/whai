@@ -14,10 +14,11 @@ interface Props {
 	params: { locale: string }
 	children: React.ReactNode
 }
-export function generateStaticParams() {
-	return locales.map(locale => ({ locale }))
-}
 
+
+export function generateStaticParams() {
+	return locales.map((locale) => ({locale}))
+}
 
 const LocaleLayout: FC<Props> = ({ children, params: { locale } }) => {
 	unstable_setRequestLocale(locale)
@@ -29,7 +30,7 @@ const LocaleLayout: FC<Props> = ({ children, params: { locale } }) => {
 				<link rel='icon' href={'/Whai.svg'} sizes='any' />
 			</head>
 			<Body className={UbuntuSans.className}>
-				<NextIntlClientProvider locale={locale} messages={messages}>
+				<NextIntlClientProvider messages={messages} locale={locale}>
 					{children}
 				</NextIntlClientProvider>
 			</Body>

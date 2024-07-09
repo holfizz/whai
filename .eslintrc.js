@@ -2,23 +2,23 @@ module.exports = {
 	env: {
 		browser: true,
 		es2021: true,
-		jest: true,
+		jest: true
 	},
 	extends: ['plugin:react/recommended'],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaFeatures: {
-			jsx: true,
+			jsx: true
 		},
 		ecmaVersion: 'latest',
-		sourceType: 'module',
+		sourceType: 'module'
 	},
 	plugins: [
 		'react',
 		'@typescript-eslint',
 		'unused-imports',
 		'react-hooks',
-		'unused-imports',
+		'unused-imports'
 	],
 	rules: {
 		'unused-imports/no-unused-imports': 'error',
@@ -27,8 +27,8 @@ module.exports = {
 		'react/jsx-filename-extension': [
 			2,
 			{
-				extensions: ['.js', '.jsx', '.tsx', '.ts'],
-			},
+				extensions: ['.js', '.jsx', '.tsx', '.ts']
+			}
 		],
 		'import/no-unresolved': 'off',
 		'import/prefer-default-export': 'off',
@@ -49,6 +49,6 @@ module.exports = {
 		'react/prop-types': 0,
 		'react/display-name': 'off',
 		'no-undef': 'off',
-		'react/no-array-index-key': 'off',
-	},
+		'react/no-array-index-key': 'off'
+	}
 }

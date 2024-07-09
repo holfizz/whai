@@ -1,5 +1,5 @@
-import { redirect } from '@/navigation'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import {redirect} from '@/navigation'
+import {unstable_setRequestLocale} from 'next-intl/server'
 
 export default function RootPage({
 	params: { locale },

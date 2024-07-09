@@ -1,13 +1,13 @@
-import {Metadata} from 'next'
-import {unstable_setRequestLocale} from 'next-intl/server'
-import DMainAsync from './(ui)/DMain.async'
+import { Metadata } from 'next'
+import { unstable_setRequestLocale } from 'next-intl/server'
+import DMainAsync from './(ui)/(page)/DMain.async'
 
 export const metadata: Metadata = {
-	title: 'Dashboard | Whai',
+	title: 'Dashboard | Whai'
 }
 
 export default function Page({
-	params: { locale },
+	params: { locale }
 }: {
 	params: { locale: string }
 }) {

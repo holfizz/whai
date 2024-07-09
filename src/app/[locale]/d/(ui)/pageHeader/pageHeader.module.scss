@@ -1,0 +1,24 @@
+.personWelcomeBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+}
+
+.avatar {
+  height: 100px;
+  width: 100px;
+}
+
+.welcomeBlcTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  align-items: center;
+
+  p {
+    width: 250px;
+    word-break: break-all;
+  }
+}

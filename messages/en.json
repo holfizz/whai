@@ -109,7 +109,12 @@
   },
   "Dashboard": {
     "Continue education": "Continue education",
-    "Welcome back": "Welcome back"
+    "Let's begin! (1/4)": "Let's begin! (1/4)",
+    "Welcome back": "Welcome back",
+    "Recommendations": "Recommendations",
+    "View all": "View all",
+    "topics": "topics",
+    "hours": "hours"
   },
   "Close": "Close",
   "Open": "Open",

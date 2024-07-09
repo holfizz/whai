@@ -1,7 +1,7 @@
 import createIntlMiddleware from 'next-intl/middleware'
 import { NextRequest, NextResponse } from 'next/server'
 import { locales } from './navigation'
-import { EnumTokens } from './shared/types/auth'
+import { EnumTokens } from '@/shared/types/auth'
 
 const nextIntlMiddleware = createIntlMiddleware({
 	locales,
@@ -15,12 +15,17 @@ export default function (req: NextRequest) {
 	const isHomePage = url === `http://localhost:3000/${locale}`
 	const accessToken = cookies.get(EnumTokens.ACCESS_TOKEN)?.value
 	const isAuthPage = url.includes('auth')
+	const isDashboardPage = url.includes('/d/')
 	if (isHomePage) {
 		return NextResponse.next()
 	}
 
 	if (isAuthPage && accessToken) {
 		return NextResponse.redirect(new URL(`/${locale}/`, url))
+	}
+
+	if (isDashboardPage && !accessToken) {
+		return NextResponse.redirect(new URL(`/${locale}/auth/login`, url))
 	}
 
 	if (isAuthPage) {
@@ -34,9 +39,5 @@ export default function (req: NextRequest) {
 }
 
 export const config = {
-	matcher: [
-		'/',
-		'/(ru|en|ar|bn|es|bn)/:path*',
-		'/((?!_next|_vercel|.*\\..*).*)',
-	],
+	matcher: ['/', '/(ru|en)/:path*', '/((?!_next|_vercel|.*\\..*).*)'],
 }

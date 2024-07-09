@@ -1,9 +1,14 @@
 .title {
 	color: var(--primary-color);
-	white-space: nowrap;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2; /* Отображать только две строки */
 	overflow: hidden;
 	text-overflow: ellipsis;
-	font-weight: 500;
+	max-height: 3em; /* Высота для двух строк текста */
+	line-height: 1.5em; /* Высота строки */
+	overflow-wrap: break-word; /* Перенос по словам */
+
 }
 
 .text {
@@ -12,6 +17,12 @@
 	text-overflow: ellipsis;
 	color: var(--color-accent);
 	font-weight: 500;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	max-height: 4.5em;
+	line-height: 1.5em;
+	overflow-wrap: break-word
 }
 
 .error {

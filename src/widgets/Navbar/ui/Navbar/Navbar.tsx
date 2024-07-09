@@ -1,7 +1,7 @@
 'use client'
-import { useGetProfile } from '@/entities/Auth/model/auth.queries'
-import { logout } from '@/features/auth/model/auth.model'
-import { Link } from '@/navigation'
+import {useGetProfile} from '@/entities/Auth/model/auth.queries'
+import {logout} from '@/features/auth/model/auth.model'
+import {Link} from '@/navigation'
 import {
 	getDashboardRoute,
 	getRouteLogin,
@@ -10,27 +10,23 @@ import {
 	getSupportRoute,
 } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
-import {
-	Dropdown,
-	DropdownItem,
-	DropdownMenu,
-} from '@/shared/ui/Dropdown/Dropdown'
-import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
+import {Dropdown, DropdownItem, DropdownMenu,} from '@/shared/ui/Dropdown/Dropdown'
+import Logo, {LogoSize} from '@/shared/ui/Logo/Logo'
 import {
 	Avatar,
 	DropdownTrigger,
+	Link as UILink,
+	Navbar as UINavbar,
 	NavbarBrand,
 	NavbarContent,
 	NavbarItem,
 	NavbarMenu,
 	NavbarMenuItem,
 	NavbarMenuToggle,
-	Link as UILink,
-	Navbar as UINavbar,
 } from '@nextui-org/react'
-import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
-import { MdKeyboardArrowDown } from 'react-icons/md'
+import {useTranslations} from 'next-intl'
+import {useEffect, useState} from 'react'
+import {MdKeyboardArrowDown} from 'react-icons/md'
 import cls from './Navbar.module.scss'
 
 export function Navbar() {

@@ -116,8 +116,13 @@
 		"Settings": "Настройки"
 	},
 	"Dashboard": {
+		"Let's begin! (1/4)": "Начнем! (1/4)",
 		"Continue education": "Продолжить обучение",
-		"Welcome back": "С возвращением"
+		"Welcome back": "С возвращением",
+		"Recommendations": "Рекомендации",
+		"View all": "Смотреть все",
+		"topics": "тем",
+		"hours": "часов"
 	},
 	"Close": "Закрыть",
 	"Open": "Открыть",

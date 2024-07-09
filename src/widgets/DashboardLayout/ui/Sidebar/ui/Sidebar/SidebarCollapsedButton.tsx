@@ -17,9 +17,13 @@ const SidebarCollapsedButton: FC<SidebarCollapsedButtonProps> = props => {
 	return (
 		<button onClick={toggleSidebar} className={cls.sidebarCollapsedButton}>
 			<div
-				className={classNames(cls.arrowBtn, {
-					[cls.isCollapsedBtn]: isCollapsed,
-				})}
+				className={classNames(
+					cls.arrowBtn,
+					{
+						[cls.isCollapsedBtn]: isCollapsed
+					},
+					[]
+				)}
 			>
 				<IoIosArrowBack />
 			</div>
