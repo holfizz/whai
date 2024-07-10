@@ -4,7 +4,7 @@ import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { useTranslations } from 'next-intl'
 import cls from './pageHeader.module.scss'
 import { Avatar, Skeleton } from '@nextui-org/react'
-import { useGetLastCourse } from '@/entities/course/model/course.queries'
+import { ICourse, useGetLastCourse } from '@/entities/course'
 import { Progress } from '@/shared/ui/Progress/Progress'
 import Icon from '@/shared/ui/Icon/Icon'
 import { ArrowUpRight } from 'lucide-react'
@@ -13,7 +13,6 @@ import { TbBrain } from 'react-icons/tb'
 import { Link } from '@/navigation'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import { IUser } from '@/entities/Auth'
-import { ICourse } from '@/entities/course'
 import CourseStat from '@/app/[locale]/d/(ui)/CourseStat/CourseStat'
 
 export default function PageHeader({ userData }: { userData: IUser }) {
@@ -73,7 +72,7 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 										/>
 									</div>
 								</div>
-								<div className={'w-[-webkit-fill-available]'}>
+								<div>
 									<ProgressBar
 										data={lastCourseData}
 										classNames={'md:hidden max-md:flex w-full'}

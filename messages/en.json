@@ -116,6 +116,13 @@
     "topics": "topics",
     "hours": "hours"
   },
+  "TopicsPage": {
+    "In notes": "In notes",
+    "Report a bug": "Report a bug",
+    "Share": "Share",
+    "Video lesson": "Video lesson",
+    "Topics": "Topics"
+  },
   "Close": "Close",
   "Open": "Open",
   "User": "User",

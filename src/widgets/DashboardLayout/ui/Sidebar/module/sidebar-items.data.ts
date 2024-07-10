@@ -3,7 +3,7 @@ import {
 	getCoursesRoute,
 	getDashboardRoute,
 	getSettingsRoute,
-	getStatisticsRoute,
+	getStatisticsRoute
 } from '@/shared/const/router'
 import {
 	BarChartBig,
@@ -11,8 +11,9 @@ import {
 	Brain,
 	House,
 	LucideIcon,
-	Settings,
+	Settings
 } from 'lucide-react'
+
 export interface ISidebarItem {
 	link: string
 	icon: LucideIcon
@@ -23,27 +24,27 @@ export const sidebarItems: ISidebarItem[] = [
 	{
 		text: 'Main',
 		icon: House,
-		link: getDashboardRoute(),
+		link: getDashboardRoute()
 	},
 	{
 		text: 'Courses',
 		icon: BookHeart,
-		link: getCoursesRoute(),
+		link: getCoursesRoute()
 	},
 	{
 		text: 'Chat with AI',
 		icon: Brain,
-		link: getChatWithAIRoute(),
+		link: getChatWithAIRoute()
 	},
 	{
 		text: 'Statistics',
 		icon: BarChartBig,
-		link: getStatisticsRoute(),
+		link: getStatisticsRoute()
 	},
 
 	{
 		text: 'Settings',
 		icon: Settings,
-		link: getSettingsRoute(),
-	},
+		link: getSettingsRoute()
+	}
 ]

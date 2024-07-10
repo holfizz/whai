@@ -51,3 +51,25 @@ export const useGetAllCourses = () => {
 		loadingAllCourse: loading
 	}
 }
+
+export const GET_COURSE = gql`
+	query ($courseId: ID!) {
+		getCourse(courseId: $courseId) {
+			name
+		}
+	}
+`
+export const useGetCourse = (courseId: string) => {
+	const { data, error, loading } = useQuery<{ getCourse: ICourse }>(
+		GET_COURSE,
+		{
+			variables: { courseId },
+			fetchPolicy: 'cache-and-network'
+		}
+	)
+	return {
+		courseData: data?.getCourse,
+		errorCourse: error,
+		loadingCourse: loading
+	}
+}
