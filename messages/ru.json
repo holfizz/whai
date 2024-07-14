@@ -129,7 +129,14 @@
 		"Report a bug": "Сообщить об ошибке",
 		"Share": "Поделиться",
 		"Video lesson": "Видеоурок",
-		"Topics": "Тем"
+		"Topics": "Темы",
+		"Lessons": "Уроки",
+		"Tests": "Тесты",
+		"Task": "ДЗ"
+	},
+	"CoursesPage": {
+		"My courses": "Мои курсы",
+		"Library of all courses": "Библиотека всех курсов"
 	},
 	"Close": "Закрыть",
 	"Open": "Открыть",

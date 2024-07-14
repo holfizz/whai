@@ -11,8 +11,8 @@ export const getChatWithAIRoute = () => `/d/chat-ai`
 export const getStatisticsRoute = () => `/statistics`
 
 //Course
-export const getCoursesRoute = () => `/d/courses`
-export const getCourseByIdRoute = (id: string) => `/d/course/${id}`
+export const getCoursesRoute = () => `/d/c`
+export const getCourseByIdRoute = (id: string) => `/d/c/${id}`
 
 export const getSettingsRoute = () => `/d/settings`
 

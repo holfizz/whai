@@ -121,7 +121,14 @@
     "Report a bug": "Report a bug",
     "Share": "Share",
     "Video lesson": "Video lesson",
-    "Topics": "Topics"
+    "Topics": "Topics",
+    "Lessons": "Lessons",
+    "Tests": "Tests",
+    "Task": "Task"
+  },
+  "CoursesPage": {
+    "My courses": "My courses",
+    "Library of all courses": "Library of all courses"
   },
   "Close": "Close",
   "Open": "Open",

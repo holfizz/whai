@@ -11,4 +11,4 @@ export interface ITopic {
 	progressPercents: number
 }
 
-export type ICourseData = z.infer<typeof CourseData>
+export type ITopicData = z.infer<typeof CourseData>

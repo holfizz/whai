@@ -30,8 +30,8 @@ export const useGetLastCourse = () => {
 export const GET_ALL_COURSES = gql`
 	query {
 		getAllCourses {
-			name
 			id
+			name
 			totalTopics
 			completionTime
 			progressPercents

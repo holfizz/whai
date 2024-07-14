@@ -13,7 +13,7 @@ import { TbBrain } from 'react-icons/tb'
 import { Link } from '@/navigation'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import { IUser } from '@/entities/Auth'
-import CourseStat from '@/app/[locale]/d/(ui)/CourseStat/CourseStat'
+import CourseStat from '@/shared/ui/CourseCard/CourseStat/CourseStat'
 
 export default function PageHeader({ userData }: { userData: IUser }) {
 	const t = useTranslations('Dashboard')
@@ -41,7 +41,7 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 								<div className={'flex'}>
 									<div
 										className={
-											'w-[70px] h-[70px]  rounded-full bg-decor-8 mr-4 flex justify-center items-center'
+											'w-[70px] h-[70px]  rounded-full bg-decor-2 mr-4 flex justify-center items-center'
 										}
 									>
 										<Icon
@@ -130,7 +130,7 @@ const ProgressBar = ({
 }) => {
 	return (
 		<Progress
-			className={`w-[390px] h-[2px] mt-4 rounded-xl ${classNames}`}
+			className={`w-[390px] h-1 mt-4 rounded-xl ${classNames}`}
 			color='peach'
 			value={data?.progressPercents}
 			size={'sm'}

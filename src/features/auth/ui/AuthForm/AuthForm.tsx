@@ -1,14 +1,27 @@
 'use client'
 
-import {useRouter} from '@/navigation'
-import {saveTokenStorage} from '@/shared/api/auth/auth.helper'
-import {authConstants} from '@/shared/const/auth'
-import {classNames} from '@/shared/lib/classNames/classNames'
-import {Dispatch, FC, FormEvent, memo, SetStateAction, useEffect, useState,} from 'react'
-import {z} from 'zod'
-import {formLoginSchema, formSignUpSchema} from '../../model/auth.contracts'
-import {setAuthUser} from '../../model/auth.model'
-import {LoginInput, SignUpInput, useLoginMutation, useSignUpMutation,} from '../../model/auth.queries'
+import { useRouter } from '@/navigation'
+import { saveTokenStorage } from '@/shared/api/auth/auth.helper'
+import { authConstants } from '@/shared/const/auth'
+import { classNames } from '@/shared/lib/classNames/classNames'
+import {
+	Dispatch,
+	FC,
+	FormEvent,
+	memo,
+	SetStateAction,
+	useEffect,
+	useState
+} from 'react'
+import { z } from 'zod'
+import { formLoginSchema, formSignUpSchema } from '../../model/auth.contracts'
+import { setAuthUser } from '../../model/auth.model'
+import {
+	LoginInput,
+	SignUpInput,
+	useLoginMutation,
+	useSignUpMutation
+} from '../../model/auth.queries'
 import BasicInputs from '../BasicInputs/BasicInputs'
 import ButtonsForm from '../ButtonsForm/ButtonsForm'
 import InfoMessage from '../InfoMessage/InfoMessage'
@@ -41,13 +54,13 @@ const AuthForm: FC<AuthFormProps> = memo(
 			login,
 			data: loginData,
 			loading: loginLoading,
-			error: loginError,
+			error: loginError
 		} = useLoginMutation()
 		const {
 			signUp,
 			data: signUpData,
 			loading: signUpLoading,
-			error: signUpError,
+			error: signUpError
 		} = useSignUpMutation()
 
 		const data = type === authConstants.SIGNUP ? signUpData : loginData
@@ -66,7 +79,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 			if (loginData && type === authConstants.LOGIN) {
 				setTimeout(() => {
 					router.push('/')
-				}, 2000)
+				}, 500)
 			}
 		}, [loginData, router, type])
 
@@ -105,7 +118,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 				<ButtonsForm type={type} setIsFormType={setIsFormType} />
 			</form>
 		)
-	},
+	}
 )
 
 export default AuthForm

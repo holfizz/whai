@@ -1,0 +1,16 @@
+.group {
+  @apply relative h-[44px] w-full cursor-pointer mt-3
+}
+
+.icon {
+  opacity: 0;
+}
+
+.group:hover .icon {
+  opacity: 1;
+
+}
+
+.group:hover .checkIcon {
+  display: none;
+}

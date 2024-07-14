@@ -15,8 +15,9 @@ export const GET_TOPIC = gql`
 		}
 	}
 `
-export const useGetTopic = () => {
+export const useGetTopic = (topicId: string) => {
 	const { data, error, loading } = useQuery<{ getTopic: ITopic }>(GET_TOPIC, {
+		variables: { topicId },
 		fetchPolicy: 'cache-and-network'
 	})
 	return {

@@ -12,12 +12,22 @@ import { useTranslations } from 'next-intl'
 import { PiShareFatFill } from 'react-icons/pi'
 import { IoFlagSharp, IoVideocam } from 'react-icons/io5'
 import { Progress } from '@/shared/ui/Progress/Progress'
+import { useDisclosure } from '@nextui-org/react'
+import { useState } from 'react'
+import ModalComponent from './ModalComponent/ModalComponent'
 
 const TopicsPage = () => {
 	const { courseId } = useParams<{ courseId: string }>()
 	const { topicsAllData } = useGetAllTopics(courseId)
 	const { courseData } = useGetCourse(courseId)
 	const t = useTranslations('TopicsPage')
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	const [selectedTopicId, setSelectedTopicId] = useState('')
+
+	const handleTopicClick = topicId => {
+		setSelectedTopicId(topicId)
+		onOpen()
+	}
 	return (
 		<DashboardLayout className={`w-full flex justify-center`}>
 			<div className={'w-[800px] '}>
@@ -25,7 +35,7 @@ const TopicsPage = () => {
 				<div className={'flex gap-4'}>
 					<Button
 						startContent={
-							<FaThumbtack size={18} color={'var(--color-decor-5)'} />
+							<FaThumbtack size={18} color={'var(--color-decor-2)'} />
 						}
 						className={cls.actionButton}
 					>
@@ -35,7 +45,7 @@ const TopicsPage = () => {
 					</Button>
 					<Button
 						startContent={
-							<IoFlagSharp size={18} color={'var(--color-decor-5)'} />
+							<IoFlagSharp size={18} color={'var(--color-decor-2)'} />
 						}
 						className={cls.actionButton}
 					>
@@ -45,7 +55,7 @@ const TopicsPage = () => {
 					</Button>
 					<Button
 						startContent={
-							<PiShareFatFill size={18} color={'var(--color-decor-5)'} />
+							<PiShareFatFill size={18} color={'var(--color-decor-2)'} />
 						}
 						className={cls.actionButton}
 					>
@@ -62,30 +72,39 @@ const TopicsPage = () => {
 								key={i}
 							>
 								<div className={'flex justify-between '}>
-									<h1 className={cls.title}>{topic.name}</h1>
+									<h1
+										onClick={() => handleTopicClick(topic.id)}
+										className={cls.title}
+									>
+										{topic.name}
+									</h1>
 									<Button
+										onClick={() => handleTopicClick(topic.id)}
 										variant={'round'}
 										size={'sRound'}
 										startContent={<ArrowUpRight color={'#fff'} />}
 									/>
 								</div>
 								<p className={cls.description}>{topic.description}</p>
-								<div className={'flex gap-4 flex-wrap w-full'}>
-									<div className={'flex gap-2 items-center'}>
-										<FaClock size={18} className={'text-gray-300'} />
-										<h3 className={'text-gray-300 font-medium'}>
+								<div className={'flex gap-2 flex-wrap w-full'}>
+									<div className={'flex mr-4 items-center'}>
+										<FaClock size={18} className={'text-gray-300 mx-2'} />
+										<h3 className={'text-gray-300 font-normal'}>
 											{`${topic.completionTime} Hours`}
 										</h3>
 									</div>
-									<div className={'flex gap-2 items-center'}>
-										<IoVideocam size={18} className={'text-gray-300'} />
-										<h3 className={'text-gray-300 font-medium'}>
+									<div className={'flex mr-4 items-center'}>
+										<IoVideocam size={18} className={'text-gray-300 mx-2'} />
+										<h3 className={'text-gray-300 font-normal'}>
 											{`${topic.completionTime}  ${t('Video lesson')}`}
 										</h3>
 									</div>
-									<div className={'flex gap-2 items-center'}>
-										<FaClipboardList size={18} className={'text-gray-300'} />
-										<h3 className={'text-gray-300 font-medium'}>
+									<div className={'flex mr-4 items-center'}>
+										<FaClipboardList
+											size={18}
+											className={'text-gray-300 mx-2'}
+										/>
+										<h3 className={'text-gray-300 font-normal'}>
 											{`${topic.totalSubtopics}  ${t('Topics')}`}
 										</h3>
 									</div>
@@ -99,6 +118,7 @@ const TopicsPage = () => {
 						))}
 				</div>
 			</div>
+			{isOpen && <ModalComponent topicId={selectedTopicId} onClose={onClose} />}
 		</DashboardLayout>
 	)
 }

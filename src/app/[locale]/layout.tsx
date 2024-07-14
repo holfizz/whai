@@ -1,12 +1,12 @@
 import {NextIntlClientProvider, useMessages} from 'next-intl'
 import {unstable_setRequestLocale} from 'next-intl/server'
-import {Ubuntu} from 'next/font/google'
+import {Inter} from 'next/font/google'
 import {FC} from 'react'
 import '../(styles)/index.scss'
 import Body from './body'
 import {locales} from "@/navigation";
 
-const UbuntuSans = Ubuntu({
+const UbuntuSans = Inter({
 	subsets: ['latin', 'latin-ext', 'cyrillic'],
 	weight: ['300', '400', '500', '700'],
 })

@@ -5,7 +5,8 @@ const Button = extendVariants(UiButton, {
 	variants: {
 		color: {
 			accent: 'text-[var(--color-secondary)] bg-[var(--color-accent)]',
-			peach: 'text-[var(--color-accent)] bg-[var(--color-decor-8)]',
+			primary: 'text-[var(--color-accent)] bg-[var(--color-decor-1)]',
+			secondary: 'text-[var(--color-accent)] bg-[var(--color-decor-3)]',
 			softPeach: 'text-[var(--color-accent)] bg-[var(--color-decor-4)]',
 			clear: 'bg-transparent text-[var(--primary-color)]'
 		},

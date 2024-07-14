@@ -7,10 +7,12 @@ import cls from './Sidebar.module.scss'
 import SidebarCollapsedButton from './SidebarCollapsedButton'
 import { useSidebar } from '@/widgets/DashboardLayout/ui/Sidebar'
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 const Sidebar = () => {
 	const setIsCollapsed = useSidebar(state => state.setIsCollapsed)
 	const isCollapsed = useSidebar(state => state.isCollapsed)
+	const router = useRouter()
 	useEffect(() => {
 		window.outerWidth <= 1024 ? setIsCollapsed(true) : null
 	}, [isCollapsed])
@@ -25,7 +27,7 @@ const Sidebar = () => {
 			}}
 			className={cls.sidebar}
 		>
-			<div className={cls.logoBlock}>
+			<div onClick={() => router.push('/')} className={cls.logoBlock}>
 				<Logo
 					color='var(--color-accent)'
 					logoType={'short'}
