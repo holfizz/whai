@@ -1,5 +1,5 @@
 .group {
-  @apply relative h-[44px] w-full cursor-pointer mt-3
+  @apply relative h-[44px] w-full cursor-pointer
 }
 
 .icon {
@@ -13,4 +13,9 @@
 
 .group:hover .checkIcon {
   display: none;
+}
+
+.task {
+  border: 1px solid var(--color-decor-3);
+  @apply h-[44px] rounded-xl w-[90px] flex items-center justify-center cursor-pointer
 }

@@ -1,3 +1,13 @@
-export type { ILesson, ILessonData } from './model/lesson.types'
-export { LessonsData } from './model/lesson.contracts'
-export { useGetAllLessons, useGetLesson } from './model/lesson.queries'
+export type {
+	ILesson,
+	ILessonData,
+	ILessonTask,
+	LessonBlockType,
+	ILessonBlock,
+	ILessonContent
+} from './model/lesson.types'
+export {
+	useGetAllLessons,
+	useGetLesson,
+	useGetLessonContent
+} from './model/lesson.queries'

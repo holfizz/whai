@@ -15,5 +15,3 @@ export const LessonSchema = z.object({
 	isHasLessonTask: z.boolean(),
 	lessonTasks: z.array(LessonTaskSchema)
 })
-
-export type ILessonData = z.infer<typeof LessonSchema>

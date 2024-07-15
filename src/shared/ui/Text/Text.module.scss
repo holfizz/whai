@@ -1,28 +1,28 @@
 .title {
+	width: 100%;
 	color: var(--primary-color);
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2; /* Отображать только две строки */
-	overflow: hidden;
 	text-overflow: ellipsis;
 	max-height: 3em; /* Высота для двух строк текста */
-	line-height: 1.5em; /* Высота строки */
-	overflow-wrap: break-word; /* Перенос по словам */
-
+	overflow: hidden; /* Скрытие текста, который не умещается */
+	word-wrap: break-word; /* Перенос по словам */
+	overflow-wrap: break-word; /* Для поддержки браузеров, не поддерживающих word-wrap */
 }
 
 .text {
-	white-space: nowrap;
-	overflow: hidden;
+	width: 100%;
+	white-space: normal; /* Обычное пространство между словами */
 	text-overflow: ellipsis;
 	color: var(--color-accent);
 	font-weight: 500;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
 	max-height: 4.5em;
 	line-height: 1.5em;
-	overflow-wrap: break-word
+	overflow: hidden; /* Скрытие текста, который не умещается */
+	word-wrap: break-word; /* Перенос по словам */
+	overflow-wrap: break-word; /* Для поддержки браузеров, не поддерживающих word-wrap */
 }
 
 .error {

@@ -1,6 +1,6 @@
-import {Link} from '@/navigation'
-import {DropdownItem} from '@/shared/ui/Dropdown/Dropdown'
-import {dashboardNavbarItems} from '../../module/dashboard-navbar-items.data'
+import { Link } from '@/navigation'
+import { DropdownItem } from '@/shared/ui/Dropdown/Dropdown'
+import { dashboardNavbarItems } from '../../module/dashboard-navbar-items.data'
 
 const DashboardNavbarItems = ({ userData }) => {
 	return (
@@ -9,7 +9,7 @@ const DashboardNavbarItems = ({ userData }) => {
 				<DropdownItem
 					key={item.key}
 					className='h-14 gap-2'
-					color={'peach'}
+					color={'white'}
 					as={item.link ? Link : 'div'}
 					href={item.link}
 					onClick={item.onClick}

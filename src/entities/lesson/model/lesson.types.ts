@@ -12,9 +12,34 @@ export interface ILesson {
 	lessonTasks: ILessonTask[]
 }
 
+export interface ILessonContent {
+	id: string
+	name: string
+	isCompleted: boolean
+	isHasLessonTask: boolean
+	lessonTasks: ILessonTask[]
+	lessonBlocks: ILessonBlock[]
+}
+
 export interface ILessonTask {
 	isChecked: boolean
 	name: string
+}
+
+export interface ILessonBlock {
+	id: string
+	type: LessonBlockType
+	text: string
+	videoUrl: string
+	imageUrl: string
+	code: string
+}
+
+export enum LessonBlockType {
+	TEXT = 'TEXT',
+	VIDEO = 'VIDEO',
+	IMAGE = 'IMAGE',
+	CODE = 'CODE'
 }
 
 export type ILessonData = z.infer<typeof CourseData>

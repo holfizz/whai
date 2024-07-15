@@ -1,6 +1,6 @@
 'use client'
 import { gql, useQuery } from '@apollo/client'
-import { ISubtopic } from '@/entities/subtopic/model/subtopic.types'
+import { ISubtopic } from '../model/subtopic.types'
 
 export const GET_SUBTOPIC = gql`
 	query ($subtopicId: ID!) {

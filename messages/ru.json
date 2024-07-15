@@ -107,7 +107,6 @@
 	"ChatWithAI": {
 		"Enter your request": "Введите ваш запрос"
 	},
-
 	"Sidebar": {
 		"Main": "Главная",
 		"Courses": "Курсы",
@@ -122,7 +121,9 @@
 		"Recommendations": "Рекомендации",
 		"View all": "Смотреть все",
 		"topics": "тем",
-		"hours": "часов"
+		"hours": "часов",
+		"Course not found": "Курс не найден",
+		"No courses found": "Курсы не найдены"
 	},
 	"TopicsPage": {
 		"In notes": "В заметки",
@@ -136,9 +137,10 @@
 	},
 	"CoursesPage": {
 		"My courses": "Мои курсы",
-		"Library of all courses": "Библиотека всех курсов"
+		"Library of all courses": "Библиотека всех курсов",
+		"There was an error loading the lesson": "Произошла ошибка при загрузке урока"
 	},
-	"Close": "Закрыть",
+	"Close": "Close",
 	"Open": "Открыть",
 	"User": "Пользователь",
 	"New chat": "Новый чат",

@@ -17,7 +17,7 @@ import {
 export interface ISidebarItem {
 	link: string
 	icon: LucideIcon
-	text: string
+	text: 'Main' | 'Courses' | 'Chat with AI' | 'Statistics' | 'Settings'
 }
 
 export const sidebarItems: ISidebarItem[] = [

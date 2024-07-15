@@ -1,6 +1,6 @@
 'use client'
 
-import Text, { TextSize } from '@/shared/ui/Text/Text'
+import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { useTranslations } from 'next-intl'
 import cls from './pageHeader.module.scss'
 import { Avatar, Skeleton } from '@nextui-org/react'
@@ -38,60 +38,69 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 									'w-[800px] max-lg:w-[80vw] flex justify-between items-center border-solid border-2 border-opacity-5  border-secondary rounded-2xl p-2 max-md:flex-col max-md:items-start'
 								}
 							>
-								<div className={'flex'}>
-									<div
-										className={
-											'w-[70px] h-[70px]  rounded-full bg-decor-2 mr-4 flex justify-center items-center'
-										}
-									>
-										<Icon
-											className={'stroke-[var(--color-white)]  text-3xl'}
-											SVG={TbBrain}
-										/>
-									</div>
-
-									<div>
-										<div>
-											{loadingLastCourse ? (
-												<Skeleton className='h-3 w-3/5 rounded-lg' />
-											) : (
-												<Text
-													className={'max-md:w-[50vw]'}
-													size={TextSize.S}
-													title={lastCourseData?.name}
+								{lastCourseData ? (
+									<>
+										<div className={'flex'}>
+											<div
+												className={
+													'w-[70px] h-[70px]  rounded-full bg-decor-2 mr-4 flex justify-center items-center'
+												}
+											>
+												<Icon
+													className={'stroke-[var(--color-white)]  text-3xl'}
+													SVG={TbBrain}
 												/>
-											)}
+											</div>
+
+											<div>
+												<div>
+													{loadingLastCourse ? (
+														<Skeleton className='h-3 w-3/5 rounded-lg' />
+													) : (
+														<Text
+															className={'max-md:w-[50vw]'}
+															size={TextSize.S}
+															title={lastCourseData?.name}
+														/>
+													)}
+													<ProgressBar
+														data={lastCourseData}
+														classNames={'max-md:hidden'}
+													/>
+												</div>
+												<CourseStat
+													className={'max-md:hidden '}
+													data={lastCourseData}
+												/>
+											</div>
+										</div>
+										<div>
 											<ProgressBar
 												data={lastCourseData}
-												classNames={'max-md:hidden'}
+												classNames={'md:hidden max-md:flex w-full'}
 											/>
-										</div>
-										<CourseStat
-											className={'max-md:hidden '}
-											data={lastCourseData}
-										/>
-									</div>
-								</div>
-								<div>
-									<ProgressBar
-										data={lastCourseData}
-										classNames={'md:hidden max-md:flex w-full'}
-									/>
-									<CourseStat
-										data={lastCourseData}
-										className={'md:hidden max-md:flex max-md:w-[95%]'}
-									/>
+											<CourseStat
+												data={lastCourseData}
+												className={'md:hidden max-md:flex max-md:w-[95%]'}
+											/>
 
-									<Button
-										size={'mRound'}
-										href={getCourseByIdRoute(lastCourseData?.id)}
-										isIconOnly
-										startContent={<ArrowUpRight color={'#fff'} />}
-										variant={'round'}
-										as={Link}
-										className={'max-md:hidden'}
-									></Button>
-								</div>
+											<Button
+												size={'mRound'}
+												href={getCourseByIdRoute(lastCourseData?.id)}
+												isIconOnly
+												startContent={<ArrowUpRight color={'#fff'} />}
+												variant={'round'}
+												as={Link}
+												className={'max-md:hidden'}
+											></Button>
+										</div>
+									</>
+								) : (
+									<Text
+										theme={TextTheme.ERROR}
+										title={t('Course not found')}
+									></Text>
+								)}
 							</div>
 						</div>
 					</div>

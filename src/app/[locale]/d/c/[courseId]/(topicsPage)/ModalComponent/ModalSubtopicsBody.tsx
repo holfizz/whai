@@ -30,7 +30,7 @@ const ModalSubtopicsBody = ({
 				<div>
 					{subtopicsAllData &&
 						subtopicsAllData.map((subtopic, index) => (
-							<div className={cls.group} key={subtopic.id}>
+							<div className={`${cls.group} mt-3`} key={subtopic.id}>
 								<div
 									className={`absolute b-0 bg-decor-3 h-[44px]  rounded-xl w-[${Number(subtopic.progressPercents + 100)}%] `}
 								></div>
@@ -46,6 +46,7 @@ const ModalSubtopicsBody = ({
 										}
 									>
 										{subtopic.name}
+										{subtopic.id}
 									</h1>
 									<ArrowUpRight
 										className={cls.icon}

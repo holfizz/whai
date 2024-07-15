@@ -107,6 +107,13 @@
   "ChatWithAI": {
     "Enter your request": "Enter your request"
   },
+  "Sidebar": {
+    "Main": "Main",
+    "Courses": "Courses",
+    "Chat with AI": "Chat with AI",
+    "Statistics": "Statistics",
+    "Settings": "Settings"
+  },
   "Dashboard": {
     "Continue education": "Continue education",
     "Let's begin! (1/4)": "Let's begin! (1/4)",
@@ -114,7 +121,9 @@
     "Recommendations": "Recommendations",
     "View all": "View all",
     "topics": "topics",
-    "hours": "hours"
+    "hours": "hours",
+    "Course not found": "Course not found",
+    "No courses found": "No courses found"
   },
   "TopicsPage": {
     "In notes": "In notes",
@@ -129,6 +138,11 @@
   "CoursesPage": {
     "My courses": "My courses",
     "Library of all courses": "Library of all courses"
+  },
+  "Lesson": {
+    "My courses": "My courses",
+    "Library of all courses": "Library of all courses",
+    "There was an error loading the lesson": "There was an error loading the lesson"
   },
   "Close": "Close",
   "Open": "Open",

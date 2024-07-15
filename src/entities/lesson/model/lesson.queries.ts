@@ -1,6 +1,6 @@
 'use client'
 import { gql, useQuery } from '@apollo/client'
-import { ILesson } from '@/entities/lesson/model/lesson.types'
+import { ILesson, ILessonContent } from '@/entities/lesson/model/lesson.types'
 
 export const GET_LESSON = gql`
 	query ($lessonId: ID!) {
@@ -26,9 +26,9 @@ export const useGetLesson = (lessonId: string) => {
 		}
 	)
 	return {
-		lessonsAllData: data?.getLesson,
-		errorLessonAll: error,
-		loadingLessonAll: loading
+		lessonData: data?.getLesson,
+		errorLesson: error,
+		loadingLesson: loading
 	}
 }
 
@@ -57,7 +57,46 @@ export const useGetAllLessons = (subtopicId: string) => {
 	)
 	return {
 		lessonsAllData: data?.getAllLessons,
-		errorLessonAll: error,
-		loadingLessonAll: loading
+		errorLessonsAll: error,
+		loadingLessonsAll: loading
+	}
+}
+
+//==================//
+export const GET_LESSON_CONTENT = gql`
+	query ($lessonId: ID!) {
+		getLesson(lessonId: $lessonId) {
+			id
+			name
+			description
+			isHasLessonTask
+			lessonTasks {
+				isChecked
+				lessonId
+				name
+			}
+			lessonBlocks {
+				id
+				type
+				text
+				videoUrl
+				imageUrl
+				code
+			}
+		}
+	}
+`
+export const useGetLessonContent = (lessonId: string) => {
+	const { data, error, loading } = useQuery<{ getLesson: ILessonContent }>(
+		GET_LESSON_CONTENT,
+		{
+			variables: { lessonId },
+			fetchPolicy: 'cache-and-network'
+		}
+	)
+	return {
+		lessonContentData: data?.getLesson,
+		errorLessonContent: error,
+		loadingLessonContent: loading
 	}
 }
