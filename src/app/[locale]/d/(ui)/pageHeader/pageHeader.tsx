@@ -2,8 +2,7 @@
 
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { useTranslations } from 'next-intl'
-import cls from './pageHeader.module.scss'
-import { Avatar, Skeleton } from '@nextui-org/react'
+import { Skeleton } from '@nextui-org/react'
 import { ICourse, useGetLastCourse } from '@/entities/course'
 import { Progress } from '@/shared/ui/Progress/Progress'
 import Icon from '@/shared/ui/Icon/Icon'
@@ -14,6 +13,7 @@ import { Link } from '@/navigation'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import { IUser } from '@/entities/Auth'
 import CourseStat from '@/shared/ui/CourseCard/CourseStat/CourseStat'
+import { WelcomeBack } from '@/widgets/WelcomeBack'
 
 export default function PageHeader({ userData }: { userData: IUser }) {
 	const t = useTranslations('Dashboard')
@@ -104,27 +104,7 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 							</div>
 						</div>
 					</div>
-					<div className={cls.welcomeBlocks}>
-						<div className={cls.personWelcomeBlock}>
-							<Avatar
-								className={cls.avatar}
-								src={userData?.avatarPath}
-								alt='Avatar'
-							/>
-							<div className={cls.welcomeBlcTitle}>
-								<Text title={`${t('Welcome back')},`} />
-								<Text title={`${userData?.firstName}!`} />
-								<Text text={`Давайте продолжим изучать работу с Whai`} />
-								<h1
-									className={
-										'text-[var(--color-decor-5)] font-semibold text-2xl'
-									}
-								>
-									{t("Let's begin! (1/4)")}
-								</h1>
-							</div>
-						</div>
-					</div>
+					<WelcomeBack userData={userData} />
 				</div>
 			</div>
 		</div>

@@ -1,14 +1,14 @@
-import {Metadata} from 'next'
-import {unstable_setRequestLocale} from 'next-intl/server'
+import { Metadata } from 'next'
+import { unstable_setRequestLocale } from 'next-intl/server'
 import LoginPage from './(ui)/Login.page'
 
 export const metadata: Metadata = {
 	title: 'Войти в аккаунт | Whai',
-	description: 'Войти в аккаунт на образовательной платформе Whai',
+	description: 'Войти в аккаунт на образовательной платформе Whai'
 }
 
 export default function IndexPage({
-	params: { locale },
+	params: { locale }
 }: {
 	params: { locale: string }
 }) {

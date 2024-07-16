@@ -1,0 +1,14 @@
+.dropdownMenu {
+	padding: 30px 20px;
+}
+
+.dropdownItem {
+	font-size: var(--font-size-l);
+	line-height: var(--font-line-m);
+	padding: 18px 20px;
+	border-radius: 20px;
+}
+
+.dropdownItem:not(:first-child) {
+	margin-top: 10px;
+}

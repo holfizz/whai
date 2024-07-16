@@ -88,7 +88,7 @@ export const useLoginMutation = () => {
 	>(LOGIN, {
 		onCompleted: data => {
 			authUserVar(data.login)
-		},
+		}
 	})
 	return { login: mutate, data, loading, error }
 }
@@ -111,12 +111,12 @@ export const useGetNewTokenMutation = () => {
 			if (currentState && currentState.user) {
 				const updatedAuthState = {
 					...currentState,
-					accessToken: data.getNewToken.accessToken,
+					accessToken: data.getNewToken.accessToken
 				}
 				authUserVar(updatedAuthState)
 			}
 			client.reFetchObservableQueries()
-		},
+		}
 	})
 	return { refreshAccessToken: mutate, data, loading, error }
 }
@@ -131,7 +131,7 @@ export const useLogoutQuery = () => {
 	const [query, { loading, error }] = useLazyQuery<any>(LOGOUT, {
 		onCompleted: () => {
 			logout()
-		},
+		}
 	})
 	return { logout: query, loading, error }
 }

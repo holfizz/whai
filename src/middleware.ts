@@ -13,7 +13,8 @@ export default function (req: NextRequest) {
 	const localeMatch = url.match(/^\/([a-z]{2})\//)
 	const locale = localeMatch ? localeMatch[1] : 'ru'
 	const isHomePage = url === `http://localhost:3000/${locale}`
-	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
+	// const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
+	const refreshToken = cookies.get(EnumTokens.ACCESS_TOKEN)?.value
 	const isAuthPage = url.includes('auth')
 	const isDashboardPage = url.includes('/d')
 	if (isHomePage) {

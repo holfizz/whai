@@ -8,7 +8,7 @@ export const getAuthStateFromStorage = () => {
 
 export enum EnumTokens {
 	'ACCESS_TOKEN' = 'accessToken',
-	'REFRESH_TOKEN' = 'refreshToken',
+	'REFRESH_TOKEN' = 'refreshToken'
 }
 
 export const getAccessToken = () => {
@@ -20,7 +20,7 @@ export const saveTokenStorage = (accessToken: string) => {
 	Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
 		domain: process.env.CLIENT_DOMAIN,
 		sameSite: 'strict',
-		expires: 1,
+		expires: 1
 	})
 }
 

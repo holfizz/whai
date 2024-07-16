@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
-import cls from './CoursesPage.module.scss'
+import cls from './coursesPage.module.scss'
 import { useGetAllCourses } from '@/entities/course'
 import CourseCard from '@/shared/ui/CourseCard/CourseCard'
 
