@@ -1,52 +1,49 @@
 .DashboardLayout {
-  width: 100%;
-  height: 100vh;
+	width: 100%;
+	height: 100vh;
 }
 
 .wrapper {
-  width: 100%;
-  height: 100vh;
-  display: flex;
+	width: 100%;
+	height: 100vh;
+	display: flex;
 }
 
 .layout {
-  display: flex;
+	display: flex;
 }
 
 .sidebarWrapper {
-  display: flex;
-  position: relative;
-  height: 100%;
+	display: flex;
+	position: relative;
+	height: 100%;
 }
 
 .contentWrapper {
-  padding: 20px 40px;
+	padding: 20px 40px;
 }
 
 @media screen and (max-width: 640px) {
-  .sidebarWrapper, .fakeSidebar {
-    display: none;
-  }
-  .contentWrapper {
-    padding: 5px;
-    width: 100vw;
-  }
-
+	.sidebarWrapper,
+	.fakeSidebar {
+		display: none;
+	}
+	.contentWrapper {
+		padding: 5px;
+		width: 100vw;
+	}
 }
-
 
 .navbarWrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: fit-content;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: fit-content;
 }
-
 
 @media (min-width: 1400px) {
-  .contentWrapper {
-    max-width: 1400px;
-  }
+	.contentWrapper {
+		max-width: 1400px;
+	}
 }
-

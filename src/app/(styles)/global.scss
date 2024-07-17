@@ -1,51 +1,52 @@
 :root {
+	//s
+	--font-size-s: 12px;
+	--font-line-s: 20px;
+	--font-s: var(--font-size-s) / var(--font-line-s);
 
-  //s
-  --font-size-s: 12px;
-  --font-line-s: 20px;
-  --font-s: var(--font-size-s) / var(--font-line-s);
+	// m
+	--font-size-m: 16px;
+	--font-line-m: 24px;
+	--font-m: var(--font-size-m) / var(--font-line-m);
 
-  // m
-  --font-size-m: 16px;
-  --font-line-m: 24px;
-  --font-m: var(--font-size-m) / var(--font-line-m);
+	// l
+	--font-size-l: 24px;
+	--font-line-l: 32px;
+	--font-l: var(--font-size-l) / var(--font-line-l);
 
-  // l
-  --font-size-l: 24px;
-  --font-line-l: 32px;
-  --font-l: var(--font-size-l) / var(--font-line-l);
+	// xl
+	--font-size-xl: 40px;
+	--font-line-xl: 48px;
+	--font-xl: var(--font-size-xl) / var(--font-line-xl);
 
-  // xl
-  --font-size-xl: 40px;
-  --font-line-xl: 48px;
-  --font-xl: var(--font-size-xl) / var(--font-line-xl);
+	//size
+	--sidebar-width: 250px;
+	--sidebar-width-collapsed: 100px;
+	--navbar-height: 70px;
+	--button-border-radius: 9px;
+	--modal-z-index: 100;
+	--animation-delay: 0.2s;
 
-  //size
-  --sidebar-width: 250px;
-  --sidebar-width-collapsed: 100px;
-  --navbar-height: 70px;
-  --button-border-radius: 9px;
-  --modal-z-index: 100;
-  --animation-delay: 0.2s;
-
-  //colors
-  --color-white: #fff;
-  --color-black: #000;
-  /* Background Colors */
-  --color-background-1: #f2e4d4;
-  --color-background-2: #f8f4f0;
-  --color-background-3: #fdfdfd;
-  /* Accent Colors */
-  --color-accent: #272727;
-  /* Secondary Colors */
-  --color-secondary: #e3e3e3;
-  /* Decorative Colors */
-  --color-decor-1: #FFF7DC;
-  --color-decor-2: #ffb57f;
-  --color-decor-3: #ffe8a3;
-  --color-decor-4: #f8f8f8;
-  /* Alert Colors */
-  --color-error: #f37474;
-  --color-alert: #f3e774;
-  --color-success: #87d88f;
+	//colors
+	--color-white: #fff;
+	--color-black: #000;
+	/* Background Colors */
+	--color-background-1: #f2e4d4;
+	--color-background-2: #f8f4f0;
+	--color-background-3: #fdfdfd;
+	/* Accent Colors */
+	--color-accent: #272727;
+	/* Secondary Colors */
+	--color-secondary: #e3e3e3;
+	/* Decorative Colors */
+	--color-decor-1: #fff7dc;
+	--color-decor-2: #ffb57f;
+	--color-decor-3: #ffe8a3;
+	--color-decor-4: #f8f8f8;
+	--color-decor-5: #ffede0;
+	--color-decor-6: #f3f3f3;
+	/* Alert Colors */
+	--color-error: #f37474;
+	--color-alert: #f3e774;
+	--color-success: #87d88f;
 }

@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	h4 {
+		font-size: var(--font-size-m);
+		line-height: var(--font-line-m);
+		font-weight: 700;
+	}
+
+	.description {
+		text-wrap: wrap;
+	}
+}

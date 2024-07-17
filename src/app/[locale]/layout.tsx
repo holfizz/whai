@@ -1,23 +1,22 @@
-import {NextIntlClientProvider, useMessages} from 'next-intl'
-import {unstable_setRequestLocale} from 'next-intl/server'
-import {Inter} from 'next/font/google'
-import {FC} from 'react'
+import { NextIntlClientProvider, useMessages } from 'next-intl'
+import { unstable_setRequestLocale } from 'next-intl/server'
+import { Inter } from 'next/font/google'
+import { FC } from 'react'
 import '../(styles)/index.scss'
 import Body from './body'
-import {locales} from "@/navigation";
+import { locales } from '@/navigation'
 
 const UbuntuSans = Inter({
 	subsets: ['latin', 'latin-ext', 'cyrillic'],
-	weight: ['300', '400', '500', '700'],
+	weight: ['300', '400', '500', '700']
 })
 interface Props {
 	params: { locale: string }
 	children: React.ReactNode
 }
 
-
 export function generateStaticParams() {
-	return locales.map((locale) => ({locale}))
+	return locales.map(locale => ({ locale }))
 }
 
 const LocaleLayout: FC<Props> = ({ children, params: { locale } }) => {

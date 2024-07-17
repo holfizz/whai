@@ -10,11 +10,11 @@ type HTMLInputProps = Omit<
 export enum InputTheme {
 	OUTLINE = 'outline',
 	CLEAR = 'clear',
-	FILL = 'fill',
+	FILL = 'fill'
 }
 export enum InputSize {
 	PRIMARY = 'primary',
-	FULL = 'full',
+	FULL = 'full'
 }
 
 interface InputProps extends HTMLInputProps {
@@ -43,7 +43,7 @@ const Input: FC<InputProps> = memo(props => {
 	const mods: Mods = {
 		[cls[theme]]: true,
 		[cls[size]]: true,
-		[cls.readonly]: readonly,
+		[cls.readonly]: readonly
 	}
 	return (
 		<input
