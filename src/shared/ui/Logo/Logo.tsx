@@ -1,15 +1,15 @@
 'use client'
-import {useRouter} from '@/navigation'
-import {WhaiBig} from '@/shared/assets/logo/WhaiBig'
-import {WhaiSmall} from '@/shared/assets/logo/WhaiSmall'
-import {classNames, Mods} from '@/shared/lib/classNames/classNames'
-import {FC, memo} from 'react'
+import { useRouter } from '@/navigation'
+import { WhaiBig } from '@/shared/assets/logo/WhaiBig'
+import { WhaiSmall } from '@/shared/assets/logo/WhaiSmall'
+import { classNames, Mods } from '@/shared/lib/classNames/classNames'
+import { FC, memo } from 'react'
 import cls from './Logo.module.scss'
 
 export enum LogoSize {
 	S = 'small',
 	M = 'medium',
-	FULL = 'full',
+	FULL = 'full'
 }
 
 interface LogoProps {
@@ -24,12 +24,12 @@ const Logo: FC<LogoProps> = memo(
 		className,
 		logoSize = LogoSize.S,
 		color = '#2E311D',
-		logoType = 'small',
+		logoType = 'small'
 	}) => {
 		const router = useRouter()
 
 		const mods: Mods = {
-			[cls[logoSize]]: true,
+			[cls[logoSize]]: true
 		}
 		const LOGO_TYPE = logoType === 'short' ? WhaiSmall : WhaiBig
 		return (
@@ -42,13 +42,13 @@ const Logo: FC<LogoProps> = memo(
 				{/* ERROR*/}
 				<LOGO_TYPE
 					style={{
-						fill: color,
+						fill: color
 					}}
 					className={classNames(cls.Logo, {}, [className])}
 				/>
 			</button>
 		)
-	},
+	}
 )
 
 export default Logo

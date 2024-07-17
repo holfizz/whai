@@ -27,7 +27,7 @@ const InputField: FC<InputFieldProps> = ({
 	errorMessage,
 	onValueChange,
 	placeholder,
-	className,
+	className
 }) => {
 	return (
 		<label className={className}>

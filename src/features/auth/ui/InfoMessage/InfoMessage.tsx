@@ -5,7 +5,7 @@ import { authConstants } from '@/shared/const/auth'
 import { useTranslations } from 'next-intl'
 import {
 	LoginMutationResponse,
-	SignUpMutationResponse,
+	SignUpMutationResponse
 } from '../../model/auth.queries'
 
 interface InfoMessageProps {
@@ -24,8 +24,8 @@ const InfoMessage: FC<InfoMessageProps> = ({ error, data, type }) => {
 					error?.message
 						? TextTheme.ERROR
 						: data
-						? TextTheme.SUCCESS
-						: TextTheme.PRIMARY
+							? TextTheme.SUCCESS
+							: TextTheme.PRIMARY
 				}
 				size={TextSize.L}
 				title={type === authConstants.LOGIN ? t('Log in') : t('Sign up')}

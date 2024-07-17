@@ -1,12 +1,12 @@
 export enum EnumTokens {
 	ACCESS_TOKEN = 'accessToken',
-	REFRESH_TOKEN = 'refreshToken',
+	REFRESH_TOKEN = 'refreshToken'
 }
 
 export enum EnumUserRole {
 	Admin = 'ADMIN',
 	Student = 'STUDENT',
-	Creator = 'CREATOR',
+	Creator = 'CREATOR'
 }
 
 export interface IUser {

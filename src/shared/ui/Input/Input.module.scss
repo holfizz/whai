@@ -1,50 +1,50 @@
 .Input {
-  height: 50px;
-  padding: 0 30px;
-  border-radius: var(--button-border-radius);
+	height: 50px;
+	padding: 0 30px;
+	border-radius: var(--button-border-radius);
 }
 
 .outline {
-  border: var(--primary-color) 1px solid;
-  color: var(--primary-color);
-  font-size: 16px;
+	border: var(--primary-color) 1px solid;
+	color: var(--primary-color);
+	font-size: 16px;
 }
 
 .outline::placeholder {
-  color: var(--primary-color);
-  opacity: .5;
+	color: var(--primary-color);
+	opacity: 0.5;
 }
 
 .readonly {
-  border: var(--grey) 1px solid;
-  color: var(--grey);
+	border: var(--grey) 1px solid;
+	color: var(--grey);
 }
 
 .readonly::placeholder {
-  color: var(--grey);
+	color: var(--grey);
 }
 
 .fill {
-  border: 1px solid var(--primary-color);
-  background: var(--elements-color);
+	border: 1px solid var(--primary-color);
+	background: var(--elements-color);
 
-  color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .fill::placeholder {
-  color: var(--primary-color);
-  opacity: 0.5;
+	color: var(--primary-color);
+	opacity: 0.5;
 }
 
 .clear {
-  border: none;
-  color: var(--primary-color);
+	border: none;
+	color: var(--primary-color);
 }
 
 .primary {
-  width: auto;
+	width: auto;
 }
 
 .full {
-  width: 100%;
+	width: 100%;
 }
