@@ -22,7 +22,7 @@
 	line-height: 1.5em;
 	overflow: hidden; /* Скрытие текста, который не умещается */
 	word-wrap: break-word; /* Перенос по словам */
-	overflow-wrap: break-word; /* Для поддержки браузеров, не поддерживающих word-wrap */
+	overflow-wrap: break-word;
 }
 
 .error {

@@ -142,7 +142,9 @@
 	},
 	"Lesson": {
 		"There was an error loading the lesson": "Произошла ошибка при загрузке урока.",
-		"Ask AI": "Спросить AI"
+		"Ask AI": "Спросить AI",
+		"Your question": "Ваш вопрос"
+
 	},
 	"Open": "Открыть",
 	"User": "Пользователь",

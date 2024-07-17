@@ -6,9 +6,10 @@ import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ILessonBlock, useGetLessonContent } from '@/entities/lesson'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
-import { Skeleton } from '@nextui-org/react'
+import { BreadcrumbItem, Breadcrumbs, Skeleton } from '@nextui-org/react'
 import { MDX } from '@/shared/ui/MDX/MDX'
-import Button from '@/shared/ui/Button/Button'
+import { ChatWithAI } from '@/features/chatWithAI'
+import { getCourseByIdRoute } from '@/shared/const/router'
 
 const LessonPageAsync = () => {
 	const { lessonId } = useParams<{ lessonId: string }>()
@@ -108,14 +109,22 @@ const LessonPageAsync = () => {
 			</>
 		)
 	}
+
 	return (
 		<DashboardLayout>
 			<div className={cls.LessonDetails}>
 				<div className={cls.content}>
+					<Breadcrumbs>
+						<BreadcrumbItem
+							href={getCourseByIdRoute(lessonContentData?.courseId)}
+						>
+							Курс
+						</BreadcrumbItem>
+						<BreadcrumbItem>Урок: {lessonContentData?.name}</BreadcrumbItem>
+					</Breadcrumbs>
+
 					{content}
-					<Button className={cls.askAIBtn} color={'accent'}>
-						{t('Ask AI')}
-					</Button>
+					<ChatWithAI />
 				</div>
 			</div>
 		</DashboardLayout>

@@ -14,6 +14,8 @@ export interface ILesson {
 
 export interface ILessonContent {
 	id: string
+	courseId: string
+	subtopicId: string
 	name: string
 	isCompleted: boolean
 	isHasLessonTask: boolean

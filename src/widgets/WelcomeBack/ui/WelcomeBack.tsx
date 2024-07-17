@@ -1,6 +1,6 @@
 import { Avatar, DropdownTrigger } from '@nextui-org/react'
 import Text, { TextAlign, TextSize } from '@/shared/ui/Text/Text'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import cls from './WelcomeBack.module.scss'
 import { useTranslations } from 'next-intl'
 import { IUser } from '@/entities/Auth'
@@ -39,7 +39,7 @@ export const WelcomeBack: FC<{ userData: IUser }> = ({ userData }) => {
 							isFirstCourseCreated={false}
 							isFirstLessonFinished={true}
 							isSmthElseCompleted1={false}
-							isSmthElseCompleted2={true}
+							isSmthElseCompleted2={false}
 						/>
 					</Dropdown>
 				</div>

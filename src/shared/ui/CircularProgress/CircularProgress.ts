@@ -5,10 +5,16 @@ import {
 
 export const CircularProgress = extendVariants(CircularProgressUI, {
 	variants: {
+		variant: {
+			big: {
+				svg: 'w-[64px] h-[64px]',
+				value: 'hidden'
+			}
+		},
 		color: {
 			main: {
-				indicator: 'bg-black',
-				svg: '#000000'
+				indicator: 'bg-decor-2',
+				svg: 'text-decor-2'
 			}
 		}
 	}

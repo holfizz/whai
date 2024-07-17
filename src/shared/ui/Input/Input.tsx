@@ -10,17 +10,25 @@ type HTMLInputProps = Omit<
 export enum InputTheme {
 	OUTLINE = 'outline',
 	CLEAR = 'clear',
-	FILL = 'fill'
+	FILL = 'fill',
+	WHITE = 'white'
 }
 export enum InputSize {
 	PRIMARY = 'primary',
 	FULL = 'full'
 }
 
+export enum InputRounded {
+	LG = 'roundedLg',
+	MD = 'roundedMd',
+	SM = 'roundedSm'
+}
+
 interface InputProps extends HTMLInputProps {
 	className?: string
 	value?: string | number
 	theme?: InputTheme
+	rounded?: InputRounded
 	onChange?: (value: string) => void
 	readonly?: boolean
 	size?: InputSize
@@ -33,6 +41,7 @@ const Input: FC<InputProps> = memo(props => {
 		value,
 		type = 'text',
 		theme = InputTheme.OUTLINE,
+		rounded = InputRounded.MD,
 		readonly,
 		size = InputSize.PRIMARY,
 		...otherProps
@@ -43,6 +52,7 @@ const Input: FC<InputProps> = memo(props => {
 	const mods: Mods = {
 		[cls[theme]]: true,
 		[cls[size]]: true,
+		[cls[rounded]]: true,
 		[cls.readonly]: readonly
 	}
 	return (

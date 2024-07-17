@@ -13,7 +13,7 @@ interface UsageGoalsMenuProps {
 }
 
 const UserGoalsOptions: string[] = [
-	// TODO: поменять названия, когда будут
+	// TODO: поменять названия, когда будут + сделать переводы
 	'Start your first course',
 	'Finish your first lesson',
 	'Something else',

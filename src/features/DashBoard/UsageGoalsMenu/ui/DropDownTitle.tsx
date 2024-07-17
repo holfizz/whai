@@ -20,13 +20,17 @@ export const DropdownTitle: FC<{ completed: number }> = ({ completed }) => {
 					className='mt-2'
 				/>
 			</div>
-			<CircularProgress
-				value={value}
-				size='lg'
-				strokeWidth={3}
-				showValueLabel={true}
-				color='main'
-			/>
+			<div className={'flex justify-center items-center flex-nowrap'}>
+				<CircularProgress
+					variant={'big'}
+					size='lg'
+					value={value}
+					strokeWidth={3}
+					showValueLabel={true}
+					color='main'
+				/>
+				<h1 className={'absolute'}>{completed}/4</h1>
+			</div>
 		</div>
 	)
 }

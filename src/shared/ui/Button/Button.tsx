@@ -4,7 +4,8 @@ import { Button as UiButton, extendVariants } from '@nextui-org/react'
 const Button = extendVariants(UiButton, {
 	variants: {
 		color: {
-			accent: 'text-[var(--color-secondary)] bg-[var(--color-accent)]',
+			accent: 'text-[var(--color-white)] bg-[var(--color-accent)]',
+			white: 'bg-[var(--color-white)] text-[var(--color-accent)]',
 			primary: 'text-[var(--color-accent)] bg-[var(--color-decor-1)]',
 			secondary: 'text-[var(--color-accent)] bg-[var(--color-decor-3)]',
 			softPeach: 'text-[var(--color-accent)] bg-[var(--color-decor-4)]',
@@ -14,7 +15,7 @@ const Button = extendVariants(UiButton, {
 			sidebar:
 				'bg-transparent text-[var(--color-accent)] flex justify-center items-center',
 			round:
-				'bg-accent rounded-full flex align-center justify-center stroke-white min-w-fit '
+				' rounded-full flex align-center justify-center stroke-white min-w-fit '
 		},
 		isDisabled: {
 			true: 'opacity-30  cursor-not-allowed'

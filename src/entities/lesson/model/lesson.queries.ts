@@ -70,6 +70,8 @@ export const GET_LESSON_CONTENT = gql`
 			name
 			description
 			isHasLessonTask
+			courseId
+			subtopicId
 			lessonTasks {
 				isChecked
 				lessonId

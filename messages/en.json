@@ -141,7 +141,8 @@
   },
   "Lesson": {
     "There was an error loading the lesson": "There was an error loading the lesson",
-    "Ask AI": "Ask AI"
+    "Ask AI": "Ask AI",
+    "Your question": "Your question"
   },
   "Close": "Close",
   "Open": "Open",
