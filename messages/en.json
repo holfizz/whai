@@ -140,9 +140,8 @@
     "Library of all courses": "Library of all courses"
   },
   "Lesson": {
-    "My courses": "My courses",
-    "Library of all courses": "Library of all courses",
-    "There was an error loading the lesson": "There was an error loading the lesson"
+    "There was an error loading the lesson": "There was an error loading the lesson",
+    "Ask AI": "Ask AI"
   },
   "Close": "Close",
   "Open": "Open",

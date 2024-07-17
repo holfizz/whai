@@ -33,6 +33,7 @@ export interface ILessonBlock {
 	videoUrl: string
 	imageUrl: string
 	code: string
+	createdAt: string
 }
 
 export enum LessonBlockType {

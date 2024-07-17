@@ -82,6 +82,7 @@ export const GET_LESSON_CONTENT = gql`
 				videoUrl
 				imageUrl
 				code
+				createdAt
 			}
 		}
 	}

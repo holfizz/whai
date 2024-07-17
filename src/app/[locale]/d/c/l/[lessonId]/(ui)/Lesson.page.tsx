@@ -7,6 +7,8 @@ import { useTranslations } from 'next-intl'
 import { ILessonBlock, useGetLessonContent } from '@/entities/lesson'
 import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { Skeleton } from '@nextui-org/react'
+import { MDX } from '@/shared/ui/MDX/MDX'
+import Button from '@/shared/ui/Button/Button'
 
 const LessonPageAsync = () => {
 	const { lessonId } = useParams<{ lessonId: string }>()
@@ -30,14 +32,26 @@ const LessonPageAsync = () => {
 				)
 			case 'TEXT':
 				return (
-					<div key={block.id} className={cls.block}>
-						<Text text={block.text} />
+					<div key={block.id} className={cls.blockImage}>
+						<MDX source={block.text}></MDX>
 					</div>
 				)
 			case 'VIDEO':
+				const videoUrl = block.videoUrl.includes('youtube.com')
+					? block.videoUrl.replace('watch?v=', 'embed/')
+					: block.videoUrl
 				return (
-					<div key={block.id} className={cls.block}>
-						<iframe src={block.videoUrl} title='video' className={cls.video} />
+					<div key={block.id} className={cls.videoBlock}>
+						<div className={cls.videoContainer}>
+							<iframe
+								src={videoUrl}
+								title='video'
+								className={cls.video}
+								frameBorder='0'
+								allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+								allowFullScreen
+							/>
+						</div>
 					</div>
 				)
 			default:
@@ -97,7 +111,12 @@ const LessonPageAsync = () => {
 	return (
 		<DashboardLayout>
 			<div className={cls.LessonDetails}>
-				<div className={cls.content}>{content}</div>
+				<div className={cls.content}>
+					{content}
+					<Button className={cls.askAIBtn} color={'accent'}>
+						{t('Ask AI')}
+					</Button>
+				</div>
 			</div>
 		</DashboardLayout>
 	)

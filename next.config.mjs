@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 import createNextIntlPlugin from 'next-intl/plugin'
 
-import createMDX from "@next/mdx";
+// import createMDX from "@next/mdx";
 
-const withMDX = createMDX();
+// const withMDX = createMDX();
 const withNextIntl = createNextIntlPlugin('./src/shared/config/i18n/i18n.ts')
 const nextConfig = {
 	env: {
@@ -17,4 +17,4 @@ const nextConfig = {
 
 }
 
-export default withMDX(withNextIntl(nextConfig))
+export default withNextIntl(nextConfig)

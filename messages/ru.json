@@ -140,7 +140,10 @@
 		"Library of all courses": "Библиотека всех курсов",
 		"There was an error loading the lesson": "Произошла ошибка при загрузке урока"
 	},
-	"Close": "Close",
+	"Lesson": {
+		"There was an error loading the lesson": "Произошла ошибка при загрузке урока.",
+		"Ask AI": "Спросить AI"
+	},
 	"Open": "Открыть",
 	"User": "Пользователь",
 	"New chat": "Новый чат",
