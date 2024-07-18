@@ -89,8 +89,9 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 												href={getCourseByIdRoute(lastCourseData?.id)}
 												isIconOnly
 												startContent={<ArrowUpRight color={'#fff'} />}
-												variant={'round'}
+												variant={'circle'}
 												as={Link}
+												color={'accent'}
 												className={'max-md:hidden'}
 											></Button>
 										</div>

@@ -30,8 +30,9 @@ const CourseCard = ({
 					href={getCourseByIdRoute(course?.id)}
 					isIconOnly
 					startContent={<ArrowUpRight color={'#fff'} />}
-					variant={'round'}
+					variant={'circle'}
 					as={Link}
+					color={'accent'}
 				></Button>
 			</div>
 			<Link className={cls.link} href={getCourseByIdRoute(course?.id)}>

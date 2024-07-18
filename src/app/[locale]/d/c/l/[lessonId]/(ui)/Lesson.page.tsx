@@ -10,13 +10,14 @@ import { BreadcrumbItem, Breadcrumbs, Skeleton } from '@nextui-org/react'
 import { MDX } from '@/shared/ui/MDX/MDX'
 import { ChatWithAI } from '@/features/chatWithAI'
 import { getCourseByIdRoute } from '@/shared/const/router'
+import { useGetCourse } from '@/entities/course'
 
 const LessonPageAsync = () => {
 	const { lessonId } = useParams<{ lessonId: string }>()
 	const t = useTranslations('Lesson')
 	const { lessonContentData, errorLessonContent, loadingLessonContent } =
 		useGetLessonContent(lessonId)
-
+	const { courseData } = useGetCourse(lessonContentData?.courseId)
 	const renderBlock = useCallback((block: ILessonBlock) => {
 		switch (block.type) {
 			case 'CODE':
@@ -109,7 +110,6 @@ const LessonPageAsync = () => {
 			</>
 		)
 	}
-
 	return (
 		<DashboardLayout>
 			<div className={cls.LessonDetails}>
@@ -118,13 +118,14 @@ const LessonPageAsync = () => {
 						<BreadcrumbItem
 							href={getCourseByIdRoute(lessonContentData?.courseId)}
 						>
-							Курс
+							{t('Course')}: {courseData?.name}
 						</BreadcrumbItem>
-						<BreadcrumbItem>Урок: {lessonContentData?.name}</BreadcrumbItem>
+						<BreadcrumbItem>
+							{t('Lesson')}: {lessonContentData?.name}
+						</BreadcrumbItem>
 					</Breadcrumbs>
-
 					{content}
-					<ChatWithAI />
+					<ChatWithAI lessonId={lessonId} />
 				</div>
 			</div>
 		</DashboardLayout>

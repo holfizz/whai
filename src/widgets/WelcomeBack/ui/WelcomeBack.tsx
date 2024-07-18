@@ -45,7 +45,7 @@ export const WelcomeBack: FC<{ userData: IUser }> = ({ userData }) => {
 				</div>
 
 				<Button color='accent' size='xl' className='mt-[40px] z-0'>
-					{`${t2('Create')}`}
+					{`${t('Create')}`}
 				</Button>
 			</div>
 		</div>

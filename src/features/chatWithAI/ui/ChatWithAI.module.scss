@@ -2,6 +2,7 @@
   position: fixed;
   bottom: 0 !important;
   right: 0 !important;
+  @apply rounded-3xl
 }
 
 .askAIBtn {
@@ -11,8 +12,4 @@
   position: fixed;
   bottom: 4rem;
   right: 4rem;
-}
-
-.askAIInput {
-
 }

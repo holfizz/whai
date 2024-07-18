@@ -80,9 +80,10 @@ const TopicsPage = () => {
 									</h1>
 									<Button
 										onClick={() => handleTopicClick(topic.id)}
-										variant={'round'}
+										variant={'circle'}
 										size={'sRound'}
 										startContent={<ArrowUpRight color={'#fff'} />}
+										color={'accent'}
 									/>
 								</div>
 								<p className={cls.description}>{topic.description}</p>

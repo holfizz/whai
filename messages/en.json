@@ -123,7 +123,9 @@
     "topics": "topics",
     "hours": "hours",
     "Course not found": "Course not found",
-    "No courses found": "No courses found"
+    "No courses found": "No courses found",
+    "Let's continue to explore working with Whai": "Let's continue to explore working with Whai",
+    "Create": "Create"
   },
   "TopicsPage": {
     "In notes": "In notes",
@@ -142,7 +144,10 @@
   "Lesson": {
     "There was an error loading the lesson": "There was an error loading the lesson",
     "Ask AI": "Ask AI",
-    "Your question": "Your question"
+    "Your question": "Your question",
+    "Lesson": "Lesson",
+    "Course": "Course",
+    "Create a new chat": "Create a new chat"
   },
   "Close": "Close",
   "Open": "Open",

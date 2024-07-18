@@ -14,8 +14,10 @@ const Button = extendVariants(UiButton, {
 		variant: {
 			sidebar:
 				'bg-transparent text-[var(--color-accent)] flex justify-center items-center',
-			round:
-				' rounded-full flex align-center justify-center stroke-white min-w-fit '
+			circle:
+				'rounded-full flex align-center justify-center stroke-white min-w-fit ',
+			sRound:
+				'rounded-2xl flex align-center justify-center stroke-white min-w-fit '
 		},
 		isDisabled: {
 			true: 'opacity-30  cursor-not-allowed'

@@ -123,7 +123,9 @@
 		"topics": "тем",
 		"hours": "часов",
 		"Course not found": "Курс не найден",
-		"No courses found": "Курсы не найдены"
+		"No courses found": "Курсы не найдены",
+		"Let's continue to explore working with Whai": "Давайте продолжим изучать работу с Whai",
+		"Create": "Создать"
 	},
 	"TopicsPage": {
 		"In notes": "В заметки",
@@ -143,8 +145,10 @@
 	"Lesson": {
 		"There was an error loading the lesson": "Произошла ошибка при загрузке урока.",
 		"Ask AI": "Спросить AI",
-		"Your question": "Ваш вопрос"
-
+		"Your question": "Ваш вопрос",
+		"Lesson": "Урок",
+		"Course": "Курс",
+		"Create a new chat": "Создать новый чат"
 	},
 	"Open": "Открыть",
 	"User": "Пользователь",
