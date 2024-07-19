@@ -46,7 +46,7 @@ const ChatList = ({
 				getAllChatsWithAI.map(chat => (
 					<div
 						className={
-							'mt-2 flex opacity-50 hover:opacity-100 cursor-pointer hover:transition-opacity transition-opacity'
+							'mt-2 flex items-center opacity-50 hover:opacity-100 cursor-pointer hover:transition-opacity transition-opacity'
 						}
 					>
 						<Button
@@ -58,10 +58,10 @@ const ChatList = ({
 						/>
 						<h3
 							className={
-								'text-md font-normal flex items-center ml-2 w-1/2 text-ellipsis whitespace-nowrap overflow-hidden h-min'
+								'text-md font-normal ml-2 w-2/3 text-ellipsis whitespace-nowrap overflow-hidden h-min block'
 							}
 						>
-							{chat.title}dasdasdsadsadsad
+							{chat.title}
 						</h3>
 					</div>
 				))}

@@ -1,18 +1,14 @@
 import React, { ReactNode } from 'react'
 import cls from './Message.module.scss'
 import { classNames, Mods } from '@/shared/lib/classNames/classNames'
-
-export enum MessageFrom {
-	AI = 'messageAI',
-	USER = 'messageUser'
-}
+import { MessageWithAIRole } from '@/entities/messageWithAI'
 
 const Message = ({
 	children,
-	messageFrom = MessageFrom.USER
+	messageFrom = MessageWithAIRole.USER
 }: {
 	children: ReactNode
-	messageFrom?: MessageFrom
+	messageFrom?: MessageWithAIRole
 }) => {
 	const mods: Mods = {
 		[cls[messageFrom]]: true

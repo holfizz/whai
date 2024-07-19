@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import cls from './ChatWithAI.module.scss'
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
@@ -12,10 +12,10 @@ import {
 } from '@nextui-org/react'
 import { IoClose } from 'react-icons/io5'
 import ChatsMenuIcon from '@/shared/assets/icons/Lesson/Fill/ChatsMenuIcon'
-import Message, { MessageFrom } from '@/shared/ui/Message/Message'
 import SendIcon from '@/shared/assets/icons/Lesson/Fill/SendIcon'
 import { Input } from '@/shared/ui/Input/InputUI'
 import ChatList from '@/features/chatWithAI/ui/ChatList/ChatList'
+import ChatUI from '@/features/chatWithAI/ui/ChatUI/ChatUI'
 
 const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	const t = useTranslations('Lesson')
@@ -23,23 +23,6 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	const [scrollBehavior, setScrollBehavior] =
 		useState<ModalProps['scrollBehavior']>('inside')
 	const [isAdditionalParam, setIsAdditionalParam] = useState<boolean>(false)
-	const modalBodyRef = useRef<HTMLDivElement>(null)
-	const [messages, setMessages] = useState([
-		{ from: MessageFrom.USER, text: 'Что такое волновой дуалеизм?' },
-		{
-			from: MessageFrom.AI,
-			text: 'Квантовый дуализм — это фундаментальное свойство природы, заключающееся в том, что всем микрообъектам присущи одновременно и корпускулярные, и волновые свойства. Это основа квантовой механики, которая объясняет поведение элементарных частиц и их взаимодействие с окружающим миром.'
-		},
-		{ from: MessageFrom.USER, text: 'Что такое волновой дуалеизм?' },
-		{ from: MessageFrom.USER, text: '?' },
-		{ from: MessageFrom.AI, text: '?' }
-	])
-
-	useEffect(() => {
-		if (modalBodyRef.current) {
-			modalBodyRef.current.scrollTop = modalBodyRef.current.scrollHeight
-		}
-	}, [isOpen, messages])
 
 	const handleOpen = () => {
 		onOpen()
@@ -91,13 +74,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 							)}
 						</ModalHeader>
 						<ModalBody className={'h-auto'}>
-							<div ref={modalBodyRef} className={'overflow-y-auto'}>
-								{messages.map((message, index) => (
-									<Message key={index} messageFrom={message.from}>
-										{message.text}
-									</Message>
-								))}
-							</div>
+							<ChatUI />
 						</ModalBody>
 						<ModalFooter>
 							<Input
