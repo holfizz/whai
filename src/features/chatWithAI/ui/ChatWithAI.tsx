@@ -79,15 +79,30 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 						<ModalFooter>
 							<Input
 								classNames={{
-									input: ['bg-color-white data-[hover=true]:bg-color-white'],
-									innerWrapper: 'bg-color-white',
-									inputWrapper: ['shadow-xl', '!cursor-text']
+									inputWrapper: [
+										'w-full',
+										'py-[10px]',
+										'px-[20px]',
+										'rounded-3xl',
+										'h-auto'
+									],
+									innerWrapper: ['flex justify-between'],
+									input: ['w-max']
 								}}
 								placeholder={t('Your question')}
 								endContent={
-									<SendIcon
-										className={'cursor-pointer'}
-										fill={'var(--color-accent)'}
+									<Button
+										isIconOnly
+										size={'sRound'}
+										variant={'circle'}
+										color={'accent'}
+										startContent={
+											<SendIcon
+												height={20}
+												width={20}
+												fill={'var(--color-white)'}
+											/>
+										}
 									/>
 								}
 							/>

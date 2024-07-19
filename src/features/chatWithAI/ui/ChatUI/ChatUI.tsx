@@ -19,18 +19,17 @@ const ChatUi = () => {
 		loadMore,
 		errorAllMessagesInChatWithAI,
 		loadingAllMessagesInChatWithAI
-	} = useGetAllMessagesInChatWithAI(
-		'2be6faca-9d2f-47c6-8218-cc4dfa6c580f',
-		skip,
-		take
-	)
+	} = useGetAllMessagesInChatWithAI({
+		chatId: '2be6faca-9d2f-47c6-8218-cc4dfa6c580f',
+		initialTake: take,
+		initialSkip: skip
+	})
 
 	const handleLoadMore = useCallback(() => {
 		if (!isLoadingMore) {
 			setIsLoadingMore(true)
 			const newSkip = skip + take
-			setSkip(newSkip)
-			loadMore(newSkip, take)
+			loadMore({ currentSkip: newSkip, currentTake: take })
 				.then(() => {
 					setIsLoadingMore(false)
 				})
@@ -45,16 +44,16 @@ const ChatUi = () => {
 			handleLoadMore()
 		}
 	}, [handleLoadMore, isLoadingMore, loadingAllMessagesInChatWithAI])
+
 	const showLoader =
 		(loadingAllMessagesInChatWithAI && skip === 0) || isLoadingMore
+
 	useEffect(() => {
-		if (virtuosoRef.current) {
+		if (virtuosoRef.current && skip === 0) {
 			const virtuoso = virtuosoRef.current
-			virtuoso.scrollToIndex(
-				messagesAllMessagesInChatWithAI.length - initialTake
-			)
+			virtuoso.scrollToIndex(messagesAllMessagesInChatWithAI.length - 1)
 		}
-	}, [messagesAllMessagesInChatWithAI])
+	}, [messagesAllMessagesInChatWithAI, skip])
 
 	if (errorAllMessagesInChatWithAI) {
 		return <div>Error: {errorAllMessagesInChatWithAI.message}</div>
@@ -69,17 +68,15 @@ const ChatUi = () => {
 				flexDirection: 'column'
 			}}
 		>
-			{/*<Loader />*/}
 			{showLoader && (
-				<div className={'w-full flex  justify-center'}>
+				<div className={'w-full flex justify-center'}>
 					<Loader />
 				</div>
 			)}
 			<Virtuoso
 				ref={virtuosoRef}
-				style={{ height: '100%' }}
-				initialTopMostItemIndex={messagesAllMessagesInChatWithAI.length - 1}
-				data={messagesAllMessagesInChatWithAI}
+				style={{ height: 'calc(100% + 100px)' }}
+				data={messagesAllMessagesInChatWithAI?.toReversed()}
 				startReached={handleStartReached}
 				itemContent={(index, message) => (
 					<div key={index}>
