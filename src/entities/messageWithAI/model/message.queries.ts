@@ -14,20 +14,31 @@ export const GET__ALL_MESSAGES_IN_CHAT_WITH_AI = gql`
 
 export const useGetAllMessagesInChatWithAI = (
 	chatId: string,
-	skip: number,
-	take: number
+	initialSkip: number,
+	initialTake: number
 ) => {
 	const { data, error, loading, fetchMore } = useQuery<{
 		getAllMessageInChatWithAI: IMessageWithAI[]
 	}>(GET__ALL_MESSAGES_IN_CHAT_WITH_AI, {
-		variables: { chatId, skip, take },
+		variables: { chatId, skip: initialSkip, take: initialTake },
 		fetchPolicy: 'cache-and-network'
 	})
 
-	const loadMore = () => {
-		fetchMore({
+	const loadMore = (currentSkip: number, currentTake: number) => {
+		return fetchMore({
 			variables: {
-				skip: skip + take
+				chatId,
+				skip: currentSkip,
+				take: currentTake
+			},
+			updateQuery: (prev, { fetchMoreResult }) => {
+				if (!fetchMoreResult) return prev
+				return {
+					getAllMessageInChatWithAI: [
+						...fetchMoreResult.getAllMessageInChatWithAI,
+						...prev.getAllMessageInChatWithAI
+					]
+				}
 			}
 		})
 	}

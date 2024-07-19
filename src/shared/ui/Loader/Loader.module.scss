@@ -1,39 +1,33 @@
 .loader {
-	width: 80px;
-	height: 80px;
-}
-
-.loader div {
-	box-sizing: border-box;
 	display: block;
+	position: relative;
+	height: 32px;
+	width: 100px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.loader:before {
+	content: '';
 	position: absolute;
-	width: 64px;
-	height: 64px;
-	margin: 8px;
-	border: 8px solid var(--primary-color);
-	border-radius: 50%;
-	animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-	border-color: var(--primary-color) transparent transparent;
+	left: 0;
+	bottom: 4px;
+	width: 24px;
+	height: 24px;
+	animation: ballbns 2s ease-in infinite;
 }
 
-.loader div:nth-child(1) {
-	animation-delay: -0.45s;
-}
-
-.loader div:nth-child(2) {
-	animation-delay: -0.3s;
-}
-
-.loader div:nth-child(3) {
-	animation-delay: -0.15s;
-}
-
-@keyframes loading {
+@keyframes ballbns {
 	0% {
-		transform: rotate(0deg);
+		left: 0;
+		transform: translateX(-100%) rotate(0deg);
+		border-radius: 0;
+		background: var(--color-decor-2);
 	}
-
 	100% {
-		transform: rotate(360deg);
+		left: 100%;
+		transform: translateX(0%) rotate(360deg);
+		border-radius: 50%;
+		background: var(--color-decor-2);
 	}
 }
