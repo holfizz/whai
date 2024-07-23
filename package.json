@@ -30,7 +30,7 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "framer-motion": "^11.2.11",
     "graphql": "^16.8.1",
-    "graphql-ws": "^5.15.0",
+    "graphql-ws": "^5.16.0",
     "js-cookie": "^3.0.5",
     "katex": "^0.16.11",
     "lucide-react": "^0.399.0",
@@ -40,6 +40,7 @@
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-error-boundary": "^4.0.13",
     "react-icons": "^5.0.1",
     "react-katex": "^3.0.1",
     "react-markdown": "^9.0.1",
@@ -52,9 +53,8 @@
     "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
     "sass": "^1.70.0",
-    "subscriptions-transport-ws": "^0.11.0",
     "zod": "^3.22.4",
-    "zustand": "^4.5.0"
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

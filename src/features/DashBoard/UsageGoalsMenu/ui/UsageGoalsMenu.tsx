@@ -3,6 +3,8 @@ import cls from './UsageGoalsMenu.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { DropdownItem, DropdownMenu } from '@/shared/ui/Dropdown/Dropdown'
 import { DropdownTitle } from './DropDownTitle'
+import { Link } from '@/navigation'
+import { getCreatePageRoute } from '@/shared/const/router'
 
 interface UsageGoalsMenuProps {
 	// TODO: поменять названия, когда будут придуманы
@@ -32,7 +34,7 @@ export const UsageGoalsMenu: FC<UsageGoalsMenuProps> = ({
 }) => {
 	return (
 		<DropdownMenu className={cls.dropdownMenu}>
-			<DropdownItem color='white'>
+			<DropdownItem color='white' as={Link} href={getCreatePageRoute()}>
 				<DropdownTitle
 					completed={
 						Number(isFirstCourseCreated) +

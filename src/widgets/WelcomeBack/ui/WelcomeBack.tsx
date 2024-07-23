@@ -7,6 +7,8 @@ import { IUser } from '@/entities/Auth'
 import Button from '@/shared/ui/Button/Button'
 import { UsageGoalsMenu } from '@/features/DashBoard/UsageGoalsMenu'
 import { Dropdown } from '@/shared/ui/Dropdown/Dropdown'
+import { Link } from '@/navigation'
+import { getCreatePageRoute } from '@/shared/const/router'
 
 export const WelcomeBack: FC<{ userData: IUser }> = ({ userData }) => {
 	const t = useTranslations('Dashboard')
@@ -44,7 +46,13 @@ export const WelcomeBack: FC<{ userData: IUser }> = ({ userData }) => {
 					</Dropdown>
 				</div>
 
-				<Button color='accent' size='xl' className='mt-[40px] z-0'>
+				<Button
+					color='accent'
+					size='xl'
+					className='mt-[40px] z-0'
+					as={Link}
+					href={getCreatePageRoute()}
+				>
 					{`${t('Create')}`}
 				</Button>
 			</div>

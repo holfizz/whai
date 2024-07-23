@@ -1,5 +1,5 @@
 'use client'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { ICourse } from '@/entities/course'
 
 export const GET_LAST_COURSE = gql`
@@ -71,5 +71,28 @@ export const useGetCourse = (courseId: string) => {
 		courseData: data?.getCourse,
 		errorCourse: error,
 		loadingCourse: loading
+	}
+}
+export const CREATE_COURSE = gql`
+	mutation ($createCourseData: CourseInput!) {
+		createCourse(createCourseData: $createCourseData) {
+			id
+		}
+	}
+`
+
+export const useCreateCourse = () => {
+	const [createCourse, { data, error, loading }] = useMutation<{
+		createCourse: Pick<ICourse, 'id'>
+	}>(CREATE_COURSE, {
+		fetchPolicy: 'no-cache',
+		variables: { createCourseData: {} }
+	})
+
+	return {
+		createCourse,
+		newCourseData: data?.createCourse,
+		errorCreatingCourse: error,
+		loadingCreatingCourse: loading
 	}
 }

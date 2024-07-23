@@ -4,9 +4,9 @@ import { classNames, Mods } from '@/shared/lib/classNames/classNames'
 import { MessageWithAIRole } from '@/entities/messageWithAI'
 
 const Message = ({
-	children,
-	messageFrom = MessageWithAIRole.USER
-}: {
+	                 children,
+	                 messageFrom = MessageWithAIRole.USER
+                 }: {
 	children: ReactNode
 	messageFrom?: MessageWithAIRole
 }) => {

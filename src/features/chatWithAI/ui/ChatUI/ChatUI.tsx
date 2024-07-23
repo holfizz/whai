@@ -5,12 +5,12 @@ import { MessageWithAIRole } from '@/entities/messageWithAI'
 import Loader from '@/shared/ui/Loader/Loader'
 
 const ChatUi = ({
-	messages,
-	loading,
-	isLoadingMore,
-	handleStartReached,
-	skip
-}) => {
+	                messages,
+	                loading,
+	                isLoadingMore,
+	                handleStartReached,
+	                skip
+                }) => {
 	const virtuosoRef = useRef(null)
 
 	useEffect(() => {

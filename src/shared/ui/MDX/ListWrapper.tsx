@@ -1,7 +1,13 @@
 import { Divider } from '@nextui-org/react'
 import React from 'react'
 
-export const ListWrapperUl = ({ children, className }) => {
+export const ListWrapperUl = ({
+	children,
+	className
+}: {
+	children: any
+	className: string
+}) => {
 	return (
 		<div className={'flex'}>
 			<Divider
@@ -13,7 +19,13 @@ export const ListWrapperUl = ({ children, className }) => {
 	)
 }
 
-export const ListWrapperOl = ({ children, className }) => {
+export const ListWrapperOl = ({
+	children,
+	className
+}: {
+	children: any
+	className: string
+}) => {
 	return (
 		<div className={'flex'}>
 			<Divider

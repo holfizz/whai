@@ -15,6 +15,7 @@ export const getStatisticsRoute = () => `/statistics`
 export const getCoursesRoute = () => `/d/c`
 export const getCourseByIdRoute = (id: string) => `/d/c/${id}`
 export const getSettingsRoute = () => `/d/settings`
+export const getCreatePageRoute = () => `/d/c/create`
 
 //lessons
 

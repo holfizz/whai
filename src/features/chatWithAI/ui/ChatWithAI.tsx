@@ -1,8 +1,9 @@
+'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import cls from './ChatWithAI.module.scss'
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
-import { Modal, ModalContent } from '@/shared/Modal/Modal'
+import { Modal, ModalContent } from '@/shared/ui/Modal/Modal'
 import {
 	ModalBody,
 	ModalFooter,
@@ -27,20 +28,22 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	const [messageContent, setMessageContent] = useState('')
 	const [loading, setLoading] = useState<boolean>(false)
 	const [messages, setMessages] = useState([]) // State for messages
-	const [partialMessage, setPartialMessage] = useState(null) // To store the partial message
+	const [partialMessage, setPartialMessage] = useState<any>(null) // Use any or a specific type for partial message
 
 	const initialTake = 10
 	const [skip, setSkip] = useState(0)
 	const [take] = useState(initialTake)
 	const [isLoadingMore, setIsLoadingMore] = useState(false)
-	const { createMessageWithAI } = useCreateMessageWithAI()
+
+	const { createMessageWithAI, mutationCreateMessageWithAIData } =
+		useCreateMessageWithAI()
 	const {
 		messagesAllMessagesInChatWithAI,
 		loadMore,
 		errorAllMessagesInChatWithAI,
 		loadingAllMessagesInChatWithAI
 	} = useGetAllMessagesInChatWithAI({
-		chatId: '2be6faca-9d2f-47c6-8218-cc4dfa6c580f',
+		chatId: '2b7809a3-4c11-4334-8fe8-7089ae4f5ff1',
 		initialTake: take,
 		initialSkip: skip
 	})
@@ -50,66 +53,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		subscriptionChatWithAIData,
 		subscriptionChatWithAIError,
 		subscriptionChatWithAILoading
-	} = useChatWithAIAnswerSubscription('2be6faca-9d2f-47c6-8218-cc4dfa6c580f')
-
-	useEffect(() => {
-		if (
-			subscriptionChatWithAIData &&
-			subscriptionChatWithAIData.message.type === 'answer'
-		) {
-			const { message, is_finish } = subscriptionChatWithAIData
-			setPartialMessage(prev => {
-				const updatedMessage = (prev?.content || '') + message.content
-
-				if (is_finish) {
-					// If message is finished, add it to messages
-					setMessages(prevMessages => [
-						{
-							content: updatedMessage.replace(/\n/g, '<br/>'),
-							role: message.role,
-							id: crypto.randomUUID()
-						},
-						...prevMessages // Adding to the start of the array
-					])
-					return null // Reset partial message
-				} else {
-					return {
-						content: updatedMessage,
-						role: message.role,
-						id: prev ? prev.id : crypto.randomUUID()
-					}
-				}
-			})
-		}
-	}, [subscriptionChatWithAIData])
-
-	useEffect(() => {
-		if (partialMessage) {
-			setMessages(prevMessages => {
-				const existingMessageIndex = prevMessages.findIndex(
-					msg => msg.id === partialMessage.id
-				)
-				if (existingMessageIndex > -1) {
-					// Update the existing partial message
-					const updatedMessages = [...prevMessages]
-					updatedMessages[existingMessageIndex] = {
-						...partialMessage,
-						content: partialMessage.content
-					}
-					return updatedMessages
-				} else {
-					// Add the new partial message
-					return [
-						{
-							...partialMessage,
-							content: partialMessage.content
-						},
-						...prevMessages
-					]
-				}
-			})
-		}
-	}, [partialMessage])
+	} = useChatWithAIAnswerSubscription('2b7809a3-4c11-4334-8fe8-7089ae4f5ff1')
 
 	useEffect(() => {
 		if (messagesAllMessagesInChatWithAI.length > 0) {
@@ -121,6 +65,34 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			)
 		}
 	}, [messagesAllMessagesInChatWithAI])
+
+	useEffect(() => {
+		if (subscriptionChatWithAIData && !subscriptionChatWithAIData.is_finish) {
+			const { message, is_finish, conversation_id } = subscriptionChatWithAIData
+			console.log(1, message.content)
+
+			setPartialMessage(prev => {
+				if (prev && prev.id === conversation_id) {
+					const newContent = prev.content + message.content
+					return { ...prev, content: newContent }
+				}
+				const updatedMessage = {
+					...message,
+					content: message.content,
+					id: conversation_id
+				}
+
+				if (is_finish) {
+					setMessages(prevMessages => [
+						{ ...updatedMessage, type: 'answer' },
+						...prevMessages.filter(msg => msg.id !== updatedMessage.id)
+					])
+					return null
+				}
+				return updatedMessage
+			})
+		}
+	}, [subscriptionChatWithAIData])
 
 	const handleLoadMore = useCallback(() => {
 		if (!isLoadingMore) {
@@ -163,14 +135,23 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		setLoading(true)
 
 		try {
-			await createMessageWithAI({
+			const response = await createMessageWithAI({
 				variables: {
 					chatWithAIRequestDto: {
-						chatWithAIId: '2be6faca-9d2f-47c6-8218-cc4dfa6c580f',
+						chatWithAIId: '2b7809a3-4c11-4334-8fe8-7089ae4f5ff1',
 						content: messageContent
 					}
 				}
 			})
+
+			const finalMessage = response.data.createMessageWithAI
+			setMessages(prevMessages => {
+				const updatedMessages = prevMessages.filter(
+					msg => msg.role !== 'assistant' || msg.type !== 'partial'
+				)
+				return [finalMessage, ...updatedMessages]
+			})
+			setPartialMessage(null)
 		} catch (error) {
 			console.error('Error sending message:', error)
 		} finally {
@@ -179,10 +160,6 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	}
 
 	const isSendButtonDisabled = messageContent.trim().length < 3 || loading
-
-	if (errorAllMessagesInChatWithAI) {
-		return <div>Error: {errorAllMessagesInChatWithAI.message}</div>
-	}
 
 	return (
 		<>
@@ -206,7 +183,9 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 						/>
 						<ModalBody className={'h-auto'}>
 							<ChatUi
-								messages={messages} // Use local state messages to avoid duplication
+								messages={
+									partialMessage ? [partialMessage, ...messages] : messages
+								} // Use partialMessage if present
 								loading={loadingAllMessagesInChatWithAI}
 								isLoadingMore={isLoadingMore}
 								handleStartReached={handleStartReached}

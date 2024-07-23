@@ -16,9 +16,10 @@ import {
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
-import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { GraphQLError } from 'graphql'
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
+import { createClient } from 'graphql-ws'
 
 interface AccessToken {
 	accessToken: string
@@ -57,7 +58,7 @@ const errorLink = onError(
 								try {
 									const { refreshAccessToken, data, error } =
 										useGetNewTokenMutation()
-									refreshAccessToken()
+									await refreshAccessToken()
 									if (error || !data) {
 										throw new GraphQLError('Failed to refresh token')
 									}
@@ -67,7 +68,6 @@ const errorLink = onError(
 										throw new GraphQLError('Empty AccessToken')
 									}
 
-									// Обновляем заголовок авторизации
 									operation.setContext(({ headers = {} }) => ({
 										headers: {
 											...headers,
@@ -106,16 +106,20 @@ const httpLink = new HttpLink({
 	credentials: 'include'
 })
 
-// Настройка WebSocket-ссылки
-const wsLink = new WebSocketLink({
-	uri: GRAPHQL_WS_SERVER_URL,
-	options: {
-		reconnect: true,
+export const wsLink = new GraphQLWsLink(
+	createClient({
+		url: GRAPHQL_WS_SERVER_URL,
 		connectionParams: {
 			authToken: getAccessToken()
+		},
+		retryAttempts: 5, // Добавьте повторные попытки подключения при ошибках
+		on: {
+			connected: () => console.log('WebSocket connected'),
+			closed: () => console.log('WebSocket closed'),
+			error: error => console.error('WebSocket error', error)
 		}
-	}
-})
+	})
+)
 
 // Разделение ссылок для подписок и других запросов
 const link = split(
@@ -129,11 +133,10 @@ const link = split(
 	wsLink,
 	httpLink
 )
-export const cache = new InMemoryCache()
-// Создание Apollo клиента
+
 export const client = new ApolloClient({
 	link: ApolloLink.from([authLink, errorLink, link]),
-	cache
+	cache: new InMemoryCache()
 })
 
 export default client

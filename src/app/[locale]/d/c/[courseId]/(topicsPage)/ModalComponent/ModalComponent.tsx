@@ -1,5 +1,5 @@
 import { ModalHeader } from '@nextui-org/react'
-import { Modal, ModalContent } from '@/shared/Modal/Modal'
+import { Modal, ModalContent } from '@/shared/ui/Modal/Modal'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import ModalSubtopicsBody from './ModalSubtopicsBody'
