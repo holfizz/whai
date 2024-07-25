@@ -1,12 +1,12 @@
 'use client'
 import React, { useCallback, useEffect, useState } from 'react'
-import useCourseStore from '../../(model)/createPage.state'
 import { useCreateCourseAIHistory } from '@/entities/courseAIHistory'
 import { useCreateCourse } from '@/entities/course/model/course.queries'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 
 const GenerateTDStep = (): React.JSX.Element => {
 	const forTest = [

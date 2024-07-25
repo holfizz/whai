@@ -3,8 +3,8 @@ import { DashboardLayout } from '@/widgets/DashboardLayout'
 import Button from '@/shared/ui/Button/Button'
 import { Textarea } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import useCourseStore from '../../(model)/createPage.state'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce'
+import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 
 const PromptStep = () => {
 	const t = useTranslations('CreateCourse')

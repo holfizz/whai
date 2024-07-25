@@ -125,7 +125,11 @@
 		"Course not found": "Курс не найден",
 		"No courses found": "Курсы не найдены",
 		"Let's continue to explore working with Whai": "Давайте продолжим изучать работу с Whai",
-		"Create": "Создать"
+		"Create": "Создать",
+		"Start your first course": "Начните ваш первый курс",
+		"Finish your first lesson": "Закончите первый урок",
+		"Complete your first homework assignment": "Выполните ваше первое ДЗ",
+		"Complete your first test": "Завершите ваш первый тест"
 	},
 	"TopicsPage": {
 		"In notes": "В заметки",
@@ -139,8 +143,7 @@
 	},
 	"CoursesPage": {
 		"My courses": "Мои курсы",
-		"Library of all courses": "Библиотека всех курсов",
-		"There was an error loading the lesson": "Произошла ошибка при загрузке урока"
+		"Library of all courses": "Библиотека всех курсов"
 	},
 	"Lesson": {
 		"There was an error loading the lesson": "Произошла ошибка при загрузке урока.",
@@ -163,12 +166,14 @@
 		"Generating, wait a couple of seconds": "Генерируем, подождите пару секунд.",
 		"Course Settings": "Настройки курса",
 		"Need video tutorials from YouTube?": "Нужны видеоуроки с YouTube?",
-		"Generate pictures?": "Генерировать картинки??",
+		"Generate pictures?": "Генерировать картинки?",
 		"Need homework?": "Нужны домашние задания?",
 		"Add or drag a preview image": "Добавьте или перетащите картинку для превью",
 		"Yes": "Да",
 		"No": "Нет"
 	},
+	"Quiz": {},
+
 	"Open": "Открыть",
 	"User": "Пользователь",
 	"New chat": "Новый чат",

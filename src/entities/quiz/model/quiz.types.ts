@@ -1,6 +1,3 @@
-import { z } from 'zod'
-import { QuizData } from './quiz.contracts'
-
 export interface IQuiz {
 	id: string
 	name: string
@@ -11,5 +8,79 @@ export interface IQuiz {
 	}
 }
 
-// Экспортируем типы данных
-export type IQuizData = z.infer<typeof QuizData>
+export enum QuizQuestionType {
+	MCQ = 'MCQ',
+	MRQ = 'MRQ',
+	CLOZE = 'CLOZE',
+	MATCH = 'MATCH'
+}
+
+export interface IChoice {
+	content: string
+	correctAnswerDescription?: string
+	incorrectAnswerDescription?: string
+	questionId?: string
+	interactionId?: string
+}
+
+export interface ISideType {
+	content: string
+}
+
+export interface IMatchingInteraction {
+	id?: string
+	left: ISideType[]
+	right: ISideType[]
+	answers: string[][]
+}
+
+export interface IQuestion {
+	id: string
+	questionType: QuizQuestionType
+	prompt?: string
+	choices?: IChoice[]
+	matchingInteraction?: IMatchingInteraction
+	answers?: string[]
+}
+
+export interface IQuizResult {
+	id: string
+	userId: string
+	quizId: string
+	courseId: string
+	lessonId?: string
+	subtopicId?: string
+	correctAnswers: number
+	totalPercents?: number
+	wrongAnswers: number
+	userAnswers: IUserAnswer[]
+}
+
+export interface IUserAnswer {
+	questionId: string
+	selectedAnswer: string[][]
+	isCorrect: boolean
+}
+
+export interface IQuizData {
+	id: string
+	name: string
+	description?: string
+	questions: IQuestion[]
+	quizResult?: IQuizResult
+	subtopicId?: string
+	isCompleted?: boolean
+	courseId: string
+}
+
+export interface IQuizDetails extends IQuizData {
+	subtopicId: string
+	quizResult?: IQuizResult
+}
+
+export interface IQuizSummary {
+	id: string
+	name: string
+	description?: string
+	totalPercents?: number
+}

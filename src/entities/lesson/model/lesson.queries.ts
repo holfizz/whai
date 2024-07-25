@@ -1,6 +1,6 @@
 'use client'
-import { gql, useQuery } from '@apollo/client'
 import { ILesson, ILessonContent } from '@/entities/lesson/model/lesson.types'
+import { gql, useQuery } from '@apollo/client'
 
 export const GET_LESSON = gql`
 	query ($lessonId: ID!) {
@@ -14,6 +14,14 @@ export const GET_LESSON = gql`
 				isChecked
 				name
 			}
+		}
+	}
+`
+
+export const GET_LESSON_NAME = gql`
+	query ($lessonId: ID!) {
+		getLesson(lessonId: $lessonId) {
+			name
 		}
 	}
 `

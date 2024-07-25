@@ -125,7 +125,11 @@
     "Course not found": "Course not found",
     "No courses found": "No courses found",
     "Let's continue to explore working with Whai": "Let's continue to explore working with Whai",
-    "Create": "Create"
+    "Create": "Create",
+    "Start your first course": "Start your first course",
+    "Finish your first lesson": "Finish your first lesson",
+    "Complete your first homework assignment": "Complete your first homework assignment",
+    "Complete your first test": "Complete your first test"
   },
   "TopicsPage": {
     "In notes": "In notes",
@@ -168,6 +172,7 @@
     "Yes": "Yes",
     "No": "No"
   },
+  "Quiz": {},
   "Close": "Close",
   "Open": "Open",
   "User": "User",

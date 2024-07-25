@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
-import useCourseStore from '../(model)/createPage.state'
 import ChoiceStep from './steps/ChoiceStep'
 import PromptStep from './steps/PromptStep'
 import GenerateTDStep from './steps/GenerateTDStep'
 import SettingStep from './steps/SettingStep'
+import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 
 const CreateCoursePage = (): React.JSX.Element => {
 	const step = useCourseStore(state => state.step)

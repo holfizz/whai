@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
 
-const LessonPageAsync = dynamic(() => import('./Lesson.page'))
+const QuizPageAsync = dynamic(() => import('./Quiz.page'))
 
-export default LessonPageAsync
+export default QuizPageAsync

@@ -1,6 +1,6 @@
 'use client'
 import { gql, useQuery } from '@apollo/client'
-import { IQuiz } from './quiz.types'
+import { IQuiz, IQuizData } from './quiz.types'
 
 export const GET_QUIZ = gql`
 	query ($quizId: ID!) {
@@ -48,5 +48,52 @@ export const useGetAllQuizzes = (subtopicId: string) => {
 		quizzesAllData: data?.getAllQuizzes,
 		errorQuizzesAll: error,
 		loadingQuizzesAll: loading
+	}
+}
+
+export const GET_QUIZ_DATA = gql`
+	query ($quizId: ID!) {
+		getQuiz(quizId: $quizId) {
+			id
+			name
+			quizResult {
+				correctAnswers
+				quizId
+				wrongAnswers
+				totalPercents
+			}
+			questions {
+				id
+				questionType
+				prompt
+				choices {
+					content
+				}
+				matchingInteraction {
+					left {
+						content
+					}
+					right {
+						content
+					}
+					answers
+				}
+				answers
+			}
+		}
+	}
+`
+export const useGetQuizData = (quizId: string) => {
+	const { data, error, loading } = useQuery<{ getQuiz: IQuizData }>(
+		GET_QUIZ_DATA,
+		{
+			variables: { quizId },
+			fetchPolicy: 'cache-and-network'
+		}
+	)
+	return {
+		quizData: data?.getQuiz,
+		errorQuiz: error,
+		loadingQuiz: loading
 	}
 }

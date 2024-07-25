@@ -2,9 +2,9 @@ import React from 'react'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
-import useCourseStore from '../../(model)/createPage.state'
 import { Link } from '@/navigation'
 import { getDashboardRoute } from '@/shared/const/router'
+import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 
 const ChoiceStep = () => {
 	const [selectedChoice, setSelectedChoice] = React.useState(null)

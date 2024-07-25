@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
-import useCourseStore from '../../(model)/createPage.state'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
+import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 
 const SettingStep = (): React.JSX.Element => {
 	const t = useTranslations('CreateCourse')

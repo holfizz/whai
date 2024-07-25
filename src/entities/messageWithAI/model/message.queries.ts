@@ -42,14 +42,17 @@ export const useGetAllMessagesInChatWithAI = ({
 				take: currentTake
 			},
 			updateQuery: (prev, { fetchMoreResult }) => {
-				console.log('Previous data:', prev)
-				console.log('Fetched more data:', fetchMoreResult)
 				if (!fetchMoreResult) return prev
+				const newMessages = fetchMoreResult.getAllMessageInChatWithAI
+				console.log(newMessages)
+				if (newMessages.length === 0) {
+					return prev
+				}
 
 				return {
 					getAllMessageInChatWithAI: [
 						...prev.getAllMessageInChatWithAI,
-						...fetchMoreResult.getAllMessageInChatWithAI
+						...newMessages
 					]
 				}
 			}

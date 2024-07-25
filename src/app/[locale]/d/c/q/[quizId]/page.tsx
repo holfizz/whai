@@ -1,7 +1,12 @@
-import React from 'react'
+import { unstable_setRequestLocale } from 'next-intl/server'
+import QuizPageAsync from './(ui)/Quiz.async'
 
-const Page = () => {
-	return <div></div>
+export default function IndexPage({
+	params: { locale }
+}: {
+	params: { locale: string }
+}) {
+	unstable_setRequestLocale(locale)
+
+	return <QuizPageAsync />
 }
-
-export default Page

@@ -6,8 +6,9 @@ import { useGetSubtopic } from '@/entities/subtopic'
 import { ModalBody } from '@nextui-org/react'
 import { useGetAllQuizzes } from '@/entities/quiz'
 import { useTranslations } from 'next-intl'
-import { getLessonRoute } from '@/shared/const/router'
+import { getLessonRoute, getQuizRoute } from '@/shared/const/router'
 import { Link } from '@/navigation'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 const ModalLessonsBody = ({ selectedSubtopicId }) => {
 	const { lessonsAllData } = useGetAllLessons(selectedSubtopicId)
@@ -72,11 +73,15 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 					<h3 className={'mt-4'}>{t('Tests')}</h3>
 					{quizzesAllData &&
 						quizzesAllData.map((quiz, index) => (
-							<div className={cls.group} key={quiz.id}>
+							<div
+								className={classNames(cls.group, {}, ['mt-3'])}
+								key={quiz.id}
+							>
 								<div
 									className={`absolute b-0 bg-decor-3 h-[44px] rounded-xl w-[${quiz.totalPercents}%]`}
 								></div>
-								<div
+								<Link
+									href={getQuizRoute(quiz.id)}
 									className={
 										'absolute b-0 border-1 border-decor-3 h-[44px] w-full rounded-xl flex items-center px-6 z-20 justify-between'
 									}
@@ -95,7 +100,7 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 									{quiz.totalPercents === 100 && (
 										<FiCheck className={cls.checkIcon} />
 									)}
-								</div>
+								</Link>
 							</div>
 						))}
 				</div>

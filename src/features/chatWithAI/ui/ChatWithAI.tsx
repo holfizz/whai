@@ -1,8 +1,11 @@
 'use client'
-import React, { useCallback, useEffect, useState } from 'react'
-import cls from './ChatWithAI.module.scss'
+import {
+	useChatWithAIAnswerSubscription,
+	useCreateMessageWithAI,
+	useGetAllMessagesInChatWithAI
+} from '@/entities/messageWithAI'
+import ChatUi from '@/features/chatWithAI/ui/ChatUI/ChatUI'
 import Button from '@/shared/ui/Button/Button'
-import { useTranslations } from 'next-intl'
 import { Modal, ModalContent } from '@/shared/ui/Modal/Modal'
 import {
 	ModalBody,
@@ -10,14 +13,12 @@ import {
 	ModalProps,
 	useDisclosure
 } from '@nextui-org/react'
-import {
-	useChatWithAIAnswerSubscription,
-	useCreateMessageWithAI,
-	useGetAllMessagesInChatWithAI
-} from '@/entities/messageWithAI'
-import ModalHeader from './ModalHeader'
+import { useTranslations } from 'next-intl'
+import { useCallback, useEffect, useState } from 'react'
+import { useChatStore } from '../model/chat-with-ai.store'
+import cls from './ChatWithAI.module.scss'
 import MessageInput from './MessageInput'
-import ChatUi from '@/features/chatWithAI/ui/ChatUI/ChatUI'
+import ModalHeader from './ModalHeader'
 
 const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	const t = useTranslations('Lesson')
@@ -27,33 +28,28 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	const [isAdditionalParam, setIsAdditionalParam] = useState<boolean>(false)
 	const [messageContent, setMessageContent] = useState('')
 	const [loading, setLoading] = useState<boolean>(false)
-	const [messages, setMessages] = useState([]) // State for messages
-	const [partialMessage, setPartialMessage] = useState<any>(null) // Use any or a specific type for partial message
-
+	const [messages, setMessages] = useState([])
+	const [partialMessage, setPartialMessage] = useState<any>(null)
 	const initialTake = 10
 	const [skip, setSkip] = useState(0)
 	const [take] = useState(initialTake)
 	const [isLoadingMore, setIsLoadingMore] = useState(false)
 
-	const { createMessageWithAI, mutationCreateMessageWithAIData } =
-		useCreateMessageWithAI()
+	const { createMessageWithAI } = useCreateMessageWithAI()
+	const { selectedChatId, setSelectedChatId } = useChatStore()
 	const {
 		messagesAllMessagesInChatWithAI,
 		loadMore,
-		errorAllMessagesInChatWithAI,
 		loadingAllMessagesInChatWithAI
 	} = useGetAllMessagesInChatWithAI({
-		chatId: '2b7809a3-4c11-4334-8fe8-7089ae4f5ff1',
+		chatId: selectedChatId,
 		initialTake: take,
 		initialSkip: skip
 	})
 
 	// Subscription to listen for new messages
-	const {
-		subscriptionChatWithAIData,
-		subscriptionChatWithAIError,
-		subscriptionChatWithAILoading
-	} = useChatWithAIAnswerSubscription('2b7809a3-4c11-4334-8fe8-7089ae4f5ff1')
+	const { subscriptionChatWithAIData } =
+		useChatWithAIAnswerSubscription(selectedChatId)
 
 	useEffect(() => {
 		if (messagesAllMessagesInChatWithAI.length > 0) {
@@ -69,7 +65,6 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	useEffect(() => {
 		if (subscriptionChatWithAIData && !subscriptionChatWithAIData.is_finish) {
 			const { message, is_finish, conversation_id } = subscriptionChatWithAIData
-			console.log(1, message.content)
 
 			setPartialMessage(prev => {
 				if (prev && prev.id === conversation_id) {
@@ -94,12 +89,22 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		}
 	}, [subscriptionChatWithAIData])
 
+	useEffect(() => {
+		// Reset messages and partial messages when selectedChatId changes
+		if (selectedChatId) {
+			setMessages([])
+			setPartialMessage(null)
+			setSkip(0)
+		}
+	}, [selectedChatId])
+
 	const handleLoadMore = useCallback(() => {
 		if (!isLoadingMore) {
 			setIsLoadingMore(true)
 			const newSkip = skip + take
 			loadMore({ currentSkip: newSkip, currentTake: take })
 				.then(() => {
+					setSkip(newSkip)
 					setIsLoadingMore(false)
 				})
 				.catch(() => {
@@ -129,7 +134,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			role: 'USER',
 			id: crypto.randomUUID()
 		}
-		setMessages(prevMessages => [sentMessage, ...prevMessages]) // Add new message to state immediately
+		setMessages(prevMessages => [sentMessage, ...prevMessages])
 		setMessageContent('')
 
 		setLoading(true)
@@ -138,7 +143,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			const response = await createMessageWithAI({
 				variables: {
 					chatWithAIRequestDto: {
-						chatWithAIId: '2b7809a3-4c11-4334-8fe8-7089ae4f5ff1',
+						chatWithAIId: selectedChatId,
 						content: messageContent
 					}
 				}
