@@ -1,14 +1,13 @@
 'use client'
-import React from 'react'
-import { useParams } from 'next/navigation'
 import { useGetQuizData } from '@/entities/quiz'
-import QuizHead from './QuizHead/QuizHead'
+import { useParams } from 'next/navigation'
 import QuizBody from './QuizBody/QuizBody'
+import QuizHead from './QuizHead/QuizHead'
 
 const Quiz = () => {
 	const { quizId } = useParams<{ quizId: string }>()
 	const { quizData, loadingQuiz } = useGetQuizData(quizId)
-
+	console.log(quizData)
 	return (
 		<div>
 			{quizData && (

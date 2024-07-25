@@ -172,7 +172,14 @@
 		"Yes": "Да",
 		"No": "Нет"
 	},
-	"Quiz": {},
+	"Quiz": {
+		"Your asnwer": "Ваш ответ",
+		"Next": "Далее",
+		"Back": "Назад",
+		"Finish": "Завершить",
+		"Please select at least one answer before proceeding": "Прежде чем продолжить, выберите хотя бы один ответ.",
+		"Please match all items before proceeding": "Пожалуйста, сопоставьте все элементы, прежде чем продолжить"
+	},
 
 	"Open": "Открыть",
 	"User": "Пользователь",

@@ -1,13 +1,12 @@
-import React from 'react'
 import { IQuizData } from '@/entities/quiz'
-import { useRouter } from 'next/navigation'
 import { useQuizStore } from '@/features/quiz/model/quiz.store'
+import { useRouter } from 'next/navigation'
 
 const QuizHead = ({ quizData }: { quizData: IQuizData }) => {
 	const router = useRouter()
 	const { answeredQuestions, setCurrentQuestionIndex } = useQuizStore(
 		state => ({
-			answeredQuestions: state.answeredQuestions,
+			answeredQuestions: state.selectedAnswers,
 			setCurrentQuestionIndex: state.setCurrentQuestionIndex
 		})
 	)
@@ -26,7 +25,7 @@ const QuizHead = ({ quizData }: { quizData: IQuizData }) => {
 				}
 			>
 				{quizData.questions.map((question, index) => {
-					const isAnswered = answeredQuestions[question.id]
+					const isAnswered = !!answeredQuestions[question.id]
 					return (
 						<div
 							key={index}

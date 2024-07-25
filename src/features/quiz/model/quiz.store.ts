@@ -1,18 +1,20 @@
 import { create } from 'zustand'
 
 interface QuizState {
-	answeredQuestions: { [key: string]: boolean } // хранит, был ли вопрос отвечен
-	currentQuestion: string | null // ID текущего вопроса
-	currentQuestionIndex: number // индекс текущего вопроса
-	selectedAnswers: { [key: string]: string[] } // хранит выбранные ответы для вопросов, теперь массив строк
-	matchingAnswers: { [key: string]: { value: string[] } } // хранит matching ответы в формате { value: string[] }
+	answeredQuestions: { [key: string]: boolean }
+	currentQuestion: string | null
+	currentQuestionIndex: number
+	selectedAnswers: { [key: string]: string[] }
+	matchingAnswers: { [key: string]: { value: [string, string] }[] }
 	setAnsweredQuestion: (questionId: string) => void
 	setCurrentQuestion: (questionId: string) => void
 	setCurrentQuestionIndex: (index: number) => void
 	setSelectedAnswers: (questionId: string, answers: string[]) => void
-	setMatchingAnswers: (questionId: string, answers: { value: string[] }) => void
+	setMatchingAnswers: (
+		questionId: string,
+		answers: { value: [string, string] }[]
+	) => void
 }
-
 export const useQuizStore = create<QuizState>(set => ({
 	answeredQuestions: {},
 	currentQuestion: null,
@@ -31,8 +33,14 @@ export const useQuizStore = create<QuizState>(set => ({
 		set(state => ({
 			selectedAnswers: { ...state.selectedAnswers, [questionId]: answers }
 		})),
-	setMatchingAnswers: (questionId: string, answers: { value: string[] }) =>
+	setMatchingAnswers: (
+		questionId: string,
+		answers: { value: [string, string] }[]
+	) =>
 		set(state => ({
-			matchingAnswers: { ...state.matchingAnswers, [questionId]: answers }
+			matchingAnswers: {
+				...state.matchingAnswers,
+				[questionId]: answers
+			}
 		}))
 }))

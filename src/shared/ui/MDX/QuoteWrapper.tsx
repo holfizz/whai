@@ -1,6 +1,12 @@
 import React from 'react'
 
-const QuoteWrapper = ({ children }) => {
+const QuoteWrapper = ({
+	children,
+	color
+}: {
+	children: any
+	color?: string
+}) => {
 	const singleQuoteRegex = /'([^']+)'/g
 	const doubleQuoteRegex = /"([^"]+)"/g
 
@@ -13,6 +19,7 @@ const QuoteWrapper = ({ children }) => {
 					index % 2 === 1 ? (
 						<span
 							key={index}
+							style={{ background: color }}
 							className='bg-lime-200 p-[2px] m-[1px] inline-block rounded'
 						>
 							{part}
