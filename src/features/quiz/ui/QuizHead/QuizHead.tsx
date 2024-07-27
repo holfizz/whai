@@ -4,12 +4,8 @@ import { useRouter } from 'next/navigation'
 
 const QuizHead = ({ quizData }: { quizData: IQuizData }) => {
 	const router = useRouter()
-	const { answeredQuestions, setCurrentQuestionIndex } = useQuizStore(
-		state => ({
-			answeredQuestions: state.selectedAnswers,
-			setCurrentQuestionIndex: state.setCurrentQuestionIndex
-		})
-	)
+	const { selectedAnswers, matchingAnswers, setCurrentQuestionIndex } =
+		useQuizStore()
 
 	const handleQuestionClick = (index: number) => {
 		const hash = `#${index + 1}`
@@ -21,11 +17,16 @@ const QuizHead = ({ quizData }: { quizData: IQuizData }) => {
 		<div>
 			<div
 				className={
-					'flex justify-center items-center gap-5 w-[70vw] overflow-x-auto rounded-full'
+					'flex justify-start items-center gap-5 w-[70vw] overflow-x-auto rounded-full '
 				}
 			>
 				{quizData.questions.map((question, index) => {
-					const isAnswered = !!answeredQuestions[question.id]
+					const isAnswered =
+						(selectedAnswers[question.id] &&
+							selectedAnswers[question.id].length > 0) ||
+						(matchingAnswers[question.id] &&
+							matchingAnswers[question.id].length > 0)
+
 					return (
 						<div
 							key={index}

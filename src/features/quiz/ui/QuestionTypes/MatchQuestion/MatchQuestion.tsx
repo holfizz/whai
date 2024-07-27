@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 import Xarrow, { useXarrow, Xwrapper } from 'react-xarrows'
 import NavigationButtons from '../NavigationButton'
+import cls from './MatchQuestion.module.scss'
 
 interface MatchQuestionProps {
 	question: IQuestion
@@ -13,6 +14,15 @@ interface MatchQuestionProps {
 	isFirstQuestion: boolean
 	isLastQuestion: boolean
 }
+
+const shuffleArray = (array: any[]) => {
+	for (let i = array.length - 1, j; i > 0; i--) {
+		j = Math.floor(Math.random() * (i + 1))
+		;[array[i], array[j]] = [array[j], array[i]]
+	}
+	return array
+}
+
 const MatchQuestion: React.FC<MatchQuestionProps> = ({
 	question,
 	onPrev,
@@ -29,23 +39,30 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 
 	const [localMatchingAnswers, setLocalMatchingAnswers] = useState<{
 		[key: string]: string
-	}>(
-		matchingAnswers[question.id]?.reduce((acc, { value: [left, right] }) => {
-			acc[left] = right
-			return acc
-		}, {} as { [key: string]: string }) || {}
-	)
+	}>({})
 
 	const [draggingItem, setDraggingItem] = useState<string | null>(null)
 
+	const [shuffledLeft] = useState(() =>
+		shuffleArray([...question.matchingInteraction.left])
+	)
+	const [shuffledRight] = useState(() =>
+		shuffleArray([...question.matchingInteraction.right])
+	)
+
 	useEffect(() => {
-		setLocalMatchingAnswers(
-			matchingAnswers[question.id]?.reduce((acc, { value: [left, right] }) => {
-				acc[left] = right
-				return acc
-			}, {} as { [key: string]: string }) || {}
-		)
-	}, [matchingAnswers, question.id])
+		// Initialize answers from the store if they exist
+		const storedAnswers = matchingAnswers[question.id] || []
+		const initialAnswers = shuffledLeft.reduce((acc, leftItem) => {
+			const match = storedAnswers.find(
+				answer => answer.left === leftItem.content
+			)
+			acc[leftItem.content] = match ? match.right : ''
+			return acc
+		}, {} as { [key: string]: string })
+
+		setLocalMatchingAnswers(initialAnswers)
+	}, [shuffledLeft, matchingAnswers, question.id])
 
 	const handleMatchChange = (leftItem: string, rightItem: string) => {
 		setLocalMatchingAnswers(prev => ({
@@ -67,10 +84,8 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 		setError(false)
 
 		const formattedAnswers = Object.entries(localMatchingAnswers).map(
-			([left, right]) => ({ value: [left, right] })
+			([left, right]) => ({ left, right })
 		)
-
-		console.log('Matching answers:', formattedAnswers)
 
 		setMatchingAnswers(question.id, formattedAnswers)
 		onNext()
@@ -90,9 +105,9 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 			)}
 			<Xwrapper>
 				<div className='relative flex justify-between w-full px-10'>
-					<div className='flex flex-col gap-2 relative'>
-						{question.matchingInteraction?.left.map((item, index) => (
-							<div key={index} className='relative'>
+					<div className='flex flex-col gap-2 relative flex-wrap'>
+						{shuffledLeft.map((item, index) => (
+							<div key={index} className='relative w-min'>
 								<Button
 									size='lg'
 									color='secondary'
@@ -104,25 +119,17 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 								<div
 									id={item.content}
 									style={{
-										position: 'absolute',
-										width: 15,
-										height: 15,
-										borderRadius: '50%',
-										background: 'var(--color-decor-2)',
-										cursor: 'pointer',
-										zIndex: 1,
-										transform: 'translate(50%, -50%)',
-										right: '2px',
-										top: '44%'
+										right: '2px'
 									}}
+									className={cls.Circle}
 									onMouseDown={() => setDraggingItem(item.content)}
 								/>
 							</div>
 						))}
 					</div>
 					<div className='flex flex-col gap-2'>
-						{question.matchingInteraction?.right.map((item, index) => (
-							<div key={index} className='relative'>
+						{shuffledRight.map((item, index) => (
+							<div key={index} className='relative w-min'>
 								<Button
 									size='lg'
 									color='primary'
@@ -139,18 +146,8 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 								</Button>
 								<div
 									id={item.content}
-									style={{
-										position: 'absolute',
-										width: 15,
-										height: 15,
-										borderRadius: '50%',
-										background: 'var(--color-decor-2)',
-										cursor: 'pointer',
-										zIndex: 1,
-										left: '-10px',
-										top: '50%',
-										transform: 'translate(50%, -50%)'
-									}}
+									className={cls.Circle}
+									style={{ left: -10 }}
 									onMouseUp={() => {
 										if (draggingItem) {
 											handleMatchChange(draggingItem, item.content)

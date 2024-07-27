@@ -173,12 +173,16 @@
 		"No": "No"
 	},
 	"Quiz": {
-		"Your asnwer": "Your asnwer",
+		"Your answer": "Your answer",
 		"Next": "Next",
 		"Back": "Back",
-		"Finish": "Finishs",
+		"Finish": "Finish",
 		"Please select at least one answer before proceeding": "Please select at least one answer before proceeding.",
-		"Please match all items before proceeding": "Please match all items before proceeding"
+		"Please match all items before proceeding": "Please match all items before proceeding",
+		"Question": "Question",
+		"Partial": "Partial",
+		"Incorrect": "Incorrect",
+		"Correct": "Correct"
 	},
 	"Close": "Close",
 	"Open": "Open",

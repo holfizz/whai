@@ -1,0 +1,11 @@
+.Circle {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: var(--color-decor-2);
+	cursor: pointer;
+	z-index: 1;
+	top: 44%;
+	transform: translate(50%, -50%);
+}

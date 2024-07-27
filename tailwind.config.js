@@ -11,9 +11,13 @@ const twColors = {
 	'decor-2': '#ffb57f',
 	'decor-3': '#ffe8a3',
 	'decor-4': '#f8f8f8',
-	danger: '#f37474',
-	warning: '#f3e774',
-	success: '#87d88f'
+	'error-10': '#FF9090',
+	'error-4': '#FFC9C9',
+	'error-1': '#FFE3E3',
+	'success-10': '#99FF90',
+	'success-4': '#C0FFBB',
+	'success-1': '#E4FFE2',
+	warning: '#f3e774'
 }
 module.exports = {
 	content: [

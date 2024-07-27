@@ -1,5 +1,6 @@
 import { IQuestion } from '@/entities/quiz'
 import { useQuizStore } from '@/features/quiz/model/quiz.store'
+import ParenthesesWrapper from '@/shared/ui/MDX/ParentsWrapper'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 import NavigationButtons from '../NavigationButton'
@@ -41,7 +42,7 @@ const ClozeQuestion: React.FC<ClozeQuestionProps> = ({
 
 	const handleNext = () => {
 		// Save the answer to global state when "Next" is clicked
-		if (!!selectedAnswers) {
+		if (!selectedAnswers) {
 			setError(true)
 			return
 		}
@@ -52,40 +53,37 @@ const ClozeQuestion: React.FC<ClozeQuestionProps> = ({
 	}
 
 	const parsePrompt = (prompt: string) => {
-		const parts = prompt.split(/(<ClozeLine \/>)|(<\/ClozeLine>)/)
-		return parts.map((part, index) => {
-			if (part === '<ClozeLine />') {
-				return (
-					<ClozeLine
-						key={index}
-						value={localAnswer}
-						onChange={handleAnswerChange}
-					/>
-				)
-			} else if (typeof part === 'string') {
-				return part.split(/(\s+)/).map((word, wordIndex) => (
-					<React.Fragment key={`${index}-${wordIndex}`}>
-						<span className='flex flex-wrap text-2xl leading-loose'>
-							{word}
-						</span>
-						{word.match(/\s+/) ? <span>&nbsp;</span> : null}
-					</React.Fragment>
-				))
-			} else {
-				return null
-			}
-		})
+		const hasClozeLine = prompt.includes('<ClozeLine />')
+
+		const adjustedPrompt = hasClozeLine
+			? prompt
+			: prompt.replace(/__+/g, '<ClozeLine />')
+
+		const parts = adjustedPrompt.split(/<ClozeLine \/>/)
+		return parts.map((part, index) => (
+			<React.Fragment key={index}>
+				<ParenthesesWrapper
+					className='flex flex-wrap text-lg leading-loose'
+					color={'bg-decor-1'}
+				>
+					{part}
+				</ParenthesesWrapper>
+				{index < parts.length - 1 && (
+					<ClozeLine value={localAnswer} onChange={handleAnswerChange} />
+				)}
+			</React.Fragment>
+		))
 	}
 
 	return (
 		<>
-			<div className='flex flex-col items-center'>
+			<div className='flex flex-col items-center mt-10'>
 				{error && (
 					<h4 className={'text-red-400 my-5'}>
 						{t('Please select at least one answer before proceeding')}
 					</h4>
 				)}
-				<div className='flex flex-wrap items-center'>
+				<div className='flex flex-wrap items-center text-xl'>
 					{parsePrompt(question.prompt)}
 				</div>
 			</div>

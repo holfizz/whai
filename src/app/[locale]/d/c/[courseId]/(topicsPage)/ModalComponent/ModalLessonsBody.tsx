@@ -27,9 +27,11 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 				<div>
 					{lessonsAllData &&
 						lessonsAllData.map((lesson, index) => (
-							<div className={'flex mt-3'}>
+							<div key={index} className={'flex mt-3'}>
 								<div
-									className={`${cls.group} ${lesson.isHasLessonTask ? 'calc(100% - 90px)' : ''} flex items-center`}
+									className={`${cls.group} ${
+										lesson.isHasLessonTask ? 'calc(100% - 90px)' : ''
+									} flex items-center`}
 									key={lesson.id}
 								>
 									<Link

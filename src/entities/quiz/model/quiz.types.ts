@@ -58,7 +58,7 @@ export interface IQuizResult {
 
 export interface IUserAnswer {
 	questionId: string
-	selectedAnswer: string[][]
+	selectedAnswers: string[]
 	isCorrect: boolean
 }
 
@@ -83,4 +83,25 @@ export interface IQuizSummary {
 	name: string
 	description?: string
 	totalPercents?: number
+}
+export interface IUserAnswer {
+	questionId: string
+	selectedAnswers?: string[]
+	matchingAnswers?: { left: string; right: string }[]
+}
+
+export interface IQuizAnswer {
+	quizResult: {
+		quizId: string
+		totalPercents: number
+		userAnswers: {
+			questionId: string
+			selectedAnswers?: string[]
+			correctnessPercentage: number
+			matchingAnswers?: {
+				right: string
+				left: string
+			}[]
+		}[]
+	}
 }

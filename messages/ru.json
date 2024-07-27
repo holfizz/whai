@@ -173,12 +173,16 @@
 		"No": "Нет"
 	},
 	"Quiz": {
-		"Your asnwer": "Ваш ответ",
+		"Your answer": "Ваш ответ",
 		"Next": "Далее",
 		"Back": "Назад",
 		"Finish": "Завершить",
 		"Please select at least one answer before proceeding": "Прежде чем продолжить, выберите хотя бы один ответ.",
-		"Please match all items before proceeding": "Пожалуйста, сопоставьте все элементы, прежде чем продолжить"
+		"Please match all items before proceeding": "Пожалуйста, сопоставьте все элементы, прежде чем продолжить",
+		"Question": "Вопрос",
+		"Partial": "Частично",
+		"Incorrect": "Неверно",
+		"Correct": "Верно"
 	},
 
 	"Open": "Открыть",

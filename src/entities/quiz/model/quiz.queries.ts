@@ -1,6 +1,6 @@
 'use client'
 import { gql, useQuery } from '@apollo/client'
-import { IQuiz, IQuizData } from './quiz.types'
+import { IQuiz, IQuizAnswer, IQuizData } from './quiz.types'
 
 export const GET_QUIZ = gql`
 	query ($quizId: ID!) {
@@ -56,10 +56,9 @@ export const GET_QUIZ_DATA = gql`
 		getQuiz(quizId: $quizId) {
 			id
 			name
+			courseId
 			quizResult {
-				correctAnswers
 				quizId
-				wrongAnswers
 				totalPercents
 			}
 			questions {
@@ -95,5 +94,59 @@ export const useGetQuizData = (quizId: string) => {
 		quizData: data?.getQuiz,
 		errorQuiz: error,
 		loadingQuiz: loading
+	}
+}
+
+export const SAVE_QUIZ_RESULT = gql`
+	mutation SaveQuizResult($saveQuizResultInput: SaveQuizResultInput!) {
+		saveQuizResult(saveQuizResultInput: $saveQuizResultInput) {
+			id
+			userId
+			quizId
+			courseId
+			subtopicId
+			totalPercents
+			userAnswers {
+				questionId
+				correctnessPercentage
+				matchingAnswers {
+					right
+					left
+				}
+				selectedAnswers
+			}
+		}
+	}
+`
+
+export const GET_LAST_QUIZ_RESULT = gql`
+	query GetLastQuizResult($quizResultId: ID!) {
+		getLastSaveQuizResult(quizResultId: $quizResultId) {
+			quizId
+			totalPercents
+			userAnswers {
+				questionId
+				selectedAnswers
+				correctnessPercentage
+				correctAnswers
+				matchingAnswers {
+					right
+					left
+				}
+			}
+		}
+	}
+`
+export const useGetLastQuizResult = (quizResultId: string) => {
+	const { data, error, loading } = useQuery<{
+		getLastSaveQuizResult: IQuizAnswer
+	}>(GET_LAST_QUIZ_RESULT, {
+		variables: { quizResultId },
+		fetchPolicy: 'cache-and-network'
+	})
+	return {
+		lastQuizResult: data?.getLastSaveQuizResult,
+		errorLastQuizResult: error,
+		loadingLastQuizResult: loading
 	}
 }

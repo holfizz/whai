@@ -16,11 +16,11 @@ const ClozeLine: React.FC<ClozeLineProps> = ({ value, onChange }) => {
 		<Textarea
 			variant='underlined'
 			labelPlacement='outside'
-			placeholder={t('Your asnwer')}
+			placeholder={t('Your answer')}
 			value={value}
 			maxRows={1}
 			classNames={{
-				base: 'max-w-[300px] min-w-[100px]',
+				base: 'max-w-[300px] min-w-[100px mx-2',
 				inputWrapper: ['w-[300px]', 'py-0', 'h-auto', 'after:bg-decor-2'],
 				innerWrapper: ['flex justify-between', 'h-auto', 'p-0'],
 				input: ['w-max', 'text-2xl', 'text-center']

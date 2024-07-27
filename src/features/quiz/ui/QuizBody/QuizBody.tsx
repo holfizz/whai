@@ -6,7 +6,7 @@ import ClozeQuestion from '../QuestionTypes/ClozeQuestion/ClozeQuestion'
 import MatchQuestion from '../QuestionTypes/MatchQuestion/MatchQuestion'
 import MCQQuestion from '../QuestionTypes/MCQQuestion/MCQQuestion'
 import MRQQuestion from '../QuestionTypes/MRQQuestion/MRQQuestion'
-
+import QuizResult from '../QuizResult/QuizResult'
 const QuizBody: React.FC<{ quizData: IQuizData }> = ({ quizData }) => {
 	const router = useRouter()
 	const { currentQuestionIndex, setCurrentQuestionIndex } = useQuizStore(
@@ -15,6 +15,8 @@ const QuizBody: React.FC<{ quizData: IQuizData }> = ({ quizData }) => {
 			setCurrentQuestionIndex: state.setCurrentQuestionIndex
 		})
 	)
+
+	const [isFinished, setIsFinished] = React.useState(false)
 
 	const currentQuestion = quizData?.questions[currentQuestionIndex]
 	const isFirstQuestion = currentQuestionIndex === 0
@@ -30,7 +32,7 @@ const QuizBody: React.FC<{ quizData: IQuizData }> = ({ quizData }) => {
 		if (currentQuestionIndex < quizData?.questions.length - 1) {
 			setCurrentQuestionIndex(currentQuestionIndex + 1)
 		} else {
-			// router.push('/q/result')
+			setIsFinished(true)
 		}
 	}
 
@@ -79,6 +81,16 @@ const QuizBody: React.FC<{ quizData: IQuizData }> = ({ quizData }) => {
 			default:
 				return null
 		}
+	}
+
+	if (isFinished) {
+		return (
+			<QuizResult
+				quizId={quizData.id}
+				courseId={quizData.courseId}
+				subtopicId={quizData.subtopicId}
+			/>
+		)
 	}
 
 	return (

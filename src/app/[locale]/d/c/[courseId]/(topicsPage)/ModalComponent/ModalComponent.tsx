@@ -1,9 +1,9 @@
-import { ModalHeader } from '@nextui-org/react'
 import { Modal, ModalContent } from '@/shared/ui/Modal/Modal'
+import { ModalHeader } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import ModalSubtopicsBody from './ModalSubtopicsBody'
 import ModalLessonsBody from './ModalLessonsBody'
+import ModalSubtopicsBody from './ModalSubtopicsBody'
 
 const ModalComponent = ({ topicId, onClose }) => {
 	const t = useTranslations('TopicsPage')
@@ -16,6 +16,7 @@ const ModalComponent = ({ topicId, onClose }) => {
 			backdrop='opaque'
 			isOpen={!!topicId}
 			size={'5xl'}
+			scrollBehavior='inside'
 			onOpenChange={isOpen => !isOpen && onClose()}
 		>
 			<ModalContent className={'w-[50vw] h-[70vh]'} color={'white'}>
@@ -27,7 +28,9 @@ const ModalComponent = ({ topicId, onClose }) => {
 									setIsLessons(false)
 									setSelectedSubtopicId('')
 								}}
-								className={`cursor-pointer text-md font-medium tracking-wide text-accent pb-2 ${!isLessons && 'border-b border-accent mb-[-1px]'}`}
+								className={`cursor-pointer text-md font-medium tracking-wide text-accent pb-2 ${
+									!isLessons && 'border-b border-accent mb-[-1px]'
+								}`}
 							>
 								{t('Topics')}
 							</div>

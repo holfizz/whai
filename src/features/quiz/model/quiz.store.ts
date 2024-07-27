@@ -5,14 +5,14 @@ interface QuizState {
 	currentQuestion: string | null
 	currentQuestionIndex: number
 	selectedAnswers: { [key: string]: string[] }
-	matchingAnswers: { [key: string]: { value: [string, string] }[] }
+	matchingAnswers: { [key: string]: { left: string; right: string }[] }
 	setAnsweredQuestion: (questionId: string) => void
 	setCurrentQuestion: (questionId: string) => void
 	setCurrentQuestionIndex: (index: number) => void
 	setSelectedAnswers: (questionId: string, answers: string[]) => void
 	setMatchingAnswers: (
 		questionId: string,
-		answers: { value: [string, string] }[]
+		answers: { left: string; right: string }[]
 	) => void
 }
 export const useQuizStore = create<QuizState>(set => ({
@@ -35,7 +35,7 @@ export const useQuizStore = create<QuizState>(set => ({
 		})),
 	setMatchingAnswers: (
 		questionId: string,
-		answers: { value: [string, string] }[]
+		answers: { left: string; right: string }[]
 	) =>
 		set(state => ({
 			matchingAnswers: {

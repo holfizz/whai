@@ -1,6 +1,14 @@
 import React from 'react'
 
-const ParenthesesWrapper = ({ children }) => {
+const ParenthesesWrapper = ({
+	children,
+	className,
+	color
+}: {
+	children: any
+	className?: string
+	color?: string
+}) => {
 	const regex = /\(([^)]+)\)/g
 
 	const processChildren = children => {
@@ -11,7 +19,9 @@ const ParenthesesWrapper = ({ children }) => {
 					index % 2 === 1 ? (
 						<span
 							key={index}
-							className='bg-fuchsia-100 p-[2px] m-[1px] inline-block rounded'
+							className={`${
+								color ? color : 'bg-fuchsia-100'
+							} p-[2px] m-[1px] inline-block rounded ${className}`}
 						>
 							({part})
 						</span>

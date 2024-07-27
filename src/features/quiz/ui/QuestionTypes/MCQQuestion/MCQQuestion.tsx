@@ -62,7 +62,7 @@ const MCQQuestion: React.FC<MCQQuestionProps> = ({
 				{question.choices?.map((choice, index) => (
 					<Button
 						key={index}
-						size='xl'
+						size='3xl'
 						color='secondary'
 						onClick={() => handleChoiceClick(choice.content)}
 						className={` ${
