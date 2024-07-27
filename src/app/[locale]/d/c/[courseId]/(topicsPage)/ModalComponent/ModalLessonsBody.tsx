@@ -1,14 +1,14 @@
-import cls from './ModalComponent.module.scss'
-import { ArrowUpRight } from 'lucide-react'
-import { FiCheck } from 'react-icons/fi'
 import { useGetAllLessons } from '@/entities/lesson'
-import { useGetSubtopic } from '@/entities/subtopic'
-import { ModalBody } from '@nextui-org/react'
 import { useGetAllQuizzes } from '@/entities/quiz'
-import { useTranslations } from 'next-intl'
-import { getLessonRoute, getQuizRoute } from '@/shared/const/router'
+import { useGetSubtopic } from '@/entities/subtopic'
 import { Link } from '@/navigation'
+import { getLessonRoute, getQuizRoute } from '@/shared/const/router'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { ModalBody } from '@nextui-org/react'
+import { ArrowUpRight } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { FiCheck } from 'react-icons/fi'
+import cls from './ModalComponent.module.scss'
 
 const ModalLessonsBody = ({ selectedSubtopicId }) => {
 	const { lessonsAllData } = useGetAllLessons(selectedSubtopicId)
@@ -36,7 +36,7 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 								>
 									<Link
 										href={getLessonRoute(lesson.id)}
-										className={`absolute border-1 border-decor-3 h-[44px] rounded-xl flex items-center px-6 z-20 justify-between`}
+										className={`absolute border-2 border-decor-3 h-[44px] rounded-xl flex items-center px-6 z-20 justify-between`}
 										style={{
 											width: lesson.isHasLessonTask
 												? 'calc(100% - 15px)'
@@ -80,12 +80,13 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 								key={quiz.id}
 							>
 								<div
-									className={`absolute b-0 bg-decor-3 h-[44px] rounded-xl w-[${quiz.totalPercents}%]`}
+									style={{ width: `${quiz.totalPercents}%` }}
+									className={`absolute b-0 bg-decor-3 h-[44px] rounded-xl `}
 								></div>
 								<Link
 									href={getQuizRoute(quiz.id)}
 									className={
-										'absolute b-0 border-1 border-decor-3 h-[44px] w-full rounded-xl flex items-center px-6 z-20 justify-between'
+										'absolute b-0 border-2 border-decor-3 h-[44px] w-full rounded-xl flex items-center px-6 z-20 justify-between'
 									}
 								>
 									<h1

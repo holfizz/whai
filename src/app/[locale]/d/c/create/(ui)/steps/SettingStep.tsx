@@ -1,10 +1,11 @@
 'use client'
-import React from 'react'
-import { DashboardLayout } from '@/widgets/DashboardLayout'
-import Button from '@/shared/ui/Button/Button'
-import { useTranslations } from 'next-intl'
 import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
-
+import DropImage from '@/shared/assets/icons/Course/fill/DropImage'
+import Button from '@/shared/ui/Button/Button'
+import { DashboardLayout } from '@/widgets/DashboardLayout'
+import { useTranslations } from 'next-intl'
+import React from 'react'
+import { useDropzone } from 'react-dropzone'
 const SettingStep = (): React.JSX.Element => {
 	const t = useTranslations('CreateCourse')
 	const {
@@ -27,6 +28,14 @@ const SettingStep = (): React.JSX.Element => {
 		setNeedHomework: state.setNeedHomework
 	}))
 
+	const { getRootProps, getInputProps } = useDropzone({
+		onDrop: acceptedFiles => {
+			console.log(acceptedFiles)
+			// Handle file upload here
+		},
+		accept: 'image/*' // Adjust the file types as needed
+	})
+
 	const handleSaveSettings = () => {
 		nextStep()
 	}
@@ -36,63 +45,77 @@ const SettingStep = (): React.JSX.Element => {
 			<div className='w-full flex justify-center items-center flex-col'>
 				<h1 className='text-2xl'>{t('Course Settings')}</h1>
 
-				<div className='mt-4 flex gap-4 items-center'>
-					<label className='block mb-2'>
-						{t('Need video tutorials from YouTube?')}
-					</label>
-					<div className='flex gap-4'>
-						<Button
-							size={'lg'}
-							color={videosFromYouTube ? 'secondary' : 'primary'}
-							onClick={() => setVideosFromYouTube(true)}
-						>
-							{t('Yes')}
-						</Button>
-						<Button
-							size={'lg'}
-							color={!videosFromYouTube ? 'secondary' : 'primary'}
-							onClick={() => setVideosFromYouTube(false)}
-						>
-							{t('No')}
-						</Button>
+				<div className='flex gap-5 h-[200px]'>
+					<div>
+						<div className='mt-4 flex gap-4 justify-end items-center'>
+							<label className='block mb-2'>
+								{t('Need video tutorials from YouTube?')}
+							</label>
+							<div className='flex gap-4'>
+								<Button
+									size={'lg'}
+									color={videosFromYouTube ? 'secondary' : 'gray'}
+									onClick={() => setVideosFromYouTube(true)}
+								>
+									{t('Yes')}
+								</Button>
+								<Button
+									size={'lg'}
+									color={!videosFromYouTube ? 'secondary' : 'gray'}
+									onClick={() => setVideosFromYouTube(false)}
+								>
+									{t('No')}
+								</Button>
+							</div>
+						</div>
+						<div className='mt-4 flex gap-4 justify-end items-center'>
+							<label className='block mb-2'>{t('Generate pictures?')}</label>
+							<div className='flex gap-4'>
+								<Button
+									size={'lg'}
+									color={generateImages ? 'secondary' : 'gray'}
+									onClick={() => setGenerateImages(true)}
+								>
+									{t('Yes')}
+								</Button>
+								<Button
+									size={'lg'}
+									color={!generateImages ? 'secondary' : 'gray'}
+									onClick={() => setGenerateImages(false)}
+								>
+									{t('No')}
+								</Button>
+							</div>
+						</div>
+						<div className='mt-4 flex gap-4 justify-end items-center'>
+							<label className='block mb-2'>{t('Need homework?')}</label>
+							<div className='flex gap-4'>
+								<Button
+									size={'lg'}
+									color={needHomework ? 'secondary' : 'gray'}
+									onClick={() => setNeedHomework(true)}
+								>
+									{t('Yes')}
+								</Button>
+								<Button
+									size={'lg'}
+									color={!needHomework ? 'secondary' : 'gray'}
+									onClick={() => setNeedHomework(false)}
+								>
+									{t('No')}
+								</Button>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div className='mt-4 flex gap-4 items-center'>
-					<label className='block mb-2'>{t('Generate pictures?')}</label>
-					<div className='flex gap-4'>
-						<Button
-							size={'lg'}
-							color={generateImages ? 'secondary' : 'primary'}
-							onClick={() => setGenerateImages(true)}
-						>
-							{t('Yes')}
-						</Button>
-						<Button
-							size={'lg'}
-							color={!generateImages ? 'secondary' : 'primary'}
-							onClick={() => setGenerateImages(false)}
-						>
-							{t('No')}
-						</Button>
-					</div>
-				</div>
-				<div className='mt-4 flex gap-4 items-center'>
-					<label className='block mb-2'>{t('Need homework?')}</label>
-					<div className='flex gap-4'>
-						<Button
-							size={'lg'}
-							color={needHomework ? 'secondary' : 'primary'}
-							onClick={() => setNeedHomework(true)}
-						>
-							{t('Yes')}
-						</Button>
-						<Button
-							size={'lg'}
-							color={!needHomework ? 'secondary' : 'primary'}
-							onClick={() => setNeedHomework(false)}
-						>
-							{t('No')}
-						</Button>
+					<div
+						{...getRootProps({ className: 'dropzone' })}
+						className='p-4 bg-decor-4 flex justify-center items-center cursor-pointer rounded-3xl h-full w-[200px] flex-col '
+					>
+						<input {...getInputProps()} />
+						<DropImage />
+						<p className='text-gray-500 text-center text-sm mt-4'>
+							{t('Add or drag a preview image')}
+						</p>
 					</div>
 				</div>
 				<div className='flex gap-4 mt-4'>

@@ -182,7 +182,9 @@
 		"Question": "Question",
 		"Partial": "Partial",
 		"Incorrect": "Incorrect",
-		"Correct": "Correct"
+		"Correct": "Correct",
+		"Test results": "Test results",
+		"Total percentage of correct answers:": "Total percentage of correct answers:"
 	},
 	"Close": "Close",
 	"Open": "Open",

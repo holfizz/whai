@@ -16,9 +16,9 @@ import {
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { GraphQLError } from 'graphql'
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { createClient } from 'graphql-ws'
 
 interface AccessToken {
@@ -38,7 +38,8 @@ const authLink = setContext((operation, { headers }) => {
 	return {
 		headers: {
 			...headers,
-			authorization: token ? `Bearer ${token}` : ''
+			authorization: token ? `Bearer ${token}` : '',
+			'apollo-require-preflight': true
 		}
 	}
 })

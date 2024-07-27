@@ -182,7 +182,9 @@
 		"Question": "Вопрос",
 		"Partial": "Частично",
 		"Incorrect": "Неверно",
-		"Correct": "Верно"
+		"Correct": "Верно",
+		"Test results": "Результаты теста",
+		"Total percentage of correct answers:": "Общий процент правильных ответов: "
 	},
 
 	"Open": "Открыть",

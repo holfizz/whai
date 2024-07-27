@@ -1,5 +1,5 @@
 import { unstable_setRequestLocale } from 'next-intl/server'
-import TopicsPageAsync from './(topicsPage)/topicsPage.async'
+import TopicsPageAsync from './(topicsPage)/(ui)/topicsPage.async'
 
 export default function IndexPage({
 	params: { locale }

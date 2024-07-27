@@ -44,9 +44,11 @@ const QuizResult: React.FC<QuizResultProps> = ({ quizResult }) => {
 	if (errorQuiz) return <p>Ошибка: {errorQuiz.message}</p>
 
 	return (
-		<div>
-			<h2>Результаты теста</h2>
-			<p>Общий процент правильных ответов: {quizResult.totalPercents}%</p>
+		<div className='w-3/5'>
+			<h2>{t('Test results')}</h2>
+			<p>
+				{t('Total percentage of correct answers:')} {quizResult.totalPercents}%
+			</p>
 			<Accordion
 				selectedKeys={selectedKeys}
 				onSelectionChange={setSelectedKeys}
@@ -62,7 +64,7 @@ const QuizResult: React.FC<QuizResultProps> = ({ quizResult }) => {
 						<AccordionItem
 							title={
 								<div className='flex'>
-									<p className='text-lg'>
+									<p className='text-lg break-words'>
 										{t('Question')} №{index + 1}
 									</p>
 									<Chip size='sm' className='ml-4' color={chipColor}>
@@ -73,21 +75,21 @@ const QuizResult: React.FC<QuizResultProps> = ({ quizResult }) => {
 							key={answer.questionId}
 							aria-label={`Accordion ${index + 1}`}
 						>
-							<p>
+							<p className='break-words'>
 								<strong>Процент правильности:</strong>{' '}
 								{answer.correctnessPercentage}%
 							</p>
-							<p>
+							<p className='break-words'>
 								<strong>Выбранные ответы:</strong>{' '}
 								{answer.selectedAnswers?.join(', ')}
 							</p>
-							<p>
+							<p className='break-words'>
 								<strong>Правильные ответы:</strong>{' '}
 								{answer.correctAnswers.join(', ')}
 							</p>
 							{question && (
 								<>
-									<p>
+									<p className='break-words'>
 										<strong>Вопрос:</strong> {question.prompt}
 									</p>
 									{question.choices && (
@@ -97,6 +99,7 @@ const QuizResult: React.FC<QuizResultProps> = ({ quizResult }) => {
 												{question.choices.map((choice, i) => (
 													<li
 														key={i}
+														className='break-words'
 														style={{
 															color: answer.selectedAnswers?.includes(
 																choice.content
@@ -111,7 +114,7 @@ const QuizResult: React.FC<QuizResultProps> = ({ quizResult }) => {
 														) && (
 															<>
 																{choice.correctAnswerDescription && (
-																	<p>
+																	<p className='break-words'>
 																		<strong>
 																			Описание правильного ответа:
 																		</strong>{' '}
@@ -119,7 +122,7 @@ const QuizResult: React.FC<QuizResultProps> = ({ quizResult }) => {
 																	</p>
 																)}
 																{choice.incorrectAnswerDescription && (
-																	<p>
+																	<p className='break-words'>
 																		<strong>
 																			Описание неправильного ответа:
 																		</strong>{' '}
@@ -140,7 +143,7 @@ const QuizResult: React.FC<QuizResultProps> = ({ quizResult }) => {
 									<strong>Совпадения:</strong>
 									<ul>
 										{answer.matchingAnswers.map((match, i) => (
-											<li key={i}>
+											<li key={i} className='break-words'>
 												{match.left} - {match.right}
 											</li>
 										))}
