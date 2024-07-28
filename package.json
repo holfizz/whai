@@ -25,6 +25,7 @@
     "@typescript-eslint/parser": "^6.19.1",
     "@use-gesture/react": "^10.3.0",
     "apollo-link-ws": "^1.0.20",
+    "apollo-upload-client": "^18.0.1",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",

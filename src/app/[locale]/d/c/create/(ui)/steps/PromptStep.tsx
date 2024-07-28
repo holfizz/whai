@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { DashboardLayout } from '@/widgets/DashboardLayout'
+import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
+import { useDebounce } from '@/shared/lib/hooks/useDebounce'
 import Button from '@/shared/ui/Button/Button'
+import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { Textarea } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { useDebounce } from '@/shared/lib/hooks/useDebounce'
-import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
+import { useEffect, useState } from 'react'
 
 const PromptStep = () => {
 	const t = useTranslations('CreateCourse')

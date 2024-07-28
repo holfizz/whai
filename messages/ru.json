@@ -170,7 +170,11 @@
 		"Need homework?": "Нужны домашние задания?",
 		"Add or drag a preview image": "Добавьте или перетащите картинку для превью",
 		"Yes": "Да",
-		"No": "Нет"
+		"No": "Нет",
+		"Here is the title and description you chose": "Вот название и описание, которые вы выбрали",
+		"Reset": "Сбросить",
+		"Let's test your knowledge": "Давайте проверим ваши знания",
+		"Take a short test to determine the difficulty level of the course": "Пройдите небольшой тест, чтобы определить уровень сложности курса"
 	},
 	"Quiz": {
 		"Your answer": "Ваш ответ",

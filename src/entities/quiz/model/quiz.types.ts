@@ -14,7 +14,7 @@ export enum QuizQuestionType {
 	CLOZE = 'CLOZE',
 	MATCH = 'MATCH'
 }
-
+type arrayString = string[]
 export interface IChoice {
 	content: string
 	correctAnswerDescription?: string
@@ -58,7 +58,7 @@ export interface IQuizResult {
 
 export interface IUserAnswer {
 	questionId: string
-	selectedAnswers: string[]
+	selectedAnswers?: string[]
 	isCorrect: boolean
 }
 
@@ -84,6 +84,7 @@ export interface IQuizSummary {
 	description?: string
 	totalPercents?: number
 }
+
 export interface IUserAnswer {
 	questionId: string
 	selectedAnswers?: string[]
@@ -91,17 +92,24 @@ export interface IUserAnswer {
 }
 
 export interface IQuizAnswer {
-	quizResult: {
-		quizId: string
-		totalPercents: number
-		userAnswers: {
-			questionId: string
-			selectedAnswers?: string[]
-			correctnessPercentage: number
-			matchingAnswers?: {
-				right: string
-				left: string
-			}[]
+	id: string
+	quizId: string
+	totalPercents: number
+	userAnswers: {
+		id: string
+		questionId: string
+		selectedAnswers?: arrayString
+		correctAnswers: string[]
+		correctnessPercentage: number
+		matchingAnswers?: {
+			right: string
+			left: string
 		}[]
-	}
+	}[]
+}
+export interface KnowledgeSum {
+	summary: string
+	strongPoints: string[]
+	weakPoints: string[]
+	recommendations: string[]
 }

@@ -1,6 +1,9 @@
 export { QuizData } from './model/quiz.contracts'
 export {
+	GET_QUIZ_DATA,
 	SAVE_QUIZ_RESULT,
+	useCreateIndependentQuizWithAI,
+	useGenerateKnowledgeSum,
 	useGetAllQuizzes,
 	useGetLastQuizResult,
 	useGetQuiz,

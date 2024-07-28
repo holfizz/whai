@@ -170,7 +170,11 @@
 		"Need homework?": "Need homework?",
 		"Add or drag a preview image": "Add or drag a preview image",
 		"Yes": "Yes",
-		"No": "No"
+		"No": "No",
+		"Here is the title and description you chose": "Here is the title and description you chose",
+		"Reset": "Reset",
+		"Let's test your knowledge": "Let's test your knowledge",
+		"Take a short test to determine the difficulty level of the course": ""
 	},
 	"Quiz": {
 		"Your answer": "Your answer",

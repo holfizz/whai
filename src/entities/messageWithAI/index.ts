@@ -5,7 +5,7 @@ export {
 export type { MessageWithAiType } from './model/message.types'
 
 export {
-	useGetAllMessagesInChatWithAI,
 	useChatWithAIAnswerSubscription,
-	useCreateMessageWithAI
+	useCreateMessageWithAI,
+	useGetAllMessagesInChatWithAI
 } from './model/message.queries'

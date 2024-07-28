@@ -1,5 +1,8 @@
-import { IQuizData, QuizQuestionType } from '@/entities/quiz'
-import { useRouter } from 'next/navigation'
+import {
+	IQuizData,
+	QuizQuestionType,
+	useGetLastQuizResult
+} from '@/entities/quiz'
 import React from 'react'
 import { useQuizStore } from '../../model/quiz.store'
 import ClozeQuestion from '../QuestionTypes/ClozeQuestion/ClozeQuestion'
@@ -7,15 +10,10 @@ import MatchQuestion from '../QuestionTypes/MatchQuestion/MatchQuestion'
 import MCQQuestion from '../QuestionTypes/MCQQuestion/MCQQuestion'
 import MRQQuestion from '../QuestionTypes/MRQQuestion/MRQQuestion'
 import QuizResult from '../QuizResult/QuizResult'
-const QuizBody: React.FC<{ quizData: IQuizData }> = ({ quizData }) => {
-	const router = useRouter()
-	const { currentQuestionIndex, setCurrentQuestionIndex } = useQuizStore(
-		state => ({
-			currentQuestionIndex: state.currentQuestionIndex,
-			setCurrentQuestionIndex: state.setCurrentQuestionIndex
-		})
-	)
 
+const QuizBody = ({ quizData }: { quizData: IQuizData }) => {
+	const { currentQuestionIndex, setCurrentQuestionIndex } = useQuizStore()
+	const { lastQuizResult } = useGetLastQuizResult(quizData?.id)
 	const [isFinished, setIsFinished] = React.useState(false)
 
 	const currentQuestion = quizData?.questions[currentQuestionIndex]

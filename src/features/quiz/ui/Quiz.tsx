@@ -1,25 +1,37 @@
 'use client'
+import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 import { useGetLastQuizResult, useGetQuizData } from '@/entities/quiz'
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { useQuizStore } from '../model/quiz.store'
 import QuizAnswers from './QuizAnswers/QuizAnswers'
 import QuizBody from './QuizBody/QuizBody'
 import QuizHead from './QuizHead/QuizHead'
 
-const Quiz = () => {
+const Quiz = ({ quizIdProp }: { quizIdProp?: string }) => {
 	const t = useTranslations('Quiz')
 	const { quizId } = useParams<{ quizId: string }>()
 	const { back } = useRouter()
-	const { quizData, loadingQuiz } = useGetQuizData(quizId)
-
+	const { setQuizResultId } = useQuizStore()
+	const { quizData, loadingQuiz } = useGetQuizData(quizIdProp || quizId)
+	const { resetState } = useCourseStore()
+	console.log(quizIdProp)
 	const { lastQuizResult, errorLastQuizResult, loadingLastQuizResult } =
-		useGetLastQuizResult(quizId)
+		useGetLastQuizResult(quizIdProp || quizId)
 
+	useEffect(() => {
+		console.log(123123, lastQuizResult?.quizId)
+
+		if (lastQuizResult) {
+			setQuizResultId(lastQuizResult.id)
+		}
+	}, [lastQuizResult, setQuizResultId])
 	if (loadingQuiz || loadingLastQuizResult) return <p>Загрузка...</p>
 
 	return (
-		<div className='w-full '>
+		<div className='w-full flex gap-5 flex-col'>
 			{quizData && !lastQuizResult && (
 				<>
 					<QuizHead quizData={quizData} />
@@ -28,7 +40,16 @@ const Quiz = () => {
 			)}
 			<div className='w-full flex items-center flex-col'>
 				{lastQuizResult && <QuizAnswers quizResult={lastQuizResult} />}
-				<Button onClick={back} size='3xl' color={'main'}>
+			</div>
+			<div className='w-full flex justify-center'>
+				<Button
+					onClick={() => {
+						back()
+						resetState()
+					}}
+					size='3xl'
+					color={'main'}
+				>
 					{t('Back')}
 				</Button>
 			</div>

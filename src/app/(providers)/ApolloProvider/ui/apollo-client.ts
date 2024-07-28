@@ -9,7 +9,6 @@ import {
 	ApolloLink,
 	FetchResult,
 	GraphQLRequest,
-	HttpLink,
 	InMemoryCache,
 	Observable,
 	split
@@ -18,9 +17,10 @@ import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
+
 import { GraphQLError } from 'graphql'
 import { createClient } from 'graphql-ws'
-
 interface AccessToken {
 	accessToken: string
 }
@@ -38,8 +38,7 @@ const authLink = setContext((operation, { headers }) => {
 	return {
 		headers: {
 			...headers,
-			authorization: token ? `Bearer ${token}` : '',
-			'apollo-require-preflight': true
+			authorization: token ? `Bearer ${token}` : ''
 		}
 	}
 })
@@ -102,9 +101,17 @@ const errorLink = onError(
 )
 
 // Настройка HTTP-ссылки
-const httpLink = new HttpLink({
+// const httpLink = new HttpLink({
+// 	uri: GRAPHQL_SERVER_URL,
+// 	credentials: 'include'
+// })
+
+const uploadLink = new createUploadLink({
 	uri: GRAPHQL_SERVER_URL,
-	credentials: 'include'
+	credentials: 'include',
+	headers: {
+		'apollo-require-preflight': true
+	}
 })
 
 export const wsLink = new GraphQLWsLink(
@@ -132,12 +139,13 @@ const link = split(
 		)
 	},
 	wsLink,
-	httpLink
+	uploadLink
 )
 
 export const client = new ApolloClient({
 	link: ApolloLink.from([authLink, errorLink, link]),
-	cache: new InMemoryCache()
+	cache: new InMemoryCache(),
+	connectToDevTools: true
 })
 
 export default client

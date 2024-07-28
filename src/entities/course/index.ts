@@ -1,7 +1,9 @@
 export { CourseData } from './model/course.contracts'
-export type { ICourse, ICourseData } from './model/course.types'
 export {
+	useCreateCourse,
 	useGetAllCourses,
+	useGetCourse,
 	useGetLastCourse,
-	useGetCourse
+	useUpdateCourse
 } from './model/course.queries'
+export type { ICourse, ICourseData } from './model/course.types'

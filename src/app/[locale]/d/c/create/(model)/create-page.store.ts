@@ -11,14 +11,17 @@ interface CourseState {
 	videosFromYouTube: boolean
 	generateImages: boolean
 	needHomework: boolean
+	quizId: string | null
 	setStep: (step: number) => void
 	setChoice: (choice: string | null) => void
+	setCourseId: (courseId: string | null) => void
 	setPromptContent: (promptContent: string) => void
 	setSelectedTitle: (title: string | null) => void
 	setSelectedDescription: (description: string | null) => void
 	setVideosFromYouTube: (value: boolean) => void
 	setGenerateImages: (value: boolean) => void
 	setNeedHomework: (value: boolean) => void
+	setQuizId: (quizId: string | null) => void
 	nextStep: () => void
 	prevStep: () => void
 	resetState: () => void
@@ -36,8 +39,10 @@ const useCourseStore = create<CourseState>()(
 			videosFromYouTube: false,
 			generateImages: false,
 			needHomework: false,
+			quizId: null,
 			setStep: step => set({ step }),
 			setChoice: choice => set({ choice }),
+			setCourseId: courseId => set({ courseId }),
 			setPromptContent: promptContent => set({ promptContent }),
 			setSelectedTitle: selectedTitle => set({ selectedTitle }),
 			setSelectedDescription: selectedDescription =>
@@ -45,6 +50,7 @@ const useCourseStore = create<CourseState>()(
 			setVideosFromYouTube: value => set({ videosFromYouTube: value }),
 			setGenerateImages: value => set({ generateImages: value }),
 			setNeedHomework: value => set({ needHomework: value }),
+			setQuizId: quizId => set({ quizId }),
 			nextStep: () => set(state => ({ step: state.step + 1 })),
 			prevStep: () => set(state => ({ step: state.step - 1 })),
 			resetState: () =>
@@ -57,11 +63,13 @@ const useCourseStore = create<CourseState>()(
 					selectedDescription: null,
 					videosFromYouTube: false,
 					generateImages: false,
-					needHomework: false
+					needHomework: false,
+					quizId: null
 				})
 		}),
 		{
-			name: 'course-storage'
+			name: 'course-storage',
+			getStorage: () => localStorage
 		}
 	)
 )

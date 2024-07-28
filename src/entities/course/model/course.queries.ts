@@ -1,6 +1,6 @@
 'use client'
-import { gql, useMutation, useQuery } from '@apollo/client'
 import { ICourse } from '@/entities/course'
+import { gql, useMutation, useQuery } from '@apollo/client'
 
 export const GET_LAST_COURSE = gql`
 	query {
@@ -74,8 +74,8 @@ export const useGetCourse = (courseId: string) => {
 	}
 }
 export const CREATE_COURSE = gql`
-	mutation ($createCourseData: CourseInput!) {
-		createCourse(createCourseData: $createCourseData) {
+	mutation ($createCourseData: CourseInput!, $image: Upload) {
+		createCourse(createCourseData: $createCourseData, image: $image) {
 			id
 		}
 	}
@@ -85,8 +85,13 @@ export const useCreateCourse = () => {
 	const [createCourse, { data, error, loading }] = useMutation<{
 		createCourse: Pick<ICourse, 'id'>
 	}>(CREATE_COURSE, {
-		fetchPolicy: 'no-cache',
-		variables: { createCourseData: {} }
+		context: {
+			headers: {
+				'apollo-require-preflight': true
+			}
+		},
+
+		fetchPolicy: 'no-cache'
 	})
 
 	return {
@@ -94,5 +99,40 @@ export const useCreateCourse = () => {
 		newCourseData: data?.createCourse,
 		errorCreatingCourse: error,
 		loadingCreatingCourse: loading
+	}
+}
+
+export const UPDATE_COURSE = gql`
+	mutation UpdateCourse(
+		$id: ID!
+		$updateCourseData: UpdateCourse!
+		$image: Upload
+	) {
+		updateCourse(id: $id, updateCourseData: $updateCourseData, image: $image) {
+			id
+			name
+			description
+			imgUrl
+		}
+	}
+`
+
+export const useUpdateCourse = () => {
+	const [updateCourse, { data, error, loading }] = useMutation<{
+		updateCourse: Pick<ICourse, 'id' | 'name' | 'description' | 'imgUrl'>
+	}>(UPDATE_COURSE, {
+		context: {
+			headers: {
+				'apollo-require-preflight': true
+			}
+		},
+		fetchPolicy: 'no-cache'
+	})
+
+	return {
+		updateCourse,
+		updatedCourse: data?.updateCourse,
+		errorUpdatingCourse: error,
+		loadingUpdatingCourse: loading
 	}
 }

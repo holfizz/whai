@@ -6,6 +6,7 @@ interface QuizState {
 	currentQuestionIndex: number
 	selectedAnswers: { [key: string]: string[] }
 	matchingAnswers: { [key: string]: { left: string; right: string }[] }
+	quizResultId: string | null
 	setAnsweredQuestion: (questionId: string) => void
 	setCurrentQuestion: (questionId: string) => void
 	setCurrentQuestionIndex: (index: number) => void
@@ -14,13 +15,16 @@ interface QuizState {
 		questionId: string,
 		answers: { left: string; right: string }[]
 	) => void
+	setQuizResultId: (id: string) => void
 }
+
 export const useQuizStore = create<QuizState>(set => ({
 	answeredQuestions: {},
 	currentQuestion: null,
 	currentQuestionIndex: 0,
 	selectedAnswers: {},
 	matchingAnswers: {},
+	quizResultId: null,
 	setAnsweredQuestion: (questionId: string) =>
 		set(state => ({
 			answeredQuestions: { ...state.answeredQuestions, [questionId]: true }
@@ -38,9 +42,7 @@ export const useQuizStore = create<QuizState>(set => ({
 		answers: { left: string; right: string }[]
 	) =>
 		set(state => ({
-			matchingAnswers: {
-				...state.matchingAnswers,
-				[questionId]: answers
-			}
-		}))
+			matchingAnswers: { ...state.matchingAnswers, [questionId]: answers }
+		})),
+	setQuizResultId: (id: string) => set({ quizResultId: id })
 }))

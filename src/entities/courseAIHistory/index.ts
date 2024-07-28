@@ -1,1 +1,4 @@
-export { useCreateCourseAIHistory } from './model/courseAIHistory.queries'
+export {
+	useCreateCourseAIHistory,
+	useGetCourseAIHistoryByCourseId
+} from './model/courseAIHistory.queries'

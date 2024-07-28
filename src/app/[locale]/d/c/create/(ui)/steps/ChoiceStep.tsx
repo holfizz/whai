@@ -1,10 +1,10 @@
-import React from 'react'
-import { DashboardLayout } from '@/widgets/DashboardLayout'
-import Button from '@/shared/ui/Button/Button'
-import { useTranslations } from 'next-intl'
+import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 import { Link } from '@/navigation'
 import { getDashboardRoute } from '@/shared/const/router'
-import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
+import Button from '@/shared/ui/Button/Button'
+import { DashboardLayout } from '@/widgets/DashboardLayout'
+import { useTranslations } from 'next-intl'
+import React from 'react'
 
 const ChoiceStep = () => {
 	const [selectedChoice, setSelectedChoice] = React.useState(null)
@@ -40,8 +40,8 @@ const ChoiceStep = () => {
 							selectedChoice === 'Course'
 								? ''
 								: selectedChoice
-									? 'opacity-50'
-									: 'opacity-100'
+								? 'opacity-50'
+								: 'opacity-100'
 						}
 					>
 						{t('Course')}
@@ -54,8 +54,8 @@ const ChoiceStep = () => {
 							selectedChoice === 'Lesson'
 								? ''
 								: selectedChoice
-									? 'opacity-50'
-									: 'opacity-100'
+								? 'opacity-50'
+								: 'opacity-100'
 						}
 					>
 						{t('Lesson')}
@@ -68,8 +68,8 @@ const ChoiceStep = () => {
 							selectedChoice === 'Test'
 								? ''
 								: selectedChoice
-									? 'opacity-50'
-									: 'opacity-100'
+								? 'opacity-50'
+								: 'opacity-100'
 						}
 					>
 						{t('Test')}

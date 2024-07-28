@@ -1,4 +1,4 @@
-import { useGetQuizData } from '@/entities/quiz'
+import { IQuizAnswer, useGetQuizData } from '@/entities/quiz'
 import Chip from '@/shared/ui/Chip/Chip'
 import type { Selection } from '@nextui-org/react'
 import { Accordion, AccordionItem } from '@nextui-org/react'
@@ -33,7 +33,7 @@ const getChipText = (
 	return 'Partial'
 }
 
-const QuizResult: React.FC<QuizResultProps> = ({ quizResult }) => {
+const QuizAnswer = ({ quizResult }: { quizResult: IQuizAnswer }) => {
 	const t = useTranslations('Quiz')
 	const { quizData, errorQuiz, loadingQuiz } = useGetQuizData(quizResult.quizId)
 	const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
@@ -158,4 +158,4 @@ const QuizResult: React.FC<QuizResultProps> = ({ quizResult }) => {
 	)
 }
 
-export default QuizResult
+export default QuizAnswer

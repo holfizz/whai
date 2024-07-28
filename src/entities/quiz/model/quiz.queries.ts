@@ -1,6 +1,6 @@
 'use client'
-import { gql, useQuery } from '@apollo/client'
-import { IQuiz, IQuizAnswer, IQuizData } from './quiz.types'
+import { gql, useMutation, useQuery } from '@apollo/client'
+import { IQuiz, IQuizAnswer, IQuizData, KnowledgeSum } from './quiz.types'
 
 export const GET_QUIZ = gql`
 	query ($quizId: ID!) {
@@ -120,8 +120,9 @@ export const SAVE_QUIZ_RESULT = gql`
 `
 
 export const GET_LAST_QUIZ_RESULT = gql`
-	query GetLastQuizResult($quizResultId: ID!) {
-		getLastSaveQuizResult(quizResultId: $quizResultId) {
+	query GetLastQuizResult($quizId: ID!) {
+		getLastSaveQuizResult(quizId: $quizId) {
+			id
 			quizId
 			totalPercents
 			userAnswers {
@@ -137,16 +138,79 @@ export const GET_LAST_QUIZ_RESULT = gql`
 		}
 	}
 `
-export const useGetLastQuizResult = (quizResultId: string) => {
+export const useGetLastQuizResult = (quizId: string) => {
 	const { data, error, loading } = useQuery<{
 		getLastSaveQuizResult: IQuizAnswer
 	}>(GET_LAST_QUIZ_RESULT, {
-		variables: { quizResultId },
+		variables: { quizId },
 		fetchPolicy: 'cache-and-network'
 	})
 	return {
 		lastQuizResult: data?.getLastSaveQuizResult,
 		errorLastQuizResult: error,
 		loadingLastQuizResult: loading
+	}
+}
+export const CREATE_INDEPENDENT_QUIZ_WITH_AI = gql`
+	mutation CreateIndependentQuizWithAI($dto: QuizIndependentWithAIInput!) {
+		createIndependentQuizWithAI(dto: $dto) {
+			id
+			name
+			isCompleted
+			quizResult {
+				totalPercents
+			}
+			questions {
+				id
+				questionType
+				prompt
+				choices {
+					content
+				}
+				matchingInteraction {
+					left {
+						content
+					}
+					right {
+						content
+					}
+					answers
+				}
+				answers
+			}
+		}
+	}
+`
+export const useCreateIndependentQuizWithAI = () => {
+	const [createQuiz, { data, error, loading }] = useMutation<{
+		createIndependentQuizWithAI: { id: string }
+	}>(CREATE_INDEPENDENT_QUIZ_WITH_AI, { fetchPolicy: 'no-cache' })
+	return {
+		createQuiz,
+		dataCreateQuiz: data?.createIndependentQuizWithAI,
+		errorCreateQuiz: error,
+		loadingCreateQuiz: loading
+	}
+}
+export const GENERATE_KNOWLEDGE_SUM = gql`
+	mutation generateKnowledgeSum($dto: KnowledgeSumInput!) {
+		generateKnowledgeSum(dto: $dto) {
+			summary
+			strongPoints
+			weakPoints
+			recommendations
+		}
+	}
+`
+export const useGenerateKnowledgeSum = () => {
+	const [generateKnowledgeSum, { data, error, loading }] = useMutation<{
+		generateKnowledgeSum: KnowledgeSum
+	}>(GENERATE_KNOWLEDGE_SUM)
+
+	return {
+		generateKnowledgeSum,
+		knowledgeSumData: data?.generateKnowledgeSum,
+		knowledgeSumError: error,
+		knowledgeSumLoading: loading
 	}
 }
