@@ -18,4 +18,5 @@ export interface MatchItemProps {
 	localMatchingAnswers: { [key: string]: string }
 	handleMatchChange?: (leftItem: string, rightItem: string) => void
 	draggingItem?: string | null
+	disabled: boolean
 }

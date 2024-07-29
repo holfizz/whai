@@ -1,6 +1,7 @@
 import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory'
 import { useCreateIndependentQuizWithAI } from '@/entities/quiz'
-import { Quiz } from '@/features/quiz'
+import { Quiz, useQuizStore } from '@/features/quiz'
+import Button from '@/shared/ui/Button/Button'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { LoaderCircle } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -11,9 +12,18 @@ const CheckKnowledgeStep = () => {
 	const t = useTranslations('CreateCourse')
 	const { createQuiz, dataCreateQuiz, errorCreateQuiz, loadingCreateQuiz } =
 		useCreateIndependentQuizWithAI()
-	const { courseId, setQuizId, quizId, selectedDescription, selectedTitle } =
-		useCourseStore()
-
+	const {
+		courseId,
+		nextStep,
+		setQuizId,
+		quizId,
+		selectedDescription,
+		selectedTitle
+	} = useCourseStore()
+	const { quizResultId } = useQuizStore()
+	const handleNext = () => {
+		nextStep()
+	}
 	const { courseAIHistory, errorFetchingHistory, loadingFetchingHistory } =
 		useGetCourseAIHistoryByCourseId(courseId)
 
@@ -75,6 +85,11 @@ const CheckKnowledgeStep = () => {
 					</>
 				)}
 				{quizId ? <Quiz quizIdProp={quizId} /> : <p>Создание викторины...</p>}
+				{quizResultId && (
+					<Button size={'3xl'} color={'main'} onClick={handleNext}>
+						{t('Next')}
+					</Button>
+				)}
 			</div>
 		</DashboardLayout>
 	)

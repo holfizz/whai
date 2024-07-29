@@ -63,11 +63,17 @@ const MCQQuestion = ({
 	}
 
 	const getChoiceColor = (choice: IChoice) => {
-		if (!checked) return 'secondary'
+		if (!checked) {
+			// If not checked, highlight the selected choice or use default color
+			return selectedChoice === choice.content ? 'primary' : 'secondary'
+		}
+		// If checked, determine color based on correctness
 		if (choice.content === selectedChoice) {
+			// Selected choice color
 			return choice.correctAnswerDescription ? 'success' : 'error'
 		}
-		return choice.correctAnswerDescription ? 'success' : 'gray-text'
+		// Non-selected choices should show correct/wrong color based on correctness
+		return choice.correctAnswerDescription ? 'success' : 'error'
 	}
 
 	const getChoiceClass = (choice: IChoice) => {

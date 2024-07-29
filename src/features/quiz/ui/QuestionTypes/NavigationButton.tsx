@@ -37,7 +37,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 				<Button
 					size={'3xl'}
 					color={'main'}
-					onClick={onNext}
+					onPress={onNext}
 					disabled={isLastQuestion}
 				>
 					{isLastQuestion ? t('Finish') : t('Next')}

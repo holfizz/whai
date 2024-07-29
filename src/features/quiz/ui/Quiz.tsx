@@ -22,8 +22,6 @@ const Quiz = ({ quizIdProp }: { quizIdProp?: string }) => {
 		useGetLastQuizResult(quizIdProp || quizId)
 
 	useEffect(() => {
-		console.log(123123, lastQuizResult?.quizId)
-
 		if (lastQuizResult) {
 			setQuizResultId(lastQuizResult.id)
 		}

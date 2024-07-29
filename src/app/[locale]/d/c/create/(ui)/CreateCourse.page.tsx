@@ -1,5 +1,6 @@
 'use client'
 import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
+import AIKnowledgeSummary from './steps/AIKnowledgeSummary'
 import CheckKnowledgeStep from './steps/CheckKnowledgeStep'
 import ChoiceStep from './steps/ChoiceStep'
 import GenerateTDStep from './steps/GenerateTDStep'
@@ -22,6 +23,8 @@ const CreateCoursePage = () => {
 				return <SettingStep />
 			case 5:
 				return <CheckKnowledgeStep />
+			case 6:
+				return <AIKnowledgeSummary />
 			default:
 				resetState()
 				return <p>Unknown step</p>

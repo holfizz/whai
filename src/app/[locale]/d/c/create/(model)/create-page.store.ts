@@ -12,6 +12,7 @@ interface CourseState {
 	generateImages: boolean
 	needHomework: boolean
 	quizId: string | null
+	summaryData: any | null // Add summaryData to the store
 	setStep: (step: number) => void
 	setChoice: (choice: string | null) => void
 	setCourseId: (courseId: string | null) => void
@@ -22,6 +23,7 @@ interface CourseState {
 	setGenerateImages: (value: boolean) => void
 	setNeedHomework: (value: boolean) => void
 	setQuizId: (quizId: string | null) => void
+	setSummaryData: (summaryData: any) => void // Add a method to set summaryData
 	nextStep: () => void
 	prevStep: () => void
 	resetState: () => void
@@ -40,6 +42,7 @@ const useCourseStore = create<CourseState>()(
 			generateImages: false,
 			needHomework: false,
 			quizId: null,
+			summaryData: null, // Initialize summaryData
 			setStep: step => set({ step }),
 			setChoice: choice => set({ choice }),
 			setCourseId: courseId => set({ courseId }),
@@ -51,6 +54,7 @@ const useCourseStore = create<CourseState>()(
 			setGenerateImages: value => set({ generateImages: value }),
 			setNeedHomework: value => set({ needHomework: value }),
 			setQuizId: quizId => set({ quizId }),
+			setSummaryData: summaryData => set({ summaryData }), // Add method to set summaryData
 			nextStep: () => set(state => ({ step: state.step + 1 })),
 			prevStep: () => set(state => ({ step: state.step - 1 })),
 			resetState: () =>
@@ -64,7 +68,8 @@ const useCourseStore = create<CourseState>()(
 					videosFromYouTube: false,
 					generateImages: false,
 					needHomework: false,
-					quizId: null
+					quizId: null,
+					summaryData: null // Reset summaryData
 				})
 		}),
 		{

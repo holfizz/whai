@@ -163,6 +163,7 @@ export const CREATE_INDEPENDENT_QUIZ_WITH_AI = gql`
 				totalPercents
 			}
 			questions {
+				answers
 				id
 				questionType
 				prompt
@@ -178,14 +179,13 @@ export const CREATE_INDEPENDENT_QUIZ_WITH_AI = gql`
 					}
 					answers
 				}
-				answers
 			}
 		}
 	}
 `
 export const useCreateIndependentQuizWithAI = () => {
 	const [createQuiz, { data, error, loading }] = useMutation<{
-		createIndependentQuizWithAI: { id: string }
+		createIndependentQuizWithAI: IQuizData
 	}>(CREATE_INDEPENDENT_QUIZ_WITH_AI, { fetchPolicy: 'no-cache' })
 	return {
 		createQuiz,

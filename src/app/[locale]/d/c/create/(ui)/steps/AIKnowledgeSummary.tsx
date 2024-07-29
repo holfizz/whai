@@ -1,23 +1,35 @@
 import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory/'
 import { useGenerateKnowledgeSum } from '@/entities/quiz'
 import { useQuizStore } from '@/features/quiz'
-import { useEffect, useState } from 'react'
+import Button from '@/shared/ui/Button/Button'
+import { DashboardLayout } from '@/widgets/DashboardLayout'
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableColumn,
+	TableHeader,
+	TableRow
+} from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
+import { useEffect } from 'react'
 import useCourseStore from '../../(model)/create-page.store'
 
 const AIKnowledgeSummary = () => {
+	const t = useTranslations('CreateCourse')
 	const { quizResultId } = useQuizStore()
-	const { courseId } = useCourseStore()
+	const { courseId, prevStep, summaryData, setSummaryData } = useCourseStore()
 	const {
 		generateKnowledgeSum,
 		knowledgeSumData,
 		knowledgeSumError,
 		knowledgeSumLoading
 	} = useGenerateKnowledgeSum()
-	const [summaryData, setSummaryData] = useState(null)
 	const { courseAIHistory, errorFetchingHistory, loadingFetchingHistory } =
 		useGetCourseAIHistoryByCourseId(courseId)
+
 	useEffect(() => {
-		if (quizResultId && courseAIHistory.id) {
+		if (!summaryData && quizResultId && courseAIHistory?.id) {
 			generateKnowledgeSum({
 				variables: {
 					dto: {
@@ -27,41 +39,78 @@ const AIKnowledgeSummary = () => {
 					}
 				}
 			})
-				.then(response => setSummaryData(response.data.generateKnowledgeSum))
+				.then(response => {
+					const data = response.data.generateKnowledgeSum
+					setSummaryData(data)
+				})
 				.catch(err => console.error(err))
 		}
-	}, [quizResultId, generateKnowledgeSum, courseAIHistory?.id, courseId])
+	}, [
+		quizResultId,
+		generateKnowledgeSum,
+		courseAIHistory?.id,
+		courseId,
+		summaryData,
+		setSummaryData
+	])
 
 	if (knowledgeSumLoading) return <p>Loading...</p>
-	if (knowledgeSumData) return <p>Error: {knowledgeSumError.message}</p>
+	if (knowledgeSumError) return <p>Error: {knowledgeSumError?.message}</p>
 
 	return (
-		<div>
-			{summaryData && (
-				<>
-					<h2>Knowledge Summary</h2>
-					<p>{summaryData.summary}</p>
-					<h3>Strong Points</h3>
-					<ul>
-						{summaryData.strongPoints.map((point, index) => (
-							<li key={index}>{point}</li>
-						))}
-					</ul>
-					<h3>Weak Points</h3>
-					<ul>
-						{summaryData.weakPoints.map((point, index) => (
-							<li key={index}>{point}</li>
-						))}
-					</ul>
-					<h3>Recommendations</h3>
-					<ul>
-						{summaryData.recommendations.map((rec, index) => (
-							<li key={index}>{rec}</li>
-						))}
-					</ul>
-				</>
-			)}
-		</div>
+		<DashboardLayout>
+			<div>
+				{summaryData && (
+					<>
+						<h2>Knowledge Summary</h2>
+						<p>{summaryData.summary}</p>
+
+						<h3>Details</h3>
+						<Table aria-label='Knowledge Summary Details'>
+							<TableHeader>
+								<TableColumn>Type</TableColumn>
+								<TableColumn>Details</TableColumn>
+							</TableHeader>
+							<TableBody>
+								<TableRow key='1'>
+									<TableCell>Strong Points</TableCell>
+									<TableCell>
+										<ul>
+											{summaryData.strongPoints.map((point, index) => (
+												<li key={index}>{point}</li>
+											))}
+										</ul>
+									</TableCell>
+								</TableRow>
+								<TableRow key='2'>
+									<TableCell>Weak Points</TableCell>
+									<TableCell>
+										<ul>
+											{summaryData.weakPoints.map((point, index) => (
+												<li key={index}>{point}</li>
+											))}
+										</ul>
+									</TableCell>
+								</TableRow>
+								<TableRow key='3'>
+									<TableCell>Recommendations</TableCell>
+									<TableCell>
+										<ul>
+											{summaryData.recommendations.map((rec, index) => (
+												<li key={index}>{rec}</li>
+											))}
+										</ul>
+									</TableCell>
+								</TableRow>
+							</TableBody>
+						</Table>
+					</>
+				)}
+				<Button size={'3xl'} color={'gray'} onClick={prevStep}>
+					{t('Back')}
+				</Button>
+			</div>
+		</DashboardLayout>
 	)
 }
 

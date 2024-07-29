@@ -13,7 +13,8 @@ const MatchItem: React.FC<MatchItemProps> = ({
 	question,
 	localMatchingAnswers,
 	handleMatchChange,
-	draggingItem
+	draggingItem,
+	disabled // New prop
 }) => {
 	const updateXarrow = useXarrow()
 
@@ -24,6 +25,7 @@ const MatchItem: React.FC<MatchItemProps> = ({
 				color={getButtonColor(side, item.content)}
 				className='mb-2'
 				onClick={() => {
+					if (disabled) return // Prevent interaction if disabled
 					if (side === 'left') {
 						setDraggingItem(item.content)
 					} else if (draggingItem) {
@@ -32,6 +34,7 @@ const MatchItem: React.FC<MatchItemProps> = ({
 						updateXarrow()
 					}
 				}}
+				disabled={disabled} // Disable the button if needed
 			>
 				{item.content}
 			</Button>
@@ -64,6 +67,7 @@ const MatchItem: React.FC<MatchItemProps> = ({
 				}}
 				className={cls.Circle}
 				onMouseDown={() => {
+					if (disabled) return // Prevent interaction if disabled
 					if (side === 'left') {
 						setDraggingItem(item.content)
 					} else if (draggingItem) {
@@ -76,5 +80,4 @@ const MatchItem: React.FC<MatchItemProps> = ({
 		</div>
 	)
 }
-
 export default MatchItem

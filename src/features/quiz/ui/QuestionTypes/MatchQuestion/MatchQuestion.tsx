@@ -5,7 +5,6 @@ import NavigationButtons from '../NavigationButton'
 import MatchItem from './MatchItem'
 import { MatchQuestionProps } from './MatchQuestion.types'
 import { useMatchQuestion } from './useMatchQuestion'
-
 const MatchQuestion: React.FC<MatchQuestionProps> = ({
 	question,
 	onPrev,
@@ -53,6 +52,9 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 								checked={checked}
 								question={question}
 								localMatchingAnswers={localMatchingAnswers}
+								handleMatchChange={handleMatchChange}
+								draggingItem={draggingItem}
+								disabled={checked} // Disable if checked
 							/>
 						))}
 					</div>
@@ -69,6 +71,7 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 								checked={checked}
 								question={question}
 								localMatchingAnswers={localMatchingAnswers}
+								disabled={checked} // Disable if checked
 							/>
 						))}
 					</div>
@@ -96,5 +99,4 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 		</>
 	)
 }
-
 export default MatchQuestion

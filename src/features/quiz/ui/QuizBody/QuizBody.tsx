@@ -27,10 +27,10 @@ const QuizBody = ({ quizData }: { quizData: IQuizData }) => {
 	}
 
 	const handleNext = () => {
-		if (currentQuestionIndex < quizData?.questions.length - 1) {
-			setCurrentQuestionIndex(currentQuestionIndex + 1)
-		} else {
+		if (isLastQuestion) {
 			setIsFinished(true)
+		} else {
+			setCurrentQuestionIndex(currentQuestionIndex + 1)
 		}
 	}
 

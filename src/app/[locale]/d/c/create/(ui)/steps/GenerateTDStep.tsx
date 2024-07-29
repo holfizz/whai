@@ -59,15 +59,16 @@ const GenerateTDStep = (): React.JSX.Element => {
 				console.error('Error creating course: ', error)
 			}
 		}
-		setCourseId(newCourseData?.id)
 	}, [
 		createCourse,
-		setCourseId,
 		newCourseData?.id,
 		loadingCreatingCourse,
 		errorCreatingCourse
 	])
 
+	useEffect(() => {
+		setCourseId(newCourseData?.id)
+	}, [newCourseData])
 	const handleCreateCourseAIHistory = useCallback(async () => {
 		if (
 			newCourseData?.id &&
@@ -201,12 +202,12 @@ const GenerateTDStep = (): React.JSX.Element => {
 	)
 
 	const handleNextStep = () => {
-		if (selectedCardIndex !== null) {
+		if (selectedCardIndex !== null && courseId) {
 			const selectedTD = mutationTDData[selectedCardIndex]
 			setSelectedTitle(selectedTD.title)
 			setSelectedDescription(selectedTD.description)
 			nextStep()
-		} else if (selectedTitle) {
+		} else if (selectedTitle && courseId) {
 			nextStep()
 		}
 	}

@@ -58,7 +58,8 @@ const SettingStep = (): React.JSX.Element => {
 			} else {
 				console.log('courseId', courseId)
 			}
-			nextStep()
+
+			if (courseId) nextStep()
 		} catch (error) {
 			console.error('Error updating course:', errorUpdatingCourse)
 		}
