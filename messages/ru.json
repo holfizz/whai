@@ -181,14 +181,15 @@
 		"Next": "Далее",
 		"Back": "Назад",
 		"Finish": "Завершить",
-		"Please select at least one answer before proceeding": "Прежде чем продолжить, выберите хотя бы один ответ.",
+		"Please select and check your answer before proceeding": "Пожалуйста, выберите и проверьте свой ответ, прежде чем продолжить",
 		"Please match all items before proceeding": "Пожалуйста, сопоставьте все элементы, прежде чем продолжить",
 		"Question": "Вопрос",
 		"Partial": "Частично",
 		"Incorrect": "Неверно",
 		"Correct": "Верно",
 		"Test results": "Результаты теста",
-		"Total percentage of correct answers:": "Общий процент правильных ответов: "
+		"Total percentage of correct answers:": "Общий процент правильных ответов:",
+		"Check": "Проверить"
 	},
 
 	"Open": "Открыть",

@@ -65,7 +65,10 @@ export const GET_QUIZ_DATA = gql`
 				id
 				questionType
 				prompt
+				answers
 				choices {
+					correctAnswerDescription
+					incorrectAnswerDescription
 					content
 				}
 				matchingInteraction {
@@ -77,7 +80,6 @@ export const GET_QUIZ_DATA = gql`
 					}
 					answers
 				}
-				answers
 			}
 		}
 	}

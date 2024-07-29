@@ -36,11 +36,11 @@ export interface IMatchingInteraction {
 
 export interface IQuestion {
 	id: string
+	answers?: string[]
 	questionType: QuizQuestionType
 	prompt?: string
 	choices?: IChoice[]
 	matchingInteraction?: IMatchingInteraction
-	answers?: string[]
 }
 
 export interface IQuizResult {

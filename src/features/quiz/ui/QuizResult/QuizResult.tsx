@@ -27,7 +27,7 @@ const QuizResult = ({ quizId, courseId, subtopicId }) => {
 					answer => answer.questionId === questionId
 				)
 				if (index !== -1) {
-					delete userAnswers[index].selectedAnswers // Удалите, если это вопрос с совпадением
+					delete userAnswers[index].selectedAnswers
 					userAnswers[index].matchingAnswers = answers.map(a => ({
 						left: a.left,
 						right: a.right

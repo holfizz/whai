@@ -7,6 +7,7 @@ interface QuizState {
 	selectedAnswers: { [key: string]: string[] }
 	matchingAnswers: { [key: string]: { left: string; right: string }[] }
 	quizResultId: string | null
+	checkedQuestions: { [key: string]: boolean }
 	setAnsweredQuestion: (questionId: string) => void
 	setCurrentQuestion: (questionId: string) => void
 	setCurrentQuestionIndex: (index: number) => void
@@ -16,6 +17,7 @@ interface QuizState {
 		answers: { left: string; right: string }[]
 	) => void
 	setQuizResultId: (id: string) => void
+	setCheckedQuestion: (questionId: string, isChecked: boolean) => void
 }
 
 export const useQuizStore = create<QuizState>(set => ({
@@ -25,6 +27,7 @@ export const useQuizStore = create<QuizState>(set => ({
 	selectedAnswers: {},
 	matchingAnswers: {},
 	quizResultId: null,
+	checkedQuestions: {},
 	setAnsweredQuestion: (questionId: string) =>
 		set(state => ({
 			answeredQuestions: { ...state.answeredQuestions, [questionId]: true }
@@ -44,5 +47,9 @@ export const useQuizStore = create<QuizState>(set => ({
 		set(state => ({
 			matchingAnswers: { ...state.matchingAnswers, [questionId]: answers }
 		})),
-	setQuizResultId: (id: string) => set({ quizResultId: id })
+	setQuizResultId: (id: string) => set({ quizResultId: id }),
+	setCheckedQuestion: (questionId: string, isChecked: boolean) =>
+		set(state => ({
+			checkedQuestions: { ...state.checkedQuestions, [questionId]: isChecked }
+		}))
 }))

@@ -181,14 +181,15 @@
 		"Next": "Next",
 		"Back": "Back",
 		"Finish": "Finish",
-		"Please select at least one answer before proceeding": "Please select at least one answer before proceeding.",
+		"Please select and check your answer before proceeding": "Please select and check your answer before proceeding",
 		"Please match all items before proceeding": "Please match all items before proceeding",
 		"Question": "Question",
 		"Partial": "Partial",
 		"Incorrect": "Incorrect",
 		"Correct": "Correct",
 		"Test results": "Test results",
-		"Total percentage of correct answers:": "Total percentage of correct answers:"
+		"Total percentage of correct answers:": "Total percentage of correct answers:",
+		"Check": "Check"
 	},
 	"Close": "Close",
 	"Open": "Open",

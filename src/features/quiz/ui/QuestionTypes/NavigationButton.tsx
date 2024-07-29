@@ -1,21 +1,26 @@
-import Button from '@/shared/ui/Button/Button' // Adjust import path as necessary
+import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 
 interface NavigationButtonsProps {
 	onPrev: () => void
 	onNext: () => void
+	onCheck: () => void
 	isFirstQuestion: boolean
 	isLastQuestion: boolean
+	isChecked: boolean
 }
 
 const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 	onPrev,
 	onNext,
+	onCheck,
 	isFirstQuestion,
-	isLastQuestion
+	isLastQuestion,
+	isChecked
 }) => {
 	const t = useTranslations('Quiz')
+
 	return (
 		<div className='flex gap-4 mt-60'>
 			{!isFirstQuestion && (
@@ -23,13 +28,19 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 					{t('Back')}
 				</Button>
 			)}
-			{isLastQuestion ? (
-				<Button size={'3xl'} color={'main'} onClick={onNext}>
-					{t('Finish')}
+			{!isChecked && (
+				<Button size={'3xl'} color={'main'} onClick={onCheck}>
+					{t('Check')}
 				</Button>
-			) : (
-				<Button size={'3xl'} color={'main'} onClick={onNext}>
-					{t('Next')}
+			)}
+			{isChecked && (
+				<Button
+					size={'3xl'}
+					color={'main'}
+					onClick={onNext}
+					disabled={isLastQuestion}
+				>
+					{isLastQuestion ? t('Finish') : t('Next')}
 				</Button>
 			)}
 		</div>

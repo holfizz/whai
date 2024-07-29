@@ -1,6 +1,6 @@
 import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory/'
 import { useGenerateKnowledgeSum } from '@/entities/quiz'
-import { useQuizStore } from '@/features/quiz/model/quiz.store'
+import { useQuizStore } from '@/features/quiz'
 import { useEffect, useState } from 'react'
 import useCourseStore from '../../(model)/create-page.store'
 
