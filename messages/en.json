@@ -190,7 +190,15 @@
 		"Test results": "Test results",
 		"Total percentage of correct answers:": "Total percentage of correct answers:",
 		"Please provide an answer before proceeding": "Please provide an answer before proceeding",
-		"Check": "Check"
+		"Check": "Check",
+		"Answer": "Answer"
+	},
+	"CreateCoursePlanPage": {
+		"View Topics": "View Topic",
+		"View Lessons": "View Lessons",
+		"Generate lesson": "Generate",
+		"Create Course Plan": "Create Course Plan",
+		"Skip": "Skip"
 	},
 	"Close": "Close",
 	"Open": "Open",

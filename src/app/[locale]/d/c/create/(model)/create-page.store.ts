@@ -12,7 +12,8 @@ interface CourseState {
 	generateImages: boolean
 	needHomework: boolean
 	quizId: string | null
-	summaryData: any | null // Add summaryData to the store
+	summaryData: any | null
+	coursePlanStateData: any | null
 	setStep: (step: number) => void
 	setChoice: (choice: string | null) => void
 	setCourseId: (courseId: string | null) => void
@@ -23,7 +24,8 @@ interface CourseState {
 	setGenerateImages: (value: boolean) => void
 	setNeedHomework: (value: boolean) => void
 	setQuizId: (quizId: string | null) => void
-	setSummaryData: (summaryData: any) => void // Add a method to set summaryData
+	setSummaryData: (summaryData: any) => void
+	setCoursePlanStateData: (coursePlanData: any) => void
 	nextStep: () => void
 	prevStep: () => void
 	resetState: () => void
@@ -42,7 +44,8 @@ const useCourseStore = create<CourseState>()(
 			generateImages: false,
 			needHomework: false,
 			quizId: null,
-			summaryData: null, // Initialize summaryData
+			summaryData: null,
+			coursePlanStateData: null,
 			setStep: step => set({ step }),
 			setChoice: choice => set({ choice }),
 			setCourseId: courseId => set({ courseId }),
@@ -54,7 +57,9 @@ const useCourseStore = create<CourseState>()(
 			setGenerateImages: value => set({ generateImages: value }),
 			setNeedHomework: value => set({ needHomework: value }),
 			setQuizId: quizId => set({ quizId }),
-			setSummaryData: summaryData => set({ summaryData }), // Add method to set summaryData
+			setSummaryData: summaryData => set({ summaryData }),
+			setCoursePlanStateData: coursePlanStateData =>
+				set({ coursePlanStateData }),
 			nextStep: () => set(state => ({ step: state.step + 1 })),
 			prevStep: () => set(state => ({ step: state.step - 1 })),
 			resetState: () =>
@@ -69,7 +74,8 @@ const useCourseStore = create<CourseState>()(
 					generateImages: false,
 					needHomework: false,
 					quizId: null,
-					summaryData: null // Reset summaryData
+					summaryData: null,
+					coursePlanStateData: null // Reset this field
 				})
 		}),
 		{

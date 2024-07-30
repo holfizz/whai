@@ -29,8 +29,8 @@ const QuizResult: React.FC<QuizResultProps> = ({
 	const [width, height] = useWindowSize()
 	const t = useTranslations('Quiz')
 	useEffect(() => {
-		setQuizResultId(data.id)
-	}, [data.id, setQuizResultId])
+		setQuizResultId(data?.id)
+	}, [data?.id, setQuizResultId])
 	useEffect(() => {
 		const saveResults = async () => {
 			const userAnswers: any = Object.entries(selectedAnswers).map(

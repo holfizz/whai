@@ -3,6 +3,7 @@ import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 import AIKnowledgeSummary from './steps/AIKnowledgeSummary'
 import CheckKnowledgeStep from './steps/CheckKnowledgeStep'
 import ChoiceStep from './steps/ChoiceStep'
+import CreateCoursePlanPage from './steps/CreateCoursePlant/CreateCoursePlanPage'
 import GenerateTDStep from './steps/GenerateTDStep'
 import PromptStep from './steps/PromptStep'
 import SettingStep from './steps/SettingStep'
@@ -25,6 +26,8 @@ const CreateCoursePage = () => {
 				return <CheckKnowledgeStep />
 			case 6:
 				return <AIKnowledgeSummary />
+			case 7:
+				return <CreateCoursePlanPage />
 			default:
 				resetState()
 				return <p>Unknown step</p>

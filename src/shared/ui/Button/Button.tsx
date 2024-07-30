@@ -7,7 +7,7 @@ const Button = extendVariants(UiButton, {
 			accent: 'text-[var(--color-white)] bg-[var(--color-accent)]',
 			white: 'bg-[var(--color-white)] text-[var(--color-accent)]',
 			gray: 'bg-[var(--color-decor-4)] text-[var(--color-accent)]',
-			'gray-text': 'bg-[var(--color-decor-4)] text-[#BDBDBD)]',
+			'gray-text': 'bg-[var(--color-decor-4)] text-[#BDBDBD]',
 			error: 'bg-error-4 text-[#B78787]',
 			success: 'bg-success-4 text-[#8EBB8B]',
 			primary: 'text-[var(--color-accent)] bg-[var(--color-decor-1)]',

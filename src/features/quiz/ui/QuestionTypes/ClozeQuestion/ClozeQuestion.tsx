@@ -66,10 +66,7 @@ const ClozeQuestion: React.FC<ClozeQuestionProps> = ({
 	}
 
 	const parsePrompt = (prompt: string) => {
-		const hasClozeLine = prompt.includes('<ClozeLine />')
-		const adjustedPrompt = hasClozeLine
-			? prompt
-			: prompt.replace(/__+/g, '<ClozeLine />')
+		const adjustedPrompt = prompt.replace(/<ClozeLine\s*\/>/g, '<ClozeLine />')
 
 		const parts = adjustedPrompt.split(/<ClozeLine \/>/)
 		return parts.map((part, index) => {
@@ -83,7 +80,7 @@ const ClozeQuestion: React.FC<ClozeQuestionProps> = ({
 							<div
 								className={`max-w-[300px] rounded-xl text-2xl min-w-[220px] h-[50px] mx-2 flex items-center justify-center ${
 									isCorrect ? 'bg-success-4' : 'bg-error-4'
-								} text-center text-white`}
+								} text-center text-white overflow-x-auto whitespace-nowrap flex justify-start`}
 							>
 								{localAnswer}
 							</div>
@@ -137,6 +134,17 @@ const ClozeQuestion: React.FC<ClozeQuestionProps> = ({
 				<div className='flex flex-wrap items-center text-xl'>
 					{parsePrompt(question.prompt)}
 				</div>
+
+				{checked && (
+					<div
+						className={`mt-10 text-2xl mx-2 flex items-center justify-center  text-center text-accent`}
+					>
+						<h1>
+							<strong>{t('Answer')}:</strong>
+							{question.answers.join(' ')}
+						</h1>
+					</div>
+				)}
 			</div>
 			<NavigationButtons
 				onPrev={handlePrev}

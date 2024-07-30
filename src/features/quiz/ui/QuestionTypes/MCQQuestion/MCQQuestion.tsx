@@ -64,16 +64,18 @@ const MCQQuestion = ({
 
 	const getChoiceColor = (choice: IChoice) => {
 		if (!checked) {
-			// If not checked, highlight the selected choice or use default color
+			// Если не проверено, выделить выбранный выбор или использовать цвет по умолчанию
 			return selectedChoice === choice.content ? 'primary' : 'secondary'
 		}
-		// If checked, determine color based on correctness
+		// Если проверено, определить цвет на основе правильности
 		if (choice.content === selectedChoice) {
-			// Selected choice color
-			return choice.correctAnswerDescription ? 'success' : 'error'
+			// Цвет выбранного ответа
+			return choice.correctAnswerDescription === 'Correct' ? 'success' : 'error'
 		}
-		// Non-selected choices should show correct/wrong color based on correctness
-		return choice.correctAnswerDescription ? 'success' : 'error'
+		// Цвет не выбранных вариантов должен показывать правильность/неправильность на основе правильности
+		return choice.correctAnswerDescription === 'Correct'
+			? 'success'
+			: 'gray-text' // По умолчанию серый, если неправильно
 	}
 
 	const getChoiceClass = (choice: IChoice) => {

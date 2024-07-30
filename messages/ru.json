@@ -190,9 +190,16 @@
 		"Test results": "Результаты теста",
 		"Total percentage of correct answers:": "Общий процент правильных ответов:",
 		"Please provide an answer before proceeding": "Пожалуйста, дайте ответ, прежде чем продолжить",
-		"Check": "Проверить"
+		"Check": "Проверить",
+		"Answer": "Ответ"
 	},
-
+	"CreateCoursePlanPage": {
+		"View Topics": "Посмотреть Темы",
+		"View Lessons": "Посмотреть уроки",
+		"Generate lesson": "Сгенерировать урок",
+		"Create Course Plan": "Создать план курса",
+		"Skip": "Пропустить"
+	},
 	"Open": "Открыть",
 	"User": "Пользователь",
 	"New chat": "Новый чат",

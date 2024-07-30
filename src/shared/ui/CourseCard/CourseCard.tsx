@@ -1,20 +1,22 @@
-import React from 'react'
-import Button from '@/shared/ui/Button/Button'
-import { getCourseByIdRoute } from '@/shared/const/router'
-import { ArrowUpRight } from 'lucide-react'
+import { ICourse } from '@/entities/course'
 import { Link } from '@/navigation'
+import { getCourseByIdRoute } from '@/shared/const/router'
+import Button from '@/shared/ui/Button/Button'
+import { ArrowUpRight } from 'lucide-react'
+import { ReactNode } from 'react'
 import cls from './CourseCard.module.scss'
 import CourseStat from './CourseStat/CourseStat'
-import { ICourse } from '@/entities/course'
 
 const CourseCard = ({
 	course,
 	className,
-	isSquare
+	isSquare,
+	button
 }: {
 	course: ICourse
 	className?: string
 	isSquare?: boolean
+	button?: ReactNode
 }) => {
 	const styles = isSquare
 		? 'w-[330px] h-min-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-[330px]'
@@ -39,7 +41,11 @@ const CourseCard = ({
 				{course?.name}
 			</Link>
 			<p className={cls.paragraph}>{course?.description}</p>
-			<CourseStat data={course} className={'max-md:w-[95%]'} />
+			{button ? (
+				button
+			) : (
+				<CourseStat data={course} className={'max-md:w-[95%]'} />
+			)}{' '}
 		</div>
 	)
 }

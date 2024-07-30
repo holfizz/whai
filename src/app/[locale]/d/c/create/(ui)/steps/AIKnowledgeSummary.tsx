@@ -18,7 +18,8 @@ import useCourseStore from '../../(model)/create-page.store'
 const AIKnowledgeSummary = () => {
 	const t = useTranslations('CreateCourse')
 	const { quizResultId } = useQuizStore()
-	const { courseId, prevStep, summaryData, setSummaryData } = useCourseStore()
+	const { courseId, prevStep, nextStep, summaryData, setSummaryData } =
+		useCourseStore()
 	const {
 		generateKnowledgeSum,
 		knowledgeSumData,
@@ -108,6 +109,9 @@ const AIKnowledgeSummary = () => {
 				)}
 				<Button size={'3xl'} color={'gray'} onClick={prevStep}>
 					{t('Back')}
+				</Button>
+				<Button size={'3xl'} color={'gray'} onClick={nextStep}>
+					{t('Next')}
 				</Button>
 			</div>
 		</DashboardLayout>
