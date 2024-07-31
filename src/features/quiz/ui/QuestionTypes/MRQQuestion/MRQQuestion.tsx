@@ -1,7 +1,9 @@
 import { IChoice, IQuestion } from '@/entities/quiz'
 import { useQuizStore } from '@/features/quiz'
 import Button from '@/shared/ui/Button/Button'
+import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import NavigationButtons from '../NavigationButton'
 
 interface MRQQuestionProps {
@@ -19,6 +21,7 @@ const MRQQuestion: React.FC<MRQQuestionProps> = ({
 	isFirstQuestion,
 	isLastQuestion
 }) => {
+	const t = useTranslations('Quiz')
 	const { selectedAnswers, setSelectedAnswers } = useQuizStore(state => ({
 		selectedAnswers: state.selectedAnswers,
 		setSelectedAnswers: state.setSelectedAnswers
@@ -26,7 +29,6 @@ const MRQQuestion: React.FC<MRQQuestionProps> = ({
 
 	const [localAnswers, setLocalAnswers] = useState<string[]>([])
 	const [checked, setChecked] = useState<boolean>(false)
-	const [error, setError] = useState<boolean>(false)
 
 	useEffect(() => {
 		setLocalAnswers(selectedAnswers[question.id] || [])
@@ -39,20 +41,22 @@ const MRQQuestion: React.FC<MRQQuestionProps> = ({
 
 	const handleCheck = () => {
 		if (localAnswers.length === 0) {
-			setError(true)
+			toast.error(t('Please provide an answer before proceeding'))
+
 			return
 		}
-		setError(false)
+
 		setChecked(true)
 		setSelectedAnswers(question.id, localAnswers)
 	}
 
 	const handleNext = () => {
 		if (!checked) {
-			setError(true)
+			toast.error(t('Please provide an answer before proceeding'))
+
 			return
 		}
-		setError(false)
+
 		onNext()
 	}
 
@@ -80,11 +84,7 @@ const MRQQuestion: React.FC<MRQQuestionProps> = ({
 			<h3 className='w-[400px] text-accent text-center text-sm my-10'>
 				{question.prompt}
 			</h3>
-			{error && (
-				<h4 className={'text-red-400 mb-5'}>
-					Please select and check your answers before proceeding
-				</h4>
-			)}
+
 			<div className='flex flex-col gap-3'>
 				{question.choices?.map((choice, index) => (
 					<Button
@@ -115,6 +115,8 @@ const MRQQuestion: React.FC<MRQQuestionProps> = ({
 					</Button>
 				))}
 			</div>
+			<Toaster position='top-right' reverseOrder={false} />
+
 			<NavigationButtons
 				onPrev={handlePrev}
 				onNext={handleNext}

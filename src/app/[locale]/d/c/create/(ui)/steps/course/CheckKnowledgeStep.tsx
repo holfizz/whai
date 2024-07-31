@@ -2,11 +2,11 @@ import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory'
 import { useCreateIndependentQuizWithAI } from '@/entities/quiz'
 import { Quiz, useQuizStore } from '@/features/quiz'
 import Button from '@/shared/ui/Button/Button'
+import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
-import { LoaderCircle } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
-import useCourseStore from '../../(model)/create-page.store'
+import useUnifiedStore from '../../../(model)/unified.state'
 
 const CheckKnowledgeStep = () => {
 	const t = useTranslations('CreateCourse')
@@ -19,7 +19,7 @@ const CheckKnowledgeStep = () => {
 		quizId,
 		selectedDescription,
 		selectedTitle
-	} = useCourseStore()
+	} = useUnifiedStore()
 	const { quizResultId } = useQuizStore()
 	const handleNext = () => {
 		nextStep()
@@ -34,7 +34,8 @@ const CheckKnowledgeStep = () => {
 					dto: {
 						courseTitle: selectedTitle,
 						courseDescription: selectedDescription,
-						courseAIHistoryId: courseAIHistory.id
+						courseAIHistoryId: courseAIHistory.id,
+						toCheckKnowledge: true
 					}
 				}
 			})
@@ -54,22 +55,13 @@ const CheckKnowledgeStep = () => {
 		}
 	}, [dataCreateQuiz, setQuizId])
 
-	if (errorCreateQuiz) return <p>Ошибка: {errorCreateQuiz.message}</p>
-	if (errorFetchingHistory || errorCreateQuiz)
-		return (
-			<p>
-				Ошибка при получении истории AI курса: {errorFetchingHistory.message}
-			</p>
-		)
-
 	return (
 		<DashboardLayout>
 			<div className='w-full flex flex-col items-center justify-center'>
-				{(loadingCreateQuiz || loadingFetchingHistory) && <LoaderCircle />}
+				{(loadingCreateQuiz || loadingFetchingHistory) && <DotsLoader />}
 				{(errorFetchingHistory || errorCreateQuiz) && (
 					<h1 className='text-lg font-bold text-error-10'>
-						{errorFetchingHistory.message}
-						{errorCreateQuiz.message}
+						{t('An error occurred while creating the test')}
 					</h1>
 				)}
 				{dataCreateQuiz && (

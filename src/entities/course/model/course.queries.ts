@@ -32,6 +32,7 @@ export const GET_ALL_COURSES = gql`
 		getAllCourses {
 			id
 			name
+			imgUrl
 			totalTopics
 			completionTime
 			progressPercents

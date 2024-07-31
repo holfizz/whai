@@ -1,5 +1,5 @@
 'use client'
-import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
+import useUnifiedStore from '@/app/[locale]/d/c/create/(model)/unified.state'
 import { useGetLastQuizResult, useGetQuizData } from '@/entities/quiz'
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
@@ -16,10 +16,10 @@ const Quiz = ({ quizIdProp }: { quizIdProp?: string }) => {
 	const { back } = useRouter()
 	const { setQuizResultId } = useQuizStore()
 	const { quizData, loadingQuiz } = useGetQuizData(quizIdProp || quizId)
-	const { resetState } = useCourseStore()
-	console.log(quizIdProp)
-	const { lastQuizResult, errorLastQuizResult, loadingLastQuizResult } =
-		useGetLastQuizResult(quizIdProp || quizId)
+	const { resetState } = useUnifiedStore()
+	const { lastQuizResult, loadingLastQuizResult } = useGetLastQuizResult(
+		quizIdProp || quizId
+	)
 
 	useEffect(() => {
 		if (lastQuizResult) {

@@ -1,18 +1,20 @@
-import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce'
 import Button from '@/shared/ui/Button/Button'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { Textarea } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
+import useUnifiedStore from '../../../(model)/unified.state'
 
 const PromptStep = () => {
-	const t = useTranslations('CreateCourse')
-	const storePromptContent = useCourseStore(state => state.promptContent)
-	const setPromptContent = useCourseStore(state => state.setPromptContent)
+	const t = useTranslations('CreateTest')
+	const {
+		promptContent: storePromptContent,
+		setPromptContent,
+		nextStep,
+		prevStep
+	} = useUnifiedStore()
 	const [promptContent, setLocalPromptContent] = useState(storePromptContent)
-	const nextStep = useCourseStore(state => state.nextStep)
-	const prevStep = useCourseStore(state => state.prevStep)
 
 	const debouncedSetPromptContent = useDebounce(setPromptContent, 500)
 
@@ -29,7 +31,7 @@ const PromptStep = () => {
 				<h1>{t('What are we creating?')}</h1>
 				<Textarea
 					placeholder={t(
-						'What should the course be about, describe in detail what you want to receive'
+						'What should be in the test, describe in detail what you want to get'
 					)}
 					classNames={{
 						inputWrapper: [

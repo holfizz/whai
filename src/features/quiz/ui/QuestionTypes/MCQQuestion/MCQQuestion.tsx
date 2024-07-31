@@ -1,8 +1,10 @@
 import { IChoice, IQuestion } from '@/entities/quiz'
 import { useQuizStore } from '@/features/quiz/model/quiz.store'
 import Button from '@/shared/ui/Button/Button'
+import { MDX } from '@/shared/ui/MDX/MDX'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import NavigationButtons from '../NavigationButton'
 import cls from './MCQQuestion.module.scss'
 
@@ -13,6 +15,7 @@ interface MCQQuestionProps {
 	isFirstQuestion: boolean
 	isLastQuestion: boolean
 }
+const MemoizedMDX = memo(MDX)
 
 const MCQQuestion = ({
 	question,
@@ -22,7 +25,7 @@ const MCQQuestion = ({
 	isLastQuestion
 }: MCQQuestionProps) => {
 	const t = useTranslations('Quiz')
-	const [error, setError] = useState<boolean>(false)
+
 	const [checked, setChecked] = useState<boolean>(false)
 	const { selectedAnswers, setSelectedAnswers } = useQuizStore()
 
@@ -41,20 +44,18 @@ const MCQQuestion = ({
 
 	const handleCheck = () => {
 		if (!selectedChoice) {
-			setError(true)
+			toast.error(t('Please provide an answer before proceeding'))
 			return
 		}
-		setError(false)
 		setChecked(true)
 		setSelectedAnswers(question.id, [selectedChoice])
 	}
 
 	const handleNext = () => {
 		if (!checked) {
-			setError(true)
+			toast.error(t('Please provide an answer before proceeding'))
 			return
 		}
-		setError(false)
 		onNext()
 	}
 
@@ -64,52 +65,36 @@ const MCQQuestion = ({
 
 	const getChoiceColor = (choice: IChoice) => {
 		if (!checked) {
-			// Если не проверено, выделить выбранный выбор или использовать цвет по умолчанию
-			return selectedChoice === choice.content ? 'primary' : 'secondary'
+			return selectedChoice === choice.content ? 'main' : 'secondary'
 		}
-		// Если проверено, определить цвет на основе правильности
 		if (choice.content === selectedChoice) {
-			// Цвет выбранного ответа
-			return choice.correctAnswerDescription === 'Correct' ? 'success' : 'error'
+			return choice.correctAnswerDescription ? 'success' : 'error'
 		}
-		// Цвет не выбранных вариантов должен показывать правильность/неправильность на основе правильности
-		return choice.correctAnswerDescription === 'Correct'
-			? 'success'
-			: 'gray-text' // По умолчанию серый, если неправильно
-	}
-
-	const getChoiceClass = (choice: IChoice) => {
-		if (!checked)
-			return selectedChoice === choice.content ? 'opacity-100' : 'opacity-50'
-		return ''
+		return choice.correctAnswerDescription ? 'success' : 'gray-text'
 	}
 
 	return (
 		<>
 			<h3 className='w-[400px] text-accent text-center text-sm my-10'>
-				{question.prompt}
+				<MemoizedMDX source={question.prompt}></MemoizedMDX>
 			</h3>
-			{error && (
-				<h4 className={'text-red-400 mb-5'}>
-					{t('Please select and check your answer before proceeding')}
-				</h4>
-			)}
 			<div className={cls.choicesContainer}>
 				{question.choices?.map((choice, index) => (
 					<Button
+						disableAnimation={false}
+						disabled={checked}
 						key={index}
 						size='auto'
 						color={getChoiceColor(choice)}
 						onClick={() => handleChoiceClick(choice.content)}
-						className={getChoiceClass(choice)}
 					>
 						<h1
-							className={`${
+							className={`opacity-100 ${
 								checked &&
 								'text-lg font-medium text-center w-full break-words whitespace-normal'
 							}`}
 						>
-							{choice.content}
+							<MemoizedMDX source={choice.content}></MemoizedMDX>
 						</h1>
 						{checked && (
 							<p
@@ -124,6 +109,8 @@ const MCQQuestion = ({
 					</Button>
 				))}
 			</div>
+			<Toaster position='top-right' reverseOrder={false} />
+
 			<NavigationButtons
 				onPrev={handlePrev}
 				onNext={handleNext}
@@ -136,4 +123,4 @@ const MCQQuestion = ({
 	)
 }
 
-export default MCQQuestion
+export default memo(MCQQuestion)

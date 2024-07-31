@@ -13,13 +13,13 @@ import {
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
-import useCourseStore from '../../(model)/create-page.store'
+import useUnifiedStore from '../../../(model)/unified.state'
 
 const AIKnowledgeSummary = () => {
 	const t = useTranslations('CreateCourse')
 	const { quizResultId } = useQuizStore()
 	const { courseId, prevStep, nextStep, summaryData, setSummaryData } =
-		useCourseStore()
+		useUnifiedStore()
 	const {
 		generateKnowledgeSum,
 		knowledgeSumData,

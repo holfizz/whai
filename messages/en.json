@@ -161,7 +161,7 @@
 		"Next": "Next",
 		"Back": "Back",
 		"What will the course be about?": "What will the course be about?",
-		"What should the course be about, describe in detail what you want to receive": "What should the course be about, describe in detail what you want to receive",
+		"What should be in the know, describe in detail what you want to get": "What should be in the know, describe in detail what you want to get",
 		"Which course description fits best?": "Which course description fits best?",
 		"Generating, wait a couple of seconds": "Generating, wait a couple of seconds.",
 		"Course Settings": "Course Settings",
@@ -174,7 +174,21 @@
 		"Here is the title and description you chose": "Here is the title and description you chose",
 		"Reset": "Reset",
 		"Let's test your knowledge": "Let's test your knowledge",
-		"Take a short test to determine the difficulty level of the course": ""
+		"Take a short test to determine the difficulty level of the course": "Take a short test to determine the difficulty level of the course",
+		"Try one more time": "Try one more time",
+		"An error occurred while generating headers": "An error occurred while generating headers",
+		"An error occurred while creating the test": "An error occurred while creating the test"
+	},
+	"CreateTest": {
+		"What are we creating?": "What are we creating?",
+		"What should be in the test, describe in detail what you want to get": "What should be in the test, describe in detail what you want to get",
+		"Next": "Next",
+		"Back": "Back",
+		"An error occurred while generating headers": "An error occurred while generating headers",
+		"Try one more time": "Try one more time",
+		"Which test description fits best?": "Which test description fits best?",
+		"Here is the title and description you chose": "Here is the title and description you chose",
+		"Generating, wait a couple of seconds": "Generating, wait a couple of seconds"
 	},
 	"Quiz": {
 		"Your answer": "Your answer",
@@ -191,7 +205,8 @@
 		"Total percentage of correct answers:": "Total percentage of correct answers:",
 		"Please provide an answer before proceeding": "Please provide an answer before proceeding",
 		"Check": "Check",
-		"Answer": "Answer"
+		"Answer": "Answer",
+		"Please answer all questions before finishing the quiz": "Please answer all questions before finishing the quiz"
 	},
 	"CreateCoursePlanPage": {
 		"View Topics": "View Topic",

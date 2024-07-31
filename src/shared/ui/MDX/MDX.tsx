@@ -1,16 +1,16 @@
 // components/mdx-remote.js
-import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
-import remarkMath from 'remark-math'
-import rehypeKatex from 'rehype-katex'
-import rehypeHighlight from 'rehype-highlight'
 import '@/app/(styles)/a11.scss'
-import QuoteWrapper from './QuoteWrapper'
+import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
+import rehypeHighlight from 'rehype-highlight'
+import rehypeKatex from 'rehype-katex'
+import rehypeRaw from 'rehype-raw'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
 import remarkParse from 'remark-parse'
-import rehypeRaw from 'rehype-raw'
-import ParenthesesWrapper from './ParentsWrapper'
 import { ListWrapperOl, ListWrapperUl } from './ListWrapper'
+import ParenthesesWrapper from './ParentsWrapper'
+import QuoteWrapper from './QuoteWrapper'
 
 const components = {
 	h1: props => <h1 className='text-3xl font-black pb-2 my-2' {...props} />,

@@ -1,19 +1,28 @@
-import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 import { Link } from '@/navigation'
 import { getDashboardRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import React from 'react'
+import useUnifiedStore from '../../(model)/unified.state'
 
 const ChoiceStep = () => {
-	const [selectedChoice, setSelectedChoice] = React.useState(null)
-	const nextStep = useCourseStore(state => state.nextStep)
-	const setChoice = useCourseStore(state => state.setChoice)
+	const [selectedChoice, setSelectedChoice] = React.useState<string | null>(
+		null
+	)
+	const { step, setStep, setChoice, nextStep, prevStep } = useUnifiedStore(
+		state => ({
+			step: state.step,
+			setStep: state.setStep,
+			setChoice: state.setChoice,
+			nextStep: state.nextStep,
+			prevStep: state.prevStep
+		})
+	)
 
 	const t = useTranslations('CreateCourse')
 
-	const handleChoice = choice => {
+	const handleChoice = (choice: string) => {
 		setSelectedChoice(choice)
 	}
 
@@ -49,20 +58,6 @@ const ChoiceStep = () => {
 					<Button
 						color={'secondary'}
 						size={'3xl'}
-						onClick={() => handleChoice('Lesson')}
-						className={
-							selectedChoice === 'Lesson'
-								? ''
-								: selectedChoice
-								? 'opacity-50'
-								: 'opacity-100'
-						}
-					>
-						{t('Lesson')}
-					</Button>
-					<Button
-						color={'secondary'}
-						size={'3xl'}
 						onClick={() => handleChoice('Test')}
 						className={
 							selectedChoice === 'Test'
@@ -74,6 +69,23 @@ const ChoiceStep = () => {
 					>
 						{t('Test')}
 					</Button>
+					<Button
+						isDisabled
+						color={'secondary'}
+						size={'3xl'}
+						onClick={() => handleChoice('Lesson')}
+						className={`
+							${
+								selectedChoice === 'Lesson'
+									? ''
+									: selectedChoice
+									? 'opacity-50'
+									: 'opacity-100'
+							}
+						`}
+					>
+						{t('Lesson')}
+					</Button>
 				</div>
 				<div className='mt-20'>
 					<Button
@@ -81,7 +93,7 @@ const ChoiceStep = () => {
 						href={getDashboardRoute()}
 						color={'accent'}
 						size={'3xl'}
-						onClick={handleNext}
+						onClick={prevStep}
 					>
 						{t('Back')}
 					</Button>{' '}

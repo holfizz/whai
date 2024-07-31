@@ -1,16 +1,20 @@
 'use client'
-import React, { useCallback, useEffect } from 'react'
-import { DashboardLayout } from '@/widgets/DashboardLayout'
-import cls from './LessonPage.module.scss'
-import { useParams } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useGetCourse } from '@/entities/course'
+import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory'
 import { ILessonBlock, useGetLessonContent } from '@/entities/lesson'
-import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
-import { BreadcrumbItem, Breadcrumbs, Skeleton } from '@nextui-org/react'
-import { MDX } from '@/shared/ui/MDX/MDX'
+import { CREATE_LESSON_WITH_AI } from '@/entities/lesson/model/lesson.queries'
 import { ChatWithAI } from '@/features/chatWithAI'
 import { getCourseByIdRoute } from '@/shared/const/router'
-import { useGetCourse } from '@/entities/course'
+import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import { MDX } from '@/shared/ui/MDX/MDX'
+import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
+import { DashboardLayout } from '@/widgets/DashboardLayout'
+import { useMutation } from '@apollo/client'
+import { BreadcrumbItem, Breadcrumbs, Skeleton } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
+import { useParams } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
+import cls from './LessonPage.module.scss'
 
 const LessonPageAsync = () => {
 	const { lessonId } = useParams<{ lessonId: string }>()
@@ -18,6 +22,16 @@ const LessonPageAsync = () => {
 	const { lessonContentData, errorLessonContent, loadingLessonContent } =
 		useGetLessonContent(lessonId)
 	const { courseData } = useGetCourse(lessonContentData?.courseId)
+	const { courseAIHistory } = useGetCourseAIHistoryByCourseId(
+		lessonContentData?.courseId
+	)
+
+	const [
+		createLessonWithAI,
+		{ loading: creatingLesson, error: createLessonError }
+	] = useMutation(CREATE_LESSON_WITH_AI)
+	const [isLessonCreated, setIsLessonCreated] = useState(false)
+
 	const renderBlock = useCallback((block: ILessonBlock) => {
 		switch (block.type) {
 			case 'CODE':
@@ -64,12 +78,36 @@ const LessonPageAsync = () => {
 	useEffect(() => {
 		if (lessonId) {
 			// Fetch lesson content when lessonId changes
+			if (lessonContentData?.lessonBlocks.length === 0 && !isLessonCreated) {
+				createLessonWithAI({
+					variables: {
+						input: {
+							courseAIHistoryId: courseAIHistory?.id,
+							courseId: lessonContentData?.courseId,
+							name: lessonContentData?.name,
+							subtopicId: lessonContentData?.subtopicId,
+							isHasVideo: false,
+							isHasAISearchImage: false
+						}
+					}
+				}).then(({ data }) => {
+					if (data?.createLessonWithAI) {
+						setIsLessonCreated(true)
+					}
+				})
+			}
 		}
-	}, [lessonId])
+	}, [
+		lessonId,
+		lessonContentData,
+		createLessonWithAI,
+		isLessonCreated,
+		courseAIHistory?.id
+	])
 
 	let content
 
-	if (loadingLessonContent) {
+	if (loadingLessonContent || creatingLesson) {
 		content = (
 			<>
 				<Skeleton
@@ -89,13 +127,14 @@ const LessonPageAsync = () => {
 					className={cls.skeleton}
 					style={{ width: '100%', height: 10 }}
 				/>
+				<DotsLoader />
 			</>
 		)
-	} else if (errorLessonContent) {
+	} else if (errorLessonContent || createLessonError) {
 		content = (
 			<Text
 				theme={TextTheme.ERROR}
-				title={t('There was an error loading the lesson')}
+				title={t('There was an error loading the lesson or creating it')}
 			/>
 		)
 	} else {
@@ -105,11 +144,12 @@ const LessonPageAsync = () => {
 				{lessonContentData.lessonBlocks.length > 0 ? (
 					lessonContentData.lessonBlocks.map(renderBlock)
 				) : (
-					<h1>Урок пустой</h1>
+					<h1>{t('Lesson is empty')}</h1>
 				)}
 			</>
 		)
 	}
+
 	return (
 		<DashboardLayout>
 			<div className={cls.LessonDetails}>

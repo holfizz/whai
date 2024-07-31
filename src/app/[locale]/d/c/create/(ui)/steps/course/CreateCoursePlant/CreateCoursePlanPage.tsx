@@ -6,7 +6,7 @@ import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import useCourseStore from '../../../(model)/create-page.store'
+import useUnifiedStore from '../../../../(model)/unified.state'
 import LessonPlan from './LessonPlan'
 import SubtopicPlan from './SubtopicPlan'
 import TopicPlan from './TopicPlan'
@@ -22,34 +22,16 @@ const CreateCoursePlanPage = () => {
 		createPlanLoading
 	} = useCreateCoursePlanWithAI()
 	const {
-		step,
-		choice,
 		courseId,
-		promptContent,
 		selectedTitle,
 		selectedDescription,
 		videosFromYouTube,
-		generateImages,
-		needHomework,
-		quizId,
 		summaryData,
 		coursePlanStateData,
-		setStep,
-		setChoice,
 		setCourseId,
-		setPromptContent,
-		setSelectedTitle,
-		setSelectedDescription,
-		setVideosFromYouTube,
-		setGenerateImages,
-		setNeedHomework,
-		setQuizId,
-		setSummaryData,
 		setCoursePlanStateData,
-		nextStep,
-		prevStep,
-		resetState
-	} = useCourseStore()
+		nextStep
+	} = useUnifiedStore()
 	const { courseAIHistory } = useGetCourseAIHistoryByCourseId(courseId)
 
 	const handleTopicClick = topicId => {

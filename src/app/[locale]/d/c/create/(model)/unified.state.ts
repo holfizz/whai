@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-interface CourseState {
+interface UnifiedState {
 	step: number
 	choice: string | null
 	courseId: string | null
@@ -31,7 +31,7 @@ interface CourseState {
 	resetState: () => void
 }
 
-const useCourseStore = create<CourseState>()(
+const useUnifiedStore = create<UnifiedState>()(
 	persist(
 		set => ({
 			step: 1,
@@ -56,6 +56,7 @@ const useCourseStore = create<CourseState>()(
 			setVideosFromYouTube: value => set({ videosFromYouTube: value }),
 			setGenerateImages: value => set({ generateImages: value }),
 			setNeedHomework: value => set({ needHomework: value }),
+
 			setQuizId: quizId => set({ quizId }),
 			setSummaryData: summaryData => set({ summaryData }),
 			setCoursePlanStateData: coursePlanStateData =>
@@ -75,14 +76,13 @@ const useCourseStore = create<CourseState>()(
 					needHomework: false,
 					quizId: null,
 					summaryData: null,
-					coursePlanStateData: null // Reset this field
+					coursePlanStateData: null
 				})
 		}),
 		{
-			name: 'course-storage',
-			getStorage: () => localStorage
+			name: 'unified-storage'
 		}
 	)
 )
 
-export default useCourseStore
+export default useUnifiedStore

@@ -22,3 +22,4 @@ export const getLessonRoute = (lessonId: string) => `/d/c/l/${lessonId}`
 
 //quizzes - q
 export const getQuizRoute = (quizId: string) => `/d/c/q/${quizId}`
+export const getQuizIndependentRoute = (quizId: string) => `/d/c/q/i/${quizId}`

@@ -1,6 +1,8 @@
 import { IQuestion } from '@/entities/quiz'
 import { useQuizStore } from '@/features/quiz'
+import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
+import toast from 'react-hot-toast'
 
 const shuffleArray = (array: any[]) => {
 	const newArray = [...array]
@@ -16,7 +18,7 @@ export const useMatchQuestion = (
 	onNext: () => void,
 	onPrev: () => void
 ) => {
-	const [error, setError] = useState<boolean>(false)
+	const t = useTranslations('Quiz')
 	const {
 		matchingAnswers,
 		setMatchingAnswers,
@@ -72,11 +74,10 @@ export const useMatchQuestion = (
 		)
 
 		if (!allMatched) {
-			setError(true)
-			return
+			toast.error(t('Please match all items before proceeding'))
+			return // Exit early if not all items are matched
 		}
 
-		setError(false)
 		setChecked(true)
 		setCheckedQuestion(question.id, true)
 		setMatchingAnswers(
@@ -90,10 +91,11 @@ export const useMatchQuestion = (
 
 	const handleNext = () => {
 		if (!checked) {
-			setError(true)
+			toast.error(t('Please match all items before proceeding'))
+
 			return
 		}
-		setError(false)
+
 		onNext()
 	}
 
@@ -139,7 +141,6 @@ export const useMatchQuestion = (
 	}
 
 	return {
-		error,
 		checked,
 		shuffledLeft,
 		shuffledRight,

@@ -161,7 +161,7 @@
 		"Next": "Далее",
 		"Back": "Назад",
 		"What will the course be about?": "О чём будет курс?",
-		"What should the course be about, describe in detail what you want to receive": "О чём должен быть курс, опишите подробно что хотите получить",
+		"What should be in the know, describe in detail what you want to get": "О чём должен быть курс, опишите подробно что хотите получить",
 		"Which course description fits best?": "Какое описание курса подходит лучше всего?",
 		"Generating, wait a couple of seconds": "Генерируем, подождите пару секунд.",
 		"Course Settings": "Настройки курса",
@@ -174,7 +174,21 @@
 		"Here is the title and description you chose": "Вот название и описание, которые вы выбрали",
 		"Reset": "Сбросить",
 		"Let's test your knowledge": "Давайте проверим ваши знания",
-		"Take a short test to determine the difficulty level of the course": "Пройдите небольшой тест, чтобы определить уровень сложности курса"
+		"Take a short test to determine the difficulty level of the course": "Пройдите небольшой тест, чтобы определить уровень сложности курса",
+		"Try one more time": "Попробуйте еще раз",
+		"An error occurred while generating headers": "Произошла ошибка при создании заголовков",
+		"An error occurred while creating the test": "Произошла ошибка при создании теста"
+	},
+	"CreateTest": {
+		"What are we creating?": "Что мы создаем?",
+		"What should be in the test, describe in detail what you want to get": "Что должно быть в тесте, подробно опишите, что вы хотите получить",
+		"Next": "Далее",
+		"Back": "Назад",
+		"An error occurred while generating headers": "Произошла ошибка при генерации заголовков",
+		"Try one more time": "Попробуйте еще раз",
+		"Which test description fits best?": "Какая тестовая запись подходит лучше всего?",
+		"Here is the title and description you chose": "Вот заголовок и описание, которые вы выбрали",
+		"Generating, wait a couple of seconds": "Генерация, подождите несколько секунд"
 	},
 	"Quiz": {
 		"Your answer": "Ваш ответ",
@@ -191,7 +205,8 @@
 		"Total percentage of correct answers:": "Общий процент правильных ответов:",
 		"Please provide an answer before proceeding": "Пожалуйста, дайте ответ, прежде чем продолжить",
 		"Check": "Проверить",
-		"Answer": "Ответ"
+		"Answer": "Ответ",
+		"Please answer all questions before finishing the quiz": "Пожалуйста, ответьте на все вопросы, прежде чем закончить викторину"
 	},
 	"CreateCoursePlanPage": {
 		"View Topics": "Посмотреть Темы",

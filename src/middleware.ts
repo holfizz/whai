@@ -1,7 +1,7 @@
+import { EnumTokens } from '@/shared/types/auth'
 import createIntlMiddleware from 'next-intl/middleware'
 import { NextRequest, NextResponse } from 'next/server'
 import { locales } from './navigation'
-import { EnumTokens } from '@/shared/types/auth'
 
 const nextIntlMiddleware = createIntlMiddleware({
 	locales,
@@ -14,6 +14,7 @@ export default function (req: NextRequest) {
 	const locale = localeMatch ? localeMatch[1] : 'ru'
 	const isHomePage = url === `http://localhost:3000/${locale}`
 	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
+	const accessToken = cookies.get(EnumTokens.ACCESS_TOKEN)?.value
 	const isAuthPage = url.includes('auth')
 	const isDashboardPage = url.includes('/d')
 	if (isHomePage) {
@@ -39,5 +40,10 @@ export default function (req: NextRequest) {
 }
 
 export const config = {
-	matcher: ['/', '/(ru|en)/:path*', '/((?!_next|_vercel|.*\\..*).*)']
+	matcher: [
+		'/',
+		'/(ru|en)/:path*',
+		'/((?!_next|_vercel|.*\\..*).*)',
+		'/d/:path*'
+	]
 }

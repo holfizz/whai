@@ -1,43 +1,28 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
-import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
-import { useCreateCourse } from '@/entities/course/model/course.queries'
-import { useCreateCourseAIHistory } from '@/entities/courseAIHistory'
 import { useGenerateTD } from '@/entities/titleDescription'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import React, { useCallback, useEffect, useState } from 'react'
-import ResetButton from '../resetButton'
+import useUnifiedStore from '../../../(model)/unified.state'
+import ResetButton from '../../resetButton'
 
-const GenerateTDStep = (): React.JSX.Element => {
-	const t = useTranslations('CreateCourse')
+const GenerateTDTestStep = (): React.JSX.Element => {
+	const t = useTranslations('CreateTest')
 	const {
 		promptContent,
 		step,
 		prevStep,
 		nextStep,
-		setCourseId,
-		courseId,
+		setQuizId,
+		quizId,
 		selectedTitle,
 		selectedDescription,
 		setSelectedTitle,
 		setSelectedDescription
-	} = useCourseStore()
+	} = useUnifiedStore()
 
-	const {
-		createCourse,
-		newCourseData,
-		errorCreatingCourse,
-		loadingCreatingCourse
-	} = useCreateCourse()
-	const {
-		createCourseAIHistory,
-		historyData,
-		errorCreatingHistory,
-		loadingCreatingHistory
-	} = useCreateCourseAIHistory()
 	const { mutationTD, mutationTDData, errorTD, loadingTD } = useGenerateTD()
 
 	const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
@@ -45,67 +30,16 @@ const GenerateTDStep = (): React.JSX.Element => {
 	)
 	const [requestSuccessful, setRequestSuccessful] = useState(false)
 
-	const handleCreateCourse = useCallback(async () => {
-		if (!loadingCreatingCourse && !errorCreatingCourse && !newCourseData?.id) {
-			try {
-				await createCourse({
-					variables: {
-						createCourseData: {},
-						image: null
-					}
-				})
-				console.log()
-			} catch (error) {
-				console.error('Error creating course: ', error)
-			}
-		}
-	}, [
-		createCourse,
-		newCourseData?.id,
-		loadingCreatingCourse,
-		errorCreatingCourse
-	])
-
-	useEffect(() => {
-		setCourseId(newCourseData?.id)
-	}, [newCourseData])
-	const handleCreateCourseAIHistory = useCallback(async () => {
-		if (
-			newCourseData?.id &&
-			!loadingCreatingCourse &&
-			!errorCreatingCourse &&
-			!historyData?.id
-		) {
-			try {
-				const result = await createCourseAIHistory({
-					variables: { courseId: newCourseData.id }
-				})
-			} catch (error) {
-				console.error('Error creating course AI history: ', error)
-			}
-		}
-	}, [
-		createCourseAIHistory,
-		newCourseData?.id,
-		loadingCreatingCourse,
-		errorCreatingCourse,
-		historyData?.id
-	])
-
 	const handleGenerateTD = useCallback(async () => {
-		if (
-			historyData?.id &&
-			!loadingCreatingHistory &&
-			!errorCreatingHistory &&
-			!requestSuccessful
-		) {
+		if (!loadingTD && !errorTD && !requestSuccessful) {
 			try {
 				if (!selectedTitle) {
 					await mutationTD({
 						variables: {
 							dto: {
 								userRequest: promptContent,
-								conversationId: historyData.id
+								type: 'TEST',
+								conversationId: quizId
 							}
 						}
 					})
@@ -116,22 +50,14 @@ const GenerateTDStep = (): React.JSX.Element => {
 			}
 		}
 	}, [
-		historyData,
+		loadingTD,
+		errorTD,
+		requestSuccessful,
+		selectedTitle,
 		mutationTD,
 		promptContent,
-		courseId,
-		requestSuccessful,
-		loadingCreatingHistory,
-		errorCreatingHistory
+		quizId
 	])
-
-	useEffect(() => {
-		handleCreateCourse()
-	}, [handleCreateCourse])
-
-	useEffect(() => {
-		handleCreateCourseAIHistory()
-	}, [handleCreateCourseAIHistory])
 
 	useEffect(() => {
 		handleGenerateTD()
@@ -142,24 +68,26 @@ const GenerateTDStep = (): React.JSX.Element => {
 		return <></>
 	}
 
-	if (errorCreatingCourse || errorCreatingHistory || errorTD) {
+	if (errorTD) {
 		return (
 			<DashboardLayout>
 				<div className='flex flex-col justify-center items-center h-full w-full text-accent'>
 					<h1 className='text-2xl mb-4'>
-						{errorCreatingCourse?.message ||
-							errorCreatingHistory?.message ||
-							errorTD?.message ||
-							'An unknown error occurred'}
+						{t('An error occurred while generating headers')}
 					</h1>
 					<Button
 						size={'3xl'}
 						color={'main'}
 						onClick={() => window.location.reload()}
 					>
-						Reload Page
+						{t('Try one more time')}
 					</Button>
-					<Button size={'3xl'} color={'main'} onClick={prevStep}>
+					<Button
+						className='mt-3'
+						size={'3xl'}
+						color={'main'}
+						onClick={prevStep}
+					>
 						{t('Back')}
 					</Button>
 				</div>
@@ -202,12 +130,12 @@ const GenerateTDStep = (): React.JSX.Element => {
 	)
 
 	const handleNextStep = () => {
-		if (selectedCardIndex !== null && courseId) {
+		if (selectedCardIndex !== null) {
 			const selectedTD = mutationTDData[selectedCardIndex]
 			setSelectedTitle(selectedTD.title)
 			setSelectedDescription(selectedTD.description)
 			nextStep()
-		} else if (selectedTitle && courseId) {
+		} else if (selectedTitle && quizId) {
 			nextStep()
 		}
 	}
@@ -218,7 +146,7 @@ const GenerateTDStep = (): React.JSX.Element => {
 				style={{ height: 'calc(100vh - var(--navbar-height))' }}
 				className='w-full flex justify-center items-center flex-col'
 			>
-				<h1 className='text-2xl'>{t('Which course description fits best?')}</h1>
+				<h1 className='text-2xl'>{t('Which test description fits best?')}</h1>
 				{selectedTitle ? (
 					<div className='flex flex-col w-1/3'>
 						<h1 className='text-lg font-medium my-5'>
@@ -252,4 +180,4 @@ const GenerateTDStep = (): React.JSX.Element => {
 	)
 }
 
-export default GenerateTDStep
+export default GenerateTDTestStep

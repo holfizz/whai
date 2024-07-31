@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl'
 import React from 'react'
+import { Toaster } from 'react-hot-toast'
 import Xarrow, { Xwrapper } from 'react-xarrows'
 import NavigationButtons from '../NavigationButton'
 import MatchItem from './MatchItem'
@@ -14,7 +15,6 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 }) => {
 	const t = useTranslations('Quiz')
 	const {
-		error,
 		checked,
 		shuffledLeft,
 		shuffledRight,
@@ -34,11 +34,7 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 			<h3 className='w-[400px] text-accent text-center text-sm my-10'>
 				{question.prompt}
 			</h3>
-			{error && (
-				<h4 className={'text-red-400 mb-5'}>
-					{t('Please match all items before proceeding')}
-				</h4>
-			)}
+
 			<Xwrapper>
 				<div className='relative flex justify-between w-full px-10'>
 					<div className='flex flex-col gap-2 relative flex-wrap'>
@@ -88,6 +84,8 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 					) : null
 				)}
 			</Xwrapper>
+			<Toaster position='top-right' reverseOrder={false} />
+
 			<NavigationButtons
 				onPrev={handlePrev}
 				onNext={handleNext}

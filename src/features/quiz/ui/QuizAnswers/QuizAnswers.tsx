@@ -3,8 +3,7 @@ import Chip from '@/shared/ui/Chip/Chip'
 import type { Selection } from '@nextui-org/react'
 import { Accordion, AccordionItem } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import React, { useEffect } from 'react'
-import { useQuizStore } from '../../model/quiz.store'
+import React from 'react'
 
 interface QuizResultProps {
 	quizResult: {
@@ -36,15 +35,11 @@ const getChipText = (
 
 const QuizAnswer = ({ quizResult }: { quizResult: IQuizAnswer }) => {
 	const t = useTranslations('Quiz')
-	const { setQuizResultId } = useQuizStore()
-
 	const { quizData, errorQuiz, loadingQuiz } = useGetQuizData(quizResult.quizId)
 	const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
 		new Set<string>()
 	)
-	useEffect(() => {
-		setQuizResultId(quizResult.id)
-	}, [quizResult.id, setQuizResultId])
+
 	if (loadingQuiz) return <p>Загрузка...</p>
 	if (errorQuiz) return <p>Ошибка: {errorQuiz.message}</p>
 

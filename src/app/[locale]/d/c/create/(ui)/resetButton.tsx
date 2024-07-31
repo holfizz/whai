@@ -1,8 +1,8 @@
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
-import useCourseStore from '../(model)/create-page.store'
+import useUnifiedStore from '../(model)/unified.state'
 const ResetButton = () => {
-	const { resetState } = useCourseStore()
+	const { resetState } = useUnifiedStore()
 	const t = useTranslations('CreateCourse')
 	return (
 		<Button

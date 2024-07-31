@@ -3,18 +3,21 @@ import {
 	QuizQuestionType,
 	useGetLastQuizResult
 } from '@/entities/quiz'
-import React from 'react'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import { useQuizStore } from '../../model/quiz.store'
 import ClozeQuestion from '../QuestionTypes/ClozeQuestion/ClozeQuestion'
 import MatchQuestion from '../QuestionTypes/MatchQuestion/MatchQuestion'
 import MCQQuestion from '../QuestionTypes/MCQQuestion/MCQQuestion'
 import MRQQuestion from '../QuestionTypes/MRQQuestion/MRQQuestion'
 import QuizResult from '../QuizResult/QuizResult'
-
 const QuizBody = ({ quizData }: { quizData: IQuizData }) => {
-	const { currentQuestionIndex, setCurrentQuestionIndex } = useQuizStore()
+	const t = useTranslations('Quiz')
+	const { currentQuestionIndex, setCurrentQuestionIndex, selectedAnswers } =
+		useQuizStore()
 	const { lastQuizResult } = useGetLastQuizResult(quizData?.id)
-	const [isFinished, setIsFinished] = React.useState(false)
+	const [isFinished, setIsFinished] = useState(false)
 
 	const currentQuestion = quizData?.questions[currentQuestionIndex]
 	const isFirstQuestion = currentQuestionIndex === 0
@@ -28,7 +31,15 @@ const QuizBody = ({ quizData }: { quizData: IQuizData }) => {
 
 	const handleNext = () => {
 		if (isLastQuestion) {
-			setIsFinished(true)
+			// Check if all questions have been answered
+			const allAnswered = quizData.questions.every(
+				question => selectedAnswers[question.id]?.length > 0
+			)
+			if (allAnswered) {
+				setIsFinished(true)
+			} else {
+				toast.error(t('Please answer all questions before finishing the quiz'))
+			}
 		} else {
 			setCurrentQuestionIndex(currentQuestionIndex + 1)
 		}
@@ -81,19 +92,16 @@ const QuizBody = ({ quizData }: { quizData: IQuizData }) => {
 		}
 	}
 
-	if (isFinished) {
-		return (
-			<QuizResult
-				quizId={quizData.id}
-				courseId={quizData.courseId}
-				subtopicId={quizData.subtopicId}
-			/>
-		)
-	}
-
-	return (
+	return isFinished ? (
+		<QuizResult
+			quizId={quizData?.id}
+			courseId={quizData?.courseId}
+			subtopicId={quizData?.subtopicId}
+		/>
+	) : (
 		<div className='flex flex-col items-center justify-center'>
 			{renderQuestion()}
+			<Toaster position='top-right' reverseOrder={false} />
 		</div>
 	)
 }

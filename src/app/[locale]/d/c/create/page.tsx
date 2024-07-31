@@ -1,5 +1,5 @@
 import { unstable_setRequestLocale } from 'next-intl/server'
-import CreateCoursePageAsync from './(ui)/CreateCourse.async'
+import CreatePageAsync from './(ui)/Create.async'
 
 export default function IndexPage({
 	params: { locale }
@@ -8,5 +8,5 @@ export default function IndexPage({
 }) {
 	unstable_setRequestLocale(locale)
 
-	return <CreateCoursePageAsync />
+	return <CreatePageAsync />
 }

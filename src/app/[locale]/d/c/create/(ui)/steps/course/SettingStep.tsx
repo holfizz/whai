@@ -1,5 +1,4 @@
 'use client'
-import useCourseStore from '@/app/[locale]/d/c/create/(model)/create-page.store'
 import { useUpdateCourse } from '@/entities/course'
 import DropImage from '@/shared/assets/icons/Course/fill/DropImage'
 import Button from '@/shared/ui/Button/Button'
@@ -7,6 +6,7 @@ import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import useUnifiedStore from '../../../(model)/unified.state'
 
 const SettingStep = (): React.JSX.Element => {
 	const t = useTranslations('CreateCourse')
@@ -22,7 +22,7 @@ const SettingStep = (): React.JSX.Element => {
 		courseId,
 		selectedDescription,
 		selectedTitle
-	} = useCourseStore()
+	} = useUnifiedStore()
 
 	const [selectedFile, setSelectedFile] = useState<File | null>(null)
 	const [imagePreview, setImagePreview] = useState<string | null>(null)

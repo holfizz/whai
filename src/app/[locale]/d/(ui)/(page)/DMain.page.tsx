@@ -6,12 +6,12 @@ import { useGetProfile } from '@/entities/Auth/model/auth.queries'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
-import useCourseStore from '../../c/create/(model)/create-page.store'
+import useUnifiedStore from '../../c/create/(model)/unified.state'
 
 export default function DMain() {
 	const t = useTranslations('Dashboard')
 	const { userData } = useGetProfile()
-	const { resetState } = useCourseStore()
+	const { resetState } = useUnifiedStore()
 	useEffect(() => resetState(), [resetState])
 	return (
 		<DashboardLayout className={'w-full'}>

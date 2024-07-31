@@ -3,6 +3,7 @@ import { useQuizStore } from '@/features/quiz/model/quiz.store'
 import ParenthesesWrapper from '@/shared/ui/MDX/ParentsWrapper'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import NavigationButtons from '../NavigationButton'
 import ClozeLine from './ClozeLine' // Adjust the import path as necessary
 
@@ -44,20 +45,20 @@ const ClozeQuestion: React.FC<ClozeQuestionProps> = ({
 
 	const handleCheck = () => {
 		if (!localAnswer) {
-			setError(true)
+			toast.error(t('Please provide an answer before proceeding'))
 			return
 		}
-		setError(false)
+
 		setChecked(true)
 		setSelectedAnswers(question.id, [localAnswer])
 	}
 
 	const handleNext = () => {
 		if (!checked) {
-			setError(true)
+			toast.error(t('Please provide an answer before proceeding'))
 			return
 		}
-		setError(false)
+
 		onNext()
 	}
 
@@ -146,6 +147,7 @@ const ClozeQuestion: React.FC<ClozeQuestionProps> = ({
 					</div>
 				)}
 			</div>
+			<Toaster position='top-right' reverseOrder={false} />
 			<NavigationButtons
 				onPrev={handlePrev}
 				onNext={handleNext}

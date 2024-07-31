@@ -77,7 +77,6 @@ export const GET_LESSON_CONTENT = gql`
 			id
 			name
 			description
-			isHasLessonTask
 			courseId
 			subtopicId
 			lessonTasks {
@@ -111,3 +110,23 @@ export const useGetLessonContent = (lessonId: string) => {
 		loadingLessonContent: loading
 	}
 }
+
+export const CREATE_LESSON_WITH_AI = gql`
+	mutation CreateLessonWithAI($input: LessonWithAIInput!) {
+		createLessonWithAI(createLessonWithAIInput: $input) {
+			id
+			name
+			description
+			isHasLessonTask
+			lessonBlocks {
+				id
+				type
+				text
+				videoUrl
+				imageUrl
+				code
+				createdAt
+			}
+		}
+	}
+`
