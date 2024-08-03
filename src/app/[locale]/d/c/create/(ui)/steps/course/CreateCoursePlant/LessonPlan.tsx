@@ -1,17 +1,17 @@
-import Button from '@/shared/ui/Button/Button'
-import CourseCard from '@/shared/ui/CourseCard/CourseCard'
+import CreateCourseCard from './CreateCourseCard/CreateCourseCard'
 
 const LessonPlan = ({ lessonsAllData, t }) => {
 	return (
 		<>
-			{lessonsAllData &&
-				lessonsAllData.map(lesson => (
-					<CourseCard
-						key={lesson.id}
-						course={lesson}
-						button={<Button className='w-full'>{t('Generate lesson')}</Button>}
-					/>
-				))}
+			{lessonsAllData.map(lesson => (
+				<CreateCourseCard
+					t={t}
+					type='lesson'
+					key={lesson.id}
+					data={lesson}
+					buttonText={t('Generate lesson')}
+				/>
+			))}
 		</>
 	)
 }

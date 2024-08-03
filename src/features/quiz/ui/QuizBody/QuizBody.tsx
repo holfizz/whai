@@ -14,8 +14,12 @@ import MRQQuestion from '../QuestionTypes/MRQQuestion/MRQQuestion'
 import QuizResult from '../QuizResult/QuizResult'
 const QuizBody = ({ quizData }: { quizData: IQuizData }) => {
 	const t = useTranslations('Quiz')
-	const { currentQuestionIndex, setCurrentQuestionIndex, selectedAnswers } =
-		useQuizStore()
+	const {
+		currentQuestionIndex,
+		setCurrentQuestionIndex,
+		selectedAnswers,
+		matchingAnswers
+	} = useQuizStore()
 	const { lastQuizResult } = useGetLastQuizResult(quizData?.id)
 	const [isFinished, setIsFinished] = useState(false)
 
@@ -32,9 +36,13 @@ const QuizBody = ({ quizData }: { quizData: IQuizData }) => {
 	const handleNext = () => {
 		if (isLastQuestion) {
 			// Check if all questions have been answered
-			const allAnswered = quizData.questions.every(
-				question => selectedAnswers[question.id]?.length > 0
-			)
+			const allAnswered = quizData.questions.every(question => {
+				if (question.questionType === QuizQuestionType.MATCH) {
+					return matchingAnswers[question.id]?.length > 0
+				} else {
+					return selectedAnswers[question.id]?.length > 0
+				}
+			})
 			if (allAnswered) {
 				setIsFinished(true)
 			} else {

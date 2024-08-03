@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 interface QuizState {
 	answeredQuestions: { [key: string]: boolean }
@@ -6,8 +7,7 @@ interface QuizState {
 	currentQuestionIndex: number
 	selectedAnswers: { [key: string]: string[] }
 	matchingAnswers: { [key: string]: { left: string; right: string }[] }
-	quizResultId: string | null
-	checkedQuestions: { [key: string]: boolean }
+	userAnswerId: string | null
 	setAnsweredQuestion: (questionId: string) => void
 	setCurrentQuestion: (questionId: string) => void
 	setCurrentQuestionIndex: (index: number) => void
@@ -17,39 +17,50 @@ interface QuizState {
 		answers: { left: string; right: string }[]
 	) => void
 	setQuizResultId: (id: string) => void
-	setCheckedQuestion: (questionId: string, isChecked: boolean) => void
+	resetState: () => void
 }
 
-export const useQuizStore = create<QuizState>(set => ({
-	answeredQuestions: {},
-	currentQuestion: null,
-	currentQuestionIndex: 0,
-	selectedAnswers: {},
-	matchingAnswers: {},
-	quizResultId: null,
-	checkedQuestions: {},
-	setAnsweredQuestion: (questionId: string) =>
-		set(state => ({
-			answeredQuestions: { ...state.answeredQuestions, [questionId]: true }
-		})),
-	setCurrentQuestion: (questionId: string) =>
-		set({ currentQuestion: questionId }),
-	setCurrentQuestionIndex: (index: number) =>
-		set({ currentQuestionIndex: index }),
-	setSelectedAnswers: (questionId: string, answers: string[]) =>
-		set(state => ({
-			selectedAnswers: { ...state.selectedAnswers, [questionId]: answers }
-		})),
-	setMatchingAnswers: (
-		questionId: string,
-		answers: { left: string; right: string }[]
-	) =>
-		set(state => ({
-			matchingAnswers: { ...state.matchingAnswers, [questionId]: answers }
-		})),
-	setQuizResultId: (id: string) => set({ quizResultId: id }),
-	setCheckedQuestion: (questionId: string, isChecked: boolean) =>
-		set(state => ({
-			checkedQuestions: { ...state.checkedQuestions, [questionId]: isChecked }
-		}))
-}))
+export const useQuizStore = create<QuizState>()(
+	persist(
+		set => ({
+			answeredQuestions: {},
+			currentQuestion: null,
+			currentQuestionIndex: 0,
+			selectedAnswers: {},
+			matchingAnswers: {},
+			userAnswerId: null,
+			setAnsweredQuestion: (questionId: string) =>
+				set(state => ({
+					answeredQuestions: { ...state.answeredQuestions, [questionId]: true }
+				})),
+			setCurrentQuestion: (questionId: string) =>
+				set({ currentQuestion: questionId }),
+			setCurrentQuestionIndex: (index: number) =>
+				set({ currentQuestionIndex: index }),
+			setSelectedAnswers: (questionId: string, answers: string[]) =>
+				set(state => ({
+					selectedAnswers: { ...state.selectedAnswers, [questionId]: answers }
+				})),
+			setMatchingAnswers: (
+				questionId: string,
+				answers: { left: string; right: string }[]
+			) =>
+				set(state => ({
+					matchingAnswers: { ...state.matchingAnswers, [questionId]: answers }
+				})),
+			setQuizResultId: (id: string) => set({ userAnswerId: id }),
+			resetState: () =>
+				set({
+					answeredQuestions: {},
+					currentQuestion: null,
+					currentQuestionIndex: 0,
+					selectedAnswers: {},
+					matchingAnswers: {},
+					userAnswerId: null
+				})
+		}),
+		{
+			name: 'quiz-storage'
+		}
+	)
+)

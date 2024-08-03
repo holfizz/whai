@@ -19,17 +19,7 @@ export const useMatchQuestion = (
 	onPrev: () => void
 ) => {
 	const t = useTranslations('Quiz')
-	const {
-		matchingAnswers,
-		setMatchingAnswers,
-		checkedQuestions,
-		setCheckedQuestion
-	} = useQuizStore(state => ({
-		matchingAnswers: state.matchingAnswers,
-		setMatchingAnswers: state.setMatchingAnswers,
-		checkedQuestions: state.checkedQuestions,
-		setCheckedQuestion: state.setCheckedQuestion
-	}))
+	const { matchingAnswers, setMatchingAnswers } = useQuizStore()
 
 	const [localMatchingAnswers, setLocalMatchingAnswers] = useState<{
 		[key: string]: string
@@ -58,8 +48,8 @@ export const useMatchQuestion = (
 		}, {} as { [key: string]: string })
 
 		setLocalMatchingAnswers(initialAnswers)
-		setChecked(checkedQuestions[question.id] || false)
-	}, [shuffledLeft, matchingAnswers, checkedQuestions, question.id])
+		// Removed the line that sets `checked` from `checkedQuestions`
+	}, [shuffledLeft, matchingAnswers, question.id])
 
 	const handleMatchChange = (leftItem: string, rightItem: string) => {
 		setLocalMatchingAnswers(prev => ({
@@ -79,7 +69,6 @@ export const useMatchQuestion = (
 		}
 
 		setChecked(true)
-		setCheckedQuestion(question.id, true)
 		setMatchingAnswers(
 			question.id,
 			Object.entries(localMatchingAnswers).map(([left, right]) => ({
@@ -92,7 +81,6 @@ export const useMatchQuestion = (
 	const handleNext = () => {
 		if (!checked) {
 			toast.error(t('Please match all items before proceeding'))
-
 			return
 		}
 

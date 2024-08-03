@@ -177,7 +177,8 @@
 		"Take a short test to determine the difficulty level of the course": "Пройдите небольшой тест, чтобы определить уровень сложности курса",
 		"Try one more time": "Попробуйте еще раз",
 		"An error occurred while generating headers": "Произошла ошибка при создании заголовков",
-		"An error occurred while creating the test": "Произошла ошибка при создании теста"
+		"An error occurred while creating the test": "Произошла ошибка при создании теста",
+		"An error occurred while summing up your test results": "Произошла ошибка при подведении итогов вашего теста"
 	},
 	"CreateTest": {
 		"What are we creating?": "Что мы создаем?",
@@ -209,11 +210,23 @@
 		"Please answer all questions before finishing the quiz": "Пожалуйста, ответьте на все вопросы, прежде чем закончить викторину"
 	},
 	"CreateCoursePlanPage": {
-		"View Topics": "Посмотреть Темы",
-		"View Lessons": "Посмотреть уроки",
+		"View topics": "Посмотреть темы",
+		"View lessons": "Посмотреть уроки",
 		"Generate lesson": "Сгенерировать урок",
 		"Create Course Plan": "Создать план курса",
-		"Skip": "Пропустить"
+		"Editing stage of the training module": "Этап редактирования учебного модуля",
+		"Editing Course Topics": "Редактирование тем курса",
+		"Editing lessons": "Редактирование уроков",
+		"Next": "Далее",
+		"Back": "Назад",
+		"Save": "Сохранить",
+		"Enter the title": "Введите название",
+		"Enter the description": "Введите описание",
+		"What should be in the know, describe in detail what you want to get": "Что следует знать, подробно опишите, что вы хотите получить",
+		"topic": "Тема",
+		"module": "Модуль",
+		"lesson": "Урок",
+		"description": "Описание"
 	},
 	"Open": "Открыть",
 	"User": "Пользователь",

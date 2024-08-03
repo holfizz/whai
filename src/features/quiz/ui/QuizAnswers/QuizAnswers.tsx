@@ -2,8 +2,10 @@ import { IQuizAnswer, useGetQuizData } from '@/entities/quiz'
 import Chip from '@/shared/ui/Chip/Chip'
 import type { Selection } from '@nextui-org/react'
 import { Accordion, AccordionItem } from '@nextui-org/react'
+import { useWindowSize } from '@react-hook/window-size'
 import { useTranslations } from 'next-intl'
-import React from 'react'
+import { useState } from 'react'
+import Confetti from 'react-confetti'
 
 interface QuizResultProps {
 	quizResult: {
@@ -35,10 +37,9 @@ const getChipText = (
 
 const QuizAnswer = ({ quizResult }: { quizResult: IQuizAnswer }) => {
 	const t = useTranslations('Quiz')
+	const [width, height] = useWindowSize()
 	const { quizData, errorQuiz, loadingQuiz } = useGetQuizData(quizResult.quizId)
-	const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
-		new Set<string>()
-	)
+	const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set<string>())
 
 	if (loadingQuiz) return <p>Загрузка...</p>
 	if (errorQuiz) return <p>Ошибка: {errorQuiz.message}</p>
@@ -154,6 +155,7 @@ const QuizAnswer = ({ quizResult }: { quizResult: IQuizAnswer }) => {
 					)
 				})}
 			</Accordion>
+			<Confetti recycle={false} width={width} height={height} />
 		</div>
 	)
 }

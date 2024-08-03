@@ -7,6 +7,7 @@ const twColors = {
 	'background-3': '#fdfdfd',
 	accent: '#272727',
 	secondary: '#bbb9b7',
+	'gray-md': '#BDBDBD',
 	'decor-1': '#FFF7DC',
 	'decor-2': '#ffb57f',
 	'decor-3': '#ffe8a3',
@@ -14,9 +15,11 @@ const twColors = {
 	'error-10': '#FF9090',
 	'error-4': '#FFC9C9',
 	'error-1': '#FFE3E3',
+	'error-text': '#B78787',
 	'success-10': '#99FF90',
 	'success-4': '#C0FFBB',
 	'success-1': '#E4FFE2',
+	'success-text': '#8EBB8B',
 	warning: '#f3e774'
 }
 module.exports = {

@@ -1,24 +1,19 @@
-import Button from '@/shared/ui/Button/Button'
-import CourseCard from '@/shared/ui/CourseCard/CourseCard'
+import CreateCourseCard from './CreateCourseCard/CreateCourseCard'
 
 const TopicPlan = ({ topicsAllData, handleTopicClick, t }) => {
 	return (
 		<>
-			{topicsAllData &&
-				topicsAllData.map(topic => (
-					<CourseCard
-						key={topic.id}
-						course={topic}
-						button={
-							<Button
-								className='w-full'
-								onClick={() => handleTopicClick(topic.id)}
-							>
-								{t('Generate topic')}
-							</Button>
-						}
-					/>
-				))}
+			{topicsAllData.map(topic => (
+				<CreateCourseCard
+					t={t}
+					type='topic'
+					handleClick={() => handleTopicClick(topic)}
+					key={topic.id}
+					className='w-full'
+					data={topic}
+					buttonText={t('View topics')}
+				/>
+			))}
 		</>
 	)
 }

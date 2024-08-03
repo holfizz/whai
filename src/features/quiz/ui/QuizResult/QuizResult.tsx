@@ -1,17 +1,13 @@
 'use client'
 import { SAVE_QUIZ_RESULT } from '@/entities/quiz'
 import { useMutation } from '@apollo/client'
-import { useWindowSize } from '@react-hook/window-size'
 import { useEffect } from 'react'
-import Confetti from 'react-confetti'
 import { useQuizStore } from '../../model/quiz.store'
 
 const QuizResult = ({ quizId, courseId, subtopicId }) => {
 	const [saveQuizResult, { data, loading, error }] =
 		useMutation(SAVE_QUIZ_RESULT)
-	const { selectedAnswers, matchingAnswers } = useQuizStore()
-
-	const [width, height] = useWindowSize()
+	const { selectedAnswers, matchingAnswers, resetState } = useQuizStore()
 
 	useEffect(() => {
 		const saveResults = async () => {
@@ -55,35 +51,19 @@ const QuizResult = ({ quizId, courseId, subtopicId }) => {
 						}
 					}
 				})
+				window.location.reload()
 			} catch (err) {
 				console.error('Error saving quiz result:', err)
 			}
 		}
+		resetState()
 
 		saveResults()
-	}, [
-		quizId,
-		courseId,
-		subtopicId,
-		selectedAnswers,
-		matchingAnswers,
-		saveQuizResult
-	])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedAnswers, matchingAnswers, saveQuizResult])
 
 	if (loading) return <p>Сохранение результатов...</p>
 	if (error) return <p>Ошибка при сохранении результатов: {error.message}</p>
-
-	return (
-		<div>
-			<h2>Результаты теста</h2>
-			{data && (
-				<>
-					<Confetti recycle={false} width={width} height={height} />
-					<pre>{JSON.stringify(data.saveQuizResult, null, 2)}</pre>
-				</>
-			)}
-		</div>
-	)
 }
 
 export default QuizResult

@@ -78,8 +78,12 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 							key={index}
 							start={left}
 							end={right}
+							// headShape={{
+							// 	svgElem: <div className='w-4 h-4 bg-red-200' />
+							// }}
 							color={getArrowColor(left, right)}
 							strokeWidth={2}
+							_extendSVGcanvas={500}
 						/>
 					) : null
 				)}

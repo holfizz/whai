@@ -129,12 +129,12 @@ const CREATE_COURSE_PLAN_WITH_AI_MUTATION = gql`
 `
 export const useCreateCoursePlanWithAI = () => {
 	const [createCoursePlanWithAI, { data, error, loading }] = useMutation<{
-		createCoursePlanWithAI: ICoursePlanWithAI
+		createPlanWithAI: ICoursePlanWithAI
 	}>(CREATE_COURSE_PLAN_WITH_AI_MUTATION, {})
 
 	return {
 		createCoursePlanWithAI,
-		createPlanData: data?.createCoursePlanWithAI,
+		createPlanData: data?.createPlanWithAI,
 		createPlanError: error,
 		createPlanLoading: loading
 	}

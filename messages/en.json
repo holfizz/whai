@@ -177,7 +177,8 @@
 		"Take a short test to determine the difficulty level of the course": "Take a short test to determine the difficulty level of the course",
 		"Try one more time": "Try one more time",
 		"An error occurred while generating headers": "An error occurred while generating headers",
-		"An error occurred while creating the test": "An error occurred while creating the test"
+		"An error occurred while creating the test": "An error occurred while creating the test",
+		"An error occurred while summing up your test results": "An error occurred while summing up your test results"
 	},
 	"CreateTest": {
 		"What are we creating?": "What are we creating?",
@@ -209,11 +210,23 @@
 		"Please answer all questions before finishing the quiz": "Please answer all questions before finishing the quiz"
 	},
 	"CreateCoursePlanPage": {
-		"View Topics": "View Topic",
-		"View Lessons": "View Lessons",
+		"View topics": "View topic",
+		"View lessons": "View lessons",
 		"Generate lesson": "Generate",
 		"Create Course Plan": "Create Course Plan",
-		"Skip": "Skip"
+		"Editing stage of the training module": "Editing stage of the training module",
+		"Editing Course Topics": "Editing Course Topics",
+		"Editing lessons": "Editing lessons",
+		"Next": "Next",
+		"Back": "Back",
+		"Save": "Save",
+		"Enter the title": "Enter the title",
+		"Enter the description": "Enter the description",
+		"What should be in the know, describe in detail what you want to get": "What should be in the know, describe in detail what you want to get",
+		"topic": "Topic",
+		"module": "Module",
+		"lesson": "Lesson",
+		"description": "Description"
 	},
 	"Close": "Close",
 	"Open": "Open",

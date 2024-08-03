@@ -2,6 +2,7 @@ import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory/'
 import { useGenerateKnowledgeSum } from '@/entities/quiz'
 import { useQuizStore } from '@/features/quiz'
 import Button from '@/shared/ui/Button/Button'
+import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import {
 	Table,
@@ -13,6 +14,7 @@ import {
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import useUnifiedStore from '../../../(model)/unified.state'
 
 const AIKnowledgeSummary = () => {
@@ -55,11 +57,13 @@ const AIKnowledgeSummary = () => {
 		setSummaryData
 	])
 
-	if (knowledgeSumLoading) return <p>Loading...</p>
-	if (knowledgeSumError) return <p>Error: {knowledgeSumError?.message}</p>
+	if (knowledgeSumError) {
+		toast.error(t('An error occurred while summing up your test results'))
+	}
 
 	return (
 		<DashboardLayout>
+			{knowledgeSumLoading && <DotsLoader />}
 			<div>
 				{summaryData && (
 					<>
@@ -114,6 +118,7 @@ const AIKnowledgeSummary = () => {
 					{t('Next')}
 				</Button>
 			</div>
+			<Toaster position='top-right' reverseOrder={false} />
 		</DashboardLayout>
 	)
 }

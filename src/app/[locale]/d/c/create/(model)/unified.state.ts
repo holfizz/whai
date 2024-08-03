@@ -14,6 +14,7 @@ interface UnifiedState {
 	quizId: string | null
 	summaryData: any | null
 	coursePlanStateData: any | null
+	isCoursePlanGenerated: boolean // New state
 	setStep: (step: number) => void
 	setChoice: (choice: string | null) => void
 	setCourseId: (courseId: string | null) => void
@@ -26,6 +27,7 @@ interface UnifiedState {
 	setQuizId: (quizId: string | null) => void
 	setSummaryData: (summaryData: any) => void
 	setCoursePlanStateData: (coursePlanData: any) => void
+	setIsCoursePlanGenerated: (status: boolean) => void // New function
 	nextStep: () => void
 	prevStep: () => void
 	resetState: () => void
@@ -46,6 +48,7 @@ const useUnifiedStore = create<UnifiedState>()(
 			quizId: null,
 			summaryData: null,
 			coursePlanStateData: null,
+			isCoursePlanGenerated: false,
 			setStep: step => set({ step }),
 			setChoice: choice => set({ choice }),
 			setCourseId: courseId => set({ courseId }),
@@ -56,11 +59,18 @@ const useUnifiedStore = create<UnifiedState>()(
 			setVideosFromYouTube: value => set({ videosFromYouTube: value }),
 			setGenerateImages: value => set({ generateImages: value }),
 			setNeedHomework: value => set({ needHomework: value }),
-
 			setQuizId: quizId => set({ quizId }),
 			setSummaryData: summaryData => set({ summaryData }),
-			setCoursePlanStateData: coursePlanStateData =>
-				set({ coursePlanStateData }),
+			setCoursePlanStateData: coursePlanStateData => {
+				if (!coursePlanStateData) return
+
+				set({
+					coursePlanStateData,
+					isCoursePlanGenerated: true
+				})
+			},
+			setIsCoursePlanGenerated: status =>
+				set({ isCoursePlanGenerated: status }),
 			nextStep: () => set(state => ({ step: state.step + 1 })),
 			prevStep: () => set(state => ({ step: state.step - 1 })),
 			resetState: () =>
@@ -76,7 +86,8 @@ const useUnifiedStore = create<UnifiedState>()(
 					needHomework: false,
 					quizId: null,
 					summaryData: null,
-					coursePlanStateData: null
+					coursePlanStateData: null,
+					isCoursePlanGenerated: false
 				})
 		}),
 		{

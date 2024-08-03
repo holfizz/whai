@@ -1,13 +1,20 @@
 import { IChoice, IQuestion } from '@/entities/quiz'
 import { useQuizStore } from '@/features/quiz/model/quiz.store'
+import InfoIcon from '@/shared/assets/icons/InfoIcon'
 import Button from '@/shared/ui/Button/Button'
-import { MDX } from '@/shared/ui/MDX/MDX'
+import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import SimpleMDX from '@/shared/ui/MDX/SimpleMDX'
+import { Popover, PopoverContent } from '@/shared/ui/Popover/Popover'
+import { PopoverTrigger } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { memo, useEffect, useState } from 'react'
+import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import NavigationButtons from '../NavigationButton'
 import cls from './MCQQuestion.module.scss'
 
+const MemoizedMDX = memo(SimpleMDX)
+
+const LazyMDX = lazy(() => import('@/shared/ui/MDX/SimpleMDX'))
 interface MCQQuestionProps {
 	question: IQuestion
 	onPrev: () => void
@@ -15,8 +22,6 @@ interface MCQQuestionProps {
 	isFirstQuestion: boolean
 	isLastQuestion: boolean
 }
-const MemoizedMDX = memo(MDX)
-
 const MCQQuestion = ({
 	question,
 	onPrev,
@@ -27,8 +32,8 @@ const MCQQuestion = ({
 	const t = useTranslations('Quiz')
 
 	const [checked, setChecked] = useState<boolean>(false)
+	const [openPopover, setOpenPopover] = useState<number | null>(null)
 	const { selectedAnswers, setSelectedAnswers } = useQuizStore()
-
 	const [selectedChoice, setSelectedChoice] = useState<string | null>(null)
 
 	useEffect(() => {
@@ -37,10 +42,16 @@ const MCQQuestion = ({
 		setChecked(!!savedChoice)
 	}, [selectedAnswers, question.id])
 
-	const handleChoiceClick = (choice: string) => {
-		if (checked) return
-		setSelectedChoice(choice)
-	}
+	const handleChoiceClick = useCallback(
+		(choice: string, index: number) => {
+			if (checked) {
+				setOpenPopover(prevIndex => (prevIndex === index ? null : index))
+				return
+			}
+			setSelectedChoice(choice)
+		},
+		[checked]
+	)
 
 	const handleCheck = () => {
 		if (!selectedChoice) {
@@ -63,51 +74,113 @@ const MCQQuestion = ({
 		onPrev()
 	}
 
-	const getChoiceColor = (choice: IChoice) => {
-		if (!checked) {
-			return selectedChoice === choice.content ? 'main' : 'secondary'
-		}
-		if (choice.content === selectedChoice) {
-			return choice.correctAnswerDescription ? 'success' : 'error'
-		}
-		return choice.correctAnswerDescription ? 'success' : 'gray-text'
-	}
+	const getChoiceColor = useCallback(
+		(choice: IChoice): string => {
+			if (!checked) {
+				return selectedChoice === choice.content ? 'main' : 'secondary'
+			}
+			const isSelected = choice.content === selectedChoice
+			const isCorrect = question.answers.includes(choice.content)
+
+			if (isSelected) {
+				return isCorrect ? 'success' : 'error'
+			} else {
+				return isCorrect ? 'success' : 'gray-text'
+			}
+		},
+		[checked, selectedChoice, question.answers]
+	) as any
+
+	const getIconColor = useCallback(
+		(choice: IChoice): string => {
+			const isSelected = choice.content === selectedChoice
+			const isCorrect = question.answers.includes(choice.content)
+
+			if (isSelected) {
+				return isCorrect ? '#8EBB8B' : '#B78787'
+			} else {
+				return isCorrect ? '#8EBB8B' : '#BDBDBD'
+			}
+		},
+		[selectedChoice, question.answers]
+	) as any
 
 	return (
 		<>
 			<h3 className='w-[400px] text-accent text-center text-sm my-10'>
-				<MemoizedMDX source={question.prompt}></MemoizedMDX>
+				<Suspense fallback={<div>Loading...</div>}>
+					<MemoizedMDX source={question.prompt} />
+				</Suspense>
 			</h3>
 			<div className={cls.choicesContainer}>
-				{question.choices?.map((choice, index) => (
-					<Button
-						disableAnimation={false}
-						disabled={checked}
-						key={index}
-						size='auto'
-						color={getChoiceColor(choice)}
-						onClick={() => handleChoiceClick(choice.content)}
-					>
-						<h1
-							className={`opacity-100 ${
-								checked &&
-								'text-lg font-medium text-center w-full break-words whitespace-normal'
-							}`}
+				{question.choices?.map((choice, index) => {
+					const description =
+						choice.correctAnswerDescription || choice.incorrectAnswerDescription
+					return (
+						<Popover
+							key={index}
+							size='1/2'
+							color={getChoiceColor(choice)}
+							placement='top'
+							shouldCloseOnBlur
+							shouldCloseOnInteractOutside={() => true}
+							isOpen={openPopover === index && checked && !!description}
+							onClose={() => setOpenPopover(null)}
 						>
-							<MemoizedMDX source={choice.content}></MemoizedMDX>
-						</h1>
-						{checked && (
-							<p
-								className={
-									'text-sm font-light text-center w-full break-words whitespace-normal'
-								}
-							>
-								{choice.correctAnswerDescription ||
-									choice.incorrectAnswerDescription}
-							</p>
-						)}
-					</Button>
-				))}
+							<PopoverTrigger>
+								<Button
+									className='relative'
+									disableAnimation={false}
+									size='auto'
+									endContent={
+										checked &&
+										description && (
+											<InfoIcon
+												fill={getIconColor(choice)}
+												className='absolute right-4 w-5 top-4'
+											/>
+										)
+									}
+									color={getChoiceColor(choice)}
+									onClick={() => handleChoiceClick(choice.content, index)}
+								>
+									<div className='flex flex-col justify-center items-center'>
+										<h1
+											className={`opacity-100 ${
+												checked &&
+												'text-lg font-medium text-center w-full break-words whitespace-normal'
+											}`}
+										>
+											<Suspense fallback={<DotsLoader />}>
+												<MemoizedMDX source={choice.content} />
+											</Suspense>
+										</h1>
+									</div>
+								</Button>
+							</PopoverTrigger>
+							{checked && description && (
+								<PopoverContent>
+									<h1 className='text-xl font-bold text-left text-accent'>
+										{choice.correctAnswerDescription
+											? t('Correct')
+											: t('Incorrect')}
+										:
+									</h1>
+									<div className='px-1 py-2'>
+										<Suspense fallback={<DotsLoader />}>
+											<LazyMDX
+												source={
+													choice.correctAnswerDescription ||
+													choice.incorrectAnswerDescription
+												}
+											/>
+										</Suspense>
+									</div>
+								</PopoverContent>
+							)}
+						</Popover>
+					)
+				})}
 			</div>
 			<Toaster position='top-right' reverseOrder={false} />
 

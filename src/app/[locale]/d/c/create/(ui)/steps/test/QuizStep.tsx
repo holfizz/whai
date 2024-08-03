@@ -6,7 +6,8 @@ import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import useUnifiedStore from '../../../(model)/unified.state'
 
 const QuizStep = () => {
@@ -23,6 +24,7 @@ const QuizStep = () => {
 		courseId
 	} = useUnifiedStore()
 	const { quizResultId } = useQuizStore()
+	const hasCreatedQuiz = useRef(false) // Используем useRef для отслеживания состояния
 
 	const handleNext = () => {
 		nextStep()
@@ -31,7 +33,8 @@ const QuizStep = () => {
 	useEffect(() => {
 		if (quizId) {
 			router.replace(getQuizIndependentRoute(quizId))
-		} else {
+		} else if (!hasCreatedQuiz.current) {
+			// Проверка, чтобы запрос выполнялся только один раз
 			createQuiz({
 				variables: {
 					dto: {
@@ -41,9 +44,10 @@ const QuizStep = () => {
 					}
 				}
 			})
+			hasCreatedQuiz.current = true // Устанавливаем флаг после выполнения запроса
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [quizId, router, createQuiz, selectedTitle, selectedDescription])
 
 	useEffect(() => {
 		if (dataCreateQuiz) {
@@ -51,16 +55,15 @@ const QuizStep = () => {
 			router.replace(getQuizIndependentRoute(dataCreateQuiz.id))
 		}
 	}, [dataCreateQuiz, router, setQuizId])
-
+	useEffect(() => {
+		if (errorCreateQuiz) {
+			toast.error(t('An error occurred while creating the test'))
+		}
+	}, [errorCreateQuiz, t])
 	return (
 		<DashboardLayout>
 			<div className='w-full flex flex-col items-center justify-center'>
 				{loadingCreateQuiz && <DotsLoader />}
-				{errorCreateQuiz && (
-					<h1 className='text-lg font-bold text-error-10'>
-						{t('An error occurred while creating the test')}
-					</h1>
-				)}
 				{quizId ? <Quiz quizIdProp={quizId} /> : <p>Создание викторины...</p>}
 				{quizResultId && (
 					<Button size={'3xl'} color={'main'} onClick={handleNext}>
@@ -68,6 +71,7 @@ const QuizStep = () => {
 					</Button>
 				)}
 			</div>
+			<Toaster position='top-right' reverseOrder={false} />
 		</DashboardLayout>
 	)
 }

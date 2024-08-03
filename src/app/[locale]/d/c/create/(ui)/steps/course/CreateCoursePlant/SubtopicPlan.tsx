@@ -1,24 +1,19 @@
-import Button from '@/shared/ui/Button/Button'
-import CourseCard from '@/shared/ui/CourseCard/CourseCard'
+import CreateCourseCard from './CreateCourseCard/CreateCourseCard'
 
 const SubtopicPlan = ({ subtopicsAllData, handleSubtopicClick, t }) => {
 	return (
 		<>
-			{subtopicsAllData &&
-				subtopicsAllData.map(subtopic => (
-					<CourseCard
-						key={subtopic.id}
-						course={subtopic}
-						button={
-							<Button
-								className='w-full'
-								onClick={() => handleSubtopicClick(subtopic.id)}
-							>
-								{t('Generate subtopic')}
-							</Button>
-						}
-					/>
-				))}
+			{subtopicsAllData.map(subtopic => (
+				<CreateCourseCard
+					t={t}
+					type='subtopic'
+					handleClick={() => handleSubtopicClick(subtopic)}
+					className='w-full'
+					key={subtopic.id}
+					data={subtopic}
+					buttonText={t('View lessons')}
+				/>
+			))}
 		</>
 	)
 }

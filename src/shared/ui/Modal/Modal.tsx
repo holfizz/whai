@@ -1,7 +1,7 @@
 import {
 	extendVariants,
-	Modal as ModalUI,
-	ModalContent as ModalContentUI
+	ModalContent as ModalContentUI,
+	Modal as ModalUI
 } from '@nextui-org/react'
 
 export const Modal = extendVariants(ModalUI, {
@@ -9,7 +9,7 @@ export const Modal = extendVariants(ModalUI, {
 		color: {
 			white: {
 				base: 'bg-white rounded-xl',
-				backdrop: 'ba-[rgba(65, 54, 46, 0.8)]'
+				backdrop: 'bg-[#41362ECC]'
 			}
 		},
 		variant: {
@@ -30,7 +30,7 @@ export const Modal = extendVariants(ModalUI, {
 export const ModalContent = extendVariants(ModalContentUI, {
 	variants: {
 		color: {
-			white: 'bg-white'
+			white: 'bg-white border-none'
 		}
 	}
 })

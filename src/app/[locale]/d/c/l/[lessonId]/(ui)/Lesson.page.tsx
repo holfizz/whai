@@ -78,7 +78,11 @@ const LessonPageAsync = () => {
 	useEffect(() => {
 		if (lessonId) {
 			// Fetch lesson content when lessonId changes
-			if (lessonContentData?.lessonBlocks.length === 0 && !isLessonCreated) {
+			if (
+				lessonContentData?.lessonBlocks.length === 0 &&
+				!isLessonCreated &&
+				false
+			) {
 				createLessonWithAI({
 					variables: {
 						input: {

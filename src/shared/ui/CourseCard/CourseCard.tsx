@@ -4,19 +4,16 @@ import { getCourseByIdRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
-import { ReactNode } from 'react'
 import cls from './CourseCard.module.scss'
 import CourseStat from './CourseStat/CourseStat'
 const CourseCard = ({
 	course,
 	className,
-	isSquare,
-	button
+	isSquare
 }: {
 	course: ICourse
 	className?: string
 	isSquare?: boolean
-	button?: ReactNode
 }) => {
 	const styles = isSquare
 		? 'w-[330px] h-min-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-[330px]'
@@ -51,11 +48,7 @@ const CourseCard = ({
 				{course?.name}
 			</Link>
 			<p className={cls.paragraph}>{course?.description}</p>
-			{button ? (
-				button
-			) : (
-				<CourseStat data={course} className={'max-md:w-[95%]'} />
-			)}{' '}
+			<CourseStat data={course} className={'max-md:w-[95%]'} />
 		</div>
 	)
 }
