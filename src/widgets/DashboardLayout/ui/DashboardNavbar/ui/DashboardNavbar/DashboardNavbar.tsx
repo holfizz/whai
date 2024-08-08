@@ -1,6 +1,7 @@
 'use client'
 import { useGetProfile } from '@/entities/Auth/model/auth.queries'
 import { logout } from '@/features/auth/model/auth.model'
+import { Link } from '@/navigation'
 import {
 	getDashboardRoute,
 	getSettingsRoute,
@@ -13,6 +14,7 @@ import {
 	DropdownMenu
 } from '@/shared/ui/Dropdown/Dropdown'
 import Logo from '@/shared/ui/Logo/Logo'
+import { Popover, PopoverContent } from '@/shared/ui/Popover/Popover'
 import Text from '@/shared/ui/Text/Text'
 import {
 	Avatar,
@@ -24,15 +26,13 @@ import {
 	NavbarMenuToggle,
 	PopoverTrigger
 } from '@nextui-org/react'
+import { X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { FaRegBell } from 'react-icons/fa'
 import { sidebarItems } from '../../../Sidebar/module/sidebar-items.data'
 import SidebarItem from '../../../Sidebar/ui/SidebarItem/SidebarItem'
 import cls from './DashboardNavbar.module.scss'
-import { FaRegBell } from 'react-icons/fa'
-import { Popover, PopoverContent } from '@/shared/ui/Popover/Popover'
-import { X } from 'lucide-react'
-import { Link } from '@/navigation'
 
 interface IDashboardNavbar {}
 
@@ -74,7 +74,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 						<Button
 							className={cls.popoverButton}
 							fullWidth
-							color={'softPeach'}
+							color={'white'}
 							endContent={<X />}
 						>
 							adasdas
@@ -82,7 +82,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 						<Button
 							className={cls.popoverButton}
 							fullWidth
-							color={'softPeach'}
+							color={'white'}
 							endContent={<X />}
 						>
 							adasdas
@@ -90,7 +90,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 						<Button
 							className={cls.popoverButton}
 							fullWidth
-							color={'softPeach'}
+							color={'white'}
 							endContent={<X />}
 						>
 							adasdas
@@ -152,7 +152,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 					</Dropdown>
 				)}
 				<NavbarMenuToggle
-					className='md:hidden'
+					className='640:hidden'
 					aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
 				/>
 			</NavbarContent>

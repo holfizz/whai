@@ -1,5 +1,6 @@
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 interface NavigationButtonsProps {
@@ -20,14 +21,21 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 	isChecked
 }) => {
 	const t = useTranslations('Quiz')
-
+	const { back } = useRouter()
 	return (
 		<div className='flex gap-4 mt-60'>
-			{!isFirstQuestion && (
-				<Button size={'3xl'} color={'gray'} onClick={onPrev}>
+			{
+				<Button
+					size={'3xl'}
+					color={'gray'}
+					onClick={() => {
+						onPrev()
+						isFirstQuestion && back()
+					}}
+				>
 					{t('Back')}
 				</Button>
-			)}
+			}
 			{!isChecked && (
 				<Button size={'3xl'} color={'main'} onClick={onCheck}>
 					{t('Check')}

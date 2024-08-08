@@ -11,7 +11,7 @@ interface IUseSidebar {
 export const useSidebar = create<IUseSidebar>()(
 	persist(
 		set => ({
-			isCollapsed: getLocalStorage('sidebarCollapsed'),
+			isCollapsed: getLocalStorage('sidebarCollapsed') || false,
 			setIsCollapsed: isCollapsed => set(() => ({ isCollapsed: isCollapsed }))
 		}),
 		{ name: 'sidebarCollapsed' }

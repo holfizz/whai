@@ -1,11 +1,12 @@
-import { z } from 'zod'
 import { CourseData } from '@/entities/course/model/course.contracts'
+import { z } from 'zod'
 
 // ILesson.ts
 
 export interface ILesson {
 	id: string
 	name: string
+	description: string
 	subtopicId: string
 	isCompleted: boolean
 	isHasLessonTask: boolean

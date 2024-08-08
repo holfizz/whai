@@ -1,15 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-'use client'
 import { useCreateCourse } from '@/entities/course/model/course.queries'
 import { useCreateCourseAIHistory } from '@/entities/courseAIHistory'
 import { useGenerateTD } from '@/entities/titleDescription'
 import Button from '@/shared/ui/Button/Button'
-import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import React, { useCallback, useEffect, useState } from 'react'
-import useUnifiedStore from '../../../(model)/unified.state'
-import ResetButton from '../../resetButton'
+import useUnifiedStore from '../../../../(model)/unified.state'
+import ResetButton from '../../../resetButton'
+import DataCards from './DataCards'
+import Loader from './Loader'
 
 const GenerateTDStep = (): React.JSX.Element => {
 	const t = useTranslations('CreateCourse')
@@ -40,35 +39,40 @@ const GenerateTDStep = (): React.JSX.Element => {
 	} = useCreateCourseAIHistory()
 	const { mutationTD, mutationTDData, errorTD, loadingTD } = useGenerateTD()
 
+	const [titleDescriptionData, setTitleDescriptionData] = useState([])
 	const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
 		null
 	)
 	const [requestSuccessful, setRequestSuccessful] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
 
 	const handleCreateCourse = useCallback(async () => {
-		if (!loadingCreatingCourse && !errorCreatingCourse && !newCourseData?.id) {
-			try {
-				await createCourse({
-					variables: {
-						createCourseData: {},
-						image: null
-					}
-				})
-				console.log()
-			} catch (error) {
-				console.error('Error creating course: ', error)
+		if (!loadingCreatingCourse && !errorCreatingCourse && !newCourseData) {
+			if (!courseId) {
+				try {
+					await createCourse({
+						variables: {
+							createCourseData: {},
+							image: null
+						}
+					})
+				} catch (error) {
+					console.error('Error creating course: ', error)
+				}
 			}
 		}
 	}, [
 		createCourse,
-		newCourseData?.id,
+		errorCreatingCourse,
 		loadingCreatingCourse,
-		errorCreatingCourse
+		newCourseData,
+		courseId
 	])
 
 	useEffect(() => {
 		setCourseId(newCourseData?.id)
-	}, [newCourseData])
+	}, [newCourseData, setCourseId])
+
 	const handleCreateCourseAIHistory = useCallback(async () => {
 		if (
 			newCourseData?.id &&
@@ -77,7 +81,7 @@ const GenerateTDStep = (): React.JSX.Element => {
 			!historyData?.id
 		) {
 			try {
-				const result = await createCourseAIHistory({
+				await createCourseAIHistory({
 					variables: { courseId: newCourseData.id }
 				})
 			} catch (error) {
@@ -101,7 +105,8 @@ const GenerateTDStep = (): React.JSX.Element => {
 		) {
 			try {
 				if (!selectedTitle) {
-					await mutationTD({
+					setIsLoading(true)
+					mutationTD({
 						variables: {
 							dto: {
 								userRequest: promptContent,
@@ -114,16 +119,18 @@ const GenerateTDStep = (): React.JSX.Element => {
 				}
 			} catch (error) {
 				console.error('Error generating title and description: ', error)
+			} finally {
+				setIsLoading(false)
 			}
 		}
 	}, [
 		historyData,
-		mutationTD,
-		promptContent,
-		courseId,
-		requestSuccessful,
 		loadingCreatingHistory,
-		errorCreatingHistory
+		errorCreatingHistory,
+		requestSuccessful,
+		selectedTitle,
+		mutationTD,
+		promptContent
 	])
 
 	useEffect(() => {
@@ -135,8 +142,27 @@ const GenerateTDStep = (): React.JSX.Element => {
 	}, [handleCreateCourseAIHistory])
 
 	useEffect(() => {
+		if (mutationTDData.length > 0) {
+			setTitleDescriptionData(mutationTDData)
+		}
+	}, [mutationTDData])
+
+	useEffect(() => {
 		handleGenerateTD()
 	}, [handleGenerateTD])
+
+	const reGenerateTD = () => {
+		setRequestSuccessful(false)
+		setIsLoading(true)
+		handleGenerateTD()
+	}
+
+	const handleSaveEdit = (updatedData, index) => {
+		const updatedTDData = titleDescriptionData.map((td, i) =>
+			i === index ? { ...td, ...updatedData } : td
+		)
+		setTitleDescriptionData(updatedTDData)
+	}
 
 	if (step !== 3 && promptContent.length === 0) {
 		prevStep()
@@ -170,43 +196,9 @@ const GenerateTDStep = (): React.JSX.Element => {
 		)
 	}
 
-	const Loader = () => (
-		<>
-			{[...Array(4)].map((_, i) => (
-				<div
-					key={i}
-					className={`w-full h-auto min-h-30 py-2 px-7 rounded-2xl bg-decor-3 flex flex-col justify-center items-center p-4`}
-				>
-					<h1 className={'text-sm text-[#97917D] text-center'}>
-						{t('Generating, wait a couple of seconds')}
-					</h1>
-					<DotsLoader className={'mt-4'} />
-				</div>
-			))}
-		</>
-	)
-
-	const DataCards = () => (
-		<>
-			{mutationTDData &&
-				mutationTDData.map((td, index) => (
-					<div
-						key={index}
-						onClick={() => setSelectedCardIndex(index)}
-						className={`w-full h-auto min-h-30 p-4 rounded-2xl cursor-pointer ${
-							selectedCardIndex === index ? 'bg-decor-2' : 'bg-decor-3'
-						}`}
-					>
-						<h1 className='text-xl font-medium'>{td.title}</h1>
-						<p className='text-lg mt-2'>{td.description}</p>
-					</div>
-				))}
-		</>
-	)
-
 	const handleNextStep = () => {
 		if (selectedCardIndex !== null && courseId) {
-			const selectedTD = mutationTDData[selectedCardIndex]
+			const selectedTD = titleDescriptionData[selectedCardIndex]
 			setSelectedTitle(selectedTD.title)
 			setSelectedDescription(selectedTD.description)
 			nextStep()
@@ -214,7 +206,9 @@ const GenerateTDStep = (): React.JSX.Element => {
 			nextStep()
 		}
 	}
+
 	const conditionNextButton = selectedCardIndex !== null || selectedTitle
+
 	return (
 		<DashboardLayout>
 			<div
@@ -236,19 +230,47 @@ const GenerateTDStep = (): React.JSX.Element => {
 					</div>
 				) : (
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4'>
-						{mutationTDData && !requestSuccessful ? <Loader /> : <DataCards />}
+						{isLoading || loadingTD ? (
+							<Loader />
+						) : (
+							<DataCards
+								isLoading={loadingTD}
+								mutationTDData={titleDescriptionData}
+								setSelectedCardIndex={setSelectedCardIndex}
+								selectedCardIndex={selectedCardIndex}
+								onEditSave={handleSaveEdit}
+							/>
+						)}
 					</div>
 				)}
 				<div className={'flex gap-4 mt-4'}>
-					<Button size={'3xl'} color={'gray'} onClick={prevStep}>
+					<Button
+						isDisabled={loadingTD}
+						size={'3xl'}
+						color={'gray'}
+						onClick={prevStep}
+					>
 						{t('Back')}
 					</Button>
+					<Button
+						isDisabled={loadingTD}
+						size={'3xl'}
+						color={'main'}
+						onClick={reGenerateTD}
+					>
+						{t('Re-generate')}
+					</Button>
 					{conditionNextButton && (
-						<Button size={'3xl'} color={'main'} onClick={handleNextStep}>
+						<Button
+							isDisabled={loadingTD}
+							size={'3xl'}
+							color={'main'}
+							onClick={handleNextStep}
+						>
 							{t('Next')}
 						</Button>
 					)}
-					<ResetButton />
+					<ResetButton isLoading={loadingTD} />
 				</div>
 			</div>
 		</DashboardLayout>

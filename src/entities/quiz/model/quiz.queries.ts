@@ -7,16 +7,20 @@ export const GET_QUIZ = gql`
 		getQuiz(quizId: $quizId) {
 			id
 			name
+			courseId
 			description
 			quizResult {
 				totalPercents
 			}
+			questions {
+				id
+			}
 		}
 	}
 `
-export const useGetQuiz = (subtopicId: string) => {
+export const useGetQuiz = (quizId: string) => {
 	const { data, error, loading } = useQuery<{ getQuiz: IQuiz }>(GET_QUIZ, {
-		variables: { subtopicId },
+		variables: { quizId },
 		fetchPolicy: 'cache-and-network'
 	})
 	return {
@@ -214,5 +218,50 @@ export const useGenerateKnowledgeSum = () => {
 		knowledgeSumData: data?.generateKnowledgeSum,
 		knowledgeSumError: error,
 		knowledgeSumLoading: loading
+	}
+}
+export const CREATE_QUIZ_WITH_AI = gql`
+	mutation CreateQuizWithAI($QuizWithAIInput: QuizWithAIInput!) {
+		createQuizWithAI(QuizWithAIInput: $QuizWithAIInput) {
+			id
+			name
+			description
+			questions {
+				id
+				questionType
+				prompt
+				choices {
+					content
+				}
+				matchingInteraction {
+					left {
+						content
+					}
+					right {
+						content
+					}
+					answers
+				}
+				answers
+			}
+			quizResult {
+				totalPercents
+			}
+			isCompleted
+		}
+	}
+`
+export const useCreateQuizWithAI = () => {
+	const [createQuizWithAI, { data, error, loading }] = useMutation<{
+		createQuizWithAI: IQuiz
+	}>(CREATE_QUIZ_WITH_AI, {
+		fetchPolicy: 'no-cache'
+	})
+
+	return {
+		createQuizWithAI,
+		dataCreateQuizWithAI: data?.createQuizWithAI,
+		errorCreateQuizWithAI: error,
+		loadingCreateQuizWithAI: loading
 	}
 }

@@ -7,8 +7,7 @@ import { useQuizStore } from '../../model/quiz.store'
 const QuizResult = ({ quizId, courseId, subtopicId }) => {
 	const [saveQuizResult, { data, loading, error }] =
 		useMutation(SAVE_QUIZ_RESULT)
-	const { selectedAnswers, matchingAnswers, resetState } = useQuizStore()
-
+	const { selectedAnswers, matchingAnswers } = useQuizStore()
 	useEffect(() => {
 		const saveResults = async () => {
 			const userAnswers: any = Object.entries(selectedAnswers).map(
@@ -56,7 +55,6 @@ const QuizResult = ({ quizId, courseId, subtopicId }) => {
 				console.error('Error saving quiz result:', err)
 			}
 		}
-		resetState()
 
 		saveResults()
 		// eslint-disable-next-line react-hooks/exhaustive-deps

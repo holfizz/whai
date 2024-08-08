@@ -2,7 +2,8 @@ export {
 	GET_LESSON_NAME,
 	useGetAllLessons,
 	useGetLesson,
-	useGetLessonContent
+	useGetLessonContent,
+	useUpdateLesson
 } from './model/lesson.queries'
 export type {
 	ILesson,

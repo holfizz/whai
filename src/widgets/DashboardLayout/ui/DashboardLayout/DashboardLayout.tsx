@@ -1,9 +1,10 @@
 'use client'
+import { classNames } from '@/shared/lib/classNames/classNames'
 import Sidebar, { useSidebar } from '@/widgets/DashboardLayout/ui/Sidebar'
+import { useWindowSize } from '@react-hook/window-size'
 import { FC, ReactNode } from 'react'
 import { DashboardNavbar } from '../DashboardNavbar/ui/DashboardNavbar/DashboardNavbar'
 import cls from './DashboardLayout.module.scss'
-import { classNames } from '@/shared/lib/classNames/classNames'
 
 interface LayoutProps {
 	children: ReactNode
@@ -16,7 +17,17 @@ export const DashboardLayout: FC<LayoutProps> = ({
 	sidebarChildren,
 	className
 }) => {
-	const isCollapsed = useSidebar(state => state.isCollapsed)
+	const { isCollapsed } = useSidebar()
+	const [width] = useWindowSize()
+
+	const getWidth = () => {
+		if (width <= 640) {
+			return '100%'
+		}
+		return isCollapsed
+			? 'calc(100vw - var(--sidebar-width-collapsed))'
+			: 'calc(100vw - var(--sidebar-width))'
+	}
 
 	return (
 		<div className={cls.DashboardLayout}>
@@ -37,9 +48,7 @@ export const DashboardLayout: FC<LayoutProps> = ({
 						></div>
 						<div
 							style={{
-								width: isCollapsed
-									? 'calc(100vw - var(--sidebar-width-collapsed))'
-									: 'calc(100vw - var(--sidebar-width))'
+								width: getWidth()
 							}}
 							className={classNames(cls.contentWrapper, {}, [className])}
 						>

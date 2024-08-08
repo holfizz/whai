@@ -7,14 +7,11 @@ import SimpleMDX from '@/shared/ui/MDX/SimpleMDX'
 import { Popover, PopoverContent } from '@/shared/ui/Popover/Popover'
 import { PopoverTrigger } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react'
+import { memo, Suspense, useCallback, useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import NavigationButtons from '../NavigationButton'
 import cls from './MCQQuestion.module.scss'
 
-const MemoizedMDX = memo(SimpleMDX)
-
-const LazyMDX = lazy(() => import('@/shared/ui/MDX/SimpleMDX'))
 interface MCQQuestionProps {
 	question: IQuestion
 	onPrev: () => void
@@ -109,7 +106,7 @@ const MCQQuestion = ({
 		<>
 			<h3 className='w-[400px] text-accent text-center text-sm my-10'>
 				<Suspense fallback={<div>Loading...</div>}>
-					<MemoizedMDX source={question.prompt} />
+					<SimpleMDX>{question.prompt}</SimpleMDX>
 				</Suspense>
 			</h3>
 			<div className={cls.choicesContainer}>
@@ -152,7 +149,7 @@ const MCQQuestion = ({
 											}`}
 										>
 											<Suspense fallback={<DotsLoader />}>
-												<MemoizedMDX source={choice.content} />
+												<SimpleMDX>{choice.content}</SimpleMDX>
 											</Suspense>
 										</h1>
 									</div>
@@ -168,12 +165,10 @@ const MCQQuestion = ({
 									</h1>
 									<div className='px-1 py-2'>
 										<Suspense fallback={<DotsLoader />}>
-											<LazyMDX
-												source={
-													choice.correctAnswerDescription ||
-													choice.incorrectAnswerDescription
-												}
-											/>
+											<SimpleMDX>
+												{choice.correctAnswerDescription ||
+													choice.incorrectAnswerDescription}
+											</SimpleMDX>
 										</Suspense>
 									</div>
 								</PopoverContent>

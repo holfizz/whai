@@ -2,6 +2,7 @@
 import { useUpdateCourse } from '@/entities/course'
 import DropImage from '@/shared/assets/icons/Course/fill/DropImage'
 import Button from '@/shared/ui/Button/Button'
+import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
@@ -50,7 +51,10 @@ const SettingStep = (): React.JSX.Element => {
 						id: courseId,
 						updateCourseData: {
 							description: selectedDescription,
-							name: selectedTitle
+							name: selectedTitle,
+							isHasVideo: videosFromYouTube,
+							isHasAISearchImage: videosFromYouTube,
+							needHomeworks: needHomework
 						},
 						image: selectedFile
 					}
@@ -178,7 +182,7 @@ const SettingStep = (): React.JSX.Element => {
 						onClick={handleSaveSettings}
 						disabled={loadingUpdatingCourse}
 					>
-						{loadingUpdatingCourse ? t('Saving...') : t('Next')}
+						{loadingUpdatingCourse ? <DotsLoader /> : t('Next')}
 					</Button>
 				</div>
 			</div>

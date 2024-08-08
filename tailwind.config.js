@@ -8,6 +8,7 @@ const twColors = {
 	accent: '#272727',
 	secondary: '#bbb9b7',
 	'gray-md': '#BDBDBD',
+	'gray-lg': '#828282',
 	'decor-1': '#FFF7DC',
 	'decor-2': '#ffb57f',
 	'decor-3': '#ffe8a3',
@@ -22,6 +23,7 @@ const twColors = {
 	'success-text': '#8EBB8B',
 	warning: '#f3e774'
 }
+
 module.exports = {
 	content: [
 		'./src/{shared,widgets,features,app,entities}/**/*.{js,ts,jsx,tsx,mdx}',
@@ -30,10 +32,16 @@ module.exports = {
 	],
 	theme: {
 		extend: {
-			colors: twColors
+			colors: twColors,
+			lineClamp: {
+				1: '1',
+				2: '2',
+				3: '3'
+			}
 		},
 		screens: {
 			sm: '393px',
+			640: '641px',
 			md: '768px',
 			lg: '1024px',
 			xl: '1440px',
@@ -52,6 +60,7 @@ module.exports = {
 			extend: {
 				colors: twColors
 			}
-		})
+		}),
+		require('@tailwindcss/line-clamp') // Add the line-clamp plugin
 	]
 }

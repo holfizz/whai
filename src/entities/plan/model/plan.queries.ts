@@ -99,14 +99,17 @@ const CREATE_COURSE_PLAN_WITH_AI_MUTATION = gql`
 			description
 			id
 			topics {
+				id
 				name
 				description
 				courseId
 				subtopics {
+					id
 					name
 					description
 					topicId
 					lessons {
+						id
 						name
 						description
 						types

@@ -4,6 +4,7 @@ import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
+import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import useUnifiedStore from '../../../../(model)/unified.state'
@@ -12,7 +13,7 @@ import SubtopicPlan from './SubtopicPlan'
 import TopicPlan from './TopicPlan'
 
 const CreateCoursePlanPage = () => {
-	const [view, setView] = useState('topics') // 'topics', 'subtopics', 'lessons'
+	const [view, setView] = useState('topics')
 	const [selectedTopic, setSelectedTopic] = useState(null)
 	const [selectedSubtopic, setSelectedSubtopic] = useState(null)
 	const t = useTranslations('CreateCoursePlanPage')
@@ -35,7 +36,8 @@ const CreateCoursePlanPage = () => {
 		setCourseId,
 		setCoursePlanStateData,
 		setIsCoursePlanGenerated,
-		nextStep
+		nextStep,
+		prevStep
 	} = useUnifiedStore()
 
 	const { courseAIHistory } = useGetCourseAIHistoryByCourseId(courseId)
@@ -85,8 +87,7 @@ const CreateCoursePlanPage = () => {
 			setCoursePlanStateData(createPlanData)
 			setIsCoursePlanGenerated(true)
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [createPlanData])
+	}, [createPlanData, setCoursePlanStateData, setIsCoursePlanGenerated])
 
 	const handleTopicClick = topic => {
 		setSelectedTopic(topic)
@@ -103,20 +104,41 @@ const CreateCoursePlanPage = () => {
 		if (view === 'lessons') {
 			setSelectedSubtopic(null)
 			setView('subtopics')
+			return
 		} else if (view === 'subtopics') {
 			setSelectedTopic(null)
 			setView('topics')
+			return
 		}
+		prevStep()
+		return
 	}
-	let currentTitle
+
+	let breadcrumbs = []
 
 	if (view === 'topics') {
-		currentTitle = coursePlanStateData.name
+		breadcrumbs = [
+			<BreadcrumbItem key='course'>{selectedTitle}</BreadcrumbItem>
+		]
 	} else if (view === 'subtopics' && selectedTopic) {
-		currentTitle = selectedTopic.name // Заголовок текущей подтемы
+		breadcrumbs = [
+			<BreadcrumbItem key='course'>{selectedTitle}</BreadcrumbItem>,
+			<BreadcrumbItem key='topic'>{selectedTopic.name}</BreadcrumbItem>
+		]
 	} else if (view === 'lessons' && selectedSubtopic) {
-		currentTitle = selectedSubtopic.name // Заголовок текущего урока
+		breadcrumbs = [
+			<BreadcrumbItem key='course'>{selectedTitle}</BreadcrumbItem>,
+			<BreadcrumbItem key='topic'>{selectedTopic.name}</BreadcrumbItem>,
+			<BreadcrumbItem key='subtopic'>{selectedSubtopic.name}</BreadcrumbItem>
+		]
 	}
+
+	const currentStageTitle = {
+		topics: t('Editing stage of the training module'),
+		subtopics: t('Editing Course Topics'),
+		lessons: t('Editing lessons')
+	}
+
 	return (
 		<DashboardLayout className='w-full flex justify-center'>
 			<div className='w-full max-w-[1200px] p-4 flex flex-col items-center justify-center'>
@@ -127,8 +149,8 @@ const CreateCoursePlanPage = () => {
 				{coursePlanStateData && coursePlanStateData.topics.length > 0 && (
 					<>
 						<div className='flex flex-col items-center'>
-							<Text size={TextSize.XL} title={currentTitle} />
-
+							<Text size={TextSize.XL} title={currentStageTitle[view]} />
+							<Breadcrumbs className='mt-8'>{breadcrumbs}</Breadcrumbs>
 							{view === 'topics' && (
 								<div className='grid grid-cols-1 gap-6 mt-10 sm:grid-cols-2 md:grid-cols-3'>
 									<TopicPlan
@@ -155,12 +177,7 @@ const CreateCoursePlanPage = () => {
 						</div>
 					</>
 				)}
-				{!coursePlanStateData && !createPlanData && (
-					<Text
-						size={TextSize.XL}
-						title='Нет доступных данных для отображения'
-					/>
-				)}
+
 				<div className='flex gap-5 mt-10'>
 					<Button
 						color={'gray'}

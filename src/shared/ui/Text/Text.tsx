@@ -1,7 +1,7 @@
 import { classNames, Mods } from '@/shared/lib/classNames/classNames'
+import { Skeleton } from '@nextui-org/react'
 import { FC, memo } from 'react'
 import cls from './Text.module.scss'
-import { Skeleton } from '@nextui-org/react'
 
 export enum TextTheme {
 	PRIMARY = 'primary',
@@ -20,7 +20,8 @@ export enum TextSize {
 	S = 'size_s',
 	M = 'size_m',
 	L = 'size_l',
-	XL = 'size_xl'
+	XL = 'size_xl',
+	SM = 'SM'
 }
 
 interface TextProps {

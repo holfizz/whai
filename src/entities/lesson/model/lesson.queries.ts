@@ -1,6 +1,6 @@
 'use client'
 import { ILesson, ILessonContent } from '@/entities/lesson/model/lesson.types'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 
 export const GET_LESSON = gql`
 	query ($lessonId: ID!) {
@@ -47,7 +47,6 @@ export const GET_ALL_LESSONS = gql`
 			name
 			subtopicId
 			isCompleted
-			isHasLessonTask
 			lessonTasks {
 				isChecked
 				name
@@ -117,7 +116,6 @@ export const CREATE_LESSON_WITH_AI = gql`
 			id
 			name
 			description
-			isHasLessonTask
 			lessonBlocks {
 				id
 				type
@@ -130,3 +128,24 @@ export const CREATE_LESSON_WITH_AI = gql`
 		}
 	}
 `
+
+export const UPDATE_LESSON = gql`
+	mutation updateLesson($updateLessonInput: UpdateLesson!) {
+		updateLesson(updateLessonInput: $updateLessonInput) {
+			id
+			name
+			description
+		}
+	}
+`
+export const useUpdateLesson = () => {
+	const [updateLesson, { data, error, loading }] = useMutation<{
+		updateLesson: Pick<ILesson, 'name' | 'description' | 'id'>
+	}>(GET_LESSON_CONTENT, {})
+	return {
+		updateLesson,
+		dataLessonUpdate: data?.updateLesson,
+		errorLessonUpdate: error,
+		loadingLessonUpdate: loading
+	}
+}

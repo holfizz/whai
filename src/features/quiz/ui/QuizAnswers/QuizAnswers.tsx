@@ -1,11 +1,14 @@
+'use client'
 import { IQuizAnswer, useGetQuizData } from '@/entities/quiz'
+import Button from '@/shared/ui/Button/Button'
 import Chip from '@/shared/ui/Chip/Chip'
 import type { Selection } from '@nextui-org/react'
 import { Accordion, AccordionItem } from '@nextui-org/react'
 import { useWindowSize } from '@react-hook/window-size'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Confetti from 'react-confetti'
+import { useQuizStore } from '../../model/quiz.store'
 
 interface QuizResultProps {
 	quizResult: {
@@ -35,20 +38,32 @@ const getChipText = (
 	return 'Partial'
 }
 
-const QuizAnswer = ({ quizResult }: { quizResult: IQuizAnswer }) => {
+const QuizAnswer = ({
+	quizResult,
+	handleNext
+}: {
+	quizResult: IQuizAnswer
+	handleNext?: () => void
+}) => {
 	const t = useTranslations('Quiz')
 	const [width, height] = useWindowSize()
+	const { resetState } = useQuizStore()
 	const { quizData, errorQuiz, loadingQuiz } = useGetQuizData(quizResult.quizId)
 	const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set<string>())
-
+	useEffect(() => {
+		resetState()
+	}, [resetState])
 	if (loadingQuiz) return <p>Загрузка...</p>
 	if (errorQuiz) return <p>Ошибка: {errorQuiz.message}</p>
 
 	return (
-		<div className='w-3/5'>
+		<div className='w-3/5 flex flex-col items-center justify-center'>
 			<h2>{t('Test results')}</h2>
-			<p>
-				{t('Total percentage of correct answers:')} {quizResult.totalPercents}%
+			<p className='flex items-center'>
+				{t('Total percentage of correct answers:')}{' '}
+				<p className='p-1 bg-success-4 rounded-xl w-min ml-4'>
+					{Math.round(quizResult.totalPercents)}%
+				</p>
 			</p>
 			<Accordion
 				selectedKeys={selectedKeys}
@@ -155,6 +170,16 @@ const QuizAnswer = ({ quizResult }: { quizResult: IQuizAnswer }) => {
 					)
 				})}
 			</Accordion>
+			{handleNext && (
+				<Button
+					className='mt-4'
+					size={'3xl'}
+					color={'main'}
+					onClick={handleNext}
+				>
+					{t('Next')}
+				</Button>
+			)}
 			<Confetti recycle={false} width={width} height={height} />
 		</div>
 	)

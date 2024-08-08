@@ -178,7 +178,20 @@
 		"Try one more time": "Try one more time",
 		"An error occurred while generating headers": "An error occurred while generating headers",
 		"An error occurred while creating the test": "An error occurred while creating the test",
-		"An error occurred while summing up your test results": "An error occurred while summing up your test results"
+		"An error occurred while summing up your test results": "An error occurred while summing up your test results",
+		"Summary of your knowledge": "Summary of your knowledge",
+		"Knowledge Summary": "Knowledge summary",
+		"Strong Points": "Strong points",
+		"Weak Points": "Weak points",
+		"Recommendations": "Recommendations",
+		"Try again": "Try again",
+		"Save": "Save",
+		"Re-generate": "Re-generate",
+		"Edit title and description": "Edit title and description",
+		"Enter the title": "Enter the title",
+		"Enter the description": "Enter the description",
+		"Title": "Title",
+		"Description": "Description"
 	},
 	"CreateTest": {
 		"What are we creating?": "What are we creating?",
@@ -207,7 +220,12 @@
 		"Please provide an answer before proceeding": "Please provide an answer before proceeding",
 		"Check": "Check",
 		"Answer": "Answer",
-		"Please answer all questions before finishing the quiz": "Please answer all questions before finishing the quiz"
+		"Edit Course": "Edit Course",
+		"Please answer all questions before finishing the quiz": "Please answer all questions before finishing the quiz",
+		"Choose 1 or more answer options": "Choose 1 or more answer options",
+		"Quiz creation in progress": "Quiz creation in progress",
+		"To try one more time": "To try one more time",
+		"There was an error loading the quiz or creating it": "There was an error loading the quiz or creating it"
 	},
 	"CreateCoursePlanPage": {
 		"View topics": "View topic",
@@ -217,6 +235,7 @@
 		"Editing stage of the training module": "Editing stage of the training module",
 		"Editing Course Topics": "Editing Course Topics",
 		"Editing lessons": "Editing lessons",
+		"Editing lesson": "Editing lesson",
 		"Next": "Next",
 		"Back": "Back",
 		"Save": "Save",

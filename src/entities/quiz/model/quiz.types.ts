@@ -1,11 +1,16 @@
 export interface IQuiz {
 	id: string
+	courseId: string
+	subtopicId: string
 	name: string
 	description: string
 	totalPercents?: number
 	quizResult?: {
 		totalPercents?: number
 	}
+	questions?: {
+		id?: string
+	}[]
 }
 
 export enum QuizQuestionType {

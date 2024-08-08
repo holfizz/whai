@@ -9,38 +9,35 @@ import {
 } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 
-const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
-	const [originalData, setOriginalData] = useState(data) // Стили для хранения оригинальных данных
-	const [name, setName] = useState(data.name)
-	const [description, setDescription] = useState(data.description)
+const EditTDModal = ({ isOpen, onClose, initialData, onSave, t }) => {
+	const [originalData, setOriginalData] = useState(initialData) // State for original data
+	const [name, setName] = useState(initialData.title)
+	const [description, setDescription] = useState(initialData.description)
 
+	// Effect to reset the state when modal opens
 	useEffect(() => {
 		if (isOpen) {
-			setOriginalData(data)
-			setName(data.name)
-			setDescription(data.description)
+			setOriginalData(initialData) // Update original data
+			setName(initialData.title)
+			setDescription(initialData.description)
 		}
-	}, [isOpen, data])
+	}, [isOpen, initialData])
 
+	// Handler for saving updates
 	const handleSave = () => {
-		onSave({ id: data.id, name, description }) // Ensure the id is retained
+		onSave({ title: name, description })
 		onClose()
 	}
 
+	// Handler to reset title to original state
 	const handleBackName = () => {
-		setName(originalData.name)
+		setName(originalData.title) // Rollback to the original title
 	}
 
+	// Handler to reset description to original state
 	const handleBackDesc = () => {
-		setDescription(originalData.description)
+		setDescription(originalData.description) // Rollback to the original description
 	}
-
-	const promptText =
-		type === 'module'
-			? t('module')
-			: type === 'lesson'
-			? t('lesson')
-			: t('topic')
 
 	return (
 		<Modal
@@ -54,18 +51,16 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 				{() => (
 					<>
 						<ModalHeader className='flex flex-col gap-1'>
-							{t('Edit Course')}
+							{t('Edit title and description')}
 						</ModalHeader>
 						<ModalBody>
-							<div className='flex justify-between items-start'>
-								<div className='flex justify-end items-center w-[80%]'>
+							<div className='flex justify-between items-start mb-4'>
+								<div className='flex justify-end items-start w-[80%]'>
 									<h1 className='text-medium font-medium text-gray-lg  mr-3 w-[25%] text-end'>
-										{promptText}
+										{t('Title')}
 									</h1>
 									<Textarea
-										placeholder={t(
-											'What should be in the know, describe in detail what you want to get'
-										)}
+										placeholder={t('Enter the title')}
 										classNames={{
 											inputWrapper: [
 												'py-[10px]',
@@ -79,14 +74,7 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 												'overflow-x-auto',
 												'whitespace-nowrap',
 												'w-full'
-											],
-											innerWrapper: [
-												'flex justify-between',
-												'h-auto',
-												'w-full'
-											],
-											input: ['w-full'],
-											base: 'w-[85%]'
+											]
 										}}
 										minRows={1}
 										value={name}
@@ -105,12 +93,10 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 							<div className='flex justify-between items-start'>
 								<div className='flex justify-end items-start w-[80%]'>
 									<h1 className='text-medium font-medium text-gray-lg  mr-3 w-[25%]'>
-										{t('description')}
+										{t('Description')}
 									</h1>
 									<Textarea
-										placeholder={t(
-											'What should be in the know, describe in detail what you want to get'
-										)}
+										placeholder={t('Enter the description')}
 										classNames={{
 											inputWrapper: [
 												'py-[10px]',
@@ -124,20 +110,14 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 												'overflow-x-auto',
 												'whitespace-nowrap',
 												'w-full'
-											],
-											innerWrapper: [
-												'flex justify-between',
-												'h-auto',
-												'w-full'
-											],
-											input: ['w-full'],
-											base: 'w-[85%]'
+											]
 										}}
-										minRows={1}
+										minRows={3}
 										value={description}
 										onChange={e => setDescription(e.target.value)}
 									/>
 								</div>
+
 								<Button
 									isIconOnly
 									variant='circle'
@@ -149,7 +129,7 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 							</div>
 						</ModalBody>
 						<ModalFooter>
-							<div className='w-full flex items-center justify-center'>
+							<div className='flex justify-center items-center w-full'>
 								<Button size={'3xl'} color='main' onPress={handleSave}>
 									{t('Save')}
 								</Button>
@@ -162,4 +142,4 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 	)
 }
 
-export default EditCourseModal
+export default EditTDModal

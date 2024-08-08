@@ -1,6 +1,5 @@
-import client from '@/app/(providers)/ApolloProvider/ui/apollo-client'
 import { IAuthResponse } from '@/entities/Auth'
-import { gql, useLazyQuery, useMutation } from '@apollo/client'
+import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { authUserVar, logout } from './auth.model'
 
 //==========input=======================================//
@@ -65,7 +64,7 @@ export const useSignUpMutation = () => {
 	return { signUp: mutate, data, loading, error }
 }
 
-const LOGIN = gql`
+export const LOGIN = gql`
 	mutation login($input: loginInput!) {
 		login(loginInput: $input) {
 			accessToken
@@ -94,34 +93,53 @@ export const useLoginMutation = () => {
 }
 
 export const GET_NEW_TOKEN = gql`
-	mutation getNewToken {
+	query getNewToken {
 		getNewToken {
 			accessToken
+			user {
+				email
+				roles
+			}
 		}
 	}
 `
 
-export const useGetNewTokenMutation = () => {
-	const [mutate, { data, loading, error }] = useMutation<
-		GetNewTokenMutationResponse,
-		GetNewTokenInput
-	>(GET_NEW_TOKEN, {
-		onCompleted: data => {
-			const currentState = authUserVar()
-			if (currentState && currentState.user) {
-				const updatedAuthState = {
-					...currentState,
-					accessToken: data.getNewToken.accessToken
-				}
-				authUserVar(updatedAuthState)
-			}
-			client.reFetchObservableQueries()
+interface GetNewTokenResponse {
+	getNewToken: {
+		accessToken: string
+		user: {
+			email: string
+			roles: string[]
 		}
-	})
-	return { refreshAccessToken: mutate, data, loading, error }
+	}
 }
 
-const LOGOUT = gql`
+export const useGetNewTokenQuery = () => {
+	const { data, loading, error } = useQuery<GetNewTokenResponse>(
+		GET_NEW_TOKEN,
+		{
+			onCompleted: data => {
+				if (data && data.getNewToken) {
+					const currentState = authUserVar()
+					if (currentState && currentState.user) {
+						const updatedAuthState = {
+							...currentState,
+							accessToken: data.getNewToken.accessToken
+						}
+						authUserVar(updatedAuthState)
+					}
+				}
+			}
+		}
+	)
+
+	return {
+		dataNewToken: data?.getNewToken,
+		loading,
+		error
+	}
+}
+export const LOGOUT = gql`
 	query logout {
 		logout
 	}

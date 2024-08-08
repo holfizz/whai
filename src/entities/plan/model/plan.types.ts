@@ -30,7 +30,6 @@ export interface ISubtopicPlan {
 
 export interface ITopicPlan {
 	id: string
-
 	name: string
 	description?: string
 	courseId: string

@@ -1,19 +1,19 @@
 'use client'
 
-import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
-import { useTranslations } from 'next-intl'
-import { Skeleton } from '@nextui-org/react'
-import { ICourse, useGetLastCourse } from '@/entities/course'
-import { Progress } from '@/shared/ui/Progress/Progress'
-import Icon from '@/shared/ui/Icon/Icon'
-import { ArrowUpRight } from 'lucide-react'
-import Button from '@/shared/ui/Button/Button'
-import { TbBrain } from 'react-icons/tb'
-import { Link } from '@/navigation'
-import { getCourseByIdRoute } from '@/shared/const/router'
 import { IUser } from '@/entities/Auth'
+import { ICourse, useGetLastCourse } from '@/entities/course'
+import { Link } from '@/navigation'
+import ArrowUpRight from '@/shared/assets/icons/Arrows/Outline/ArrowUpRight'
+import { getCourseByIdRoute } from '@/shared/const/router'
+import Button from '@/shared/ui/Button/Button'
 import CourseStat from '@/shared/ui/CourseCard/CourseStat/CourseStat'
+import Icon from '@/shared/ui/Icon/Icon'
+import { Progress } from '@/shared/ui/Progress/Progress'
+import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { WelcomeBack } from '@/widgets/WelcomeBack'
+import { Skeleton } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
+import { TbBrain } from 'react-icons/tb'
 
 export default function PageHeader({ userData }: { userData: IUser }) {
 	const t = useTranslations('Dashboard')
@@ -88,7 +88,7 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 												size={'mRound'}
 												href={getCourseByIdRoute(lastCourseData?.id)}
 												isIconOnly
-												startContent={<ArrowUpRight color={'#fff'} />}
+												startContent={<ArrowUpRight fill={'#fff'} />}
 												variant={'circle'}
 												as={Link}
 												color={'accent'}

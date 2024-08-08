@@ -1,5 +1,4 @@
 import { Divider } from '@nextui-org/react'
-import React from 'react'
 
 export const ListWrapperUl = ({
 	children,
@@ -26,13 +25,5 @@ export const ListWrapperOl = ({
 	children: any
 	className: string
 }) => {
-	return (
-		<div className={'flex'}>
-			<Divider
-				orientation='vertical'
-				className={'w-[3px] rounded-sm h-[inherit]'}
-			/>
-			<ol className={`flex flex-col ml-8 *:list-decimal`}>{children}</ol>
-		</div>
-	)
+	return <ol className={'flex'}></ol>
 }

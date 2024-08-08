@@ -1,19 +1,24 @@
-import React, { ReactNode } from 'react'
-import cls from './Message.module.scss'
-import { classNames, Mods } from '@/shared/lib/classNames/classNames'
 import { MessageWithAIRole } from '@/entities/messageWithAI'
+import { classNames, Mods } from '@/shared/lib/classNames/classNames'
+import SimpleMDX from '../MDX/SimpleMDX'
+import cls from './Message.module.scss'
 
 const Message = ({
-	                 children,
-	                 messageFrom = MessageWithAIRole.USER
-                 }: {
-	children: ReactNode
+	children,
+	messageFrom = MessageWithAIRole.USER
+}: {
+	children: string
 	messageFrom?: MessageWithAIRole
 }) => {
 	const mods: Mods = {
 		[cls[messageFrom]]: true
 	}
-	return <div className={classNames(cls.message, mods)}>{children}</div>
+
+	return (
+		<div className={classNames(cls.message, mods)}>
+			<SimpleMDX>{children}</SimpleMDX>
+		</div>
+	)
 }
 
 export default Message

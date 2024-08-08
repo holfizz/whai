@@ -1,3 +1,4 @@
+// useMatchQuestion.ts
 import { IQuestion } from '@/entities/quiz'
 import { useQuizStore } from '@/features/quiz'
 import { useTranslations } from 'next-intl'
@@ -48,7 +49,6 @@ export const useMatchQuestion = (
 		}, {} as { [key: string]: string })
 
 		setLocalMatchingAnswers(initialAnswers)
-		// Removed the line that sets `checked` from `checkedQuestions`
 	}, [shuffledLeft, matchingAnswers, question.id])
 
 	const handleMatchChange = (leftItem: string, rightItem: string) => {
@@ -65,7 +65,7 @@ export const useMatchQuestion = (
 
 		if (!allMatched) {
 			toast.error(t('Please match all items before proceeding'))
-			return // Exit early if not all items are matched
+			return
 		}
 
 		setChecked(true)

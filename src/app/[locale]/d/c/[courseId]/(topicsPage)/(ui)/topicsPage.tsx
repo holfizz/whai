@@ -1,18 +1,17 @@
 'use client'
 import { useGetCourse } from '@/entities/course'
 import { useGetAllTopics } from '@/entities/topic'
+import ArrowUpRight from '@/shared/assets/icons/Arrows/Outline/ArrowUpRight'
 import Button from '@/shared/ui/Button/Button'
 import { Progress } from '@/shared/ui/Progress/Progress'
 import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useDisclosure } from '@nextui-org/react'
-import { ArrowUpRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
-import { FaClipboardList, FaClock, FaThumbtack } from 'react-icons/fa6'
-import { IoFlagSharp, IoVideocam } from 'react-icons/io5'
-import { PiShareFatFill } from 'react-icons/pi'
+import { FaClipboardList, FaClock } from 'react-icons/fa6'
+import { IoVideocam } from 'react-icons/io5'
 import ModalComponent from '../ModalComponent/ModalComponent'
 import cls from './topicPage.module.scss'
 
@@ -32,37 +31,8 @@ const TopicsPage = () => {
 		<DashboardLayout className={`w-full flex justify-center`}>
 			<div className={'w-[800px] '}>
 				<Text size={TextSize.XL} title={courseData?.name} />
-				<div className={'flex gap-4'}>
-					<Button
-						startContent={
-							<FaThumbtack size={18} color={'var(--color-decor-2)'} />
-						}
-						className={cls.actionButton}
-					>
-						<h3 className={'text-[var(--color-secondary)] text-lg'}>
-							{t('In notes')}
-						</h3>
-					</Button>
-					<Button
-						startContent={
-							<IoFlagSharp size={18} color={'var(--color-decor-2)'} />
-						}
-						className={cls.actionButton}
-					>
-						<h3 className={'text-[var(--color-secondary)] text-lg'}>
-							{t('Report a bug')}
-						</h3>
-					</Button>
-					<Button
-						startContent={
-							<PiShareFatFill size={18} color={'var(--color-decor-2)'} />
-						}
-						className={cls.actionButton}
-					>
-						<h3 className={'text-[var(--color-secondary)]'}>{t('Share')}</h3>
-					</Button>
-				</div>
-				<div className={'flex flex-wrap gap-6 mt-10'}>
+
+				<div className={'flex flex-wrap gap-6 mt-5'}>
 					{topicsAllData &&
 						topicsAllData.map((topic, i) => (
 							<div
@@ -82,30 +52,30 @@ const TopicsPage = () => {
 										onClick={() => handleTopicClick(topic.id)}
 										variant={'circle'}
 										size={'sRound'}
-										startContent={<ArrowUpRight color={'#fff'} />}
-										color={'accent'}
+										startContent={<ArrowUpRight fill={'var(--color-accent)'} />}
+										color={'main'}
 									/>
 								</div>
 								<p className={cls.description}>{topic.description}</p>
-								<div className={'flex gap-2 flex-wrap w-full'}>
+								<div className={'flex gap-2 flex-wrap w-full mt-auto'}>
 									<div className={'flex mr-4 items-center'}>
-										<FaClock size={18} className={'text-gray-300 mx-2'} />
-										<h3 className={'text-gray-300 font-normal'}>
+										<FaClock size={18} className={'text-gray-md mx-2'} />
+										<h3 className={'text-gray-md font-normal'}>
 											{`${topic.completionTime} Hours`}
 										</h3>
 									</div>
 									<div className={'flex mr-4 items-center'}>
-										<IoVideocam size={18} className={'text-gray-300 mx-2'} />
-										<h3 className={'text-gray-300 font-normal'}>
-											{`${topic.completionTime}  ${t('Video lesson')}`}
+										<IoVideocam size={18} className={'text-gray-md mx-2'} />
+										<h3 className={'text-gray-md font-normal'}>
+											{t('Video lesson')}
 										</h3>
 									</div>
 									<div className={'flex mr-4 items-center'}>
 										<FaClipboardList
 											size={18}
-											className={'text-gray-300 mx-2'}
+											className={'text-gray-md mx-2'}
 										/>
-										<h3 className={'text-gray-300 font-normal'}>
+										<h3 className={'text-gray-md font-normal'}>
 											{`${topic.totalSubtopics}  ${t('Topics')}`}
 										</h3>
 									</div>
@@ -113,7 +83,7 @@ const TopicsPage = () => {
 								<Progress
 									color={'peach'}
 									value={topic.progressPercents}
-									className={'h-1 rounded-full mt-auto'}
+									className={'h-1 rounded-full mt-2'}
 								></Progress>
 							</div>
 						))}

@@ -1,35 +1,45 @@
 import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory/'
 import { useGenerateKnowledgeSum } from '@/entities/quiz'
-import { useQuizStore } from '@/features/quiz'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableColumn,
-	TableHeader,
-	TableRow
-} from '@nextui-org/react'
+import { Accordion, AccordionItem, Divider } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import useUnifiedStore from '../../../(model)/unified.state'
 
+const getChipColor = (type: string) => {
+	if (type === 'strong') return 'success'
+	if (type === 'weak') return 'warning'
+	if (type === 'recommendation') return 'info'
+	return 'default'
+}
+
+const getChipText = (type: string): 'Strong' | 'Weak' | 'Recommendation' => {
+	if (type === 'strong') return 'Strong'
+	if (type === 'weak') return 'Weak'
+	if (type === 'recommendation') return 'Recommendation'
+	return 'Other'
+}
+
 const AIKnowledgeSummary = () => {
 	const t = useTranslations('CreateCourse')
-	const { quizResultId } = useQuizStore()
-	const { courseId, prevStep, nextStep, summaryData, setSummaryData } =
-		useUnifiedStore()
+	const {
+		courseId,
+		prevStep,
+		nextStep,
+		summaryData,
+		setSummaryData,
+		quizResultId
+	} = useUnifiedStore()
 	const {
 		generateKnowledgeSum,
 		knowledgeSumData,
 		knowledgeSumError,
 		knowledgeSumLoading
 	} = useGenerateKnowledgeSum()
-	const { courseAIHistory, errorFetchingHistory, loadingFetchingHistory } =
-		useGetCourseAIHistoryByCourseId(courseId)
+	const { courseAIHistory } = useGetCourseAIHistoryByCourseId(courseId)
 
 	useEffect(() => {
 		if (!summaryData && quizResultId && courseAIHistory?.id) {
@@ -42,20 +52,19 @@ const AIKnowledgeSummary = () => {
 					}
 				}
 			})
-				.then(response => {
-					const data = response.data.generateKnowledgeSum
-					setSummaryData(data)
-				})
-				.catch(err => console.error(err))
 		}
 	}, [
 		quizResultId,
 		generateKnowledgeSum,
-		courseAIHistory?.id,
+		courseAIHistory,
 		courseId,
-		summaryData,
-		setSummaryData
+		summaryData
 	])
+	useEffect(() => {
+		if (knowledgeSumData) {
+			setSummaryData(knowledgeSumData)
+		}
+	}, [knowledgeSumData, setSummaryData])
 
 	if (knowledgeSumError) {
 		toast.error(t('An error occurred while summing up your test results'))
@@ -63,60 +72,111 @@ const AIKnowledgeSummary = () => {
 
 	return (
 		<DashboardLayout>
-			{knowledgeSumLoading && <DotsLoader />}
-			<div>
+			<div className={'flex flex-col items-center justify-center'}>
+				{knowledgeSumLoading && <DotsLoader />}
 				{summaryData && (
 					<>
-						<h2>Knowledge Summary</h2>
-						<p>{summaryData.summary}</p>
-
-						<h3>Details</h3>
-						<Table aria-label='Knowledge Summary Details'>
-							<TableHeader>
-								<TableColumn>Type</TableColumn>
-								<TableColumn>Details</TableColumn>
-							</TableHeader>
-							<TableBody>
-								<TableRow key='1'>
-									<TableCell>Strong Points</TableCell>
-									<TableCell>
+						<h3>{t('Summary of your knowledge')}</h3>
+						<Accordion className='w-[80%]'>
+							{summaryData.summary && (
+								<AccordionItem
+									title={
+										<div className='flex'>
+											<p className='text-lg break-words'>
+												{t('Knowledge Summary')}
+											</p>
+										</div>
+									}
+								>
+									<p>{summaryData.summary}</p>
+								</AccordionItem>
+							)}
+							{summaryData.strongPoints.length > 0 && (
+								<AccordionItem
+									title={
+										<div className='flex'>
+											<p className='text-lg break-words'>
+												{t('Strong Points')}
+											</p>
+										</div>
+									}
+								>
+									<div className={'flex'}>
+										<Divider
+											orientation='vertical'
+											className={'w-[3px] rounded-sm h-[inherit] mr-3'}
+										/>
 										<ul>
 											{summaryData.strongPoints.map((point, index) => (
-												<li key={index}>{point}</li>
+												<li key={index} className='break-words'>
+													{point}
+												</li>
 											))}
 										</ul>
-									</TableCell>
-								</TableRow>
-								<TableRow key='2'>
-									<TableCell>Weak Points</TableCell>
-									<TableCell>
+									</div>
+								</AccordionItem>
+							)}
+							{summaryData.weakPoints.length > 0 && (
+								<AccordionItem
+									title={
+										<div className='flex'>
+											<p className='text-lg break-words'>{t('Weak Points')}</p>
+										</div>
+									}
+								>
+									<div className={'flex'}>
+										<Divider
+											orientation='vertical'
+											className={'w-[3px] rounded-sm h-[inherit] mr-3'}
+										/>
 										<ul>
 											{summaryData.weakPoints.map((point, index) => (
-												<li key={index}>{point}</li>
+												<li key={index} className='break-words'>
+													{point}
+												</li>
 											))}
 										</ul>
-									</TableCell>
-								</TableRow>
-								<TableRow key='3'>
-									<TableCell>Recommendations</TableCell>
-									<TableCell>
+									</div>
+								</AccordionItem>
+							)}
+							{summaryData.recommendations.length > 0 && (
+								<AccordionItem
+									title={
+										<div className='flex'>
+											<p className='text-lg break-words'>
+												{t('Recommendations')}
+											</p>
+										</div>
+									}
+								>
+									<div className={'flex'}>
+										<Divider
+											orientation='vertical'
+											className={'w-[3px] rounded-sm h-[inherit] mr-3'}
+										/>
 										<ul>
 											{summaryData.recommendations.map((rec, index) => (
-												<li key={index}>{rec}</li>
+												<li key={index} className='break-words'>
+													{rec}
+												</li>
 											))}
 										</ul>
-									</TableCell>
-								</TableRow>
-							</TableBody>
-						</Table>
+									</div>
+								</AccordionItem>
+							)}
+						</Accordion>
 					</>
 				)}
-				<Button size={'3xl'} color={'gray'} onClick={prevStep}>
-					{t('Back')}
-				</Button>
-				<Button size={'3xl'} color={'gray'} onClick={nextStep}>
-					{t('Next')}
-				</Button>
+				{summaryData && (
+					<div className={'flex gap-5 mt-4'}>
+						<Button size={'3xl'} color={'gray'} onClick={prevStep}>
+							{t('Back')}
+						</Button>
+						<Button size={'3xl'} color={'main'} onClick={nextStep}>
+							{t('Next')}
+						</Button>
+					</div>
+				)}
 			</div>
 			<Toaster position='top-right' reverseOrder={false} />
 		</DashboardLayout>

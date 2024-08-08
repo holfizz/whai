@@ -14,8 +14,10 @@ interface UnifiedState {
 	quizId: string | null
 	summaryData: any | null
 	coursePlanStateData: any | null
-	isCoursePlanGenerated: boolean // New state
+	isCoursePlanGenerated: boolean
+	quizResultId: string | null
 	setStep: (step: number) => void
+	setQuizResultId: (id: string) => void
 	setChoice: (choice: string | null) => void
 	setCourseId: (courseId: string | null) => void
 	setPromptContent: (promptContent: string) => void
@@ -38,6 +40,7 @@ const useUnifiedStore = create<UnifiedState>()(
 		set => ({
 			step: 1,
 			choice: null,
+			quizResultId: '',
 			courseId: null,
 			promptContent: '',
 			selectedTitle: null,
@@ -73,6 +76,7 @@ const useUnifiedStore = create<UnifiedState>()(
 				set({ isCoursePlanGenerated: status }),
 			nextStep: () => set(state => ({ step: state.step + 1 })),
 			prevStep: () => set(state => ({ step: state.step - 1 })),
+			setQuizResultId: (id: string) => set({ quizResultId: id }),
 			resetState: () =>
 				set({
 					step: 1,

@@ -1,16 +1,16 @@
-import React, { useEffect, useRef } from 'react'
-import { Virtuoso } from 'react-virtuoso'
-import Message from '@/shared/ui/Message/Message'
 import { MessageWithAIRole } from '@/entities/messageWithAI'
 import Loader from '@/shared/ui/Loader/Loader'
+import Message from '@/shared/ui/Message/Message'
+import { useEffect, useRef } from 'react'
+import { Virtuoso } from 'react-virtuoso'
 
 const ChatUi = ({
-	                messages,
-	                loading,
-	                isLoadingMore,
-	                handleStartReached,
-	                skip
-                }) => {
+	messages,
+	loading,
+	isLoadingMore,
+	handleStartReached,
+	skip
+}) => {
 	const virtuosoRef = useRef(null)
 
 	useEffect(() => {

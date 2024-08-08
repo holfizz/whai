@@ -10,6 +10,7 @@ const Button = extendVariants(UiButton, {
 			'gray-text': 'bg-[var(--color-decor-4)] text-[#BDBDBD]',
 			error: 'bg-error-1 text-error-text',
 			success: 'bg-success-1 text-success-text',
+			'success-4': 'bg-success-4 text-success-text',
 			primary: 'text-[var(--color-accent)] bg-[var(--color-decor-1)]',
 			secondary: 'text-[var(--color-accent)] bg-[var(--color-decor-3)]',
 			main: 'text-[var(--color-accent)] bg-[var(--color-decor-2)]',
@@ -19,6 +20,8 @@ const Button = extendVariants(UiButton, {
 			sidebar:
 				'bg-transparent text-[var(--color-accent)] flex justify-center items-center',
 			circle: 'rounded-full flex align-center justify-center min-w-fit ',
+			square:
+				'rounded-full flex align-center justify-center min-w-fit rounded-lg ',
 			sRound:
 				'rounded-2xl flex align-center justify-center stroke-white min-w-fit ',
 			noneRound: 'rounded-none'
@@ -34,6 +37,7 @@ const Button = extendVariants(UiButton, {
 			auto: 'px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-xl w-full h-auto max-sm:w-[40vw] max-sm:h-[50px]',
 			sRound: 'w-[42px] h-[42px] px-0',
 			mRound: 'w-[78px] h-[78px] px-0',
+			bigIcon: 'w-[100px] h-[100px] px-0',
 			full: 'w-full h-auto min-h-[60px] px-0'
 		}
 	},

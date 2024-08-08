@@ -87,11 +87,11 @@ const ChoiceStep = () => {
 						{t('Lesson')}
 					</Button>
 				</div>
-				<div className='mt-20'>
+				<div className='flex mt-20 gap-4'>
 					<Button
 						as={Link}
 						href={getDashboardRoute()}
-						color={'accent'}
+						color={'gray'}
 						size={'3xl'}
 						onClick={prevStep}
 					>

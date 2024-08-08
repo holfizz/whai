@@ -1,6 +1,6 @@
 'use client'
-import { gql, useQuery } from '@apollo/client'
 import type { ITopic } from '@/entities/topic/model/topic.types'
+import { gql, useMutation, useQuery } from '@apollo/client'
 
 export const GET_TOPIC = gql`
 	query ($topicId: ID!) {
@@ -52,5 +52,26 @@ export const useGetAllTopics = (courseId: string) => {
 		topicsAllData: data?.getAllTopics,
 		errorTopicAll: error,
 		loadingTopicAll: loading
+	}
+}
+export const UPDATE_TOPIC = gql`
+	mutation ($topicId: ID!, $updateTopicInput: UpdateTopicInput!) {
+		updateTopic(topicId: $topicId, updateTopicInput: $updateTopicInput) {
+			id
+			name
+			description
+		}
+	}
+`
+
+export const useUpdateTopic = () => {
+	const [updateTopic, { data, error, loading }] = useMutation<{
+		updateTopic: ITopic
+	}>(UPDATE_TOPIC)
+	return {
+		updateTopic,
+		updatedTopicData: data?.updateTopic,
+		errorUpdateTopic: error,
+		loadingUpdateTopic: loading
 	}
 }

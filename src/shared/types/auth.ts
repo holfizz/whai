@@ -21,5 +21,5 @@ export type TypeAuth = {
 }
 
 export type TypeNewTokensResponse = {
-	newTokens: TypeAuth
+	getNewToken: TypeAuth
 }

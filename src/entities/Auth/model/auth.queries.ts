@@ -2,12 +2,6 @@
 import { gql, useMutation, useQuery } from '@apollo/client'
 import { IUser } from './auth.types'
 
-export const LOGOUT = gql`
-	query Logout {
-		logout
-	}
-`
-
 export const GET_PROFILE = gql`
 	query {
 		getProfile {
@@ -20,10 +14,13 @@ export const GET_PROFILE = gql`
 	}
 `
 export const useGetProfile = () => {
-	const { data, error } = useQuery<{ getProfile: IUser }>(GET_PROFILE, {
-		fetchPolicy: 'cache-and-network'
-	})
-	return { userData: data?.getProfile, errorProfile: error }
+	const { data, error, loading } = useQuery<{ getProfile: IUser }>(
+		GET_PROFILE,
+		{
+			fetchPolicy: 'cache-and-network'
+		}
+	)
+	return { userData: data?.getProfile, errorProfile: error, loading }
 }
 
 export const UPDATE_PROFILE = gql`

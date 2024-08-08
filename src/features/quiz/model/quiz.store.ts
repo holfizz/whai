@@ -8,6 +8,8 @@ interface QuizState {
 	selectedAnswers: { [key: string]: string[] }
 	matchingAnswers: { [key: string]: { left: string; right: string }[] }
 	userAnswerId: string | null
+	quizResultId: string | null
+	currentQuizId: string | null
 	setAnsweredQuestion: (questionId: string) => void
 	setCurrentQuestion: (questionId: string) => void
 	setCurrentQuestionIndex: (index: number) => void
@@ -17,6 +19,7 @@ interface QuizState {
 		answers: { left: string; right: string }[]
 	) => void
 	setQuizResultId: (id: string) => void
+	setCurrentQuizId: (id: string) => void
 	resetState: () => void
 }
 
@@ -26,9 +29,11 @@ export const useQuizStore = create<QuizState>()(
 			answeredQuestions: {},
 			currentQuestion: null,
 			currentQuestionIndex: 0,
+			quizResultId: '',
 			selectedAnswers: {},
 			matchingAnswers: {},
 			userAnswerId: null,
+			currentQuizId: null,
 			setAnsweredQuestion: (questionId: string) =>
 				set(state => ({
 					answeredQuestions: { ...state.answeredQuestions, [questionId]: true }
@@ -48,7 +53,8 @@ export const useQuizStore = create<QuizState>()(
 				set(state => ({
 					matchingAnswers: { ...state.matchingAnswers, [questionId]: answers }
 				})),
-			setQuizResultId: (id: string) => set({ userAnswerId: id }),
+			setQuizResultId: (id: string) => set({ quizResultId: id }),
+			setCurrentQuizId: (id: string) => set({ currentQuizId: id }),
 			resetState: () =>
 				set({
 					answeredQuestions: {},
@@ -56,11 +62,13 @@ export const useQuizStore = create<QuizState>()(
 					currentQuestionIndex: 0,
 					selectedAnswers: {},
 					matchingAnswers: {},
-					userAnswerId: null
+					userAnswerId: null,
+					currentQuizId: null
 				})
 		}),
 		{
-			name: 'quiz-storage'
+			name: 'quiz-storage',
+			getStorage: () => localStorage
 		}
 	)
 )

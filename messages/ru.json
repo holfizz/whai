@@ -178,7 +178,20 @@
 		"Try one more time": "Попробуйте еще раз",
 		"An error occurred while generating headers": "Произошла ошибка при создании заголовков",
 		"An error occurred while creating the test": "Произошла ошибка при создании теста",
-		"An error occurred while summing up your test results": "Произошла ошибка при подведении итогов вашего теста"
+		"An error occurred while summing up your test results": "Произошла ошибка при подведении итогов вашего теста",
+		"Summary of your knowledge": "Краткий обзор ваших знаний",
+		"Knowledge Summary": "Кратко",
+		"Strong Points": "Сильные стороны",
+		"Weak Points": "Слабые стороны",
+		"Recommendations": "Рекомендации",
+		"Try again": "Попробовать снова",
+		"Save": "Сохранить",
+		"Re-generate": "Пересоздать",
+		"Edit title and description": "Редактировать заголовок и описание",
+		"Enter the title": "Введите название",
+		"Enter the description": "Введите описание",
+		"Title": "Название",
+		"Description": "Описание"
 	},
 	"CreateTest": {
 		"What are we creating?": "Что мы создаем?",
@@ -207,7 +220,11 @@
 		"Please provide an answer before proceeding": "Пожалуйста, дайте ответ, прежде чем продолжить",
 		"Check": "Проверить",
 		"Answer": "Ответ",
-		"Please answer all questions before finishing the quiz": "Пожалуйста, ответьте на все вопросы, прежде чем закончить викторину"
+		"Please answer all questions before finishing the quiz": "Пожалуйста, ответьте на все вопросы, прежде чем закончить викторину",
+		"Choose 1 or more answer options": "Выберите 1 или несколько вариантов ответа",
+		"Quiz creation in progress": "Выполняется создание теста",
+		"To try one more time": "Чтобы попробовать еще раз",
+		"There was an error loading the quiz or creating it": "Произошла ошибка при загрузке или создании теста"
 	},
 	"CreateCoursePlanPage": {
 		"View topics": "Посмотреть темы",

@@ -1,4 +1,5 @@
 'use client'
+
 import { useGetCourse } from '@/entities/course'
 import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory'
 import { ILessonBlock, useGetLessonContent } from '@/entities/lesson'
@@ -6,8 +7,7 @@ import { CREATE_LESSON_WITH_AI } from '@/entities/lesson/model/lesson.queries'
 import { ChatWithAI } from '@/features/chatWithAI'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
-import { MDX } from '@/shared/ui/MDX/MDX'
-import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
+import MDX from '@/shared/ui/MDX/MDX'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useMutation } from '@apollo/client'
 import { BreadcrumbItem, Breadcrumbs, Skeleton } from '@nextui-org/react'
@@ -30,7 +30,9 @@ const LessonPageAsync = () => {
 		createLessonWithAI,
 		{ loading: creatingLesson, error: createLessonError }
 	] = useMutation(CREATE_LESSON_WITH_AI)
+
 	const [isLessonCreated, setIsLessonCreated] = useState(false)
+	const [lessonIdCreated, setLessonIdCreated] = useState<string | null>(null)
 
 	const renderBlock = useCallback((block: ILessonBlock) => {
 		switch (block.type) {
@@ -49,7 +51,7 @@ const LessonPageAsync = () => {
 			case 'TEXT':
 				return (
 					<div key={block.id} className={cls.blockImage}>
-						<MDX source={block.text}></MDX>
+						<MDX>{block.text}</MDX>
 					</div>
 				)
 			case 'VIDEO':
@@ -78,27 +80,27 @@ const LessonPageAsync = () => {
 	useEffect(() => {
 		if (lessonId) {
 			// Fetch lesson content when lessonId changes
-			if (
-				lessonContentData?.lessonBlocks.length === 0 &&
-				!isLessonCreated &&
-				false
-			) {
+			if (lessonContentData?.lessonBlocks.length === 0 && !isLessonCreated) {
 				createLessonWithAI({
 					variables: {
 						input: {
+							id: lessonId,
 							courseAIHistoryId: courseAIHistory?.id,
 							courseId: lessonContentData?.courseId,
 							name: lessonContentData?.name,
-							subtopicId: lessonContentData?.subtopicId,
-							isHasVideo: false,
-							isHasAISearchImage: false
+							subtopicId: lessonContentData?.subtopicId
 						}
 					}
-				}).then(({ data }) => {
-					if (data?.createLessonWithAI) {
-						setIsLessonCreated(true)
-					}
 				})
+					.then(({ data }) => {
+						if (data?.createLessonWithAI) {
+							setIsLessonCreated(true)
+							setLessonIdCreated(data.createLessonWithAI.id) // assuming createLessonWithAI returns created lesson
+						}
+					})
+					.catch(error => {
+						console.error(error)
+					})
 			}
 		}
 	}, [
@@ -114,44 +116,60 @@ const LessonPageAsync = () => {
 	if (loadingLessonContent || creatingLesson) {
 		content = (
 			<>
+				<div className='mt-10 flex items-center w-full justify-center'>
+					<h1>{t('Lesson creation in progress')}</h1>
+					<DotsLoader />
+				</div>
 				<Skeleton
-					className={cls.avatar}
-					style={{ width: '100%', height: 30 }}
-				/>
-				<Skeleton className={cls.title} style={{ width: '100%', height: 90 }} />
-				<Skeleton
-					className={cls.skeleton}
-					style={{ width: '100%', height: 270 }}
-				/>
-				<Skeleton
-					className={cls.skeleton}
-					style={{ width: '100%', height: 400 }}
+					className={'mt-10 rounded-xl'}
+					style={{ width: '80%', height: 30 }}
 				/>
 				<Skeleton
-					className={cls.skeleton}
-					style={{ width: '100%', height: 10 }}
+					className={'mt-5 rounded-xl'}
+					style={{ width: '100%', height: 90 }}
 				/>
-				<DotsLoader />
+				<Skeleton
+					className={'mt-5 rounded-xl'}
+					style={{ width: '90%', height: 270 }}
+				/>
+				<Skeleton
+					className={'mt-5 rounded-xl'}
+					style={{ width: '50%', height: 100 }}
+				/>
+				<Skeleton
+					className={'mt-5 rounded-xl'}
+					style={{ width: '70%', height: 120 }}
+				/>
+				<Skeleton
+					className={'mt-5 rounded-xl'}
+					style={{ width: '40%', height: 40 }}
+				/>
 			</>
 		)
 	} else if (errorLessonContent || createLessonError) {
 		content = (
-			<Text
-				theme={TextTheme.ERROR}
-				title={t('There was an error loading the lesson or creating it')}
-			/>
+			<h1>{t('There was an error loading the lesson or creating it')}</h1>
 		)
 	} else {
-		content = (
-			<>
-				<Text size={TextSize.XL} title={lessonContentData?.name} />
-				{lessonContentData.lessonBlocks.length > 0 ? (
-					lessonContentData.lessonBlocks.map(renderBlock)
-				) : (
-					<h1>{t('Lesson is empty')}</h1>
-				)}
-			</>
-		)
+		// At this point, the lesson should either contain content or have been created successfully
+		if (lessonContentData.lessonBlocks.length > 0) {
+			content = (
+				<>
+					<h1>{lessonContentData?.name}</h1>
+					{lessonContentData.lessonBlocks.map(renderBlock)}
+				</>
+			)
+		} else if (isLessonCreated) {
+			// Display a message if the lesson was created successfully but still doesn't contain any blocks
+			content = (
+				<>
+					<h1>{lessonContentData?.name} </h1>
+					<h1>{t('Lesson has been created, but is currently empty.')}</h1>
+				</>
+			)
+		} else {
+			content = <h1>{t('Lesson is empty')}</h1>
+		}
 	}
 
 	return (

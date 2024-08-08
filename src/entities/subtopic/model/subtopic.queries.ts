@@ -1,5 +1,5 @@
 'use client'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { ISubtopic } from '../model/subtopic.types'
 
 export const GET_SUBTOPIC = gql`
@@ -27,7 +27,7 @@ export const useGetSubtopic = (subtopicId: string) => {
 	}
 }
 
-export const GET_ALL_SUBTOPIC = gql`
+export const GET_ALL_SUBTOPICS = gql`
 	query ($topicId: ID!) {
 		getAllSubtopics(topicId: $topicId) {
 			id
@@ -40,7 +40,7 @@ export const GET_ALL_SUBTOPIC = gql`
 `
 export const useGetAllSubtopics = (topicId: string) => {
 	const { data, error, loading } = useQuery<{ getAllSubtopics: ISubtopic[] }>(
-		GET_ALL_SUBTOPIC,
+		GET_ALL_SUBTOPICS,
 		{
 			variables: { topicId },
 			fetchPolicy: 'cache-and-network'
@@ -50,5 +50,29 @@ export const useGetAllSubtopics = (topicId: string) => {
 		subtopicsAllData: data?.getAllSubtopics,
 		errorSubtopicAll: error,
 		loadingSubtopicAll: loading
+	}
+}
+
+export const UPDATE_SUBTOPIC = gql`
+	mutation updateSubtopic($updateSubtopicInput: UpdateSubtopicInput!) {
+		updateSubtopic(updateSubtopicInput: $updateSubtopicInput) {
+			id
+			name
+			description
+			progressPercents
+			completionTime
+		}
+	}
+`
+
+export const useUpdateSubtopic = () => {
+	const [updateSubtopic, { data, error, loading }] = useMutation<{
+		updateSubtopic: ISubtopic
+	}>(UPDATE_SUBTOPIC)
+	return {
+		updateSubtopic,
+		dataSubtopicUpdate: data?.updateSubtopic,
+		errorSubtopicUpdate: error,
+		loadingSubtopicUpdate: loading
 	}
 }
