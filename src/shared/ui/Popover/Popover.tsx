@@ -17,6 +17,10 @@ export const Popover = extendVariants(UiPopover, {
 				base: 'bg-transparent',
 				content: 'bg-success-1 text-success-text'
 			},
+			'success-4': {
+				base: 'bg-transparent',
+				content: 'bg-success-4 text-success-text'
+			},
 			error: {
 				base: 'bg-transparent',
 				content: 'bg-error-1 text-error-text'

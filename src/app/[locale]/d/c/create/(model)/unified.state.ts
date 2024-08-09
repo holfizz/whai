@@ -34,7 +34,6 @@ interface UnifiedState {
 	prevStep: () => void
 	resetState: () => void
 }
-
 const useUnifiedStore = create<UnifiedState>()(
 	persist(
 		set => ({
@@ -64,14 +63,8 @@ const useUnifiedStore = create<UnifiedState>()(
 			setNeedHomework: value => set({ needHomework: value }),
 			setQuizId: quizId => set({ quizId }),
 			setSummaryData: summaryData => set({ summaryData }),
-			setCoursePlanStateData: coursePlanStateData => {
-				if (!coursePlanStateData) return
-
-				set({
-					coursePlanStateData,
-					isCoursePlanGenerated: true
-				})
-			},
+			setCoursePlanStateData: coursePlanStateData =>
+				set({ coursePlanStateData }),
 			setIsCoursePlanGenerated: status =>
 				set({ isCoursePlanGenerated: status }),
 			nextStep: () => set(state => ({ step: state.step + 1 })),

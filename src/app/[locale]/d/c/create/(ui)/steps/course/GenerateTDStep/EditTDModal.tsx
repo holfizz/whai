@@ -56,7 +56,7 @@ const EditTDModal = ({ isOpen, onClose, initialData, onSave, t }) => {
 						<ModalBody>
 							<div className='flex justify-between items-start mb-4'>
 								<div className='flex justify-end items-start w-[80%]'>
-									<h1 className='text-medium font-medium text-gray-lg  mr-3 w-[25%] text-end'>
+									<h1 className='text-medium font-medium text-gray-3  mr-3 w-[25%] text-end'>
 										{t('Title')}
 									</h1>
 									<Textarea
@@ -92,7 +92,7 @@ const EditTDModal = ({ isOpen, onClose, initialData, onSave, t }) => {
 							</div>
 							<div className='flex justify-between items-start'>
 								<div className='flex justify-end items-start w-[80%]'>
-									<h1 className='text-medium font-medium text-gray-lg  mr-3 w-[25%]'>
+									<h1 className='text-medium font-medium text-gray-3  mr-3 w-[25%]'>
 										{t('Description')}
 									</h1>
 									<Textarea

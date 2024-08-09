@@ -19,6 +19,7 @@ export const getCreatePageRoute = () => `/d/c/create`
 
 //lessons - l
 export const getLessonRoute = (lessonId: string) => `/d/c/l/${lessonId}`
+export const getLessonTaskRoute = (lessonId: string) => `/d/c/l/t/${lessonId}`
 
 //quizzes - q
 export const getQuizRoute = (quizId: string) => `/d/c/q/${quizId}`

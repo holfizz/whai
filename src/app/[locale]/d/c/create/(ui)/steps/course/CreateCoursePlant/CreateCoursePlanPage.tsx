@@ -8,9 +8,7 @@ import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import useUnifiedStore from '../../../../(model)/unified.state'
-import LessonPlan from './LessonPlan'
-import SubtopicPlan from './SubtopicPlan'
-import TopicPlan from './TopicPlan'
+import TopicPlanAccordion from './TopicPlanAccordion'
 
 const CreateCoursePlanPage = () => {
 	const [view, setView] = useState('topics')
@@ -146,34 +144,17 @@ const CreateCoursePlanPage = () => {
 				{createPlanError && (
 					<div>Ошибка загрузки плана курса: {createPlanError.message}</div>
 				)}
-				{coursePlanStateData && coursePlanStateData.topics.length > 0 && (
+				{coursePlanStateData && coursePlanStateData.topics?.length > 0 && (
 					<>
-						<div className='flex flex-col items-center'>
+						<div className='flex flex-col items-center w-[80%]'>
 							<Text size={TextSize.XL} title={currentStageTitle[view]} />
 							<Breadcrumbs className='mt-8'>{breadcrumbs}</Breadcrumbs>
-							{view === 'topics' && (
-								<div className='grid grid-cols-1 gap-6 mt-10 sm:grid-cols-2 md:grid-cols-3'>
-									<TopicPlan
-										topicsAllData={coursePlanStateData.topics}
-										handleTopicClick={handleTopicClick}
-										t={t}
-									/>
-								</div>
-							)}
-							{view === 'subtopics' && selectedTopic && (
-								<div className='grid grid-cols-1 gap-6 mt-10 sm:grid-cols-2 md:grid-cols-3'>
-									<SubtopicPlan
-										subtopicsAllData={selectedTopic.subtopics}
-										handleSubtopicClick={handleSubtopicClick}
-										t={t}
-									/>
-								</div>
-							)}
-							{view === 'lessons' && selectedSubtopic && (
-								<div className='grid grid-cols-1 gap-6 mt-10 sm:grid-cols-2 md:grid-cols-3'>
-									<LessonPlan lessonsAllData={selectedSubtopic.lessons} t={t} />
-								</div>
-							)}
+							<div className='flex flex-col justify-center gap-6 mt-10 w-full'>
+								<TopicPlanAccordion
+									topicsAllData={coursePlanStateData.topics}
+									t={t}
+								/>
+							</div>
 						</div>
 					</>
 				)}

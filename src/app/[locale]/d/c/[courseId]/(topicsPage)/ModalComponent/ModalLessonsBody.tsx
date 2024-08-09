@@ -3,7 +3,11 @@ import { useGetAllQuizzes } from '@/entities/quiz'
 import { useGetSubtopic } from '@/entities/subtopic'
 import { Link } from '@/navigation'
 import ArrowUpRight from '@/shared/assets/icons/Arrows/Outline/ArrowUpRight'
-import { getLessonRoute, getQuizRoute } from '@/shared/const/router'
+import {
+	getLessonRoute,
+	getLessonTaskRoute,
+	getQuizRoute
+} from '@/shared/const/router'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ModalBody } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
@@ -54,7 +58,8 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 									</Link>
 								</div>
 								{lesson.isHasLessonTask && (
-									<div
+									<Link
+										href={getLessonTaskRoute(lesson.id)}
 										className={cls.task}
 										style={{
 											background: lesson.lessonTasks.some(
@@ -65,7 +70,7 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 										}}
 									>
 										{t('Task')}
-									</div>
+									</Link>
 								)}
 							</div>
 						))}

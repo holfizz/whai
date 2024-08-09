@@ -59,8 +59,6 @@ export const UPDATE_SUBTOPIC = gql`
 			id
 			name
 			description
-			progressPercents
-			completionTime
 		}
 	}
 `

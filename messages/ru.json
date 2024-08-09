@@ -227,8 +227,6 @@
 		"There was an error loading the quiz or creating it": "Произошла ошибка при загрузке или создании теста"
 	},
 	"CreateCoursePlanPage": {
-		"View topics": "Посмотреть темы",
-		"View lessons": "Посмотреть уроки",
 		"Generate lesson": "Сгенерировать урок",
 		"Create Course Plan": "Создать план курса",
 		"Editing stage of the training module": "Этап редактирования учебного модуля",

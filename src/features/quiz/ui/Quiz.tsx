@@ -1,4 +1,5 @@
 'use client'
+import useUnifiedStore from '@/app/[locale]/d/c/create/(model)/unified.state'
 import { useGetLastQuizResult, useGetQuizData } from '@/entities/quiz'
 import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
@@ -17,12 +18,12 @@ const Quiz = ({
 }) => {
 	const t = useTranslations('Quiz')
 	const { quizId } = useParams<{ quizId: string }>()
-	const { setQuizResultId, setCurrentQuizId, resetState, currentQuizId } =
-		useQuizStore()
+	const { setCurrentQuizId, resetState, currentQuizId } = useQuizStore()
 	const { quizData, loadingQuiz } = useGetQuizData(quizIdProp || quizId)
 	const { lastQuizResult, loadingLastQuizResult } = useGetLastQuizResult(
 		quizIdProp || quizId
 	)
+	const { setQuizResultId } = useUnifiedStore()
 
 	useEffect(() => {
 		if (quizIdProp || quizId) {

@@ -1,0 +1,19 @@
+.AccordionItemWrapper {
+	@apply w-full flex items-start mt-4 gap-4;
+}
+
+.Accordion {
+	@apply w-full;
+}
+
+.AccordionTopic {
+	@apply bg-transparent;
+}
+
+.AccordionTopic > h2 {
+	@apply w-full bg-decor-3 rounded-3xl px-4 flex items-center justify-end;
+}
+
+.EditIcon {
+	@apply text-gray-600; /* Настройте стиль и цвет иконки */
+}

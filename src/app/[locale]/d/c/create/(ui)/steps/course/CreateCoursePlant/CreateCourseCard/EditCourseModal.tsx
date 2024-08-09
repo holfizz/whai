@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from 'react'
 
 const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
-	const [originalData, setOriginalData] = useState(data) // Стили для хранения оригинальных данных
+	const [originalData, setOriginalData] = useState(data)
 	const [name, setName] = useState(data.name)
 	const [description, setDescription] = useState(data.description)
 
@@ -23,7 +23,7 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 	}, [isOpen, data])
 
 	const handleSave = () => {
-		onSave({ id: data.id, name, description }) // Ensure the id is retained
+		onSave({ id: data.id, name, description, courseId: data?.courseId })
 		onClose()
 	}
 
@@ -59,7 +59,7 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 						<ModalBody>
 							<div className='flex justify-between items-start'>
 								<div className='flex justify-end items-center w-[80%]'>
-									<h1 className='text-medium font-medium text-gray-lg  mr-3 w-[25%] text-end'>
+									<h1 className='text-medium font-medium text-gray-3  mr-3 w-[25%] text-end'>
 										{promptText}
 									</h1>
 									<Textarea
@@ -104,7 +104,7 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 							</div>
 							<div className='flex justify-between items-start'>
 								<div className='flex justify-end items-start w-[80%]'>
-									<h1 className='text-medium font-medium text-gray-lg  mr-3 w-[25%]'>
+									<h1 className='text-medium font-medium text-gray-3  mr-3 w-[25%]'>
 										{t('description')}
 									</h1>
 									<Textarea

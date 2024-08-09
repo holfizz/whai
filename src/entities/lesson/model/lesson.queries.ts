@@ -44,6 +44,7 @@ export const GET_ALL_LESSONS = gql`
 	query ($subtopicId: ID!) {
 		getAllLessons(subtopicId: $subtopicId) {
 			id
+			isHasLessonTask
 			name
 			subtopicId
 			isCompleted
@@ -141,7 +142,7 @@ export const UPDATE_LESSON = gql`
 export const useUpdateLesson = () => {
 	const [updateLesson, { data, error, loading }] = useMutation<{
 		updateLesson: Pick<ILesson, 'name' | 'description' | 'id'>
-	}>(GET_LESSON_CONTENT, {})
+	}>(UPDATE_LESSON, {})
 	return {
 		updateLesson,
 		dataLessonUpdate: data?.updateLesson,
