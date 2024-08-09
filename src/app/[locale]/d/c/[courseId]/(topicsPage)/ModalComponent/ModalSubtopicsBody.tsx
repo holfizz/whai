@@ -1,6 +1,6 @@
 import { useGetAllSubtopics } from '@/entities/subtopic'
 import { useGetTopic } from '@/entities/topic'
-import ArrowUpRight from '@/shared/assets/icons/Arrows/Outline/ArrowUpRight'
+import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
 import { ModalBody } from '@nextui-org/react'
 import { FiCheck } from 'react-icons/fi'
 import cls from './ModalComponent.module.scss'

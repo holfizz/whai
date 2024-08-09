@@ -151,7 +151,10 @@
 		"Your question": "Your question",
 		"Lesson": "Lesson",
 		"Course": "Course",
-		"Create a new chat": "Create a new chat"
+		"Create a new chat": "Create a new chat",
+		"Lesson creation in progress": "Lesson creation in progress",
+		"There was an error loading the lesson or creating it": "There was an error loading the lesson or creating it",
+		"Lesson is empty": "Lesson is empty"
 	},
 	"CreateCourse": {
 		"What are we creating?": "What are we creating?",
@@ -202,7 +205,8 @@
 		"Try one more time": "Try one more time",
 		"Which test description fits best?": "Which test description fits best?",
 		"Here is the title and description you chose": "Here is the title and description you chose",
-		"Generating, wait a couple of seconds": "Generating, wait a couple of seconds"
+		"Generating, wait a couple of seconds": "Generating, wait a couple of seconds",
+		"An error occurred while creating the test": "An error occurred while creating the test"
 	},
 	"Quiz": {
 		"Your answer": "Your answer",
@@ -225,7 +229,8 @@
 		"Choose 1 or more answer options": "Choose 1 or more answer options",
 		"Quiz creation in progress": "Quiz creation in progress",
 		"To try one more time": "To try one more time",
-		"There was an error loading the quiz or creating it": "There was an error loading the quiz or creating it"
+		"There was an error loading the quiz or creating it": "There was an error loading the quiz or creating it",
+		"Please check your answer before proceeding": "Please check your answer before proceeding"
 	},
 	"CreateCoursePlanPage": {
 		"View topics": "View topic",

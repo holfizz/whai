@@ -1,10 +1,8 @@
-import Icon from '@/shared/ui/Icon/Icon'
-import { BsPerson } from 'react-icons/bs'
-import Text, { TextSize } from '@/shared/ui/Text/Text'
-import { Clock4 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import { ICourse } from '@/entities/course'
-
+import Icon from '@/shared/ui/Icon/Icon'
+import { useTranslations } from 'next-intl'
+import { FaClock } from 'react-icons/fa'
+import { LuListOrdered } from 'react-icons/lu'
 const CourseStat = ({
 	data,
 	className
@@ -15,13 +13,17 @@ const CourseStat = ({
 	const t = useTranslations('Dashboard')
 	return (
 		<div className={`flex w-[300px] justify-between mt-4 ${className}`}>
-			<div className={'flex text-2xl items-center'}>
-				<Icon color={'var(--color-accent)'} SVG={BsPerson} />
-				<Text size={TextSize.L} text={`${data?.totalTopics} ${t('topics')}`} />
-			</div>
 			<div className={'flex items-center'}>
-				<Icon className={'stroke-[var(--color-accent)]'} SVG={Clock4} />
-				<Text text={`${data?.completionTime} ${t('hours')}`} />
+				<Icon className={'fill-gray-2 mr-2'} SVG={FaClock} />
+				<h2 className='text-sm text-gray-2'>
+					{data?.completionTime} {t('hours')}
+				</h2>
+			</div>
+			<div className={'flex text-2xl items-center'}>
+				<Icon className={'stroke-gray-2 mr-2'} SVG={LuListOrdered} />
+				<h2 className='text-sm text-gray-2'>
+					{data?.totalTopics} {t('topics')}
+				</h2>
 			</div>
 		</div>
 	)

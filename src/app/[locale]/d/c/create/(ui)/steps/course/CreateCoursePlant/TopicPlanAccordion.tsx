@@ -14,7 +14,7 @@ const TopicPlanAccordion = ({ topicsAllData, t }) => {
 	const [topics, setTopics] = useState(topicsAllData)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedTopic, setSelectedTopic] = useState(null)
-	const [selectedKeys, setSelectedKeys] = useState(new Set()) // Track selected keys
+	const [selectedKeys, setSelectedKeys] = useState<any>(new Set())
 	const { updateTopic } = useUpdateTopic()
 	const { setCoursePlanStateData, coursePlanStateData } = useUnifiedStore()
 

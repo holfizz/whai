@@ -20,7 +20,6 @@ const getChipText = (type: string): 'Strong' | 'Weak' | 'Recommendation' => {
 	if (type === 'strong') return 'Strong'
 	if (type === 'weak') return 'Weak'
 	if (type === 'recommendation') return 'Recommendation'
-	return 'Other'
 }
 
 const AIKnowledgeSummary = () => {

@@ -2,7 +2,7 @@ import { useGetAllLessons } from '@/entities/lesson'
 import { useGetAllQuizzes } from '@/entities/quiz'
 import { useGetSubtopic } from '@/entities/subtopic'
 import { Link } from '@/navigation'
-import ArrowUpRight from '@/shared/assets/icons/Arrows/Outline/ArrowUpRight'
+import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
 import {
 	getLessonRoute,
 	getLessonTaskRoute,

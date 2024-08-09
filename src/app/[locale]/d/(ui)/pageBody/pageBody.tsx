@@ -1,14 +1,13 @@
 'use client'
 
+import BodyCards from '@/app/[locale]/d/(ui)/pageBody/bodyCard/bodyCards'
+import { useGetAllCourses } from '@/entities/course/'
+import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
+import { getCoursesRoute } from '@/shared/const/router'
+import Button from '@/shared/ui/Button/Button'
 import Text from '@/shared/ui/Text/Text'
 import { useTranslations } from 'next-intl'
-import Button from '@/shared/ui/Button/Button'
-import Icon from '@/shared/ui/Icon/Icon'
-import { ArrowUpRight } from 'lucide-react'
-import { useGetAllCourses } from '@/entities/course/'
-import BodyCards from '@/app/[locale]/d/(ui)/pageBody/bodyCard/bodyCards'
 import Link from 'next/link'
-import { getCoursesRoute } from '@/shared/const/router'
 
 export default function PageBody() {
 	const t = useTranslations('Dashboard')
@@ -20,7 +19,7 @@ export default function PageBody() {
 				<Button
 					color={'clear'}
 					className={'text-[var(--secondary-color)]'}
-					endContent={<Icon SVG={ArrowUpRight} />}
+					endContent={<ArrowUpRight fill='#fff' />}
 					as={Link}
 					href={getCoursesRoute()}
 				>

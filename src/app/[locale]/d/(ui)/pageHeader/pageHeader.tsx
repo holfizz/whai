@@ -3,7 +3,7 @@
 import { IUser } from '@/entities/Auth'
 import { ICourse, useGetLastCourse } from '@/entities/course'
 import { Link } from '@/navigation'
-import ArrowUpRight from '@/shared/assets/icons/Arrows/Outline/ArrowUpRight'
+import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import CourseStat from '@/shared/ui/CourseCard/CourseStat/CourseStat'

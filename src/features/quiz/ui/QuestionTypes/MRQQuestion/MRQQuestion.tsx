@@ -123,7 +123,7 @@ const MRQQuestion = ({
 						<Popover
 							key={index}
 							size='1/2'
-							color={getChoiceColor(choice)}
+							color={getChoiceColor(choice) as any}
 							placement='top'
 							shouldCloseOnBlur
 							shouldCloseOnInteractOutside={() => true}
@@ -144,7 +144,7 @@ const MRQQuestion = ({
 											/>
 										)
 									}
-									color={getChoiceColor(choice)}
+									color={getChoiceColor(choice) as any}
 									onClick={() => handleChoiceClick(choice.content, index)}
 								>
 									<div className='flex flex-col justify-center items-center'>

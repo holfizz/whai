@@ -8,7 +8,7 @@ import { ApolloProviders } from '../(providers)/ApolloProvider'
 
 export function AppProvider({ children }: { children: ReactNode }) {
 	return (
-		<ErrorBoundary FallbackComponent={ErrorFallback}>
+		<ErrorBoundary FallbackComponent={ErrorFallback as any}>
 			<ApolloProviders>
 				<NextUIProvider>
 					<AuthProvider>{children}</AuthProvider>

@@ -1,6 +1,6 @@
 import { ICourse } from '@/entities/course'
 import { Link } from '@/navigation'
-import ArrowUpRight from '@/shared/assets/icons/Arrows/Outline/ArrowUpRight'
+import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import Image from 'next/image'
@@ -20,7 +20,7 @@ const CourseCard = ({
 		: 'w-[390px] h-min-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2'
 	return (
 		<div
-			className={`${styles} border-decor-1 border-1 rounded-[40px] p-4 ${className}`}
+			className={`${styles} shadow-sm rounded-[40px] py-4 px-5 ${className}`}
 		>
 			<div className={'w-full flex justify-between'}>
 				{course.imgUrl ? (
@@ -38,10 +38,10 @@ const CourseCard = ({
 					size={'sRound'}
 					href={getCourseByIdRoute(course?.id)}
 					isIconOnly
-					startContent={<ArrowUpRight color={'#fff'} />}
+					startContent={<ArrowUpRight fill={'var(--color-accents)'} />}
 					variant={'circle'}
 					as={Link}
-					color={'accent'}
+					color={'main'}
 				></Button>
 			</div>
 			<Link className={cls.link} href={getCourseByIdRoute(course?.id)}>

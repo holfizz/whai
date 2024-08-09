@@ -7,7 +7,7 @@ const twColors = {
 	'background-3': '#fdfdfd',
 	accent: '#272727',
 	secondary: '#bbb9b7',
-	'gray-md': '#BDBDBD',
+	'gray-2': '#BDBDBD',
 	'gray-3': '#828282',
 	'yellow-5': '#97917D',
 	'decor-1': '#FFF7DC',
@@ -39,6 +39,9 @@ module.exports = {
 				2: '2',
 				3: '3'
 			}
+		},
+		boxShadow: {
+			sm: '0 0 20px 2px rgba(73, 73, 73, 0.05)'
 		},
 		screens: {
 			sm: '393px',

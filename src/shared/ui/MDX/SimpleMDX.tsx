@@ -36,12 +36,13 @@ const components = {
 	li: ({ node, ...props }) => <li className='ml-4 font-medium' {...props} />,
 	strong: ({ node, ...props }) => <strong className='font-bold' {...props} />,
 	em: ({ node, ...props }) => <em className='italic' {...props} />,
-	ul: ({ node, ...props }) => <ListWrapperUl {...props} />,
+	ul: ({ node, ...props }: any) => <ListWrapperUl {...props} />,
 	ol: ({ node, ...props }) => <ol className='*:list-decimal' {...props} />
 }
-const SimpleMDX = ({ children }: { children: any }) => {
+const SimpleMDX = ({ children }: any) => {
 	return (
 		<ReactMarkdown
+			// eslint-disable-next-line react/no-children-prop
 			children={children}
 			remarkPlugins={[remarkMath, remarkGfm, remarkFrontmatter, remarkParse]}
 			rehypePlugins={[rehypeKatex, rehypeHighlight]}

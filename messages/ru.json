@@ -151,7 +151,10 @@
 		"Your question": "Ваш вопрос",
 		"Lesson": "Урок",
 		"Course": "Курс",
-		"Create a new chat": "Создать новый чат"
+		"Create a new chat": "Создать новый чат",
+		"Lesson creation in progress": "Выполняется создание урока",
+		"There was an error loading the lesson or creating it": "Произошла ошибка при загрузке или создании урока",
+		"Lesson is empty": "Урок пустой"
 	},
 	"CreateCourse": {
 		"What are we creating?": "Что мы создаем?",
@@ -202,7 +205,8 @@
 		"Try one more time": "Попробуйте еще раз",
 		"Which test description fits best?": "Какая тестовая запись подходит лучше всего?",
 		"Here is the title and description you chose": "Вот заголовок и описание, которые вы выбрали",
-		"Generating, wait a couple of seconds": "Генерация, подождите несколько секунд"
+		"Generating, wait a couple of seconds": "Генерация, подождите несколько секунд",
+		"An error occurred while creating the test": "Произошла ошибка при создании теста"
 	},
 	"Quiz": {
 		"Your answer": "Ваш ответ",
@@ -224,7 +228,8 @@
 		"Choose 1 or more answer options": "Выберите 1 или несколько вариантов ответа",
 		"Quiz creation in progress": "Выполняется создание теста",
 		"To try one more time": "Чтобы попробовать еще раз",
-		"There was an error loading the quiz or creating it": "Произошла ошибка при загрузке или создании теста"
+		"There was an error loading the quiz or creating it": "Произошла ошибка при загрузке или создании теста",
+		"Please check your answer before proceeding": "Пожалуйста, проверьте свой ответ, прежде чем продолжить"
 	},
 	"CreateCoursePlanPage": {
 		"Generate lesson": "Сгенерировать урок",

@@ -32,6 +32,7 @@ export const GET_ALL_COURSES = gql`
 		getAllCourses {
 			id
 			name
+			description
 			imgUrl
 			totalTopics
 			completionTime

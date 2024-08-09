@@ -9,12 +9,11 @@ import useUnifiedStore from '../../../../(model)/unified.state'
 import cls from './Accordion.module.scss'
 import EditCourseModal from './CreateCourseCard/EditCourseModal'
 import LessonPlanAccordion from './LessonPlanAccordion'
-
 const SubtopicPlanAccordion = ({ subtopicsAllData, t, parentPrefix = '' }) => {
 	const [subtopics, setSubtopics] = useState(subtopicsAllData)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedSubtopic, setSelectedSubtopic] = useState(null)
-	const [selectedKeys, setSelectedKeys] = useState(new Set()) // Track selected keys
+	const [selectedKeys, setSelectedKeys] = useState<any>(new Set())
 	const { updateSubtopic } = useUpdateSubtopic()
 	const { setCoursePlanStateData, coursePlanStateData } = useUnifiedStore()
 

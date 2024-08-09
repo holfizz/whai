@@ -5,7 +5,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import NavigationButtons from '../NavigationButton'
 import ClozeLine from './ClozeLine'
 
-const ClozeQuestion: React.FC<ClozeQuestionProps> = ({
+const ClozeQuestion = ({
 	question,
 	onPrev,
 	onNext,
@@ -52,9 +52,9 @@ const ClozeQuestion: React.FC<ClozeQuestionProps> = ({
 		setAnsweredQuestion(question.id)
 
 		if (answerIsCorrect) {
-			toast.success(t('Correct answer!'))
+			toast.success(t('Correct'))
 		} else {
-			toast.error(t('Incorrect answer!'))
+			toast.error(t('Incorrect'))
 		}
 	}
 

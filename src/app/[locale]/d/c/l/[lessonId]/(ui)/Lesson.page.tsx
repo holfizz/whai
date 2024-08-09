@@ -159,14 +159,6 @@ const LessonPageAsync = () => {
 					{lessonContentData.lessonBlocks.map(renderBlock)}
 				</>
 			)
-		} else if (isLessonCreated) {
-			// Display a message if the lesson was created successfully but still doesn't contain any blocks
-			content = (
-				<>
-					<h1>{lessonContentData?.name} </h1>
-					<h1>{t('Lesson has been created, but is currently empty.')}</h1>
-				</>
-			)
 		} else {
 			content = <h1>{t('Lesson is empty')}</h1>
 		}

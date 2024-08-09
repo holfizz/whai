@@ -29,7 +29,7 @@ const components = {
 	h6: ({ node, ...props }) => (
 		<h6 className='text-xs font-light pb-2 my-2' {...props} />
 	),
-	p: ({ node, ...props }) => (
+	p: ({ node, ...props }: any) => (
 		<p className='text-medium pb-2 my-2'>
 			<QuoteWrapper>
 				<ParenthesesWrapper {...props} />
@@ -39,7 +39,7 @@ const components = {
 	pre: ({ node, ...props }) => (
 		<pre className='border-2 border-decor-4 rounded-2xl p-5' {...props}></pre>
 	),
-	li: ({ node, ...props }) => (
+	li: ({ node, ...props }: any) => (
 		<li>
 			<QuoteWrapper>
 				<ParenthesesWrapper {...props} />
@@ -48,13 +48,14 @@ const components = {
 	),
 	strong: ({ node, ...props }) => <strong className='font-bold' {...props} />,
 	em: ({ node, ...props }) => <em className='italic' {...props} />,
-	ul: ({ node, ...props }) => <ListWrapperUl {...props} />,
-	ol: ({ node, ...props }) => <ListWrapperOl {...props} />
+	ul: ({ node, ...props }: any) => <ListWrapperUl {...props} />,
+	ol: ({ node, ...props }: any) => <ListWrapperOl {...props} />
 }
 
 const MDX = ({ children }: { children?: string }) => {
 	return (
 		<ReactMarkdown
+			// eslint-disable-next-line react/no-children-prop
 			children={children}
 			remarkPlugins={[remarkMath, remarkGfm, remarkFrontmatter, remarkParse]}
 			rehypePlugins={[rehypeKatex, rehypeHighlight]}
