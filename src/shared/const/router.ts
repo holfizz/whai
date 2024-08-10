@@ -5,6 +5,7 @@ export const getRouteLogin = () => `/auth/login`
 export const getRouteSignUp = () => `/auth/sign-up`
 export const getRouteForgotPassword = () => `/auth/forgot-password`
 export const getSupportRoute = () => `/support`
+export const getSubscriptionsRoute = () => `/subscriptions`
 
 //dashboard - d
 export const getDashboardRoute = () => `/d`

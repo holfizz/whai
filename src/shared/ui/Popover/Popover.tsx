@@ -8,7 +8,7 @@ import {
 export const Popover = extendVariants(UiPopover, {
 	variants: {
 		color: {
-			peach: {
+			white: {
 				base: `bg-[var(--color-white)] text-[var(--color-accent)] rounded-xl border-none`,
 				selected: 'bg-[var(--color-white)] text-[var(--color-accent)]',
 				arrow: 'bg-[var(--color-white)] text-red'
@@ -42,7 +42,8 @@ export const Popover = extendVariants(UiPopover, {
 export const PopoverContent = extendVariants(UiPopoverContent, {
 	variants: {
 		color: {
-			peach: 'text-[var(--color-accent)]'
+			white: 'text-[var(--color-accent)]',
+			secondary: 'bg-secondary text-[var(--color-secondary)]'
 		}
 	}
 })

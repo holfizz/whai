@@ -48,12 +48,14 @@
 }
 
 .popoverContent {
+	background: var(--color-secondary);
 	padding: 10px;
-	min-width: 200px;
-	min-height: 300px;
+	width: 335px;
+	min-height: 100px;
+	height: auto;
 	display: flex;
 	align-items: flex-start;
-	justify-content: flex-end;
+	justify-content: flex-start;
 }
 
 .popoverButton {

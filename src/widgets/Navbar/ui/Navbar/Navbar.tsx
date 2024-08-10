@@ -19,14 +19,14 @@ import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
 import {
 	Avatar,
 	DropdownTrigger,
-	Link as UILink,
-	Navbar as UINavbar,
 	NavbarBrand,
 	NavbarContent,
 	NavbarItem,
 	NavbarMenu,
 	NavbarMenuItem,
-	NavbarMenuToggle
+	NavbarMenuToggle,
+	Link as UILink,
+	Navbar as UINavbar
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
@@ -141,8 +141,11 @@ export function Navbar() {
 							<DropdownTrigger>
 								<Avatar
 									className={cls.avatar}
-									isBordered
 									as='button'
+									classNames={{
+										icon: 'text-decor-2',
+										base: 'border-decor-2 border-2 border-solid'
+									}}
 									src={userData.avatarPath}
 								/>
 							</DropdownTrigger>

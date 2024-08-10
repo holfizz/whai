@@ -2,9 +2,11 @@
 import { useGetProfile } from '@/entities/Auth/model/auth.queries'
 import { logout } from '@/features/auth/model/auth.model'
 import { Link } from '@/navigation'
+import BellIcon from '@/shared/assets/icons/Bell'
 import {
 	getDashboardRoute,
 	getSettingsRoute,
+	getSubscriptionsRoute,
 	getSupportRoute
 } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
@@ -26,10 +28,8 @@ import {
 	NavbarMenuToggle,
 	PopoverTrigger
 } from '@nextui-org/react'
-import { X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { FaRegBell } from 'react-icons/fa'
 import { sidebarItems } from '../../../Sidebar/module/sidebar-items.data'
 import SidebarItem from '../../../Sidebar/ui/SidebarItem/SidebarItem'
 import cls from './DashboardNavbar.module.scss'
@@ -59,42 +59,29 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 				</div>
 			</NavbarContent>
 			<NavbarContent justify='end'>
-				<Button className={cls.subscriptionButton} color='accent'>
+				<Button
+					size='md'
+					color='accent'
+					as={Link}
+					href={getSubscriptionsRoute()}
+				>
 					{t('Subscription')}
 				</Button>
-				<Popover color={'peach'} placement='bottom-end'>
+				<Popover color={'gray-text'} placement='bottom-end'>
 					<PopoverTrigger>
 						<Button
-							color={'secondary'}
+							color={'clear'}
 							isIconOnly={true}
-							startContent={<FaRegBell />}
+							startContent={<BellIcon />}
 						/>
 					</PopoverTrigger>
-					<PopoverContent className={cls.popoverContent} color={'peach'}>
-						<Button
-							className={cls.popoverButton}
-							fullWidth
-							color={'white'}
-							endContent={<X />}
-						>
-							adasdas
-						</Button>
-						<Button
-							className={cls.popoverButton}
-							fullWidth
-							color={'white'}
-							endContent={<X />}
-						>
-							adasdas
-						</Button>
-						<Button
-							className={cls.popoverButton}
-							fullWidth
-							color={'white'}
-							endContent={<X />}
-						>
-							adasdas
-						</Button>
+					<PopoverContent className={cls.popoverContent} color={'secondary'}>
+						<div className='mx-2 flex justify-center items-center w-fill'>
+							<h1 className='text-lg'>{t('Notice')}</h1>
+							<div className='ml-3 w-6 h-6 rounded-full bg-error-10 text-white text-sm flex justify-center items-center'>
+								0
+							</div>
+						</div>
 					</PopoverContent>
 				</Popover>
 				{userData?.email && (
@@ -102,8 +89,12 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 						<DropdownTrigger>
 							<Avatar
 								className={cls.avatar}
-								isBordered
-								// src={user.avatarPath}
+								as='button'
+								classNames={{
+									icon: 'text-decor-2',
+									base: 'bg-decor-1'
+								}}
+								src={userData.avatarPath}
 							/>
 						</DropdownTrigger>
 						<DropdownMenu
@@ -167,7 +158,12 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 							></SidebarItem>
 						</NavbarMenuItem>
 					))}
-					<Button size='lg' color='accent'>
+					<Button
+						size='lg'
+						color='accent'
+						as={Link}
+						href={getSubscriptionsRoute()}
+					>
 						{t('Subscription')}
 					</Button>
 				</div>

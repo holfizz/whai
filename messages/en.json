@@ -57,7 +57,8 @@
 		"Log Out": "Log Out",
 		"Log in": "Log in",
 		"Sign up": "Sign up",
-		"Subscription": "Subscription"
+		"Subscription": "Subscription",
+		"Notice": "Notice"
 	},
 	"SidebarSetting": {
 		"User settings": "User settings",
@@ -252,6 +253,28 @@
 		"module": "Module",
 		"lesson": "Lesson",
 		"description": "Description"
+	},
+	"Subscription": {
+		"Subscription price": "Subscription price",
+		"Annual": "Annual",
+		"Monthly": "Monthly",
+		"Base subscription": "Base subscription",
+		"Standard subscription": "Standard subscription",
+		"Premium subscription": "Premium subscription",
+		"Subscribe": "Subscribe",
+		"Base description": "The base subscription is ideal for beginners, offering essential tools for creating and managing courses, as well as basic analytics for tracking progress.",
+		"Standard description": "The standard subscription offers more content creation capabilities and includes AI-powered homework checks to enhance the learning experience.",
+		"Premium description": "The premium subscription provides maximum features for content creation and management, including advanced homework checking, document uploads, and image generation.",
+		"Courses per month": "Up to {count} courses per month",
+		"Course titles": "{count} additional titles for courses, modules, and topics",
+		"Lessons per course": "Ability to create up to {count} lessons or quizzes per course",
+		"Analytics access": "Access to basic user analytics",
+		"AI homework check": "AI will check your homework and provide feedback",
+		"Document upload": "Ability to upload images and documents to the AI chat",
+		"Image generation": "Image generation based on course topics and content",
+		"Discount notice": "20% off per month with an annual subscription",
+		"Original price": "{price} ₽",
+		"Discounted price": "{discountedPrice} ₽"
 	},
 	"Close": "Close",
 	"Open": "Open",
