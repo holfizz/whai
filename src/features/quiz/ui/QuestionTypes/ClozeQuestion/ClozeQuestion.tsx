@@ -29,9 +29,14 @@ const ClozeQuestion = ({
 	const [isCorrect, setIsCorrect] = useState<boolean | null>(null)
 
 	useEffect(() => {
-		setLocalAnswer(selectedAnswers[question.id]?.[0] || '')
-		setIsCorrect(null)
-	}, [selectedAnswers, question.id])
+		const savedAnswer = selectedAnswers[question.id]?.[0] || ''
+		setLocalAnswer(savedAnswer)
+		// Re-evaluate correctness when localAnswer or question.answers change
+		const correctAnswer = question.answers.join(' ')
+		const answerIsCorrect =
+			savedAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()
+		setIsCorrect(answerIsCorrect)
+	}, [selectedAnswers, question.id, question.answers])
 
 	const handleAnswerChange = useCallback((answer: string) => {
 		setLocalAnswer(answer)
@@ -73,7 +78,7 @@ const ClozeQuestion = ({
 
 	const parsePrompt = (prompt: string) => {
 		const elements = []
-		const regex = /(<ClozeLine\s*\/>)/g
+		const regex = /(<ClozeLine\s*\/>)|(___+)/g
 		let lastIndex = 0
 		let match: RegExpExecArray | [any]
 
@@ -81,6 +86,7 @@ const ClozeQuestion = ({
 			const [matchedText] = match
 			const matchIndex = match.index
 
+			// Push text before the match
 			if (matchIndex > lastIndex) {
 				elements.push(
 					<React.Fragment key={lastIndex}>
@@ -89,9 +95,10 @@ const ClozeQuestion = ({
 				)
 			}
 
+			// Replace the match with ClozeLine component
 			elements.push(
 				<ClozeLine
-					key={matchIndex}
+					key={`${question?.id}-${matchIndex}`}
 					value={localAnswer}
 					onChange={handleAnswerChange}
 					isCorrect={isCorrect}
@@ -101,7 +108,6 @@ const ClozeQuestion = ({
 
 			lastIndex = matchIndex + matchedText.length
 		}
-
 		if (lastIndex < prompt.length) {
 			elements.push(
 				<React.Fragment key={lastIndex}>
@@ -147,4 +153,5 @@ const ClozeQuestion = ({
 		</>
 	)
 }
+
 export default ClozeQuestion

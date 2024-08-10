@@ -33,10 +33,10 @@ const components = {
 	pre: ({ node, ...props }) => (
 		<pre className='border-2 border-decor-4 rounded-2xl p-5' {...props}></pre>
 	),
-	li: ({ node, ...props }) => <li className='ml-4 font-medium' {...props} />,
+	li: ({ node, ...props }) => <li className='ml-1 font-medium' {...props} />,
 	strong: ({ node, ...props }) => <strong className='font-bold' {...props} />,
 	em: ({ node, ...props }) => <em className='italic' {...props} />,
-	ul: ({ node, ...props }: any) => <ListWrapperUl {...props} />,
+	ul: ({ node, ...props }: any) => <ListWrapperUl size='sm' {...props} />,
 	ol: ({ node, ...props }) => <ol className='*:list-decimal' {...props} />
 }
 const SimpleMDX = ({ children }: any) => {

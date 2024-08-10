@@ -1,8 +1,13 @@
 import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory'
-import { useCreateCoursePlanWithAI } from '@/entities/plan/model/plan.queries'
+import {
+	useCreateCoursePlanWithAI,
+	useGetPlanId,
+	useUpdateCoursePlanWithAI
+} from '@/entities/plan/model/plan.queries'
+import { Link } from '@/navigation'
+import { getCourseByIdRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
-import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
@@ -28,39 +33,51 @@ const CreateCoursePlanPage = () => {
 		selectedTitle,
 		selectedDescription,
 		videosFromYouTube,
-		summaryData,
 		coursePlanStateData,
-		isCoursePlanGenerated,
-		setCourseId,
+		summaryData,
 		setCoursePlanStateData,
 		setIsCoursePlanGenerated,
 		nextStep,
 		prevStep
 	} = useUnifiedStore()
 
+	const { getCoursePlan, coursePlanData, coursePlanLoading } = useGetPlanId()
 	const { courseAIHistory } = useGetCourseAIHistoryByCourseId(courseId)
 
+	const { updateCoursePlanWithAI } = useUpdateCoursePlanWithAI()
+
 	useEffect(() => {
-		if (courseId) {
-			setCourseId(courseId)
+		if (createPlanData) {
+			const planId = createPlanData.id
+			setCoursePlanStateData(planId)
+			setIsCoursePlanGenerated(true)
 		}
-	}, [courseId, setCourseId])
+	}, [createPlanData, setCoursePlanStateData, setIsCoursePlanGenerated])
+
+	useEffect(() => {
+		if (coursePlanStateData) {
+			getCoursePlan({
+				variables: { planId: coursePlanStateData }
+			})
+		}
+	}, [coursePlanStateData, getCoursePlan])
 
 	useEffect(() => {
 		if (
+			courseId &&
 			courseAIHistory &&
 			selectedTitle &&
 			selectedDescription &&
-			courseId &&
 			!coursePlanStateData &&
-			!isCoursePlanGenerated
+			!coursePlanData &&
+			!createPlanLoading
 		) {
 			createCoursePlanWithAI({
 				variables: {
 					CoursePlanWithAIInput: {
 						name: selectedTitle,
 						description: selectedDescription,
-						courseAIHistoryId: courseAIHistory.id,
+						courseAIHistoryId: courseAIHistory?.id,
 						courseId: courseId,
 						userKnowledge: JSON.stringify(summaryData),
 						isHasVideo: videosFromYouTube || false
@@ -69,23 +86,17 @@ const CreateCoursePlanPage = () => {
 			})
 		}
 	}, [
-		courseAIHistory,
+		courseId,
 		selectedTitle,
 		selectedDescription,
-		courseId,
-		summaryData,
 		videosFromYouTube,
-		createCoursePlanWithAI,
+		createPlanLoading,
 		coursePlanStateData,
-		isCoursePlanGenerated
+		coursePlanData,
+		createCoursePlanWithAI,
+		courseAIHistory,
+		summaryData
 	])
-
-	useEffect(() => {
-		if (createPlanData) {
-			setCoursePlanStateData(createPlanData)
-			setIsCoursePlanGenerated(true)
-		}
-	}, [createPlanData, setCoursePlanStateData, setIsCoursePlanGenerated])
 
 	const handleTopicClick = topic => {
 		setSelectedTopic(topic)
@@ -102,34 +113,31 @@ const CreateCoursePlanPage = () => {
 		if (view === 'lessons') {
 			setSelectedSubtopic(null)
 			setView('subtopics')
-			return
 		} else if (view === 'subtopics') {
 			setSelectedTopic(null)
 			setView('topics')
-			return
+		} else {
+			prevStep()
 		}
-		prevStep()
-		return
 	}
 
-	let breadcrumbs = []
+	const handleUpdateOrder = async newOrder => {
+		if (!coursePlanStateData) return
+		try {
+		} catch (error) {
+			console.error('Error updating course plan order:', error)
+		}
+	}
 
-	if (view === 'topics') {
-		breadcrumbs = [
-			<BreadcrumbItem key='course'>{selectedTitle}</BreadcrumbItem>
-		]
-	} else if (view === 'subtopics' && selectedTopic) {
-		breadcrumbs = [
-			<BreadcrumbItem key='course'>{selectedTitle}</BreadcrumbItem>,
+	const breadcrumbs = [
+		<BreadcrumbItem key='course'>{selectedTitle}</BreadcrumbItem>,
+		view === 'subtopics' && selectedTopic && (
 			<BreadcrumbItem key='topic'>{selectedTopic.name}</BreadcrumbItem>
-		]
-	} else if (view === 'lessons' && selectedSubtopic) {
-		breadcrumbs = [
-			<BreadcrumbItem key='course'>{selectedTitle}</BreadcrumbItem>,
-			<BreadcrumbItem key='topic'>{selectedTopic.name}</BreadcrumbItem>,
+		),
+		view === 'lessons' && selectedSubtopic && (
 			<BreadcrumbItem key='subtopic'>{selectedSubtopic.name}</BreadcrumbItem>
-		]
-	}
+		)
+	].filter(Boolean) // Remove null or undefined items
 
 	const currentStageTitle = {
 		topics: t('Editing stage of the training module'),
@@ -140,25 +148,25 @@ const CreateCoursePlanPage = () => {
 	return (
 		<DashboardLayout className='w-full flex justify-center'>
 			<div className='w-full max-w-[1200px] p-4 flex flex-col items-center justify-center'>
-				{createPlanLoading && <DotsLoader />}
+				{(createPlanLoading || coursePlanLoading) && <DotsLoader />}
 				{createPlanError && (
 					<div>Ошибка загрузки плана курса: {createPlanError.message}</div>
 				)}
-				{coursePlanStateData && coursePlanStateData.topics?.length > 0 && (
+				{coursePlanData && (
 					<>
 						<div className='flex flex-col items-center w-[80%]'>
-							<Text size={TextSize.XL} title={currentStageTitle[view]} />
+							<h1 className='text-4xl'>{currentStageTitle[view]}</h1>
 							<Breadcrumbs className='mt-8'>{breadcrumbs}</Breadcrumbs>
 							<div className='flex flex-col justify-center gap-6 mt-10 w-full'>
 								<TopicPlanAccordion
-									topicsAllData={coursePlanStateData.topics}
+									topicsAllData={coursePlanData.topics}
 									t={t}
+									onUpdateOrder={handleUpdateOrder}
 								/>
 							</div>
 						</div>
 					</>
 				)}
-
 				<div className='flex gap-5 mt-10'>
 					<Button
 						color={'gray'}
@@ -169,7 +177,12 @@ const CreateCoursePlanPage = () => {
 						{t('Back')}
 					</Button>
 					{coursePlanStateData && (
-						<Button color={'main'} size={'3xl'} onClick={nextStep}>
+						<Button
+							color={'main'}
+							size={'3xl'}
+							as={Link}
+							href={getCourseByIdRoute(courseId)}
+						>
 							{t('Save')}
 						</Button>
 					)}

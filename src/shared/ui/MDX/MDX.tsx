@@ -48,7 +48,7 @@ const components = {
 	),
 	strong: ({ node, ...props }) => <strong className='font-bold' {...props} />,
 	em: ({ node, ...props }) => <em className='italic' {...props} />,
-	ul: ({ node, ...props }: any) => <ListWrapperUl {...props} />,
+	ul: ({ node, ...props }: any) => <ListWrapperUl size='md' {...props} />,
 	ol: ({ node, ...props }: any) => <ListWrapperOl {...props} />
 }
 

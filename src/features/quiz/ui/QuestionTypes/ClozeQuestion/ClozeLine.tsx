@@ -1,6 +1,6 @@
 import { Textarea } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface ClozeLineProps {
 	value: string
@@ -20,6 +20,9 @@ const ClozeLine: React.FC<ClozeLineProps> = ({
 		onChange(event.target.value)
 	}
 
+	useEffect(() => {
+		console.log(22, isCorrect)
+	}, [isCorrect])
 	const baseClassNames = 'max-w-[300px] min-w-[100px] mx-2 !opacity-100'
 	const inputWrapperClassNames = [
 		'w-[300px]',
@@ -27,21 +30,14 @@ const ClozeLine: React.FC<ClozeLineProps> = ({
 		'h-auto',
 		!isAnswered
 			? 'after:bg-decor-2 border-decor-2'
-			: isCorrect
-			? 'after:bg-success-4 border-success-10'
-			: 'after:bg-error-4 border-error-10'
+			: isCorrect === true
+			? 'after:bg-success-1 border-success-1'
+			: isCorrect === false
+			? 'after:bg-error-1 border-error-1'
+			: ''
 	]
-	const inputClassNames = [
-		'w-max',
-		'text-2xl',
-		'text-center',
-		!isAnswered
-			? 'text-foreground'
-			: isCorrect
-			? 'text-success-text'
-			: 'text-error-text'
-	]
-	console.log(isCorrect)
+	const inputClassNames = ['w-max', 'text-2xl', 'text-center']
+
 	return (
 		<Textarea
 			isDisabled={isAnswered}
@@ -51,6 +47,15 @@ const ClozeLine: React.FC<ClozeLineProps> = ({
 			placeholder={t('Your answer')}
 			value={value}
 			maxRows={1}
+			className={
+				!isAnswered
+					? 'text-foreground'
+					: isCorrect === true
+					? 'text-success-text group-data-[has-value=true]:text-success-text'
+					: isCorrect === false
+					? 'text-error-text group-data-[has-value=true]:text-error-text'
+					: ''
+			}
 			classNames={{
 				base: baseClassNames,
 				inputWrapper: inputWrapperClassNames,

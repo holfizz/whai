@@ -154,7 +154,8 @@
 		"Create a new chat": "Создать новый чат",
 		"Lesson creation in progress": "Выполняется создание урока",
 		"There was an error loading the lesson or creating it": "Произошла ошибка при загрузке или создании урока",
-		"Lesson is empty": "Урок пустой"
+		"Lesson is empty": "Урок пустой",
+		"Try again": "Попробовать снова"
 	},
 	"CreateCourse": {
 		"What are we creating?": "Что мы создаем?",

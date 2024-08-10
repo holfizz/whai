@@ -2,18 +2,28 @@ import { Divider } from '@nextui-org/react'
 
 export const ListWrapperUl = ({
 	children,
-	className
+	className,
+	size = 'md'
 }: {
 	children: any
-	className: string
+	className?: string
+	size?: 'sm' | 'md'
 }) => {
 	return (
 		<div className={'flex'}>
 			<Divider
 				orientation='vertical'
-				className={'w-[3px] rounded-sm h-[inherit]'}
+				className={`w-[${
+					size === 'md' ? '3px' : '2px'
+				} ] rounded-sm h-[inherit]`}
 			/>
-			<ul className={`flex flex-col ml-4 ${className}`}>{children}</ul>
+			<ul
+				className={`flex flex-col ${
+					size === 'md' ? 'ml-4' : 'ml-1'
+				} ${className}`}
+			>
+				{children}
+			</ul>
 		</div>
 	)
 }
@@ -25,5 +35,15 @@ export const ListWrapperOl = ({
 	children: any
 	className: string
 }) => {
-	return <ol className={'flex'}></ol>
+	return (
+		<div className={'flex'}>
+			<Divider
+				orientation='vertical'
+				className={'w-[3px] rounded-sm h-[inherit]'}
+			/>
+			<ol className={`flex flex-col ml-8 *:list-decimal ${className}`}>
+				{children}
+			</ol>
+		</div>
+	)
 }

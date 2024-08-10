@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { ICoursePlanWithAI } from './plan.types'
 export const GET_ALL_COURSE_PLANS_WITH_AI = gql`
 	query GetAllCoursePlansWithAI($skip: Int, $take: Int) {
@@ -95,9 +95,29 @@ export const useGetAllCoursePlansWithAI = ({
 const CREATE_COURSE_PLAN_WITH_AI_MUTATION = gql`
 	mutation createPlanWithAI($CoursePlanWithAIInput: CoursePlanWithAIInput!) {
 		createPlanWithAI(CoursePlanWithAIInput: $CoursePlanWithAIInput) {
+			id
+		}
+	}
+`
+export const useCreateCoursePlanWithAI = () => {
+	const [createCoursePlanWithAI, { data, error, loading }] = useMutation<{
+		createPlanWithAI: Pick<ICoursePlanWithAI, 'id'>
+	}>(CREATE_COURSE_PLAN_WITH_AI_MUTATION, {})
+
+	return {
+		createCoursePlanWithAI,
+		createPlanData: data?.createPlanWithAI,
+		createPlanError: error,
+		createPlanLoading: loading
+	}
+}
+
+const GET_COURSE_PLAN = gql`
+	query getCoursePlan($planId: ID!) {
+		getCoursePlan(planId: $planId) {
+			id
 			name
 			description
-			id
 			topics {
 				id
 				name
@@ -116,13 +136,7 @@ const CREATE_COURSE_PLAN_WITH_AI_MUTATION = gql`
 						subtopicId
 						courseId
 					}
-					quizzes {
-						name
-						description
-						subtopicId
-						courseId
-						isPlan
-					}
+
 					completionTime
 				}
 				completionTime
@@ -130,15 +144,73 @@ const CREATE_COURSE_PLAN_WITH_AI_MUTATION = gql`
 		}
 	}
 `
-export const useCreateCoursePlanWithAI = () => {
-	const [createCoursePlanWithAI, { data, error, loading }] = useMutation<{
-		createPlanWithAI: ICoursePlanWithAI
-	}>(CREATE_COURSE_PLAN_WITH_AI_MUTATION, {})
+export const useGetPlanId = () => {
+	const [getCoursePlan, { data, error, loading }] = useLazyQuery<{
+		getCoursePlan: ICoursePlanWithAI
+	}>(GET_COURSE_PLAN)
+	return {
+		getCoursePlan,
+		coursePlanData: data?.getCoursePlan,
+		coursePlanError: error,
+		coursePlanLoading: loading
+	}
+}
+const UPDATE_COURSE_PLAN_WITH_AI_MUTATION = gql`
+	mutation updatePlan($planId: ID!, $updatePlanInput: CoursePlanInput!) {
+		updatePlan(planId: $planId, updatePlanInput: $updatePlanInput) {
+			id
+			name
+			description
+			topics {
+				id
+				name
+				description
+				courseId
+				subtopics {
+					id
+					name
+					description
+					topicId
+					lessons {
+						id
+						name
+						description
+						subtopicId
+						courseId
+					}
+				}
+			}
+		}
+	}
+`
+
+export const useUpdateCoursePlanWithAI = () => {
+	const [updateCoursePlanWithAI, { data, error, loading }] = useMutation<{
+		updateCoursePlanWithAI: ICoursePlanWithAI
+	}>(UPDATE_COURSE_PLAN_WITH_AI_MUTATION, {
+		update(cache, { data }) {
+			if (data?.updateCoursePlanWithAI) {
+				const updatedPlan = data.updateCoursePlanWithAI
+				const { getAllCoursePlansWithAI } = cache.readQuery({
+					query: GET_ALL_COURSE_PLANS_WITH_AI
+				}) as { getAllCoursePlansWithAI: ICoursePlanWithAI[] }
+
+				const updatedPlans = getAllCoursePlansWithAI.map(plan =>
+					plan.id === updatedPlan.id ? updatedPlan : plan
+				)
+
+				cache.writeQuery({
+					query: GET_ALL_COURSE_PLANS_WITH_AI,
+					data: { getAllCoursePlansWithAI: updatedPlans }
+				})
+			}
+		}
+	})
 
 	return {
-		createCoursePlanWithAI,
-		createPlanData: data?.createPlanWithAI,
-		createPlanError: error,
-		createPlanLoading: loading
+		updateCoursePlanWithAI,
+		updatedPlanData: data?.updateCoursePlanWithAI,
+		updatePlanError: error,
+		updatePlanLoading: loading
 	}
 }

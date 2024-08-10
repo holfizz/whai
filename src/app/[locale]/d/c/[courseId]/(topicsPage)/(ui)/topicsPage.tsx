@@ -38,7 +38,7 @@ const TopicsPage = () => {
 						topicsAllData.map((topic, i) => (
 							<div
 								className={
-									'w-[335px] h-[300px] shadow-xl bg-white rounded-xl p-4 flex flex-col justify-between'
+									'w-[335px] h-[300px] bg-white rounded-xl p-4 flex flex-col justify-between shadow-sm'
 								}
 								key={i}
 							>

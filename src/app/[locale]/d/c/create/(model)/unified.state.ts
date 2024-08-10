@@ -13,7 +13,7 @@ interface UnifiedState {
 	needHomework: boolean
 	quizId: string | null
 	summaryData: any | null
-	coursePlanStateData: any | null
+	coursePlanStateData: string | null
 	isCoursePlanGenerated: boolean
 	quizResultId: string | null
 	setStep: (step: number) => void

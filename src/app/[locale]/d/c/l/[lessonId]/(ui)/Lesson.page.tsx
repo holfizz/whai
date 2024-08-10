@@ -6,6 +6,7 @@ import { ILessonBlock, useGetLessonContent } from '@/entities/lesson'
 import { CREATE_LESSON_WITH_AI } from '@/entities/lesson/model/lesson.queries'
 import { ChatWithAI } from '@/features/chatWithAI'
 import { getCourseByIdRoute } from '@/shared/const/router'
+import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import MDX from '@/shared/ui/MDX/MDX'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
@@ -148,7 +149,16 @@ const LessonPageAsync = () => {
 		)
 	} else if (errorLessonContent || createLessonError) {
 		content = (
-			<h1>{t('There was an error loading the lesson or creating it')}</h1>
+			<div className='w-fill flex flex-col items-center justify-center mt-10'>
+				<h1>{t('There was an error loading the lesson or creating it')}</h1>
+				<Button
+					onClick={() => window.location.reload()}
+					size='3xl'
+					color='main'
+				>
+					{t('Try again')}
+				</Button>
+			</div>
 		)
 	} else {
 		// At this point, the lesson should either contain content or have been created successfully

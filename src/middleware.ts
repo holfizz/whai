@@ -50,7 +50,8 @@ export const config = {
 		'/',
 		'/(ru|en)/:path*',
 		'/((?!_next|_vercel|.*\\..*).*)',
-		'/d/:path*'
+		'/d/:path*',
+		'/d'
 	]
 }
 const redirectToLogin = (

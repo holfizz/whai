@@ -1,0 +1,27 @@
+.accordion {
+	@apply flex flex-col gap-4 w-full;
+}
+
+.accordion-item {
+	@apply w-full;
+}
+
+.accordion-header {
+	@apply flex overflow-hidden justify-between items-center cursor-pointer text-left outline-none transition-colors gap-4 w-full;
+}
+
+.header-content {
+	@apply flex justify-between items-center w-full px-5 rounded-3xl bg-decor-3;
+}
+
+.icon {
+	@apply transition-transform;
+}
+
+.icon.open {
+	@apply transform rotate-180;
+}
+
+.accordion-content {
+	@apply bg-white;
+}

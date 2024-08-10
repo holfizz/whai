@@ -144,7 +144,8 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 				variables: {
 					chatWithAIRequestDto: {
 						chatWithAIId: selectedChatId,
-						content: messageContent
+						message: messageContent,
+						lessonId: lessonId
 					}
 				}
 			})

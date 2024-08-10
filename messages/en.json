@@ -154,7 +154,8 @@
 		"Create a new chat": "Create a new chat",
 		"Lesson creation in progress": "Lesson creation in progress",
 		"There was an error loading the lesson or creating it": "There was an error loading the lesson or creating it",
-		"Lesson is empty": "Lesson is empty"
+		"Lesson is empty": "Lesson is empty",
+		"Try again": "Try again"
 	},
 	"CreateCourse": {
 		"What are we creating?": "What are we creating?",

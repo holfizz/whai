@@ -21,7 +21,7 @@ const Button = extendVariants(UiButton, {
 				'bg-transparent text-[var(--color-accent)] flex justify-center items-center',
 			circle: 'rounded-full flex align-center justify-center min-w-fit ',
 			square:
-				'rounded-full flex align-center justify-center min-w-fit rounded-lg aspect-square',
+				'rounded-full flex align-center justify-center min-w-fit rounded-lg ',
 			sRound:
 				'rounded-2xl flex align-center justify-center stroke-white min-w-fit ',
 			noneRound: 'rounded-none'
@@ -33,7 +33,8 @@ const Button = extendVariants(UiButton, {
 			xs: 'px-unit-2 min-w-unit-12 h-unit-6 text-tiny gap-unit-1 rounded-small',
 			md: 'px-unit-4 min-w-unit-20 h-unit-10 text-small gap-unit-2 rounded-small',
 			xl: 'px-5 py-3 w-[150px] h-[50px] gap-4 rounded-2xl',
-			'3xl': 'px-5 py-3 w-[215px] h-[85px] gap-4 rounded-3xl ',
+			'3xl':
+				'px-5 py-3 w-[215px] h-[85px] gap-4 rounded-3xl max-sm:px-2 max-sm:py-1 max-sm:w-[120px] max-sm:h-[50px]',
 			auto: 'px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-xl w-full h-auto max-sm:w-[40vw] max-sm:h-[50px]',
 			sRound: 'w-[42px] h-[42px] px-0',
 			mRound: 'w-[78px] h-[78px] px-0',

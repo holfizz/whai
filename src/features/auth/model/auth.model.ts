@@ -30,6 +30,7 @@ export async function logout(): Promise<void> {
 			user: null,
 			accessToken: null
 		})
+		window.location.reload()
 	} catch (error) {
 		console.error('Logout error:', error)
 	}
