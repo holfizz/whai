@@ -1,4 +1,4 @@
 const LessonTask = () => {
-	return <div>LessonTask.page</div>
+	return <div></div>
 }
 export default LessonTask

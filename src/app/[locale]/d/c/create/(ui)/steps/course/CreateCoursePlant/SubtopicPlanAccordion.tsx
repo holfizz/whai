@@ -19,8 +19,8 @@ const SubtopicPlanAccordion = ({ subtopicsAllData, t, parentPrefix = '' }) => {
 		setIsModalOpen(true)
 	}
 
-	const handleSave = updatedSubtopic => {
-		updateSubtopic({
+	const handleSave = async updatedSubtopic => {
+		await updateSubtopic({
 			variables: {
 				subtopicId: updatedSubtopic.id,
 				updateSubtopicInput: {

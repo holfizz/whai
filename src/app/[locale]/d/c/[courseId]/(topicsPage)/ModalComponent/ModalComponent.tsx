@@ -15,7 +15,9 @@ const ModalComponent = ({ topicId, onClose }) => {
 			color={'white'}
 			backdrop='opaque'
 			isOpen={!!topicId}
-			size={'5xl'}
+			classNames={{
+				base: 'max-md:w-[99vw] max-w-xl'
+			}}
 			scrollBehavior='inside'
 			onOpenChange={isOpen => !isOpen && onClose()}
 		>

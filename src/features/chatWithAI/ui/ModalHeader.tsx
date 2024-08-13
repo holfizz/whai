@@ -1,19 +1,24 @@
-import React from 'react'
-import Button from '@/shared/ui/Button/Button'
-import { IoClose } from 'react-icons/io5'
-import ChatsMenuIcon from '@/shared/assets/icons/Lesson/Fill/ChatsMenuIcon'
+import { IChatWithAI } from '@/entities/chatWithAI/model/chatWithAI.types'
 import ChatList from '@/features/chatWithAI/ui/ChatList/ChatList'
+import ChatsMenuIcon from '@/shared/assets/icons/Lesson/Fill/ChatsMenuIcon'
+import Button from '@/shared/ui/Button/Button'
+import React from 'react'
+import { IoClose } from 'react-icons/io5'
 
 const ModalHeader = ({
 	isAdditionalParam,
 	setIsAdditionalParam,
 	lessonId,
-	onClose
+	onClose,
+	getAllChatsWithAI,
+	setMessages
 }: {
 	isAdditionalParam: boolean
 	setIsAdditionalParam: React.Dispatch<React.SetStateAction<boolean>>
 	lessonId: string
 	onClose: () => void
+	getAllChatsWithAI?: IChatWithAI[]
+	setMessages: any
 }) => {
 	return (
 		<div
@@ -21,6 +26,8 @@ const ModalHeader = ({
 		>
 			{isAdditionalParam ? (
 				<ChatList
+					setMessages={setMessages}
+					getAllChatsWithAI={getAllChatsWithAI}
 					lessonId={lessonId}
 					setIsAdditionalParam={setIsAdditionalParam}
 				/>

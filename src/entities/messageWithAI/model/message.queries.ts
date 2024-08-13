@@ -21,7 +21,7 @@ export const useGetAllMessagesInChatWithAI = ({
 	initialSkip: number
 	initialTake: number
 }) => {
-	const { data, error, loading, fetchMore } = useQuery<{
+	const { data, error, loading, fetchMore, refetch } = useQuery<{
 		getAllMessageInChatWithAI: IMessageWithAI[]
 	}>(GET_ALL_MESSAGES_IN_CHAT_WITH_AI, {
 		variables: { chatId, skip: initialSkip, take: initialTake },
@@ -63,7 +63,8 @@ export const useGetAllMessagesInChatWithAI = ({
 		messagesAllMessagesInChatWithAI: data?.getAllMessageInChatWithAI || [],
 		errorAllMessagesInChatWithAI: error,
 		loadingAllMessagesInChatWithAI: loading,
-		loadMore
+		loadMore,
+		refetch
 	}
 }
 
@@ -119,8 +120,8 @@ export const useCreateMessageWithAI = () => {
 
 	return {
 		createMessageWithAI,
-		mutationCreateMessageWithAIData: data?.createMessageWithAI,
-		mutationCreateMessageWithAIError: error,
-		mutationCreateMessageWithAILoading: loading
+		createMessageWithAIData: data?.createMessageWithAI,
+		createMessageWithAIError: error,
+		createMessageWithAILoading: loading
 	}
 }

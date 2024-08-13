@@ -150,3 +150,32 @@ export const useUpdateLesson = () => {
 		loadingLessonUpdate: loading
 	}
 }
+
+export const GET_ALL_INDEPENDENT_LESSONS = gql`
+	query ($subtopicId: ID!) {
+		getAllLessons(subtopicId: $subtopicId) {
+			id
+			isHasLessonTask
+			name
+			subtopicId
+			isCompleted
+			lessonTasks {
+				isChecked
+				name
+			}
+		}
+	}
+`
+export const useGetAllIndependentLesson = () => {
+	const { data, error, loading } = useQuery<{ getAllLessons: ILesson[] }>(
+		GET_ALL_INDEPENDENT_LESSONS,
+		{
+			fetchPolicy: 'cache-and-network'
+		}
+	)
+	return {
+		lessonsAllData: data?.getAllLessons,
+		errorLessonsAll: error,
+		loadingLessonsAll: loading
+	}
+}

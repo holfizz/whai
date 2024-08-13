@@ -1,22 +1,21 @@
-'use client'
 import { useGenerateTD } from '@/entities/titleDescription'
+import RegenerateIcon from '@/shared/assets/icons/Regenerate'
 import Button from '@/shared/ui/Button/Button'
-import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import useUnifiedStore from '../../../(model)/unified.state'
 import ResetButton from '../../resetButton'
+import DataCards from '../course/GenerateTDStep/DataCards'
+import Loader from '../course/GenerateTDStep/Loader'
 
-const GenerateTDTestStep = (): React.JSX.Element => {
+const GenerateTDTestStep = () => {
 	const t = useTranslations('CreateTest')
 	const {
 		promptContent,
 		step,
 		prevStep,
 		nextStep,
-		setQuizId,
-		quizId,
 		selectedTitle,
 		selectedDescription,
 		setSelectedTitle,
@@ -25,21 +24,27 @@ const GenerateTDTestStep = (): React.JSX.Element => {
 
 	const { mutationTD, mutationTDData, errorTD, loadingTD } = useGenerateTD()
 
+	const [titleDescriptionData, setTitleDescriptionData] = useState([])
 	const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
 		null
 	)
 	const [requestSuccessful, setRequestSuccessful] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
+
+	const hasFetched = useRef(false)
 
 	const handleGenerateTD = useCallback(async () => {
-		if (!loadingTD && !errorTD && !requestSuccessful) {
+		console.log('handleGenerateTD called')
+		if (!requestSuccessful) {
 			try {
-				if (!selectedTitle) {
+				if (!selectedTitle && !isLoading && !loadingTD) {
+					console.log('Starting request')
+					setIsLoading(true)
 					await mutationTD({
 						variables: {
 							dto: {
 								userRequest: promptContent,
-								type: 'TEST',
-								conversationId: quizId
+								type: 'TEST'
 							}
 						}
 					})
@@ -47,21 +52,48 @@ const GenerateTDTestStep = (): React.JSX.Element => {
 				}
 			} catch (error) {
 				console.error('Error generating title and description: ', error)
+			} finally {
+				setIsLoading(false)
 			}
 		}
 	}, [
-		loadingTD,
-		errorTD,
 		requestSuccessful,
 		selectedTitle,
-		mutationTD,
 		promptContent,
-		quizId
+		isLoading,
+		loadingTD,
+		mutationTD
 	])
 
 	useEffect(() => {
-		handleGenerateTD()
+		console.log('mutationTDData changed', mutationTDData)
+		if (mutationTDData.length > 0) {
+			setTitleDescriptionData(mutationTDData)
+		}
+	}, [mutationTDData])
+
+	useEffect(() => {
+		if (!hasFetched.current) {
+			console.log('useEffect running')
+			handleGenerateTD()
+			hasFetched.current = true
+		}
 	}, [handleGenerateTD])
+
+	const reGenerateTD = () => {
+		console.log('Re-generating TD')
+		setRequestSuccessful(false)
+		setIsLoading(true)
+		handleGenerateTD()
+	}
+
+	const handleSaveEdit = (updatedData, index) => {
+		console.log('Saving edit', { updatedData, index })
+		const updatedTDData = titleDescriptionData.map((td, i) =>
+			i === index ? { ...td, ...updatedData } : td
+		)
+		setTitleDescriptionData(updatedTDData)
+	}
 
 	if (step !== 3 && promptContent.length === 0) {
 		prevStep()
@@ -72,108 +104,107 @@ const GenerateTDTestStep = (): React.JSX.Element => {
 		return (
 			<DashboardLayout>
 				<div className='flex flex-col justify-center items-center h-full w-full text-accent'>
-					<h1 className='text-2xl mb-4'>
-						{t('An error occurred while generating headers')}
-					</h1>
-					<Button
-						size={'3xl'}
-						color={'main'}
-						onClick={() => window.location.reload()}
-					>
-						{t('Try one more time')}
-					</Button>
-					<Button
-						className='mt-3'
-						size={'3xl'}
-						color={'main'}
-						onClick={prevStep}
-					>
-						{t('Back')}
-					</Button>
+					<h1 className='text-2xl mb-4 '>{t('What will the quiz be about')}</h1>
+					<h3 className='text-lg mb-4 text-error-text'>
+						{t('Oops Error please try again')}
+					</h3>
+					<p className='text-lg mb-4 text-error-text px-6 py-3 bg-error-1 rounded-2xl'>
+						{promptContent}
+					</p>
+					<div className='w-[30%] flex mt-10 items-center justify-center'>
+						<Button
+							className='w-auto px-10 h-[70px] rounded-3xl ml-5'
+							color={'main'}
+							onClick={prevStep}
+						>
+							{t('Back')}
+						</Button>
+						<Button
+							className='ml-5 h-[70px] w-[70px] rounded-3xl p-0'
+							color={'gray'}
+							isIconOnly
+							startContent={<RegenerateIcon />}
+							onClick={() => window.location.reload()}
+						/>
+					</div>
 				</div>
 			</DashboardLayout>
 		)
 	}
 
-	const Loader = () => (
-		<>
-			{[...Array(4)].map((_, i) => (
-				<div
-					key={i}
-					className={`w-full h-auto min-h-30 py-2 px-7 rounded-2xl bg-decor-3 flex flex-col justify-center items-center p-4`}
-				>
-					<h1 className={'text-sm text-[#97917D] text-center'}>
-						{t('Generating, wait a couple of seconds')}
-					</h1>
-					<DotsLoader className={'mt-4'} />
-				</div>
-			))}
-		</>
-	)
-
-	const DataCards = () => (
-		<>
-			{mutationTDData &&
-				mutationTDData.map((td, index) => (
-					<div
-						key={index}
-						onClick={() => setSelectedCardIndex(index)}
-						className={`w-full h-auto min-h-30 p-4 rounded-2xl cursor-pointer ${
-							selectedCardIndex === index ? 'bg-decor-2' : 'bg-decor-3'
-						}`}
-					>
-						<h1 className='text-xl font-medium'>{td.title}</h1>
-						<p className='text-lg mt-2'>{td.description}</p>
-					</div>
-				))}
-		</>
-	)
-
 	const handleNextStep = () => {
 		if (selectedCardIndex !== null) {
-			const selectedTD = mutationTDData[selectedCardIndex]
+			const selectedTD = titleDescriptionData[selectedCardIndex]
 			setSelectedTitle(selectedTD.title)
 			setSelectedDescription(selectedTD.description)
 			nextStep()
-		} else if (selectedTitle && quizId) {
+		} else if (selectedTitle) {
 			nextStep()
 		}
 	}
+
 	const conditionNextButton = selectedCardIndex !== null || selectedTitle
+
 	return (
 		<DashboardLayout>
 			<div
 				style={{ height: 'calc(100vh - var(--navbar-height))' }}
 				className='w-full flex justify-center items-center flex-col'
 			>
-				<h1 className='text-2xl'>{t('Which test description fits best?')}</h1>
+				<h1 className='text-2xl'>{t('What will the quiz be about')}</h1>
 				{selectedTitle ? (
 					<div className='flex flex-col w-1/3'>
 						<h1 className='text-lg font-medium my-5'>
 							{t('Here is the title and description you chose')}
 						</h1>
-						<div
-							className={`w-full h-auto min-h-30 p-4 rounded-2xl cursor-pointer bg-decor-3`}
-						>
+						<div className='w-full h-auto min-h-30 p-4 rounded-2xl cursor-pointer bg-decor-3'>
 							<h1 className='text-xl font-medium'>{selectedTitle}</h1>
 							<p className='text-lg mt-2'>{selectedDescription}</p>
 						</div>
 					</div>
 				) : (
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4'>
-						{mutationTDData && !requestSuccessful ? <Loader /> : <DataCards />}
+						{isLoading || loadingTD ? (
+							<Loader />
+						) : (
+							<DataCards
+								isLoading={loadingTD}
+								mutationTDData={titleDescriptionData}
+								setSelectedCardIndex={setSelectedCardIndex}
+								selectedCardIndex={selectedCardIndex}
+								onEditSave={handleSaveEdit}
+							/>
+						)}
 					</div>
 				)}
 				<div className={'flex gap-4 mt-4'}>
-					<Button size={'3xl'} color={'gray'} onClick={prevStep}>
+					<Button
+						isDisabled={loadingTD}
+						size={'3xl'}
+						color={'gray'}
+						onClick={prevStep}
+					>
 						{t('Back')}
 					</Button>
+					<Button
+						isDisabled={loadingTD}
+						size={'3xl'}
+						color={'main'}
+						onClick={reGenerateTD}
+					>
+						{t('Re-generate')}
+					</Button>
 					{conditionNextButton && (
-						<Button size={'3xl'} color={'main'} onClick={handleNextStep}>
+						<Button
+							isDisabled={loadingTD}
+							size={'3xl'}
+							color={'main'}
+							onClick={handleNextStep}
+						>
 							{t('Next')}
 						</Button>
 					)}
-					<ResetButton />
+					<ResetButton isLoading={loadingTD} />
 				</div>
 			</div>
 		</DashboardLayout>

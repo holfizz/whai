@@ -4,6 +4,7 @@ export {
 	SAVE_QUIZ_RESULT,
 	useCreateIndependentQuizWithAI,
 	useGenerateKnowledgeSum,
+	useGetAllIndependentQuizzes,
 	useGetAllQuizzes,
 	useGetLastQuizResult,
 	useGetQuiz,

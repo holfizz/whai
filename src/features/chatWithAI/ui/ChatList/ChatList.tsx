@@ -1,4 +1,4 @@
-import { useGetAllChatsWithAI } from '@/entities/chatWithAI/model/chatWithAI.queries'
+import { IChatWithAI } from '@/entities/chatWithAI/model/chatWithAI.types'
 import MessageIcon from '@/shared/assets/icons/Lesson/Fill/MessageIcon'
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
@@ -9,17 +9,26 @@ import CreateChatButton from './CreateChatButton'
 
 const ChatList = ({
 	setIsAdditionalParam,
-	lessonId
+	lessonId,
+	getAllChatsWithAI,
+	setMessages
 }: {
 	setIsAdditionalParam: Dispatch<SetStateAction<boolean>>
 	lessonId: string
+	getAllChatsWithAI?: IChatWithAI[]
+	setMessages: any
 }) => {
-	const { getAllChatsWithAI } = useGetAllChatsWithAI(lessonId)
 	const t = useTranslations('Lesson')
 	const { setSelectedChatId, selectedChatId } = useChatStore(state => ({
 		setSelectedChatId: state.setSelectedChatId,
 		selectedChatId: state.selectedChatId
 	}))
+
+	const handleChatClick = (chatId: string) => {
+		setSelectedChatId(chatId)
+		setIsAdditionalParam(false)
+		setMessages([])
+	}
 
 	return (
 		<div
@@ -49,16 +58,10 @@ const ChatList = ({
 						className={`mt-2 flex items-center hover:opacity-100 cursor-pointer hover:transition-opacity transition-opacity ${
 							selectedChatId === chat.id ? 'opacity-100' : 'opacity-50'
 						}`}
-						onClick={() => {
-							setSelectedChatId(chat.id)
-							setIsAdditionalParam(false)
-						}}
+						onClick={() => handleChatClick(chat.id)}
 					>
 						<Button
-							onClick={() => {
-								setSelectedChatId(chat.id)
-								console.log(chat.id)
-							}}
+							onClick={() => handleChatClick(chat.id)} // Вызываем ту же функцию при клике на кнопку
 							color={'secondary'}
 							variant={'sRound'}
 							size={'sRound'}

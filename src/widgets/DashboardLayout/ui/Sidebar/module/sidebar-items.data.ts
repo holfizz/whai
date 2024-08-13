@@ -1,50 +1,60 @@
+import ChatIcon from '@/shared/assets/icons/Chat'
+import HomeIcon from '@/shared/assets/icons/Home'
+import LibraryIcon from '@/shared/assets/icons/Library'
+import MyCoursesIcon from '@/shared/assets/icons/MyCourses'
+import SettingsIcon from '@/shared/assets/icons/Settings'
+import StatisticsIcon from '@/shared/assets/icons/Statistics'
 import {
 	getChatWithAIRoute,
 	getCoursesRoute,
 	getDashboardRoute,
+	getLibraryRoute,
 	getSettingsRoute,
 	getStatisticsRoute
 } from '@/shared/const/router'
-import {
-	BarChartBig,
-	BookHeart,
-	Brain,
-	House,
-	LucideIcon,
-	Settings
-} from 'lucide-react'
 
 export interface ISidebarItem {
 	link: string
 	icon: LucideIcon
-	text: 'Main' | 'Courses' | 'Chat with AI' | 'Statistics' | 'Settings'
+	text:
+		| 'Main'
+		| 'Courses'
+		| 'Chat with AI'
+		| 'Statistics'
+		| 'Settings'
+		| 'Library'
 }
 
 export const sidebarItems: ISidebarItem[] = [
 	{
 		text: 'Main',
-		icon: House,
+		icon: HomeIcon,
 		link: getDashboardRoute()
 	},
 	{
 		text: 'Courses',
-		icon: BookHeart,
+		icon: MyCoursesIcon,
 		link: getCoursesRoute()
 	},
 	{
+		text: 'Library',
+		icon: LibraryIcon,
+		link: getLibraryRoute()
+	},
+	{
 		text: 'Chat with AI',
-		icon: Brain,
+		icon: ChatIcon,
 		link: getChatWithAIRoute()
 	},
 	{
 		text: 'Statistics',
-		icon: BarChartBig,
+		icon: StatisticsIcon,
 		link: getStatisticsRoute()
 	},
 
 	{
 		text: 'Settings',
-		icon: Settings,
+		icon: SettingsIcon,
 		link: getSettingsRoute()
 	}
 ]

@@ -29,11 +29,12 @@ interface UnifiedState {
 	setQuizId: (quizId: string | null) => void
 	setSummaryData: (summaryData: any) => void
 	setCoursePlanStateData: (coursePlanData: any) => void
-	setIsCoursePlanGenerated: (status: boolean) => void // New function
+	setIsCoursePlanGenerated: (status: boolean) => void
 	nextStep: () => void
 	prevStep: () => void
 	resetState: () => void
 }
+
 const useUnifiedStore = create<UnifiedState>()(
 	persist(
 		set => ({

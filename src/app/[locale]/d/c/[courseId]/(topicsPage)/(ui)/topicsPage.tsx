@@ -4,7 +4,6 @@ import { useGetAllTopics } from '@/entities/topic'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
 import Button from '@/shared/ui/Button/Button'
 import { Progress } from '@/shared/ui/Progress/Progress'
-import Text, { TextSize } from '@/shared/ui/Text/Text'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useDisclosure } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
@@ -24,25 +23,40 @@ const TopicsPage = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const [selectedTopicId, setSelectedTopicId] = useState('')
 
-	const handleTopicClick = topicId => {
+	const handleTopicClick = (topicId: string) => {
 		setSelectedTopicId(topicId)
 		onOpen()
 	}
-	return (
-		<DashboardLayout className={`w-full flex justify-center`}>
-			<div className={'w-[800px] '}>
-				<Text size={TextSize.XL} title={courseData?.name} />
 
-				<div className={'flex flex-wrap gap-6 mt-5'}>
+	return (
+		<DashboardLayout className='w-full flex justify-center'>
+			<div className='w-full max-w-[800px]'>
+				<h1 className='text-2xl font-normal max-md:text-3xl max-md:text-center  max-md:w-2/3 mx-auto max-sm:w-4/5'>
+					{courseData?.name}
+				</h1>
+				<div
+					className='grid gap-6 mt-5 justify-center'
+					style={{
+						gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 0.8fr))',
+						gridAutoRows: 'minmax(250px, auto)'
+					}}
+				>
 					{topicsAllData &&
 						topicsAllData.map((topic, i) => (
 							<div
 								className={
-									'w-[335px] h-[300px] bg-white rounded-xl p-4 flex flex-col justify-between shadow-sm'
+									'bg-white rounded-xl p-4 flex flex-col justify-between shadow-sm'
 								}
 								key={i}
+								style={{
+									gridColumn:
+										topicsAllData.length === 1 ||
+										(topicsAllData.length === 2 && i === 0)
+											? 'span 2'
+											: 'span 1'
+								}}
 							>
-								<div className={'flex justify-between '}>
+								<div className='flex justify-between'>
 									<h1
 										onClick={() => handleTopicClick(topic.id)}
 										className={cls.title}
@@ -58,22 +72,22 @@ const TopicsPage = () => {
 									/>
 								</div>
 								<p className={cls.description}>{topic.description}</p>
-								<div className={'flex gap-2 flex-wrap w-full mt-auto'}>
-									<div className={'flex mr-4 items-center'}>
-										<FaClock size={18} className={'text-gray-2 mx-2'} />
-										<h3 className={'text-gray-2 font-normal'}>
+								<div className='flex gap-2 flex-wrap w-full mt-auto'>
+									<div className='flex mr-4 items-center'>
+										<FaClock size={18} className='text-gray-2 mx-2' />
+										<h3 className='text-gray-2 font-normal'>
 											{`${topic.completionTime} Hours`}
 										</h3>
 									</div>
-									<div className={'flex mr-4 items-center'}>
-										<HiVideoCamera size={24} className={'text-gray-2 mx-2'} />
-										<h3 className={'text-gray-2 font-normal'}>
+									<div className='flex mr-4 items-center'>
+										<HiVideoCamera size={24} className='text-gray-2 mx-2' />
+										<h3 className='text-gray-2 font-normal'>
 											{t('Video lesson')}
 										</h3>
 									</div>
-									<div className={'flex mr-4 items-center'}>
-										<LuListOrdered size={18} className={'text-gray-2 mx-2'} />
-										<h3 className={'text-gray-2 font-normal'}>
+									<div className='flex mr-4 items-center'>
+										<LuListOrdered size={18} className='text-gray-2 mx-2' />
+										<h3 className='text-gray-2 font-normal'>
 											{`${topic.totalSubtopics}  ${t('Topics')}`}
 										</h3>
 									</div>
@@ -81,8 +95,8 @@ const TopicsPage = () => {
 								<Progress
 									color={'peach'}
 									value={topic.progressPercents}
-									className={'h-1 rounded-full mt-2'}
-								></Progress>
+									className='h-1 rounded-full mt-2'
+								/>
 							</div>
 						))}
 				</div>

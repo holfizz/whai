@@ -29,18 +29,21 @@ const CheckKnowledgeStep = () => {
 		useGetCourseAIHistoryByCourseId(courseId)
 
 	useEffect(() => {
-		if (!quizId && courseId && courseAIHistory?.id) {
-			createQuiz({
-				variables: {
-					dto: {
-						courseTitle: selectedTitle,
-						courseDescription: selectedDescription,
-						courseAIHistoryId: courseAIHistory.id,
-						toCheckKnowledge: true
+		const req = async () => {
+			if (!quizId && courseId && courseAIHistory?.id) {
+				await createQuiz({
+					variables: {
+						dto: {
+							courseTitle: selectedTitle,
+							courseDescription: selectedDescription,
+							courseAIHistoryId: courseAIHistory.id,
+							toCheckKnowledge: true
+						}
 					}
-				}
-			})
+				})
+			}
 		}
+		req()
 	}, [
 		quizId,
 		courseId,

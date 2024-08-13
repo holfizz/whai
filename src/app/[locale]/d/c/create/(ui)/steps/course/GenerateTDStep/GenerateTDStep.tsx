@@ -1,12 +1,13 @@
 import { useCreateCourse } from '@/entities/course/model/course.queries'
 import { useCreateCourseAIHistory } from '@/entities/courseAIHistory'
 import { useGenerateTD } from '@/entities/titleDescription'
+import RegenerateIcon from '@/shared/assets/icons/Regenerate'
 import Button from '@/shared/ui/Button/Button'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
+
 import React, { useCallback, useEffect, useState } from 'react'
 import useUnifiedStore from '../../../../(model)/unified.state'
-import ResetButton from '../../../resetButton'
 import DataCards from './DataCards'
 import Loader from './Loader'
 
@@ -106,7 +107,7 @@ const GenerateTDStep = (): React.JSX.Element => {
 			try {
 				if (!selectedTitle) {
 					setIsLoading(true)
-					mutationTD({
+					await mutationTD({
 						variables: {
 							dto: {
 								userRequest: promptContent,
@@ -123,13 +124,14 @@ const GenerateTDStep = (): React.JSX.Element => {
 				setIsLoading(false)
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [
 		historyData,
 		loadingCreatingHistory,
 		errorCreatingHistory,
 		requestSuccessful,
 		selectedTitle,
-		mutationTD,
+
 		promptContent
 	])
 
@@ -173,24 +175,31 @@ const GenerateTDStep = (): React.JSX.Element => {
 		return (
 			<DashboardLayout>
 				<div className='flex flex-col justify-center items-center h-full w-full text-accent'>
-					<h1 className='text-2xl mb-4'>
-						{t('An error occurred while generating headers')}
+					<h1 className='text-2xl mb-4 '>
+						{t('What will the course be about?')}
 					</h1>
-					<Button
-						size={'3xl'}
-						color={'main'}
-						onClick={() => window.location.reload()}
-					>
-						{t('Try one more time')}
-					</Button>
-					<Button
-						className='mt-3'
-						size={'3xl'}
-						color={'main'}
-						onClick={prevStep}
-					>
-						{t('Back')}
-					</Button>
+					<h3 className='text-lg mb-4 text-error-text'>
+						{t('Oops Error please try again')}
+					</h3>
+					<p className='text-lg mb-4 text-error-text px-6 py-3 bg-error-1 rounded-2xl'>
+						{promptContent}
+					</p>
+					<div className='w-[30%] flex mt-10 items-center justify-center'>
+						<Button
+							className='w-auto px-10 h-[70px] rounded-3xl ml-5'
+							color={'main'}
+							onClick={prevStep}
+						>
+							{t('Back')}
+						</Button>
+						<Button
+							className='ml-5 h-[70px] w-[70px] rounded-3xl p-0'
+							color={'gray'}
+							isIconOnly
+							startContent={<RegenerateIcon />}
+							onClick={() => window.location.reload()}
+						/>
+					</div>
 				</div>
 			</DashboardLayout>
 		)
@@ -222,7 +231,9 @@ const GenerateTDStep = (): React.JSX.Element => {
 							{t('Here is the title and description you chose')}
 						</h1>
 						<div
-							className={`w-full h-auto min-h-30 p-4 rounded-2xl cursor-pointer bg-decor-3`}
+							className={
+								'w-full h-auto min-h-30 p-4 rounded-2xl cursor-pointer bg-decor-3'
+							}
 						>
 							<h1 className='text-xl font-medium'>{selectedTitle}</h1>
 							<p className='text-lg mt-2'>{selectedDescription}</p>
@@ -254,12 +265,12 @@ const GenerateTDStep = (): React.JSX.Element => {
 					</Button>
 					<Button
 						isDisabled={loadingTD}
-						size={'3xl'}
-						color={'main'}
+						className=' h-full w-auto aspect-square rounded-3xl p-0'
+						color={'gray'}
+						isIconOnly
+						startContent={<RegenerateIcon />}
 						onClick={reGenerateTD}
-					>
-						{t('Re-generate')}
-					</Button>
+					/>
 					{conditionNextButton && (
 						<Button
 							isDisabled={loadingTD}
@@ -270,7 +281,6 @@ const GenerateTDStep = (): React.JSX.Element => {
 							{t('Next')}
 						</Button>
 					)}
-					<ResetButton isLoading={loadingTD} />
 				</div>
 			</div>
 		</DashboardLayout>

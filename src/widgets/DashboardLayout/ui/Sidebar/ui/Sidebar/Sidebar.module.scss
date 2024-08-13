@@ -3,20 +3,18 @@
 	position: fixed;
 	z-index: 49;
 	background: var(--color-decor-4);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between; /* Распределяет пространство между элементами */
 }
 
-@media screen and (max-width: 768px) {
-	.sidebar {
-		max-width: 200px;
-		font-size: 16px;
-	}
-}
 .container {
 	margin-top: 50px;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	background: var();
+	padding: 0 10px;
+	flex-grow: 1;
 }
 
 .logoBlock {
@@ -55,4 +53,11 @@
 
 .isCollapsedBtn {
 	transform: rotate(180deg);
+}
+
+@media screen and (max-width: 768px) {
+	.sidebar {
+		max-width: 200px;
+		font-size: 16px;
+	}
 }

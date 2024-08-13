@@ -1,4 +1,5 @@
 import { useCreateChatWithAI } from '@/entities/chatWithAI/'
+import { useGetAllChatsWithAI } from '@/entities/chatWithAI/model/chatWithAI.queries'
 import { GET_LESSON_NAME, ILesson } from '@/entities/lesson'
 import Button from '@/shared/ui/Button/Button'
 import { useQuery } from '@apollo/client'
@@ -24,6 +25,7 @@ const CreateChatButton = ({
 	const { setSelectedChatId } = useChatStore(state => ({
 		setSelectedChatId: state.setSelectedChatId
 	}))
+	const { refetch: refetchChats } = useGetAllChatsWithAI(lessonId)
 
 	const handleCreateChat = useCallback(async () => {
 		try {
@@ -45,9 +47,9 @@ const CreateChatButton = ({
 			})
 
 			if (data?.createChatWithAI) {
-				// Установите созданный чат как выбранный
 				setSelectedChatId(data.createChatWithAI.id)
-				setIsAdditionalParam(false) // Закрыть меню создания чата
+				setIsAdditionalParam(false)
+				await refetchChats() // Refetch the chats after creation
 			}
 		} catch (error) {
 			console.error('Error creating chat:', error)
@@ -57,7 +59,8 @@ const CreateChatButton = ({
 		lessonId,
 		LessonData,
 		setSelectedChatId,
-		setIsAdditionalParam
+		setIsAdditionalParam,
+		refetchChats
 	])
 
 	return (

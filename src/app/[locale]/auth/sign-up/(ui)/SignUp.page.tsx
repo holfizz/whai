@@ -1,7 +1,6 @@
 'use client'
 import { AuthForm } from '@/features/auth'
 import { authConstants } from '@/shared/const/auth'
-// import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Loader from '@/shared/ui/Loader/Loader'
 import Logo from '@/shared/ui/Logo/Logo'
 import { Suspense } from 'react'

@@ -41,17 +41,20 @@ const AIKnowledgeSummary = () => {
 	const { courseAIHistory } = useGetCourseAIHistoryByCourseId(courseId)
 
 	useEffect(() => {
-		if (!summaryData && quizResultId && courseAIHistory?.id) {
-			generateKnowledgeSum({
-				variables: {
-					dto: {
-						conversationId: courseAIHistory.id,
-						quizResultId,
-						courseId: courseId
+		const req = async () => {
+			if (!summaryData && quizResultId && courseAIHistory?.id) {
+				await generateKnowledgeSum({
+					variables: {
+						dto: {
+							conversationId: courseAIHistory.id,
+							quizResultId,
+							courseId: courseId
+						}
 					}
-				}
-			})
+				})
+			}
 		}
+		req()
 	}, [
 		quizResultId,
 		generateKnowledgeSum,

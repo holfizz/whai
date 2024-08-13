@@ -55,14 +55,22 @@ const refreshToken = async () => {
 
 		const newAccessToken = response.data?.getNewToken.accessToken
 		if (!newAccessToken) {
+			logout()
 			throw new GraphQLError('Empty AccessToken')
 		}
+		console.log('Received new access token:', newAccessToken)
 
-		// Сохранение нового токена
+		if (response.error) {
+			console.log('GraphQL error:', response.error)
+			logout()
+		}
+
 		saveTokenStorage(newAccessToken)
 
 		return newAccessToken
 	} catch (err) {
+		console.error('Error refreshing token:', err)
+		logout()
 		localStorage.clear()
 		throw err
 	}
@@ -71,8 +79,15 @@ const refreshToken = async () => {
 // Обработка ошибок Apollo
 const errorLink = onError(
 	({ graphQLErrors, networkError, operation, forward }) => {
+		if (networkError) {
+			console.error(`[Network error]: ${networkError}`)
+		}
+
 		if (graphQLErrors) {
 			for (const err of graphQLErrors) {
+				console.error(`[GraphQL error]: ${err.message}`)
+				console.error('Error details:', err)
+
 				if (
 					err.extensions?.code === 'UNAUTHENTICATED' &&
 					!isRefreshRequest(operation)
@@ -82,6 +97,11 @@ const errorLink = onError(
 							;(async () => {
 								try {
 									const newAccessToken = await refreshToken()
+
+									if (!newAccessToken) {
+										console.log('No new access token, logging out')
+										logout()
+									}
 
 									// Установка нового токена в заголовок
 									operation.setContext(({ headers = {} }) => ({
@@ -98,6 +118,7 @@ const errorLink = onError(
 										complete: observer.complete.bind(observer)
 									})
 								} catch (err) {
+									console.error('Error during token refresh:', err)
 									logout()
 									observer.error(err)
 								}
@@ -110,9 +131,7 @@ const errorLink = onError(
 			}
 		}
 
-		if (networkError) {
-			console.error(`[Network error]: ${networkError}`)
-		}
+		return forward(operation)
 	}
 )
 
@@ -125,13 +144,14 @@ const uploadLink = new createUploadLink({
 	}
 })
 
-export const wsLink = new GraphQLWsLink(
+// Настройка WebSocket-ссылки
+const wsLink = new GraphQLWsLink(
 	createClient({
 		url: GRAPHQL_WS_SERVER_URL,
 		connectionParams: {
 			authToken: getAccessToken()
 		},
-		retryAttempts: 5, // Добавьте повторные попытки подключения при ошибках
+		retryAttempts: 5, // Повторные попытки подключения при ошибках
 		on: {
 			connected: () => console.log('WebSocket connected'),
 			closed: () => console.log('WebSocket closed'),
@@ -140,7 +160,7 @@ export const wsLink = new GraphQLWsLink(
 	})
 )
 
-// Разделение ссылок для подписок и других запросов
+// Разделение ссылок для подписок и обычных запросов
 const link = split(
 	({ query }) => {
 		const definition = getMainDefinition(query)

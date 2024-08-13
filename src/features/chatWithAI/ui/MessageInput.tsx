@@ -1,9 +1,9 @@
-import React from 'react'
-import Button from '@/shared/ui/Button/Button'
 import SendIcon from '@/shared/assets/icons/Lesson/Fill/SendIcon'
-import { useTranslations } from 'next-intl'
-import { Textarea } from '@nextui-org/react'
+import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import { Textarea } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
+import React from 'react'
 
 const MessageInput = ({
 	messageContent,

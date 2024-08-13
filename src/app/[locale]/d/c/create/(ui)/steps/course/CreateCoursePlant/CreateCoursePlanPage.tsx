@@ -63,28 +63,31 @@ const CreateCoursePlanPage = () => {
 	}, [coursePlanStateData, getCoursePlan])
 
 	useEffect(() => {
-		if (
-			courseId &&
-			courseAIHistory &&
-			selectedTitle &&
-			selectedDescription &&
-			!coursePlanStateData &&
-			!coursePlanData &&
-			!createPlanLoading
-		) {
-			createCoursePlanWithAI({
-				variables: {
-					CoursePlanWithAIInput: {
-						name: selectedTitle,
-						description: selectedDescription,
-						courseAIHistoryId: courseAIHistory?.id,
-						courseId: courseId,
-						userKnowledge: JSON.stringify(summaryData),
-						isHasVideo: videosFromYouTube || false
+		const req = async () => {
+			if (
+				courseId &&
+				courseAIHistory &&
+				selectedTitle &&
+				selectedDescription &&
+				!coursePlanStateData &&
+				!coursePlanData &&
+				!createPlanLoading
+			) {
+				await createCoursePlanWithAI({
+					variables: {
+						CoursePlanWithAIInput: {
+							name: selectedTitle,
+							description: selectedDescription,
+							courseAIHistoryId: courseAIHistory?.id,
+							courseId: courseId,
+							userKnowledge: JSON.stringify(summaryData),
+							isHasVideo: videosFromYouTube || false
+						}
 					}
-				}
-			})
+				})
+			}
 		}
+		req()
 	}, [
 		courseId,
 		selectedTitle,

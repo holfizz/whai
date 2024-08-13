@@ -19,8 +19,8 @@ const TopicPlanAccordion = ({ topicsAllData, t }) => {
 		setIsModalOpen(true)
 	}
 
-	const handleSave = updatedTopic => {
-		updateTopic({
+	const handleSave = async updatedTopic => {
+		await updateTopic({
 			variables: {
 				topicId: updatedTopic.id,
 				updateTopicInput: {

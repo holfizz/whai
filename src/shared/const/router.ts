@@ -25,3 +25,6 @@ export const getLessonTaskRoute = (lessonId: string) => `/d/c/l/t/${lessonId}`
 //quizzes - q
 export const getQuizRoute = (quizId: string) => `/d/c/q/${quizId}`
 export const getQuizIndependentRoute = (quizId: string) => `/d/c/q/i/${quizId}`
+
+//library - lib
+export const getLibraryRoute = () => `/d/l`

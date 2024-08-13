@@ -111,6 +111,7 @@
 	"Sidebar": {
 		"Main": "Main",
 		"Courses": "Courses",
+		"Library": "Library",
 		"Chat with AI": "Chat with AI",
 		"Statistics": "Statistics",
 		"Settings": "Settings"
@@ -156,7 +157,8 @@
 		"Lesson creation in progress": "Lesson creation in progress",
 		"There was an error loading the lesson or creating it": "There was an error loading the lesson or creating it",
 		"Lesson is empty": "Lesson is empty",
-		"Try again": "Try again"
+		"Try again": "Try again",
+		"You don't have chats": "You don't have chats"
 	},
 	"CreateCourse": {
 		"What are we creating?": "What are we creating?",
@@ -181,7 +183,7 @@
 		"Let's test your knowledge": "Let's test your knowledge",
 		"Take a short test to determine the difficulty level of the course": "Take a short test to determine the difficulty level of the course",
 		"Try one more time": "Try one more time",
-		"An error occurred while generating headers": "An error occurred while generating headers",
+		"Oops Error please try again": "Oops. Error, please try again",
 		"An error occurred while creating the test": "An error occurred while creating the test",
 		"An error occurred while summing up your test results": "An error occurred while summing up your test results",
 		"Summary of your knowledge": "Summary of your knowledge",
@@ -203,7 +205,8 @@
 		"What should be in the test, describe in detail what you want to get": "What should be in the test, describe in detail what you want to get",
 		"Next": "Next",
 		"Back": "Back",
-		"An error occurred while generating headers": "An error occurred while generating headers",
+		"What will the quiz be about": "What will the quiz be about?",
+		"Oops Error please try again": "Oops. Error, please try again",
 		"Try one more time": "Try one more time",
 		"Which test description fits best?": "Which test description fits best?",
 		"Here is the title and description you chose": "Here is the title and description you chose",

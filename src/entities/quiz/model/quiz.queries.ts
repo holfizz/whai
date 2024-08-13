@@ -1,6 +1,12 @@
 'use client'
 import { gql, useMutation, useQuery } from '@apollo/client'
-import { IQuiz, IQuizAnswer, IQuizData, KnowledgeSum } from './quiz.types'
+import {
+	IQuiz,
+	IQuizAnswer,
+	IQuizData,
+	IQuizSummary,
+	KnowledgeSum
+} from './quiz.types'
 
 export const GET_QUIZ = gql`
 	query ($quizId: ID!) {
@@ -263,5 +269,28 @@ export const useCreateQuizWithAI = () => {
 		dataCreateQuizWithAI: data?.createQuizWithAI,
 		errorCreateQuizWithAI: error,
 		loadingCreateQuizWithAI: loading
+	}
+}
+export const GET_ALL_INDEPENDENT_QUIZZES = gql`
+	query {
+		getAllIndependentQuizzes {
+			id
+			name
+			description
+			totalPercents
+		}
+	}
+`
+export const useGetAllIndependentQuizzes = () => {
+	const { data, error, loading } = useQuery<{
+		getAllIndependentQuizzes: IQuizSummary[]
+	}>(GET_ALL_INDEPENDENT_QUIZZES, {
+		fetchPolicy: 'cache-and-network'
+	})
+
+	return {
+		independentQuizzesData: data?.getAllIndependentQuizzes,
+		errorIndependentQuizzes: error,
+		loadingIndependentQuizzes: loading
 	}
 }

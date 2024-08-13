@@ -1,4 +1,8 @@
-'use client'
+import {
+	useCreateChatWithAI,
+	useGetAllChatsWithAI
+} from '@/entities/chatWithAI/model/chatWithAI.queries'
+import { GET_LESSON_NAME, ILesson } from '@/entities/lesson'
 import {
 	useChatWithAIAnswerSubscription,
 	useCreateMessageWithAI,
@@ -7,6 +11,7 @@ import {
 import ChatUi from '@/features/chatWithAI/ui/ChatUI/ChatUI'
 import Button from '@/shared/ui/Button/Button'
 import { Modal, ModalContent } from '@/shared/ui/Modal/Modal'
+import { useQuery } from '@apollo/client'
 import {
 	ModalBody,
 	ModalFooter,
@@ -28,40 +33,58 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	const [isAdditionalParam, setIsAdditionalParam] = useState<boolean>(false)
 	const [messageContent, setMessageContent] = useState('')
 	const [loading, setLoading] = useState<boolean>(false)
-	const [messages, setMessages] = useState([])
+	const [messages, setMessages] = useState<any[]>([])
 	const [partialMessage, setPartialMessage] = useState<any>(null)
 	const initialTake = 10
 	const [skip, setSkip] = useState(0)
 	const [take] = useState(initialTake)
 	const [isLoadingMore, setIsLoadingMore] = useState(false)
 
-	const { createMessageWithAI } = useCreateMessageWithAI()
+	// Queries
+	const { data: LessonData } = useQuery<{ getLesson: Pick<ILesson, 'name'> }>(
+		GET_LESSON_NAME,
+		{
+			variables: { lessonId },
+			fetchPolicy: 'cache-and-network'
+		}
+	)
+	const { getAllChatsWithAI, refetch: refetchChats } =
+		useGetAllChatsWithAI(lessonId)
+	const { createMessageWithAI, createMessageWithAIData } =
+		useCreateMessageWithAI()
+	const { mutationCreateChatWithAI, loadingCreateChatsWithAI } =
+		useCreateChatWithAI()
 	const { selectedChatId, setSelectedChatId } = useChatStore()
 	const {
 		messagesAllMessagesInChatWithAI,
 		loadMore,
-		loadingAllMessagesInChatWithAI
+		loadingAllMessagesInChatWithAI,
+		refetch: refetchMessages
 	} = useGetAllMessagesInChatWithAI({
 		chatId: selectedChatId,
 		initialTake: take,
 		initialSkip: skip
 	})
-
-	// Subscription to listen for new messages
 	const { subscriptionChatWithAIData } =
 		useChatWithAIAnswerSubscription(selectedChatId)
 
+	// Effect for updating messages with new chat data
 	useEffect(() => {
 		if (messagesAllMessagesInChatWithAI.length > 0) {
-			setMessages(
-				messagesAllMessagesInChatWithAI.map(msg => ({
-					...msg,
-					content: msg.content
-				}))
-			)
+			setMessages(messagesAllMessagesInChatWithAI)
 		}
 	}, [messagesAllMessagesInChatWithAI])
-
+	useEffect(() => {
+		if (selectedChatId) {
+			setPartialMessage(null)
+			setSkip(0)
+			refetchMessages().catch(err =>
+				console.error('Error refetching messages:', err)
+			)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedChatId])
+	// Effect for handling subscription updates
 	useEffect(() => {
 		if (subscriptionChatWithAIData && !subscriptionChatWithAIData.is_finish) {
 			const { message, is_finish, conversation_id } = subscriptionChatWithAIData
@@ -88,15 +111,6 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			})
 		}
 	}, [subscriptionChatWithAIData])
-
-	useEffect(() => {
-		// Reset messages and partial messages when selectedChatId changes
-		if (selectedChatId) {
-			setMessages([])
-			setPartialMessage(null)
-			setSkip(0)
-		}
-	}, [selectedChatId])
 
 	const handleLoadMore = useCallback(() => {
 		if (!isLoadingMore) {
@@ -140,7 +154,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		setLoading(true)
 
 		try {
-			const response = await createMessageWithAI({
+			await createMessageWithAI({
 				variables: {
 					chatWithAIRequestDto: {
 						chatWithAIId: selectedChatId,
@@ -150,13 +164,6 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 				}
 			})
 
-			const finalMessage = response.data.createMessageWithAI
-			setMessages(prevMessages => {
-				const updatedMessages = prevMessages.filter(
-					msg => msg.role !== 'assistant' || msg.type !== 'partial'
-				)
-				return [finalMessage, ...updatedMessages]
-			})
 			setPartialMessage(null)
 		} catch (error) {
 			console.error('Error sending message:', error)
@@ -164,8 +171,48 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			setLoading(false)
 		}
 	}
-
+	useEffect(() => {
+		setMessages(prevMessages => {
+			const updatedMessages = prevMessages.filter(
+				msg => msg?.role !== 'assistant' || msg?.type !== 'partial'
+			)
+			return [createMessageWithAIData, ...updatedMessages]
+		})
+	}, [createMessageWithAIData])
 	const isSendButtonDisabled = messageContent.trim().length < 3 || loading
+
+	const handleCreateChat = useCallback(async () => {
+		try {
+			const createChatInput: {
+				lessonId: string
+				title?: string
+			} = {
+				lessonId
+			}
+			if (LessonData?.getLesson?.name) {
+				createChatInput.title = LessonData.getLesson.name
+			}
+			const { data } = await mutationCreateChatWithAI({
+				variables: {
+					createChatInput
+				}
+			})
+
+			if (data?.createChatWithAI) {
+				setSelectedChatId(data.createChatWithAI.id)
+				setIsAdditionalParam(false)
+				await refetchChats() // Refetch chats after creating a new one
+			}
+		} catch (error) {
+			console.error('Error creating chat:', error)
+		}
+	}, [
+		LessonData,
+		lessonId,
+		mutationCreateChatWithAI,
+		setSelectedChatId,
+		refetchChats
+	])
 
 	return (
 		<>
@@ -182,21 +229,36 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 				<ModalContent>
 					<>
 						<ModalHeader
+							setMessages={setMessages}
+							getAllChatsWithAI={getAllChatsWithAI}
 							isAdditionalParam={isAdditionalParam}
 							setIsAdditionalParam={setIsAdditionalParam}
 							lessonId={lessonId}
 							onClose={onClose}
 						/>
 						<ModalBody className={'h-auto'}>
-							<ChatUi
-								messages={
-									partialMessage ? [partialMessage, ...messages] : messages
-								} // Use partialMessage if present
-								loading={loadingAllMessagesInChatWithAI}
-								isLoadingMore={isLoadingMore}
-								handleStartReached={handleStartReached}
-								skip={skip}
-							/>
+							{getAllChatsWithAI?.length > 0 ? (
+								<ChatUi
+									messages={
+										partialMessage ? [partialMessage, ...messages] : messages
+									}
+									loading={loadingAllMessagesInChatWithAI}
+									isLoadingMore={isLoadingMore}
+									handleStartReached={handleStartReached}
+									skip={skip}
+								/>
+							) : (
+								<div className='w-full flex flex-col items-center justify-center'>
+									<h1>{t("You don't have chats")}</h1>
+									<Button
+										color='main'
+										onClick={handleCreateChat}
+										disabled={loadingCreateChatsWithAI}
+									>
+										{t('Create a new chat')}
+									</Button>
+								</div>
+							)}
 						</ModalBody>
 						<ModalFooter>
 							<MessageInput

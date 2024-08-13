@@ -1,14 +1,16 @@
-// 'use client'
-// import { useAuth } from '@/features/auth/model/auth.model'
-// import { useRouter } from '@/navigation'
-// import { useEffect } from 'react'
+'use client'
+import { IUser } from '@/entities/Auth'
+import { GET_PROFILE } from '@/entities/Auth/model/auth.queries'
+import { useRouter } from '@/navigation'
+import { useQuery } from '@apollo/client'
+import { useEffect } from 'react'
 
-// export const useAuthRedirect = () => {
-// 	const { user } = useAuth()
+export const useAuthRedirect = () => {
+	const { data: user } = useQuery<{ getProfile: IUser }>(GET_PROFILE)
 
-// 	const { replace } = useRouter()
+	const { replace } = useRouter()
 
-// 	useEffect(() => {
-// 		if (!!user?.email) replace('/')
-// 	}, [replace, user])
-// }
+	useEffect(() => {
+		if (!!user?.getProfile?.email) replace('/')
+	}, [replace, user])
+}

@@ -13,7 +13,8 @@ const nextConfig = {
 		GRAPHQL_SERVER_URL: process.env.GRAPHQL_SERVER_URL,
 		GRAPHQL_WS_SERVER_URL: process.env.GRAPHQL_WS_SERVER_URL,
 		CLIENT_DOMAIN: process.env.CLIENT_DOMAIN,
-		SERVER_URL: process.env.SERVER_URL
+		SERVER_URL: process.env.SERVER_URL,
+		CLIENT_URL: process.env.CLIENT_URL
 	},
 	images: {
 		remotePatterns: [

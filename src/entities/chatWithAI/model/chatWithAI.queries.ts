@@ -11,7 +11,7 @@ export const GET_ALL_CHATS_WITH_AI = gql`
 	}
 `
 export const useGetAllChatsWithAI = (lessonId: string) => {
-	const { data, error, loading } = useQuery<{
+	const { data, error, loading, refetch } = useQuery<{
 		getAllChatsWithAI: IChatWithAI[]
 	}>(GET_ALL_CHATS_WITH_AI, {
 		variables: { lessonId },
@@ -21,7 +21,8 @@ export const useGetAllChatsWithAI = (lessonId: string) => {
 		getAllChatsWithAI: data?.getAllChatsWithAI,
 		errorAllChatsWithAI: error,
 		loadingAllChatsWithAI: loading,
-		hasFetched: !loading && data !== undefined
+		hasFetched: !loading && data !== undefined,
+		refetch
 	}
 }
 

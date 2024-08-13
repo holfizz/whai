@@ -19,8 +19,8 @@ const LessonPlanAccordion = ({ lessonsAllData, t, parentPrefix = '' }) => {
 		setIsModalOpen(true)
 	}
 
-	const handleSave = updatedLesson => {
-		updateLesson({
+	const handleSave = async updatedLesson => {
+		await updateLesson({
 			variables: {
 				lessonId: updatedLesson.id,
 				updateLessonInput: {

@@ -43,15 +43,17 @@ const ChatUi = ({
 				startReached={handleStartReached}
 				itemContent={(index, message) => (
 					<div key={index}>
-						<Message
-							messageFrom={
-								message.role === 'USER'
-									? MessageWithAIRole.USER
-									: MessageWithAIRole.ASSISTANT
-							}
-						>
-							{message.content}
-						</Message>
+						{message && (
+							<Message
+								messageFrom={
+									message.role === 'USER'
+										? MessageWithAIRole.USER
+										: MessageWithAIRole.ASSISTANT
+								}
+							>
+								{message.content}
+							</Message>
+						)}
 					</div>
 				)}
 			/>

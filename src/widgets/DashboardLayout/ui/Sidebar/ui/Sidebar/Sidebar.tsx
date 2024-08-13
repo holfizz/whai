@@ -1,13 +1,14 @@
 // Sidebar.jsx
 import Logo from '@/shared/ui/Logo/Logo'
 import Text from '@/shared/ui/Text/Text'
+import { useSidebar } from '@/widgets/DashboardLayout/ui/Sidebar'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 import { sidebarItems } from '../../module/sidebar-items.data'
+import SidebarFooter from '../SidebarFooter/SidebarFooter'
 import SidebarItem from '../SidebarItem/SidebarItem'
 import cls from './Sidebar.module.scss'
 import SidebarCollapsedButton from './SidebarCollapsedButton'
-import { useSidebar } from '@/widgets/DashboardLayout/ui/Sidebar'
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 
 const Sidebar = () => {
 	const setIsCollapsed = useSidebar(state => state.setIsCollapsed)
@@ -50,6 +51,7 @@ const Sidebar = () => {
 					)
 				})}
 			</div>
+			<SidebarFooter />
 		</aside>
 	)
 }

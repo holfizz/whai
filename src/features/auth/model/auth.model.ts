@@ -22,10 +22,13 @@ export function setAuthUser(authResponse: IUserData | null): void {
 
 export async function logout(): Promise<void> {
 	try {
-		client.mutate({ mutation: LOGOUT })
+		console.log('Calling logout function')
+		await client.mutate({ mutation: LOGOUT })
+		console.log('Logout mutation sent')
 		localStorage.removeItem('authState')
+		console.log('Removed authState from localStorage')
 		removeFromStorage()
-
+		console.log('Removed from storage')
 		authUserVar({
 			user: null,
 			accessToken: null
