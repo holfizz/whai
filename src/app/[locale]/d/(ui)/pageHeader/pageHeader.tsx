@@ -4,16 +4,16 @@ import { IUser } from '@/entities/Auth'
 import { ICourse, useGetLastCourse } from '@/entities/course'
 import { Link } from '@/navigation'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
+import MathAvatar from '@/shared/assets/image/MathCourseAvatar.png'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import CourseStat from '@/shared/ui/CourseCard/CourseStat/CourseStat'
-import Icon from '@/shared/ui/Icon/Icon'
 import { Progress } from '@/shared/ui/Progress/Progress'
-import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
+import Text, { TextTheme } from '@/shared/ui/Text/Text'
 import { WelcomeBack } from '@/widgets/WelcomeBack'
 import { Skeleton } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { TbBrain } from 'react-icons/tb'
+import Image from 'next/image'
 
 export default function PageHeader({ userData }: { userData: IUser }) {
 	const t = useTranslations('Dashboard')
@@ -35,55 +35,41 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 						<div>
 							<div
 								className={
-									'w-[800px] max-lg:w-[80vw] flex justify-between items-center border-solid border-2 border-opacity-5  border-secondary rounded-2xl p-2 max-md:flex-col max-md:items-start'
+									'w-auto max-lg:w-[75vw] flex justify-between items-center border-solid border-2 border-opacity-5  border-secondary rounded-2xl p-2 max-md:flex-col max-sm:items-start'
 								}
 							>
 								{lastCourseData ? (
-									<>
+									<div className='flex max-sm:w-full'>
 										<div className={'flex'}>
-											<div
+											<Link
+												href={getCourseByIdRoute(lastCourseData?.id)}
 												className={
-													'w-[70px] h-[70px]  rounded-full bg-decor-2 mr-4 flex justify-center items-center'
+													'w-[70px] h-[70px] mr-4 flex justify-center items-center'
 												}
 											>
-												<Icon
-													className={'stroke-[var(--color-white)]  text-3xl'}
-													SVG={TbBrain}
-												/>
-											</div>
+												<Image src={MathAvatar} alt='recommendation' />
+											</Link>
 
-											<div>
-												<div>
+											<div className='w-full'>
+												<div className='w-min max-md:w-full'>
 													{loadingLastCourse ? (
-														<Skeleton className='h-3 w-3/5 rounded-lg' />
+														<Skeleton className='h-3 max-sm:w-full rounded-lg' />
 													) : (
-														<Text
-															className={'max-md:w-[50vw]'}
-															size={TextSize.S}
-															title={lastCourseData?.name}
-														/>
+														<Link
+															className={
+																'font-medium text-xl w-2/3 line-clamp-2 text-ellipsis max-sm:w-full '
+															}
+															href={getCourseByIdRoute(lastCourseData?.id)}
+														>
+															{lastCourseData?.name}
+														</Link>
 													)}
-													<ProgressBar
-														data={lastCourseData}
-														classNames={'max-md:hidden'}
-													/>
+													<ProgressBar data={lastCourseData} />
 												</div>
-												<CourseStat
-													className={'max-md:hidden '}
-													data={lastCourseData}
-												/>
+												<CourseStat data={lastCourseData} />
 											</div>
 										</div>
-										<div>
-											<ProgressBar
-												data={lastCourseData}
-												classNames={'md:hidden max-md:flex w-full'}
-											/>
-											<CourseStat
-												data={lastCourseData}
-												className={'md:hidden max-md:flex max-md:w-[95%]'}
-											/>
-
+										<div className=''>
 											<Button
 												size={'mRound'}
 												href={getCourseByIdRoute(lastCourseData?.id)}
@@ -92,10 +78,12 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 												variant={'circle'}
 												as={Link}
 												color={'accent'}
-												className={'max-md:hidden'}
+												className={
+													'max-sm:hidden max-md:w-[50px] max-md:h-[50px] ml-8'
+												}
 											></Button>
 										</div>
-									</>
+									</div>
 								) : (
 									<Text
 										theme={TextTheme.ERROR}
@@ -120,7 +108,7 @@ const ProgressBar = ({
 }) => {
 	return (
 		<Progress
-			className={`w-[390px] h-1 mt-4 rounded-xl ${classNames}`}
+			className={`w-[390px] h-1 mt-4 rounded-xl max-md:w-full ${classNames}`}
 			color='peach'
 			value={data?.progressPercents}
 			size={'sm'}

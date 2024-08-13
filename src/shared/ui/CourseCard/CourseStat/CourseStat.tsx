@@ -12,7 +12,9 @@ const CourseStat = ({
 }) => {
 	const t = useTranslations('Dashboard')
 	return (
-		<div className={`flex w-[300px] justify-between mt-4 ${className}`}>
+		<div
+			className={`flex w-[300px] justify-between mt-4 max-md:w-1/2 ${className}`}
+		>
 			<div className={'flex items-center'}>
 				<Icon className={'fill-gray-2 mr-2'} SVG={FaClock} />
 				<h2 className='text-sm text-gray-2'>

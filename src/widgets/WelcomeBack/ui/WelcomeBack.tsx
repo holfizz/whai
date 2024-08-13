@@ -1,14 +1,14 @@
-import { Avatar, DropdownTrigger } from '@nextui-org/react'
-import Text, { TextAlign, TextSize } from '@/shared/ui/Text/Text'
-import { FC } from 'react'
-import cls from './WelcomeBack.module.scss'
-import { useTranslations } from 'next-intl'
 import { IUser } from '@/entities/Auth'
-import Button from '@/shared/ui/Button/Button'
-import { UsageGoalsMenu } from '../../DashboardLayout/ui/UsageGoalsMenu'
-import { Dropdown } from '@/shared/ui/Dropdown/Dropdown'
 import { Link } from '@/navigation'
 import { getCreatePageRoute } from '@/shared/const/router'
+import Button from '@/shared/ui/Button/Button'
+import { Dropdown } from '@/shared/ui/Dropdown/Dropdown'
+import Text, { TextAlign, TextSize } from '@/shared/ui/Text/Text'
+import { Avatar, DropdownTrigger } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
+import { FC } from 'react'
+import { UsageGoalsMenu } from '../../DashboardLayout/ui/UsageGoalsMenu'
+import cls from './WelcomeBack.module.scss'
 
 export const WelcomeBack: FC<{ userData: IUser }> = ({ userData }) => {
 	const t = useTranslations('Dashboard')
@@ -23,8 +23,8 @@ export const WelcomeBack: FC<{ userData: IUser }> = ({ userData }) => {
 					alt='Avatar'
 				/>
 				<div className={cls.welcomeBackTitle}>
-					<Text title={`${t('Welcome back')},`} />
-					<Text title={`${userData?.firstName}!`} />
+					<h1 className='text-2xl font-semibold'>{`${t('Welcome back')},`}</h1>
+					<h1 className='text-2xl font-semibold'>{`${userData?.firstName}!`}</h1>
 					<Text
 						className={cls.keepWorkingMessage}
 						align={TextAlign.CENTER}
