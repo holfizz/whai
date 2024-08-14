@@ -148,9 +148,7 @@ const MCQQuestion = ({
 												'text-lg font-medium text-center w-full break-words whitespace-normal'
 											}`}
 										>
-											<Suspense fallback={<DotsLoader />}>
-												<SimpleMDX>{choice.content}</SimpleMDX>
-											</Suspense>
+											<SimpleMDX>{choice.content}</SimpleMDX>
 										</h1>
 									</div>
 								</Button>

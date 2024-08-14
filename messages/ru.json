@@ -184,7 +184,6 @@
 		"Take a short test to determine the difficulty level of the course": "Пройдите небольшой тест, чтобы определить уровень сложности курса",
 		"Try one more time": "Попробуйте еще раз",
 		"Oops Error please try again": "Упс. Ошибочка, пожалуйста попробуйте снова",
-
 		"An error occurred while creating the test": "Произошла ошибка при создании теста",
 		"An error occurred while summing up your test results": "Произошла ошибка при подведении итогов вашего теста",
 		"Summary of your knowledge": "Краткий обзор ваших знаний",
@@ -199,7 +198,11 @@
 		"Enter the title": "Введите название",
 		"Enter the description": "Введите описание",
 		"Title": "Название",
-		"Description": "Описание"
+		"Description": "Описание",
+		"We continue to create the quiz": "Продолжаем создавать тест",
+		"We continue to create the courseThis will take a couple of minutes Please do not close the page": "Это займёт пару минут. Пожалуйста не закрывайте страницy",
+		"Artificial Intelligence is analyzing your knowledge, please wait": "Искусственный интеллект анализирует ваши знания, пожалуйста, подождите",
+		"This will take some time Please dont close the page": "Это займет некоторое время. Пожалуйста, не закрывайте страницу"
 	},
 	"CreateTest": {
 		"What are we creating?": "Что мы создаем?",
@@ -253,7 +256,10 @@
 		"topic": "Тема",
 		"module": "Модуль",
 		"lesson": "Урок",
-		"description": "Описание"
+		"description": "Описание",
+		"We continue to create the course": "Продолжаем создавать курс",
+		"We continue to create the courseThis will take a couple of minutes Please do not close the page": "Это займёт пару минут. Пожалуйста не закрывайте страницy",
+		"Oops Error please try again": "Упс. Ошибочка, пожалуйста попробуйте снова"
 	},
 	"Subscription": {
 		"Subscription price": "Цена подписки",

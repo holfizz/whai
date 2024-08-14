@@ -47,17 +47,23 @@ const PromptStep = () => {
 						],
 						innerWrapper: ['flex justify-between', 'h-auto', 'w-full'],
 						input: ['w-full'],
-						base: 'w-1/2'
+						base: 'w-1/2 max-lg:w-[60vw]'
 					}}
 					minRows={1}
 					value={promptContent}
 					onChange={e => setLocalPromptContent(e.target.value)}
 				/>
-				<div className='mt-20 flex gap-4'>
-					<Button color={'gray'} size={'3xl'} onClick={prevStep}>
+				<div className='mt-20 flex gap-4 max-640:flex-col max-640:w-full  max-640:items-center max-640:justify-center'>
+					<Button
+						className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
+						color={'gray'}
+						size={'3xl'}
+						onClick={prevStep}
+					>
 						{t('Back')}
 					</Button>
 					<Button
+						className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
 						isDisabled={!promptContent.length}
 						color={'main'}
 						size={'3xl'}

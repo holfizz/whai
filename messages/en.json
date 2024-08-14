@@ -198,7 +198,11 @@
 		"Enter the title": "Enter the title",
 		"Enter the description": "Enter the description",
 		"Title": "Title",
-		"Description": "Description"
+		"Description": "Description",
+		"We continue to create the quiz": "We continue to create the quiz",
+		"We continue to create the courseThis will take a couple of minutes Please do not close the page": "We continue to create the courseThis will take a couple of minutes. Please do not close the page",
+		"Artificial Intelligence is analyzing your knowledge, please wait": "Artificial Intelligence is analyzing your knowledge, please wait",
+		"This will take some time Please dont close the page": "This will take some time. Please don't close the page"
 	},
 	"CreateTest": {
 		"What are we creating?": "What are we creating?",
@@ -255,7 +259,10 @@
 		"topic": "Topic",
 		"module": "Module",
 		"lesson": "Lesson",
-		"description": "Description"
+		"description": "Description",
+		"We continue to create the course": "We continue to create the course",
+		"We continue to create the courseThis will take a couple of minutes Please do not close the page": "We continue to create the courseThis will take a couple of minutes Please do not close the page",
+		"Oops Error please try again": "Oops. Error, please try again"
 	},
 	"Subscription": {
 		"Subscription price": "Subscription price",

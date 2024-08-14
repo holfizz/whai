@@ -1,7 +1,7 @@
 import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory/'
 import { useGenerateKnowledgeSum } from '@/entities/quiz'
 import Button from '@/shared/ui/Button/Button'
-import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { Accordion, AccordionItem, Divider } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
@@ -75,7 +75,21 @@ const AIKnowledgeSummary = () => {
 	return (
 		<DashboardLayout>
 			<div className={'flex flex-col items-center justify-center'}>
-				{knowledgeSumLoading && <DotsLoader />}
+				{knowledgeSumLoading && (
+					<>
+						<>
+							<h1 className='text-2xl font-bold max-md:w-[80vw] max-md:text-center'>
+								{t(
+									'Artificial Intelligence is analyzing your knowledge, please wait'
+								)}
+							</h1>
+							<h3 className='text-sm text-gray-3 mt-4 max-md:w-[60vw] max-md:text-center'>
+								{t('This will take some time Please dont close the page')}
+							</h3>
+							<BigDotsLoader className='mt-8' />
+						</>
+					</>
+				)}
 				{summaryData && (
 					<>
 						<h3>{t('Summary of your knowledge')}</h3>
@@ -170,11 +184,21 @@ const AIKnowledgeSummary = () => {
 					</>
 				)}
 				{summaryData && (
-					<div className={'flex gap-5 mt-4'}>
-						<Button size={'3xl'} color={'gray'} onClick={prevStep}>
+					<div className={'flex gap-5 mt-4 max-md:flex-col'}>
+						<Button
+							className=' max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
+							size={'3xl'}
+							color={'gray'}
+							onClick={prevStep}
+						>
 							{t('Back')}
 						</Button>
-						<Button size={'3xl'} color={'main'} onClick={nextStep}>
+						<Button
+							className=' max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
+							size={'3xl'}
+							color={'main'}
+							onClick={nextStep}
+						>
 							{t('Next')}
 						</Button>
 					</div>

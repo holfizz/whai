@@ -39,11 +39,12 @@ const components = {
 	ul: ({ node, ...props }: any) => <ListWrapperUl size='sm' {...props} />,
 	ol: ({ node, ...props }) => <ol className='*:list-decimal' {...props} />
 }
-const SimpleMDX = ({ children }: any) => {
+const SimpleMDX = ({ children, className }: any) => {
 	return (
 		<ReactMarkdown
 			// eslint-disable-next-line react/no-children-prop
 			children={children}
+			className={className}
 			remarkPlugins={[remarkMath, remarkGfm, remarkFrontmatter, remarkParse]}
 			rehypePlugins={[rehypeKatex, rehypeHighlight]}
 			components={components}

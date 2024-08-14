@@ -53,6 +53,7 @@ module.exports = {
 			// Maximum width breakpoints
 			'max-sm': { max: '393px' },
 			'max-md': { max: '768px' },
+			'max-640': { max: '640px' },
 			'max-lg': { max: '1024px' },
 			'max-xl': { max: '1440px' },
 			'max-2xl': { max: '1920px' }

@@ -95,7 +95,6 @@ const ClozeQuestion = ({
 				)
 			}
 
-			// Replace the match with ClozeLine component
 			elements.push(
 				<ClozeLine
 					key={`${question?.id}-${matchIndex}`}
@@ -126,8 +125,8 @@ const ClozeQuestion = ({
 
 	return (
 		<>
-			<div className='flex flex-col items-center mt-10'>
-				<div className='flex flex-wrap items-center text-xl'>
+			<div className='flex flex-col items-center mt-10 w-full px-10'>
+				<div className='flex flex-wrap items-center text-xl whitespace-normal max-sm:text-center max-md:w-full '>
 					{parsedPrompt}
 				</div>
 

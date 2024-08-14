@@ -23,9 +23,11 @@ const ClozeLine: React.FC<ClozeLineProps> = ({
 	useEffect(() => {
 		console.log(22, isCorrect)
 	}, [isCorrect])
-	const baseClassNames = 'max-w-[300px] min-w-[100px] mx-2 !opacity-100'
+	const baseClassNames =
+		'max-w-[300px] min-w-[100px] w-[200px] mx-2 !opacity-100 max-sm:w-[150px]'
 	const inputWrapperClassNames = [
-		'w-[300px]',
+		'w-[200px]',
+		'max-sm:w-[150px]',
 		'py-0',
 		'h-auto',
 		!isAnswered

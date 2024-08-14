@@ -32,7 +32,8 @@ const ChoiceStep = () => {
 			nextStep()
 		}
 	}
-
+	const adaptiveStyleButton =
+		' max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[80vw]'
 	return (
 		<DashboardLayout>
 			<div
@@ -40,18 +41,18 @@ const ChoiceStep = () => {
 				className='w-full flex justify-center items-center flex-col'
 			>
 				<h1>{t('What are we creating?')}</h1>
-				<div className='flex gap-4'>
+				<div className='flex gap-4 max-640:flex-col max-640:w-full  max-640:items-center max-640:justify-center'>
 					<Button
 						color={'secondary'}
 						size={'3xl'}
 						onClick={() => handleChoice('Course')}
-						className={
+						className={`${
 							selectedChoice === 'Course'
 								? ''
 								: selectedChoice
 								? 'opacity-50'
 								: 'opacity-100'
-						}
+						} ${adaptiveStyleButton} `}
 					>
 						{t('Course')}
 					</Button>
@@ -59,13 +60,13 @@ const ChoiceStep = () => {
 						color={'secondary'}
 						size={'3xl'}
 						onClick={() => handleChoice('Test')}
-						className={
+						className={`${
 							selectedChoice === 'Test'
 								? ''
 								: selectedChoice
 								? 'opacity-50'
 								: 'opacity-100'
-						}
+						}  ${adaptiveStyleButton}`}
 					>
 						{t('Test')}
 					</Button>
@@ -81,14 +82,15 @@ const ChoiceStep = () => {
 									: selectedChoice
 									? 'opacity-50'
 									: 'opacity-100'
-							}
+							} ${adaptiveStyleButton}
 						`}
 					>
 						{t('Lesson')}
 					</Button>
 				</div>
-				<div className='flex mt-20 gap-4'>
+				<div className='flex mt-20 gap-4 max-640:flex-col max-640:w-full  max-640:items-center max-640:justify-center'>
 					<Button
+						className={`${adaptiveStyleButton}`}
 						as={Link}
 						href={getDashboardRoute()}
 						color={'gray'}
@@ -98,6 +100,7 @@ const ChoiceStep = () => {
 						{t('Back')}
 					</Button>{' '}
 					<Button
+						className={`${adaptiveStyleButton}`}
 						isDisabled={!selectedChoice}
 						color={'accent'}
 						size={'3xl'}

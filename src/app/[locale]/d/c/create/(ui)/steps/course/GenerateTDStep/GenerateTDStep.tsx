@@ -220,11 +220,10 @@ const GenerateTDStep = (): React.JSX.Element => {
 
 	return (
 		<DashboardLayout>
-			<div
-				style={{ height: 'calc(100vh - var(--navbar-height))' }}
-				className='w-full flex justify-center items-center flex-col'
-			>
-				<h1 className='text-2xl'>{t('Which course description fits best?')}</h1>
+			<div className='w-full flex justify-center items-center flex-col'>
+				<h1 className='text-2xl text-center'>
+					{t('Which course description fits best?')}
+				</h1>
 				{selectedTitle ? (
 					<div className='flex flex-col w-1/3'>
 						<h1 className='text-lg font-medium my-5'>
@@ -240,7 +239,7 @@ const GenerateTDStep = (): React.JSX.Element => {
 						</div>
 					</div>
 				) : (
-					<div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4'>
+					<div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 max-640:w-[90vw]'>
 						{isLoading || loadingTD ? (
 							<Loader />
 						) : (

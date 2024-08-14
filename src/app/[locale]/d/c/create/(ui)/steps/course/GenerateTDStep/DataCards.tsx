@@ -41,6 +41,7 @@ const DataCards = ({
 								size='sRound'
 								variant='square'
 								isIconOnly
+								className='max-640:w-[35px] max-640:h-[35px] aspect-square'
 								onClick={() => handleEditClick(td)}
 								startContent={
 									<HiPencil

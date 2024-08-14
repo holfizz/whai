@@ -107,15 +107,17 @@ const MRQQuestion = ({
 
 	return (
 		<>
-			<h3 className='w-[400px] text-accent text-center text-sm my-10'>
-				<Suspense fallback={<div>Loading...</div>}>
-					<SimpleMDX>{question.prompt}</SimpleMDX>
-				</Suspense>
+			<h3 className=' text-accent text-center text-sm my-10'>
+				<div className='w-full flex items-center'>
+					<div className='w-[90%]'>
+						<SimpleMDX>{question.prompt}</SimpleMDX>
+					</div>
+				</div>
 			</h3>
 			<h4 className='text-sm bg-decor-4 mb-10 rounded-md p-2'>
 				{t('Choose 1 or more answer options')}
 			</h4>
-			<div className='grid grid-cols-2 gap-4 w-full'>
+			<div className='grid grid-cols-2 gap-4 w-full max-640:grid-cols-1 max-640:w-min max-640:flex max-640:flex-col max-640:justify-center max-640:items-center'>
 				{question.choices?.map((choice, index) => {
 					const description =
 						choice.correctAnswerDescription || choice.incorrectAnswerDescription
@@ -132,7 +134,7 @@ const MRQQuestion = ({
 						>
 							<PopoverTrigger>
 								<Button
-									className='relative'
+									className={'max-640:w-[70vw] relative'}
 									disableAnimation={false}
 									size='auto'
 									endContent={

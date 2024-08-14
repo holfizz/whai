@@ -5,9 +5,10 @@ import {
 	useUpdateCoursePlanWithAI
 } from '@/entities/plan/model/plan.queries'
 import { Link } from '@/navigation'
+import RegenerateIcon from '@/shared/assets/icons/Regenerate'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
-import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
@@ -151,9 +152,41 @@ const CreateCoursePlanPage = () => {
 	return (
 		<DashboardLayout className='w-full flex justify-center'>
 			<div className='w-full max-w-[1200px] p-4 flex flex-col items-center justify-center'>
-				{(createPlanLoading || coursePlanLoading) && <DotsLoader />}
+				{(createPlanLoading || coursePlanLoading) && (
+					<>
+						<h1 className='text-2xl font-bold max-md:w-[80vw] max-md:text-center'>
+							{t('We continue to create the course')}
+						</h1>
+						<h3 className='text-sm text-gray-3 mt-4 max-md:w-[60vw] max-md:text-center'>
+							{t(
+								'We continue to create the courseThis will take a couple of minutes Please do not close the page'
+							)}
+						</h3>
+						<BigDotsLoader className='mt-8' />
+					</>
+				)}
 				{createPlanError && (
-					<div>Ошибка загрузки плана курса: {createPlanError.message}</div>
+					<div>
+						<h1 className='text-2xl text-error-text'>
+							{t('Oops Error please try again')}
+						</h1>
+						<div className='w-fll flex mt-10 items-center justify-center'>
+							<Button
+								className='w-auto px-20 h-[70px]  rounded-3xl ml-5'
+								color={'main'}
+								onClick={prevStep}
+							>
+								{t('Back')}
+							</Button>
+							<Button
+								className='ml-5 h-[70px] w-[70px] aspect-square rounded-3xl p-0'
+								color={'gray'}
+								isIconOnly
+								startContent={<RegenerateIcon />}
+								onClick={() => window.location.reload()}
+							/>
+						</div>
+					</div>
 				)}
 				{coursePlanData && (
 					<>

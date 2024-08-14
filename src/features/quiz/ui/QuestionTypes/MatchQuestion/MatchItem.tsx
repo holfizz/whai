@@ -19,11 +19,11 @@ const MatchItem: React.FC<MatchItemProps> = ({
 	const updateXarrow = useXarrow()
 
 	return (
-		<div className='relative w-min'>
+		<div className='relative'>
 			<Button
 				size='lg'
 				color={getButtonColor(side, item.content)}
-				className='mb-2'
+				className={cls.button}
 				onClick={() => {
 					if (disabled) return // Prevent interaction if disabled
 					if (side === 'left') {

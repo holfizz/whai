@@ -60,6 +60,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 			</NavbarContent>
 			<NavbarContent justify='end'>
 				<Button
+					className='max-md:hidden'
 					size='md'
 					color='accent'
 					as={Link}
@@ -143,6 +144,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 					</Dropdown>
 				)}
 				<NavbarMenuToggle
+					i
 					className='640:hidden'
 					aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
 				/>
@@ -153,20 +155,21 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 						<NavbarMenuItem className={cls.MenuItem} key={index}>
 							<SidebarItem
 								item={item}
-								className='w-full'
+								className=''
 								isCollapsed={false}
 							></SidebarItem>
 						</NavbarMenuItem>
 					))}
-					<Button
-						size='lg'
-						color='accent'
-						as={Link}
-						href={getSubscriptionsRoute()}
-					>
-						{t('Subscription')}
-					</Button>
 				</div>
+				<Button
+					className='mx-auto w-[70vw] h-[60px] max-sm:w-[90vw] mb-10'
+					size='lg'
+					color='accent'
+					as={Link}
+					href={getSubscriptionsRoute()}
+				>
+					{t('Subscription')}
+				</Button>
 			</NavbarMenu>
 		</Navbar>
 	)

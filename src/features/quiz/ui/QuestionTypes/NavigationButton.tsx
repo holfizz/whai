@@ -23,9 +23,10 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 	const t = useTranslations('Quiz')
 	const { back } = useRouter()
 	return (
-		<div className='flex gap-4 mt-60'>
+		<div className='flex gap-4 mt-24 max-md:flex-col'>
 			{
 				<Button
+					className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
 					size={'3xl'}
 					color={'gray'}
 					onClick={() => {
@@ -37,12 +38,18 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 				</Button>
 			}
 			{!isChecked && (
-				<Button size={'3xl'} color={'main'} onClick={onCheck}>
+				<Button
+					className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
+					size={'3xl'}
+					color={'main'}
+					onClick={onCheck}
+				>
 					{t('Check')}
 				</Button>
 			)}
 			{isChecked && (
 				<Button
+					className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
 					size={'3xl'}
 					color={'main'}
 					onPress={onNext}

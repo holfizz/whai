@@ -28,7 +28,8 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 		setDraggingItem,
 		draggingItem
 	} = useMatchQuestion(question, onNext, onPrev)
-
+	const isSmallScreen =
+		typeof window !== 'undefined' && window.innerWidth <= 640
 	return (
 		<>
 			<h3 className='w-[400px] text-accent text-center text-sm my-10'>
@@ -75,6 +76,7 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 				{Object.entries(localMatchingAnswers).map(([left, right], index) =>
 					right ? (
 						<Xarrow
+							curveness={isSmallScreen ? 0 : 0.5}
 							key={index}
 							start={left}
 							end={right}

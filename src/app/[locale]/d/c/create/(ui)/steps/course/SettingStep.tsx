@@ -83,15 +83,12 @@ const SettingStep = (): React.JSX.Element => {
 
 	return (
 		<DashboardLayout>
-			<div
-				style={{ height: 'calc(80vh - var(--navbar-height))' }}
-				className='w-full flex justify-center items-center flex-col'
-			>
+			<div className='w-full flex justify-center items-center flex-col h-auto'>
 				<h1 className='text-2xl'>{t('Course Settings')}</h1>
 
-				<div className='flex gap-5 h-[200px]'>
-					<div>
-						<div className='mt-4 flex gap-4 justify-end items-center'>
+				<div className='flex gap-5 max-640:flex-col-reverse max-640:flex-wrap h-auto max-640:justify-center max-640:items-center max-640:mt-40'>
+					<div className='h-[200px] flex flex-col justify-center  max-640:h-auto'>
+						<div className='mt-4 flex gap-4 justify-end items-center '>
 							<label className='block mb-2'>
 								{t('Need video tutorials from YouTube?')}
 							</label>
@@ -153,7 +150,7 @@ const SettingStep = (): React.JSX.Element => {
 					</div>
 					<div
 						{...getRootProps({ className: 'dropzone' })}
-						className='p-4 bg-decor-4 flex justify-center items-center cursor-pointer rounded-3xl h-full w-[200px] flex-col '
+						className='p-4 bg-decor-4 flex justify-center items-center cursor-pointer rounded-3xl w-[200px] h-[200px] max-640:h-[150px]  max-640:w-[150px]  flex-col'
 					>
 						<input {...getInputProps()} />
 						{imagePreview ? (
@@ -172,11 +169,17 @@ const SettingStep = (): React.JSX.Element => {
 						)}
 					</div>
 				</div>
-				<div className='flex gap-4 mt-4'>
-					<Button size={'3xl'} color={'gray'} onClick={prevStep}>
+				<div className='flex gap-4 mt-4 max-640:flex-col max-640:items-center max-640:mt-28'>
+					<Button
+						className=' max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[50vw]'
+						size={'3xl'}
+						color={'gray'}
+						onClick={prevStep}
+					>
 						{t('Back')}
 					</Button>
 					<Button
+						className=' max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[50vw]'
 						size={'3xl'}
 						color={'main'}
 						onClick={handleSaveSettings}

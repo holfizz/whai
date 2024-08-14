@@ -172,7 +172,7 @@ const QuizAnswer = ({
 			</Accordion>
 			{handleNext && (
 				<Button
-					className='mt-4'
+					className='mt-4 max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw] max-sm:w-[200px] max-sm:h-[100px] '
 					size={'3xl'}
 					color={'main'}
 					onClick={handleNext}

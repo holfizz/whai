@@ -3,20 +3,22 @@
 	backdrop-filter: none;
 	height: var(--navbar-height);
 }
-
 .MenuDark {
 	padding: 0;
 }
 
 .Menu {
-	width: 80%;
+	width: max-content;
 	height: 100%;
 	top: 0;
-	margin-left: auto;
+	margin-left: 40px;
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
 }
 
 .MenuItem {
-	width: 100%;
+	width: auto;
 	height: 50px;
 }
 
