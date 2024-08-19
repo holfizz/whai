@@ -190,30 +190,31 @@ const CreateCoursePlanPage = () => {
 				)}
 				{coursePlanData && (
 					<>
-						<div className='flex flex-col items-center w-[80%]'>
+						<div className='flex flex-col items-center w-[80%] max-md:w-[95%]'>
 							<h1 className='text-4xl'>{currentStageTitle[view]}</h1>
 							<Breadcrumbs className='mt-8'>{breadcrumbs}</Breadcrumbs>
 							<div className='flex flex-col justify-center gap-6 mt-10 w-full'>
 								<TopicPlanAccordion
 									topicsAllData={coursePlanData.topics}
 									t={t}
-									onUpdateOrder={handleUpdateOrder}
+									// onUpdateOrder={handleUpdateOrder}
 								/>
 							</div>
 						</div>
 					</>
 				)}
-				<div className='flex gap-5 mt-10'>
+				<div className='flex gap-5 mt-10 max-md:flex-col'>
 					<Button
 						color={'gray'}
 						size={'3xl'}
 						onClick={handleBackClick}
-						className='col-span-full'
+						className='col-span-full max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[50vw]'
 					>
 						{t('Back')}
 					</Button>
 					{coursePlanStateData && (
 						<Button
+							className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[50vw]'
 							color={'main'}
 							size={'3xl'}
 							as={Link}

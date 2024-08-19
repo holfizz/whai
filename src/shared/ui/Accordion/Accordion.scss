@@ -7,11 +7,11 @@
 }
 
 .accordion-header {
-	@apply flex overflow-hidden justify-between items-center cursor-pointer text-left outline-none transition-colors gap-4 w-full;
+	@apply flex overflow-hidden justify-between items-center cursor-pointer text-left outline-none transition-colors gap-4 w-full max-md:min-h-[50px] h-min;
 }
 
 .header-content {
-	@apply flex justify-between items-center w-full px-5 rounded-3xl bg-decor-3;
+	@apply flex justify-between items-center w-full px-5 rounded-3xl max-md:min-h-[50px] h-auto bg-decor-3;
 }
 
 .icon {

@@ -1,7 +1,7 @@
 import { useUpdateLesson } from '@/entities/lesson/model/lesson.queries'
 import DNDIcon from '@/shared/assets/icons/DNDIcon'
+import '@/shared/ui/Accordion/Accordion.scss'
 import Button from '@/shared/ui/Button/Button'
-import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
 import { ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 import { HiPencil } from 'react-icons/hi'
@@ -36,85 +36,44 @@ const LessonPlanAccordion = ({ lessonsAllData, t, parentPrefix = '' }) => {
 		setOpenLessonId(openLessonId === lessonId ? null : lessonId)
 	}
 
-	const onDragEnd = result => {
-		const { source, destination } = result
-
-		if (
-			!destination ||
-			(source.index === destination.index &&
-				source.droppableId === destination.droppableId)
-		) {
-			return
-		}
-
-		const reorderedLessons = Array.from(lessons)
-		const [movedLesson] = reorderedLessons.splice(source.index, 1)
-		reorderedLessons.splice(destination.index, 0, movedLesson)
-
-		setLessons(reorderedLessons)
-	}
-
 	return (
-		<DragDropContext onDragEnd={onDragEnd}>
-			<Droppable droppableId='droppable-lessons'>
-				{provided => (
-					<div
-						className='w-full gap-5'
-						ref={provided.innerRef}
-						{...provided.droppableProps}
+		<div className='w-full gap-5'>
+			{lessons.map((lesson, index) => (
+				<div key={lesson.id} className='flex gap-5 items-center w-full mt-4'>
+					<DNDIcon />
+					<Button
+						color='primary'
+						size='auto'
+						className='w-full flex justify-between items-center rounded-3xl h-[70px] max-md:h-[50px]'
+						onClick={() => toggleLesson(lesson.id)}
+						endContent={<ArrowRight />}
 					>
-						{lessons.map((lesson, index) => (
-							<Draggable key={lesson.id} draggableId={lesson.id} index={index}>
-								{provided => (
-									<div
-										ref={provided.innerRef}
-										{...provided.draggableProps}
-										{...provided.dragHandleProps}
-										className='flex gap-5 items-center w-full mt-4'
-									>
-										<DNDIcon />
-										<Button
-											color='primary'
-											size='auto'
-											className='w-full flex justify-between items-center rounded-3xl h-[70px]'
-											onClick={() => toggleLesson(lesson.id)}
-											endContent={<ArrowRight />}
-										>
-											<div className='flex-1'>
-												<div className='flex justify-between items-center'>
-													<div className='flex gap-4 items-center'>
-														<h2 className='text-sm text-yellow-5'>
-															{t('lesson')}
-														</h2>
-														<h1>{`${parentPrefix}${index + 1}. ${
-															lesson.name
-														}`}</h1>
-													</div>
-												</div>
-											</div>
-										</Button>
-										<Button
-											className='rounded-3xl'
-											isIconOnly
-											size='mdIcon'
-											variant='square'
-											color='gray'
-											onClick={e => {
-												e.stopPropagation()
-												handleEditClick(lesson)
-											}}
-											startContent={
-												<HiPencil color='var(--color-decor-2)' fontSize={28} />
-											}
-										/>
-									</div>
-								)}
-							</Draggable>
-						))}
-						{provided.placeholder}
-					</div>
-				)}
-			</Droppable>
+						<div className='flex-1'>
+							<div className='flex justify-between items-center'>
+								<div className='flex gap-4 items-center'>
+									<h2 className='text-sm text-yellow-5'>{t('lesson')}</h2>
+									<h1>{`${parentPrefix}${index + 1}. ${lesson.name}`}</h1>
+								</div>
+							</div>
+						</div>
+					</Button>
+					<Button
+						className='rounded-3xl max-md:w-[50px] max-md:h-[50px] aspect-square'
+						isIconOnly
+						size='mdIcon'
+						variant='square'
+						color='gray'
+						onClick={e => {
+							e.stopPropagation()
+							handleEditClick(lesson)
+						}}
+						startContent={
+							<HiPencil color='var(--color-accent)' fontSize={28} />
+						}
+					/>
+				</div>
+			))}
+
 			{selectedLesson && (
 				<EditCourseModal
 					t={t}
@@ -125,7 +84,7 @@ const LessonPlanAccordion = ({ lessonsAllData, t, parentPrefix = '' }) => {
 					type='lesson'
 				/>
 			)}
-		</DragDropContext>
+		</div>
 	)
 }
 
