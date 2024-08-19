@@ -145,7 +145,12 @@
 	},
 	"CoursesPage": {
 		"My courses": "My courses",
-		"Library of all courses": "Library of all courses"
+		"Library of all courses": "Library of all courses",
+		"Library": "Library",
+		"Choose what to view": "Choose what to view",
+		"Courses": "Courses",
+		"Tests": "Tests",
+		"Lessons": "Lessons"
 	},
 	"Lesson": {
 		"There was an error loading the lesson": "There was an error loading the lesson",

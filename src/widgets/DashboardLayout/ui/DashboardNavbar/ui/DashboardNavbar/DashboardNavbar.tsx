@@ -144,7 +144,6 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 					</Dropdown>
 				)}
 				<NavbarMenuToggle
-					i
 					className='640:hidden'
 					aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
 				/>

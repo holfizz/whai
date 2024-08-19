@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { SubtopicsData } from './subtopic.contracts'
+import { SubtopicsData } from './task.contracts'
 
 export interface ISubtopic {
 	id: string

@@ -20,7 +20,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'http',
-				hostname: 'localhost',
+				hostname: process.env.CLIENT_DOMAIN,
 				port: '8800',
 				pathname: '/avatar/**'
 			}

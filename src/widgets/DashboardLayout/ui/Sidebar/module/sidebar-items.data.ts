@@ -12,10 +12,11 @@ import {
 	getSettingsRoute,
 	getStatisticsRoute
 } from '@/shared/const/router'
+import { LucideIcon } from 'lucide-react'
 
 export interface ISidebarItem {
 	link: string
-	icon: LucideIcon
+	icon: LucideIcon | any
 	text:
 		| 'Main'
 		| 'Courses'

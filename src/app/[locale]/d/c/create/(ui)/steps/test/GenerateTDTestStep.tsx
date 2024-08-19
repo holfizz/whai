@@ -190,9 +190,10 @@ const GenerateTDTestStep = () => {
 						isDisabled={loadingTD}
 						size={'3xl'}
 						color={'main'}
+						isIconOnly
 						onClick={reGenerateTD}
 					>
-						{t('Re-generate')}
+						<RegenerateIcon />
 					</Button>
 					{conditionNextButton && (
 						<Button

@@ -145,7 +145,12 @@
 	},
 	"CoursesPage": {
 		"My courses": "Мои курсы",
-		"Library of all courses": "Библиотека всех курсов"
+		"Library of all courses": "Библиотека всех курсов",
+		"Library": "Библиотека",
+		"Choose what to view": "Выберите, что посмотреть",
+		"Courses": "Курсы",
+		"Tests": "Тесты",
+		"Lessons": "Уроки"
 	},
 	"Lesson": {
 		"There was an error loading the lesson": "Произошла ошибка при загрузке урока.",
