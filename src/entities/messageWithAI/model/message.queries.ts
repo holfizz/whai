@@ -1,3 +1,4 @@
+import logger from '@/shared/lib/utils/logger'
 import { gql, useMutation, useQuery, useSubscription } from '@apollo/client'
 import { IMessageWithAI } from './message.types'
 
