@@ -6,6 +6,7 @@ import InputField from '../InputLabel/InputField'
 
 import { useTranslations } from 'next-intl'
 import { z } from 'zod'
+import InputPhoneField from '../InputLabel/InputPhoneField'
 
 interface RegistrationInputsProps {
 	type: authConstants
@@ -32,14 +33,11 @@ const RegistraionInputs: FC<RegistrationInputsProps> = ({
 		<>
 			{type === authConstants.SIGNUP && (
 				<>
-					<InputField
+					<InputPhoneField
 						className={cls.label}
 						name={'phoneNumber'}
 						label={t('Phone Number')}
-						type='number'
-						color={
-							formErrors.phoneNumber?._errors.length ? 'danger' : 'default'
-						}
+						color={formErrors.phoneNumber?._errors.length ? 'danger' : 'white'}
 						errorMessage={formErrors.phoneNumber?._errors
 							?.map((error: any) => tAuthValidation(error))
 							.join(', ')}
@@ -50,7 +48,7 @@ const RegistraionInputs: FC<RegistrationInputsProps> = ({
 						name={'firstName'}
 						label={t('First Name')}
 						type='text'
-						color={formErrors.firstName?._errors.length ? 'danger' : 'default'}
+						color={formErrors.firstName?._errors.length ? 'danger' : 'white'}
 						errorMessage={formErrors.firstName?._errors
 							?.map((error: any) => tAuthValidation(error))
 							.join(', ')}
@@ -61,7 +59,7 @@ const RegistraionInputs: FC<RegistrationInputsProps> = ({
 						name={'lastName'}
 						label={t('Last Name')}
 						type='text'
-						color={formErrors.lastName?._errors.length ? 'danger' : 'default'}
+						color={formErrors.lastName?._errors.length ? 'danger' : 'white'}
 						errorMessage={formErrors.lastName?._errors
 							?.map((error: any) => tAuthValidation(error))
 							.join(', ')}

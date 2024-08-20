@@ -1,18 +1,11 @@
-import { Input } from '@nextui-org/react'
+import { Input } from '@/shared/ui/Input/InputUI'
 import { FC } from 'react'
 
 interface InputFieldProps {
 	name: string
 	label: string
 	type?: string
-	color:
-		| 'secondary'
-		| 'default'
-		| 'primary'
-		| 'success'
-		| 'warning'
-		| 'danger'
-		| undefined
+	color: any
 	errorMessage?: string
 	onValueChange?: (e: any) => void
 	placeholder?: string
@@ -32,12 +25,16 @@ const InputField: FC<InputFieldProps> = ({
 	return (
 		<label className={className}>
 			<Input
+				classNames={{
+					innerWrapper: 'py-3 px-2 h-[60px]',
+					inputWrapper: 'h-auto',
+					input: 'max-md:text-2xl'
+				}}
 				name={name}
 				isRequired
+				radius={'roundedFull'}
 				isClearable
 				type={type}
-				label={label}
-				variant='bordered'
 				color={color}
 				errorMessage={errorMessage}
 				onValueChange={onValueChange}

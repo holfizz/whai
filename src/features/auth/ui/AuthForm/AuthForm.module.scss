@@ -52,6 +52,9 @@
 .submitButton {
 	margin-top: 10px;
 	width: 90%;
+	height: 60px;
+	border-radius: 30px;
+	@apply text-lg max-md:text-2xl;
 }
 
 .forgotPasswordButton {

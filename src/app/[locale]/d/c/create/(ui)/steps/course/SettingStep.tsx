@@ -1,6 +1,7 @@
 'use client'
 import { useUpdateCourse } from '@/entities/course'
 import DropImage from '@/shared/assets/icons/Course/fill/DropImage'
+import logger from '@/shared/lib/utils/logger'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
@@ -60,7 +61,7 @@ const SettingStep = (): React.JSX.Element => {
 					}
 				})
 			} else {
-				console.log('courseId', courseId)
+				logger.log('courseId', courseId)
 			}
 
 			if (courseId) nextStep()

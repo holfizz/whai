@@ -76,12 +76,16 @@ const AuthForm: FC<AuthFormProps> = memo(
 		}, [loginData])
 
 		useEffect(() => {
-			if (loginData && type === authConstants.LOGIN) {
+			if (
+				loginData?.login?.accessToken &&
+				!loginError?.message?.length &&
+				type === authConstants.LOGIN
+			) {
 				setTimeout(() => {
 					router.push('/')
 				}, 500)
 			}
-		}, [loginData, router, type])
+		}, [loginData, loginError, router, type])
 
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()

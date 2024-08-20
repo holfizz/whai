@@ -1,3 +1,4 @@
+import logger from '@/shared/lib/utils/logger'
 import { ArrowUpRight } from 'lucide-react'
 import { useState } from 'react'
 import { HiPencil } from 'react-icons/hi'
@@ -18,7 +19,7 @@ const CreateCourseCard = ({
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	const handleSave = updatedCourse => {
-		console.log('Course updated:', updatedCourse)
+		logger.log('Course updated:', updatedCourse)
 		onCourseDataChange(updatedCourse)
 	}
 

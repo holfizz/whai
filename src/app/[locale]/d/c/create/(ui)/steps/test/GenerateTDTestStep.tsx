@@ -1,5 +1,6 @@
 import { useGenerateTD } from '@/entities/titleDescription'
 import RegenerateIcon from '@/shared/assets/icons/Regenerate'
+import logger from '@/shared/lib/utils/logger'
 import Button from '@/shared/ui/Button/Button'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
@@ -34,11 +35,11 @@ const GenerateTDTestStep = () => {
 	const hasFetched = useRef(false)
 
 	const handleGenerateTD = useCallback(async () => {
-		console.log('handleGenerateTD called')
+		logger.log('handleGenerateTD called')
 		if (!requestSuccessful) {
 			try {
 				if (!selectedTitle && !isLoading && !loadingTD) {
-					console.log('Starting request')
+					logger.log('Starting request')
 					setIsLoading(true)
 					await mutationTD({
 						variables: {
@@ -51,7 +52,7 @@ const GenerateTDTestStep = () => {
 					setRequestSuccessful(true)
 				}
 			} catch (error) {
-				console.error('Error generating title and description: ', error)
+				logger.error('Error generating title and description: ', error)
 			} finally {
 				setIsLoading(false)
 			}
@@ -66,7 +67,7 @@ const GenerateTDTestStep = () => {
 	])
 
 	useEffect(() => {
-		console.log('mutationTDData changed', mutationTDData)
+		logger.log('mutationTDData changed', mutationTDData)
 		if (mutationTDData.length > 0) {
 			setTitleDescriptionData(mutationTDData)
 		}
@@ -74,21 +75,21 @@ const GenerateTDTestStep = () => {
 
 	useEffect(() => {
 		if (!hasFetched.current) {
-			console.log('useEffect running')
+			logger.log('useEffect running')
 			handleGenerateTD()
 			hasFetched.current = true
 		}
 	}, [handleGenerateTD])
 
 	const reGenerateTD = () => {
-		console.log('Re-generating TD')
+		logger.log('Re-generating TD')
 		setRequestSuccessful(false)
 		setIsLoading(true)
 		handleGenerateTD()
 	}
 
 	const handleSaveEdit = (updatedData, index) => {
-		console.log('Saving edit', { updatedData, index })
+		logger.log('Saving edit', { updatedData, index })
 		const updatedTDData = titleDescriptionData.map((td, i) =>
 			i === index ? { ...td, ...updatedData } : td
 		)

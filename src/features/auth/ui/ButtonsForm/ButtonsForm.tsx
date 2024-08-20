@@ -3,7 +3,6 @@ import cls from '../AuthForm/AuthForm.module.scss'
 
 import { authConstants } from '@/shared/const/auth'
 
-import Button from '@/shared/ui/Button/Button'
 import { Link } from '@/navigation'
 
 import {
@@ -12,6 +11,7 @@ import {
 	getRouteSignUp
 } from '@/shared/const/router'
 
+import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
 
 interface ButtonsFormProps {
@@ -24,7 +24,12 @@ const ButtonsForm: FC<ButtonsFormProps> = ({ type, setIsFormType }) => {
 
 	return (
 		<>
-			<Button color='warning' type={'submit'} className={cls.submitButton}>
+			<Button
+				color='primary'
+				variant='light'
+				type={'submit'}
+				className={cls.submitButton}
+			>
 				{type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
 			</Button>
 
@@ -32,7 +37,11 @@ const ButtonsForm: FC<ButtonsFormProps> = ({ type, setIsFormType }) => {
 				className={cls.forgotPasswordButton}
 				href={getRouteForgotPassword()}
 			>
-				<Button color='danger' variant='light'>
+				<Button
+					color='danger'
+					className='rounded-[30px] mt-2 text-md max-md:text-2xl'
+					variant='light'
+				>
 					{t('Forgot your password?')}
 				</Button>
 			</Link>
@@ -49,7 +58,11 @@ const ButtonsForm: FC<ButtonsFormProps> = ({ type, setIsFormType }) => {
 				className={cls.changeModeButton}
 				href={type === authConstants.LOGIN ? getRouteSignUp() : getRouteLogin()}
 			>
-				<Button variant='light' color='warning'>
+				<Button
+					variant='lightMain'
+					className='rounded-[30px] mt-2 text-md max-md:text-2xl'
+					color='main'
+				>
 					{type === authConstants.LOGIN ? t('Sign up') : t('Log in')}
 				</Button>
 			</Link>

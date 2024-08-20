@@ -4,27 +4,27 @@ import { Button as UiButton, extendVariants } from '@nextui-org/react'
 const Button = extendVariants(UiButton, {
 	variants: {
 		color: {
-			accent: 'text-[var(--color-white)] bg-[var(--color-accent)]',
-			white: 'bg-[var(--color-white)] text-[var(--color-accent)]',
-			gray: 'bg-[var(--color-decor-4)] text-[var(--color-accent)]',
-			'gray-text': 'bg-[var(--color-decor-4)] text-[#BDBDBD]',
+			accent: 'text-white bg-accent',
+			white: 'bg-white text-accent',
+			gray: 'bg-decor-4 text-accent',
+			'gray-text': 'bg-decor-4 text-[#BDBDBD]',
 			error: 'bg-error-1 text-error-text',
 			success: 'bg-success-1 text-success-text',
 			'success-4': 'bg-success-4 text-success-text',
-			primary: 'text-[var(--color-accent)] bg-[var(--color-decor-1)]',
-			secondary: 'text-[var(--color-accent)] bg-[var(--color-decor-3)]',
-			main: 'text-[var(--color-accent)] bg-[var(--color-decor-2)]',
+			primary: 'text-accent bg-decor-1 data-[hover=true]:bg-[#FFEDB6CD]',
+			secondary: 'text-accent bg-decor-3',
+			main: 'text-accent bg-decor-2',
 			clear: 'bg-transparent text-[var(--primary-color)]'
 		},
 		variant: {
-			sidebar:
-				'bg-transparent text-[var(--color-accent)] flex justify-center items-center',
+			sidebar: 'bg-transparent text-accent flex justify-center items-center',
 			circle: 'rounded-full flex align-center justify-center min-w-fit ',
 			square:
 				'rounded-full flex align-center justify-center min-w-fit rounded-lg ',
 			sRound:
 				'rounded-2xl flex align-center justify-center stroke-white min-w-fit ',
-			noneRound: 'rounded-none'
+			noneRound: 'rounded-none',
+			lightMain: 'data-[hover=true]:bg-[#FD9F9F84] bg-transparent'
 		},
 		isDisabled: {
 			true: 'opacity-30  cursor-not-allowed'

@@ -1,11 +1,11 @@
-import { Input } from '@nextui-org/react'
 import { FC, useState } from 'react'
 
-import cls from '../AuthForm/AuthForm.module.scss'
-import InputField from '../InputLabel/InputField'
 import { useTranslations } from 'next-intl'
 import { z } from 'zod'
+import cls from '../AuthForm/AuthForm.module.scss'
+import InputField from '../InputLabel/InputField'
 
+import { Input } from '@/shared/ui/Input/InputUI'
 import { HiOutlineEye } from 'react-icons/hi'
 import { PiEyeClosedBold } from 'react-icons/pi'
 
@@ -37,7 +37,7 @@ const BasicInputs: FC<BasicInputsProps> = ({ formErrors }) => {
 				name={'email'}
 				type='email'
 				label={t('Email')}
-				color={formErrors.email?._errors.length ? 'danger' : 'default'}
+				color={formErrors.email?._errors.length ? 'danger' : 'white'}
 				errorMessage={formErrors.email?._errors
 					?.map((error: any) => tAuthValidation(error))
 					.join(', ')}
@@ -47,10 +47,13 @@ const BasicInputs: FC<BasicInputsProps> = ({ formErrors }) => {
 			<label className={cls.label}>
 				<div className={cls.passwordInput}>
 					<Input
-						label={t('Password')}
-						variant='bordered'
+						classNames={{
+							innerWrapper: 'py-3 px-2 h-[60px]',
+							inputWrapper: 'h-auto',
+							input: 'max-md:text-2xl'
+						}}
 						placeholder={t('Enter your password')}
-						isRequired
+						radius='roundedFull'
 						endContent={
 							<button
 								className='focus:outline-none'
@@ -58,13 +61,13 @@ const BasicInputs: FC<BasicInputsProps> = ({ formErrors }) => {
 								onClick={toggleVisibility}
 							>
 								{isVisible ? (
-									<HiOutlineEye className='text-2xl text-default-400 pointer-events-none' />
+									<HiOutlineEye className='text-2xl max-md:text-4xl text-default-400 pointer-events-none' />
 								) : (
-									<PiEyeClosedBold className='text-2xl text-default-400 pointer-events-none' />
+									<PiEyeClosedBold className='text-2xl max-md:text-4xl text-default-400 pointer-events-none' />
 								)}
 							</button>
 						}
-						color={formErrors.password?._errors.length ? 'danger' : 'default'}
+						color={formErrors.password?._errors.length ? 'danger' : 'white'}
 						errorMessage={formErrors.password?._errors
 							?.map((error: any) => tAuthValidation(error))
 							.join(', ')}

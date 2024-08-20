@@ -7,6 +7,7 @@ import {
 	GRAPHQL_SERVER_URL,
 	GRAPHQL_WS_SERVER_URL
 } from '@/shared/const/constants'
+import logger from '@/shared/lib/utils/logger'
 import {
 	ApolloClient,
 	ApolloLink,
@@ -58,10 +59,10 @@ const refreshToken = async () => {
 			logout()
 			throw new GraphQLError('Empty AccessToken')
 		}
-		console.log('Received new access token:', newAccessToken)
+		logger.log('Received new access token:', newAccessToken)
 
 		if (response.error) {
-			console.log('GraphQL error:', response.error)
+			logger.log('GraphQL error:', response.error)
 			logout()
 		}
 
@@ -99,7 +100,7 @@ const errorLink = onError(
 									const newAccessToken = await refreshToken()
 
 									if (!newAccessToken) {
-										console.log('No new access token, logging out')
+										logger.log('No new access token, logging out')
 										logout()
 									}
 
@@ -153,9 +154,9 @@ const wsLink = new GraphQLWsLink(
 		},
 		retryAttempts: 5, // Повторные попытки подключения при ошибках
 		on: {
-			connected: () => console.log('WebSocket connected'),
-			closed: () => console.log('WebSocket closed'),
-			error: error => console.error('WebSocket error', error)
+			connected: () => logger.log('WebSocket connected'),
+			closed: () => logger.log('WebSocket closed'),
+			error: error => logger.error('WebSocket error', error)
 		}
 	})
 )

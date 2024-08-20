@@ -1,3 +1,4 @@
+import logger from '@/shared/lib/utils/logger'
 import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { ICoursePlanWithAI } from './plan.types'
 export const GET_ALL_COURSE_PLANS_WITH_AI = gql`
@@ -69,7 +70,7 @@ export const useGetAllCoursePlansWithAI = ({
 			updateQuery: (prev, { fetchMoreResult }) => {
 				if (!fetchMoreResult) return prev
 				const newCoursePlans = fetchMoreResult.getAllCoursePlansWithAI
-				console.log(newCoursePlans)
+				logger.log(newCoursePlans)
 				if (newCoursePlans.length === 0) {
 					return prev
 				}

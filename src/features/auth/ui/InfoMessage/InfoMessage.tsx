@@ -1,4 +1,3 @@
-import Text, { TextSize, TextTheme } from '@/shared/ui/Text/Text'
 import { FC } from 'react'
 
 import { authConstants } from '@/shared/const/auth'
@@ -19,28 +18,28 @@ const InfoMessage: FC<InfoMessageProps> = ({ error, data, type }) => {
 
 	return (
 		<>
-			<Text
-				theme={
+			<h1
+				className={`${
 					error?.message
-						? TextTheme.ERROR
+						? 'text-red-400'
 						: data
-							? TextTheme.SUCCESS
-							: TextTheme.PRIMARY
-				}
-				size={TextSize.L}
-				title={type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
-			/>
+						? 'text-success-10'
+						: 'text-accent'
+				} text-2xl max-md:text-5xl text-bold`}
+			>
+				{type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
+			</h1>
 
 			{error && (
-				<Text theme={TextTheme.ERROR} text={error?.message} size={TextSize.L} />
+				<h1 className='text-xl max-md:text-2xl text-error-10'>
+					{error?.message}
+				</h1>
 			)}
 
 			{type === authConstants.SIGNUP && data && (
-				<Text
-					theme={TextTheme.SUCCESS}
-					text={t('Confirm your email')}
-					size={TextSize.L}
-				/>
+				<h1 className='text-success-text text-xl max-md:text-2xl text-center'>
+					{t('Confirm your email')}
+				</h1>
 			)}
 		</>
 	)
