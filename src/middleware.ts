@@ -1,4 +1,4 @@
-import { EnumTokens } from '@/shared/types/auth' // Импортируйте ваш EnumTokens
+import { EnumTokens } from '@/shared/types/auth'
 import { gql } from '@apollo/client'
 import createIntlMiddleware from 'next-intl/middleware'
 import { NextRequest, NextResponse } from 'next/server'
@@ -11,7 +11,6 @@ const nextIntlMiddleware = createIntlMiddleware({
 	defaultLocale: 'ru'
 })
 
-// Запрос GraphQL для получения нового токена
 const GET_NEW_TOKEN = gql`
 	query getNewToken {
 		getNewToken {
@@ -24,35 +23,12 @@ const GET_NEW_TOKEN = gql`
 	}
 `
 
-// Функция для получения токенов с сервера
-const fetchNewToken = async (refreshToken: string) => {
-	try {
-		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_URL}/refresh-token`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${refreshToken}`
-				}
-			}
-		)
-		if (!response.ok) throw new Error('Failed to refresh token')
-		const data = await response.json()
-		return data.accessToken
-	} catch (error) {
-		console.error('Error fetching new token:', error)
-		return null
-	}
-}
-
-// Функция для получения нового токена через Apollo Client
 const fetchNewTokenFromApollo = async () => {
 	try {
 		const { data } = await client.query({
 			query: GET_NEW_TOKEN
 		})
-		return data.getNewToken.accessToken
+		return data?.getNewToken?.accessToken
 	} catch (error) {
 		console.error('Error fetching new token from Apollo:', error)
 		return null
@@ -63,45 +39,39 @@ export default async function (req: NextRequest) {
 	const { url, cookies, nextUrl } = req
 	const localeMatch = url.match(/^\/([a-z]{2})\//)
 	const locale = localeMatch ? localeMatch[1] : 'ru'
-	const isHomePage = nextUrl.pathname === `/${locale}`
+	const path = nextUrl.pathname
+	const publicRoutes = [
+		`/${locale}/auth/login`,
+		`/${locale}/auth/sign-up`,
+		`/${locale}/`,
+		`/${locale}/offer`
+	]
+
+	const isProtectedRoute = path.startsWith(`/${locale}/d`)
+	const isPublicRoute = publicRoutes.includes(path)
+	const isOnboardingPage = path === `/${locale}`
+	const isAuthPage = path.includes('auth')
+
 	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
 	const accessToken = cookies.get(EnumTokens.ACCESS_TOKEN)?.value
-	const isAuthPage = url.includes('auth')
-	const isDashboardPage = url.includes('/d')
 	if (!refreshToken) {
-		if (!isAuthPage) {
-			req.cookies.delete(EnumTokens.ACCESS_TOKEN)
-			req.cookies.delete(EnumTokens.REFRESH_TOKEN)
-			return redirectToLogin(false, req, locale)
-		}
-	} else {
-		if (isAuthPage) {
-			return NextResponse.redirect(new URL(`/${locale}/`, url))
-		}
-		if (isDashboardPage && !accessToken) {
-			let newAccessToken = await fetchNewToken(refreshToken)
-			if (!newAccessToken) {
-				newAccessToken = await fetchNewTokenFromApollo()
-			}
-
-			if (newAccessToken) {
-				const response = NextResponse.next()
-				response.cookies.set(EnumTokens.ACCESS_TOKEN, newAccessToken)
-				return response
-			}
-			logout()
-			return redirectToLogin(false, req, locale)
-		}
+		req.cookies.delete(EnumTokens.ACCESS_TOKEN)
 	}
-
-	if (isHomePage && accessToken && refreshToken) {
-		return NextResponse.redirect(new URL(`/${locale}/d`, url))
+	if (isPublicRoute) {
+		return nextIntlMiddleware(req)
 	}
-	if (isAuthPage && refreshToken) {
-		return NextResponse.redirect(new URL(`/${locale}/d`, url))
+	if ((isOnboardingPage || isAuthPage) && accessToken) {
+		return NextResponse.redirect(new URL(`/${locale}/d`, nextUrl))
 	}
-	if (isDashboardPage && !refreshToken) {
-		return NextResponse.redirect(new URL(`/${locale}/auth/login`, url))
+	if (isProtectedRoute && !accessToken) {
+		const newAccessToken = await fetchNewTokenFromApollo()
+		if (newAccessToken) {
+			const response = NextResponse.next()
+			response.cookies.set(EnumTokens.ACCESS_TOKEN, newAccessToken)
+			return response
+		}
+		logout()
+		return NextResponse.redirect(new URL(`/${locale}/auth/login`, nextUrl))
 	}
 
 	return nextIntlMiddleware(req)
@@ -116,14 +86,4 @@ export const config = {
 		'/d/:path*',
 		'/d'
 	]
-}
-
-const redirectToLogin = (
-	isAdminPage: boolean,
-	req: NextRequest,
-	locale: string
-) => {
-	return NextResponse.redirect(
-		new URL(isAdminPage ? `/${locale}/404` : `/${locale}/auth/login`, req.url)
-	)
 }

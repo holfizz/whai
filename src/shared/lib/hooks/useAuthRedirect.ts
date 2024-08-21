@@ -11,6 +11,6 @@ export const useAuthRedirect = () => {
 	const { replace } = useRouter()
 
 	useEffect(() => {
-		if (!!user?.getProfile?.email) replace('/')
+		if (!!user?.getProfile?.email) replace('/d')
 	}, [replace, user])
 }

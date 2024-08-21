@@ -27,12 +27,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
 	width: 100%;
 	height: 100vh;
 }
 .authFormWrapper {
 	height: auto;
 	border-radius: 15px;
+	flex-direction: column;
+
 	width: 50vw;
 	min-width: 300px;
 	max-width: 500px;

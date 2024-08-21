@@ -2,10 +2,10 @@
 import { Link, useRouter } from '@/navigation'
 import { WhaiBig } from '@/shared/assets/logo/WhaiBig'
 import { WhaiSmall } from '@/shared/assets/logo/WhaiSmall'
+import { getDashboardRoute, getRouteMain } from '@/shared/const/router'
 import { classNames, Mods } from '@/shared/lib/classNames/classNames'
 import { FC, memo } from 'react'
 import cls from './Logo.module.scss'
-import { getDashboardRoute } from '@/shared/const/router'
 
 export enum LogoSize {
 	S = 'small',
@@ -17,6 +17,7 @@ interface LogoProps {
 	className?: string
 	logoSize?: LogoSize
 	color?: string
+	isDashboard?: boolean
 	logoType?: 'long' | 'short'
 }
 
@@ -25,6 +26,7 @@ const Logo: FC<LogoProps> = memo(
 		className,
 		logoSize = LogoSize.S,
 		color = '#2E311D',
+		isDashboard = true,
 		logoType = 'small'
 	}) => {
 		const router = useRouter()
@@ -35,7 +37,7 @@ const Logo: FC<LogoProps> = memo(
 		const LOGO_TYPE = logoType === 'short' ? WhaiSmall : WhaiBig
 		return (
 			<Link
-				href={getDashboardRoute()}
+				href={isDashboard ? getDashboardRoute() : getRouteMain()}
 				className={classNames(cls.logoButton, mods, [])}
 				type={'button'}
 			>

@@ -13,7 +13,11 @@
 		"Sign up": "Регистрация",
 		"Log in": "Войти",
 		"Confirm your email": "Подтвердите свой адрес электронной почты",
-		"Forgot your password?": "Забыли пароль?"
+		"Forgot your password?": "Забыли пароль?",
+		"Upon login I accept": "При входе я принимаю",
+		"Upon sign up I accept": "При регистрации я принимаю",
+		"Terms and Conditions": "Публичное Соглашение (оферту)",
+		"Personal data processing policy": "Политику обработки персональных данных"
 	},
 	"confirmEmailPage": {
 		"Mail has been successfully activated You can close the page": "Почта успешно активирована. Вы можете закрыть страницу",
@@ -47,7 +51,9 @@
 	},
 	"Navbar": {
 		"Start for free": "Начать бесплатно",
-		"Features": "Функции",
+		"Home": "Главная",
+		"About us": "О нас",
+		"Reviews": "Отзывы",
 		"Integrations": "Интеграции",
 		"Customers": "Клиенты",
 		"Signed in as": "Авторизовался как",
@@ -58,7 +64,9 @@
 		"Log in": "Войти",
 		"Sign up": "Регистрация",
 		"Subscription": "Подписка",
-		"Notice": "Уведомления"
+		"Notice": "Уведомления",
+		"FAQ": "FAQ",
+		"Continue studying": "Продолжить обучение"
 	},
 	"SidebarSetting": {
 		"My account": "Мой аккаунт ",
@@ -114,7 +122,9 @@
 		"Library": "Библиотека",
 		"Chat with AI": "Чат с ИИ",
 		"Statistics": "Статистика",
-		"Settings": "Настройки"
+		"Settings": "Настройки",
+		"Generations of courses": "Генераций курсов",
+		"Block generation": "Генераций блоков"
 	},
 	"Dashboard": {
 		"Let's begin! (1/4)": "Начнем! (1/4)",

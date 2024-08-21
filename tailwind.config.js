@@ -2,9 +2,10 @@
 import { nextui } from '@nextui-org/react'
 
 const twColors = {
-	'background-1': '#f2e4d4',
-	'background-2': '#f8f4f0',
-	'background-3': '#fdfdfd',
+	'bg-1': '#f2e4d4',
+	'bg-2': '#f8f4f0',
+	'bg-3': '#fdfdfd',
+	'bg-accent': '#FFEDE0',
 	accent: '#272727',
 	secondary: '#bbb9b7',
 	'gray-2': '#BDBDBD',

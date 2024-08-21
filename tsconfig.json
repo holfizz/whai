@@ -26,7 +26,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		"src/app/page.tsx",
-		".next/types/**/*.ts"
+		".next/types/**/*.ts",
+		"src/app/[locale]/offer/(ui)/Subs.page.mdx"
 	],
 	"exclude": ["node_modules", "dist"]
 }

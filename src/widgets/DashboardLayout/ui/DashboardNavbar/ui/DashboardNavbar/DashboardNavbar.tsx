@@ -98,11 +98,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 								src={userData.avatarPath}
 							/>
 						</DropdownTrigger>
-						<DropdownMenu
-							color='white'
-							aria-label='Profile Actions'
-							variant='flat'
-						>
+						<DropdownMenu color='white' aria-label='Profile Actions'>
 							<DropdownItem color='white' key='profile' className='h-14 gap-2'>
 								<p className='font-semibold'>{t('Signed in as')}</p>
 								<p className='font-semibold'>{userData.email}</p>

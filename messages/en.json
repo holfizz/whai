@@ -13,7 +13,10 @@
 		"Sign up": "Sign up",
 		"Log in": "Log in",
 		"Forgot your password?": "Forgot your password?",
-		"Confirm your email": "Confirm your email"
+		"Confirm your email": "Confirm your email",
+		"I accept the": "I accept the",
+		"Terms and Conditions": "Terms and Conditions",
+		"Personal data processing policy": "Personal data processing policy"
 	},
 	"confirmEmailPage": {
 		"Mail has been successfully activated You can close the page": "Mail has been successfully activated. You can close the page",
@@ -47,7 +50,9 @@
 	},
 	"Navbar": {
 		"Start for free": "Start for free",
-		"Features": "Features",
+		"Home": "Home",
+		"About us": "About us",
+		"Reviews": "Отзывы",
 		"Integrations": "Integrations",
 		"Customers": "Customers",
 		"Signed in as": "Signed in as",
@@ -58,7 +63,9 @@
 		"Log in": "Log in",
 		"Sign up": "Sign up",
 		"Subscription": "Subscription",
-		"Notice": "Notice"
+		"Notice": "Notice",
+		"FAQ": "FAQ",
+		"Continue studying": "Continue studying"
 	},
 	"SidebarSetting": {
 		"User settings": "User settings",
@@ -114,7 +121,9 @@
 		"Library": "Library",
 		"Chat with AI": "Chat with AI",
 		"Statistics": "Statistics",
-		"Settings": "Settings"
+		"Settings": "Settings",
+		"Generations of courses": "Generations of courses",
+		"Block generation": "Block generation"
 	},
 	"Dashboard": {
 		"Continue education": "Continue education",

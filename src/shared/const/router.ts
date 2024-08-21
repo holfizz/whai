@@ -1,6 +1,10 @@
 export const getRouteMain = () => '/'
 export const getRouteAbout = () => '/about'
+export const getFAQRoute = () => '/faq'
+export const getReviewRoute = () => '/review'
 export const getRouteProfile = () => `/profile`
+export const getRouteOffer = () => `/offer`
+export const getRoutePrivacy = () => `/privacy`
 export const getRouteLogin = () => `/auth/login`
 export const getRouteSignUp = () => `/auth/sign-up`
 export const getRouteForgotPassword = () => `/auth/forgot-password`

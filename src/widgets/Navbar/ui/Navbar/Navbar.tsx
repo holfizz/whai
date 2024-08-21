@@ -1,24 +1,18 @@
 'use client'
 import { useGetProfile } from '@/entities/Auth/model/auth.queries'
-import { logout } from '@/features/auth/model/auth.model'
 import { Link } from '@/navigation'
 import {
 	getDashboardRoute,
+	getFAQRoute,
+	getReviewRoute,
+	getRouteAbout,
 	getRouteLogin,
-	getRouteSignUp,
-	getSettingsRoute,
-	getSupportRoute
+	getRouteMain,
+	getRouteSignUp
 } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
-import {
-	Dropdown,
-	DropdownItem,
-	DropdownMenu
-} from '@/shared/ui/Dropdown/Dropdown'
 import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
 import {
-	Avatar,
-	DropdownTrigger,
 	NavbarBrand,
 	NavbarContent,
 	NavbarItem,
@@ -30,24 +24,12 @@ import {
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { MdKeyboardArrowDown } from 'react-icons/md'
 import cls from './Navbar.module.scss'
 
 export function Navbar() {
 	const t = useTranslations('Navbar')
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
-	const menuItems = [
-		'Profile',
-		'Dashboard',
-		'Activity',
-		'Analytics',
-		'System',
-		'Deployments',
-		'My Settings',
-		'Team Settings',
-		'Help & Feedback',
-		'Log Out'
-	]
+	const menuItems = ['Home', 'About us', 'Reviews', 'FAQ'] as any
 
 	const [isClient, setIsClient] = useState(false)
 	const { userData } = useGetProfile()
@@ -69,123 +51,33 @@ export function Navbar() {
 			</NavbarContent>
 
 			<NavbarContent className='hidden sm:flex gap-4' justify='center'>
-				<Dropdown color='white'>
-					<NavbarItem>
-						<DropdownTrigger>
-							<Button
-								disableRipple
-								className='p-0 bg-transparent data-[hover=true]:bg-transparent'
-								radius='sm'
-								color='clear'
-								size='lg'
-							>
-								{t('Features')}
-								<MdKeyboardArrowDown />
-							</Button>
-						</DropdownTrigger>
-					</NavbarItem>
-					<DropdownMenu className='w-[340px]' color='white'>
-						<DropdownItem
-							key='autoscaling'
-							description='ACME scales apps to meet user demand, automagically, based on load.'
-							color='white'
-						>
-							Autoscaling
-						</DropdownItem>
-						<DropdownItem
-							key='usage_metrics'
-							description='Real-time metrics to debug issues. Slow query added? We’ll show you exactly where.'
-							color='white'
-						>
-							Usage Metrics
-						</DropdownItem>
-						<DropdownItem
-							key='production_ready'
-							description='ACME runs on ACME, join us and others serving requests at web scale.'
-							color='white'
-						>
-							Production Ready
-						</DropdownItem>
-						<DropdownItem
-							key='99_uptime'
-							description='Applications stay on the grid with high availability and high uptime guarantees.'
-							color='white'
-						>
-							+99% Uptime
-						</DropdownItem>
-						<DropdownItem
-							isSelected
-							key='supreme_support'
-							description='Overcome any challenge with a supporting team ready to respond.'
-							color='white'
-						>
-							+Supreme Support
-						</DropdownItem>
-					</DropdownMenu>
-				</Dropdown>
 				<NavbarItem>
-					<Link color='foreground' href='#'>
-						{t('Customers')}
+					<Link color='foreground' href={getRouteMain()}>
+						{t('Home')}
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Link color='foreground' href='#'>
-						{t('Integrations')}
+					<Link color='foreground' href={getRouteAbout()}>
+						{t('About us')}
+					</Link>
+				</NavbarItem>
+				<NavbarItem>
+					<Link color='foreground' href={getReviewRoute()}>
+						{t('Reviews')}
+					</Link>
+				</NavbarItem>
+				<NavbarItem>
+					<Link color='foreground' href={getFAQRoute()}>
+						{t('FAQ')}
 					</Link>
 				</NavbarItem>
 			</NavbarContent>
 			<NavbarContent justify='end'>
 				{userData?.email ? (
 					<>
-						<Dropdown color='white'>
-							<DropdownTrigger>
-								<Avatar
-									className={cls.avatar}
-									as='button'
-									classNames={{
-										icon: 'text-decor-2',
-										base: 'border-decor-2 border-2 border-solid'
-									}}
-									src={userData.avatarPath}
-								/>
-							</DropdownTrigger>
-							<DropdownMenu color='white' aria-label='Profile Actions'>
-								<DropdownItem key='profile' className='h-14 gap-2'>
-									<p className='font-semibold'>{t('Signed in as')}</p>
-									<p className='font-semibold'>{userData.email}</p>
-								</DropdownItem>
-								<DropdownItem
-									as={Link}
-									href={getDashboardRoute()}
-									key='dashboard'
-								>
-									{t('Dashboard')}
-								</DropdownItem>
-								<DropdownItem
-									href={getSettingsRoute()}
-									as={Link}
-									key='settings'
-								>
-									{t('Settings')}
-								</DropdownItem>
-								<DropdownItem
-									href={getSupportRoute()}
-									as={Link}
-									key='help_and_feedback'
-								>
-									{t('Help Feedback')}
-								</DropdownItem>
-								<DropdownItem
-									onClick={() => {
-										logout()
-									}}
-									key='logout'
-									color='danger'
-								>
-									{t('Log Out')}
-								</DropdownItem>
-							</DropdownMenu>
-						</Dropdown>
+						<Button as={Link} href={getDashboardRoute()} color='accent'>
+							{t('Continue studying')}
+						</Button>
 					</>
 				) : (
 					<>
@@ -216,7 +108,7 @@ export function Navbar() {
 					<NavbarMenuItem key={`${item}-${index}`}>
 						<Link href={'#'}>
 							<UILink color='foreground' className='w-full' href='#' size='lg'>
-								{item}
+								{t(item)}
 							</UILink>
 						</Link>
 					</NavbarMenuItem>
