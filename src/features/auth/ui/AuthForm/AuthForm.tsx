@@ -4,7 +4,6 @@ import { useRouter } from '@/navigation'
 import { saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import { authConstants } from '@/shared/const/auth'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { useTranslations } from 'next-intl'
 import {
 	Dispatch,
 	FC,
@@ -37,7 +36,6 @@ export interface AuthFormProps {
 
 const AuthForm: FC<AuthFormProps> = memo(
 	({ className, type, setIsFormType }) => {
-		const t = useTranslations('auth')
 		const router = useRouter()
 		const [formErrors, setFormErrors] = useState<
 			z.ZodFormattedError<
@@ -47,12 +45,10 @@ const AuthForm: FC<AuthFormProps> = memo(
 					phoneNumber?: string
 					firstName?: string
 					lastName?: string
-					offerAccepted?: string
 				},
 				string
 			>
 		>({ _errors: [] })
-		const [isOfferAccepted, setIsOfferAccepted] = useState(false)
 
 		const {
 			login,
@@ -94,16 +90,6 @@ const AuthForm: FC<AuthFormProps> = memo(
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()
 
-			if (!isOfferAccepted) {
-				setFormErrors(prev => ({
-					...prev,
-					offerAccepted: {
-						_errors: ['You must accept the offer']
-					}
-				}))
-				return
-			}
-
 			const form = new FormData(e.currentTarget)
 			const formData = Object.fromEntries(form.entries())
 			const formSchema =
@@ -133,13 +119,6 @@ const AuthForm: FC<AuthFormProps> = memo(
 				<InfoMessage error={error} data={data} type={type} />
 				<RegistrationInputs type={type} formErrors={formErrors} />
 				<BasicInputs formErrors={formErrors} />
-				<div className={cls.offerSection}>
-					{formErrors.offerAccepted?._errors.length > 0 && (
-						<div className={cls.error}>
-							{formErrors.offerAccepted._errors[0]}
-						</div>
-					)}
-				</div>
 				<ButtonsForm type={type} setIsFormType={setIsFormType} />
 			</form>
 		)

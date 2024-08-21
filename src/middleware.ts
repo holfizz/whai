@@ -60,7 +60,7 @@ export default async function (req: NextRequest) {
 	if (isPublicRoute) {
 		return nextIntlMiddleware(req)
 	}
-	if ((isOnboardingPage || isAuthPage) && accessToken) {
+	if ((isOnboardingPage || isAuthPage) && refreshToken) {
 		return NextResponse.redirect(new URL(`/${locale}/d`, nextUrl))
 	}
 	if (isProtectedRoute && !accessToken) {
