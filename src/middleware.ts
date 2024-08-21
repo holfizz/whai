@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import client from './app/(providers)/ApolloProvider/ui/apollo-client'
 import { logout } from './features/auth/model/auth.model'
 import { locales } from './navigation'
+import { removeFromStorage } from './shared/api/auth/auth.helper'
 
 const nextIntlMiddleware = createIntlMiddleware({
 	locales,
@@ -50,17 +51,16 @@ export default async function (req: NextRequest) {
 	const isProtectedRoute = path.startsWith(`/${locale}/d`)
 	const isPublicRoute = publicRoutes.includes(path)
 	const isOnboardingPage = path === `/${locale}`
-	const isAuthPage = path.includes('auth')
-
 	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
 	const accessToken = cookies.get(EnumTokens.ACCESS_TOKEN)?.value
 	if (!refreshToken) {
-		req.cookies.delete(EnumTokens.ACCESS_TOKEN)
+		removeFromStorage()
 	}
+
 	if (isPublicRoute) {
 		return nextIntlMiddleware(req)
 	}
-	if ((isOnboardingPage || isAuthPage) && refreshToken) {
+	if (isOnboardingPage && refreshToken) {
 		return NextResponse.redirect(new URL(`/${locale}/d`, nextUrl))
 	}
 	if (isProtectedRoute && !accessToken) {
