@@ -14,7 +14,8 @@
 		"Log in": "Log in",
 		"Forgot your password?": "Forgot your password?",
 		"Confirm your email": "Confirm your email",
-		"I accept the": "I accept the",
+		"Upon login I accept": "Upon login I accept",
+		"Upon sign up I accept": "Upon sign up I accept",
 		"Terms and Conditions": "Terms and Conditions",
 		"Personal data processing policy": "Personal data processing policy"
 	},
