@@ -1,11 +1,10 @@
-import { Navbar } from '@/widgets/Navbar'
+import { Layout } from '@/widgets/Layout'
 
 const AboutPage = () => {
 	return (
-		<div>
-			<Navbar />
+		<Layout>
 			<h1>О нас</h1>
-		</div>
+		</Layout>
 	)
 }
 export default AboutPage

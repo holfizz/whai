@@ -1,9 +1,8 @@
-import { Navbar } from '@/widgets/Navbar'
+import { Layout } from '@/widgets/Layout'
 
 const PrivacyPolicyPage = () => {
 	return (
-		<div>
-			<Navbar />
+		<Layout>
 			<div className='container mx-auto px-4 py-8'>
 				<h1 className='text-3xl font-bold text-decor-2 mb-4'>
 					Политика в отношении обработки персональных данных
@@ -592,7 +591,7 @@ const PrivacyPolicyPage = () => {
 					</li>
 				</ul>
 			</div>
-		</div>
+		</Layout>
 	)
 }
 

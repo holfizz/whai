@@ -1,6 +1,8 @@
 export const getRouteMain = () => '/'
 export const getRouteAbout = () => '/about'
 export const getFAQRoute = () => '/faq'
+export const getRouteContacts = () => '/contacts'
+export const getRoutePay = () => '/pay'
 export const getReviewRoute = () => '/review'
 export const getRouteProfile = () => `/profile`
 export const getRouteOffer = () => `/offer`

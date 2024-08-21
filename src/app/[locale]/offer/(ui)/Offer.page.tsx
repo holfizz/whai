@@ -1,9 +1,8 @@
-import { Navbar } from '@/widgets/Navbar'
+import { Layout } from '@/widgets/Layout'
 
 const OfferPage = () => {
 	return (
-		<div>
-			<Navbar />
+		<Layout>
 			<div className='container mx-auto px-4 py-8'>
 				<h1 className='text-3xl font-bold text-decor-2 mb-4'>
 					ПУБЛИЧНАЯ ОФЕРТА
@@ -641,7 +640,7 @@ const OfferPage = () => {
 				</p>
 				<p className='mb-4 text-yellow-5'>Редакция 20 августа 2024 года.</p>
 			</div>
-		</div>
+		</Layout>
 	)
 }
 

@@ -1,11 +1,10 @@
-import { Navbar } from '@/widgets/Navbar'
+import { Layout } from '@/widgets/Layout'
 
 const FAQPage = () => {
 	return (
-		<div>
-			<Navbar />
-			<h1>О нас</h1>
-		</div>
+		<Layout>
+			<h1>faq</h1>
+		</Layout>
 	)
 }
 export default FAQPage

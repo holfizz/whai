@@ -1,0 +1,18 @@
+/* Layout.scss */
+
+.layout-container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh; /* Ensure the layout takes up at least the full viewport height */
+}
+
+.content {
+	flex: 1; /* This allows the content to grow and push the footer to the bottom */
+}
+
+footer {
+	background-color: #f1f1f1; /* Add your footer background color */
+	text-align: center;
+	padding: 20px;
+	margin-top: auto; /* Pushes the footer to the bottom */
+}
