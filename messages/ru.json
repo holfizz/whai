@@ -15,9 +15,14 @@
 		"Confirm your email": "Подтвердите свой адрес электронной почты",
 		"Forgot your password?": "Забыли пароль?",
 		"Upon login I accept": "При входе я принимаю",
-		"Upon sign up I accept": "При регистрации я принимаю",
+		"I accept the": "Я принимаю",
 		"Terms and Conditions": "Публичное Соглашение (оферту)",
 		"Personal data processing policy": "Политику обработки персональных данных"
+	},
+	"Layout": {
+		"By using the site, you consent to the collection of cookies and agree to": "Пользуясь сайтом, вы разрешаете сбор cookie-файлов и соглашаетесь c",
+		"personal data processing policy": "политикой обработки персональные данных",
+		"Okey": "Окей"
 	},
 	"confirmEmailPage": {
 		"Mail has been successfully activated You can close the page": "Почта успешно активирована. Вы можете закрыть страницу",

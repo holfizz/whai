@@ -1,9 +1,11 @@
 'use client'
-
-import { useRouter } from '@/navigation'
+import { Link, useRouter } from '@/navigation'
 import { saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import { authConstants } from '@/shared/const/auth'
+import { getRouteOffer, getRoutePrivacy } from '@/shared/const/router'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { Checkbox, CheckboxGroup } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
 import {
 	Dispatch,
 	FC,
@@ -36,6 +38,7 @@ export interface AuthFormProps {
 
 const AuthForm: FC<AuthFormProps> = memo(
 	({ className, type, setIsFormType }) => {
+		const t = useTranslations('auth')
 		const router = useRouter()
 		const [formErrors, setFormErrors] = useState<
 			z.ZodFormattedError<
@@ -45,6 +48,8 @@ const AuthForm: FC<AuthFormProps> = memo(
 					phoneNumber?: string
 					firstName?: string
 					lastName?: string
+					termsAccepted: boolean
+					policyAccepted: boolean
 				},
 				string
 			>
@@ -66,6 +71,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 		const data = type === authConstants.SIGNUP ? signUpData : loginData
 		const loading = type === authConstants.SIGNUP ? signUpLoading : loginLoading
 		const error = type === authConstants.SIGNUP ? signUpError : loginError
+
+		const [termsAccepted, setTermsAccepted] = useState(false)
+		const [policyAccepted, setPolicyAccepted] = useState(false)
 
 		useEffect(() => {
 			if (loginData) {
@@ -96,6 +104,22 @@ const AuthForm: FC<AuthFormProps> = memo(
 				type === authConstants.SIGNUP ? formSignUpSchema : formLoginSchema
 			const validationResult = formSchema.safeParse(formData) as any
 
+			// Дополнительная проверка на чекбоксы
+			if (type === authConstants.SIGNUP) {
+				if (!termsAccepted || !policyAccepted) {
+					setFormErrors({
+						...formErrors,
+						_termsAccepted: !termsAccepted
+							? ['You must accept the Terms and Conditions']
+							: [],
+						_policyAccepted: !policyAccepted
+							? ['You must accept the Privacy Policy']
+							: []
+					})
+					return
+				}
+			}
+
 			if (!validationResult.success) {
 				const errors = validationResult.error.format()
 				setFormErrors(errors)
@@ -111,6 +135,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 			}
 		}
 
+		const isTermsInvalid = !!formErrors._termsAccepted?.length
+		const isPolicyInvalid = !!formErrors._policyAccepted?.length
+
 		return (
 			<form
 				onSubmit={onSubmit}
@@ -119,6 +146,46 @@ const AuthForm: FC<AuthFormProps> = memo(
 				<InfoMessage error={error} data={data} type={type} />
 				<RegistrationInputs type={type} formErrors={formErrors} />
 				<BasicInputs formErrors={formErrors} />
+				{type === authConstants.SIGNUP && (
+					<div className={'ml-2 w-full'}>
+						<CheckboxGroup
+							className='w-full'
+							isRequired
+							isInvalid={isTermsInvalid || isPolicyInvalid}
+							onValueChange={values => {
+								setTermsAccepted(values.includes('termsAccepted'))
+								setPolicyAccepted(values.includes('policyAccepted'))
+							}}
+						>
+							<Checkbox
+								size='lg'
+								value='termsAccepted'
+								className='w-full max-w-full text-lg flex items-start'
+								classNames={{
+									wrapper: 'after:bg-decor-2 min-w-[20px] min-h-[20px]'
+								}}
+							>
+								{t('I accept the')}{' '}
+								<Link href={getRouteOffer()} className='underline'>
+									{t('Terms and Conditions')}
+								</Link>
+							</Checkbox>
+							<Checkbox
+								size='lg'
+								className='w-full max-w-full text-lg flex items-start my-2'
+								classNames={{
+									wrapper: 'after:bg-decor-2 min-w-[20px] min-h-[20px]'
+								}}
+								value='policyAccepted'
+							>
+								{t('I accept the')}{' '}
+								<Link href={getRoutePrivacy()} className='underline'>
+									{t('Personal data processing policy')}
+								</Link>
+							</Checkbox>
+						</CheckboxGroup>
+					</div>
+				)}
 				<ButtonsForm type={type} setIsFormType={setIsFormType} />
 			</form>
 		)

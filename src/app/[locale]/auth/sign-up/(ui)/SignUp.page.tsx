@@ -1,8 +1,6 @@
 'use client'
 import { AuthForm } from '@/features/auth'
-import { Link } from '@/navigation'
 import { authConstants } from '@/shared/const/auth'
-import { getRouteOffer, getRoutePrivacy } from '@/shared/const/router'
 import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
 import Loader from '@/shared/ui/Loader/Loader'
 import Logo from '@/shared/ui/Logo/Logo'
@@ -25,18 +23,6 @@ export default function Page() {
 				<div className={cls.authFormWrapper}>
 					<Suspense fallback={<Loader />}>
 						<AuthForm type={authConstants.SIGNUP} />
-						<div className='flex items-start text-secondary w-[400px] max-md:w-[90vw]'>
-							<p className='text-center text-[12px]'>
-								{t('Upon sign up I accept')}{' '}
-								<Link href={getRouteOffer()} className='underline'>
-									{t('Terms and Conditions')}
-								</Link>
-								{', '}
-								<Link href={getRoutePrivacy()} className='underline'>
-									{t('Personal data processing policy')}
-								</Link>
-							</p>
-						</div>
 					</Suspense>
 				</div>
 			</div>

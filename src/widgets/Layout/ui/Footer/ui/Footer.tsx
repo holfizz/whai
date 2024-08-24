@@ -4,6 +4,7 @@ import {
 	getReviewRoute,
 	getRouteAbout,
 	getRouteContacts,
+	getRouteCookiePolicy,
 	getRouteOffer,
 	getRoutePay,
 	getRoutePrivacy,
@@ -62,14 +63,19 @@ export const Footer = () => {
 					<h3 className='text-lg font-semibold'>Whai 2024</h3>
 					<ul className='space-y-1'>
 						<li>
-							<a href={getRouteOffer()} className='underline'>
+							<Link href={getRouteOffer()} className='underline'>
 								Договор оферты
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href={getRoutePrivacy()} className='underline'>
+							<Link href={getRoutePrivacy()} className='underline'>
 								Политика конфиденциальности
-							</a>
+							</Link>
+						</li>
+						<li>
+							<Link href={getRouteCookiePolicy()} className='underline'>
+								Политика Cookies
+							</Link>
 						</li>
 						<li>ОГРНИП: 324750000037516</li>
 						<li>ИНН: 753614213399</li>

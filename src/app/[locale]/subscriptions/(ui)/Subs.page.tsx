@@ -12,8 +12,8 @@ const SubsPage = () => {
 
 	const monthlyPrices = {
 		base: 2999,
-		standard: 5999,
-		premium: 7999
+		standard: 3999,
+		premium: 4999
 	}
 
 	const discountedPrices = {
@@ -76,27 +76,27 @@ const SubsPage = () => {
 								<p className='text-sm text-gray-500 mb-6'>
 									{t('Discount notice')}
 								</p>
-								<p className='mb-4'>{t('Base description')}</p>
+								<p className='mb-4 h-[150px]'>{t('Base description')}</p>
 								<ul className='mb-4 flex flex-col justify-center w-full'>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Courses per month', { count: 2 })}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Course titles', { count: 20 })}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Lessons per course', { count: 10 })}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Analytics access')}
@@ -137,33 +137,33 @@ const SubsPage = () => {
 								<p className='text-sm text-gray-500 mb-6'>
 									{t('Discount notice')}
 								</p>
-								<p className='mb-4'>{t('Standard description')}</p>
+								<p className='mb-4 h-[150px]'>{t('Standard description')}</p>
 								<ul className='mb-4 flex flex-col justify-center w-full'>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Courses per month', { count: 5 })}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Course titles', { count: 30 })}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Lessons per course', { count: 10 })}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Analytics access')}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('AI homework check')}
@@ -204,45 +204,45 @@ const SubsPage = () => {
 								<p className='text-sm text-gray-500 mb-6'>
 									{t('Discount notice')}
 								</p>
-								<p className='mb-4'>{t('Premium description')}</p>
+								<p className='mb-4 h-[150px]'>{t('Premium description')}</p>
 								<ul className='mb-4 flex flex-col justify-center w-full'>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Courses per month', { count: 10 })}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Course titles', { count: 50 })}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Lessons per course', { count: 30 })}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Analytics access')} (visits, grades)
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('AI homework check')}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Document upload')}
 										</span>
 									</li>
-									<li className='flex justify-start items-start w-full mt-8'>
+									<li className='flex justify-start items-start w-full mt-4'>
 										<CheckIcon className='mr-2 flex-shrink-0' />
 										<span className='flex-grow leading-tight'>
 											{t('Image generation')}

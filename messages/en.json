@@ -14,10 +14,15 @@
 		"Log in": "Log in",
 		"Forgot your password?": "Forgot your password?",
 		"Confirm your email": "Confirm your email",
+		"I accept the": "I accept the",
 		"Upon login I accept": "Upon login I accept",
-		"Upon sign up I accept": "Upon sign up I accept",
 		"Terms and Conditions": "Terms and Conditions",
 		"Personal data processing policy": "Personal data processing policy"
+	},
+	"Layout": {
+		"By using the site, you consent to the collection of cookies and agree to": "By using the site, you consent to the collection of cookies and agree to",
+		"personal data processing policy": "personal data processing policy",
+		"Okey": "Okey"
 	},
 	"confirmEmailPage": {
 		"Mail has been successfully activated You can close the page": "Mail has been successfully activated. You can close the page",

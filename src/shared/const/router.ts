@@ -7,6 +7,8 @@ export const getReviewRoute = () => '/review'
 export const getRouteProfile = () => `/profile`
 export const getRouteOffer = () => `/offer`
 export const getRoutePrivacy = () => `/privacy`
+export const getRouteCookiePolicy = () => `/cookie-policy`
+export const getRouteSubscriptionTerm = () => `/subscription-term`
 export const getRouteLogin = () => `/auth/login`
 export const getRouteSignUp = () => `/auth/sign-up`
 export const getRouteForgotPassword = () => `/auth/forgot-password`
