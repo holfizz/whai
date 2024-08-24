@@ -11,7 +11,7 @@ export const getRouteCookiePolicy = () => `/cookie-policy`
 export const getRouteSubscriptionTerm = () => `/subscription-term`
 export const getRouteLogin = () => `/auth/login`
 export const getRouteSignUp = () => `/auth/sign-up`
-export const getRouteForgotPassword = () => `/auth/forgot-password`
+export const getRouteForgotPassword = () => `/forgot-password`
 export const getSupportRoute = () => `/support`
 export const getSubscriptionsRoute = () => `/subscriptions`
 

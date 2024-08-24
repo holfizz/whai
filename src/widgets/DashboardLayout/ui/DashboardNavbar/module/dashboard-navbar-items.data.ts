@@ -49,7 +49,10 @@ export const dashboardNavbarItems: IDashboardNavbarItem[] = [
 	{
 		key: 'logout',
 		text: 'Log Out',
-		onClick: logout,
+		onClick: () => {
+			logout()
+			window.location.replace('/')
+		},
 		icon: LogOut
 	}
 ]

@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 import { unstable_setRequestLocale } from 'next-intl/server'
-import SubsPageAsync from './(ui)/Subs.async'
+import ForgotPasswordPage from './(ui)/ForgotPassword.page'
 
 export const metadata: Metadata = {
-	title: 'Оформление подписки | Whai'
+	title: 'Восстановление пароля | Whai'
 }
 
 export default function Page({
@@ -12,5 +12,5 @@ export default function Page({
 	params: { locale: string }
 }) {
 	unstable_setRequestLocale(locale)
-	return <SubsPageAsync />
+	return <ForgotPasswordPage />
 }

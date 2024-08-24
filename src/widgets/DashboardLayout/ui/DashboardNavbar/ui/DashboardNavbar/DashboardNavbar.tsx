@@ -130,6 +130,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 							<DropdownItem
 								onClick={() => {
 									logout()
+									window.location.replace('/')
 								}}
 								key='logout'
 								color='danger'

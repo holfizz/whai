@@ -144,7 +144,6 @@ const SubsPage = () => {
 					)}
 
 					<div className='mt-5'>
-						<h1 className='text-xl font-medium'>{t('Subscription price')}</h1>
 						<div className='flex items-center gap-4 mt-4'>
 							<h2
 								className={`text-sm ${
