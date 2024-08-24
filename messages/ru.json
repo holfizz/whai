@@ -300,8 +300,14 @@
 		"Document upload": "Возможность скидывать изображения и документы в чат с ИИ",
 		"Image generation": "Генерация изображений на основе заданных тем и контента курса",
 		"Discount notice": "-20% в месяц при годовой подписке",
-		"Original price": "{price} ₽",
-		"Discounted price": "{discountedPrice} ₽"
+		"Read subscription terms": "Читать условия подписки",
+		"Enable auto-renewal": "Включить автоматическое продление",
+		"Continue checkout": "Продолжить оформление",
+		"Your current subscription": "Ваша текущая подписка на данный момент",
+		"PREMIUM": "Премиум",
+		"BASIC": "Базовая",
+		"STANDARD": "Стандартная",
+		"Subscription end date": "Дата окончания подписки"
 	},
 	"Open": "Открыть",
 	"User": "Пользователь",

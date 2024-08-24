@@ -1,4 +1,3 @@
-export interface IChatWithAI {
-	id: string
-	title: string
+export interface IMakePayment {
+	paymentUrl: string
 }

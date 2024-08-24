@@ -304,7 +304,15 @@
 		"Image generation": "Image generation based on course topics and content",
 		"Discount notice": "20% off per month with an annual subscription",
 		"Original price": "{price} ₽",
-		"Discounted price": "{discountedPrice} ₽"
+		"Discounted price": "{discountedPrice} ₽",
+		"Read subscription terms": "Read subscription terms",
+		"Enable auto-renewal": "Enable auto-renewal",
+		"Continue checkout": "Continue checkout",
+		"Your current subscription": "Your current subscription",
+		"PREMIUM": "Premium",
+		"BASIC": "Basic",
+		"STANDARD": "Standard",
+		"Subscription end date": "Subscription end date"
 	},
 	"Close": "Close",
 	"Open": "Open",

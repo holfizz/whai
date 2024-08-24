@@ -41,16 +41,13 @@ export default async function (req: NextRequest) {
 	const localeMatch = url.match(/^\/([a-z]{2})\//)
 	const locale = localeMatch ? localeMatch[1] : 'ru'
 	const path = nextUrl.pathname
-	const publicRoutes = [
-		`/${locale}/auth/login`,
-		`/${locale}/auth/sign-up`,
-		`/${locale}/`,
-		`/${locale}/offer`
-	]
+	const publicRoutes = [`/${locale}/`, `/${locale}/offer`]
 
 	const isProtectedRoute = path.startsWith(`/${locale}/d`)
 	const isPublicRoute = publicRoutes.includes(path)
 	const isOnboardingPage = path === `/${locale}`
+	const isAuthPage = path.includes('auth')
+
 	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
 	const accessToken = cookies.get(EnumTokens.ACCESS_TOKEN)?.value
 	if (!refreshToken) {
@@ -61,6 +58,9 @@ export default async function (req: NextRequest) {
 		return nextIntlMiddleware(req)
 	}
 	if (isOnboardingPage && refreshToken) {
+		return NextResponse.redirect(new URL(`/${locale}/d`, nextUrl))
+	}
+	if (isAuthPage && accessToken) {
 		return NextResponse.redirect(new URL(`/${locale}/d`, nextUrl))
 	}
 	if (isProtectedRoute && !accessToken) {
@@ -84,6 +84,7 @@ export const config = {
 		'/(ru|en)/:path*',
 		'/((?!_next|_vercel|.*\\..*).*)',
 		'/d/:path*',
-		'/d'
+		'/d',
+		'/auth/:path*'
 	]
 }

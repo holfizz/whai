@@ -1,27 +1,22 @@
 'use client'
-import { IChatWithAI } from '@/entities/chatWithAI/model/chatWithAI.types'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
+import { IMakePayment } from './transaction.types'
 
-export const GET_ALL_CHATS_WITH_AI = gql`
-	query GetAllChatsWithAI($lessonId: ID!) {
-		getAllChatsWithAI(lessonId: $lessonId) {
-			id
-			title
+export const MAKE_PAYMENT = gql`
+	mutation MakePayment($dto: MakePaymentDto!) {
+		makePayment(dto: $dto) {
+			paymentUrl
 		}
 	}
 `
-export const useGetAllChatsWithAI = (lessonId: string) => {
-	const { data, error, loading, refetch } = useQuery<{
-		getAllChatsWithAI: IChatWithAI[]
-	}>(GET_ALL_CHATS_WITH_AI, {
-		variables: { lessonId },
-		fetchPolicy: 'cache-and-network'
-	})
+export const useMakePaymentMutation = () => {
+	const [mutation, { data, error, loading }] = useMutation<{
+		makePayment: IMakePayment
+	}>(MAKE_PAYMENT)
 	return {
-		getAllChatsWithAI: data?.getAllChatsWithAI,
-		errorAllChatsWithAI: error,
-		loadingAllChatsWithAI: loading,
-		hasFetched: !loading && data !== undefined,
-		refetch
+		makePaymentMutation: mutation,
+		makePaymentData: data?.makePayment,
+		makePaymentError: error,
+		makePaymentDataLoading: loading
 	}
 }

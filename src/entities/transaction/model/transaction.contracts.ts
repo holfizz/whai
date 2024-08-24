@@ -1,6 +1,6 @@
 'use client'
 import { z } from 'zod'
 
-export const MessageWithAISchema = z.object({
-	title: z.string()
+export const MakePaymentSchema = z.object({
+	paymentUrl: z.string()
 })

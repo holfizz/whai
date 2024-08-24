@@ -10,6 +10,18 @@ export const GET_PROFILE = gql`
 			lastName
 			avatarPath
 			phoneNumber
+			activeSubscription {
+				type
+				endedAt
+				isActive
+				# courseLimitPerMonth
+				# lessonLimitPerCourse
+				# additionalTitlesLimit
+				# hasBasicAnalytics
+				# hasAIAssistedHomework
+				# hasFileUploadInChat
+				# hasImageGeneration
+			}
 		}
 	}
 `
