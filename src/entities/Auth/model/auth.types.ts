@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { ProfileData, ProfileState } from './auth.contracts'
 export interface ActiveSubscription {
 	type: 'BASIC' | 'STANDARD' | 'PREMIUM'
-	endedAt?: Date
+	endedAt?: number
 	isActive: boolean
 	// courseLimitPerMonth?: number
 	// lessonLimitPerCourse?: number

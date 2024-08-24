@@ -109,6 +109,8 @@ const AuthForm: FC<AuthFormProps> = memo(
 				if (!termsAccepted || !policyAccepted) {
 					setFormErrors({
 						...formErrors,
+						//@ts-ignore
+
 						_termsAccepted: !termsAccepted
 							? ['You must accept the Terms and Conditions']
 							: [],
@@ -134,8 +136,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 				}
 			}
 		}
-
+		//@ts-ignore
 		const isTermsInvalid = !!formErrors._termsAccepted?.length
+		//@ts-ignore
 		const isPolicyInvalid = !!formErrors._policyAccepted?.length
 
 		return (

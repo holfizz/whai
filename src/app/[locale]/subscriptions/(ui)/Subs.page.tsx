@@ -86,7 +86,7 @@ const SubsPage = () => {
 			]
 		}
 	}
-	const formatDate = (timestamp: number | string | undefined | Date) => {
+	const formatDate = (timestamp: number | string | undefined) => {
 		if (timestamp === undefined || timestamp === null) return ''
 
 		// Преобразуем значение в число, если оно является строкой
