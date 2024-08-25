@@ -48,6 +48,7 @@ export const Footer = () => {
 				<div className='space-y-2'>
 					<h3 className='text-lg font-semibold'>Связаться с нами</h3>
 					<a href='mailto:support@whai.ru?subject=Вопрос'>support@whai.ru</a>
+					<li>Телефон для связи:+7 (993) 636 59-63</li>
 					<p>Присоединиться к нам в соцсетях:</p>
 					<div className='flex justify-center md:justify-start space-x-4'>
 						<Link href='https://vk.ru/whai_edu' className='underline'>
@@ -80,7 +81,6 @@ export const Footer = () => {
 						<li>ОГРНИП: 324750000037516</li>
 						<li>ИНН: 753614213399</li>
 						<li>ИП Горлачев Сергей Русланович</li>
-						<li>Телефон для связи:+7 (993) 636 59-63</li>
 					</ul>
 				</div>
 			</div>

@@ -13,11 +13,13 @@ export interface ActiveSubscription {
 	// hasImageGeneration?: boolean
 }
 export interface IUser {
+	id: string
 	email: string
 	firstName: string
 	lastName: string
 	phoneNumber: string
 	avatarPath: string
+	isAutoRenewal: boolean
 	activeSubscription?: ActiveSubscription
 }
 export type IUserData = z.infer<typeof ProfileData>

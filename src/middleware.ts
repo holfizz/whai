@@ -50,6 +50,7 @@ export default async function (req: NextRequest) {
 
 	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
 	const accessToken = cookies.get(EnumTokens.ACCESS_TOKEN)?.value
+	const isAuthTokens = !!accessToken && !!refreshToken
 	if (!refreshToken) {
 		removeFromStorage()
 	}
@@ -57,13 +58,13 @@ export default async function (req: NextRequest) {
 	if (isPublicRoute) {
 		return nextIntlMiddleware(req)
 	}
-	if (isOnboardingPage && refreshToken) {
+	if (isOnboardingPage && isAuthTokens) {
 		return NextResponse.redirect(new URL(`/${locale}/d`, nextUrl))
 	}
-	if (isAuthPage && accessToken) {
+	if (isAuthPage && isAuthTokens) {
 		return NextResponse.redirect(new URL(`/${locale}/d`, nextUrl))
 	}
-	if (isProtectedRoute && !accessToken) {
+	if (isProtectedRoute && !isAuthTokens) {
 		const newAccessToken = await fetchNewTokenFromApollo()
 		if (newAccessToken) {
 			const response = NextResponse.next()

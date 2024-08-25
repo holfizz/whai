@@ -215,6 +215,9 @@ const AuthForm: FC<AuthFormProps> = memo(
 						setCaptchaToken(token)
 						setCaptchaError(null)
 					}}
+					options={{
+						theme: 'light'
+					}}
 					onExpire={() => {
 						console.log('CAPTCHA token expired')
 						setCaptchaToken(null)

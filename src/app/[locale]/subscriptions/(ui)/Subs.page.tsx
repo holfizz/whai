@@ -1,6 +1,6 @@
 'use client'
 import { IUser } from '@/entities/Auth'
-import { GET_PROFILE } from '@/entities/Auth/model/auth.queries'
+import { GET_PROFILE, UPDATE_PROFILE } from '@/entities/Auth/model/auth.queries'
 import { useMakePaymentMutation } from '@/entities/transaction/model/transaction.queries'
 import { useRouter } from '@/navigation'
 import CheckIcon from '@/shared/assets/icons/CheckIcon'
@@ -8,7 +8,7 @@ import { getRouteSubscriptionTerm } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { Layout } from '@/widgets/Layout'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import {
 	ModalBody,
 	ModalContent,
@@ -19,17 +19,24 @@ import {
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import './Subs.scss'
+
 const SubsPage = () => {
 	const t = useTranslations('Subscription')
 	const [isYear, setIsYear] = useState(false)
-	const [isAutoRenewal, setIsAutoRenewal] = useState(false)
 	const [activeModal, setActiveModal] = useState<
 		'BASIC' | 'STANDARD' | 'PREMIUM' | null
 	>(null)
+	const [showConfirmModal, setShowConfirmModal] = useState(false)
 	const { data: user } = useQuery<{ getProfile: IUser }>(GET_PROFILE)
 	const { makePaymentData, makePaymentMutation } = useMakePaymentMutation()
+	const [updateProfile] = useMutation(UPDATE_PROFILE)
 	const router = useRouter()
-
+	const [isAutoRenewal, setIsAutoRenewal] = useState<boolean>(false)
+	useEffect(() => {
+		if (user?.getProfile?.isAutoRenewal !== undefined) {
+			setIsAutoRenewal(user.getProfile.isAutoRenewal)
+		}
+	}, [user?.getProfile?.isAutoRenewal])
 	const monthlyPrices = {
 		BASIC: 2999,
 		STANDARD: 3999,
@@ -86,25 +93,21 @@ const SubsPage = () => {
 			]
 		}
 	}
+
 	const formatDate = (timestamp: number | string | undefined) => {
 		if (timestamp === undefined || timestamp === null) return ''
 
-		// Преобразуем значение в число, если оно является строкой
 		const timestampNumber =
 			typeof timestamp === 'string' ? parseInt(timestamp, 10) : timestamp
 
-		// Проверяем, что преобразование прошло успешно
 		if (isNaN(timestampNumber)) return ''
 
-		// Преобразуем timestamp в объект Date
 		const date = new Date(timestampNumber)
 
-		// Извлекаем день, месяц и год
 		const day = String(date.getDate()).padStart(2, '0')
-		const month = String(date.getMonth() + 1).padStart(2, '0') // Месяцы в JavaScript начинаются с 0
+		const month = String(date.getMonth() + 1).padStart(2, '0')
 		const year = date.getFullYear()
 
-		// Возвращаем отформатированную дату
 		return `${day}.${month}.${year}`
 	}
 
@@ -113,6 +116,31 @@ const SubsPage = () => {
 			window.open(makePaymentData.paymentUrl, '_blank')
 		}
 	}, [makePaymentData, router])
+
+	const handleAutoRenewalToggle = async () => {
+		setShowConfirmModal(true)
+	}
+
+	const confirmAutoRenewalChange = async () => {
+		setShowConfirmModal(false)
+		try {
+			await updateProfile({
+				variables: {
+					id: user?.getProfile?.id,
+					dto: {
+						isAutoRenewal: !isAutoRenewal
+					}
+				}
+			})
+			setIsAutoRenewal(prev => !prev)
+		} catch (error) {
+			console.error('Failed to update profile:', error)
+		}
+	}
+
+	const cancelAutoRenewalChange = () => {
+		setShowConfirmModal(false)
+	}
 
 	return (
 		<Layout>
@@ -140,6 +168,17 @@ const SubsPage = () => {
 									{formatDate(user?.getProfile?.activeSubscription?.endedAt)}
 								</h2>
 							</h1>
+							{/* Display auto-renewal switch only if subscription is active */}
+							<div className='mt-4 flex items-center justify-start'>
+								<Switch
+									classNames={{
+										wrapper: 'group-data-[selected=true]:bg-decor-2'
+									}}
+									isSelected={isAutoRenewal}
+									onClick={handleAutoRenewalToggle}
+								/>
+								<label className='ml-2'>{t('Enable auto-renewal')}</label>
+							</div>
 						</>
 					)}
 
@@ -197,7 +236,7 @@ const SubsPage = () => {
 											<p
 												className={`text-2xl font-semibold mb-2 ${
 													type === 'PREMIUM' ? 'text-white' : 'text-accent'
-												} `}
+												}`}
 											>
 												{`${discountedPrices[type]} ₽`}
 											</p>
@@ -284,9 +323,9 @@ const SubsPage = () => {
 													wrapper: 'group-data-[selected=true]:bg-decor-2'
 												}}
 												isSelected={isAutoRenewal}
-												onClick={() => setIsAutoRenewal(prev => !prev)}
+												onClick={handleAutoRenewalToggle}
 											/>
-											<label>{t('Enable auto-renewal')}</label>
+											<label className='ml-2'>{t('Enable auto-renewal')}</label>
 										</div>
 									</ModalBody>
 									<ModalFooter>
@@ -315,6 +354,40 @@ const SubsPage = () => {
 					</Modal>
 				)
 			)}
+
+			{/* Confirmation Modal for Auto-Renewal Change */}
+			<Modal
+				color='white'
+				isOpen={showConfirmModal}
+				onOpenChange={() => setShowConfirmModal(false)}
+			>
+				<ModalContent>
+					<ModalHeader>{t('Confirm Auto-Renewal Change')}</ModalHeader>
+					<ModalBody>
+						<p>
+							{t('Are you sure you want to change the auto-renewal setting?')}
+						</p>
+					</ModalBody>
+					<ModalFooter>
+						<Button
+							size='xl'
+							className='rounded-3xl w-[auto]'
+							color='primary'
+							onPress={cancelAutoRenewalChange}
+						>
+							{t('Cancel')}
+						</Button>
+						<Button
+							size='xl'
+							className='rounded-3xl w-[auto]'
+							color='secondary'
+							onPress={confirmAutoRenewalChange}
+						>
+							{t('Confirm')}
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
 		</Layout>
 	)
 }

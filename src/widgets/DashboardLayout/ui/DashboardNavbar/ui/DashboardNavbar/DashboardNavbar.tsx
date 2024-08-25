@@ -86,7 +86,11 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 					</PopoverContent>
 				</Popover>
 				{userData?.email && (
-					<Dropdown color='white' placement='bottom-end'>
+					<Dropdown
+						color='white'
+						classNames={{ base: 'bg-white rounded-[15px]' }}
+						placement='bottom-end'
+					>
 						<DropdownTrigger>
 							<Avatar
 								className={cls.avatar}
@@ -128,12 +132,12 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 								{t('Help Feedback')}
 							</DropdownItem>
 							<DropdownItem
+								className='data-[hover=true]:bg-[#FF9090]'
 								onClick={() => {
 									logout()
 									window.location.replace('/')
 								}}
 								key='logout'
-								color='danger'
 							>
 								{t('Log Out')}
 							</DropdownItem>

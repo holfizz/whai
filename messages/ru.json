@@ -308,7 +308,11 @@
 		"PREMIUM": "Премиум",
 		"BASIC": "Базовая",
 		"STANDARD": "Стандартная",
-		"Subscription end date": "Дата окончания подписки"
+		"Subscription end date": "Дата окончания подписки",
+		"Confirm Auto-Renewal Change": "Подтвердить изменение автоматического продления",
+		"Are you sure you want to change the auto-renewal setting?": "Вы уверены, что хотите изменить настройки автоматического продления?",
+		"Confirm": "Подтвердить",
+		"Cancel": "Отменить"
 	},
 	"Open": "Открыть",
 	"User": "Пользователь",

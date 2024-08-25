@@ -313,7 +313,11 @@
 		"PREMIUM": "Premium",
 		"BASIC": "Basic",
 		"STANDARD": "Standard",
-		"Subscription end date": "Subscription end date"
+		"Subscription end date": "Subscription end date",
+		"Confirm Auto-Renewal Change": "Confirm Auto-Renewal Change",
+		"Are you sure you want to change the auto-renewal setting?": "Are you sure you want to change the auto-renewal setting?",
+		"Confirm": "Confirm",
+		"Cancel": "Cancel"
 	},
 	"Close": "Close",
 	"Open": "Open",

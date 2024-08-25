@@ -5,9 +5,11 @@ import { IUser } from './auth.types'
 export const GET_PROFILE = gql`
 	query {
 		getProfile {
+			id
 			email
 			firstName
 			lastName
+			isAutoRenewal
 			avatarPath
 			phoneNumber
 			activeSubscription {
@@ -36,13 +38,14 @@ export const useGetProfile = () => {
 }
 
 export const UPDATE_PROFILE = gql`
-	mutation ($input: UpdateUserInput!, $picture: Upload) {
-		updateProfile(dto: $input, picture: $picture) {
+	mutation ($dto: UpdateUserInput!, $picture: Upload) {
+		updateProfile(dto: $dto, picture: $picture) {
 			email
 			firstName
 			lastName
 			avatarPath
 			phoneNumber
+			isAutoRenewal
 		}
 	}
 `
