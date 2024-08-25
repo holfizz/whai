@@ -41,6 +41,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 	({ className, type, setIsFormType }) => {
 		const t = useTranslations('auth')
 		const router = useRouter()
+		const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 		const [formErrors, setFormErrors] = useState<
 			z.ZodFormattedError<
 				{
@@ -123,12 +124,22 @@ const AuthForm: FC<AuthFormProps> = memo(
 				}
 			}
 
+			// Skip CAPTCHA check in development mode
+			if (process.env.NODE_ENV !== 'development' && !captchaToken) {
+				setFormErrors({
+					...formErrors,
+					//@ts-ignore
+					_captcha: ['You must complete the CAPTCHA validation']
+				})
+				return
+			}
+
 			if (!validationResult.success) {
 				const errors = validationResult.error.format()
 				setFormErrors(errors)
 			} else {
 				setFormErrors({ _errors: [] })
-				const variables = { input: validationResult.data }
+				const variables = { input: { ...validationResult.data, captchaToken } }
 
 				if (type === authConstants.SIGNUP) {
 					signUp({ variables: variables as SignUpInput })
@@ -137,6 +148,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 				}
 			}
 		}
+
 		//@ts-ignore
 		const isTermsInvalid = !!formErrors._termsAccepted?.length
 		//@ts-ignore
@@ -191,16 +203,20 @@ const AuthForm: FC<AuthFormProps> = memo(
 					</div>
 				)}
 				<ButtonsForm type={type} setIsFormType={setIsFormType} />
-				<Script
-					src='https://challenges.cloudflare.com/turnstile/v0/api.js'
-					async
-					defer
-				></Script>
-				<div
-					className='cf-turnstile'
-					data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-					data-callback='javascriptCallback'
-				></div>
+				{process.env.NODE_ENV !== 'development' && (
+					<>
+						<Script
+							src='https://challenges.cloudflare.com/turnstile/v0/api.js'
+							async
+							defer
+						></Script>
+						<div
+							className='cf-turnstile'
+							data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+							data-callback={(token: string) => setCaptchaToken(token)}
+						></div>
+					</>
+				)}
 			</form>
 		)
 	}

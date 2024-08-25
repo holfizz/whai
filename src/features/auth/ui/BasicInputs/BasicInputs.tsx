@@ -49,7 +49,7 @@ const BasicInputs: FC<BasicInputsProps> = ({ formErrors }) => {
 					<Input
 						classNames={{
 							innerWrapper: 'py-3 px-2 h-[60px]',
-							inputWrapper: 'h-auto',
+							inputWrapper: 'h-auto overflow-hidden',
 							input: 'max-md:text-2xl'
 						}}
 						placeholder={t('Enter your password')}
