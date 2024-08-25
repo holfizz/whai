@@ -17,7 +17,8 @@
 		"Upon login I accept": "При входе я принимаю",
 		"I accept the": "Я принимаю",
 		"Terms and Conditions": "Публичное Соглашение (оферту)",
-		"Personal data processing policy": "Политику обработки персональных данных"
+		"Personal data processing policy": "Политику обработки персональных данных",
+		"You must complete the CAPTCHA validation": "Вы должны пройти проверку CAPTCHA"
 	},
 	"Layout": {
 		"By using the site, you consent to the collection of cookies and agree to": "Пользуясь сайтом, вы разрешаете сбор cookie-файлов и соглашаетесь c",

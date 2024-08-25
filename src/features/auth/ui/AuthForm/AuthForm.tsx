@@ -1,12 +1,12 @@
-'use client'
 import { Link, useRouter } from '@/navigation'
 import { saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import { authConstants } from '@/shared/const/auth'
 import { getRouteOffer, getRoutePrivacy } from '@/shared/const/router'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import logger from '@/shared/lib/utils/logger'
+import { Turnstile } from '@marsidev/react-turnstile'
 import { Checkbox, CheckboxGroup } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import Script from 'next/script'
 import {
 	Dispatch,
 	FC,
@@ -56,6 +56,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 				string
 			>
 		>({ _errors: [] })
+		const [captchaError, setCaptchaError] = useState<string | null>(null)
 
 		const {
 			login,
@@ -106,13 +107,11 @@ const AuthForm: FC<AuthFormProps> = memo(
 				type === authConstants.SIGNUP ? formSignUpSchema : formLoginSchema
 			const validationResult = formSchema.safeParse(formData) as any
 
-			// Дополнительная проверка на чекбоксы
+			// Additional checkbox validation
 			if (type === authConstants.SIGNUP) {
 				if (!termsAccepted || !policyAccepted) {
 					setFormErrors({
 						...formErrors,
-						//@ts-ignore
-
 						_termsAccepted: !termsAccepted
 							? ['You must accept the Terms and Conditions']
 							: [],
@@ -124,14 +123,12 @@ const AuthForm: FC<AuthFormProps> = memo(
 				}
 			}
 
-			// Skip CAPTCHA check in development mode
-			if (process.env.NODE_ENV !== 'development' && !captchaToken) {
-				setFormErrors({
-					...formErrors,
-					//@ts-ignore
-					_captcha: ['You must complete the CAPTCHA validation']
-				})
+			// CAPTCHA validation
+			if (!captchaToken) {
+				setCaptchaError('You must complete the CAPTCHA validation')
 				return
+			} else {
+				setCaptchaError(null)
 			}
 
 			if (!validationResult.success) {
@@ -139,7 +136,8 @@ const AuthForm: FC<AuthFormProps> = memo(
 				setFormErrors(errors)
 			} else {
 				setFormErrors({ _errors: [] })
-				const variables = { input: { ...validationResult.data, captchaToken } }
+				logger.log('validationResult.data', validationResult.data)
+				const variables = { input: { ...validationResult.data } }
 
 				if (type === authConstants.SIGNUP) {
 					signUp({ variables: variables as SignUpInput })
@@ -149,9 +147,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 			}
 		}
 
-		//@ts-ignore
 		const isTermsInvalid = !!formErrors._termsAccepted?.length
-		//@ts-ignore
 		const isPolicyInvalid = !!formErrors._policyAccepted?.length
 
 		return (
@@ -202,21 +198,31 @@ const AuthForm: FC<AuthFormProps> = memo(
 						</CheckboxGroup>
 					</div>
 				)}
-				<ButtonsForm type={type} setIsFormType={setIsFormType} />
-				{process.env.NODE_ENV !== 'development' && (
-					<>
-						<Script
-							src='https://challenges.cloudflare.com/turnstile/v0/api.js'
-							async
-							defer
-						></Script>
-						<div
-							className='cf-turnstile'
-							data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-							data-callback={(token: string) => setCaptchaToken(token)}
-						></div>
-					</>
+
+				{captchaError && (
+					<p className='text-sm text-red-500'>
+						{t('You must complete the CAPTCHA validation')}
+					</p>
 				)}
+
+				<Turnstile
+					siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+					onSuccess={token => {
+						console.log('CAPTCHA token received:', token)
+						setCaptchaToken(token)
+						setCaptchaError(null)
+					}}
+					onExpire={() => {
+						console.log('CAPTCHA token expired')
+						setCaptchaToken(null)
+						setCaptchaError('CAPTCHA token expired')
+					}}
+					onError={() => {
+						console.error('CAPTCHA error occurred')
+					}}
+				/>
+
+				<ButtonsForm type={type} setIsFormType={setIsFormType} />
 			</form>
 		)
 	}

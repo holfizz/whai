@@ -20,8 +20,7 @@ export const formSignUpSchema = z.object({
 		.regex(
 			phoneNumberRegex,
 			'Phone number must be in the format +7 (XXX) XXX XX-XX'
-		),
-	_captcha: z.string()
+		)
 })
 export const formLoginSchema = z.object({
 	email: z.string().email('Email is not correct'),
