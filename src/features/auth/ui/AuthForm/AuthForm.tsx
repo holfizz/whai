@@ -6,6 +6,7 @@ import { getRouteOffer, getRoutePrivacy } from '@/shared/const/router'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Checkbox, CheckboxGroup } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
+import Script from 'next/script'
 import {
 	Dispatch,
 	FC,
@@ -190,6 +191,16 @@ const AuthForm: FC<AuthFormProps> = memo(
 					</div>
 				)}
 				<ButtonsForm type={type} setIsFormType={setIsFormType} />
+				<Script
+					src='https://challenges.cloudflare.com/turnstile/v0/api.js'
+					async
+					defer
+				></Script>
+				<div
+					className='cf-turnstile'
+					data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+					data-callback='javascriptCallback'
+				></div>
 			</form>
 		)
 	}
