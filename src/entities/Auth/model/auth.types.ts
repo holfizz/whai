@@ -20,6 +20,9 @@ export interface IUser {
 	phoneNumber: string
 	avatarPath: string
 	isAutoRenewal: boolean
+	currentCourseCount: number
+	currentLessonCount: number
+	additionalTitlesCount: number
 	activeSubscription?: ActiveSubscription
 }
 export type IUserData = z.infer<typeof ProfileData>

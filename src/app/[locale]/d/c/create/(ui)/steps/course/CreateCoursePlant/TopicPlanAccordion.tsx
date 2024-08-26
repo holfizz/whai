@@ -5,12 +5,15 @@ import { Accordion, AccordionItem } from '@/shared/ui/Accordion/MyAccordion'
 import Button from '@/shared/ui/Button/Button'
 import { useEffect, useRef, useState } from 'react'
 import { HiPencil } from 'react-icons/hi'
+import { IoMdAdd } from 'react-icons/io'
 import EditCourseModal from './CreateCourseCard/EditCourseModal'
+import GenerateBlockModal from './GenerateBlockModal' // Ensure this import is correct
 import SubtopicPlanAccordion from './SubtopicPlanAccordion'
 
 const TopicPlanAccordion = ({ topicsAllData, t }) => {
 	const [topics, setTopics] = useState(topicsAllData)
-	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+	const [isGenerateModalOpen, setIsGenerateModalOpen] = useState(false)
 	const [selectedTopic, setSelectedTopic] = useState(null)
 	const { updateTopic } = useUpdateTopic()
 	const [accordionWidth, setAccordionWidth] = useState('auto')
@@ -25,7 +28,7 @@ const TopicPlanAccordion = ({ topicsAllData, t }) => {
 
 	const handleEditClick = topic => {
 		setSelectedTopic(topic)
-		setIsModalOpen(true)
+		setIsEditModalOpen(true)
 	}
 
 	const handleSave = async updatedTopic => {
@@ -38,7 +41,16 @@ const TopicPlanAccordion = ({ topicsAllData, t }) => {
 				}
 			}
 		})
-		setIsModalOpen(false)
+		setIsEditModalOpen(false)
+	}
+
+	const handleGenerate = () => {
+		setIsGenerateModalOpen(true)
+	}
+
+	const handleBlockSave = newBlocks => {
+		console.log('Newly generated blocks:', newBlocks)
+		setIsGenerateModalOpen(false)
 	}
 
 	return (
@@ -48,6 +60,7 @@ const TopicPlanAccordion = ({ topicsAllData, t }) => {
 					<AccordionItem
 						key={topic.id}
 						className={'ml-6'}
+						isLast={index === topics.length - 1}
 						title={
 							<div className='flex items-center justify-between gap-3'>
 								<div className='w-full px-4 flex justify-between items-center h-[70px] max-md:h-min'>
@@ -78,6 +91,16 @@ const TopicPlanAccordion = ({ topicsAllData, t }) => {
 								}
 							/>
 						}
+						addButton={
+							<Button
+								className='rounded-3xl h-[70px]'
+								isIconOnly
+								size='full'
+								color='gray'
+								startContent={<IoMdAdd />}
+								onClick={handleGenerate}
+							/>
+						}
 					>
 						<div className='w-full flex flex-col items-end'>
 							<div className='flex flex-col w-full items-end justify-center'>
@@ -101,13 +124,20 @@ const TopicPlanAccordion = ({ topicsAllData, t }) => {
 			{selectedTopic && (
 				<EditCourseModal
 					t={t}
-					isOpen={isModalOpen}
-					onClose={() => setIsModalOpen(false)}
+					isOpen={isEditModalOpen}
+					onClose={() => setIsEditModalOpen(false)}
 					data={selectedTopic}
 					onSave={handleSave}
 					type='topic'
 				/>
 			)}
+
+			<GenerateBlockModal
+				type='topic'
+				isOpen={isGenerateModalOpen}
+				onClose={() => setIsGenerateModalOpen(false)}
+				onSave={handleBlockSave}
+			/>
 		</div>
 	)
 }

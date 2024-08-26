@@ -1,1 +1,4 @@
-export { useGenerateTD } from './model/titleDescription.queries'
+export {
+	GENERATE_BLOCKS,
+	useGenerateTD
+} from './model/titleDescription.queries'

@@ -7,7 +7,7 @@
 }
 
 .accordion-header {
-	@apply flex overflow-hidden justify-between items-center cursor-pointer text-left outline-none transition-colors gap-4 w-full max-md:min-h-[50px] h-min;
+	@apply flex overflow-hidden justify-between items-start cursor-pointer text-left outline-none transition-colors gap-4 w-full max-md:min-h-[50px] h-min;
 }
 
 .header-content {

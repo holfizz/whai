@@ -299,10 +299,18 @@
 		"topic": "Тема",
 		"module": "Модуль",
 		"lesson": "Урок",
+		"title": "Заголовок",
 		"description": "Описание",
 		"We continue to create the course": "Продолжаем создавать курс",
 		"We continue to create the courseThis will take a couple of minutes Please do not close the page": "Это займёт пару минут. Пожалуйста не закрывайте страницy",
-		"Oops Error please try again": "Упс. Ошибочка, пожалуйста попробуйте снова"
+		"Oops Error please try again": "Упс. Ошибочка, пожалуйста попробуйте снова",
+		"Describe in detail what the module should be about": "Подробно опишите, о чем должен быть модуль.",
+		"Describe in detail what the topic should be about": "Подробно опишите, о чем должна быть тема.",
+		"Enable Autofill": "Включить автозаполнение",
+		"Add new topic": "Добавить новую тему",
+		"Add new module": "Добавить новый модуль",
+		"Manual": "Вручную",
+		"From AI": "С помощью AI"
 	},
 	"Subscription": {
 		"Subscription price": "Цена подписки",

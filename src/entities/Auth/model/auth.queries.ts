@@ -10,8 +10,10 @@ export const GET_PROFILE = gql`
 			firstName
 			lastName
 			isAutoRenewal
-			avatarPath
 			phoneNumber
+			currentCourseCount
+			currentLessonCount
+			additionalTitlesCount
 			activeSubscription {
 				type
 				endedAt

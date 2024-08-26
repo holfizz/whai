@@ -285,8 +285,6 @@
 		"Please check your answer before proceeding": "Please check your answer before proceeding"
 	},
 	"CreateCoursePlanPage": {
-		"View topics": "View topic",
-		"View lessons": "View lessons",
 		"Generate lesson": "Generate",
 		"Create Course Plan": "Create Course Plan",
 		"Editing stage of the training module": "Editing stage of the training module",
@@ -302,10 +300,18 @@
 		"topic": "Topic",
 		"module": "Module",
 		"lesson": "Lesson",
+		"title": "Title",
 		"description": "Description",
 		"We continue to create the course": "We continue to create the course",
 		"We continue to create the courseThis will take a couple of minutes Please do not close the page": "We continue to create the courseThis will take a couple of minutes Please do not close the page",
-		"Oops Error please try again": "Oops. Error, please try again"
+		"Oops Error please try again": "Oops. Error, please try again",
+		"Describe in detail what the module should be about": "Describe in detail what the module should be about.",
+		"Describe in detail what the topic should be about": "Describe in detail what the topic should be about.",
+		"Enable Autofill": "Enable Autofill",
+		"Add new topic": "Add new topic",
+		"Add new module": "Add new module",
+		"Manual": "Manual",
+		"From AI": "From AI"
 	},
 	"Subscription": {
 		"Subscription price": "Subscription price",

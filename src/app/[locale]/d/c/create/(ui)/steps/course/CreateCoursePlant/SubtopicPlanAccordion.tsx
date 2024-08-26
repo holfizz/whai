@@ -4,6 +4,7 @@ import { Accordion, AccordionItem } from '@/shared/ui/Accordion/MyAccordion'
 import Button from '@/shared/ui/Button/Button'
 import { useState } from 'react'
 import { HiPencil } from 'react-icons/hi'
+import { IoMdAdd } from 'react-icons/io'
 import EditCourseModal from './CreateCourseCard/EditCourseModal'
 import LessonPlanAccordion from './LessonPlanAccordion'
 
@@ -38,6 +39,7 @@ const SubtopicPlanAccordion = ({ subtopicsAllData, t, parentPrefix = '' }) => {
 					<AccordionItem
 						key={subtopic.id}
 						className={'ml-6'}
+						isLast={index === subtopics.length - 1}
 						title={
 							<div className='flex items-center justify-between gap-3'>
 								<div className='w-full px-4 flex justify-between items-center h-[70px]'>
@@ -67,6 +69,15 @@ const SubtopicPlanAccordion = ({ subtopicsAllData, t, parentPrefix = '' }) => {
 								startContent={
 									<HiPencil color='var(--color-accent)' fontSize={28} />
 								}
+							/>
+						}
+						addButton={
+							<Button
+								className='rounded-3xl h-[70px]'
+								isIconOnly
+								size='full'
+								color='gray'
+								startContent={<IoMdAdd />}
 							/>
 						}
 					>
