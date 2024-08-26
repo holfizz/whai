@@ -1,1 +1,4 @@
-export { useCreateChatWithAI } from './model/chatWithAI.queries'
+export {
+	useCreateChatWithAI,
+	useStopGeneration
+} from './model/chatWithAI.queries'

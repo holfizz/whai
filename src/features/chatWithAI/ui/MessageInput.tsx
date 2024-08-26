@@ -1,3 +1,4 @@
+import { useStopGeneration } from '@/entities/chatWithAI'
 import SendIcon from '@/shared/assets/icons/Lesson/Fill/SendIcon'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
@@ -10,15 +11,18 @@ const MessageInput = ({
 	setMessageContent,
 	handleSendMessage,
 	isSendButtonDisabled,
+	conversationId,
 	loading
 }: {
 	messageContent: string
 	setMessageContent: React.Dispatch<React.SetStateAction<string>>
 	handleSendMessage: () => void
 	isSendButtonDisabled: boolean
+	conversationId?: string
 	loading: boolean
 }) => {
 	const t = useTranslations('Lesson')
+	const { stopGeneration } = useStopGeneration()
 	if (loading) {
 		return (
 			<div
@@ -33,8 +37,14 @@ const MessageInput = ({
 					size={'sRound'}
 					variant={'circle'}
 					color={'accent'}
-					onClick={handleSendMessage}
-					disabled={isSendButtonDisabled}
+					onClick={() => {
+						stopGeneration({
+							variables: {
+								conversationId
+							}
+						})
+					}}
+					// disabled={isSendButtonDisabled}
 					startContent={<div className={'w-[10px] h-[10px] bg-white'} />}
 				/>
 			</div>

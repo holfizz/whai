@@ -5,6 +5,7 @@ interface UnifiedState {
 	step: number
 	choice: string | null
 	courseId: string | null
+	lessonId: string | null
 	promptContent: string
 	selectedTitle: string | null
 	selectedDescription: string | null
@@ -20,6 +21,7 @@ interface UnifiedState {
 	setQuizResultId: (id: string) => void
 	setChoice: (choice: string | null) => void
 	setCourseId: (courseId: string | null) => void
+	setLessonId: (lessonId: string | null) => void
 	setPromptContent: (promptContent: string) => void
 	setSelectedTitle: (title: string | null) => void
 	setSelectedDescription: (description: string | null) => void
@@ -42,6 +44,7 @@ const useUnifiedStore = create<UnifiedState>()(
 			choice: null,
 			quizResultId: '',
 			courseId: null,
+			lessonId: null,
 			promptContent: '',
 			selectedTitle: null,
 			selectedDescription: null,
@@ -55,6 +58,7 @@ const useUnifiedStore = create<UnifiedState>()(
 			setStep: step => set({ step }),
 			setChoice: choice => set({ choice }),
 			setCourseId: courseId => set({ courseId }),
+			setLessonId: lessonId => set({ lessonId }),
 			setPromptContent: promptContent => set({ promptContent }),
 			setSelectedTitle: selectedTitle => set({ selectedTitle }),
 			setSelectedDescription: selectedDescription =>
@@ -76,6 +80,7 @@ const useUnifiedStore = create<UnifiedState>()(
 					step: 1,
 					choice: null,
 					courseId: null,
+					lessonId: null,
 					promptContent: '',
 					selectedTitle: null,
 					selectedDescription: null,

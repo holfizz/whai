@@ -45,3 +45,17 @@ export const useCreateChatWithAI = () => {
 		loadingCreateChatsWithAI: loading
 	}
 }
+
+export const STOP_GENERATION = gql`
+	mutation ($conversationId: String!) {
+		stopGeneration(conversationId: $conversationId)
+	}
+`
+export const useStopGeneration = () => {
+	const [stopGeneration] = useMutation<{
+		createChatWithAI: IChatWithAI
+	}>(STOP_GENERATION, {})
+	return {
+		stopGeneration
+	}
+}

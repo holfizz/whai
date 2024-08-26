@@ -179,3 +179,39 @@ export const useGetAllIndependentLesson = () => {
 		loadingLessonsAll: loading
 	}
 }
+export const CREATE_INDEPENDENT_LESSON_WITH_AI = gql`
+	mutation CreateIndependentLessonWithAI($dto: LessonIndependentWithAIInput!) {
+		createIndependentLessonWithAI(dto: $dto) {
+			id
+			name
+			description
+			lessonBlocks {
+				id
+				type
+				imageUrl
+				videoUrl
+				lessonId
+				caption
+				code
+				text
+			}
+			lessonTasks {
+				id
+				name
+				isChecked
+			}
+		}
+	}
+`
+export const useCreateIndependentLessonWithAI = () => {
+	const [createLesson, { data, error, loading }] = useMutation<{
+		createIndependentLessonWithAI: ILessonContent
+	}>(CREATE_INDEPENDENT_LESSON_WITH_AI, { fetchPolicy: 'no-cache' })
+
+	return {
+		createLesson,
+		dataCreateLesson: data?.createIndependentLessonWithAI,
+		errorCreateLesson: error,
+		loadingCreateLesson: loading
+	}
+}

@@ -1,5 +1,6 @@
 export {
 	GET_LESSON_NAME,
+	useCreateIndependentLessonWithAI,
 	useGetAllLessons,
 	useGetLesson,
 	useGetLessonContent,

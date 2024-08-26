@@ -238,6 +238,28 @@
 		"Generating, wait a couple of seconds": "Generating, wait a couple of seconds",
 		"An error occurred while creating the test": "An error occurred while creating the test"
 	},
+	"CreateLesson": {
+		"What are we creating?": "What are we creating?",
+		"What should be in the lesson, describe in detail what you want to receive": "What should be in the lesson, describe in detail what you want to receive",
+		"Next": "Next",
+		"Back": "Back",
+		"What will the lesson be about": "What will the lesson be about",
+		"Oops Error please try again": "Oops. Error, please try again",
+		"Try one more time": "Try one more time",
+		"Which lesson description fits best?": "Which lesson description fits best?",
+		"Here is the title and description you chose": "Here is the title and description you chose",
+		"Generating, wait a couple of seconds": "Generating, wait a couple of seconds",
+		"An error occurred while creating the lesson": "An error occurred while creating the test",
+		"Finish": "Finish",
+		"We continue to create a lesson": "We continue to create a lesson",
+		"This will take a couple of minutes. Please do not close the page": "This will take a couple of minutes. Please do not close the page.",
+		"Lesson Settings": "Lesson Settings",
+		"Yes": "Yes",
+		"No": "No",
+		"Need video tutorials from YouTube?": "Need video tutorials from YouTube?",
+		"Generate pictures?": "Generate pictures?",
+		"Need homework?": "Need homework?"
+	},
 	"Quiz": {
 		"Your answer": "Your answer",
 		"Next": "Next",

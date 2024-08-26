@@ -71,7 +71,6 @@ const ChoiceStep = () => {
 						{t('Test')}
 					</Button>
 					<Button
-						isDisabled
 						color={'secondary'}
 						size={'3xl'}
 						onClick={() => handleChoice('Lesson')}

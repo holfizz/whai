@@ -6,8 +6,8 @@ import { z } from 'zod'
 export interface ILesson {
 	id: string
 	name: string
-	description: string
-	subtopicId: string
+	description?: string
+	subtopicId?: string
 	isCompleted: boolean
 	isHasLessonTask: boolean
 	lessonTasks: ILessonTask[]
@@ -15,9 +15,10 @@ export interface ILesson {
 
 export interface ILessonContent {
 	id: string
-	courseId: string
-	subtopicId: string
+	courseId?: string
+	subtopicId?: string
 	name: string
+	description?: string
 	isCompleted: boolean
 	isHasLessonTask: boolean
 	lessonTasks: ILessonTask[]

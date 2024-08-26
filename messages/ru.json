@@ -239,6 +239,28 @@
 		"Generating, wait a couple of seconds": "Генерация, подождите несколько секунд",
 		"An error occurred while creating the test": "Произошла ошибка при создании теста"
 	},
+	"CreateLesson": {
+		"What are we creating?": "Что мы создаем?",
+		"What should be in the lesson, describe in detail what you want to receive": "Что должно быть на уроке, подробно опишите, что вы хотите получить",
+		"Next": "Далее",
+		"Back": "Назад",
+		"What will the lesson be about": "О чем будет урок?",
+		"Oops Error please try again": "Упс. Ошибочка, пожалуйста попробуйте снова",
+		"Try one more time": "Попробуйте еще раз",
+		"Which lesson description fits best?": "Какое описание урока подходит лучше всего?",
+		"Here is the title and description you chose": "Вот заголовок и описание, которые вы выбрали",
+		"Generating, wait a couple of seconds": "Генерация, подождите несколько секунд",
+		"An error occurred while creating the lesson": "Произошла ошибка при создании урока",
+		"Finish": "Завершить",
+		"We continue to create a lesson": "Продолжаем создавать урок",
+		"This will take a couple of minutes. Please do not close the page": "Это займёт пару минут. Пожалуйста не закрывайте страницу.",
+		"Lesson Settings": "Настройки урока",
+		"Yes": "Да",
+		"No": "Нет",
+		"Need video tutorials from YouTube?": "Нужны видеоуроки с YouTube?",
+		"Generate pictures?": "Генерировать картинки?",
+		"Need homework?": "Нужны домашние задания?"
+	},
 	"Quiz": {
 		"Your answer": "Ваш ответ",
 		"Next": "Далее",

@@ -9,6 +9,7 @@ import {
 	useGetAllMessagesInChatWithAI
 } from '@/entities/messageWithAI'
 import ChatUi from '@/features/chatWithAI/ui/ChatUI/ChatUI'
+import logger from '@/shared/lib/utils/logger'
 import Button from '@/shared/ui/Button/Button'
 import { Modal, ModalContent } from '@/shared/ui/Modal/Modal'
 import { useQuery } from '@apollo/client'
@@ -52,8 +53,11 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		useGetAllChatsWithAI(lessonId)
 	const { createMessageWithAI, createMessageWithAIData } =
 		useCreateMessageWithAI()
-	const { mutationCreateChatWithAI, loadingCreateChatsWithAI } =
-		useCreateChatWithAI()
+	const {
+		createChatsWithAIData,
+		mutationCreateChatWithAI,
+		loadingCreateChatsWithAI
+	} = useCreateChatWithAI()
 	const { selectedChatId, setSelectedChatId } = useChatStore()
 	const {
 		messagesAllMessagesInChatWithAI,
@@ -73,7 +77,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		if (messagesAllMessagesInChatWithAI.length > 0) {
 			setMessages(messagesAllMessagesInChatWithAI)
 		}
-	}, [messagesAllMessagesInChatWithAI])
+	}, [messagesAllMessagesInChatWithAI, selectedChatId])
 	useEffect(() => {
 		if (selectedChatId) {
 			setPartialMessage(null)
@@ -165,6 +169,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			})
 
 			setPartialMessage(null)
+			await refetchMessages()
 		} catch (error) {
 			console.error('Error sending message:', error)
 		} finally {
@@ -192,28 +197,31 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			if (LessonData?.getLesson?.name) {
 				createChatInput.title = LessonData.getLesson.name
 			}
-			const { data } = await mutationCreateChatWithAI({
+			await mutationCreateChatWithAI({
 				variables: {
 					createChatInput
 				}
 			})
-
-			if (data?.createChatWithAI) {
-				setSelectedChatId(data.createChatWithAI.id)
-				setIsAdditionalParam(false)
-				await refetchChats() // Refetch chats after creating a new one
-			}
 		} catch (error) {
 			console.error('Error creating chat:', error)
 		}
-	}, [
-		LessonData,
-		lessonId,
-		mutationCreateChatWithAI,
-		setSelectedChatId,
-		refetchChats
-	])
+	}, [LessonData, lessonId, mutationCreateChatWithAI])
+	useEffect(() => {
+		if (createChatsWithAIData) {
+			const req = async () => {
+				await refetchMessages()
+				await refetchChats()
+			}
+			setSelectedChatId(createChatsWithAIData.id)
+			setIsAdditionalParam(false)
+			req()
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [createChatsWithAIData, setSelectedChatId])
 
+	useEffect(() => {
+		logger.log(333, selectedChatId)
+	}, [selectedChatId])
 	return (
 		<>
 			<Modal
@@ -262,6 +270,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 						</ModalBody>
 						<ModalFooter>
 							<MessageInput
+								conversationId={selectedChatId}
 								messageContent={messageContent}
 								setMessageContent={setMessageContent}
 								handleSendMessage={handleSendMessage}
