@@ -49,6 +49,11 @@ export const useMatchQuestion = (
 		}, {} as { [key: string]: string })
 
 		setLocalMatchingAnswers(initialAnswers)
+		if (storedAnswers.length > 0) {
+			setChecked(true)
+		} else {
+			setChecked(false)
+		}
 	}, [shuffledLeft, matchingAnswers, question.id])
 
 	const handleMatchChange = (leftItem: string, rightItem: string) => {

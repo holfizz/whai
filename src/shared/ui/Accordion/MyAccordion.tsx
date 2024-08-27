@@ -26,7 +26,13 @@ const AccordionItem = ({
 	return (
 		<div className={`flex gap-4 w-full ${className}`}>
 			<div className='accordion-item'>
-				<button className='accordion-header' onClick={toggleOpen}>
+				<button
+					className='accordion-header'
+					onClick={e => {
+						e.stopPropagation()
+						toggleOpen()
+					}}
+				>
 					{startContent}
 					<div className='flex flex-col items-start w-full justify-start gap-4'>
 						<div className='header-content'>
@@ -38,12 +44,19 @@ const AccordionItem = ({
 								} transition-transform duration-200`}
 							/>
 						</div>
+						{isOpen && (
+							<div
+								onClick={e => e.stopPropagation}
+								className='accordion-content'
+							>
+								{children}
+							</div>
+						)}
+
 						{isLast ? <>{addButton}</> : <></>}
 					</div>
-
 					{endContent}
 				</button>
-				{isOpen && <div className='accordion-content'>{children}</div>}
 			</div>
 		</div>
 	)

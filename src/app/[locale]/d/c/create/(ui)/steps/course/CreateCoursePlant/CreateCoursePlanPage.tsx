@@ -17,10 +17,11 @@ import useUnifiedStore from '../../../../(model)/unified.state'
 import TopicPlanAccordion from './TopicPlanAccordion'
 
 const CreateCoursePlanPage = () => {
+	const t = useTranslations('CreateCoursePlanPage')
 	const [view, setView] = useState('topics')
 	const [selectedTopic, setSelectedTopic] = useState(null)
 	const [selectedSubtopic, setSelectedSubtopic] = useState(null)
-	const t = useTranslations('CreateCoursePlanPage')
+	const [hasError, setHasError] = useState(false)
 
 	const {
 		createCoursePlanWithAI,
@@ -42,7 +43,12 @@ const CreateCoursePlanPage = () => {
 		prevStep
 	} = useUnifiedStore()
 
-	const { getCoursePlan, coursePlanData, coursePlanLoading } = useGetPlanId()
+	const {
+		getCoursePlan,
+		coursePlanData,
+		coursePlanLoading,
+		coursePlanRefetch
+	} = useGetPlanId()
 	const { courseAIHistory } = useGetCourseAIHistoryByCourseId(courseId)
 
 	const { updateCoursePlanWithAI } = useUpdateCoursePlanWithAI()
@@ -64,7 +70,7 @@ const CreateCoursePlanPage = () => {
 	}, [coursePlanStateData, getCoursePlan])
 
 	useEffect(() => {
-		const req = async () => {
+		const createPlan = async () => {
 			if (
 				courseId &&
 				courseAIHistory &&
@@ -72,34 +78,44 @@ const CreateCoursePlanPage = () => {
 				selectedDescription &&
 				!coursePlanStateData &&
 				!coursePlanData &&
-				!createPlanLoading
+				!createPlanLoading &&
+				!hasError
 			) {
-				await createCoursePlanWithAI({
-					variables: {
-						CoursePlanWithAIInput: {
-							name: selectedTitle,
-							description: selectedDescription,
-							courseAIHistoryId: courseAIHistory?.id,
-							courseId: courseId,
-							userKnowledge: JSON.stringify(summaryData),
-							isHasVideo: videosFromYouTube || false
+				try {
+					await createCoursePlanWithAI({
+						variables: {
+							CoursePlanWithAIInput: {
+								name: selectedTitle,
+								description: selectedDescription,
+								courseAIHistoryId: courseAIHistory?.id,
+								courseId: courseId,
+								userKnowledge: JSON.stringify(summaryData),
+								isHasVideo: videosFromYouTube || false
+							}
 						}
-					}
-				})
+					})
+				} catch (error) {
+					setHasError(true)
+				}
 			}
 		}
-		req()
+
+		if (!coursePlanStateData && !createPlanData && !hasError) {
+			createPlan()
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [
-		courseId,
-		selectedTitle,
-		selectedDescription,
-		videosFromYouTube,
-		createPlanLoading,
-		coursePlanStateData,
-		coursePlanData,
-		createCoursePlanWithAI,
 		courseAIHistory,
-		summaryData
+		coursePlanData,
+		coursePlanStateData,
+		createCoursePlanWithAI,
+		createPlanData,
+		createPlanLoading,
+		hasError,
+		selectedDescription,
+		selectedTitle,
+		summaryData,
+		videosFromYouTube
 	])
 
 	const handleTopicClick = topic => {

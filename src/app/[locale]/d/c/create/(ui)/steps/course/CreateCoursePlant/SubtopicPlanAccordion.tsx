@@ -1,3 +1,4 @@
+import { ISubtopicPlan } from '@/entities/plan/model/plan.types'
 import { useUpdateSubtopic } from '@/entities/subtopic/model/subtopic.queries'
 import DNDIcon from '@/shared/assets/icons/DNDIcon'
 import { Accordion, AccordionItem } from '@/shared/ui/Accordion/MyAccordion'
@@ -6,12 +7,22 @@ import { useState } from 'react'
 import { HiPencil } from 'react-icons/hi'
 import { IoMdAdd } from 'react-icons/io'
 import EditCourseModal from './CreateCourseCard/EditCourseModal'
+import GenerateBlockModal from './GenerateBlockModal' // Import GenerateBlockModal
 import LessonPlanAccordion from './LessonPlanAccordion'
 
-const SubtopicPlanAccordion = ({ subtopicsAllData, t, parentPrefix = '' }) => {
+const SubtopicPlanAccordion = ({
+	subtopicsAllData,
+	t,
+	parentPrefix = ''
+}: {
+	subtopicsAllData: ISubtopicPlan[]
+	t: any
+	parentPrefix: string
+}) => {
 	const [subtopics, setSubtopics] = useState(subtopicsAllData)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedSubtopic, setSelectedSubtopic] = useState(null)
+	const [isGenerateModalOpen, setIsGenerateModalOpen] = useState(false) // Add state for GenerateBlockModal
 	const { updateSubtopic } = useUpdateSubtopic()
 
 	const handleEditClick = subtopic => {
@@ -30,6 +41,15 @@ const SubtopicPlanAccordion = ({ subtopicsAllData, t, parentPrefix = '' }) => {
 			}
 		})
 		setIsModalOpen(false)
+	}
+
+	const handleGenerate = () => {
+		setIsGenerateModalOpen(true)
+	}
+
+	const handleBlockSave = newBlocks => {
+		console.log('Newly generated blocks:', newBlocks)
+		setIsGenerateModalOpen(false)
 	}
 
 	return (
@@ -73,11 +93,12 @@ const SubtopicPlanAccordion = ({ subtopicsAllData, t, parentPrefix = '' }) => {
 						}
 						addButton={
 							<Button
-								className='rounded-3xl h-[70px]'
+								className='rounded-3xl h-[70px] '
 								isIconOnly
 								size='full'
 								color='gray'
 								startContent={<IoMdAdd />}
+								onClick={handleGenerate} // Handle the generate button click
 							/>
 						}
 					>
@@ -99,6 +120,16 @@ const SubtopicPlanAccordion = ({ subtopicsAllData, t, parentPrefix = '' }) => {
 					</AccordionItem>
 				))}
 			</Accordion>
+			{subtopics.length === 0 && (
+				<Button
+					className='rounded-3xl h-[70px]'
+					isIconOnly
+					size='full'
+					color='gray'
+					startContent={<IoMdAdd />}
+					onClick={handleGenerate} // Handle the generate button click
+				/>
+			)}
 			{selectedSubtopic && (
 				<EditCourseModal
 					t={t}
@@ -109,6 +140,14 @@ const SubtopicPlanAccordion = ({ subtopicsAllData, t, parentPrefix = '' }) => {
 					type='subtopic'
 				/>
 			)}
+
+			<GenerateBlockModal
+				type='subtopic'
+				topicId={subtopicsAllData[0]?.topicId}
+				isOpen={isGenerateModalOpen}
+				onClose={() => setIsGenerateModalOpen(false)}
+				onSave={handleBlockSave}
+			/>
 		</div>
 	)
 }

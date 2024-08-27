@@ -23,7 +23,7 @@ const ModalComponent = ({ topicId, onClose }) => {
 		>
 			<ModalContent className={'w-[50vw] h-[70vh]'} color={'white'}>
 				<>
-					<ModalHeader className='flex flex-col gap-1 w-[50vw] '>
+					<ModalHeader className='flex flex-col gap-1 w-full '>
 						<div className='flex items-center space-x-1 border-b border-gray-100 gap-4'>
 							<div
 								onClick={() => {

@@ -103,7 +103,7 @@ const CREATE_COURSE_PLAN_WITH_AI_MUTATION = gql`
 export const useCreateCoursePlanWithAI = () => {
 	const [createCoursePlanWithAI, { data, error, loading }] = useMutation<{
 		createPlanWithAI: Pick<ICoursePlanWithAI, 'id'>
-	}>(CREATE_COURSE_PLAN_WITH_AI_MUTATION, {})
+	}>(CREATE_COURSE_PLAN_WITH_AI_MUTATION)
 
 	return {
 		createCoursePlanWithAI,
@@ -113,7 +113,7 @@ export const useCreateCoursePlanWithAI = () => {
 	}
 }
 
-const GET_COURSE_PLAN = gql`
+export const GET_COURSE_PLAN = gql`
 	query getCoursePlan($planId: ID!) {
 		getCoursePlan(planId: $planId) {
 			id
@@ -146,14 +146,18 @@ const GET_COURSE_PLAN = gql`
 	}
 `
 export const useGetPlanId = () => {
-	const [getCoursePlan, { data, error, loading }] = useLazyQuery<{
+	const [getCoursePlan, { data, error, loading, refetch }] = useLazyQuery<{
 		getCoursePlan: ICoursePlanWithAI
-	}>(GET_COURSE_PLAN)
+	}>(GET_COURSE_PLAN, {
+		refetchWritePolicy: 'overwrite',
+		fetchPolicy: 'network-only'
+	})
 	return {
 		getCoursePlan,
 		coursePlanData: data?.getCoursePlan,
 		coursePlanError: error,
-		coursePlanLoading: loading
+		coursePlanLoading: loading,
+		coursePlanRefetch: refetch
 	}
 }
 const UPDATE_COURSE_PLAN_WITH_AI_MUTATION = gql`

@@ -130,7 +130,8 @@
 		"Statistics": "Статистика",
 		"Settings": "Настройки",
 		"Generations of courses": "Генераций курсов",
-		"Block generation": "Генераций блоков"
+		"Block generation": "Генераций блоков",
+		"Generations of lessons": "Генераций уроков"
 	},
 	"Dashboard": {
 		"Let's begin! (1/4)": "Начнем! (1/4)",
@@ -309,8 +310,10 @@
 		"Enable Autofill": "Включить автозаполнение",
 		"Add new topic": "Добавить новую тему",
 		"Add new module": "Добавить новый модуль",
+		"Add new lesson": "Добавить новый урок",
 		"Manual": "Вручную",
-		"From AI": "С помощью AI"
+		"From AI": "С помощью AI",
+		"An error occurred during creation, please try again or try again later": "Во время создания произошла ошибка. Повторите попытку или попробуйте позже"
 	},
 	"Subscription": {
 		"Subscription price": "Цена подписки",

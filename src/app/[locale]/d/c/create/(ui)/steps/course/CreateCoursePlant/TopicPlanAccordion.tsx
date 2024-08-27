@@ -1,3 +1,4 @@
+import { ITopicPlan } from '@/entities/plan/model/plan.types'
 import { useUpdateTopic } from '@/entities/topic/model/topic.queries'
 import DNDIcon from '@/shared/assets/icons/DNDIcon'
 import '@/shared/ui/Accordion/Accordion.scss'
@@ -10,7 +11,13 @@ import EditCourseModal from './CreateCourseCard/EditCourseModal'
 import GenerateBlockModal from './GenerateBlockModal' // Ensure this import is correct
 import SubtopicPlanAccordion from './SubtopicPlanAccordion'
 
-const TopicPlanAccordion = ({ topicsAllData, t }) => {
+const TopicPlanAccordion = ({
+	topicsAllData,
+	t
+}: {
+	topicsAllData: ITopicPlan[]
+	t: any
+}) => {
 	const [topics, setTopics] = useState(topicsAllData)
 	const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 	const [isGenerateModalOpen, setIsGenerateModalOpen] = useState(false)
@@ -137,6 +144,7 @@ const TopicPlanAccordion = ({ topicsAllData, t }) => {
 				isOpen={isGenerateModalOpen}
 				onClose={() => setIsGenerateModalOpen(false)}
 				onSave={handleBlockSave}
+				courseId={topicsAllData[0]?.courseId}
 			/>
 		</div>
 	)

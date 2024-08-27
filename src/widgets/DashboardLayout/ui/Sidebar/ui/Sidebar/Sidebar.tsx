@@ -16,7 +16,7 @@ const Sidebar = () => {
 	const router = useRouter()
 	useEffect(() => {
 		window.outerWidth <= 1024 ? setIsCollapsed(true) : null
-	}, [isCollapsed])
+	}, [isCollapsed, setIsCollapsed])
 	return (
 		<aside
 			style={{

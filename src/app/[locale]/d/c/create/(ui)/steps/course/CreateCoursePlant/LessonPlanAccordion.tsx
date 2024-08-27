@@ -1,4 +1,5 @@
 import { useUpdateLesson } from '@/entities/lesson/model/lesson.queries'
+import { ILessonPlan } from '@/entities/plan/model/plan.types'
 import DNDIcon from '@/shared/assets/icons/DNDIcon'
 import '@/shared/ui/Accordion/Accordion.scss'
 import Button from '@/shared/ui/Button/Button'
@@ -6,13 +7,25 @@ import { ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 import { HiPencil } from 'react-icons/hi'
 import { IoMdAdd } from 'react-icons/io'
+import useUnifiedStore from '../../../../(model)/unified.state'
 import EditCourseModal from './CreateCourseCard/EditCourseModal'
+import GenerateBlockModal from './GenerateBlockModal'
 
-const LessonPlanAccordion = ({ lessonsAllData, t, parentPrefix = '' }) => {
+const LessonPlanAccordion = ({
+	lessonsAllData,
+	t,
+	parentPrefix = ''
+}: {
+	lessonsAllData?: ILessonPlan[]
+	t: any
+	parentPrefix: string
+}) => {
+	const { coursePlanStateData } = useUnifiedStore()
 	const [lessons, setLessons] = useState<any[]>(lessonsAllData)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedLesson, setSelectedLesson] = useState(null)
 	const [openLessonId, setOpenLessonId] = useState(null)
+	const [isGenerateModalOpen, setIsGenerateModalOpen] = useState(false) // Add state for GenerateBlockModal
 	const { updateLesson } = useUpdateLesson()
 
 	const handleEditClick = lesson => {
@@ -31,6 +44,15 @@ const LessonPlanAccordion = ({ lessonsAllData, t, parentPrefix = '' }) => {
 			}
 		})
 		setIsModalOpen(false)
+	}
+
+	const handleGenerate = () => {
+		setIsGenerateModalOpen(true)
+	}
+
+	const handleBlockSave = newBlocks => {
+		console.log('Newly generated blocks:', newBlocks)
+		setIsGenerateModalOpen(false)
 	}
 
 	const toggleLesson = lessonId => {
@@ -68,10 +90,7 @@ const LessonPlanAccordion = ({ lessonsAllData, t, parentPrefix = '' }) => {
 								size='full'
 								color='gray'
 								startContent={<IoMdAdd />}
-								onClick={() => {
-									// Здесь можно добавить логику для добавления нового урока
-									console.log('Add new lesson')
-								}}
+								onClick={handleGenerate} // Handle the generate button click
 							/>
 						)}
 					</div>
@@ -91,7 +110,16 @@ const LessonPlanAccordion = ({ lessonsAllData, t, parentPrefix = '' }) => {
 					/>
 				</div>
 			))}
-
+			{lessons.length === 0 && (
+				<Button
+					className='rounded-3xl h-[70px]'
+					isIconOnly
+					size='full'
+					color='gray'
+					startContent={<IoMdAdd />}
+					onClick={handleGenerate}
+				/>
+			)}
 			{selectedLesson && (
 				<EditCourseModal
 					t={t}
@@ -102,6 +130,15 @@ const LessonPlanAccordion = ({ lessonsAllData, t, parentPrefix = '' }) => {
 					type='lesson'
 				/>
 			)}
+
+			<GenerateBlockModal
+				type='lesson'
+				courseId={coursePlanStateData}
+				subtopicId={lessonsAllData[0]?.subtopicId}
+				isOpen={isGenerateModalOpen}
+				onClose={() => setIsGenerateModalOpen(false)}
+				onSave={handleBlockSave}
+			/>
 		</div>
 	)
 }

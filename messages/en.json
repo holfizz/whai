@@ -130,7 +130,8 @@
 		"Statistics": "Statistics",
 		"Settings": "Settings",
 		"Generations of courses": "Generations of courses",
-		"Block generation": "Block generation"
+		"Block generation": "Block generation",
+		"Generations of lessons": "Generations of lessons"
 	},
 	"Dashboard": {
 		"Continue education": "Continue education",
@@ -310,8 +311,10 @@
 		"Enable Autofill": "Enable Autofill",
 		"Add new topic": "Add new topic",
 		"Add new module": "Add new module",
+		"Add new lesson": "Add new lesson",
 		"Manual": "Manual",
-		"From AI": "From AI"
+		"From AI": "From AI",
+		"An error occurred during creation, please try again or try again later": "An error occurred during creation, please try again or try again later"
 	},
 	"Subscription": {
 		"Subscription price": "Subscription price",

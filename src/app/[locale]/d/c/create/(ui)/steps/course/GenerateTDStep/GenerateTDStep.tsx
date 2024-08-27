@@ -253,7 +253,7 @@ const GenerateTDStep = (): React.JSX.Element => {
 						)}
 					</div>
 				)}
-				<div className={'flex gap-4 mt-4'}>
+				<div className={'flex gap-4 mt-4 h-[100%]'}>
 					<Button
 						isDisabled={loadingTD}
 						size={'3xl'}
@@ -264,7 +264,7 @@ const GenerateTDStep = (): React.JSX.Element => {
 					</Button>
 					<Button
 						isDisabled={loadingTD}
-						className=' h-full w-auto aspect-square rounded-3xl p-0'
+						className='h-[85px] w-[85px] aspect-square rounded-3xl p-0'
 						color={'gray'}
 						isIconOnly
 						startContent={<RegenerateIcon />}
