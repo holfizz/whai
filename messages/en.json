@@ -18,7 +18,8 @@
 		"Upon login I accept": "Upon login I accept",
 		"Terms and Conditions": "Terms and Conditions",
 		"Personal data processing policy": "Personal data processing policy",
-		"You must complete the CAPTCHA validation": "You must complete the CAPTCHA validation"
+		"You must complete the CAPTCHA validation": "You must complete the CAPTCHA validation",
+		"An error occurred during registration, check your email and password and try again": "An error occurred during registration, check your email and password and try again"
 	},
 	"Layout": {
 		"By using the site, you consent to the collection of cookies and agree to": "By using the site, you consent to the collection of cookies and agree to",
@@ -314,7 +315,9 @@
 		"Add new lesson": "Add new lesson",
 		"Manual": "Manual",
 		"From AI": "From AI",
-		"An error occurred during creation, please try again or try again later": "An error occurred during creation, please try again or try again later"
+		"An error occurred during creation, please try again or try again later": "An error occurred during creation, please try again or try again later",
+		"You have reached your monthly limit for creating courses Renew your subscription or wait until your limit is updated next month": "You have reached your monthly limit for creating courses. Renew your subscription or wait until your limit is updated next month",
+		"Learn more about our premium plans and enjoy unlimited features": "Learn more about our premium plans and enjoy unlimited features"
 	},
 	"Subscription": {
 		"Subscription price": "Subscription price",

@@ -41,6 +41,9 @@ export const Footer = () => {
 						<li>
 							<Link href={getSubscriptionsRoute()}>Подписки</Link>
 						</li>
+						<li>
+							<Link href={getSubscriptionsRoute()}>Отмена подписки</Link>
+						</li>
 					</ul>
 				</div>
 

@@ -32,6 +32,7 @@ const SubsPage = () => {
 	const [updateProfile] = useMutation(UPDATE_PROFILE)
 	const router = useRouter()
 	const [isAutoRenewal, setIsAutoRenewal] = useState<boolean>(false)
+	const [isAutoRenewalModal, setIsAutoRenewalModal] = useState<boolean>(false)
 	useEffect(() => {
 		if (user?.getProfile?.isAutoRenewal !== undefined) {
 			setIsAutoRenewal(user.getProfile.isAutoRenewal)
@@ -119,6 +120,10 @@ const SubsPage = () => {
 
 	const handleAutoRenewalToggle = async () => {
 		setShowConfirmModal(true)
+	}
+
+	const handleAutoRenewalToggleModal = async () => {
+		setIsAutoRenewalModal(prev => !prev)
 	}
 
 	const confirmAutoRenewalChange = async () => {
@@ -322,8 +327,8 @@ const SubsPage = () => {
 												classNames={{
 													wrapper: 'group-data-[selected=true]:bg-decor-2'
 												}}
-												isSelected={isAutoRenewal}
-												onClick={handleAutoRenewalToggle}
+												isSelected={isAutoRenewalModal}
+												onClick={handleAutoRenewalToggleModal}
 											/>
 											<label className='ml-2'>{t('Enable auto-renewal')}</label>
 										</div>
@@ -339,7 +344,7 @@ const SubsPage = () => {
 														dto: {
 															months: isYear ? 12 : 1,
 															subscriptionType: activeModal,
-															isAutoRenewal: isAutoRenewal
+															isAutoRenewal: isAutoRenewalModal
 														}
 													}
 												})

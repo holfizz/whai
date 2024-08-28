@@ -1,10 +1,11 @@
-/** @type {import('next').NextConfig} */
 import createNextIntlPlugin from 'next-intl/plugin'
 
 // import createMDX from "@next/mdx";
 
 // const withMDX = createMDX();
 const withNextIntl = createNextIntlPlugin('./src/shared/config/i18n/i18n.ts')
+/** @type {import('next').NextConfig} */
+
 const nextConfig = {
 	sentry: {
 		hideSourceMaps: true
@@ -25,6 +26,9 @@ const nextConfig = {
 				pathname: '/avatar/**'
 			}
 		]
+	},
+	experimental: {
+		optimizePackageImports: ['@marsidev/react-turnstile', '@nextui-org/react']
 	},
 	swcMinify: true,
 	pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']

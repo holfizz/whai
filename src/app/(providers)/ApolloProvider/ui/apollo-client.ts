@@ -24,7 +24,6 @@ import { getMainDefinition } from '@apollo/client/utilities'
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 import { GraphQLError } from 'graphql'
 import { createClient } from 'graphql-ws'
-
 interface AccessToken {
 	accessToken: string
 }
@@ -49,30 +48,27 @@ const authLink = setContext((operation, { headers }) => {
 // Функция для запроса нового токена
 const refreshToken = async () => {
 	try {
-		const response = await client.query({
+		const { data, error } = await client.query({
 			query: GET_NEW_TOKEN,
 			fetchPolicy: 'no-cache'
 		})
+		if (error) {
+			logout(true)
+			throw new GraphQLError('Empty AccessToken')
+		}
+		const newAccessToken = data?.getNewToken.accessToken
 
-		const newAccessToken = response.data?.getNewToken.accessToken
 		if (!newAccessToken) {
-			logout()
+			logout(true)
 			throw new GraphQLError('Empty AccessToken')
 		}
 		logger.log('Received new access token:', newAccessToken)
-
-		if (response.error) {
-			logger.log('GraphQL error:', response.error)
-			logout()
-		}
 
 		saveTokenStorage(newAccessToken)
 
 		return newAccessToken
 	} catch (err) {
 		console.error('Error refreshing token:', err)
-		logout()
-		localStorage.clear()
 		throw err
 	}
 }
@@ -120,7 +116,6 @@ const errorLink = onError(
 									})
 								} catch (err) {
 									console.error('Error during token refresh:', err)
-									logout()
 									observer.error(err)
 								}
 							})()

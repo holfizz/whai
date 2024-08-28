@@ -2,10 +2,8 @@
 import { useGetProfile } from '@/entities/Auth/model/auth.queries'
 import { logout } from '@/features/auth/model/auth.model'
 import { Link } from '@/navigation'
-import BellIcon from '@/shared/assets/icons/Bell'
 import {
 	getDashboardRoute,
-	getSettingsRoute,
 	getSubscriptionsRoute,
 	getSupportRoute
 } from '@/shared/const/router'
@@ -16,7 +14,6 @@ import {
 	DropdownMenu
 } from '@/shared/ui/Dropdown/Dropdown'
 import Logo from '@/shared/ui/Logo/Logo'
-import { Popover, PopoverContent } from '@/shared/ui/Popover/Popover'
 import Text from '@/shared/ui/Text/Text'
 import {
 	Avatar,
@@ -25,8 +22,7 @@ import {
 	NavbarContent,
 	NavbarMenu,
 	NavbarMenuItem,
-	NavbarMenuToggle,
-	PopoverTrigger
+	NavbarMenuToggle
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
@@ -68,7 +64,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 				>
 					{t('Subscription')}
 				</Button>
-				<Popover color={'gray-text'} placement='bottom-end'>
+				{/* <Popover color={'gray-text'} placement='bottom-end'>
 					<PopoverTrigger>
 						<Button
 							color={'clear'}
@@ -84,7 +80,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 							</div>
 						</div>
 					</PopoverContent>
-				</Popover>
+				</Popover> */}
 				{userData?.email && (
 					<Dropdown
 						color='white'
@@ -115,14 +111,14 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 							>
 								{t('Dashboard')}
 							</DropdownItem>
-							<DropdownItem
+							{/* <DropdownItem
 								color='white'
 								href={getSettingsRoute()}
 								as={Link}
 								key='settings'
 							>
 								{t('Settings')}
-							</DropdownItem>
+							</DropdownItem> */}
 							<DropdownItem
 								color='white'
 								href={getSupportRoute()}
@@ -134,8 +130,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 							<DropdownItem
 								className='data-[hover=true]:bg-[#FF9090]'
 								onClick={() => {
-									logout()
-									window.location.replace('/')
+									logout(true)
 								}}
 								key='logout'
 							>

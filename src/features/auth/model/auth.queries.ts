@@ -129,7 +129,8 @@ export const useGetNewTokenQuery = () => {
 						authUserVar(updatedAuthState)
 					}
 				}
-			}
+			},
+			fetchPolicy: 'cache-only'
 		}
 	)
 

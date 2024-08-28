@@ -2,13 +2,19 @@
 
 import { useGetNewTokenQuery } from '@/features/auth/model/auth.queries'
 import { getAccessToken, saveTokenStorage } from '@/shared/api/auth/auth.helper'
-import Loader from '@/shared/ui/Loader/Loader'
+import logger from '@/shared/lib/utils/logger'
+import { EnumTokens } from '@/shared/types/auth'
+import Cookies from 'js-cookie'
+import { Loader } from 'lucide-react'
 import { ReactNode, useEffect, useState } from 'react'
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [loading, setLoading] = useState(true)
 	const { dataNewToken, loading: queryLoading, error } = useGetNewTokenQuery()
-
+	const refreshToken = Cookies.get(EnumTokens.REFRESH_TOKEN)
+	useEffect(() => {
+		logger.log('No refresh token, logging out', refreshToken)
+	}, [])
 	useEffect(() => {
 		const fetchNewToken = async () => {
 			try {

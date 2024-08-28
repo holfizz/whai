@@ -6,12 +6,17 @@ import {
 } from '@/entities/plan/model/plan.queries'
 import { Link } from '@/navigation'
 import RegenerateIcon from '@/shared/assets/icons/Regenerate'
-import { getCourseByIdRoute } from '@/shared/const/router'
+import Error from '@/shared/assets/image/error.png'
+import {
+	getCourseByIdRoute,
+	getSubscriptionsRoute
+} from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import useUnifiedStore from '../../../../(model)/unified.state'
 import TopicPlanAccordion from './TopicPlanAccordion'
@@ -183,27 +188,55 @@ const CreateCoursePlanPage = () => {
 				)}
 				{createPlanError && (
 					<div>
-						<h1 className='text-2xl text-error-text'>
-							{t('Oops Error please try again')}
-						</h1>
-						<div className='w-fll flex mt-10 items-center justify-center'>
-							<Button
-								className='w-auto px-20 h-[70px]  rounded-3xl ml-5'
-								color={'main'}
-								onClick={prevStep}
-							>
-								{t('Back')}
-							</Button>
-							<Button
-								className='ml-5 h-[70px] w-[70px] aspect-square rounded-3xl p-0'
-								color={'gray'}
-								isIconOnly
-								startContent={<RegenerateIcon />}
-								onClick={() => window.location.reload()}
-							/>
-						</div>
+						{createPlanError.graphQLErrors.some(
+							error =>
+								error.message ===
+								'You have reached your course creation limit for this month.'
+						) ? (
+							<div className='w-full flex flex-col items-center justify-center'>
+								<div className='flex flex-col w-2/3 text-center items-center justify-center'>
+									<Image src={Error} alt='error' width={250} />
+									<h1 className='text-2xl bg-error-4 text-error-text rounded-3xl p-2'>
+										{t(
+											'You have reached your monthly limit for creating courses Renew your subscription or wait until your limit is updated next month'
+										)}
+									</h1>
+									<Link
+										className='text-secondary text-sm mt-3'
+										href={getSubscriptionsRoute()}
+									>
+										{t(
+											'Learn more about our premium plans and enjoy unlimited features'
+										)}
+									</Link>
+								</div>
+							</div>
+						) : (
+							<div>
+								<h1 className='text-2xl text-error-text'>
+									{t('Oops Error please try again')}
+								</h1>
+								<div className='w-full flex mt-10 items-center justify-center'>
+									<Button
+										className='w-auto px-20 h-[70px] rounded-3xl ml-5'
+										color={'main'}
+										onClick={prevStep}
+									>
+										{t('Back')}
+									</Button>
+									<Button
+										className='ml-5 h-[70px] w-[70px] aspect-square rounded-3xl p-0'
+										color={'gray'}
+										isIconOnly
+										startContent={<RegenerateIcon />}
+										onClick={() => window.location.reload()}
+									/>
+								</div>
+							</div>
+						)}
 					</div>
 				)}
+
 				{coursePlanData && (
 					<>
 						<div className='flex flex-col items-center w-[80%] max-md:w-[95%]'>

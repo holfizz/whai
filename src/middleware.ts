@@ -1,9 +1,6 @@
 import { EnumTokens } from '@/shared/types/auth'
-import { gql } from '@apollo/client'
 import createIntlMiddleware from 'next-intl/middleware'
 import { NextRequest, NextResponse } from 'next/server'
-import client from './app/(providers)/ApolloProvider/ui/apollo-client'
-import { logout } from './features/auth/model/auth.model'
 import { locales } from './navigation'
 import { removeFromStorage } from './shared/api/auth/auth.helper'
 
@@ -12,29 +9,29 @@ const nextIntlMiddleware = createIntlMiddleware({
 	defaultLocale: 'ru'
 })
 
-const GET_NEW_TOKEN = gql`
-	query getNewToken {
-		getNewToken {
-			accessToken
-			user {
-				email
-				roles
-			}
-		}
-	}
-`
+// const GET_NEW_TOKEN = gql`
+// 	query getNewToken {
+// 		getNewToken {
+// 			accessToken
+// 			user {
+// 				email
+// 				roles
+// 			}
+// 		}
+// 	}
+// `
 
-const fetchNewTokenFromApollo = async () => {
-	try {
-		const { data } = await client.query({
-			query: GET_NEW_TOKEN
-		})
-		return data?.getNewToken?.accessToken
-	} catch (error) {
-		console.error('Error fetching new token from Apollo:', error)
-		return null
-	}
-}
+// const fetchNewTokenFromApollo = async () => {
+// 	try {
+// 		const { data, error } = await client.query({
+// 			query: GET_NEW_TOKEN
+// 		})
+// 		return { data: data?.getNewToken?.accessToken, error }
+// 	} catch (error) {
+// 		console.error('Error fetching new token from Apollo:', error)
+// 		return null
+// 	}
+// }
 
 export default async function (req: NextRequest) {
 	const { url, cookies, nextUrl } = req
@@ -65,13 +62,6 @@ export default async function (req: NextRequest) {
 		return NextResponse.redirect(new URL(`/${locale}/d`, nextUrl))
 	}
 	if (isProtectedRoute && !isAuthTokens) {
-		const newAccessToken = await fetchNewTokenFromApollo()
-		if (newAccessToken) {
-			const response = NextResponse.next()
-			response.cookies.set(EnumTokens.ACCESS_TOKEN, newAccessToken)
-			return response
-		}
-		logout()
 		return NextResponse.redirect(new URL(`/${locale}/auth/login`, nextUrl))
 	}
 

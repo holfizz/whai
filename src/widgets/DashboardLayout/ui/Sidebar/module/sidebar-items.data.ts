@@ -2,14 +2,12 @@ import ChatIcon from '@/shared/assets/icons/Chat'
 import HomeIcon from '@/shared/assets/icons/Home'
 import LibraryIcon from '@/shared/assets/icons/Library'
 import MyCoursesIcon from '@/shared/assets/icons/MyCourses'
-import SettingsIcon from '@/shared/assets/icons/Settings'
 import StatisticsIcon from '@/shared/assets/icons/Statistics'
 import {
 	getChatWithAIRoute,
 	getCoursesRoute,
 	getDashboardRoute,
 	getLibraryRoute,
-	getSettingsRoute,
 	getStatisticsRoute
 } from '@/shared/const/router'
 import { LucideIcon } from 'lucide-react'
@@ -22,7 +20,7 @@ export interface ISidebarItem {
 		| 'Courses'
 		| 'Chat with AI'
 		| 'Statistics'
-		| 'Settings'
+		// | 'Settings'
 		| 'Library'
 }
 
@@ -51,11 +49,11 @@ export const sidebarItems: ISidebarItem[] = [
 		text: 'Statistics',
 		icon: StatisticsIcon,
 		link: getStatisticsRoute()
-	},
-
-	{
-		text: 'Settings',
-		icon: SettingsIcon,
-		link: getSettingsRoute()
 	}
+
+	// {
+	// 	text: 'Settings',
+	// 	icon: SettingsIcon,
+	// 	link: getSettingsRoute()
+	// }
 ]

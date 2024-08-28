@@ -23,16 +23,18 @@ const InfoMessage: FC<InfoMessageProps> = ({ error, data, type }) => {
 					error?.message
 						? 'text-red-400'
 						: data
-						? 'text-success-10'
+						? 'text-decor-2'
 						: 'text-accent'
-				} text-2xl max-md:text-5xl text-bold`}
+				} text-2xl max-md:text-5xl text-bold text-center`}
 			>
 				{type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
 			</h1>
 
 			{error && (
-				<h1 className='text-xl max-md:text-2xl text-error-10'>
-					{error?.message}
+				<h1 className='text-xl max-md:text-2xl text-error-10 text-center'>
+					{t(
+						'An error occurred during registration, check your email and password and try again'
+					)}
 				</h1>
 			)}
 

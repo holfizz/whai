@@ -3,6 +3,7 @@
 import { client } from '@/app/(providers)/ApolloProvider/ui/apollo-client'
 import { IUserData } from '@/entities/Auth'
 import { removeFromStorage } from '@/shared/api/auth/auth.helper'
+import logger from '@/shared/lib/utils/logger'
 import { makeVar } from '@apollo/client'
 import { LOGOUT } from './auth.queries'
 
@@ -20,15 +21,19 @@ export function setAuthUser(authResponse: IUserData | null): void {
 	}
 }
 
-export async function logout(): Promise<void> {
+export async function logout(isReload = false): Promise<void> {
 	try {
-		await client.mutate({ mutation: LOGOUT })
+		const { data } = await client.query({ query: LOGOUT })
 		localStorage.removeItem('authState')
 		removeFromStorage()
 		authUserVar({
 			user: null,
 			accessToken: null
 		})
+		logger.log(112, data?.logout)
+		if (isReload && data?.logout) {
+			window.location.reload()
+		}
 	} catch (error) {
 		console.error('Logout error:', error)
 	}
