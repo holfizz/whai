@@ -234,19 +234,25 @@ const SubsPage = () => {
 													: 'text-accent'
 											}`}
 										>
-											{monthlyPrices[type]}
+											{isYear
+												? `${Math.round(Number(monthlyPrices[type]) * 12)} `
+												: `${monthlyPrices[type]} `}
 											<span className='text-3xl ml-2 text-secondary'>₽</span>
 										</p>
 										{isYear && (
 											<p
-												className={`text-2xl font-semibold mb-2 ${
+												className={`text-3xl font-semibold mb-2 ${
 													type === 'PREMIUM' ? 'text-white' : 'text-accent'
 												}`}
 											>
-												{`${discountedPrices[type]} ₽`}
+												{isYear
+													? `${Math.round(
+															Number(discountedPrices[type]) * 12
+													  )} ₽`
+													: `${discountedPrices[type]} ₽`}
 											</p>
 										)}
-										<p className='text-sm text-gray-500 mb-6'>
+										<p className='text-sm text-#040404-500 mb-6'>
 											{t('Discount notice')}
 										</p>
 										<p className='mb-4'>

@@ -10,6 +10,7 @@ import {
 	getRoutePrivacy,
 	getSubscriptionsRoute
 } from '@/shared/const/router'
+import Button from '@/shared/ui/Button/Button'
 import Logo from '@/shared/ui/Logo/Logo'
 
 export const Footer = () => {
@@ -40,9 +41,6 @@ export const Footer = () => {
 						</li>
 						<li>
 							<Link href={getSubscriptionsRoute()}>Подписки</Link>
-						</li>
-						<li>
-							<Link href={getSubscriptionsRoute()}>Отмена подписки</Link>
 						</li>
 					</ul>
 				</div>
@@ -85,6 +83,9 @@ export const Footer = () => {
 						<li>ИНН: 753614213399</li>
 						<li>ИП Горлачев Сергей Русланович</li>
 					</ul>
+					<Button color='accent' style={{ marginTop: '30px' }}>
+						<Link href={getSubscriptionsRoute()}>Отмена подписки</Link>
+					</Button>
 				</div>
 			</div>
 		</div>
