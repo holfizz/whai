@@ -23,6 +23,7 @@ export const getStatisticsRoute = () => `/statistics`
 //courses - c
 export const getCoursesRoute = () => `/d/c`
 export const getCourseByIdRoute = (id: string) => `/d/c/${id}`
+export const getCourseExampleByIdRoute = (id: string) => `/d/c/e/${id}`
 export const getSettingsRoute = () => `/d/settings`
 export const getCreatePageRoute = () => `/d/c/create`
 

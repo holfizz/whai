@@ -1,6 +1,5 @@
 'use client'
 
-import PageBody from '@/app/[locale]/d/(ui)/pageBody/pageBody'
 import PageHeader from '@/app/[locale]/d/(ui)/pageHeader/pageHeader'
 import { useGetProfile } from '@/entities/Auth/model/auth.queries'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
@@ -16,7 +15,7 @@ export default function DMain() {
 	return (
 		<DashboardLayout className={'w-full'}>
 			<PageHeader userData={userData} />
-			<PageBody />
+			{/* <PageBody /> */}
 		</DashboardLayout>
 	)
 }

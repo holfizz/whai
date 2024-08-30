@@ -62,8 +62,14 @@ const AccordionItem = ({
 	)
 }
 
-const Accordion = ({ children }) => {
-	return <div className='accordion'>{children}</div>
+const Accordion = ({
+	children,
+	className
+}: {
+	children: ReactNode
+	className?: string
+}) => {
+	return <div className={`accordion ${className}`}>{children}</div>
 }
 
 export { Accordion, AccordionItem }

@@ -9,10 +9,8 @@ const CourseSection = () => {
 
 	return (
 		<>
-			<div>
-				{errorAllCourse && <p>Error loading courses</p>}
-				{loadingAllCourse && <DotsLoader />}
-			</div>
+			{errorAllCourse && <p>Error loading courses</p>}
+			{loadingAllCourse && <DotsLoader />}
 			{allCourseData &&
 				allCourseData.map((course, i) => (
 					<CourseCard isSquare course={course} key={i} />

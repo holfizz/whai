@@ -2,6 +2,8 @@
 import { useGetCourse } from '@/entities/course'
 import { useGetAllTopics } from '@/entities/topic'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
+import ClockIcon from '@/shared/assets/icons/Clock'
+import ListIcon from '@/shared/assets/icons/List'
 import Button from '@/shared/ui/Button/Button'
 import { Progress } from '@/shared/ui/Progress/Progress'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
@@ -9,9 +11,7 @@ import { useDisclosure } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
-import { FaClock } from 'react-icons/fa6'
 import { HiVideoCamera } from 'react-icons/hi'
-import { LuListOrdered } from 'react-icons/lu'
 import ModalComponent from '../ModalComponent/ModalComponent'
 import cls from './topicPage.module.scss'
 
@@ -74,7 +74,7 @@ const TopicsPage = () => {
 								<p className={cls.description}>{topic.description}</p>
 								<div className='flex gap-2 flex-wrap w-full mt-auto'>
 									<div className='flex mr-4 items-center'>
-										<FaClock size={18} className='text-gray-2 mx-2' />
+										<ClockIcon fontSize={18} className='text-gray-2 mx-2' />
 										<h3 className='text-gray-2 font-normal'>
 											{`${topic.completionTime} Hours`}
 										</h3>
@@ -86,7 +86,7 @@ const TopicsPage = () => {
 										</h3>
 									</div>
 									<div className='flex mr-4 items-center'>
-										<LuListOrdered size={18} className='text-gray-2 mx-2' />
+										<ListIcon fontSize={18} className='text-gray-2 mx-2' />
 										<h3 className='text-gray-2 font-normal'>
 											{`${topic.totalSubtopics}  ${t('Topics')}`}
 										</h3>

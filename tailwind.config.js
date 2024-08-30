@@ -11,6 +11,7 @@ const twColors = {
 	'gray-2': '#BDBDBD',
 	'gray-3': '#828282',
 	'yellow-5': '#97917D',
+	'yellow-10': '#524E41',
 	'decor-1': '#FFF7DC',
 	'decor-2': '#ffb57f',
 	'decor-3': '#ffe8a3',

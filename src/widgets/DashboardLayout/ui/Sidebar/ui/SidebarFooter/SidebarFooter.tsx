@@ -1,4 +1,5 @@
 import { useGetProfile } from '@/entities/Auth/model/auth.queries'
+import { Tooltip } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useSidebar } from '../../module/sidebar.module'
 
@@ -8,41 +9,42 @@ const SidebarFooter = () => {
 	const { userData } = useGetProfile()
 
 	return (
-		<div className='w-full h-[100px] flex flex-col items-center justify-center gap-4 mb-16 px-4'>
-			<div
-				className={`flex w-full items-center ${
-					isCollapsed ? 'justify-center' : 'justify-between '
-				} text-secondary `}
+		<div className='w-full h-auto flex flex-col items-center justify-center gap-4 mb-4 px-4'>
+			<Tooltip
+				classNames={{
+					content: ['py-2 px-4 shadow-xl', 'text-black bg-bg-accent']
+				}}
+				placement={'right-end'}
+				content={
+					<div className='px-1 py-2'>
+						<div className='flex gap-2 items-center'>
+							<h1 className='font-bold'>{t('Generations of courses')}:</h1>
+							<p>{Number(userData?.currentCourseCount)}</p>
+						</div>
+						<div className='flex gap-2 items-center'>
+							<h1 className='font-bold'>{t('Generations of lessons')}:</h1>
+							<p>{Number(userData?.currentLessonCount)}</p>
+						</div>
+						<div className='flex gap-2 items-center'>
+							<h1 className='font-bold'>{t('Block generation')}:</h1>
+							<p>{Number(userData?.additionalTitlesCount)}</p>
+						</div>
+					</div>
+				}
 			>
-				{!isCollapsed && (
-					<h3 className='max-w-1/2 text-ellipsis overflow-hidden'>
-						{t('Generations of courses')}
-					</h3>
-				)}
-				<div className='w-[40px] h-[40px] rounded-md text-accent flex justify-center items-center bg-white'>
-					{userData?.currentCourseCount}
+				<div
+					className={`flex w-full items-center  ${
+						isCollapsed ? 'justify-center' : 'justify-evenly'
+					} text-secondary`}
+				>
+					{!isCollapsed && <h3>{t('Generations')}</h3>}
+					<div className='w-[40px] h-[40px] rounded-md text-accent flex justify-center items-center bg-bg-accent'>
+						{Number(userData?.currentLessonCount) +
+							Number(userData?.additionalTitlesCount) +
+							Number(userData?.currentCourseCount)}
+					</div>
 				</div>
-			</div>
-			<div
-				className={`flex w-full items-center  ${
-					isCollapsed ? 'justify-center' : 'justify-between'
-				} text-secondary`}
-			>
-				{!isCollapsed && <h3>{t('Generations of lessons')}</h3>}
-				<div className='w-[40px] h-[40px] rounded-md text-accent flex justify-center items-center bg-bg-accent'>
-					{userData?.currentLessonCount}
-				</div>
-			</div>
-			<div
-				className={`flex w-full items-center ${
-					isCollapsed ? 'justify-center' : 'justify-between '
-				} text-secondary`}
-			>
-				{!isCollapsed && <h3>{t('Block generation')}</h3>}
-				<div className='w-[40px] h-[40px] rounded-md text-accent flex justify-center items-center bg-decor-1'>
-					{userData?.additionalTitlesCount}
-				</div>
-			</div>
+			</Tooltip>
 		</div>
 	)
 }

@@ -1,6 +1,7 @@
 import { ICourse } from '@/entities/course'
 import { Link } from '@/navigation'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
+import UniverseImage from '@/shared/assets/image/UniversalLife.png'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import Image from 'next/image'
@@ -16,11 +17,11 @@ const CourseCard = ({
 	isSquare?: boolean
 }) => {
 	const styles = isSquare
-		? 'w-[330px] h-min-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-[330px]'
+		? ' h-min-[330px] h-auto md:w-[90%] max-md:h-min-[252px] lg:w-[390px]'
 		: 'w-[390px] h-min-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2'
 	return (
 		<div
-			className={`${styles} shadow-sm rounded-[40px] py-4 px-5 ${className}`}
+			className={`${styles} shadow-sm rounded-[40px] py-4 px-5 ${className}  `}
 		>
 			<div className={'w-full flex justify-between'}>
 				{course.imgUrl ? (
@@ -32,7 +33,11 @@ const CourseCard = ({
 						alt={course.name}
 					/>
 				) : (
-					<div className='w-24 h-24 sm:h-20 sm:w-20 rounded-lg bg-gray-100'></div>
+					<Image
+						className='sm:h-20 sm:w-20 rounded-lg max-w-[150px]'
+						src={UniverseImage}
+						alt={course.name}
+					/>
 				)}
 				<Button
 					size={'sRound'}
@@ -48,7 +53,7 @@ const CourseCard = ({
 				{course?.name}
 			</Link>
 			<p className={cls.paragraph}>{course?.description}</p>
-			<CourseStat data={course} className={'max-md:w-[95%]'} />
+			<CourseStat data={course} className={' w-[95%]'} />
 		</div>
 	)
 }

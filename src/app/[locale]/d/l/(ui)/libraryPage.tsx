@@ -59,7 +59,7 @@ const LibraryPage = () => {
 					{t('Lessons')}
 				</Button>
 			</div>
-			<div className='flex flex-wrap gap-5 w-full items-center'>
+			<div className='flex flex-wrap gap-5 w-full items-center max-640:p-8'>
 				{renderContent()}
 			</div>
 		</DashboardLayout>

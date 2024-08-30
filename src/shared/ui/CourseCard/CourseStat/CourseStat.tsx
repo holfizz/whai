@@ -1,8 +1,8 @@
 import { ICourse } from '@/entities/course'
+import ClockIcon from '@/shared/assets/icons/Clock'
 import Icon from '@/shared/ui/Icon/Icon'
+import { ListIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { FaClock } from 'react-icons/fa'
-import { LuListOrdered } from 'react-icons/lu'
 const CourseStat = ({
 	data,
 	className
@@ -16,13 +16,13 @@ const CourseStat = ({
 			className={`flex w-[300px] justify-between mt-4 max-md:w-1/2 ${className}`}
 		>
 			<div className={'flex items-center'}>
-				<Icon className={'fill-gray-2 mr-2'} SVG={FaClock} />
+				<Icon className={'fill-gray-2 mr-2'} SVG={ClockIcon} />
 				<h2 className='text-sm text-gray-2'>
 					{data?.completionTime} {t('hours')}
 				</h2>
 			</div>
 			<div className={'flex text-2xl items-center'}>
-				<Icon className={'stroke-gray-2 mr-2'} SVG={LuListOrdered} />
+				<Icon className={'stroke-gray-2 mr-2'} SVG={ListIcon} />
 				<h2 className='text-sm text-gray-2'>
 					{data?.totalTopics} {t('topics')}
 				</h2>
