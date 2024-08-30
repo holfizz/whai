@@ -9,6 +9,7 @@ export interface ICourse {
 	totalTopics: number
 	progressPercents: number
 	completionTime: number
+	isStatic?: any
 }
 
 export type ICourseData = z.infer<typeof CourseData>

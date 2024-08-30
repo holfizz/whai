@@ -9,9 +9,11 @@ import { Progress } from '@/shared/ui/Progress/Progress'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useDisclosure } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { HiVideoCamera } from 'react-icons/hi'
+import { IoFlagSharp } from 'react-icons/io5'
 import ModalComponent from '../ModalComponent/ModalComponent'
 import cls from './topicPage.module.scss'
 
@@ -34,6 +36,28 @@ const TopicsPage = () => {
 				<h1 className='text-2xl font-normal max-md:text-3xl max-md:text-center  max-md:w-2/3 mx-auto max-sm:w-4/5'>
 					{courseData?.name}
 				</h1>
+				<div className={'flex gap-4'}>
+					<Button
+						as={Link}
+						href={'mailto:support@whai.ru'}
+						startContent={
+							<IoFlagSharp size={18} color={'var(--color-decor-2)'} />
+						}
+						className={cls.actionButton}
+					>
+						<h3 className={'text-[var(--color-secondary)] text-lg'}>
+							{t('Report a bug')}
+						</h3>
+					</Button>
+					{/* <Button
+						startContent={
+							<ShareIcon fontSize={18} color={'var(--color-decor-2)'} />
+						}
+						className={cls.actionButton}
+					>
+						<h3 className={'text-[var(--color-secondary)]'}>{t('Share')}</h3>
+					</Button> */}
+				</div>
 				<div
 					className='grid gap-6 mt-5 justify-center'
 					style={{

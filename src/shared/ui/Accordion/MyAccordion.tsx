@@ -9,7 +9,8 @@ const AccordionItem = ({
 	startContent,
 	addButton,
 	isLast,
-	className
+	className,
+	classNameHeaderContent
 }: {
 	title: ReactNode
 	children?: ReactNode
@@ -18,6 +19,7 @@ const AccordionItem = ({
 	addButton?: ReactNode
 	isLast?: boolean
 	className?: string
+	classNameHeaderContent?: string
 }) => {
 	const [isOpen, setIsOpen] = useState(false)
 
@@ -35,7 +37,7 @@ const AccordionItem = ({
 				>
 					{startContent}
 					<div className='flex flex-col items-start w-full justify-start gap-4'>
-						<div className='header-content'>
+						<div className={`header-content ${classNameHeaderContent}`}>
 							<div className='title'>{title}</div>
 
 							<ArrowDown

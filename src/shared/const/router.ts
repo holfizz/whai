@@ -38,4 +38,8 @@ export const getQuizRoute = (quizId: string) => `/d/c/q/${quizId}`
 export const getQuizIndependentRoute = (quizId: string) => `/d/c/q/i/${quizId}`
 
 //library - lib
-export const getLibraryRoute = () => `/d/l`
+export const getLibraryRoute = (
+	viewType?: 'tests' | 'lessons' | 'homework'
+) => {
+	return `/d/l?view=${viewType}`
+}

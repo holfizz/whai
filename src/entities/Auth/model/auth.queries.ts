@@ -39,6 +39,26 @@ export const useGetProfile = () => {
 	return { userData: data?.getProfile, errorProfile: error, loading }
 }
 
+export const GET_STAT_PROFILE = gql`
+	query {
+		getProfile {
+			isFirstCourseCompleted
+			isHomeworkCompleted
+			isQuizCompleted
+			isFirstLessonCompleted
+		}
+	}
+`
+export const useGetStatProfile = () => {
+	const { data, error, loading } = useQuery<{ getProfile: IUser }>(
+		GET_STAT_PROFILE,
+		{
+			fetchPolicy: 'cache-and-network'
+		}
+	)
+	return { userStat: data?.getProfile, errorProfile: error, loading }
+}
+
 export const UPDATE_PROFILE = gql`
 	mutation ($dto: UpdateUserInput!, $picture: Upload) {
 		updateProfile(dto: $dto, picture: $picture) {

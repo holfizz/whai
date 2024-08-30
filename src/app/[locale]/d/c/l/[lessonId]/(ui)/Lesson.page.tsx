@@ -2,33 +2,39 @@
 
 import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory'
 import { useGetLessonContent } from '@/entities/lesson'
-import { Lesson } from '@/features/lesson'
-import { DashboardLayout } from '@/widgets/DashboardLayout'
-import { useParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
 import { CREATE_LESSON_WITH_AI } from '@/entities/lesson/model/lesson.queries'
+import { Lesson } from '@/features/lesson'
+import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
+import { DashboardLayout } from '@/widgets/DashboardLayout'
+import { useMutation } from '@apollo/client'
+import { useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const LessonPage = () => {
 	const { lessonId } = useParams<{ lessonId: string }>()
 
-	// Fetch lesson content and course AI history
 	const { lessonContentData, errorLessonContent, loadingLessonContent } =
 		useGetLessonContent(lessonId)
 	const { courseAIHistory } = useGetCourseAIHistoryByCourseId(
 		lessonContentData?.courseId
 	)
 
-	// Mutation for creating lesson with AI
 	const [
 		createLessonWithAI,
 		{ loading: creatingLesson, error: createLessonError }
 	] = useMutation(CREATE_LESSON_WITH_AI)
+
 	const [isLessonCreated, setIsLessonCreated] = useState(false)
 	const [lessonIdCreated, setLessonIdCreated] = useState<string | null>(null)
 
 	useEffect(() => {
-		if (lessonId && !isLessonCreated && !loadingLessonContent) {
+		// Only attempt to create the lesson if no lesson content data is available
+		if (
+			lessonId &&
+			!lessonContentData &&
+			!isLessonCreated &&
+			!loadingLessonContent
+		) {
 			createLessonWithAI({
 				variables: {
 					input: {
@@ -59,6 +65,27 @@ const LessonPage = () => {
 		lessonContentData
 	])
 
+	// If lesson content is loading or being created, show loading state
+	if (loadingLessonContent || creatingLesson) {
+		return (
+			<DashboardLayout className='w-full'>
+				<div className='w-full flex items-center justify-center h-[100vh]'>
+					<BigDotsLoader />
+				</div>
+			</DashboardLayout>
+		)
+	}
+
+	// If there's an error in fetching lesson content or creating lesson, handle accordingly
+	if (errorLessonContent || createLessonError) {
+		return (
+			<DashboardLayout>
+				Error: {errorLessonContent?.message || createLessonError?.message}
+			</DashboardLayout>
+		)
+	}
+
+	// Render the lesson if data is available
 	return (
 		<DashboardLayout>
 			<Lesson

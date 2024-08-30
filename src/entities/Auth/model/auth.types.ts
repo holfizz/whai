@@ -24,6 +24,10 @@ export interface IUser {
 	currentLessonCount: number
 	additionalTitlesCount: number
 	activeSubscription?: ActiveSubscription
+	isFirstCourseCompleted: boolean
+	isHomeworkCompleted: boolean
+	isQuizCompleted: boolean
+	isFirstLessonCompleted: boolean
 }
 export type IUserData = z.infer<typeof ProfileData>
 

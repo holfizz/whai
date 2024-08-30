@@ -136,7 +136,7 @@
 		"Generations": "Генераций"
 	},
 	"Dashboard": {
-		"Let's begin! (1/4)": "Начнем! (1/4)",
+		"Let's begin!": "Начнем!",
 		"Continue education": "Продолжить обучение",
 		"Welcome back": "С возвращением",
 		"Recommendations": "Рекомендации",
@@ -256,7 +256,7 @@
 		"An error occurred while creating the lesson": "Произошла ошибка при создании урока",
 		"Finish": "Завершить",
 		"We continue to create a lesson": "Продолжаем создавать урок",
-		"This will take a couple of minutes. Please do not close the page": "Это займёт пару минут. Пожалуйста не закрывайте страницу.",
+		"This will take a couple of minutes Please do not close the page": "Это займёт пару минут. Пожалуйста не закрывайте страницу.",
 		"Lesson Settings": "Настройки урока",
 		"Yes": "Да",
 		"No": "Нет",

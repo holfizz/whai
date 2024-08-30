@@ -1,20 +1,20 @@
-// 'use client'
+'use client'
 
-// import { useGetAllLessons } from '@/entities/lesson'
+import { getAllIndependentLessons } from '@/entities/lesson'
 
-// const LessonSection = () => {
-// 	const { lessonsAllData, errorLessonsAll, loadingLessonsAll } = useGetAllLessons()
+const LessonSection = () => {
+	const { lessonsAllData, loadingAllLesson, errorAllLesson } =
+		getAllIndependentLessons()
 
-// 	if (isLoading) return <p>Loading...</p>
-// 	if (error) return <p>Error loading lessons</p>
+	if (loadingAllLesson) return <p>Loading...</p>
+	if (errorAllLesson) return <p>Error loading lessons</p>
 
-// 	return (
-// 		<>
-// 			{lessonsAllData.map((lesson, i) => (
-// 				<div key={i}>{lesson.name}</div>
-// 			))}
-// 		</>
-// 	)
-// }
+	return (
+		<>
+			{lessonsAllData &&
+				lessonsAllData.map((lesson, i) => <div key={i}>{lesson.name}</div>)}
+		</>
+	)
+}
 
-// export default LessonSection
+export default LessonSection

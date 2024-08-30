@@ -38,7 +38,7 @@ const ModalSubtopicsBody = ({
 								<div
 									onClick={() => handleSubtopicClick(subtopic.id)}
 									className={
-										'absolute b-0 border-1 border-decor-3 h-[44px] w-full rounded-xl flex items-center px-6 z-20 justify-between'
+										'absolute b-0 border-2 border-decor-3 h-[44px] w-full rounded-xl flex items-center px-6 z-20 justify-between'
 									}
 								>
 									<h1

@@ -18,6 +18,7 @@ import { WelcomeBack } from '@/widgets/WelcomeBack'
 import { Skeleton } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { CSSProperties } from 'react'
 import { ENGLISH_COURSE_A1_TO_B1 } from '../../(model)/static-course.data'
 import PageBody from '../pageBody/pageBody'
 
@@ -42,49 +43,58 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 						<div>
 							<div
 								className={
-									'w-auto max-lg:w-[75vw] flex justify-between items-start  rounded-2xl p-2 max-md:flex-col max-sm:items-start flex-col '
+									'w-auto max-lg:w-[75vw] flex justify-between items-start  rounded-2xl p-2 max-md:flex-col max-sm:items-start flex-col  max-640:w-full'
 								}
 							>
 								{lastCourseData ? (
-									<div className='flex max-sm:w-full'>
-										<div className={'flex'}>
+									<div className='flex w-full max-640:p-8 p-4 rounded-[40px] shadow-sm justify-between max-640:w-full'>
+										<div className={'flex max-640:flex-col'}>
 											<Link
 												href={getCourseByIdRoute(lastCourseData?.id)}
 												className={
-													'w-[70px] h-[70px] mr-4 flex justify-center items-center'
+													'w-[150px] h-[150px] mr-4 flex justify-center items-center'
 												}
 											>
-												<Image src={UniverseImage} alt='recommendation' />
+												<Image
+													width={150}
+													src={UniverseImage}
+													alt='recommendation'
+												/>
 											</Link>
 
 											<div className='w-full'>
-												<div className='w-min max-md:w-full'>
+												<div className='max-lg:max-w-[300px] w-full'>
 													{loadingLastCourse ? (
 														<Skeleton className='h-3 max-sm:w-full rounded-lg' />
 													) : (
 														<Link
 															className={
-																'font-medium text-xl w-2/3 line-clamp-2 text-ellipsis max-sm:w-full '
+																'font-bold text-2xl w-2/3 line-clamp-2 text-ellipsis max-sm:w-full '
 															}
 															href={getCourseByIdRoute(lastCourseData?.id)}
 														>
 															{lastCourseData?.name}
 														</Link>
 													)}
-													<ProgressBar data={lastCourseData} />
+													<ProgressBar
+														style={{ width: 'w-[63vw] !important' }}
+														data={lastCourseData}
+													/>
 												</div>
 												<CourseStat data={lastCourseData} />
 											</div>
 										</div>
-										<div className=''>
+										<div className='max-sm:hidden max-640:absolute max-640:right-[17vw]'>
 											<Button
 												size={'mRound'}
 												href={getCourseByIdRoute(lastCourseData?.id)}
 												isIconOnly
-												startContent={<ArrowUpRight fill={'#fff'} />}
+												startContent={
+													<ArrowUpRight className={'w-[30px] h-[30px]'} />
+												}
 												variant={'circle'}
 												as={Link}
-												color={'accent'}
+												color={'main'}
 												className={
 													'max-sm:hidden max-md:w-[50px] max-md:h-[50px] ml-8'
 												}
@@ -92,7 +102,7 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 										</div>
 									</div>
 								) : (
-									<div className='flex max-sm:w-full'>
+									<div className='flex max-sm:w-full shadow-sm'>
 										<div className={'flex'}>
 											<Link
 												href={getCourseExampleByIdRoute(
@@ -160,13 +170,16 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 }
 const ProgressBar = ({
 	data,
-	classNames
+	classNames,
+	style
 }: {
 	data: ICourse
 	classNames?: string
+	style?: CSSProperties
 }) => {
 	return (
 		<Progress
+			style={style}
 			className={`w-[390px] h-1 mt-4 rounded-xl max-md:w-full ${classNames}`}
 			color='peach'
 			value={data?.progressPercents}

@@ -1,18 +1,18 @@
-import { FC } from 'react'
-import cls from './UsageGoalsMenu.module.scss'
+import { Link } from '@/navigation'
+import { getCreatePageRoute, getLibraryRoute } from '@/shared/const/router'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { DropdownItem, DropdownMenu } from '@/shared/ui/Dropdown/Dropdown'
-import { DropdownTitle } from './DropDownTitle'
-import { Link } from '@/navigation'
-import { getCreatePageRoute } from '@/shared/const/router'
 import { useTranslations } from 'next-intl'
+import { FC } from 'react'
+import { DropdownTitle } from './DropDownTitle'
+import cls from './UsageGoalsMenu.module.scss'
 
 interface UsageGoalsMenuProps {
 	// TODO: поменять названия, когда будут придуманы
 	isFirstCourseCreated: boolean
 	isFirstLessonFinished: boolean
-	isSmthElseCompleted1: boolean
-	isSmthElseCompleted2: boolean
+	isQuizCompleted: boolean
+	isHomeworkCompleted: boolean
 }
 
 const UserGoalsOptions: string[] = [
@@ -28,8 +28,8 @@ const getBgColor = (isCompleted: boolean): string => {
 export const UsageGoalsMenu: FC<UsageGoalsMenuProps> = ({
 	isFirstCourseCreated,
 	isFirstLessonFinished,
-	isSmthElseCompleted1,
-	isSmthElseCompleted2
+	isQuizCompleted,
+	isHomeworkCompleted
 }) => {
 	const t = useTranslations('Dashboard')
 	return (
@@ -39,12 +39,14 @@ export const UsageGoalsMenu: FC<UsageGoalsMenuProps> = ({
 					completed={
 						Number(isFirstCourseCreated) +
 						Number(isFirstLessonFinished) +
-						Number(isSmthElseCompleted1) +
-						Number(isSmthElseCompleted2)
+						Number(isQuizCompleted) +
+						Number(isHomeworkCompleted)
 					}
 				/>
 			</DropdownItem>
 			<DropdownItem
+				as={Link}
+				href={getCreatePageRoute()}
 				className={classNames(cls.dropdownItem, {}, [
 					getBgColor(isFirstCourseCreated)
 				])}
@@ -52,6 +54,8 @@ export const UsageGoalsMenu: FC<UsageGoalsMenuProps> = ({
 				{t('Start your first course')}
 			</DropdownItem>
 			<DropdownItem
+				as={Link}
+				href={getLibraryRoute('lessons')}
 				className={classNames(cls.dropdownItem, {}, [
 					getBgColor(isFirstLessonFinished)
 				])}
@@ -59,18 +63,22 @@ export const UsageGoalsMenu: FC<UsageGoalsMenuProps> = ({
 				{t('Finish your first lesson')}
 			</DropdownItem>
 			<DropdownItem
+				as={Link}
+				href={getLibraryRoute('tests')}
 				className={classNames(cls.dropdownItem, {}, [
-					getBgColor(isSmthElseCompleted1)
-				])}
-			>
-				{t('Complete your first homework assignment')}
-			</DropdownItem>
-			<DropdownItem
-				className={classNames(cls.dropdownItem, {}, [
-					getBgColor(isSmthElseCompleted2)
+					getBgColor(isQuizCompleted)
 				])}
 			>
 				{t('Complete your first test')}
+			</DropdownItem>
+			<DropdownItem
+				as={Link}
+				href={getLibraryRoute('homework')}
+				className={classNames(cls.dropdownItem, {}, [
+					getBgColor(isHomeworkCompleted)
+				])}
+			>
+				{t('Complete your first homework assignment')}
 			</DropdownItem>
 		</DropdownMenu>
 	)

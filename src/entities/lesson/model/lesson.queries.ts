@@ -40,6 +40,35 @@ export const useGetLesson = (lessonId: string) => {
 	}
 }
 
+export const GET_INDEPENDENT_LESSONS = gql`
+	query {
+		getAllIndependentLessons {
+			id
+			name
+			subtopicId
+			isCompleted
+			isHasLessonTask
+			lessonTasks {
+				isChecked
+				name
+			}
+		}
+	}
+`
+
+export const getAllIndependentLessons = () => {
+	const { data, error, loading } = useQuery<{
+		getAllIndependentLessons: ILesson[]
+	}>(GET_INDEPENDENT_LESSONS, {
+		fetchPolicy: 'cache-and-network'
+	})
+	return {
+		lessonsAllData: data?.getAllIndependentLessons,
+		errorAllLesson: error,
+		loadingAllLesson: loading
+	}
+}
+
 export const GET_ALL_LESSONS = gql`
 	query ($subtopicId: ID!) {
 		getAllLessons(subtopicId: $subtopicId) {

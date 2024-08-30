@@ -73,7 +73,7 @@ const LessonStep = () => {
 						</h1>
 						<p className={'text-sm text-secondary mx-4'}>
 							{t(
-								'This will take a couple of minutes. Please do not close the page'
+								'This will take a couple of minutes Please do not close the page'
 							)}
 						</p>
 						<BigDotsLoader />

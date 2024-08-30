@@ -12,7 +12,6 @@ import { DashboardLayout } from '@/widgets/DashboardLayout'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import React from 'react'
-import './course.scss'
 const ExampleCoursePage = () => {
 	const { courseId } = useParams<{ courseId: string }>()
 	const course = coursesExample.find(c => c.id === courseId)
@@ -145,6 +144,7 @@ const ExampleCoursePage = () => {
 									<Accordion className='pt-6'>
 										{topic.subtopics.map((subtopic, subIndex) => (
 											<AccordionItem
+												classNameHeaderContent={'header-content-decor-1'}
 												key={subIndex}
 												title={
 													<div className='flex gap-4'>

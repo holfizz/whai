@@ -9,7 +9,7 @@
 	line-height: 1.5em;
 	width: 80%;
 	cursor: pointer;
-	@apply font-medium text-xl my-4;
+	@apply font-medium text-xl my-4 max-640:text-3xl;
 }
 
 .paragraph {
@@ -20,5 +20,5 @@
 	text-overflow: ellipsis;
 	max-height: 4.5em;
 	line-height: 1.5em;
-	@apply text-gray-3 font-light my-4;
+	@apply text-gray-3 font-light my-4 max-640:text-xl;
 }
