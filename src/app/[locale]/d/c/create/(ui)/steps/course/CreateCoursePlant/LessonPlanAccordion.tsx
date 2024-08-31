@@ -36,8 +36,8 @@ const LessonPlanAccordion = ({
 	const handleSave = async updatedLesson => {
 		await updateLesson({
 			variables: {
-				lessonId: updatedLesson.id,
 				updateLessonInput: {
+					id: updatedLesson.id,
 					name: updatedLesson.name,
 					description: updatedLesson.description
 				}

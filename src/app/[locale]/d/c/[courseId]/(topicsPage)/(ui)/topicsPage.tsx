@@ -10,33 +10,66 @@ import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useDisclosure } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
-import { useState } from 'react'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { HiVideoCamera } from 'react-icons/hi'
 import { IoFlagSharp } from 'react-icons/io5'
 import ModalComponent from '../ModalComponent/ModalComponent'
 import cls from './topicPage.module.scss'
 
 const TopicsPage = () => {
-	const { courseId } = useParams<{ courseId: string }>()
+	const { courseId, topicId: initialTopicId } = useParams<{
+		courseId: string
+		topicId?: string
+	}>()
 	const { topicsAllData } = useGetAllTopics(courseId)
 	const { courseData } = useGetCourse(courseId)
+	const searchParams = useSearchParams()
 	const t = useTranslations('TopicsPage')
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const [selectedTopicId, setSelectedTopicId] = useState('')
+	const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null)
+	const [selectedSubtopicId, setSelectedSubtopicId] = useState<string | null>(
+		null
+	)
+	const router = useRouter()
+
+	useEffect(() => {
+		const urlParams = new URLSearchParams(window.location.search)
+		const queryTopicId = urlParams.get('topicId')
+		const querySubtopicId = urlParams.get('subtopicId')
+
+		setSelectedTopicId(queryTopicId || null)
+		setSelectedSubtopicId(querySubtopicId || null)
+
+		if (queryTopicId) {
+			onOpen()
+		} else {
+			onClose()
+		}
+	}, [initialTopicId, selectedTopicId, searchParams, onOpen, onClose])
 
 	const handleTopicClick = (topicId: string) => {
 		setSelectedTopicId(topicId)
+		setSelectedSubtopicId(null)
+		const urlParams = new URLSearchParams(window.location.search)
+		router.push(`/ru/d/c/${courseId}?topicId=${topicId}`)
+	}
+
+	const handleSubtopicClick = (subtopicId: string) => {
+		setSelectedSubtopicId(subtopicId)
+		router.push(
+			`/ru/d/c/${courseId}?topicId=${selectedTopicId}&subtopicId=${subtopicId}`
+		)
 		onOpen()
 	}
 
 	return (
 		<DashboardLayout className='w-full flex justify-center'>
 			<div className='w-full max-w-[800px]'>
-				<h1 className='text-2xl font-normal max-md:text-3xl max-md:text-center  max-md:w-2/3 mx-auto max-sm:w-4/5'>
+				<h1 className='text-2xl font-normal max-md:text-3xl max-md:text-center max-md:w-2/3 mx-auto max-sm:w-4/5'>
 					{courseData?.name}
 				</h1>
-				<div className={'flex gap-4'}>
+				<div className='flex gap-4'>
 					<Button
 						as={Link}
 						href={'mailto:support@whai.ru'}
@@ -45,18 +78,10 @@ const TopicsPage = () => {
 						}
 						className={cls.actionButton}
 					>
-						<h3 className={'text-[var(--color-secondary)] text-lg'}>
+						<h3 className='text-[var(--color-secondary)] text-lg'>
 							{t('Report a bug')}
 						</h3>
 					</Button>
-					{/* <Button
-						startContent={
-							<ShareIcon fontSize={18} color={'var(--color-decor-2)'} />
-						}
-						className={cls.actionButton}
-					>
-						<h3 className={'text-[var(--color-secondary)]'}>{t('Share')}</h3>
-					</Button> */}
 				</div>
 				<div
 					className='grid gap-6 mt-5 justify-center'
@@ -65,17 +90,16 @@ const TopicsPage = () => {
 						gridAutoRows: 'minmax(250px, auto)'
 					}}
 				>
-					{topicsAllData &&
-						topicsAllData.map((topic, i) => (
+					{topicsAllData && topicsAllData.length > 0 ? (
+						topicsAllData.map(topic => (
 							<div
-								className={
-									'bg-white rounded-xl p-4 flex flex-col justify-between shadow-sm'
-								}
-								key={i}
+								className='bg-white rounded-xl p-4 flex flex-col justify-between shadow-sm'
+								key={topic.id}
 								style={{
 									gridColumn:
 										topicsAllData.length === 1 ||
-										(topicsAllData.length === 2 && i === 0)
+										(topicsAllData.length === 2 &&
+											topic.id === topicsAllData[0].id)
 											? 'span 2'
 											: 'span 1'
 								}}
@@ -89,19 +113,17 @@ const TopicsPage = () => {
 									</h1>
 									<Button
 										onClick={() => handleTopicClick(topic.id)}
-										variant={'circle'}
-										size={'sRound'}
-										startContent={<ArrowUpRight fill={'var(--color-accent)'} />}
-										color={'main'}
+										variant='circle'
+										size='sRound'
+										startContent={<ArrowUpRight fill='var(--color-accent)' />}
+										color='main'
 									/>
 								</div>
 								<p className={cls.description}>{topic.description}</p>
 								<div className='flex gap-2 flex-wrap w-full mt-auto'>
 									<div className='flex mr-4 items-center'>
 										<ClockIcon fontSize={18} className='text-gray-2 mx-2' />
-										<h3 className='text-gray-2 font-normal'>
-											{`${topic.completionTime} Hours`}
-										</h3>
+										<h3 className='text-gray-2 font-normal'>{`${topic.completionTime} Hours`}</h3>
 									</div>
 									<div className='flex mr-4 items-center'>
 										<HiVideoCamera size={24} className='text-gray-2 mx-2' />
@@ -111,21 +133,29 @@ const TopicsPage = () => {
 									</div>
 									<div className='flex mr-4 items-center'>
 										<ListIcon fontSize={18} className='text-gray-2 mx-2' />
-										<h3 className='text-gray-2 font-normal'>
-											{`${topic.totalSubtopics}  ${t('Topics')}`}
-										</h3>
+										<h3 className='text-gray-2 font-normal'>{`${
+											topic.totalSubtopics
+										} ${t('Topics')}`}</h3>
 									</div>
 								</div>
 								<Progress
-									color={'peach'}
+									color='peach'
 									value={topic.progressPercents}
 									className='h-1 rounded-full mt-2'
 								/>
 							</div>
-						))}
+						))
+					) : (
+						<div>No topics available.</div>
+					)}
 				</div>
 			</div>
-			{isOpen && <ModalComponent topicId={selectedTopicId} onClose={onClose} />}
+			<ModalComponent
+				topicId={selectedTopicId}
+				subtopicId={selectedSubtopicId}
+				isOpen={isOpen}
+				onClose={onClose}
+			/>
 		</DashboardLayout>
 	)
 }

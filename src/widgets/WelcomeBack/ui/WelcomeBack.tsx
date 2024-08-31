@@ -1,6 +1,7 @@
 import { IUser } from '@/entities/Auth'
 import { useGetStatProfile } from '@/entities/Auth/model/auth.queries'
 import { Link } from '@/navigation'
+import BaseAvatar from '@/shared/assets/image/BaseAvatar.png'
 import { getCreatePageRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import { Dropdown } from '@/shared/ui/Dropdown/Dropdown'
@@ -12,14 +13,14 @@ import cls from './WelcomeBack.module.scss'
 
 export const WelcomeBack: FC<{ userData: IUser }> = ({ userData }) => {
 	const t = useTranslations('Dashboard')
-	const t2 = useTranslations()
 	const { userStat } = useGetStatProfile()
 	return (
 		<div className={cls.welcomeBlocks}>
 			<div className={cls.personWelcomeBlock}>
 				<Avatar
+					classNames={{ base: 'bg-white' }}
 					className={cls.avatar}
-					src={userData?.avatarPath}
+					src={userData?.avatarPath || BaseAvatar.src}
 					alt='Avatar'
 				/>
 				<div className={cls.welcomeBackTitle}>

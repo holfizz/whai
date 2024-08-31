@@ -4,6 +4,7 @@ import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory'
 import { useGetLessonContent } from '@/entities/lesson'
 import { CREATE_LESSON_WITH_AI } from '@/entities/lesson/model/lesson.queries'
 import { Lesson } from '@/features/lesson'
+import logger from '@/shared/lib/utils/logger'
 import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useMutation } from '@apollo/client'
@@ -28,10 +29,13 @@ const LessonPage = () => {
 	const [lessonIdCreated, setLessonIdCreated] = useState<string | null>(null)
 
 	useEffect(() => {
-		// Only attempt to create the lesson if no lesson content data is available
+		logger.log(1, lessonId)
+		logger.log(2, !lessonContentData?.lessonBlocks.length)
+		logger.log(3, !isLessonCreated)
+		logger.log(4, !loadingLessonContent)
 		if (
 			lessonId &&
-			!lessonContentData &&
+			!lessonContentData?.lessonBlocks.length &&
 			!isLessonCreated &&
 			!loadingLessonContent
 		) {
@@ -65,7 +69,6 @@ const LessonPage = () => {
 		lessonContentData
 	])
 
-	// If lesson content is loading or being created, show loading state
 	if (loadingLessonContent || creatingLesson) {
 		return (
 			<DashboardLayout className='w-full'>
@@ -76,7 +79,6 @@ const LessonPage = () => {
 		)
 	}
 
-	// If there's an error in fetching lesson content or creating lesson, handle accordingly
 	if (errorLessonContent || createLessonError) {
 		return (
 			<DashboardLayout>
@@ -85,7 +87,6 @@ const LessonPage = () => {
 		)
 	}
 
-	// Render the lesson if data is available
 	return (
 		<DashboardLayout>
 			<Lesson

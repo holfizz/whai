@@ -20,7 +20,7 @@ const QuoteWrapper = ({
 						<span
 							key={index}
 							style={{ background: color }}
-							className='bg-lime-200 p-[2px] m-[1px] inline-block rounded'
+							className='bg-[#FFEDE0] p-[2px] m-[1px] inline-block rounded'
 						>
 							{part}
 						</span>

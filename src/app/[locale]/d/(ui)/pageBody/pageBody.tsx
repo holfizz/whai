@@ -20,12 +20,17 @@ export default function PageBody() {
 				<Text title={t('Recommendations')} className={'mb-5'} />
 				<Button
 					color={'clear'}
-					className={'text-[var(--secondary-color)]'}
-					endContent={<ArrowUpRight fill='#fff' />}
+					className={
+						'text-[var(--secondary-color)] text-xl max-640:text-3xl font-medium'
+					}
+					endContent={
+						<ArrowUpRight className='w-[20px] h-[20px] max-640:w-[30px] max-640:h-[30px]' />
+					}
 					as={Link}
 					href={getCoursesRoute()}
 				>
-					{t('View all')}
+					<span className='max-640:hidden'>{t('View all')}</span>
+					<span className='640:hidden'>{t('All')}</span>
 				</Button>
 			</div>
 			<BodyCards

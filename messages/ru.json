@@ -141,6 +141,7 @@
 		"Welcome back": "С возвращением",
 		"Recommendations": "Рекомендации",
 		"View all": "Смотреть все",
+		"All": "Все",
 		"topics": "тем",
 		"hours": "часов",
 		"Course not found": "Курс не найден",
@@ -182,7 +183,8 @@
 		"There was an error loading the lesson or creating it": "Произошла ошибка при загрузке или создании урока",
 		"Lesson is empty": "Урок пустой",
 		"Try again": "Попробовать снова",
-		"You don't have chats": "У вас нет чатов"
+		"You don't have chats": "У вас нет чатов",
+		"Complete lesson": "Завершить урок"
 	},
 	"CreateCourse": {
 		"What are we creating?": "Что мы создаем?",

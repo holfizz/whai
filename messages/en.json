@@ -141,6 +141,7 @@
 		"Welcome back": "Welcome back",
 		"Recommendations": "Recommendations",
 		"View all": "View all",
+		"All": "All",
 		"topics": "topics",
 		"hours": "hours",
 		"Course not found": "Course not found",
@@ -182,7 +183,8 @@
 		"There was an error loading the lesson or creating it": "There was an error loading the lesson or creating it",
 		"Lesson is empty": "Lesson is empty",
 		"Try again": "Try again",
-		"You don't have chats": "You don't have chats"
+		"You don't have chats": "You don't have chats",
+		"Complete lesson": "Complete lesson"
 	},
 	"CreateCourse": {
 		"What are we creating?": "What are we creating?",

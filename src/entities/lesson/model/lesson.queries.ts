@@ -165,13 +165,34 @@ export const UPDATE_LESSON = gql`
 			id
 			name
 			description
+			isCompleted
 		}
 	}
 `
 export const useUpdateLesson = () => {
 	const [updateLesson, { data, error, loading }] = useMutation<{
-		updateLesson: Pick<ILesson, 'name' | 'description' | 'id'>
+		updateLesson: ILesson
 	}>(UPDATE_LESSON, {})
+	return {
+		updateLesson,
+		dataLessonUpdate: data?.updateLesson,
+		errorLessonUpdate: error,
+		loadingLessonUpdate: loading
+	}
+}
+
+export const UPDATE_LESSON_COMPLETED = gql`
+	mutation updateLesson($updateLessonInput: UpdateLesson!) {
+		updateLesson(updateLessonInput: $updateLessonInput) {
+			id
+			isCompleted
+		}
+	}
+`
+export const useUpdateLessonCompleted = () => {
+	const [updateLesson, { data, error, loading }] = useMutation<{
+		updateLesson: ILesson
+	}>(UPDATE_LESSON_COMPLETED, {})
 	return {
 		updateLesson,
 		dataLessonUpdate: data?.updateLesson,
@@ -244,3 +265,33 @@ export const useCreateIndependentLessonWithAI = () => {
 		loadingCreateLesson: loading
 	}
 }
+
+export const GET_PREV_NEXT_LESSON = gql`
+	query GetPrevNextLesson($courseId: ID!, $lessonId: ID!) {
+		getPrevNextLesson(courseId: $courseId, lessonId: $lessonId) {
+			prevLessonId
+			nextLessonId
+		}
+	}
+`
+
+export const GET_BREADCRUMBS = gql`
+	query getBreadcrumbsToLesson(
+		$courseId: ID!
+		$topicId: ID!
+		$subtopicId: ID!
+		$lessonId: ID!
+	) {
+		getBreadcrumbsToLesson(
+			courseId: $courseId
+			topicId: $topicId
+			subtopicId: $subtopicId
+			lessonId: $lessonId
+		) {
+			courseName
+			topicName
+			subtopicName
+			lessonName
+		}
+	}
+`

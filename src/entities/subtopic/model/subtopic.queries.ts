@@ -12,6 +12,14 @@ export const GET_SUBTOPIC = gql`
 		}
 	}
 `
+
+export const GET_TOPIC_ID_BY_SUBTOPIC = gql`
+	query ($subtopicId: ID!) {
+		getSubtopic(subtopicId: $subtopicId) {
+			topicId
+		}
+	}
+`
 export const useGetSubtopic = (subtopicId: string) => {
 	const { data, error, loading } = useQuery<{ getSubtopic: ISubtopic }>(
 		GET_SUBTOPIC,

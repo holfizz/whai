@@ -22,13 +22,21 @@ export const getStatisticsRoute = () => `/statistics`
 
 //courses - c
 export const getCoursesRoute = () => `/d/c`
-export const getCourseByIdRoute = (id: string) => `/d/c/${id}`
+export const getCourseByIdRoute = (
+	id: string,
+	topicId?: string,
+	subtopicId?: string,
+	lessonId?: string
+) =>
+	`/d/c/${id}?topicId=${topicId}&subtopicId=${subtopicId}&lessonId=${lessonId}`
+
 export const getCourseExampleByIdRoute = (id: string) => `/d/c/e/${id}`
 export const getSettingsRoute = () => `/d/settings`
 export const getCreatePageRoute = () => `/d/c/create`
 
 //lessons - l
-export const getLessonRoute = (lessonId: string) => `/d/c/l/${lessonId}`
+export const getLessonRoute = (lessonId: string, topicId?: string) =>
+	`/d/c/l/${lessonId}?topicId=${topicId}`
 export const getLessonTaskRoute = (lessonId: string) => `/d/c/l/t/${lessonId}`
 export const getLessonIndependentRoute = (lessonId: string) =>
 	`/d/c/l/i/${lessonId}`

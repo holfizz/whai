@@ -47,7 +47,7 @@ const PromptStep = () => {
 						],
 						innerWrapper: ['flex justify-between', 'h-auto', 'w-full'],
 						input: ['w-full'],
-						base: 'w-1/2 max-lg:w-[60vw]'
+						base: 'w-1/2 max-lg:w-[50vw] max-md:w-[70vw] max-640:w-[80vw]'
 					}}
 					minRows={1}
 					value={promptContent}

@@ -221,7 +221,7 @@ const GenerateTDStep = (): React.JSX.Element => {
 	return (
 		<DashboardLayout>
 			<div className='w-full flex justify-center items-center flex-col'>
-				<h1 className='text-2xl text-center'>
+				<h1 className='text-2xl text-center max-640:text-4xl my-4 font-normal'>
 					{t('Which course description fits best?')}
 				</h1>
 				{selectedTitle ? (
@@ -253,7 +253,7 @@ const GenerateTDStep = (): React.JSX.Element => {
 						)}
 					</div>
 				)}
-				<div className={'flex gap-4 mt-4 h-[100%]'}>
+				<div className={'flex gap-4 mt-4 h-[100%] mb-10'}>
 					<Button
 						isDisabled={loadingTD}
 						size={'3xl'}
@@ -264,7 +264,7 @@ const GenerateTDStep = (): React.JSX.Element => {
 					</Button>
 					<Button
 						isDisabled={loadingTD}
-						className='h-[85px] w-[85px] aspect-square rounded-3xl p-0'
+						className='h-[85px] w-[85px] aspect-square rounded-3xl p-0 max-sm:w-[50px] max-sm:h-[50px]'
 						color={'gray'}
 						isIconOnly
 						startContent={<RegenerateIcon />}

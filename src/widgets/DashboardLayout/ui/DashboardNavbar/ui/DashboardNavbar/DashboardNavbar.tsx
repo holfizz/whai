@@ -2,6 +2,7 @@
 import { useGetProfile } from '@/entities/Auth/model/auth.queries'
 import { logout } from '@/features/auth/model/auth.model'
 import { Link } from '@/navigation'
+import BaseAvatar from '@/shared/assets/image/BaseAvatar.png'
 import {
 	getDashboardRoute,
 	getSubscriptionsRoute,
@@ -93,9 +94,9 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 								as='button'
 								classNames={{
 									icon: 'text-decor-2',
-									base: 'bg-decor-1'
+									base: 'bg-white'
 								}}
-								src={userData.avatarPath}
+								src={userData.avatarPath || BaseAvatar.src}
 							/>
 						</DropdownTrigger>
 						<DropdownMenu color='white' aria-label='Profile Actions'>

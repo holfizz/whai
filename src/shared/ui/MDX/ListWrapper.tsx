@@ -10,12 +10,10 @@ export const ListWrapperUl = ({
 	size?: 'sm' | 'md'
 }) => {
 	return (
-		<div className={'flex'}>
+		<div className={`flex ${size === 'md' && 'bg-decor-1 p-4 rounded-xl'}`}>
 			<Divider
 				orientation='vertical'
-				className={`w-[${
-					size === 'md' ? '3px' : '2px'
-				} ] rounded-sm h-[inherit]`}
+				className={`w-[2px] rounded-sm h-[inherit]`}
 			/>
 			<ul
 				className={`flex flex-col ${
@@ -36,10 +34,10 @@ export const ListWrapperOl = ({
 	className: string
 }) => {
 	return (
-		<div className={'flex'}>
+		<div className={`flex bg-error-1 p-4 rounded-xl`}>
 			<Divider
 				orientation='vertical'
-				className={'w-[3px] rounded-sm h-[inherit]'}
+				className={'w-[2px] rounded-sm h-[inherit]'}
 			/>
 			<ol className={`flex flex-col ml-8 *:list-decimal ${className}`}>
 				{children}

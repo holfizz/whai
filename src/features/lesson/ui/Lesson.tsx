@@ -1,12 +1,23 @@
 import { ILessonBlock, ILessonContent } from '@/entities/lesson'
+import {
+	GET_BREADCRUMBS,
+	GET_PREV_NEXT_LESSON,
+	useUpdateLessonCompleted
+} from '@/entities/lesson/model/lesson.queries'
+import { GET_TOPIC_ID_BY_SUBTOPIC } from '@/entities/subtopic/model/subtopic.queries'
 import { ChatWithAI } from '@/features/chatWithAI'
-import { getCourseByIdRoute } from '@/shared/const/router'
+import { getCourseByIdRoute, getLessonRoute } from '@/shared/const/router'
+import logger from '@/shared/lib/utils/logger'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import MDX from '@/shared/ui/MDX/MDX'
+import { useLazyQuery, useQuery } from '@apollo/client'
 import { BreadcrumbItem, Breadcrumbs, Skeleton } from '@nextui-org/react'
+import { ArrowRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { FC, useCallback } from 'react'
+import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { FC, useCallback, useEffect, useState } from 'react'
 import cls from './Lesson.module.scss'
 
 interface LessonProps {
@@ -31,6 +42,65 @@ const Lesson: FC<LessonProps> = ({
 	isIndependent = false
 }) => {
 	const t = useTranslations('Lesson')
+
+	const [getPrevNextLesson, { data: prevNextData, loading: prevNextLoading }] =
+		useLazyQuery(GET_PREV_NEXT_LESSON)
+	const { updateLesson } = useUpdateLessonCompleted()
+	const router = useRouter()
+	const [prevLessonId, setPrevLessonId] = useState<string | null>(null)
+	const [nextLessonId, setNextLessonId] = useState<string | null>(null)
+	const searchParams = useSearchParams()
+	// Fetch topicId by subtopicId
+	const { data: topicData, loading: topicLoading } = useQuery(
+		GET_TOPIC_ID_BY_SUBTOPIC,
+		{
+			variables: { subtopicId: lessonContentData.subtopicId }
+		}
+	)
+
+	const topicId = searchParams.get('topicId')
+
+	// Fetch breadcrumbs using topicId
+	const {
+		data: breadcrumbsData,
+		loading: breadcrumbsLoading,
+		error: breadcrumbsError
+	} = useQuery(GET_BREADCRUMBS, {
+		variables: {
+			courseId: lessonContentData.courseId,
+			topicId: topicId,
+			subtopicId: lessonContentData.subtopicId,
+			lessonId: lessonId
+		},
+		skip: isIndependent
+	})
+
+	const completeLesson = useCallback(() => {
+		updateLesson({
+			variables: {
+				updateLessonInput: { id: lessonId, isCompleted: true }
+			}
+		})
+	}, [lessonId, updateLesson])
+
+	useEffect(() => {
+		if (!isIndependent && lessonId && lessonContentData?.courseId) {
+			getPrevNextLesson({
+				variables: {
+					courseId: lessonContentData.courseId,
+					lessonId: lessonId
+				}
+			})
+		}
+	}, [isIndependent, lessonId, lessonContentData?.courseId, getPrevNextLesson])
+
+	useEffect(() => {
+		if (prevNextData?.getPrevNextLesson) {
+			setPrevLessonId(prevNextData.getPrevNextLesson.prevLessonId)
+			setNextLessonId(prevNextData.getPrevNextLesson.nextLessonId)
+			logger.log('prevNextData', prevNextData)
+		}
+	}, [prevNextData])
 
 	const renderBlock = useCallback((block: ILessonBlock) => {
 		switch (block.type) {
@@ -144,16 +214,80 @@ const Lesson: FC<LessonProps> = ({
 						<BreadcrumbItem
 							href={getCourseByIdRoute(lessonContentData?.courseId)}
 						>
-							{t('Course')}: {lessonContentData?.courseId}
+							{breadcrumbsData?.getBreadcrumbsToLesson?.courseName}
+						</BreadcrumbItem>
+						<BreadcrumbItem
+							// onClick={() => {
+							// 	router.replace()
+							// }
+							href={getCourseByIdRoute(
+								`${lessonContentData?.courseId}`,
+								topicId
+							)}
+						>
+							{breadcrumbsData?.getBreadcrumbsToLesson?.topicName}
+						</BreadcrumbItem>
+						<BreadcrumbItem
+							onPress={() => {}}
+							href={getCourseByIdRoute(
+								`${lessonContentData?.courseId}`,
+								topicId,
+								lessonContentData.subtopicId
+							)}
+						>
+							{breadcrumbsData?.getBreadcrumbsToLesson?.subtopicName}
 						</BreadcrumbItem>
 						<BreadcrumbItem>
-							{t('Lesson')}: {lessonContentData?.name}
+							{breadcrumbsData?.getBreadcrumbsToLesson?.lessonName}
 						</BreadcrumbItem>
 					</Breadcrumbs>
 				)}
-
 				{content}
 				<ChatWithAI lessonId={lessonId} />
+				<div className='w-full h-[69px] flex items-center justify-center gap-4 mt-8 mb-16'>
+					{!isIndependent && (
+						<Button
+							color='gray'
+							isIconOnly
+							isDisabled={!prevLessonId}
+							as={Link}
+							href={getLessonRoute(prevLessonId, topicId)}
+							className='h-[60px] w-[80px] rounded-[20px]'
+							startContent={<ArrowRight className='rotate-180' />}
+							isLoading={prevNextLoading}
+						/>
+					)}
+
+					<Button
+						onPress={() => {
+							completeLesson()
+						}}
+						as={Link}
+						href={getCourseByIdRoute(
+							lessonContentData.courseId,
+							topicId,
+							lessonContentData.subtopicId,
+							lessonContentData.id
+						)}
+						className='h-[60px] w-auto px-6 rounded-[20px]'
+						color='gray'
+					>
+						{t('Complete lesson')}
+					</Button>
+					{!isIndependent && (
+						<Button
+							className='h-[60px] w-[80px] rounded-[20px]'
+							color='main'
+							isIconOnly
+							isDisabled={!nextLessonId}
+							onPress={completeLesson}
+							startContent={<ArrowRight />}
+							as={Link}
+							href={getLessonRoute(nextLessonId, topicId)}
+							isLoading={prevNextLoading}
+						/>
+					)}
+				</div>
 			</div>
 		</div>
 	)
