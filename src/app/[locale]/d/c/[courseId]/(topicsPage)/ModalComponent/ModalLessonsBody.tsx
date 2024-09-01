@@ -66,7 +66,7 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 										href={generateLessonLink(lesson.id)}
 										className={`absolute ${
 											lesson.isCompleted && 'bg-decor-3'
-										} border-2 border-decor-3 h-[44px] rounded-xl flex items-center px-6 z-20 justify-between`}
+										} border-2 border-decor-3 h-[44px] rounded-2xl flex items-center px-6 z-20 justify-between`}
 										style={{
 											width: lesson.isHasLessonTask
 												? 'calc(100% - 15px)'
@@ -112,11 +112,11 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 							>
 								<div
 									style={{ width: `${quiz.totalPercents}%` }}
-									className='absolute b-0 bg-decor-3 h-[44px] rounded-xl'
+									className='absolute b-0 bg-decor-3 h-[44px] rounded-2xl'
 								></div>
 								<Link
 									href={generateQuizLink(quiz.id)}
-									className='absolute b-0 border-2 border-decor-3 h-[44px] w-full rounded-xl flex items-center px-6 z-20 justify-between'
+									className='absolute b-0 border-2 border-decor-3 h-[44px] w-full rounded-2xl flex items-center px-6 z-20 justify-between'
 								>
 									<h1 className='w-[40%] text-nowrap text-ellipsis overflow-hidden'>
 										{quiz.name}

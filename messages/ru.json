@@ -186,6 +186,14 @@
 		"You don't have chats": "У вас нет чатов",
 		"Complete lesson": "Завершить урок"
 	},
+	"LessonTask": {
+		"Supported file formats for upload": "Поддерживаемые форматы файлов для загрузки:",
+		"Documents DOC DOCX XLS XLSX PPT PPTX PDF Numbers CSV": "Документы: DOC, DOCX, XLS, XLSX, PPT, PPTX, PDF, Numbers, CSV",
+		"Images JPG JPG2 PNG GIF WEB HEIC HEIF BMP PCD TIFF": "Изображения: JPG, JPG2, PNG, GIF, WEBP, HEIC, HEIF, BMP, PCD, TIFF",
+		"The size of all uploaded files is no more than 100 MB": "Размер всех загружаемых файлов не более 100 МБ",
+		"Files must be uploaded using the multipart form-data method": "Файлы должны загружаться с использованием метода multipart/form-data.",
+		"Task": "Задача"
+	},
 	"CreateCourse": {
 		"What are we creating?": "Что мы создаем?",
 		"Course": "Курс",
@@ -278,7 +286,6 @@
 		"Incorrect": "Неверно",
 		"Correct": "Верно",
 		"Test results": "Результаты теста",
-		"Total percentage of correct answers:": "Общий процент правильных ответов:",
 		"Please provide an answer before proceeding": "Пожалуйста, дайте ответ, прежде чем продолжить",
 		"Check": "Проверить",
 		"Answer": "Ответ",

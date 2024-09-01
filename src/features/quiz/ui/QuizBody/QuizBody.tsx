@@ -107,7 +107,7 @@ const QuizBody = ({ quizData }: { quizData: IQuizData }) => {
 			subtopicId={quizData?.subtopicId}
 		/>
 	) : (
-		<div className='flex flex-col items-center justify-center'>
+		<div className='flex flex-col items-center justify-center min-h-[70vh]'>
 			{renderQuestion()}
 			<Toaster position='top-right' reverseOrder={false} />
 		</div>

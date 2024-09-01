@@ -117,7 +117,7 @@ const MRQQuestion = ({
 			<h4 className='text-sm bg-decor-4 mb-10 rounded-md p-2'>
 				{t('Choose 1 or more answer options')}
 			</h4>
-			<div className='grid grid-cols-2 gap-4 w-full max-640:grid-cols-1 max-640:w-min max-640:flex max-640:flex-col max-640:justify-center max-640:items-center'>
+			<div className='grid grid-cols-2 gap-4 w-full max-640:grid-cols-1  max-640:flex max-640:flex-col max-640:justify-center max-640:items-center max-md:w-[85vw]'>
 				{question.choices?.map((choice, index) => {
 					const description =
 						choice.correctAnswerDescription || choice.incorrectAnswerDescription
@@ -134,9 +134,10 @@ const MRQQuestion = ({
 						>
 							<PopoverTrigger>
 								<Button
-									className={'max-640:w-[70vw] relative'}
+									className={
+										'px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-xl w-full h-auto max-sm:h-[50px] max-md:w-full relative max '
+									}
 									disableAnimation={false}
-									size='auto'
 									endContent={
 										checked &&
 										description && (
@@ -153,7 +154,7 @@ const MRQQuestion = ({
 										<h1
 											className={`opacity-100 ${
 												checked &&
-												'text-lg font-medium text-center w-full break-words whitespace-normal'
+												'text-lg font-medium text-center w-full break-words whitespace-normal max-md:text-3xl'
 											}`}
 										>
 											<Suspense fallback={<DotsLoader />}>

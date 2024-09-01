@@ -48,6 +48,7 @@ const TopicsPage = () => {
 		}
 	}, [initialTopicId, selectedTopicId, searchParams, onOpen, onClose])
 
+	const isOpenResult = isOpen && selectedTopicId !== 'undefined'
 	const handleTopicClick = (topicId: string) => {
 		setSelectedTopicId(topicId)
 		setSelectedSubtopicId(null)
@@ -69,19 +70,21 @@ const TopicsPage = () => {
 				<h1 className='text-2xl font-normal max-md:text-3xl max-md:text-center max-md:w-2/3 mx-auto max-sm:w-4/5'>
 					{courseData?.name}
 				</h1>
-				<div className='flex gap-4'>
-					<Button
-						as={Link}
-						href={'mailto:support@whai.ru'}
-						startContent={
-							<IoFlagSharp size={18} color={'var(--color-decor-2)'} />
-						}
-						className={cls.actionButton}
-					>
-						<h3 className='text-[var(--color-secondary)] text-lg'>
-							{t('Report a bug')}
-						</h3>
-					</Button>
+				<div className='flex w-full items-center justify-center'>
+					<div className='flex gap-4 w-[75vw]'>
+						<Button
+							as={Link}
+							href={'mailto:support@whai.ru'}
+							startContent={
+								<IoFlagSharp size={18} color={'var(--color-decor-2)'} />
+							}
+							className={cls.actionButton}
+						>
+							<h3 className='text-[var(--color-secondary)] text-lg'>
+								{t('Report a bug')}
+							</h3>
+						</Button>
+					</div>
 				</div>
 				<div
 					className='grid gap-6 mt-5 justify-center'
@@ -153,7 +156,7 @@ const TopicsPage = () => {
 			<ModalComponent
 				topicId={selectedTopicId}
 				subtopicId={selectedSubtopicId}
-				isOpen={isOpen}
+				isOpen={isOpenResult}
 				onClose={onClose}
 			/>
 		</DashboardLayout>

@@ -186,6 +186,14 @@
 		"You don't have chats": "You don't have chats",
 		"Complete lesson": "Complete lesson"
 	},
+	"LessonTask": {
+		"Supported file formats for upload": "Supported file formats for upload:",
+		"Documents DOC DOCX XLS XLSX PPT PPTX PDF Numbers CSV": "Documents: DOC, DOCX, XLS, XLSX, PPT, PPTX, PDF, Numbers, CSV",
+		"Images JPG JPG2 PNG GIF WEB HEIC HEIF BMP PCD TIFF": "Images: JPG, JPG2, PNG, GIF, WEBP, HEIC, HEIF, BMP, PCD, TIFF",
+		"The size of all uploaded files is no more than 100 MB": "The size of all uploaded files is no more than 100 MB",
+		"Files must be uploaded using the multipart form-data method.": "Files must be uploaded using the multipart/form-data method.",
+		"Task": "Task"
+	},
 	"CreateCourse": {
 		"What are we creating?": "What are we creating?",
 		"Course": "Course",
@@ -277,7 +285,6 @@
 		"Incorrect": "Incorrect",
 		"Correct": "Correct",
 		"Test results": "Test results",
-		"Total percentage of correct answers:": "Total percentage of correct answers:",
 		"Please provide an answer before proceeding": "Please provide an answer before proceeding",
 		"Check": "Check",
 		"Answer": "Answer",

@@ -4,27 +4,27 @@ import {
 	GET_PREV_NEXT_LESSON,
 	useUpdateLessonCompleted
 } from '@/entities/lesson/model/lesson.queries'
-import { GET_TOPIC_ID_BY_SUBTOPIC } from '@/entities/subtopic/model/subtopic.queries'
 import { ChatWithAI } from '@/features/chatWithAI'
-import { getCourseByIdRoute, getLessonRoute } from '@/shared/const/router'
+import {
+	getCourseByIdRoute,
+	getLessonRoute,
+	getLessonTaskRoute
+} from '@/shared/const/router'
 import logger from '@/shared/lib/utils/logger'
 import Button from '@/shared/ui/Button/Button'
-import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import MDX from '@/shared/ui/MDX/MDX'
 import { useLazyQuery, useQuery } from '@apollo/client'
-import { BreadcrumbItem, Breadcrumbs, Skeleton } from '@nextui-org/react'
+import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
 import { ArrowRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { FC, useCallback, useEffect, useState } from 'react'
 import cls from './Lesson.module.scss'
 
 interface LessonProps {
 	lessonId: string
 	lessonContentData: ILessonContent
-	courseAIHistoryId?: string
-	loadingLessonContent: boolean
 	errorLessonContent: Error | null
 	createLessonError: Error | null
 	creatingLesson: boolean
@@ -34,11 +34,8 @@ interface LessonProps {
 const Lesson: FC<LessonProps> = ({
 	lessonId,
 	lessonContentData,
-	courseAIHistoryId,
-	loadingLessonContent,
 	errorLessonContent,
 	createLessonError,
-	creatingLesson,
 	isIndependent = false
 }) => {
 	const t = useTranslations('Lesson')
@@ -46,30 +43,15 @@ const Lesson: FC<LessonProps> = ({
 	const [getPrevNextLesson, { data: prevNextData, loading: prevNextLoading }] =
 		useLazyQuery(GET_PREV_NEXT_LESSON)
 	const { updateLesson } = useUpdateLessonCompleted()
-	const router = useRouter()
 	const [prevLessonId, setPrevLessonId] = useState<string | null>(null)
 	const [nextLessonId, setNextLessonId] = useState<string | null>(null)
 	const searchParams = useSearchParams()
-	// Fetch topicId by subtopicId
-	const { data: topicData, loading: topicLoading } = useQuery(
-		GET_TOPIC_ID_BY_SUBTOPIC,
-		{
-			variables: { subtopicId: lessonContentData.subtopicId }
-		}
-	)
-
 	const topicId = searchParams.get('topicId')
-
-	// Fetch breadcrumbs using topicId
-	const {
-		data: breadcrumbsData,
-		loading: breadcrumbsLoading,
-		error: breadcrumbsError
-	} = useQuery(GET_BREADCRUMBS, {
+	const { data: breadcrumbsData } = useQuery(GET_BREADCRUMBS, {
 		variables: {
-			courseId: lessonContentData.courseId,
+			courseId: lessonContentData?.courseId,
 			topicId: topicId,
-			subtopicId: lessonContentData.subtopicId,
+			subtopicId: lessonContentData?.subtopicId,
 			lessonId: lessonId
 		},
 		skip: isIndependent
@@ -87,7 +69,7 @@ const Lesson: FC<LessonProps> = ({
 		if (!isIndependent && lessonId && lessonContentData?.courseId) {
 			getPrevNextLesson({
 				variables: {
-					courseId: lessonContentData.courseId,
+					courseId: lessonContentData?.courseId,
 					lessonId: lessonId
 				}
 			})
@@ -101,6 +83,20 @@ const Lesson: FC<LessonProps> = ({
 			logger.log('prevNextData', prevNextData)
 		}
 	}, [prevNextData])
+
+	const redirect = ({
+		lessonId,
+		topicId
+	}: {
+		lessonId: string
+		topicId: string
+	}) => {
+		if (lessonContentData?.lessonTasks.length > 0) {
+			return getLessonTaskRoute(lessonContentData.id)
+		} else {
+			return getLessonRoute(lessonId, topicId)
+		}
+	}
 
 	const renderBlock = useCallback((block: ILessonBlock) => {
 		switch (block.type) {
@@ -147,69 +143,16 @@ const Lesson: FC<LessonProps> = ({
 
 	let content
 
-	if (loadingLessonContent || creatingLesson) {
-		content = (
-			<>
-				<div className='mt-10 flex items-center w-full justify-center'>
-					<h1>{t('Lesson creation in progress')}</h1>
-					<DotsLoader />
-				</div>
-				<Skeleton
-					className={'mt-10 rounded-xl'}
-					style={{ width: '80%', height: 30 }}
-				/>
-				<Skeleton
-					className={'mt-5 rounded-xl'}
-					style={{ width: '100%', height: 90 }}
-				/>
-				<Skeleton
-					className={'mt-5 rounded-xl'}
-					style={{ width: '90%', height: 270 }}
-				/>
-				<Skeleton
-					className={'mt-5 rounded-xl'}
-					style={{ width: '50%', height: 100 }}
-				/>
-				<Skeleton
-					className={'mt-5 rounded-xl'}
-					style={{ width: '70%', height: 120 }}
-				/>
-				<Skeleton
-					className={'mt-5 rounded-xl'}
-					style={{ width: '40%', height: 40 }}
-				/>
-			</>
-		)
-	} else if (errorLessonContent || createLessonError) {
-		content = (
-			<div className='w-fill flex flex-col items-center justify-center mt-10'>
-				<h1>{t('There was an error loading the lesson or creating it')}</h1>
-				<Button
-					onClick={() => window.location.reload()}
-					size='3xl'
-					color='main'
-				>
-					{t('Try again')}
-				</Button>
-			</div>
-		)
+	if (lessonContentData?.lessonBlocks?.length > 0) {
+		content = <>{lessonContentData.lessonBlocks.map(renderBlock)}</>
 	} else {
-		if (lessonContentData?.lessonBlocks?.length > 0) {
-			content = (
-				<>
-					<h1>{lessonContentData?.name}</h1>
-					{lessonContentData.lessonBlocks.map(renderBlock)}
-				</>
-			)
-		} else {
-			content = <h1>{t('Lesson is empty')}</h1>
-		}
+		content = <h1>{t('Lesson is empty')}</h1>
 	}
 
 	return (
 		<div className={cls.LessonDetails}>
 			<div className={cls.content}>
-				{!isIndependent && (
+				{!isIndependent && !errorLessonContent && !createLessonError && (
 					<Breadcrumbs>
 						<BreadcrumbItem
 							href={getCourseByIdRoute(lessonContentData?.courseId)}
@@ -232,7 +175,7 @@ const Lesson: FC<LessonProps> = ({
 							href={getCourseByIdRoute(
 								`${lessonContentData?.courseId}`,
 								topicId,
-								lessonContentData.subtopicId
+								lessonContentData?.subtopicId
 							)}
 						>
 							{breadcrumbsData?.getBreadcrumbsToLesson?.subtopicName}
@@ -244,50 +187,52 @@ const Lesson: FC<LessonProps> = ({
 				)}
 				{content}
 				<ChatWithAI lessonId={lessonId} />
-				<div className='w-full h-[69px] flex items-center justify-center gap-4 mt-8 mb-16'>
-					{!isIndependent && (
-						<Button
-							color='gray'
-							isIconOnly
-							isDisabled={!prevLessonId}
-							as={Link}
-							href={getLessonRoute(prevLessonId, topicId)}
-							className='h-[60px] w-[80px] rounded-[20px]'
-							startContent={<ArrowRight className='rotate-180' />}
-							isLoading={prevNextLoading}
-						/>
-					)}
-
-					<Button
-						onPress={() => {
-							completeLesson()
-						}}
-						as={Link}
-						href={getCourseByIdRoute(
-							lessonContentData.courseId,
-							topicId,
-							lessonContentData.subtopicId,
-							lessonContentData.id
+				{!errorLessonContent && !createLessonError && (
+					<div className='w-full h-[69px] flex items-center justify-center gap-4 mt-8 mb-16'>
+						{!isIndependent && (
+							<Button
+								color='gray'
+								isIconOnly
+								isDisabled={!prevLessonId}
+								as={Link}
+								href={getLessonRoute(prevLessonId, topicId)}
+								className='h-[60px] w-[80px] rounded-[20px]'
+								startContent={<ArrowRight className='rotate-180' />}
+								isLoading={prevNextLoading}
+							/>
 						)}
-						className='h-[60px] w-auto px-6 rounded-[20px]'
-						color='gray'
-					>
-						{t('Complete lesson')}
-					</Button>
-					{!isIndependent && (
+
 						<Button
-							className='h-[60px] w-[80px] rounded-[20px]'
-							color='main'
-							isIconOnly
-							isDisabled={!nextLessonId}
-							onPress={completeLesson}
-							startContent={<ArrowRight />}
+							onPress={() => {
+								completeLesson()
+							}}
 							as={Link}
-							href={getLessonRoute(nextLessonId, topicId)}
-							isLoading={prevNextLoading}
-						/>
-					)}
-				</div>
+							href={getCourseByIdRoute(
+								lessonContentData?.courseId,
+								topicId,
+								lessonContentData?.subtopicId,
+								lessonContentData?.id
+							)}
+							className='h-[60px] w-auto px-6 rounded-[20px]'
+							color='gray'
+						>
+							{t('Complete lesson')}
+						</Button>
+						{!isIndependent && (
+							<Button
+								className='h-[60px] w-[80px] rounded-[20px]'
+								color='main'
+								isIconOnly
+								isDisabled={!nextLessonId}
+								onPress={completeLesson}
+								startContent={<ArrowRight />}
+								as={Link}
+								href={redirect({ lessonId: nextLessonId, topicId })}
+								isLoading={prevNextLoading}
+							/>
+						)}
+					</div>
+				)}
 			</div>
 		</div>
 	)

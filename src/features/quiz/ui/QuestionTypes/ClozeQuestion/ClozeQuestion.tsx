@@ -1,10 +1,10 @@
 import { useQuizStore } from '@/features/quiz/model/quiz.store'
 import { useTranslations } from 'next-intl'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import NavigationButtons from '../NavigationButton'
+import './Cloze.scss'
 import ClozeLine from './ClozeLine'
-
 const ClozeQuestion = ({
 	question,
 	onPrev,
@@ -86,15 +86,21 @@ const ClozeQuestion = ({
 			const [matchedText] = match
 			const matchIndex = match.index
 
-			// Push text before the match
+			// Добавляем текст перед текущим совпадением, заменяя пробелы на &nbsp;
 			if (matchIndex > lastIndex) {
-				elements.push(
-					<React.Fragment key={lastIndex}>
-						{prompt.slice(lastIndex, matchIndex)}
-					</React.Fragment>
-				)
+				const textBefore = prompt.slice(lastIndex, matchIndex)
+				const words = textBefore.split(/(\s+)/).map((word, index) => (
+					<span
+						key={`word-${lastIndex + index}`}
+						className='whitespace-nowrap text-span'
+					>
+						{word}
+					</span>
+				))
+				elements.push(...words)
 			}
 
+			// Добавляем компонент `ClozeLine`
 			elements.push(
 				<ClozeLine
 					key={`${question?.id}-${matchIndex}`}
@@ -108,11 +114,16 @@ const ClozeQuestion = ({
 			lastIndex = matchIndex + matchedText.length
 		}
 		if (lastIndex < prompt.length) {
-			elements.push(
-				<React.Fragment key={lastIndex}>
-					{prompt.slice(lastIndex)}
-				</React.Fragment>
-			)
+			const remainingText = prompt.slice(lastIndex)
+			const words = remainingText.split(/(\s+)/).map((word, index) => (
+				<span
+					key={`word-${lastIndex + index}`}
+					className='whitespace-nowrap text-span'
+				>
+					{word}
+				</span>
+			))
+			elements.push(...words)
 		}
 
 		return elements
@@ -120,13 +131,14 @@ const ClozeQuestion = ({
 
 	const parsedPrompt = useMemo(
 		() => parsePrompt(question.prompt),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[question.prompt, localAnswer, answeredQuestions[question.id], isCorrect]
 	)
 
 	return (
 		<>
 			<div className='flex flex-col items-center mt-10 w-full px-10'>
-				<div className='flex flex-wrap items-center text-xl whitespace-normal max-sm:text-center max-md:w-full '>
+				<div className='flex flex-wrap items-center text-xl whitespace-nowrap max-sm:text-center max-md:w-full'>
 					{parsedPrompt}
 				</div>
 

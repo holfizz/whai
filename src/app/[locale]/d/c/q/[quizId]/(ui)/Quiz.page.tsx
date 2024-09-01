@@ -6,16 +6,18 @@ import {
 	useGetQuiz
 } from '@/entities/quiz/model/quiz.queries'
 import { Quiz } from '@/features/quiz'
+import { getCourseByIdRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { Skeleton } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const QuizPage = () => {
 	const { quizId } = useParams<{ quizId: string }>()
+	const router = useRouter()
 	const t = useTranslations('Quiz')
 	const { quizData, errorQuiz, loadingQuiz } = useGetQuiz(quizId)
 	const {
@@ -105,7 +107,13 @@ const QuizPage = () => {
 		)
 	} else {
 		if (quizData?.questions?.length) {
-			content = <Quiz />
+			content = (
+				<Quiz
+					handleNext={() => {
+						router.replace(getCourseByIdRoute(quizData.courseId))
+					}}
+				/>
+			)
 		} else if (isQuizCreated) {
 			content = <Quiz quizIdProp={dataCreateQuizWithAI?.id} />
 		}
@@ -113,12 +121,7 @@ const QuizPage = () => {
 
 	return (
 		<DashboardLayout>
-			<div
-				className='w-full flex items-center flex-col'
-				style={{ height: 'calc(100vh - var(--navbar-height))' }}
-			>
-				{content}
-			</div>
+			<div className='w-full flex items-center flex-col'>{content}</div>
 		</DashboardLayout>
 	)
 }

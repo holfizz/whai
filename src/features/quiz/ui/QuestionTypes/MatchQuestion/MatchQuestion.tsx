@@ -37,7 +37,7 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 			</h3>
 
 			<Xwrapper>
-				<div className='relative flex justify-between w-full px-10'>
+				<div className='relative flex justify-between w-full px-2'>
 					<div className='flex flex-col gap-2 relative flex-wrap'>
 						{shuffledLeft.map((item, index) => (
 							<MatchItem

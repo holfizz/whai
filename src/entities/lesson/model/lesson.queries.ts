@@ -99,6 +99,32 @@ export const useGetAllLessons = (subtopicId: string) => {
 	}
 }
 
+export const GET_LESSON_TASKS = gql`
+	query ($lessonId: ID!) {
+		getLesson(lessonId: $lessonId) {
+			lessonTasks {
+				isChecked
+				name
+				description
+			}
+		}
+	}
+`
+export const useGetLessonTasks = (lessonId: string) => {
+	const { data, error, loading } = useQuery<{ getLesson: ILesson }>(
+		GET_LESSON_TASKS,
+		{
+			variables: { lessonId },
+			fetchPolicy: 'cache-and-network'
+		}
+	)
+	return {
+		taskData: data?.getLesson,
+		errorTask: error,
+		loadingTask: loading
+	}
+}
+
 //==================//
 export const GET_LESSON_CONTENT = gql`
 	query ($lessonId: ID!) {
@@ -112,6 +138,7 @@ export const GET_LESSON_CONTENT = gql`
 				isChecked
 				lessonId
 				name
+				description
 			}
 			lessonBlocks {
 				id

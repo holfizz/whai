@@ -43,7 +43,7 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 						<div>
 							<div
 								className={
-									'w-auto max-lg:w-[75vw] flex justify-between items-start  rounded-2xl p-2 max-md:flex-col max-sm:items-start flex-col  max-640:w-full'
+									'w-auto max-lg:w-[75vw] flex justify-between items-start p-4 rounded-3xl max-md:flex-col max-sm:items-start flex-col  max-640:w-full'
 								}
 							>
 								{lastCourseData ? (
@@ -102,31 +102,31 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 										</div>
 									</div>
 								) : (
-									<div className='flex max-sm:w-full shadow-sm'>
-										<div className={'flex'}>
+									<div className='flex w-full max-640:p-8 p-4 rounded-[40px] shadow-sm justify-between max-640:w-full'>
+										<div className={'flex max-640:flex-col'}>
 											<Link
 												href={getCourseExampleByIdRoute(
 													ENGLISH_COURSE_A1_TO_B1?.id
 												)}
 												className={
-													'w-[70px] h-[70px] mr-4 flex justify-center items-center'
+													'w-[150px] h-[150px] mr-4 flex justify-center items-center'
 												}
 											>
 												<Image
-													className={'scale-[2]'}
+													width={150}
 													src={EngAvatar}
 													alt='recommendation'
 												/>
 											</Link>
 
 											<div className='w-full'>
-												<div className='w-min max-md:w-full'>
+												<div className='max-lg:max-w-[300px] w-full'>
 													{loadingLastCourse ? (
 														<Skeleton className='h-3 max-sm:w-full rounded-lg' />
 													) : (
 														<Link
 															className={
-																'font-medium text-xl w-2/3 line-clamp-2 text-ellipsis max-sm:w-full '
+																'font-bold text-2xl w-2/3 line-clamp-2 text-ellipsis max-sm:w-full '
 															}
 															href={getCourseExampleByIdRoute(
 																ENGLISH_COURSE_A1_TO_B1?.id
@@ -135,7 +135,10 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 															{ENGLISH_COURSE_A1_TO_B1?.name}
 														</Link>
 													)}
-													<ProgressBar data={ENGLISH_COURSE_A1_TO_B1 as any} />
+													<ProgressBar
+														style={{ width: 'w-[63vw] !important' }}
+														data={ENGLISH_COURSE_A1_TO_B1 as any}
+													/>
 												</div>
 												<CourseStat data={ENGLISH_COURSE_A1_TO_B1 as any} />
 											</div>
@@ -147,13 +150,15 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 													ENGLISH_COURSE_A1_TO_B1?.id
 												)}
 												isIconOnly
-												startContent={<ArrowUpRight fill={'#fff'} />}
-												variant={'circle'}
-												as={Link}
-												color={'accent'}
+												startContent={
+													<ArrowUpRight className={'w-[30px] h-[30px]'} />
+												}
 												className={
 													'max-sm:hidden max-md:w-[50px] max-md:h-[50px] ml-8'
 												}
+												variant={'circle'}
+												as={Link}
+												color={'main'}
 											></Button>
 										</div>
 									</div>

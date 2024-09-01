@@ -23,10 +23,10 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 	const t = useTranslations('Quiz')
 	const { back } = useRouter()
 	return (
-		<div className='flex gap-4 mt-24 max-md:flex-col'>
+		<div className='flex gap-4 mt-24 max-md:flex-col-reverse max-640:w-[80vw]'>
 			{
 				<Button
-					className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
+					className='max-lg:w-[140px] max-lg:h-[60px] max-md:w-[60vw]  max-640:!w-full'
 					size={'3xl'}
 					color={'gray'}
 					onClick={() => {
@@ -39,7 +39,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 			}
 			{!isChecked && (
 				<Button
-					className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
+					className='max-lg:w-[140px] max-lg:h-[60px] max-md:w-[60vw] max-640:!w-full'
 					size={'3xl'}
 					color={'main'}
 					onClick={onCheck}
@@ -49,7 +49,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 			)}
 			{isChecked && (
 				<Button
-					className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
+					className='max-lg:w-[140px] max-lg:h-[60px] max-md:w-[60vw]  max-640:!w-full'
 					size={'3xl'}
 					color={'main'}
 					onPress={onNext}

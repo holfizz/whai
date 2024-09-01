@@ -28,6 +28,7 @@ export interface ILessonContent {
 export interface ILessonTask {
 	isChecked: boolean
 	name: string
+	description: string
 }
 
 export interface ILessonBlock {

@@ -1,0 +1,6 @@
+.text-span {
+	display: inline-block;
+	margin-left: 2px;
+	white-space: nowrap;
+	@apply max-md:text-2xl font-normal;
+}

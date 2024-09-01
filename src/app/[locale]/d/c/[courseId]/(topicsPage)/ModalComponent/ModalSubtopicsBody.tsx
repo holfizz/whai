@@ -56,13 +56,15 @@ const ModalSubtopicsBody = ({
 					subtopicsAllData.map(subtopic => (
 						<div className={`${cls.group} mt-3`} key={subtopic.id}>
 							<div
-								style={{ width: `${subtopic.progressPercents}%` }}
-								className={`absolute b-0 bg-decor-3 h-[44px] rounded-xl`}
+								style={{
+									width: `${subtopic.progressPercents}%`
+								}}
+								className={`absolute b-0 bg-decor-3 h-[44px] rounded-2xl `}
 							></div>
 							<div
 								onClick={() => handleSubtopicClick(subtopic.id)}
 								className={
-									'absolute b-0 border-2 border-decor-3 h-[44px] w-full rounded-xl flex items-center px-6 z-20 justify-between'
+									'absolute b-0 border-2 border-decor-3 h-[44px] w-full rounded-2xl flex items-center px-6 z-20 justify-between'
 								}
 							>
 								<h1
