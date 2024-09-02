@@ -71,7 +71,7 @@ const LessonTaskPage = () => {
 					{/* Left Column: File Upload */}
 					<div className='w-1/2 p-4 bg-white rounded-[10px]'>
 						<h1 className='text-2xl font-bold mb-4 text-center'>
-							{t('Homework')}
+							{t('homework')}
 						</h1>
 
 						{/* Display Current Task */}
@@ -130,11 +130,7 @@ const LessonTaskPage = () => {
 									</div>
 								</div>
 							)}
-							{error && (
-								<p className='text-red-500'>
-									{t('Error')}: {error.message}
-								</p>
-							)}
+							{error && <p className='text-red-500'>Error: {error.message}</p>}
 						</div>
 					</div>
 				</div>

@@ -196,7 +196,13 @@
 		"Check": "Проверить",
 		"Only one file can be uploaded at a time": "Одновременно можно загрузить только один файл",
 		"File is too large Maximum size is 100 MB": "Файл слишком большой. Максимальный размер — 100 МБ.",
-		"homework": "Домашнее задание"
+		"homework": "Домашнее задание",
+		"AI Response": "Ответ ИИ",
+		"Response": "Ответ",
+		"Status": "Статус",
+		"Reason": "Причина",
+		"Incorrect Parts": "Неправильные части",
+		"Upload New File": "Загрузить новый файл"
 	},
 	"CreateCourse": {
 		"What are we creating?": "Что мы создаем?",

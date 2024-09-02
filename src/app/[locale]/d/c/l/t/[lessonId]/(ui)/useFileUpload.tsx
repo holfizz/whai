@@ -14,6 +14,7 @@ export const useFileUpload = (
 	const handleDrop = (acceptedFiles: File[], rejectedFiles: File[]) => {
 		if (rejectedFiles.length > 0) {
 			rejectedFiles.forEach(file => {
+				//@ts-ignore
 				if (file.file.size > MAX_FILE_SIZE_BYTES) {
 					toast.error(t('File is too large Maximum size is 100 MB'))
 				} else {
@@ -41,6 +42,7 @@ export const useFileUpload = (
 	}
 
 	const { getRootProps, getInputProps } = useDropzone({
+		//@ts-ignore
 		onDrop: handleDrop,
 		accept: {
 			'application/msword': ['.doc', '.docx'],

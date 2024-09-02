@@ -92,7 +92,7 @@ const Lesson: FC<LessonProps> = ({
 		topicId: string
 	}) => {
 		if (lessonContentData?.lessonTasks.length > 0) {
-			return getLessonTaskRoute(lessonContentData.id, lessonId)
+			return getLessonTaskRoute(lessonContentData.id)
 		} else {
 			return getLessonRoute(lessonId, topicId)
 		}

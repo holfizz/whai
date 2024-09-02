@@ -196,7 +196,13 @@
 		"Check": "Check",
 		"Only one file can be uploaded at a time": "Only one file can be uploaded at a time",
 		"File is too large Maximum size is 100 MB": "File is too large Maximum size is 100 MB",
-		"homework": "Homework"
+		"homework": "Homework",
+		"AI Response": "AI Response",
+		"Response": "Response",
+		"Status": "Status",
+		"Reason": "Reason",
+		"Incorrect Parts": "Incorrect Parts",
+		"Upload New File": "Upload New File"
 	},
 	"CreateCourse": {
 		"What are we creating?": "What are we creating?",
