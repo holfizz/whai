@@ -192,7 +192,11 @@
 		"Images JPG JPG2 PNG GIF WEB HEIC HEIF BMP PCD TIFF": "Изображения: JPG, JPG2, PNG, GIF, WEBP, HEIC, HEIF, BMP, PCD, TIFF",
 		"The size of all uploaded files is no more than 100 MB": "Размер всех загружаемых файлов не более 100 МБ",
 		"Files must be uploaded using the multipart form-data method": "Файлы должны загружаться с использованием метода multipart/form-data.",
-		"Task": "Задача"
+		"Task": "Задача",
+		"Check": "Проверить",
+		"Only one file can be uploaded at a time": "Одновременно можно загрузить только один файл",
+		"File is too large Maximum size is 100 MB": "Файл слишком большой. Максимальный размер — 100 МБ.",
+		"homework": "Домашнее задание"
 	},
 	"CreateCourse": {
 		"What are we creating?": "Что мы создаем?",
@@ -335,6 +339,7 @@
 		"Base subscription": "Базовая подписка",
 		"Standard subscription": "Стандартная подписка",
 		"Premium subscription": "Премиум подписка",
+		"Your subscription": "Ваша подписка",
 		"Subscribe": "Подписаться",
 		"Base description": "Базовая подписка идеально подходит для начинающих пользователей, предоставляя основные инструменты для создания и управления учебными курсами, а также базовую аналитику для отслеживания прогресса.",
 		"Standard description": "Стандартная подписка предлагает больше возможностей для создания контента и включает проверку домашних заданий с помощью ИИ, что помогает улучшить качество обучения.",
@@ -354,11 +359,18 @@
 		"PREMIUM": "Премиум",
 		"BASIC": "Базовая",
 		"STANDARD": "Стандартная",
-		"Subscription end date": "Дата окончания подписки",
+		"Subscription end date": "Подписка активна до",
 		"Confirm Auto-Renewal Change": "Подтвердить изменение автоматического продления",
 		"Are you sure you want to change the auto-renewal setting?": "Вы уверены, что хотите изменить настройки автоматического продления?",
 		"Confirm": "Подтвердить",
-		"Cancel": "Отменить"
+		"Cancel": "Отменить",
+		"Corporate subscription": "Корпоративная подписка",
+		"Contact us if you are a company representative and want to work with us": "Свяжитесь с нами, если вы являетесь представителем компании и хотите работать с нами.",
+		"Subscription settings": "Настройки подписки",
+		"Cancel subscription": "Отменить подписку",
+		"Your subscription has been cancelled": "Ваша подписка отменена",
+		"Subscription status": "Статус подписки",
+		"For questions, write to email": "По вопросам пишите на почту"
 	},
 	"Open": "Открыть",
 	"User": "Пользователь",

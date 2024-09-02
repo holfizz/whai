@@ -192,7 +192,11 @@
 		"Images JPG JPG2 PNG GIF WEB HEIC HEIF BMP PCD TIFF": "Images: JPG, JPG2, PNG, GIF, WEBP, HEIC, HEIF, BMP, PCD, TIFF",
 		"The size of all uploaded files is no more than 100 MB": "The size of all uploaded files is no more than 100 MB",
 		"Files must be uploaded using the multipart form-data method.": "Files must be uploaded using the multipart/form-data method.",
-		"Task": "Task"
+		"Task": "Task",
+		"Check": "Check",
+		"Only one file can be uploaded at a time": "Only one file can be uploaded at a time",
+		"File is too large Maximum size is 100 MB": "File is too large Maximum size is 100 MB",
+		"homework": "Homework"
 	},
 	"CreateCourse": {
 		"What are we creating?": "What are we creating?",
@@ -336,6 +340,7 @@
 		"Base subscription": "Base subscription",
 		"Standard subscription": "Standard subscription",
 		"Premium subscription": "Premium subscription",
+		"Your subscription": "Your subscription",
 		"Subscribe": "Subscribe",
 		"Base description": "The base subscription is ideal for beginners, offering essential tools for creating and managing courses, as well as basic analytics for tracking progress.",
 		"Standard description": "The standard subscription offers more content creation capabilities and includes AI-powered homework checks to enhance the learning experience.",
@@ -361,7 +366,14 @@
 		"Confirm Auto-Renewal Change": "Confirm Auto-Renewal Change",
 		"Are you sure you want to change the auto-renewal setting?": "Are you sure you want to change the auto-renewal setting?",
 		"Confirm": "Confirm",
-		"Cancel": "Cancel"
+		"Cancel": "Cancel",
+		"Corporate subscription": "Corporate subscription",
+		"Contact us if you are a company representative and want to work with us": "Contact us if you are a company representative and want to work with us.",
+		"Subscription settings": "Subscription settings",
+		"Cancel subscription": "Cancel subscription",
+		"Your subscription has been cancelled": "Your subscription has been cancelled.",
+		"Subscription status": "Subscription status",
+		"For questions, write to email": "For questions, write to email"
 	},
 	"Close": "Close",
 	"Open": "Open",

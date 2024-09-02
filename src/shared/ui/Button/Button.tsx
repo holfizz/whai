@@ -6,7 +6,7 @@ const Button = extendVariants(UiButton, {
 		color: {
 			accent: 'text-white bg-accent',
 			white: 'bg-white text-accent',
-			gray: 'bg-decor-4 text-accent',
+			gray: 'bg-decor-4 text-accent ',
 			'gray-text': 'bg-decor-4 text-[#BDBDBD]',
 			error: 'bg-error-1 text-error-text',
 			success: 'bg-success-1 text-success-text',

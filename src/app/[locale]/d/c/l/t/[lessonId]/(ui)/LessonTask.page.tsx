@@ -1,77 +1,61 @@
 'use client'
 
-import { useGetLessonTasks } from '@/entities/lesson/model/lesson.queries'
-import FileIcon from '@/shared/assets/icons/File'
-import UploadIcon from '@/shared/assets/icons/Upload'
+import {
+	CHECK_HOMEWORK,
+	useGetLessonTasks
+} from '@/entities/lesson/model/lesson.queries'
+import ArrowRight from '@/shared/assets/icons/ArrowRight'
 import Button from '@/shared/ui/Button/Button'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
+import { useMutation } from '@apollo/client'
 import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
-import { useDropzone } from 'react-dropzone' // Make sure to import useDropzone
+import { Toaster } from 'react-hot-toast'
+import FileUpload from './FileUpload'
 
 const LessonTaskPage = () => {
 	const { lessonId } = useParams<{ lessonId: string }>()
 	const t = useTranslations('LessonTask')
 	const { taskData } = useGetLessonTasks(lessonId)
 	const [selectedTaskIndex, setSelectedTaskIndex] = useState(0)
-	const [selectedFiles, setSelectedFiles] = useState<
-		Record<number, File | null>
-	>({})
-	const [imagePreviews, setImagePreviews] = useState<
-		Record<number, string | null>
-	>({})
+	const [checkHomework, { loading, error, data }] = useMutation(CHECK_HOMEWORK)
 
-	const handleDrop = (acceptedFiles: File[], taskId: number) => {
-		if (acceptedFiles.length > 0) {
-			const file = acceptedFiles[0]
-			setSelectedFiles(prevState => ({ ...prevState, [taskId]: file }))
+	const [fileUploads, setFileUploads] = useState<{
+		[key: number]: File | null
+	}>({})
 
-			const fileType = file.type.split('/')[0]
-			if (fileType === 'image') {
-				const reader = new FileReader()
-				reader.onloadend = () => {
-					setImagePreviews(prevState => ({
-						...prevState,
-						[taskId]: reader.result as string
-					}))
+	const handleFileUpload = (index: number) => (acceptedFiles: File[]) => {
+		setFileUploads(prev => ({
+			...prev,
+			[index]: acceptedFiles[0] || null
+		}))
+	}
+
+	const handleCheckHomework = async () => {
+		const selectedFile = fileUploads[selectedTaskIndex]
+
+		if (!selectedFile || !taskData?.lessonTasks[selectedTaskIndex]?.id) return
+
+		try {
+			const response = await checkHomework({
+				variables: {
+					checkHomeworkDto: {
+						lessonTaskId: taskData.lessonTasks[selectedTaskIndex].id
+					},
+					file: selectedFile
 				}
-				reader.readAsDataURL(file)
-			} else {
-				setImagePreviews(prevState => ({ ...prevState, [taskId]: null }))
-			}
+			})
+
+			console.log('Homework check result:', response.data.checkHomework)
+		} catch (err) {
+			console.error('Error checking homework:', err)
 		}
 	}
 
-	// Initialize the useDropzone hook
-	const { getRootProps, getInputProps } = useDropzone({
-		onDrop: acceptedFiles => handleDrop(acceptedFiles, selectedTaskIndex),
-		accept: {
-			'application/msword': ['.doc', '.docx'],
-			'application/vnd.ms-excel': ['.xls', '.xlsx'],
-			'application/vnd.ms-powerpoint': ['.ppt', '.pptx'],
-			'application/pdf': ['.pdf'],
-			'application/vnd.apple.numbers': ['.numbers'],
-			'text/csv': ['.csv'],
-			'image/jpeg': ['.jpg', '.jpeg'],
-			'image/jp2': ['.jp2'],
-			'image/png': ['.png'],
-			'image/gif': ['.gif'],
-			'image/webp': ['.webp'],
-			'image/heic': ['.heic'],
-			'image/heif': ['.heif'],
-			'image/bmp': ['.bmp'],
-			'image/x-photo-cd': ['.pcd'],
-			'image/tiff': ['.tiff', '.tif']
-		}
-	})
-
 	return (
 		<DashboardLayout>
-			<div className='w-full flex flex-col items-center'>
-				<h1 className='text-2xl font-bold mb-4'>Домашнее задание</h1>
-
-				{/* Task Navigation */}
+			<div className='flex flex-col items-center justify-center'>
 				<div className='flex mb-4 gap-3'>
 					{taskData?.lessonTasks.map((task, index) => (
 						<div
@@ -83,80 +67,112 @@ const LessonTaskPage = () => {
 						/>
 					))}
 				</div>
+				<div className='w-full flex bg-decor-4 rounded-[20px] gap-10 p-5'>
+					{/* Left Column: File Upload */}
+					<div className='w-1/2 p-4 bg-white rounded-[10px]'>
+						<h1 className='text-2xl font-bold mb-4 text-center'>
+							{t('Homework')}
+						</h1>
 
-				{/* Display Current Task */}
-				{taskData?.lessonTasks.map(
-					(task, index) =>
-						index === selectedTaskIndex && (
-							<div key={index} className='mb-8 w-full max-w-md'>
-								<h2 className='text-lg font-semibold mb-2'>
-									{t(`Task`)} {index + 1}: {task.name}
-								</h2>
-								<p>{task.description}</p>
-								<div
-									{...getRootProps({ className: 'dropzone' })}
-									className='px-16 py-6 border-4 border-dashed border-decor-2 rounded-lg w-full flex flex-col items-center justify-center cursor-pointer bg-decor-4'
-								>
-									<input {...getInputProps()} />
-									{selectedFiles[index] ? (
-										imagePreviews[index] ? (
-											<img
-												src={imagePreviews[index] as string}
-												alt='Preview'
-												className='w-full h-full object-cover rounded-lg'
-											/>
-										) : (
-											<div className='flex flex-col items-center'>
-												<FileIcon />
-												<p className='text-center text-sm mt-2'>
-													{selectedFiles[index]?.name}
-												</p>
-											</div>
-										)
-									) : (
-										<div className='text-center flex flex-col items-center justify-center gap-5'>
-											<div className='bg-decor-4'>
-												<UploadIcon />
-											</div>
-											<h1 className='text-sm font-medium mt-8 my-4'>
-												{t('Supported file formats for upload')}
-											</h1>
-											<p className='text-gray-600 text-sm w-full flex items-center'>
-												{t(
-													'Documents DOC DOCX XLS XLSX PPT PPTX PDF Numbers CSV'
-												)}
-												<br />
-												{t(
-													'Images JPG JPG2 PNG GIF WEB HEIC HEIF BMP PCD TIFF'
-												)}
-												<br />
-												{t(
-													'The size of all uploaded files is no more than 100 MB'
-												)}
-											</p>
-										</div>
-									)}
+						{/* Display Current Task */}
+						{taskData?.lessonTasks.map((task, index) =>
+							index === selectedTaskIndex ? (
+								<div key={index} className='mb-8 flex flex-col items-center'>
+									<div className='text-center mb-4'>
+										<h2 className='text-lg font-semibold text-left'>
+											{t('Task')} {index + 1}: {task.name}
+										</h2>
+										<p className='text-lg font-medium text-left mt-2 my-4'>
+											{task.description}
+										</p>
+									</div>
+									<FileUpload
+										taskIndex={index}
+										onDropCallback={handleFileUpload(index)}
+										file={fileUploads[index]}
+									/>
 								</div>
-							</div>
-						)
-				)}
+							) : null
+						)}
 
-				{/* Navigation Buttons */}
-				<div className='flex justify-between w-full max-w-md mt-4'>
+						{/* Navigation Buttons */}
+					</div>
+
+					{/* Right Column: AI Response */}
+					<div className='w-1/2 p-4 bg-white rounded-[10px]'>
+						<h1 className='text-2xl font-bold mb-4'>{t('AI Response')}</h1>
+						<div className='flex flex-col items-center'>
+							{data && (
+								<div className='p-4  rounded-lg w-full'>
+									<h2 className='text-lg font-semibold mb-2'>
+										{t('Response')}
+									</h2>
+									<p className='text-lg font-medium mb-2'>
+										<strong>{t('Status')}: </strong>
+										{data.checkHomework.status}
+									</p>
+									<p className='text-lg font-medium mb-2'>
+										<strong>{t('Reason')}: </strong>
+										{data.checkHomework.reason}
+									</p>
+									<p className='text-lg font-medium mb-2'>
+										<strong>{t('Incorrect Parts')}: </strong>
+										{data.checkHomework.incorrectParts}
+									</p>
+									<div className='mt-4'>
+										<Button
+											onClick={() => window.open('/file-upload', '_blank')}
+											color='gray'
+											className='w-[180px] h-[60px]'
+										>
+											{t('Upload New File')}
+										</Button>
+									</div>
+								</div>
+							)}
+							{error && (
+								<p className='text-red-500'>
+									{t('Error')}: {error.message}
+								</p>
+							)}
+						</div>
+					</div>
+				</div>
+				<div className='flex justify-center mt-4 flex-col'>
 					<Button
-						disabled={selectedTaskIndex === 0}
-						onClick={() => setSelectedTaskIndex(prev => prev - 1)}
+						onClick={handleCheckHomework}
+						disabled={!fileUploads[selectedTaskIndex] || loading}
+						color='gray'
+						className='w-[180px] h-[60px] rounded-[20px] mb-6'
 					>
-						{t('Previous')}
+						{loading ? 'Checking...' : t('Check')}
 					</Button>
-					<Button
-						disabled={selectedTaskIndex === taskData?.lessonTasks.length - 1}
-						onClick={() => setSelectedTaskIndex(prev => prev + 1)}
-					>
-						{t('Next')}
-					</Button>
+					<div className='flex gap-2 justify-between items-center'>
+						<Button
+							disabled={selectedTaskIndex === 0}
+							onClick={() => setSelectedTaskIndex(prev => prev - 1)}
+							color='gray'
+							isIconOnly
+							className={`h-[60px] w-[80px] rounded-[20px] ${
+								selectedTaskIndex === 0 && 'opacity-80'
+							}`}
+							startContent={<ArrowRight className='rotate-180' />}
+						/>
+						<Button
+							disabled={selectedTaskIndex === taskData?.lessonTasks.length - 1}
+							onClick={() => setSelectedTaskIndex(prev => prev + 1)}
+							color='gray'
+							isIconOnly
+							className={`h-[60px] w-[80px] rounded-[20px] ${
+								selectedTaskIndex === taskData?.lessonTasks.length - 1 &&
+								'opacity-80'
+							}`}
+							startContent={<ArrowRight />}
+						/>
+					</div>
 				</div>
 			</div>
+			<Toaster position='top-right' reverseOrder={false} />
 		</DashboardLayout>
 	)
 }

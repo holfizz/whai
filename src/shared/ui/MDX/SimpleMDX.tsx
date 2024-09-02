@@ -28,7 +28,10 @@ const components = {
 		<h5 className='text-base font-normal pb-2 my-2' {...props} />
 	),
 	p: ({ node, ...props }) => (
-		<p className='text-medium pb-2 my-2 max-md:text-xl' {...props}></p>
+		<p
+			className='break-words overflow-wrap  whitespace-normal text-medium pb-2 my-2 max-md:text-xl'
+			{...props}
+		></p>
 	),
 	pre: ({ node, ...props }) => (
 		<pre className='border-2 border-decor-4 rounded-2xl p-5' {...props}></pre>

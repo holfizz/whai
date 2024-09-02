@@ -135,7 +135,7 @@ const MRQQuestion = ({
 							<PopoverTrigger>
 								<Button
 									className={
-										'px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-xl w-full h-auto max-sm:h-[50px] max-md:w-full relative max '
+										'px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-xl w-full !h-auto max-sm:h-[50px] max-md:w-full relative max '
 									}
 									disableAnimation={false}
 									endContent={
@@ -152,9 +152,9 @@ const MRQQuestion = ({
 								>
 									<div className='flex flex-col justify-center items-center'>
 										<h1
-											className={`opacity-100 ${
+											className={`opacity-100  text-justify ${
 												checked &&
-												'text-lg font-medium text-center w-full break-words whitespace-normal max-md:text-3xl'
+												'text-lg font-medium w-full break-words whitespace-normal max-md:text-3xl'
 											}`}
 										>
 											<Suspense fallback={<DotsLoader />}>

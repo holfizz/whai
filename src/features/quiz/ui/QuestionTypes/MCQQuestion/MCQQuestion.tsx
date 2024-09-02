@@ -126,9 +126,8 @@ const MCQQuestion = ({
 						>
 							<PopoverTrigger>
 								<Button
-									className='relative'
+									className='relative px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-xl w-full max-sm:w-[40vw] max-sm:h-[50px] !h-auto'
 									disableAnimation={false}
-									size='auto'
 									endContent={
 										checked &&
 										description && (
@@ -141,11 +140,12 @@ const MCQQuestion = ({
 									color={getChoiceColor(choice)}
 									onClick={() => handleChoiceClick(choice.content, index)}
 								>
-									<div className='flex flex-col justify-center items-center'>
+									<div className='w-full h-auto'>
 										<h1
-											className={`opacity-100 ${
-												checked &&
-												'text-lg font-medium text-center w-full break-words whitespace-normal'
+											className={`opacity-100 w-full break-words h-auto ${
+												checked
+													? 'text-lg font-medium text-center'
+													: 'text-left'
 											}`}
 										>
 											<SimpleMDX>{choice.content}</SimpleMDX>

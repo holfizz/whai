@@ -103,6 +103,7 @@ export const GET_LESSON_TASKS = gql`
 	query ($lessonId: ID!) {
 		getLesson(lessonId: $lessonId) {
 			lessonTasks {
+				id
 				isChecked
 				name
 				description
@@ -319,6 +320,18 @@ export const GET_BREADCRUMBS = gql`
 			topicName
 			subtopicName
 			lessonName
+		}
+	}
+`
+export const CHECK_HOMEWORK = gql`
+	mutation CheckHomework($checkHomeworkDto: CheckHomeworkDto!, $file: Upload) {
+		checkHomework(checkHomeworkDto: $checkHomeworkDto, file: $file) {
+			status
+			reason
+			incorrectParts
+			completionPercentage
+			suggestions
+			links
 		}
 	}
 `

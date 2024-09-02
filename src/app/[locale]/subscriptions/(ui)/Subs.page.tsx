@@ -2,9 +2,13 @@
 import { IUser } from '@/entities/Auth'
 import { GET_PROFILE, UPDATE_PROFILE } from '@/entities/Auth/model/auth.queries'
 import { useMakePaymentMutation } from '@/entities/transaction/model/transaction.queries'
-import { useRouter } from '@/navigation'
+import { Link, useRouter } from '@/navigation'
+import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
 import CheckIcon from '@/shared/assets/icons/CheckIcon'
-import { getRouteSubscriptionTerm } from '@/shared/const/router'
+import {
+	getRouteContacts,
+	getRouteSubscriptionTerm
+} from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { Layout } from '@/widgets/Layout'
@@ -18,7 +22,6 @@ import {
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import './Subs.scss'
 
 const SubsPage = () => {
 	const t = useTranslations('Subscription')
@@ -143,6 +146,22 @@ const SubsPage = () => {
 		}
 	}
 
+	const confirmCancelSubscribe = async () => {
+		try {
+			await updateProfile({
+				variables: {
+					id: user?.getProfile?.id,
+					dto: {
+						isAutoRenewal: false
+					}
+				}
+			})
+			setIsAutoRenewal(prev => !prev)
+		} catch (error) {
+			console.error('Failed to update profile:', error)
+		}
+	}
+
 	const cancelAutoRenewalChange = () => {
 		setShowConfirmModal(false)
 	}
@@ -151,42 +170,6 @@ const SubsPage = () => {
 		<Layout>
 			<div className='w-full h-auto mt-20 flex justify-start items-center flex-col mb-10'>
 				<div className='w-[80vw] max-xl:w-[95vw] flex flex-col items-center justify-center'>
-					{user?.getProfile?.activeSubscription?.isActive && (
-						<>
-							<h1 className='text-xl font-medium text-center'>
-								{t('Your current subscription')}
-								{': '}
-								<h2
-									className={`text-2xl font-bold text-decor-2 t ${
-										user?.getProfile?.activeSubscription?.type === 'PREMIUM'
-											? 'gradient-text-premium'
-											: 'gradient-text-standard'
-									}`}
-								>
-									{t(user?.getProfile?.activeSubscription?.type as any)}
-								</h2>
-							</h1>
-							<h1 className='text-xl font-medium text-center flex items-center my-4'>
-								{t('Subscription end date')}
-								{': '}
-								<h2 className='text-2xl font-bold text-decor-2 ml-2'>
-									{formatDate(user?.getProfile?.activeSubscription?.endedAt)}
-								</h2>
-							</h1>
-							{/* Display auto-renewal switch only if subscription is active */}
-							<div className='mt-4 flex items-center justify-start'>
-								<Switch
-									classNames={{
-										wrapper: 'group-data-[selected=true]:bg-decor-2'
-									}}
-									isSelected={isAutoRenewal}
-									onClick={handleAutoRenewalToggle}
-								/>
-								<label className='ml-2'>{t('Enable auto-renewal')}</label>
-							</div>
-						</>
-					)}
-
 					<div className='mt-5'>
 						<div className='flex items-center gap-4 mt-4'>
 							<h2
@@ -212,50 +195,76 @@ const SubsPage = () => {
 							</h2>
 						</div>
 					</div>
-					<div className='w-full mt-10 grid grid-cols-3 gap-5 items-stretch max-md:flex max-md:flex-col max-md:w-[60vw] max-640:w-[70vw] max-sm:w-[95vw]'>
+					<div className='w-fit mt-10 grid grid-cols-3 gap-5 items-stretch max-md:flex max-md:flex-col max-md:w-[60vw] max-640:w-[70vw] max-sm:w-[95vw]'>
 						{['BASIC', 'STANDARD', 'PREMIUM'].map(
 							(type: 'BASIC' | 'STANDARD' | 'PREMIUM') => (
 								<div
 									key={type}
-									className={`w-full h-auto ${
+									className={`w-[335px] h-auto ${
 										type === 'PREMIUM' ? 'bg-accent text-white' : 'bg-decor-1'
 									} rounded-3xl overflow-hidden flex flex-col`}
 								>
-									<div className='flex flex-col justify-center p-10'>
-										<h2 className='text-2xl font-bold mb-4'>
+									<div className='flex flex-col justify-center p-5'>
+										<h2 className='text-lg mb-4'>
 											{subscriptionDetails[type].title}
 										</h2>
-										<p
-											className={`text-5xl font-bold mb-2 ${
-												isYear
-													? 'text-secondary font-medium line-through '
-													: type === 'PREMIUM'
-													? 'text-white'
-													: 'text-accent'
-											}`}
-										>
-											{isYear
-												? `${Math.round(Number(monthlyPrices[type]) * 12)} `
-												: `${monthlyPrices[type]} `}
-											<span className='text-3xl ml-2 text-secondary'>₽</span>
-										</p>
-										{isYear && (
+										<div className='flex items-end gap-2'>
 											<p
-												className={`text-3xl font-semibold mb-2 ${
-													type === 'PREMIUM' ? 'text-white' : 'text-accent'
+												className={` font-bold ${
+													isYear && type === 'PREMIUM'
+														? 'text-gray-500 font-medium line-through text-3xl'
+														: isYear
+														? 'text-yellow-5 font-medium line-through text-3xl'
+														: type === 'PREMIUM'
+														? 'text-white text-5xl'
+														: 'text-accent text-5xl'
 												}`}
 											>
 												{isYear
-													? `${Math.round(
-															Number(discountedPrices[type]) * 12
-													  )} ₽`
-													: `${discountedPrices[type]} ₽`}
+													? `${Math.round(Number(monthlyPrices[type]) * 12)} `
+													: `${monthlyPrices[type]} `}
 											</p>
-										)}
-										<p className='text-sm text-#040404-500 mb-6'>
+											{isYear && (
+												<p
+													className={`text-5xl flex items-end font-semibold   ${
+														type === 'PREMIUM' ? 'text-white' : 'text-accent'
+													}`}
+												>
+													{isYear
+														? `${Math.round(
+																Number(discountedPrices[type]) * 12
+														  )} `
+														: `${discountedPrices[type]} `}
+												</p>
+											)}
+											<span
+												className={`text-3xl font-bold ${
+													isYear && type === 'PREMIUM'
+														? 'text-gray-500 font-medium'
+														: isYear
+														? 'text-yellow-5 font-medium'
+														: type === 'PREMIUM'
+														? 'text-gray-500 font-medium'
+														: 'text-yellow-5 font-medium'
+												}`}
+											>
+												₽
+											</span>
+										</div>
+										<p
+											className={`${
+												isYear && type === 'PREMIUM'
+													? 'text-gray-500'
+													: isYear
+													? 'text-yellow-5'
+													: type === 'PREMIUM'
+													? 'text-gray-500'
+													: 'text-yellow-5'
+											} text-#040404-500 mb-6 mt-1`}
+										>
 											{t('Discount notice')}
 										</p>
-										<p className='mb-4'>
+										<p className='mb-4 h-[200px]'>
 											{subscriptionDetails[type].description}
 										</p>
 										<ul className='mb-4 flex flex-col justify-center w-full'>
@@ -263,7 +272,7 @@ const SubsPage = () => {
 												(benefit, index) => (
 													<li
 														key={index}
-														className='flex justify-start items-start w-full mt-4'
+														className='flex justify-start items-center w-full mt-4'
 													>
 														<CheckIcon className='mr-2 flex-shrink-0' />
 														<span className='flex-grow leading-tight'>
@@ -287,19 +296,105 @@ const SubsPage = () => {
 										variant='noneRound'
 										disableAnimation
 										className={`relative w-full rounded-none h-[70px] text-accent py-2 mt-auto ${
-											user?.getProfile?.activeSubscription?.isActive
-												? 'cursor-not-allowed'
+											user?.getProfile?.activeSubscription?.type === type
+												? 'cursor-not-allowed bg-bg-accent'
 												: ''
 										}`}
 									>
-										{t('Subscribe')}
-										{user?.getProfile?.activeSubscription?.isActive && (
-											<span className='absolute inset-0 bg-white bg-opacity-50 rounded-none'></span>
-										)}
+										{user?.getProfile?.activeSubscription?.type === type
+											? t('Your subscription')
+											: t('Subscribe')}
 									</Button>
 								</div>
 							)
 						)}
+						<div className='col-span-3 bg-decor-1 h-[134px] rounded-[20px] flex justify-between p-5'>
+							<div className='flex items-start flex-col'>
+								<h1 className='text-[20px] font-bold'>
+									{t('Corporate subscription')}
+								</h1>
+								<p className='text-base'>
+									{t(
+										'Contact us if you are a company representative and want to work with us'
+									)}
+								</p>
+							</div>
+							<Button
+								size={'mRound'}
+								href={getRouteContacts()}
+								isIconOnly
+								startContent={<ArrowUpRight className={'w-[30px] h-[30px]'} />}
+								variant={'circle'}
+								as={Link}
+								color={'main'}
+								className={'max-sm:hidden max-md:w-[50px] max-md:h-[50px] ml-8'}
+							></Button>
+						</div>
+						<div className='col-span-3'>
+							<h1 className='text-3xl font-bold'>
+								{t('Subscription settings')}:
+							</h1>
+
+							{user?.getProfile?.activeSubscription?.isActive && (
+								<>
+									<h1 className='text-xl font-medium text-center flex items-center my-4'>
+										{t('Subscription end date')}
+										{': '}
+										<h2 className='text-2xl font-bold text-decor-2 ml-2'>
+											{formatDate(
+												user?.getProfile?.activeSubscription?.endedAt
+											)}
+										</h2>
+									</h1>
+									<div>
+										<div>
+											{isAutoRenewal ? (
+												<Button
+													className='rounded-2xl mb-3'
+													onClick={confirmCancelSubscribe}
+													color='accent'
+												>
+													{t('Cancel subscription')}
+												</Button>
+											) : (
+												<div className='flex gap-1 items-center'>
+													<h1 className='font-bold'>
+														{t('Subscription status')}:
+													</h1>
+													<Button
+														disabled
+														disableAnimation
+														isDisabled
+														color='clear'
+													>
+														{t('Your subscription has been cancelled')}
+													</Button>
+												</div>
+											)}
+										</div>
+										<p className='text-sm text-gray-2'>
+											{t('For questions, write to email')}:{' '}
+											<Link
+												className='underline'
+												href={'mailto:support@whai.ru'}
+											>
+												support@whai.ru
+											</Link>
+										</p>
+									</div>
+									<div className='mt-4 flex items-center justify-start'>
+										<Switch
+											classNames={{
+												wrapper: 'group-data-[selected=true]:bg-decor-2'
+											}}
+											isSelected={isAutoRenewal}
+											onClick={handleAutoRenewalToggle}
+										/>
+										<label className='ml-2'>{t('Enable auto-renewal')}</label>
+									</div>
+								</>
+							)}
+						</div>
 					</div>
 				</div>
 			</div>
