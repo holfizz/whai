@@ -197,12 +197,19 @@
 		"Only one file can be uploaded at a time": "Only one file can be uploaded at a time",
 		"File is too large Maximum size is 100 MB": "File is too large Maximum size is 100 MB",
 		"homework": "Homework",
-		"AI Response": "AI Response",
-		"Response": "Response",
+		"Feedback": "Feedback",
+		"Here you can view the results of your homework check": "Here you can view the results of your homework check",
+		"Please wait your homework is being checked It will take about 2 minutes": "Please wait, your homework is being checked. It will take about 2 minutes",
+		"Result": "Result",
+		"Suggestions": "Suggestions",
+		"Additional materials": "Additional materials",
+		"Links": "Links",
 		"Status": "Status",
 		"Reason": "Reason",
 		"Incorrect Parts": "Incorrect Parts",
-		"Upload New File": "Upload New File"
+		"Upload New File": "Upload New File",
+		"Success": "Success",
+		"Partial": "Partial"
 	},
 	"CreateCourse": {
 		"What are we creating?": "What are we creating?",

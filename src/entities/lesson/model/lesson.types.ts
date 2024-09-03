@@ -8,6 +8,7 @@ export interface ILesson {
 	name: string
 	description?: string
 	subtopicId?: string
+	courseId?: string
 	isCompleted: boolean
 	isHasLessonTask: boolean
 	lessonTasks: ILessonTask[]

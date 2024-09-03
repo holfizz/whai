@@ -102,6 +102,7 @@ export const useGetAllLessons = (subtopicId: string) => {
 export const GET_LESSON_TASKS = gql`
 	query ($lessonId: ID!) {
 		getLesson(lessonId: $lessonId) {
+			courseId
 			lessonTasks {
 				id
 				isChecked
@@ -126,7 +127,6 @@ export const useGetLessonTasks = (lessonId: string) => {
 	}
 }
 
-//==================//
 export const GET_LESSON_CONTENT = gql`
 	query ($lessonId: ID!) {
 		getLesson(lessonId: $lessonId) {
@@ -332,6 +332,19 @@ export const CHECK_HOMEWORK = gql`
 			completionPercentage
 			suggestions
 			links
+		}
+	}
+`
+export const GET_INTERACTION_HISTORY = gql`
+	query getInteractionHistory($lessonTaskId: String!) {
+		getInteractionHistory(lessonTaskId: $lessonTaskId) {
+			status
+			reason
+			incorrectParts
+			suggestions
+			completionPercentage
+			links
+			fileName
 		}
 	}
 `

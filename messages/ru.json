@@ -197,12 +197,18 @@
 		"Only one file can be uploaded at a time": "Одновременно можно загрузить только один файл",
 		"File is too large Maximum size is 100 MB": "Файл слишком большой. Максимальный размер — 100 МБ.",
 		"homework": "Домашнее задание",
-		"AI Response": "Ответ ИИ",
-		"Response": "Ответ",
+		"Feedback": "Обратная связь",
+		"Here you can view the results of your homework check": "Здесь вы можете просмотреть результаты проверки вашего домашнего задания",
+		"Please wait your homework is being checked It will take about 2 minutes": "Пожалуйста, подождите, идет проверка вашего домашнего задания. Это займет около 2 минут",
+		"Result": "Результат",
+		"Suggestions": "Предложение",
+		"Additional materials": "Дополнительные материалы",
 		"Status": "Статус",
 		"Reason": "Причина",
 		"Incorrect Parts": "Неправильные части",
-		"Upload New File": "Загрузить новый файл"
+		"Upload New File": "Загрузить новый файл",
+		"Success": "Успешно",
+		"Partial": "Частично"
 	},
 	"CreateCourse": {
 		"What are we creating?": "Что мы создаем?",

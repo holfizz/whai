@@ -37,7 +37,7 @@ const QuoteWrapper = ({
 							index % 2 === 1 ? (
 								<span
 									key={index}
-									className='bg-cyan-100 p-[2px] m-[1px] inline-block rounded'
+									className='bg-decor-2 p-[2px] m-[1px] inline-block rounded'
 								>
 									{innerPart}
 								</span>
