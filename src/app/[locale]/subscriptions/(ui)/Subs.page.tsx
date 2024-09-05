@@ -13,6 +13,7 @@ import Button from '@/shared/ui/Button/Button'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { Layout } from '@/widgets/Layout'
 import { useMutation, useQuery } from '@apollo/client'
+import { sendGAEvent } from '@next/third-parties/google'
 import {
 	ModalBody,
 	ModalContent,
@@ -286,6 +287,9 @@ const SubsPage = () => {
 									<Button
 										disabled={user?.getProfile?.activeSubscription?.isActive}
 										onClick={() => {
+											sendGAEvent('event', 'buttonClicked', {
+												value: 'payment_btn'
+											})
 											if (user) {
 												openModal(type)
 											} else {

@@ -38,7 +38,20 @@ const ClozeLine: React.FC<ClozeLineProps> = ({
 			? 'after:bg-error-1 border-error-1'
 			: ''
 	]
-	const inputClassNames = ['w-max', 'text-2xl', 'text-center']
+	const inputClassNames = [
+		'w-max',
+		'text-2xl',
+		'text-justify after:text-3xl',
+		`${
+			!isAnswered
+				? 'text-foreground'
+				: isCorrect === true
+				? 'text-success-text group-data-[has-value=true]:text-success-text'
+				: isCorrect === false
+				? 'text-error-text group-data-[has-value=true]:text-error-text'
+				: ''
+		}`
+	]
 
 	return (
 		<Textarea
@@ -49,15 +62,6 @@ const ClozeLine: React.FC<ClozeLineProps> = ({
 			placeholder={t('Your answer')}
 			value={value}
 			maxRows={1}
-			className={
-				!isAnswered
-					? 'text-foreground'
-					: isCorrect === true
-					? 'text-success-text group-data-[has-value=true]:text-success-text'
-					: isCorrect === false
-					? 'text-error-text group-data-[has-value=true]:text-error-text'
-					: ''
-			}
 			classNames={{
 				base: baseClassNames,
 				inputWrapper: inputWrapperClassNames,

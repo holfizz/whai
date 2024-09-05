@@ -33,7 +33,7 @@ const LessonTaskPage = () => {
 	const t = useTranslations('LessonTask')
 	const { taskData } = useGetLessonTasks(lessonId)
 	const [selectedTaskIndex, setSelectedTaskIndex] = useState(0)
-	const [checkHomework, { loading, error, data }] = useMutation<{
+	const [checkHomework, { loading, data }] = useMutation<{
 		checkHomework: TaskResponseInterface
 	}>(CHECK_HOMEWORK)
 
@@ -266,7 +266,7 @@ const LessonTaskPage = () => {
 				<div className='flex justify-center mt-4 flex-col'>
 					{!isCompleted && (
 						<div className='flex flex-col items-center'>
-							{fileUploads[selectedTaskIndex] && historyData.length > 0 && (
+							{historyData.length > 0 && (
 								<Button
 									onClick={() => fileInputRef.current?.click()}
 									color='main'

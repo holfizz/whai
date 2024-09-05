@@ -75,8 +75,8 @@ const InputPhoneField: FC<InputPhoneFieldProps> = ({
 			<Input
 				classNames={{
 					innerWrapper: 'py-3 px-2 h-[60px]',
-					inputWrapper: 'h-auto',
-					input: 'max-md:text-2xl'
+					inputWrapper: 'h-auto overflow-hidden',
+					input: 'max-md:text-2xl pl-2'
 				}}
 				name={name}
 				isRequired

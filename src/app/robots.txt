@@ -1,0 +1,44 @@
+User-Agent: *
+Allow: */uploads
+Allow: *.js
+Allow: *.css
+Allow: *.png
+Allow: *.gif		
+Allow: *.jpg
+Disallow: /auth/
+Disallow: /forgot_password
+Disallow: /reset_password
+Disallow: /activate-email
+Disallow: /d/*
+
+User-agent: SeekportBot
+Disallow: /
+
+User-agent: Googlebot
+Allow: */uploads
+Allow: *.js
+Allow: *.css
+Allow: *.png
+Allow: *.gif		
+Allow: *.jpg
+Disallow: /auth/
+Disallow: /forgot_password
+Disallow: /reset_password
+Disallow: /activate-email
+Disallow: /d/*
+
+User-agent: Yandex
+Allow: */uploads
+Allow: *.js
+Allow: *.css
+Allow: *.png
+Allow: *.gif		
+Allow: *.jpg
+Disallow: /auth/
+Disallow: /forgot_password
+Disallow: /reset_password
+Disallow: /activate-email
+Disallow: /d/*
+
+
+Sitemap: https://whai.ru/sitemap.xml

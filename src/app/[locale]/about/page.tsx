@@ -3,7 +3,7 @@ import { unstable_setRequestLocale } from 'next-intl/server'
 import AboutPage from './(ui)/About.page'
 
 export const metadata: Metadata = {
-	title: 'О нас | Whai'
+	title: 'О нас'
 }
 
 export default function Page({

@@ -3,7 +3,7 @@ import { unstable_setRequestLocale } from 'next-intl/server'
 import ActivateEmailPage from './(ui)/ActivateEmail.page'
 
 export const metadata: Metadata = {
-	title: 'Активация аккаунта | Whai'
+	title: 'Активация аккаунта'
 }
 
 export default function Page({

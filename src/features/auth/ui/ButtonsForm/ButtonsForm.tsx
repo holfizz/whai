@@ -12,6 +12,7 @@ import {
 } from '@/shared/const/router'
 
 import Button from '@/shared/ui/Button/Button'
+import { sendGAEvent } from '@next/third-parties/google'
 import { useTranslations } from 'next-intl'
 
 interface ButtonsFormProps {
@@ -28,6 +29,11 @@ const ButtonsForm: FC<ButtonsFormProps> = ({ type, setIsFormType }) => {
 				color='primary'
 				variant='light'
 				type={'submit'}
+				onClick={() => {
+					if (type === authConstants.SIGNUP) {
+						sendGAEvent('event', 'buttonClicked', { value: 'signup_btn' })
+					}
+				}}
 				className={cls.submitButton}
 			>
 				{type === authConstants.LOGIN ? t('Log in') : t('Sign up')}

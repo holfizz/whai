@@ -86,7 +86,7 @@ const useUnifiedStore = create<UnifiedState>()(
 					selectedDescription: null,
 					videosFromYouTube: false,
 					generateImages: false,
-					needHomework: false,
+					needHomework: true,
 					quizId: null,
 					summaryData: null,
 					coursePlanStateData: null,

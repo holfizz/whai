@@ -14,6 +14,7 @@ import logger from '@/shared/lib/utils/logger'
 import Button from '@/shared/ui/Button/Button'
 import MDX from '@/shared/ui/MDX/MDX'
 import { useLazyQuery, useQuery } from '@apollo/client'
+import { YouTubeEmbed } from '@next/third-parties/google'
 import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
 import { ArrowRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -119,19 +120,24 @@ const Lesson: FC<LessonProps> = ({
 					</div>
 				)
 			case 'VIDEO':
-				const videoUrl = block.videoUrl.includes('youtube.com')
-					? block.videoUrl.replace('watch?v=', 'embed/')
-					: block.videoUrl
+				const pattern =
+					/https?:\/\/(?:www\.)?youtu\.be\/(\w+)|https?:\/\/(?:www\.)?youtube\.com\/watch\?v=(\w+)/
+
+				const youtubeId = (url: string): any => {
+					const match = pattern.exec(url)
+					if (match) {
+						return match[1] || match[2]
+					}
+					return ''
+				}
+
 				return (
 					<div key={block.id} className={cls.videoBlock}>
 						<div className={cls.videoContainer}>
-							<iframe
-								src={videoUrl}
-								title='video'
+							<YouTubeEmbed
+								//@ts-ignore
 								className={cls.video}
-								frameBorder='0'
-								allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-								allowFullScreen
+								videoid={youtubeId(block.videoUrl)}
 							/>
 						</div>
 					</div>

@@ -135,7 +135,7 @@ const MRQQuestion = ({
 							<PopoverTrigger>
 								<Button
 									className={
-										'px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-xl w-full !h-auto max-sm:h-[50px] max-md:w-full relative max '
+										'px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-2xl w-full !h-auto max-sm:h-[50px] max-md:w-full relative max '
 									}
 									disableAnimation={false}
 									endContent={

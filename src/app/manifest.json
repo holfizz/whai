@@ -1,0 +1,18 @@
+{
+	"theme_color": "#ffe8a3",
+	"background_color": "#ffe8a3",
+	"scope": "/",
+	"start_url": "/d",
+	"display": "standalone",
+	"orientation": "portrait",
+	"name": "Образовательная платформа Whai",
+	"short_name": "Whai",
+	"description": "Whai - Образовательная платформа на основе ИИ",
+	"icons": [
+		{
+			"src": "/Whai.svg",
+			"sizes": "96x96",
+			"type": "image/svg"
+		}
+	]
+}
