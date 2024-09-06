@@ -63,7 +63,6 @@ const GenerateBlockModal = ({
 			isAutofill: type === 'lesson' ? false : isAutofill
 		}
 
-		// Clear state before request
 		setErrorMessage('')
 		setTitle('')
 		setDescription('')
@@ -95,7 +94,12 @@ const GenerateBlockModal = ({
 	}
 
 	return (
-		<Modal color='white' isOpen={isOpen} onOpenChange={onClose}>
+		<Modal
+			placement='center'
+			color='white'
+			isOpen={isOpen}
+			onOpenChange={onClose}
+		>
 			<ModalContent
 				onClick={e => {
 					e.stopPropagation()
@@ -155,7 +159,7 @@ const GenerateBlockModal = ({
 													value={title}
 													classNames={{
 														inputWrapper: 'h-[40px] rounded-3xl',
-														input: 'pl-4'
+														input: 'pl-4 text-lg placeholder:text-lg'
 													}}
 													onChange={handleTitleChange}
 													className='w-full h-[60px] !rounded-3xl'
@@ -189,7 +193,8 @@ const GenerateBlockModal = ({
 															'h-auto',
 															'w-full'
 														],
-														input: ['w-full'],
+
+														input: ['w-full text-lg placeholder:text-lg'],
 														base: 'w-1/2 max-lg:w-[60vw]'
 													}}
 													minRows={2}
@@ -227,7 +232,7 @@ const GenerateBlockModal = ({
 															'h-auto',
 															'w-full'
 														],
-														input: ['w-full'],
+														input: ['w-full text-lg placeholder:text-lg'],
 														base: 'w-1/2 max-lg:w-[60vw]'
 													}}
 													minRows={1}
@@ -241,12 +246,12 @@ const GenerateBlockModal = ({
 												{type !== 'lesson' && (
 													<Checkbox
 														size='md'
-														className='w-full max-w-full text-lg flex items-start my-2'
+														className='w-full max-w-full text-lg flex items-center my-2'
 														checked={isAutofill}
 														onChange={() => setIsAutofill(!isAutofill)}
 														classNames={{
 															wrapper:
-																'after:bg-decor-2 min-w-[20px] min-h-[20px]'
+																'after:bg-decor-2 min-w-[20px] min-h-[20px] max-md:max-h-[20px] max-md:max-w-[20px]'
 														}}
 														value='policyAccepted'
 														disabled={loading} // Disable during loading
@@ -262,16 +267,6 @@ const GenerateBlockModal = ({
 							{/* Loading state */}
 						</ModalBody>
 						<ModalFooter>
-							<Button
-								className={'rounded-2xl'}
-								color='error'
-								variant='light'
-								onPress={onClose}
-								disabled={loading} // Disable during loading
-								style={{ opacity: loading ? 0.5 : 1 }} // Adjust opacity during loading
-							>
-								Close
-							</Button>
 							<Button
 								className={'rounded-2xl'}
 								color='primary'

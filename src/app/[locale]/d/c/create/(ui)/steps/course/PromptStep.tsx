@@ -46,7 +46,7 @@ const PromptStep = () => {
 							'w-full'
 						],
 						innerWrapper: ['flex justify-between', 'h-auto', 'w-full'],
-						input: ['w-full'],
+						input: ['w-full placeholder:text-medium'],
 						base: 'w-1/2 max-lg:w-[50vw] max-md:w-[70vw] max-640:w-[80vw]'
 					}}
 					minRows={1}

@@ -62,8 +62,14 @@ export const useGetAllSubtopics = (topicId: string) => {
 }
 
 export const UPDATE_SUBTOPIC = gql`
-	mutation updateSubtopic($updateSubtopicInput: UpdateSubtopicInput!) {
-		updateSubtopic(updateSubtopicInput: $updateSubtopicInput) {
+	mutation updateSubtopic(
+		$subtopicId: String!
+		$updateSubtopicInput: UpdateSubtopicInput!
+	) {
+		updateSubtopic(
+			subtopicId: $subtopicId
+			updateSubtopicInput: $updateSubtopicInput
+		) {
 			id
 			name
 			description

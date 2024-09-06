@@ -1,6 +1,5 @@
 import { ITopicPlan } from '@/entities/plan/model/plan.types'
 import { useUpdateTopic } from '@/entities/topic/model/topic.queries'
-import DNDIcon from '@/shared/assets/icons/DNDIcon'
 import '@/shared/ui/Accordion/Accordion.scss'
 import { Accordion, AccordionItem } from '@/shared/ui/Accordion/MyAccordion'
 import Button from '@/shared/ui/Button/Button'
@@ -61,28 +60,22 @@ const TopicPlanAccordion = ({
 	}
 
 	return (
-		<div className='w-full'>
+		<div className='w-full !max-w-full'>
 			<Accordion>
 				{topics.map((topic, index) => (
 					<AccordionItem
 						key={topic.id}
-						className={'ml-6'}
 						isLast={index === topics.length - 1}
 						title={
 							<div className='flex items-center justify-between gap-3'>
 								<div className='w-full px-4 flex justify-between items-center h-[70px] max-md:h-min'>
 									<div className='flex gap-4 items-center'>
 										<h2 className='text-sm text-yellow-5'>{t('module')}</h2>
-										<h1>
+										<h1 className='line-clamp-2'>
 											{index + 1}. {topic.name}
 										</h1>
 									</div>
 								</div>
-							</div>
-						}
-						startContent={
-							<div className='h-[70px] flex items-center justify-center max-md:h-[50px]'>
-								<DNDIcon />
 							</div>
 						}
 						endContent={
@@ -100,7 +93,7 @@ const TopicPlanAccordion = ({
 						}
 						addButton={
 							<Button
-								className='rounded-3xl h-[70px]'
+								className='rounded-3xl h-[70px] max-md:!min-h-[50px] max-md:!h-[50px]'
 								isIconOnly
 								size='full'
 								color='gray'

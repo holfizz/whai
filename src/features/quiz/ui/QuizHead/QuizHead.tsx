@@ -34,7 +34,7 @@ const QuizHead = ({ quizData }: { quizData: IQuizData }) => {
 			{/* Для экранов больше чем md показываем линии */}
 			<div
 				className={
-					'hidden md:flex justify-end items-end gap-5 h-auto overflow-x-auto rounded-full'
+					'hidden md:flex justify-start items-end gap-5 h-auto overflow-x-auto rounded-full'
 				}
 			>
 				{quizData.questions.map((question, index) => {

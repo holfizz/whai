@@ -8,6 +8,7 @@ const AccordionItem = ({
 	endContent,
 	startContent,
 	addButton,
+	editButton,
 	isLast,
 	className,
 	classNameHeaderContent
@@ -17,6 +18,7 @@ const AccordionItem = ({
 	endContent?: ReactNode
 	startContent?: ReactNode
 	addButton?: ReactNode
+	editButton?: ReactNode
 	isLast?: boolean
 	className?: string
 	classNameHeaderContent?: string
@@ -36,16 +38,28 @@ const AccordionItem = ({
 					}}
 				>
 					{startContent}
-					<div className='flex flex-col items-start w-full justify-start gap-4'>
-						<div className={`header-content ${classNameHeaderContent}`}>
-							<div className='title'>{title}</div>
+					<div
+						className={`flex 
+						// 	$ {
+						// 	editButton ? 'flex-row' : 'flex-col'
+						// } 
+						flex-col
+						items-start w-full justify-start gap-4`}
+					>
+						<div className='flex flex-row items-center gap-5 w-full'>
+							<div className={`header-content ${classNameHeaderContent}`}>
+								<div className='title'>{title}</div>
 
-							<ArrowDown
-								className={`${
-									isOpen ? 'rotate-180' : ''
-								} transition-transform duration-200`}
-							/>
+								<ArrowDown
+									className={`${
+										isOpen ? 'rotate-180' : ''
+									} transition-transform duration-200`}
+								/>
+							</div>
+
+							{editButton}
 						</div>
+
 						{isOpen && (
 							<div
 								onClick={e => e.stopPropagation}

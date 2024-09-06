@@ -1,6 +1,5 @@
 import { useUpdateLesson } from '@/entities/lesson/model/lesson.queries'
 import { ILessonPlan } from '@/entities/plan/model/plan.types'
-import DNDIcon from '@/shared/assets/icons/DNDIcon'
 import '@/shared/ui/Accordion/Accordion.scss'
 import Button from '@/shared/ui/Button/Button'
 import { ArrowRight } from 'lucide-react'
@@ -63,12 +62,11 @@ const LessonPlanAccordion = ({
 		<div className='w-full gap-5'>
 			{lessons.map((lesson, index) => (
 				<div key={lesson.id} className='flex gap-5 items-start w-full mt-4'>
-					<DNDIcon className='h-[70px] ' />
 					<div className='w-full flex flex-col items-start gap-5'>
 						<Button
 							color='primary'
 							size='auto'
-							className='w-full flex justify-between items-center rounded-3xl h-[70px] max-md:h-[50px]'
+							className='w-full  flex justify-between items-center rounded-3xl h-[70px] max-w-full max-md:h-[50px]'
 							onClick={() => toggleLesson(lesson.id)}
 							endContent={<ArrowRight />}
 						>
@@ -76,7 +74,9 @@ const LessonPlanAccordion = ({
 								<div className='flex justify-between items-center'>
 									<div className='flex gap-4 items-center'>
 										<h2 className='text-sm text-yellow-5'>{t('lesson')}</h2>
-										<h1>{`${parentPrefix}${index + 1}. ${lesson.name}`}</h1>
+										<h1 className='break-words max-md:w-[250px] max-w-full text-ellipsis overflow-hidden text-start'>{`${parentPrefix}${
+											index + 1
+										}. ${lesson.name}`}</h1>
 									</div>
 								</div>
 							</div>
@@ -85,7 +85,7 @@ const LessonPlanAccordion = ({
 						{/* Кнопка добавления нового урока */}
 						{index === lessons.length - 1 && (
 							<Button
-								className='rounded-3xl h-[70px]'
+								className='rounded-3xl h-[70px] max-md:!min-h-[50px] max-md:!h-[50px]'
 								isIconOnly
 								size='full'
 								color='gray'

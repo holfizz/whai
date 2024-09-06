@@ -1,6 +1,5 @@
 import { ISubtopicPlan } from '@/entities/plan/model/plan.types'
 import { useUpdateSubtopic } from '@/entities/subtopic/model/subtopic.queries'
-import DNDIcon from '@/shared/assets/icons/DNDIcon'
 import { Accordion, AccordionItem } from '@/shared/ui/Accordion/MyAccordion'
 import Button from '@/shared/ui/Button/Button'
 import { useState } from 'react'
@@ -22,7 +21,7 @@ const SubtopicPlanAccordion = ({
 	const [subtopics, setSubtopics] = useState(subtopicsAllData)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedSubtopic, setSelectedSubtopic] = useState(null)
-	const [isGenerateModalOpen, setIsGenerateModalOpen] = useState(false) // Add state for GenerateBlockModal
+	const [isGenerateModalOpen, setIsGenerateModalOpen] = useState(false)
 	const { updateSubtopic } = useUpdateSubtopic()
 
 	const handleEditClick = subtopic => {
@@ -58,14 +57,13 @@ const SubtopicPlanAccordion = ({
 				{subtopics.map((subtopic, index) => (
 					<AccordionItem
 						key={subtopic.id}
-						className={'ml-6'}
 						isLast={index === subtopics.length - 1}
 						title={
 							<div className='flex items-center justify-between gap-3'>
 								<div className='w-full px-4 flex justify-between items-center h-[70px]'>
 									<div className='flex gap-4 items-center'>
 										<h2 className='text-sm text-yellow-5'>{t('topic')}</h2>
-										<h1>
+										<h1 className='line-clamp-2'>
 											{parentPrefix}
 											{index + 1}. {subtopic.name}
 										</h1>
@@ -73,14 +71,9 @@ const SubtopicPlanAccordion = ({
 								</div>
 							</div>
 						}
-						startContent={
-							<div className='h-[70px] flex items-center justify-center'>
-								<DNDIcon />
-							</div>
-						}
-						endContent={
+						editButton={
 							<Button
-								className='rounded-3xl'
+								className='rounded-3xl max-md:w-[50px] max-md:h-[50px] aspect-square'
 								isIconOnly
 								size='mdIcon'
 								variant='square'
@@ -93,7 +86,7 @@ const SubtopicPlanAccordion = ({
 						}
 						addButton={
 							<Button
-								className='rounded-3xl h-[70px] '
+								className='rounded-3xl h-[70px] max-md:!min-h-[50px] max-md:!h-[50px]'
 								isIconOnly
 								size='full'
 								color='gray'
@@ -122,7 +115,7 @@ const SubtopicPlanAccordion = ({
 			</Accordion>
 			{subtopics.length === 0 && (
 				<Button
-					className='rounded-3xl h-[70px]'
+					className='rounded-3xl h-[70px] max-md:!min-h-[50px]'
 					isIconOnly
 					size='full'
 					color='gray'

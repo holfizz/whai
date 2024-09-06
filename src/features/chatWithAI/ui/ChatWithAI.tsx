@@ -225,6 +225,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	return (
 		<>
 			<Modal
+				shouldBlockScroll={false}
 				size={'chat'}
 				variant={'chat'}
 				className={cls.modal}

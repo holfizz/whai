@@ -93,11 +93,10 @@ const AuthForm: FC<AuthFormProps> = memo(
 				type === authConstants.LOGIN
 			) {
 				setTimeout(() => {
-					router.push('/')
+					router.push('/d')
 				}, 500)
 			}
 		}, [loginData, loginError, router, type])
-
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault()
 

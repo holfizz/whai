@@ -1,5 +1,5 @@
 .accordion {
-	@apply flex flex-col gap-4 w-full;
+	@apply flex flex-col gap-4 w-full max-w-full;
 }
 
 .accordion-item {
@@ -11,7 +11,7 @@
 }
 
 .header-content {
-	@apply flex justify-between items-center w-full px-5 rounded-3xl max-md:min-h-[50px] h-auto bg-decor-3;
+	@apply flex justify-between items-center w-full px-5 rounded-3xl max-md:min-h-[50px] h-auto bg-decor-3 max-md:h-[50px];
 }
 .header-content-decor-1 {
 	@apply h-[60px] bg-decor-1 rounded-[20px];
@@ -25,5 +25,5 @@
 }
 
 .accordion-content {
-	@apply bg-white w-full;
+	@apply bg-white w-full !max-w-full;
 }

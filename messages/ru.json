@@ -305,12 +305,16 @@
 		"Please provide an answer before proceeding": "Пожалуйста, дайте ответ, прежде чем продолжить",
 		"Check": "Проверить",
 		"Answer": "Ответ",
+		"Answers": "Ответы",
 		"Please answer all questions before finishing the quiz": "Пожалуйста, ответьте на все вопросы, прежде чем закончить викторину",
 		"Choose 1 or more answer options": "Выберите 1 или несколько вариантов ответа",
 		"Quiz creation in progress": "Выполняется создание теста",
 		"To try one more time": "Чтобы попробовать еще раз",
 		"There was an error loading the quiz or creating it": "Произошла ошибка при загрузке или создании теста",
-		"Please check your answer before proceeding": "Пожалуйста, проверьте свой ответ, прежде чем продолжить"
+		"Please check your answer before proceeding": "Пожалуйста, проверьте свой ответ, прежде чем продолжить",
+		"Oops Error please try again": "Упс. Ошибочка, пожалуйста попробуйте снова",
+		"Error when summing up results": "Ошибка при подведении результатов",
+		"Options": "Варианты"
 	},
 	"CreateCoursePlanPage": {
 		"Generate lesson": "Сгенерировать урок",
@@ -342,7 +346,8 @@
 		"From AI": "С помощью AI",
 		"An error occurred during creation, please try again or try again later": "Во время создания произошла ошибка. Повторите попытку или попробуйте позже",
 		"You have reached your monthly limit for creating courses Renew your subscription or wait until your limit is updated next month": "Вы исчерпали месячный лимит на создание курсов. Обновите подписку или дождитесь обновления лимита в следующем месяце",
-		"Learn more about our premium plans and enjoy unlimited features": "Узнайте больше о наших премиум-планах и наслаждайтесь неограниченными возможностями"
+		"Learn more about our premium plans and enjoy unlimited features": "Узнайте больше о наших премиум-планах и наслаждайтесь неограниченными возможностями",
+		"Edit Course": "Редактирование курса"
 	},
 	"Subscription": {
 		"Subscription price": "Цена подписки",

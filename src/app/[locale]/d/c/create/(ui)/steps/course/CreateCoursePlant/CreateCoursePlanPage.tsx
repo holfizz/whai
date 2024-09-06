@@ -14,7 +14,7 @@ import {
 import Button from '@/shared/ui/Button/Button'
 import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
-import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
+import { BreadcrumbItem } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -172,7 +172,7 @@ const CreateCoursePlanPage = () => {
 
 	return (
 		<DashboardLayout className='w-full flex justify-center'>
-			<div className='w-full max-w-[1200px] p-4 flex flex-col items-center justify-center'>
+			<div className='w-full max-w-[1200px] p-4 flex flex-col items-center  max-md:my-4 max-md:mx-0 h-[92vh] justify-between'>
 				{(createPlanLoading || coursePlanLoading) && (
 					<>
 						<h1 className='text-2xl font-bold max-md:w-[80vw] max-md:text-center'>
@@ -241,8 +241,10 @@ const CreateCoursePlanPage = () => {
 					<>
 						<div className='flex flex-col items-center w-[80%] max-md:w-[95%]'>
 							<h1 className='text-4xl'>{currentStageTitle[view]}</h1>
-							<Breadcrumbs className='mt-8'>{breadcrumbs}</Breadcrumbs>
-							<div className='flex flex-col justify-center gap-6 mt-10 w-full'>
+							<div
+								style={{ maxWidth: '100% !important' }}
+								className='flex flex-col justify-center gap-6 mt-10 w-full '
+							>
 								<TopicPlanAccordion
 									topicsAllData={coursePlanData.topics}
 									t={t}
@@ -252,7 +254,7 @@ const CreateCoursePlanPage = () => {
 						</div>
 					</>
 				)}
-				<div className='flex gap-5 mt-10 max-md:flex-col'>
+				<div className='flex gap-5 mt-10 max-md:flex-col-reverse mb-4'>
 					<Button
 						color={'gray'}
 						size={'3xl'}

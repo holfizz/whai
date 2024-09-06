@@ -305,13 +305,17 @@
 		"Please provide an answer before proceeding": "Please provide an answer before proceeding",
 		"Check": "Check",
 		"Answer": "Answer",
+		"Answers": "Answers",
 		"Edit Course": "Edit Course",
 		"Please answer all questions before finishing the quiz": "Please answer all questions before finishing the quiz",
 		"Choose 1 or more answer options": "Choose 1 or more answer options",
 		"Quiz creation in progress": "Quiz creation in progress",
 		"To try one more time": "To try one more time",
 		"There was an error loading the quiz or creating it": "There was an error loading the quiz or creating it",
-		"Please check your answer before proceeding": "Please check your answer before proceeding"
+		"Please check your answer before proceeding": "Please check your answer before proceeding",
+		"Oops Error please try again": "Oops. Error, please try again",
+		"Error when summing up results": "Error when summing up results",
+		"Options": "Options"
 	},
 	"CreateCoursePlanPage": {
 		"Generate lesson": "Generate",
@@ -344,7 +348,8 @@
 		"From AI": "From AI",
 		"An error occurred during creation, please try again or try again later": "An error occurred during creation, please try again or try again later",
 		"You have reached your monthly limit for creating courses Renew your subscription or wait until your limit is updated next month": "You have reached your monthly limit for creating courses. Renew your subscription or wait until your limit is updated next month",
-		"Learn more about our premium plans and enjoy unlimited features": "Learn more about our premium plans and enjoy unlimited features"
+		"Learn more about our premium plans and enjoy unlimited features": "Learn more about our premium plans and enjoy unlimited features",
+		"Edit Course": "Edit Course"
 	},
 	"Subscription": {
 		"Subscription price": "Subscription price",

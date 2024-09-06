@@ -40,8 +40,8 @@ const ClozeLine: React.FC<ClozeLineProps> = ({
 	]
 	const inputClassNames = [
 		'w-max',
-		'text-2xl',
-		'text-justify after:text-3xl',
+		'text-xl',
+		'text-left placeholder:text-xl',
 		`${
 			!isAnswered
 				? 'text-foreground'

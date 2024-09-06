@@ -1,9 +1,35 @@
+import EnglishImage from '@/shared/assets/image/EnglishCourseAvatar.png'
+import MathImage from '@/shared/assets/image/MathCourseAvatar.png'
+import UniversalLifeImage from '@/shared/assets/image/UniversalLife.png'
 import { Metadata } from 'next'
 import { unstable_setRequestLocale } from 'next-intl/server'
 import AboutPage from './(ui)/About.page'
 
 export const metadata: Metadata = {
-	title: 'О нас'
+	title: 'О нас',
+	description:
+		'Узнайте больше о платформе Whai — наши миссия, цели и ценности.',
+	keywords: ['о нас', 'Whai', 'миссия', 'ценности', 'образование'],
+	openGraph: {
+		title: 'О нас - Whai',
+		description: 'Познакомьтесь с миссией и целями платформы Whai.',
+		url: 'https://whai.ru/about',
+		type: 'website',
+		images: [
+			{
+				url: UniversalLifeImage.src,
+				alt: 'UniversalLifeImage'
+			},
+			{
+				url: EnglishImage.src,
+				alt: 'EnglishCourseAvatar'
+			},
+			{
+				url: MathImage.src,
+				alt: 'MathCourseAvatar'
+			}
+		]
+	}
 }
 
 export default function Page({

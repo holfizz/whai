@@ -24,7 +24,7 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 
 	const handleSave = () => {
 		onSave({ id: data.id, name, description, courseId: data?.courseId })
-		onClose()
+		window.location.reload()
 	}
 
 	const handleBackName = () => {
@@ -47,6 +47,7 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 			scrollBehavior='inside'
 			size='lg'
 			color='white'
+			placement='center'
 			isOpen={isOpen}
 			onOpenChange={onClose}
 		>
@@ -91,6 +92,7 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 										minRows={1}
 										value={name}
 										onChange={e => setName(e.target.value)}
+										onClick={e => e.stopPropagation()}
 									/>
 								</div>
 								<Button
@@ -135,6 +137,7 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 										}}
 										minRows={1}
 										value={description}
+										onClick={e => e.stopPropagation()}
 										onChange={e => setDescription(e.target.value)}
 									/>
 								</div>
@@ -149,8 +152,8 @@ const EditCourseModal = ({ isOpen, onClose, data, onSave, type, t }) => {
 							</div>
 						</ModalBody>
 						<ModalFooter>
-							<div className='w-full flex items-center justify-center'>
-								<Button size={'3xl'} color='main' onPress={handleSave}>
+							<div className='w-full flex items-center justify-center mt-4'>
+								<Button size={'xl'} color='main' onPress={handleSave}>
 									{t('Save')}
 								</Button>
 							</div>
