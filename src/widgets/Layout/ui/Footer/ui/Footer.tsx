@@ -22,7 +22,7 @@ export const Footer = () => {
 		<div className='bg-decor-4 text-accent py-8 px-4 md:px-16'>
 			<div className='container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left'>
 				<div className='flex flex-col items-start md:items-start '>
-					<Logo color='var(--main-color)' />
+					<Logo color='var(--main-color)' isDashboard={false} />
 					<p
 						className='text-sm text-secondary w-[170px] mt-2
 				max-md:text-left'

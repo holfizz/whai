@@ -361,6 +361,7 @@
 		"Standard subscription": "Стандартная подписка",
 		"Premium subscription": "Премиум подписка",
 		"Your subscription": "Ваша подписка",
+		"Try for free": "Попробовать бесплатно",
 		"Subscribe": "Подписаться",
 		"Base description": "Базовая подписка идеально подходит для начинающих пользователей, предоставляя основные инструменты для создания и управления учебными курсами, а также базовую аналитику для отслеживания прогресса.",
 		"Standard description": "Стандартная подписка предлагает больше возможностей для создания контента и включает проверку домашних заданий с помощью ИИ, что помогает улучшить качество обучения.",
@@ -391,7 +392,11 @@
 		"Cancel subscription": "Отменить подписку",
 		"Your subscription has been cancelled": "Ваша подписка отменена",
 		"Subscription status": "Статус подписки",
-		"For questions, write to email": "По вопросам пишите на почту"
+		"For questions, write to email": "По вопросам пишите на почту",
+		"Trial Subscription": "Пробная подписка",
+		"Three days access without paying is a great opportunity to try out our platform No risks, only benefits Start your trial today and see how we can help you achieve more": "Три дня доступа без оплаты – отличная возможность испытать нашу платформу. Никаких рисков, только преимущества. Начните пробный период сегодня и узнайте, как мы можем помочь вам достичь большего.",
+		"Activate Trial": "Активировать",
+		"Trial end date": "Дата окончания пробного периода"
 	},
 	"Open": "Открыть",
 	"User": "Пользователь",

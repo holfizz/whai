@@ -13,6 +13,9 @@ export const GET_PROFILE = gql`
 			phoneNumber
 			currentCourseCount
 			currentLessonCount
+			isTrial
+			isTrialUsed
+			trialEndsAt
 			additionalTitlesCount
 			activeSubscription {
 				type
@@ -77,3 +80,8 @@ export const useUpdateProfile = () => {
 	}>(UPDATE_PROFILE)
 	return { updateProfile, updateData: data?.updateProfile, errorUpdate: error }
 }
+export const ACTIVATE_TRIAL_SUBSCRIPTION = gql`
+	mutation ActivateTrialSubscription {
+		activateTrialSubscription
+	}
+`

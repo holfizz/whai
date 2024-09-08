@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { ProfileData, ProfileState } from './auth.contracts'
 export interface ActiveSubscription {
 	type: 'BASIC' | 'STANDARD' | 'PREMIUM'
-	endedAt?: number
+	endedAt?: string
 	isActive: boolean
 	// courseLimitPerMonth?: number
 	// lessonLimitPerCourse?: number
@@ -28,6 +28,9 @@ export interface IUser {
 	isHomeworkCompleted: boolean
 	isQuizCompleted: boolean
 	isFirstLessonCompleted: boolean
+	isTrial: boolean
+	isTrialUsed: boolean
+	trialEndsAt: string
 }
 export type IUserData = z.infer<typeof ProfileData>
 

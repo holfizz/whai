@@ -54,7 +54,7 @@ const Logo: FC<LogoProps> = memo(
 					{logoType === 'long' && (
 						<Link
 							className='text-3xl font-extrabold ml-4'
-							href={getRouteMain()}
+							href={isDashboard ? getDashboardRoute() : getRouteMain()}
 						>
 							Whai
 						</Link>

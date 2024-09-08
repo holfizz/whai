@@ -33,6 +33,7 @@ module.exports = {
 		'./app/**/*.{js,ts,jsx,tsx,mdx}',
 		'./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
 	],
+	mode: 'jit',
 	theme: {
 		extend: {
 			colors: twColors,
@@ -55,9 +56,11 @@ module.exports = {
 			// Maximum width breakpoints
 			'max-2xl': { max: '1920px' },
 			'max-xl': { max: '1440px' },
+			'max-1200': { max: '1200px' },
 			'max-lg': { max: '1024px' },
 			'max-md': { max: '768px' },
 			'max-640': { max: '640px' },
+			'max-500': { max: '500px' },
 			'max-sm': { max: '393px' }
 		}
 	},
