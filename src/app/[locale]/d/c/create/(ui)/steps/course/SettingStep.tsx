@@ -9,7 +9,6 @@ import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import useUnifiedStore from '../../../(model)/unified.state'
-
 const SettingStep = (): React.JSX.Element => {
 	const t = useTranslations('CreateCourse')
 	const {

@@ -10,7 +10,7 @@
 	"description": "Whai - Образовательная платформа на основе ИИ",
 	"icons": [
 		{
-			"src": "/Whai.svg",
+			"src": "/Whai_logo.svg",
 			"sizes": "96x96",
 			"type": "image/svg"
 		}

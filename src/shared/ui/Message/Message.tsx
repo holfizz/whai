@@ -1,6 +1,6 @@
 import { MessageWithAIRole } from '@/entities/messageWithAI'
 import { classNames, Mods } from '@/shared/lib/classNames/classNames'
-import SimpleMDX from '../MDX/SimpleMDX'
+import MessageMDX from '../MDX/MessageMDX'
 import cls from './Message.module.scss'
 
 const Message = ({
@@ -16,7 +16,7 @@ const Message = ({
 
 	return (
 		<div className={classNames(cls.message, mods)}>
-			<SimpleMDX>{children}</SimpleMDX>
+			<MessageMDX>{children}</MessageMDX>
 		</div>
 	)
 }

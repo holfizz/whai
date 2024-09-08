@@ -1,16 +1,17 @@
 .modal {
-  position: fixed;
-  bottom: 0 !important;
-  right: 0 !important;
-  @apply rounded-3xl
+	position: fixed;
+	bottom: 0 !important;
+	right: 0 !important;
+	@apply rounded-3xl;
+	z-index: 110;
 }
 
 .askAIBtn {
-  padding: 22px 29px;
-  border-radius: 1rem;
-  margin-left: auto;
-  position: fixed;
-  bottom: 4rem;
-  right: 4rem;
+	padding: 22px 29px;
+	border-radius: 1rem;
+	margin-left: auto;
+	position: fixed;
+	bottom: 4rem;
+	right: 4rem;
+	z-index: 2;
 }
-

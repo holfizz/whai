@@ -18,11 +18,7 @@ export default function LoginPage() {
 		<div className={cls.SignInPage}>
 			<div className={cls.wrapper}>
 				<header className={cls.header}>
-					<Logo
-						isDashboard={false}
-						className={cls.logo}
-						color='var(--main-color)'
-					/>
+					<Logo color='var(--main-color)' />
 				</header>
 			</div>
 			<div className={cls.mainScreen}>

@@ -24,7 +24,8 @@
 	"Layout": {
 		"By using the site, you consent to the collection of cookies and agree to": "By using the site, you consent to the collection of cookies and agree to",
 		"personal data processing policy": "personal data processing policy",
-		"Okey": "Okey"
+		"Okey": "Okey",
+		"Where every lesson is a step into the future": "Where every lesson is a step into the future"
 	},
 	"confirmEmailPage": {
 		"Mail has been successfully activated You can close the page": "Mail has been successfully activated. You can close the page",
@@ -73,7 +74,10 @@
 		"Subscription": "Subscription",
 		"Notice": "Notice",
 		"FAQ": "FAQ",
-		"Continue studying": "Continue studying"
+		"Continue studying": "Continue studying",
+		"Generations of courses": "Generations of courses",
+		"Block generation": "Block generation",
+		"Generations of lessons": "Generations of lessons"
 	},
 	"SidebarSetting": {
 		"User settings": "User settings",
@@ -132,8 +136,7 @@
 		"Settings": "Settings",
 		"Generations of courses": "Generations of courses",
 		"Block generation": "Block generation",
-		"Generations of lessons": "Generations of lessons",
-		"Generations": "Generations"
+		"Generations of lessons": "Generations of lessons"
 	},
 	"Dashboard": {
 		"Continue education": "Continue education",
@@ -315,7 +318,8 @@
 		"Please check your answer before proceeding": "Please check your answer before proceeding",
 		"Oops Error please try again": "Oops. Error, please try again",
 		"Error when summing up results": "Error when summing up results",
-		"Options": "Options"
+		"Options": "Options",
+		"Please do not close the page It will take no more than 2 minutes": "Please do not close the page. It will take no more than 2 minutes"
 	},
 	"CreateCoursePlanPage": {
 		"Generate lesson": "Generate",

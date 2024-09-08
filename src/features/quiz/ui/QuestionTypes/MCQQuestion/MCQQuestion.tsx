@@ -126,7 +126,7 @@ const MCQQuestion = ({
 						>
 							<PopoverTrigger>
 								<Button
-									className='relative px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-2xl w-full max-sm:w-[40vw] max-sm:h-[50px] !h-auto'
+									className='relative px-5 py-3 min-w-[215px] min-h-[60px] gap-4 rounded-2xl w-full max-sm:w-[40vw] max-sm:h-[50px] !h-auto text-start'
 									disableAnimation={false}
 									endContent={
 										checked &&

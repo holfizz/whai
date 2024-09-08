@@ -4,7 +4,8 @@ import {
 	GET_PREV_NEXT_LESSON,
 	useUpdateLessonCompleted
 } from '@/entities/lesson/model/lesson.queries'
-import { ChatWithAI } from '@/features/chatWithAI'
+
+import ArrowRight from '@/shared/assets/icons/ArrowRight'
 import {
 	getCourseByIdRoute,
 	getLessonRoute,
@@ -16,13 +17,13 @@ import MDX from '@/shared/ui/MDX/MDX'
 import { useLazyQuery, useQuery } from '@apollo/client'
 import { YouTubeEmbed } from '@next/third-parties/google'
 import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
-import { ArrowRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { FC, useCallback, useEffect, useState } from 'react'
 import cls from './Lesson.module.scss'
-
+const ChatWithAI = dynamic(() => import('@/features/chatWithAI/ui/ChatWithAI'))
 interface LessonProps {
 	lessonId: string
 	lessonContentData: ILessonContent

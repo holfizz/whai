@@ -1,7 +1,8 @@
 import { ICourse } from '@/entities/course'
 import ClockIcon from '@/shared/assets/icons/Clock'
+import ListIcon from '@/shared/assets/icons/List'
 import Icon from '@/shared/ui/Icon/Icon'
-import { ListIcon } from 'lucide-react'
+
 import { useTranslations } from 'next-intl'
 const CourseStat = ({
 	data,
@@ -22,7 +23,7 @@ const CourseStat = ({
 				</h2>
 			</div>
 			<div className={'flex text-2xl items-center'}>
-				<Icon className={'stroke-gray-2 mr-2'} SVG={ListIcon} />
+				<Icon className={'mr-2'} SVG={ListIcon} />
 				<h2 className='text-sm text-gray-2'>
 					{data?.totalTopics} {t('topics')}
 				</h2>

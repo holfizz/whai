@@ -1,12 +1,12 @@
 'use client'
+import EyeCloseIcon from '@/shared/assets/icons/EyeClose'
+import EyeOpenIcon from '@/shared/assets/icons/EyeOpen'
 import Button from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/InputUI'
 import { Layout } from '@/widgets/Layout'
 import { gql, useMutation } from '@apollo/client'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
-import { HiOutlineEye } from 'react-icons/hi'
-import { PiEyeClosedBold } from 'react-icons/pi'
 
 const RESET_PASSWORD_MUTATION = gql`
 	mutation resetPassword($dto: ResetPasswordInput!) {
@@ -78,9 +78,15 @@ const ResetPasswordPage = () => {
 									onClick={toggleVisibilityOne}
 								>
 									{isVisibleOne ? (
-										<HiOutlineEye className='text-2xl text-default-400 pointer-events-none' />
+										<EyeOpenIcon
+											fontSize={24}
+											className='text-2xl text-default-400 pointer-events-none'
+										/>
 									) : (
-										<PiEyeClosedBold className='text-2xl text-default-400 pointer-events-none' />
+										<EyeCloseIcon
+											fontSize={24}
+											className='text-2xl text-default-400 pointer-events-none'
+										/>
 									)}
 								</button>
 							}
@@ -104,9 +110,17 @@ const ResetPasswordPage = () => {
 									onClick={toggleVisibilityTwo}
 								>
 									{isVisibleTwo ? (
-										<HiOutlineEye className='text-2xl text-default-400 pointer-events-none' />
+										<EyeOpenIcon
+											fontSize={24}
+											fill='text-default-400'
+											className='text-2xl text-default-400 '
+										/>
 									) : (
-										<PiEyeClosedBold className='text-2xl text-default-400 pointer-events-none' />
+										<EyeCloseIcon
+											fontSize={24}
+											fill='text-default-400'
+											className='text-lg text-default-400 pointer-events-none'
+										/>
 									)}
 								</button>
 							}

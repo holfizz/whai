@@ -1,9 +1,9 @@
 import { IChatWithAI } from '@/entities/chatWithAI/model/chatWithAI.types'
 import ChatList from '@/features/chatWithAI/ui/ChatList/ChatList'
+import CloseIcon from '@/shared/assets/icons/Close'
 import ChatsMenuIcon from '@/shared/assets/icons/Lesson/Fill/ChatsMenuIcon'
 import Button from '@/shared/ui/Button/Button'
 import React from 'react'
-import { IoClose } from 'react-icons/io5'
 
 const ModalHeader = ({
 	isAdditionalParam,
@@ -45,7 +45,9 @@ const ModalHeader = ({
 						color={'accent'}
 						variant={'circle'}
 						size={'sRound'}
-						startContent={<IoClose size={24} color={'var(--color-white)'} />}
+						startContent={
+							<CloseIcon fontSize={24} color={'var(--color-white)'} />
+						}
 					/>
 				</>
 			)}

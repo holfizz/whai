@@ -5,9 +5,9 @@ import { z } from 'zod'
 import cls from '../AuthForm/AuthForm.module.scss'
 import InputField from '../InputLabel/InputField'
 
+import EyeCloseIcon from '@/shared/assets/icons/EyeClose'
+import EyeOpenIcon from '@/shared/assets/icons/EyeOpen'
 import { Input } from '@/shared/ui/Input/InputUI'
-import { HiOutlineEye } from 'react-icons/hi'
-import { PiEyeClosedBold } from 'react-icons/pi'
 
 interface BasicInputsProps {
 	formErrors: z.ZodFormattedError<
@@ -61,9 +61,15 @@ const BasicInputs: FC<BasicInputsProps> = ({ formErrors }) => {
 								onClick={toggleVisibility}
 							>
 								{isVisible ? (
-									<HiOutlineEye className='text-2xl max-md:text-4xl text-default-400 pointer-events-none' />
+									<EyeOpenIcon
+										fontSize={24}
+										className=' max-md:text-4xl text-default-400 pointer-events-none'
+									/>
 								) : (
-									<PiEyeClosedBold className='text-2xl max-md:text-4xl text-default-400 pointer-events-none' />
+									<EyeCloseIcon
+										fontSize={24}
+										className='text-2xl max-md:text-4xl text-default-400 pointer-events-none'
+									/>
 								)}
 							</button>
 						}

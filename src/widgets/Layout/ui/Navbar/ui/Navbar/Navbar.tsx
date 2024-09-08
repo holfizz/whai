@@ -11,7 +11,7 @@ import {
 	getRouteSignUp
 } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
-import Logo, { LogoSize } from '@/shared/ui/Logo/Logo'
+import Logo from '@/shared/ui/Logo/Logo'
 import {
 	NavbarBrand,
 	NavbarContent,
@@ -46,7 +46,7 @@ export function Navbar() {
 					className='sm:hidden'
 				/>
 				<NavbarBrand>
-					<Logo color='var(--main-color)' logoSize={LogoSize.S} />
+					<Logo color='var(--main-color)' isDashboard={false} />
 				</NavbarBrand>
 			</NavbarContent>
 

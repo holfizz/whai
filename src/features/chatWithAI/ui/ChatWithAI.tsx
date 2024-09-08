@@ -79,15 +79,24 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		}
 	}, [messagesAllMessagesInChatWithAI, selectedChatId])
 	useEffect(() => {
+		if (subscriptionChatWithAIData) {
+			console.log(
+				'Received data from subscription:',
+				subscriptionChatWithAIData
+			)
+		}
+	}, [subscriptionChatWithAIData])
+	useEffect(() => {
 		if (selectedChatId) {
 			setPartialMessage(null)
 			setSkip(0)
-			refetchMessages().catch(err =>
-				console.error('Error refetching messages:', err)
-			)
+			refetchMessages()
+				.then(() => {
+					setMessages(messagesAllMessagesInChatWithAI) // Убедитесь, что состояние обновляется
+				})
+				.catch(err => console.error('Error refetching messages:', err))
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedChatId])
+	}, [selectedChatId, refetchMessages, messagesAllMessagesInChatWithAI])
 	// Effect for handling subscription updates
 	useEffect(() => {
 		if (subscriptionChatWithAIData && !subscriptionChatWithAIData.is_finish) {
@@ -115,7 +124,11 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			})
 		}
 	}, [subscriptionChatWithAIData])
-
+	useEffect(() => {
+		if (loadMore) {
+			logger.log('LOADMORR', loadMore)
+		}
+	}, [loadMore])
 	const handleLoadMore = useCallback(() => {
 		if (!isLoadingMore) {
 			setIsLoadingMore(true)
@@ -168,7 +181,6 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 				}
 			})
 
-			setPartialMessage(null)
 			await refetchMessages()
 		} catch (error) {
 			console.error('Error sending message:', error)
@@ -188,24 +200,35 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 
 	const handleCreateChat = useCallback(async () => {
 		try {
-			const createChatInput: {
-				lessonId: string
-				title?: string
-			} = {
-				lessonId
+			const createChatInput = {
+				lessonId,
+				title: LessonData?.getLesson?.name || ''
 			}
-			if (LessonData?.getLesson?.name) {
-				createChatInput.title = LessonData.getLesson.name
-			}
-			await mutationCreateChatWithAI({
+
+			const { data } = await mutationCreateChatWithAI({
 				variables: {
 					createChatInput
 				}
 			})
+
+			if (data?.createChatWithAI) {
+				setSelectedChatId(data.createChatWithAI.id)
+				setIsAdditionalParam(false)
+				await refetchChats() // Обновите список чатов
+				await refetchMessages() // Получите сообщения для нового чата
+			}
 		} catch (error) {
 			console.error('Error creating chat:', error)
 		}
-	}, [LessonData, lessonId, mutationCreateChatWithAI])
+	}, [
+		mutationCreateChatWithAI,
+		lessonId,
+		LessonData,
+		setSelectedChatId,
+		setIsAdditionalParam,
+		refetchChats,
+		refetchMessages // Добавьте refetchMessages сюда
+	])
 	useEffect(() => {
 		if (createChatsWithAIData) {
 			const req = async () => {

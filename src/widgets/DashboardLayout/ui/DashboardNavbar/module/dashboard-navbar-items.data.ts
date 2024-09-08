@@ -1,27 +1,24 @@
 import { logout } from '@/features/auth/model/auth.model'
 import { getDashboardRoute, getSupportRoute } from '@/shared/const/router'
-import { Gauge, HelpCircle, LogOut, LucideIcon, User } from 'lucide-react'
 
 export interface IDashboardNavbarItem {
 	key: string
 	text: string
 	link?: string // Если элемент требует ссылки
 	onClick?: () => void // Если элемент требует действия
-	icon?: LucideIcon // Иконка для элемента
+	icon?: any // Иконка для элемента
 }
 
 export const dashboardNavbarItems: IDashboardNavbarItem[] = [
 	{
 		key: 'profile',
 		text: 'Signed in as',
-		link: '/profile',
-		icon: User
+		link: '/profile'
 	},
 	{
 		key: 'dashboard',
 		text: 'Dashboard',
-		link: getDashboardRoute(),
-		icon: Gauge
+		link: getDashboardRoute()
 	},
 	// {
 	// 	key: 'settings',
@@ -32,15 +29,13 @@ export const dashboardNavbarItems: IDashboardNavbarItem[] = [
 	{
 		key: 'help_and_feedback',
 		text: 'Help & Feedback',
-		link: getSupportRoute(),
-		icon: HelpCircle
+		link: getSupportRoute()
 	},
 	{
 		key: 'logout',
 		text: 'Log Out',
 		onClick: () => {
 			logout(true)
-		},
-		icon: LogOut
+		}
 	}
 ]

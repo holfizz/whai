@@ -1,6 +1,5 @@
 // Sidebar.jsx
 import Logo from '@/shared/ui/Logo/Logo'
-import Text from '@/shared/ui/Text/Text'
 import { useSidebar } from '@/widgets/DashboardLayout/ui/Sidebar'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -28,13 +27,12 @@ const Sidebar = () => {
 			}}
 			className={cls.sidebar}
 		>
-			<div onClick={() => router.push('/')} className={cls.logoBlock}>
+			<div className={cls.logoBlock}>
 				<Logo
 					color='var(--color-accent)'
 					logoType={'short'}
 					className={cls.logo}
 				/>
-				{!isCollapsed && <Text classNameTitle={cls.logoTitle} title='Whai' />}
 			</div>
 			<SidebarCollapsedButton
 				setIsCollapsed={setIsCollapsed}

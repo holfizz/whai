@@ -29,10 +29,7 @@ const components = {
 		<h5 className='text-base font-normal pb-2 my-2' {...props} />
 	),
 	p: ({ node, ...props }) => (
-		<p
-			className='text-center text-medium pb-2 my-2 max-md:text-xl'
-			{...props}
-		></p>
+		<p className='text-left text-base pb-2 my-2 max-md:text-xl' {...props}></p>
 	),
 	pre: ({ node, ...props }) => (
 		<pre className='border-2 border-decor-4 rounded-2xl p-5' {...props}></pre>
@@ -43,7 +40,7 @@ const components = {
 	ul: ({ node, ...props }: any) => <ListWrapperUl size='sm' {...props} />,
 	ol: ({ node, ...props }) => <ol className='*:list-decimal' {...props} />
 }
-const SimpleMDX = ({ children, className }: any) => {
+const MessageMDX = ({ children, className }: any) => {
 	return (
 		<ReactMarkdown
 			// eslint-disable-next-line react/no-children-prop
@@ -56,4 +53,4 @@ const SimpleMDX = ({ children, className }: any) => {
 	)
 }
 
-export default SimpleMDX
+export default MessageMDX

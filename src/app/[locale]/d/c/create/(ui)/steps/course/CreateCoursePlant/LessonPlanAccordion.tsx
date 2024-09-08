@@ -1,11 +1,13 @@
 import { useUpdateLesson } from '@/entities/lesson/model/lesson.queries'
 import { ILessonPlan } from '@/entities/plan/model/plan.types'
+import PencilIcon from '@/shared/assets/icons/Pencil'
 import '@/shared/ui/Accordion/Accordion.scss'
 import Button from '@/shared/ui/Button/Button'
-import { ArrowRight } from 'lucide-react'
+
+import ArrowRight from '@/shared/assets/icons/ArrowRight'
+import PlusIcon from '@/shared/assets/icons/Plus'
 import { useState } from 'react'
-import { HiPencil } from 'react-icons/hi'
-import { IoMdAdd } from 'react-icons/io'
+
 import useUnifiedStore from '../../../../(model)/unified.state'
 import EditCourseModal from './CreateCourseCard/EditCourseModal'
 import GenerateBlockModal from './GenerateBlockModal'
@@ -89,7 +91,7 @@ const LessonPlanAccordion = ({
 								isIconOnly
 								size='full'
 								color='gray'
-								startContent={<IoMdAdd />}
+								startContent={<PlusIcon />}
 								onClick={handleGenerate} // Handle the generate button click
 							/>
 						)}
@@ -105,7 +107,7 @@ const LessonPlanAccordion = ({
 							handleEditClick(lesson)
 						}}
 						startContent={
-							<HiPencil color='var(--color-accent)' fontSize={28} />
+							<PencilIcon color='var(--color-accent)' fontSize={28} />
 						}
 					/>
 				</div>
@@ -116,7 +118,7 @@ const LessonPlanAccordion = ({
 					isIconOnly
 					size='full'
 					color='gray'
-					startContent={<IoMdAdd />}
+					startContent={<PlusIcon />}
 					onClick={handleGenerate}
 				/>
 			)}

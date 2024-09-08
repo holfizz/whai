@@ -3,7 +3,8 @@ import MessageIcon from '@/shared/assets/icons/Lesson/Fill/MessageIcon'
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
 import { Dispatch, SetStateAction } from 'react'
-import { IoClose } from 'react-icons/io5'
+
+import CloseIcon from '@/shared/assets/icons/Close'
 import { useChatStore } from '../../model/chat-with-ai.store'
 import CreateChatButton from './CreateChatButton'
 
@@ -27,13 +28,13 @@ const ChatList = ({
 	const handleChatClick = (chatId: string) => {
 		setSelectedChatId(chatId)
 		setIsAdditionalParam(false)
-		setMessages([])
+		setMessages([]) // Сбросьте старые сообщения
 	}
 
 	return (
 		<div
 			className={
-				'w-full h-auto min-h-20 bg-white rounded-3xl p-2 flex flex-col'
+				'w-full max-h-[300px] overflow-y-auto bg-white rounded-3xl p-2 flex flex-col'
 			}
 		>
 			<div className={'flex justify-between w-full'}>
@@ -48,20 +49,34 @@ const ChatList = ({
 					color={'white'}
 					variant={'sRound'}
 					size={'sRound'}
-					startContent={<IoClose size={24} color={'var(--color-secondary)'} />}
+					startContent={
+						<CloseIcon fontSize={24} color={'var(--color-secondary)'} />
+					}
 				/>
 			</div>
 			{getAllChatsWithAI &&
 				getAllChatsWithAI.map((chat, index) => (
 					<div
 						key={index}
-						className={`mt-2 flex items-center hover:opacity-100 cursor-pointer hover:transition-opacity transition-opacity ${
+						className={`mt-2 flex items-center cursor-pointer hover:opacity-100 ${
 							selectedChatId === chat.id ? 'opacity-100' : 'opacity-50'
 						}`}
-						onClick={() => handleChatClick(chat.id)}
+						onClick={() => {
+							if (chat.id !== selectedChatId) {
+								handleChatClick(chat.id)
+								return
+							}
+							return
+						}}
 					>
 						<Button
-							onClick={() => handleChatClick(chat.id)} // Вызываем ту же функцию при клике на кнопку
+							onClick={() => {
+								if (chat.id !== selectedChatId) {
+									handleChatClick(chat.id)
+									return
+								}
+								return
+							}}
 							color={'secondary'}
 							variant={'sRound'}
 							size={'sRound'}
@@ -69,7 +84,7 @@ const ChatList = ({
 						/>
 						<h3
 							className={
-								'text-md font-normal ml-2 w-2/3 text-ellipsis whitespace-nowrap overflow-hidden h-min block'
+								'text-md font-normal ml-2 whitespace-nowrap overflow-hidden'
 							}
 						>
 							{chat.title}

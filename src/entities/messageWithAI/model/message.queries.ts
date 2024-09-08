@@ -1,4 +1,3 @@
-import logger from '@/shared/lib/utils/logger'
 import { gql, useMutation, useQuery, useSubscription } from '@apollo/client'
 import { IMessageWithAI } from './message.types'
 
@@ -45,8 +44,8 @@ export const useGetAllMessagesInChatWithAI = ({
 			updateQuery: (prev, { fetchMoreResult }) => {
 				if (!fetchMoreResult) return prev
 				const newMessages = fetchMoreResult.getAllMessageInChatWithAI
-				logger.log(newMessages)
-				if (newMessages.length === 0) {
+
+				if (!Array.isArray(newMessages) || newMessages.length === 0) {
 					return prev
 				}
 

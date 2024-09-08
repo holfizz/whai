@@ -5,7 +5,8 @@ import Button from '@/shared/ui/Button/Button'
 import { useQuery } from '@apollo/client'
 import { useParams } from 'next/navigation'
 import { Dispatch, SetStateAction, useCallback } from 'react'
-import { IoAdd } from 'react-icons/io5'
+
+import PlusIcon from '@/shared/assets/icons/Plus'
 import { useChatStore } from '../../model/chat-with-ai.store'
 
 const CreateChatButton = ({
@@ -69,7 +70,7 @@ const CreateChatButton = ({
 			color={'secondary'}
 			variant={'sRound'}
 			size={'sRound'}
-			startContent={<IoAdd size={24} />}
+			startContent={<PlusIcon stroke='none' fontSize={24} />}
 			disabled={loadingCreateChatsWithAI}
 		/>
 	)

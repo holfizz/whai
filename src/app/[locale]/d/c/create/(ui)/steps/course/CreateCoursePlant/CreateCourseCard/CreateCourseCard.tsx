@@ -1,7 +1,8 @@
+import PencilIcon from '@/shared/assets/icons/Pencil'
 import logger from '@/shared/lib/utils/logger'
-import { ArrowUpRight } from 'lucide-react'
+
+import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
 import { useState } from 'react'
-import { HiPencil } from 'react-icons/hi'
 import Button from '../../../../../../../../../../shared/ui/Button/Button'
 import Icon from '../../../../../../../../../../shared/ui/Icon/Icon'
 import cls from './CourseCard.module.scss'
@@ -32,7 +33,7 @@ const CreateCourseCard = ({
 					<h1 className={`${cls.link} line-clamp-2`} onClick={handleClick}>
 						{data?.name}
 					</h1>
-					<HiPencil
+					<PencilIcon
 						className='cursor-pointer'
 						color='var(--color-decor-2)'
 						fontSize={28}

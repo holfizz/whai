@@ -3,7 +3,7 @@
 import { useGetAllLessons } from '@/entities/lesson'
 import { useGetAllQuizzes } from '@/entities/quiz'
 import { useGetSubtopic } from '@/entities/subtopic'
-import { Link, useRouter } from '@/navigation'
+import { Link } from '@/navigation'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
 import TickIcon from '@/shared/assets/icons/Tick'
 import {
@@ -15,11 +15,11 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { ModalBody } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
-import { FiCheck } from 'react-icons/fi'
+
+import CheckIcon from '@/shared/assets/icons/CheckIcon'
 import cls from './ModalComponent.module.scss'
 
 const ModalLessonsBody = ({ selectedSubtopicId }) => {
-	const router = useRouter()
 	const searchParams = useSearchParams()
 	const { lessonsAllData } = useGetAllLessons(selectedSubtopicId)
 	const { quizzesAllData } = useGetAllQuizzes(selectedSubtopicId)
@@ -126,7 +126,7 @@ const ModalLessonsBody = ({ selectedSubtopicId }) => {
 										color='var(--color-accent)'
 									/>
 									{quiz.totalPercents === 100 && (
-										<FiCheck className={cls.checkIcon} />
+										<CheckIcon className={cls.checkIcon} />
 									)}
 								</Link>
 							</div>

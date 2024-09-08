@@ -25,12 +25,12 @@ export const metadata: Metadata = {
 	},
 	viewport: { width: 'device-width', initialScale: 1 },
 	icons: {
-		icon: '/Whai.svg',
-		shortcut: '/Whai.svg',
-		apple: '/Whai.svg',
+		icon: '/Whai_logo.svg',
+		shortcut: '/Whai_logo.svg',
+		apple: '/Whai_logo.svg',
 		other: {
 			rel: 'touch-icons',
-			url: '/Whai.svg',
+			url: '/Whai_logo96x96.svg',
 			sizes: '96x96',
 			type: 'image/svg'
 		}

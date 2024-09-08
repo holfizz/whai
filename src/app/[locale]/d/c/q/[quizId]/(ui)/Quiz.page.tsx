@@ -8,9 +8,8 @@ import {
 import { Quiz } from '@/features/quiz'
 import { getCourseByIdRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
-import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
-import { Skeleton } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -67,28 +66,15 @@ const QuizPage = () => {
 	if (loadingQuiz || loadingCreateQuizWithAI) {
 		content = (
 			<>
-				<div className='mt-10 flex items-center w-full justify-center'>
-					<h1>{t('Quiz creation in progress')}</h1>
-					<DotsLoader />
+				<div className='mt-10 flex flex-col items-center w-full justify-center'>
+					<h1 className='text-2xl'>{t('Quiz creation in progress')}</h1>
+					<p className='text-lg text-secondary my-5'>
+						{t(
+							'Please do not close the page It will take no more than 2 minutes'
+						)}
+					</p>
+					<BigDotsLoader />
 				</div>
-				<Skeleton
-					className={'mt-10 rounded-xl'}
-					style={{ width: '80%', height: 60 }}
-				/>
-				<Skeleton
-					className={'mt-5 rounded-xl'}
-					style={{ width: '30%', height: 30 }}
-				/>
-				<div className='grid grid-cols-2 gap-5 w-full mt-36'>
-					<Skeleton className={'rounded-xl'} style={{ height: 70 }} />
-					<Skeleton className={'rounded-xl'} style={{ height: 70 }} />
-					<Skeleton className={'rounded-xl'} style={{ height: 70 }} />
-					<Skeleton className={'rounded-xl'} style={{ height: 70 }} />
-				</div>
-				<Skeleton
-					className={'mt-16 rounded-xl'}
-					style={{ width: '40%', height: 100 }}
-				/>
 			</>
 		)
 	} else if (errorQuiz || errorCreateQuizWithAI) {

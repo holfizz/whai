@@ -1,8 +1,8 @@
+import PencilIcon from '@/shared/assets/icons/Pencil'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { HiPencil } from 'react-icons/hi'
 import EditTestStepModal from './EditTestStepModal'
 
 const TestStepCards = ({
@@ -43,7 +43,7 @@ const TestStepCards = ({
 								isIconOnly
 								onClick={() => handleEditClick(step)}
 								startContent={
-									<HiPencil
+									<PencilIcon
 										className='cursor-pointer'
 										color='var(--color-decor-2)'
 										fontSize={28}

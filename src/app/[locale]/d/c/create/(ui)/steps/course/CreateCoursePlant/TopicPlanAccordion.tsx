@@ -1,11 +1,11 @@
 import { ITopicPlan } from '@/entities/plan/model/plan.types'
 import { useUpdateTopic } from '@/entities/topic/model/topic.queries'
+import PencilIcon from '@/shared/assets/icons/Pencil'
+import PlusIcon from '@/shared/assets/icons/Plus'
 import '@/shared/ui/Accordion/Accordion.scss'
 import { Accordion, AccordionItem } from '@/shared/ui/Accordion/MyAccordion'
 import Button from '@/shared/ui/Button/Button'
 import { useEffect, useRef, useState } from 'react'
-import { HiPencil } from 'react-icons/hi'
-import { IoMdAdd } from 'react-icons/io'
 import EditCourseModal from './CreateCourseCard/EditCourseModal'
 import GenerateBlockModal from './GenerateBlockModal' // Ensure this import is correct
 import SubtopicPlanAccordion from './SubtopicPlanAccordion'
@@ -87,7 +87,7 @@ const TopicPlanAccordion = ({
 								color='gray'
 								onClick={() => handleEditClick(topic)}
 								startContent={
-									<HiPencil color='var(--color-accent)' fontSize={28} />
+									<PencilIcon color='var(--color-accent)' fontSize={28} />
 								}
 							/>
 						}
@@ -97,7 +97,7 @@ const TopicPlanAccordion = ({
 								isIconOnly
 								size='full'
 								color='gray'
-								startContent={<IoMdAdd />}
+								startContent={<PlusIcon />}
 								onClick={handleGenerate}
 							/>
 						}

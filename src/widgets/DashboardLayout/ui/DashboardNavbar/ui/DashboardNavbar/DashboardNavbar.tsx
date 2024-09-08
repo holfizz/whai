@@ -8,6 +8,7 @@ import {
 	getSubscriptionsRoute,
 	getSupportRoute
 } from '@/shared/const/router'
+
 import Button from '@/shared/ui/Button/Button'
 import {
 	Dropdown,
@@ -15,7 +16,6 @@ import {
 	DropdownMenu
 } from '@/shared/ui/Dropdown/Dropdown'
 import Logo from '@/shared/ui/Logo/Logo'
-import Text from '@/shared/ui/Text/Text'
 import {
 	Avatar,
 	DropdownTrigger,
@@ -41,19 +41,13 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 		<Navbar
 			disableAnimation={true}
 			maxWidth={'full'}
+			height={'5rem'}
 			className={cls.DashboardNavbar}
 			onMenuOpenChange={setIsMenuOpen}
 			isMenuOpen={isMenuOpen}
 		>
 			<NavbarContent justify='start'>
-				<div className={cls.logoBlock}>
-					<Logo
-						color='var(--color-accent)'
-						logoType={'short'}
-						className={cls.logo}
-					/>
-					<Text classNameTitle={cls.logoTitle} title='Whai' />
-				</div>
+				<Logo logoType={'short'} className={cls.logo} />
 			</NavbarContent>
 			<NavbarContent justify='end'>
 				<Button
@@ -65,23 +59,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 				>
 					{t('Subscription')}
 				</Button>
-				{/* <Popover color={'gray-text'} placement='bottom-end'>
-					<PopoverTrigger>
-						<Button
-							color={'clear'}
-							isIconOnly={true}
-							startContent={<BellIcon />}
-						/>
-					</PopoverTrigger>
-					<PopoverContent className={cls.popoverContent} color={'secondary'}>
-						<div className='mx-2 flex justify-center items-center w-fill'>
-							<h1 className='text-lg'>{t('Notice')}</h1>
-							<div className='ml-3 w-6 h-6 rounded-full bg-error-10 text-white text-sm flex justify-center items-center'>
-								0
-							</div>
-						</div>
-					</PopoverContent>
-				</Popover> */}
+
 				{userData?.email && (
 					<Dropdown
 						color='white'
@@ -157,8 +135,30 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 						</NavbarMenuItem>
 					))}
 				</div>
+				<div className='ml-[40px] w-[70vw] max-sm:w-[90vw] flex flex-col items-center gap-5 mb-10'>
+					<div className={`flex w-full items-center gap-5 text-secondary `}>
+						<div className='w-[30px] h-[30px] rounded-md text-accent flex justify-center items-center bg-white'>
+							{userData?.currentCourseCount}
+						</div>
+						<h3 className='max-w-1/2 text-ellipsis overflow-hidden'>
+							{t('Generations of courses')}
+						</h3>
+					</div>
+					<div className={`flex w-full items-center gap-5 text-secondary`}>
+						<div className='w-[30px] h-[30px] rounded-md text-accent flex justify-center items-center bg-decor-1'>
+							{userData?.currentLessonCount}
+						</div>
+						<h3>{t('Generations of lessons')}</h3>
+					</div>
+					<div className={`flex w-full items-center gap-5 text-secondary`}>
+						<div className='w-[30px] h-[30px] rounded-md text-accent flex justify-center items-center bg-bg-accent'>
+							{userData?.additionalTitlesCount}
+						</div>
+						<h3>{t('Block generation')}</h3>
+					</div>
+				</div>
 				<Button
-					className='mx-auto w-[70vw] h-[60px] max-sm:w-[90vw] mb-10'
+					className='ml-[40px] w-[70vw] h-[60px] max-sm:w-[90vw] mb-10'
 					size='lg'
 					color='accent'
 					as={Link}

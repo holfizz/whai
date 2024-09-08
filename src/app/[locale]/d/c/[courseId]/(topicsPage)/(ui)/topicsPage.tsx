@@ -12,8 +12,9 @@ import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { HiVideoCamera } from 'react-icons/hi'
-import { IoFlagSharp } from 'react-icons/io5'
+
+import FlagIcon from '@/shared/assets/icons/Flag'
+import VideoIcon from '@/shared/assets/icons/Video'
 import ModalComponent from '../ModalComponent/ModalComponent'
 import cls from './topicPage.module.scss'
 
@@ -76,7 +77,7 @@ const TopicsPage = () => {
 							as={Link}
 							href={'mailto:support@whai.ru'}
 							startContent={
-								<IoFlagSharp size={18} color={'var(--color-decor-2)'} />
+								<FlagIcon fontSize={18} color={'var(--color-decor-2)'} />
 							}
 							className={cls.actionButton}
 						>
@@ -129,7 +130,7 @@ const TopicsPage = () => {
 										<h3 className='text-gray-2 font-normal'>{`${topic.completionTime} Hours`}</h3>
 									</div>
 									<div className='flex mr-4 items-center'>
-										<HiVideoCamera size={24} className='text-gray-2 mx-2' />
+										<VideoIcon fontSize={24} className='text-gray-2 mx-2' />
 										<h3 className='text-gray-2 font-normal'>
 											{t('Video lesson')}
 										</h3>

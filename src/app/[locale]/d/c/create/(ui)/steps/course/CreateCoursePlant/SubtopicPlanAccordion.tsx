@@ -3,8 +3,10 @@ import { useUpdateSubtopic } from '@/entities/subtopic/model/subtopic.queries'
 import { Accordion, AccordionItem } from '@/shared/ui/Accordion/MyAccordion'
 import Button from '@/shared/ui/Button/Button'
 import { useState } from 'react'
-import { HiPencil } from 'react-icons/hi'
-import { IoMdAdd } from 'react-icons/io'
+
+import PencilIcon from '@/shared/assets/icons/Pencil'
+
+import PlusIcon from '@/shared/assets/icons/Plus'
 import EditCourseModal from './CreateCourseCard/EditCourseModal'
 import GenerateBlockModal from './GenerateBlockModal' // Import GenerateBlockModal
 import LessonPlanAccordion from './LessonPlanAccordion'
@@ -80,7 +82,7 @@ const SubtopicPlanAccordion = ({
 								color='gray'
 								onClick={() => handleEditClick(subtopic)}
 								startContent={
-									<HiPencil color='var(--color-accent)' fontSize={28} />
+									<PencilIcon color='var(--color-accent)' fontSize={28} />
 								}
 							/>
 						}
@@ -90,8 +92,8 @@ const SubtopicPlanAccordion = ({
 								isIconOnly
 								size='full'
 								color='gray'
-								startContent={<IoMdAdd />}
-								onClick={handleGenerate} // Handle the generate button click
+								startContent={<PlusIcon />}
+								onClick={handleGenerate}
 							/>
 						}
 					>
@@ -119,7 +121,7 @@ const SubtopicPlanAccordion = ({
 					isIconOnly
 					size='full'
 					color='gray'
-					startContent={<IoMdAdd />}
+					startContent={<PlusIcon />}
 					onClick={handleGenerate} // Handle the generate button click
 				/>
 			)}

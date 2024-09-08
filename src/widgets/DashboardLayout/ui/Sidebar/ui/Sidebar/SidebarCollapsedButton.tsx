@@ -1,7 +1,7 @@
+import ArrowRight from '@/shared/assets/icons/ArrowRight'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useTranslations } from 'next-intl'
 import { FC } from 'react'
-import { IoIosArrowBack } from 'react-icons/io'
 import cls from './Sidebar.module.scss'
 
 interface SidebarCollapsedButtonProps {
@@ -25,7 +25,7 @@ const SidebarCollapsedButton: FC<SidebarCollapsedButtonProps> = props => {
 					[]
 				)}
 			>
-				<IoIosArrowBack />
+				<ArrowRight className='rotate-180' />
 			</div>
 		</button>
 	)

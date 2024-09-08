@@ -4,8 +4,9 @@ import { useGetNewTokenQuery } from '@/features/auth/model/auth.queries'
 import { getAccessToken, saveTokenStorage } from '@/shared/api/auth/auth.helper'
 import logger from '@/shared/lib/utils/logger'
 import { EnumTokens } from '@/shared/types/auth'
+import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import Cookies from 'js-cookie'
-import { Loader } from 'lucide-react'
+
 import { ReactNode, useEffect, useState } from 'react'
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -45,7 +46,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 	if (loading || queryLoading) {
 		return (
 			<div className='flex absolute justify-center items-center h-full w-full bg-[var(--color-decor-4)]'>
-				<Loader />
+				<BigDotsLoader />
 			</div>
 		)
 	}

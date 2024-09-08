@@ -3,9 +3,9 @@
 import { useGetAllSubtopics } from '@/entities/subtopic'
 import { useGetTopic } from '@/entities/topic'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
+import CheckIcon from '@/shared/assets/icons/CheckIcon'
 import { ModalBody } from '@nextui-org/react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { FiCheck } from 'react-icons/fi'
 import cls from './ModalComponent.module.scss'
 
 const ModalSubtopicsBody = ({
@@ -79,7 +79,7 @@ const ModalSubtopicsBody = ({
 									color={'var(--color-accent)'}
 								/>
 								{subtopic.progressPercents === 100 && (
-									<FiCheck className={cls.checkIcon} />
+									<CheckIcon className={cls.checkIcon} />
 								)}
 							</div>
 						</div>

@@ -1,8 +1,8 @@
+import PencilIcon from '@/shared/assets/icons/Pencil'
 import Button from '@/shared/ui/Button/Button'
 import DotsLoader from '@/shared/ui/Loader/DotsLoader'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { HiPencil } from 'react-icons/hi'
 import EditCourseModal from './EditTDModal'
 
 const DataCards = ({
@@ -46,7 +46,7 @@ const DataCards = ({
 								className='max-640:w-[35px] max-640:h-[35px] aspect-square ml-2 mb-2 rounded-xl'
 								onClick={() => handleEditClick(td)}
 								startContent={
-									<HiPencil
+									<PencilIcon
 										className='cursor-pointer'
 										color='var(--color-decor-2)'
 										fontSize={28}
