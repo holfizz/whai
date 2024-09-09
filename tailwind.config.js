@@ -46,9 +46,12 @@ module.exports = {
 		boxShadow: {
 			sm: '0 0 20px 2px rgba(73, 73, 73, 0.05)'
 		},
+		fontFamily: {
+			srbija: 'SrbijaSans'
+		},
 		screens: {
 			sm: '393px',
-			640: '641px',
+			640: '640px',
 			md: '768px',
 			lg: '1024px',
 			xl: '1440px',

@@ -41,11 +41,9 @@
 		"Message in your mail": "Message in your mail",
 		"If its not there check your spam folder": "If it's not there, check your spam folder."
 	},
-	"mainPage": {
-		"The internet": "The internet",
-		"and AI": "and AI",
-		"is your": "is your",
-		"education": "education"
+	"MainPage": {
+		"Start for free": "Start for free",
+		"Watch video": "Watch video"
 	},
 	"resetPassword": {
 		"Reset the password": "Reset the password",

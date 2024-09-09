@@ -92,9 +92,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 				!loginError?.message?.length &&
 				type === authConstants.LOGIN
 			) {
-				setTimeout(() => {
-					router.push('/d')
-				}, 500)
+				router.push('/d')
 			}
 		}, [loginData, loginError, router, type])
 		const onSubmit = async (e: FormEvent<HTMLFormElement>) => {

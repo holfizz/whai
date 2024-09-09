@@ -209,7 +209,7 @@ const SubsPage = () => {
 								(type: 'BASIC' | 'STANDARD' | 'PREMIUM') => (
 									<div
 										key={type}
-										className={`w-[335px] max-1200:w-[300px] max-640:w-[50vw]   max-500:w-[60vw] max-sm:w-[80vw] h-auto ${
+										className={`w-[335px] max-1200:w-[300px] max-640:w-[50vw]   max-500:w-[60vw] max-sm:w-[70vw] h-auto ${
 											type === 'PREMIUM' ? 'bg-accent text-white' : 'bg-decor-1'
 										} rounded-3xl overflow-hidden flex flex-col`}
 									>

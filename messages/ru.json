@@ -41,11 +41,10 @@
 		"Message in your mail": "Сообщение на вашей почте",
 		"If its not there check your spam folder": "Если его там нет, проверьте папку «Спам»."
 	},
-	"mainPage": {
-		"The internet": "Интернет",
-		"and AI": "и AI",
-		"is your": "твое",
-		"education": "образование"
+
+	"MainPage": {
+		"Start for free": "Начать бесплатно",
+		"Watch video": "Смотреть видео"
 	},
 	"resetPassword": {
 		"Reset the password": "Сбросить пароль",
