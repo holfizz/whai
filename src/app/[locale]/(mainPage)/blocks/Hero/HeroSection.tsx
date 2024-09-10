@@ -4,10 +4,14 @@ import Shape12 from '@/shared/assets/icons/HeroSection/shape-12'
 import Shape14 from '@/shared/assets/icons/HeroSection/shape-14'
 import Shape17 from '@/shared/assets/icons/HeroSection/shape-17'
 import Shape18 from '@/shared/assets/icons/HeroSection/shape-18'
+
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useRef } from 'react'
 import './HeroSection.scss'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const HeroSection = () => {
 	const t = useTranslations('MainPage')
@@ -100,13 +104,14 @@ const HeroSection = () => {
 		gsap.to(button, {
 			duration: 0.3,
 			scale: 1,
+			zIndex: 6,
 			ease: 'power2.out'
 		})
-		// Reset position on mouse leave
 		gsap.to(button, {
 			duration: 0.3,
 			x: 0,
 			y: 0,
+			zIndex: 6,
 			ease: 'power2.out'
 		})
 	}
@@ -120,8 +125,8 @@ const HeroSection = () => {
 		const centerY = height / 2
 
 		gsap.to(button, {
-			x: (clientX - innerWidth / 2) * 0.1, // Adjust movement intensity
-			y: (clientY - innerHeight / 2) * 0.1, // Adjust movement intensity
+			x: (clientX - innerWidth / 2) * 0.1,
+			y: (clientY - innerHeight / 2) * 0.1,
 			duration: 0.3,
 			ease: 'power2.out',
 			overwrite: true
@@ -145,7 +150,7 @@ const HeroSection = () => {
 			</div>
 			<div
 				ref={buttonRef}
-				className='w-[760px] flex gap-5 mt-10 items-center justify-center'
+				className='relative w-[760px] flex gap-5 mt-10 items-center justify-center z-10'
 			>
 				<button
 					className='w-[40%] h-[80px] bg-accent text-white rounded-[40px] relative'
@@ -165,15 +170,21 @@ const HeroSection = () => {
 				</button>
 			</div>
 			<div ref={shapesRef}>
-				<Shape18 className='absolute left-10 top-9 fill-error-1' width={100} />
-				<Shape12
-					className='absolute right-10 top-96 fill-yellow-5'
+				<Shape18
+					className='absolute left-10 top-[-30px] fill-error-1'
 					width={100}
 				/>
-				<Shape14 className='absolute left-60 top-80 fill-accent' width={80} />
+				<Shape12
+					className='absolute right-10 top-36 fill-yellow-5'
+					width={100}
+				/>
+				<Shape14
+					className='absolute right-40 bottom-4 fill-accent'
+					width={50}
+				/>
 				<Shape17
-					className='absolute right-[200px] bottom-[10px] fill-accent'
-					width={70}
+					className='absolute left-20 bottom-40 fill-yellow-1'
+					width={80}
 				/>
 			</div>
 		</div>

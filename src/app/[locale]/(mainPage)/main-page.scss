@@ -34,3 +34,20 @@
 	align-items: center;
 	height: 100px; /* Set height for rows */
 }
+
+.squiggle {
+	position: absolute;
+	width: 100vw;
+	height: auto;
+	top: 0;
+	left: -10px;
+	z-index: 0;
+	opacity: 0;
+}
+
+.squiggle path {
+	stroke-width: 15px;
+	stroke: #0f0f0f;
+	stroke-dasharray: 1000;
+	stroke-dashoffset: 1000;
+}
