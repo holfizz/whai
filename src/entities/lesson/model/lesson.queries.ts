@@ -45,6 +45,7 @@ export const GET_INDEPENDENT_LESSONS = gql`
 		getAllIndependentLessons {
 			id
 			name
+			description
 			subtopicId
 			isCompleted
 			isHasLessonTask

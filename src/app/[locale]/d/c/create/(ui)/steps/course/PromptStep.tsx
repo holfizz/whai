@@ -64,7 +64,7 @@ const PromptStep = () => {
 					</Button>
 					<Button
 						className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[60vw]'
-						isDisabled={!promptContent.length}
+						isDisabled={!promptContent?.length}
 						color={'main'}
 						size={'3xl'}
 						onClick={nextStep}

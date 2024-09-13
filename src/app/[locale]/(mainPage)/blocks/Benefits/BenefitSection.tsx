@@ -2,10 +2,10 @@
 import TurboModeIcon from '@/shared/assets/icons/BenefitSection/turbo_mode'
 import UnlimitedEducationIcon from '@/shared/assets/icons/BenefitSection/unlimited_education'
 import CustomPathToSuccessIcon from '@/shared/assets/icons/BenefitSection/сustom_path_to_success'
-import Shape11 from '@/shared/assets/icons/HeroSection/shape-11'
-import Shape21 from '@/shared/assets/icons/HeroSection/shape-21'
-import Shape24 from '@/shared/assets/icons/HeroSection/shape-24'
-import Shape4 from '@/shared/assets/icons/HeroSection/shape-4'
+import Shape11 from '@/shared/assets/icons/MainPage/shape-11'
+import Shape21 from '@/shared/assets/icons/MainPage/shape-21'
+import Shape24 from '@/shared/assets/icons/MainPage/shape-24'
+import Shape4 from '@/shared/assets/icons/MainPage/shape-4'
 import QuizShot from '@/shared/assets/image/QuizShot.webp'
 import StartShot from '@/shared/assets/image/StartShot.webp'
 import gsap from 'gsap'
@@ -129,8 +129,8 @@ const BenefitSection = () => {
 	return (
 		<div
 			ref={sectionRef}
-			className='relative benefit-section z-10 flex flex-col items-center'
-			style={{ height: '100vh', padding: '2rem' }}
+			className='h-auto relative benefit-section z-10 flex flex-col items-center'
+			style={{ padding: '2rem' }}
 		>
 			<div className='flex flex-col gap-10'>
 				<div className='benefit-item flex items-center justify-end w-full gap-10 mx-auto z-10'>

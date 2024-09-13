@@ -54,8 +54,7 @@ export default function PageBody() {
 				<div className='w-auto flex justify-end overflow-hidden max-640:justify-center'>
 					<Image
 						width={222}
-						height={231}
-						className='max-640:h-[150px] max-640:w-[revert-layer]'
+						className='h-auto  max-640:w-[revert-layer]'
 						src={HandsImage}
 						alt='hands'
 					/>

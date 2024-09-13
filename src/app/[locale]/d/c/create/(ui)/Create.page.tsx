@@ -7,7 +7,7 @@ import CreateCoursePlanPage from './steps/course/CreateCoursePlant/CreateCourseP
 import GenerateTDStep from './steps/course/GenerateTDStep/GenerateTDStep'
 import PromptStep from './steps/course/PromptStep'
 import SettingStep from './steps/course/SettingStep'
-import GenerateTDLessonStep from './steps/lesson/GenerateTDTestStep'
+import GenerateTDLessonStep from './steps/lesson/GenerateTDLessonStep'
 import LessonSettings from './steps/lesson/LessonSettings'
 import LessonStep from './steps/lesson/LessonStep'
 import PromptLessonStep from './steps/lesson/PromptLessonStep'

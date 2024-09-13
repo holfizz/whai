@@ -254,7 +254,10 @@
 		"We continue to create the quiz": "We continue to create the quiz",
 		"We continue to create the courseThis will take a couple of minutes Please do not close the page": "We continue to create the courseThis will take a couple of minutes. Please do not close the page",
 		"Artificial Intelligence is analyzing your knowledge, please wait": "Artificial Intelligence is analyzing your knowledge, please wait",
-		"This will take some time Please dont close the page": "This will take some time. Please don't close the page"
+		"This will take some time Please dont close the page": "This will take some time. Please don't close the page",
+		"Do you need help finalizing your request": "Do you need help finalizing your request?",
+		"Yes, help me": "Yes, help me",
+		"No, continue": "No, continue"
 	},
 	"CreateTest": {
 		"What are we creating?": "What are we creating?",
@@ -267,7 +270,10 @@
 		"Which test description fits best?": "Which test description fits best?",
 		"Here is the title and description you chose": "Here is the title and description you chose",
 		"Generating, wait a couple of seconds": "Generating, wait a couple of seconds",
-		"An error occurred while creating the test": "An error occurred while creating the test"
+		"An error occurred while creating the test": "An error occurred while creating the test",
+		"Do you need help finalizing your request": "Do you need help finalizing your request?",
+		"Yes, help me": "Yes, help me",
+		"No, continue": "No, continue"
 	},
 	"CreateLesson": {
 		"What are we creating?": "What are we creating?",
@@ -289,7 +295,10 @@
 		"No": "No",
 		"Need video tutorials from YouTube?": "Need video tutorials from YouTube?",
 		"Generate pictures?": "Generate pictures?",
-		"Need homework?": "Need homework?"
+		"Need homework?": "Need homework?",
+		"Do you need help finalizing your request": "Do you need help finalizing your request?",
+		"Yes, help me": "Yes, help me",
+		"No, continue": "No, continue"
 	},
 	"Quiz": {
 		"Your answer": "Your answer",

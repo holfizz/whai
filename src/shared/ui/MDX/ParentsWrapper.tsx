@@ -20,7 +20,7 @@ const ParenthesesWrapper = ({
 						<span
 							key={index}
 							className={`${
-								color ? color : 'bg-[#FF9090]'
+								color ? color : 'bg-error-1'
 							} p-[2px] m-[1px] inline-block rounded ${className}`}
 						>
 							({part})

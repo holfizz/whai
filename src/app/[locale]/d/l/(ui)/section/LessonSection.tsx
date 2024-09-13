@@ -1,18 +1,64 @@
 'use client'
 
 import { getAllIndependentLessons } from '@/entities/lesson'
+import { Link } from '@/navigation'
+import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
+import { getLessonIndependentRoute } from '@/shared/const/router'
+import Button from '@/shared/ui/Button/Button'
+import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import { Progress } from '@/shared/ui/Progress/Progress'
 
 const LessonSection = () => {
 	const { lessonsAllData, loadingAllLesson, errorAllLesson } =
 		getAllIndependentLessons()
 
-	if (loadingAllLesson) return <p>Loading...</p>
+	if (loadingAllLesson) return <DotsLoader />
 	if (errorAllLesson) return <p>Error loading lessons</p>
 
 	return (
 		<>
 			{lessonsAllData &&
-				lessonsAllData.map((lesson, i) => <div key={i}>{lesson.name}</div>)}
+				lessonsAllData.map((lesson, i) => (
+					<div
+						key={i}
+						className='shadow-sm rounded-[25px] py-4 px-5 mb-4 w-[390px] h-min-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full bg-white'
+					>
+						<div className='w-full flex justify-between items-start'>
+							<div className='flex flex-col'>
+								<Link
+									href={getLessonIndependentRoute(lesson.id)}
+									className='text-xl font-medium'
+								>
+									{lesson.name}
+								</Link>
+								{lesson.description && (
+									<p className='text-gray-600 mt-2 w-[390px] line-clamp-3 text-ellipsis overflow-hidden'>
+										{lesson.description}
+									</p>
+								)}
+							</div>
+							<Button
+								size='sRound'
+								href={getLessonIndependentRoute(lesson.id)}
+								isIconOnly
+								startContent={<ArrowUpRight fill='var(--color-accents)' />}
+								variant='circle'
+								as={Link}
+								color='main'
+							></Button>
+						</div>
+						<div className='mt-4'>
+							{lesson.isHasLessonTask && (
+								<Progress
+									className='w-[390px] h-1 mt-4 rounded-xl max-md:w-full'
+									size={'sm'}
+									color='peach'
+									value={lesson.lessonTasks.length} // Example value, adjust as needed
+								></Progress>
+							)}
+						</div>
+					</div>
+				))}
 		</>
 	)
 }

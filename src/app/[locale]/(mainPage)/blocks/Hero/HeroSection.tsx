@@ -1,10 +1,9 @@
 'use client'
 
-import Shape12 from '@/shared/assets/icons/HeroSection/shape-12'
-import Shape14 from '@/shared/assets/icons/HeroSection/shape-14'
-import Shape17 from '@/shared/assets/icons/HeroSection/shape-17'
-import Shape18 from '@/shared/assets/icons/HeroSection/shape-18'
-
+import Shape12 from '@/shared/assets/icons/MainPage/shape-12'
+import Shape14 from '@/shared/assets/icons/MainPage/shape-14'
+import Shape17 from '@/shared/assets/icons/MainPage/shape-17'
+import Shape18 from '@/shared/assets/icons/MainPage/shape-18'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useTranslations } from 'next-intl'
@@ -13,7 +12,11 @@ import './HeroSection.scss'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const HeroSection = () => {
+interface HeroSectionProps {
+	scrollToVideo: () => void
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ scrollToVideo }) => {
 	const t = useTranslations('MainPage')
 
 	const textRef = useRef<HTMLDivElement>(null)
@@ -67,7 +70,6 @@ const HeroSection = () => {
 	}, [buttonRef.current])
 
 	useEffect(() => {
-		// Animations for shapes
 		const shapes = shapesRef.current?.querySelectorAll('svg')
 		if (shapes) {
 			gsap.fromTo(
@@ -157,6 +159,7 @@ const HeroSection = () => {
 					onMouseEnter={handleMouseEnter}
 					onMouseLeave={handleMouseLeave}
 					onMouseMove={handleMouseMove}
+					onClick={scrollToVideo}
 				>
 					{t('Start for free')}
 				</button>
@@ -165,6 +168,7 @@ const HeroSection = () => {
 					onMouseEnter={handleMouseEnter}
 					onMouseLeave={handleMouseLeave}
 					onMouseMove={handleMouseMove}
+					onClick={scrollToVideo}
 				>
 					{t('Watch video')}
 				</button>

@@ -7,7 +7,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkParse from 'remark-parse'
-import { ListWrapperOl, ListWrapperUl } from './ListWrapper'
+import { ListWrapperUl } from './ListWrapper'
 import ParenthesesWrapper from './ParentsWrapper'
 import QuoteWrapper from './QuoteWrapper'
 const components = {
@@ -39,17 +39,11 @@ const components = {
 	pre: ({ node, ...props }) => (
 		<pre className='border-2 border-decor-4 rounded-2xl p-5' {...props}></pre>
 	),
-	li: ({ node, ...props }: any) => (
-		<li>
-			<QuoteWrapper>
-				<ParenthesesWrapper {...props} />
-			</QuoteWrapper>
-		</li>
-	),
+	li: ({ node, ...props }: any) => <li {...props} />,
 	strong: ({ node, ...props }) => <strong className='font-bold' {...props} />,
 	em: ({ node, ...props }) => <em className='italic' {...props} />,
 	ul: ({ node, ...props }: any) => <ListWrapperUl size='md' {...props} />,
-	ol: ({ node, ...props }: any) => <ListWrapperOl {...props} />
+	ol: ({ node, ...props }: any) => <ListWrapperUl size='md' {...props} />
 }
 
 const MDX = ({ children }: { children?: string }) => {

@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@apollo/client": "^3.9.9",
+		"@lottiefiles/react-lottie-player": "^3.5.4",
 		"@marsidev/react-turnstile": "^1.0.0",
 		"@mdx-js/loader": "^3.0.1",
 		"@mdx-js/mdx": "^3.0.1",
@@ -35,6 +36,7 @@
 		"gsap": "^3.12.5",
 		"js-cookie": "^3.0.5",
 		"katex": "^0.16.11",
+		"lottie-web": "^5.12.2",
 		"next": "14.2.4",
 		"next-intl": "^3.11.1",
 		"next-sitemap": "^4.2.3",

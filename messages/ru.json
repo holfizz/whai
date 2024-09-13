@@ -254,7 +254,10 @@
 		"We continue to create the quiz": "Продолжаем создавать тест",
 		"We continue to create the courseThis will take a couple of minutes Please do not close the page": "Это займёт пару минут. Пожалуйста не закрывайте страницy",
 		"Artificial Intelligence is analyzing your knowledge, please wait": "Искусственный интеллект анализирует ваши знания, пожалуйста, подождите",
-		"This will take some time Please dont close the page": "Это займет некоторое время. Пожалуйста, не закрывайте страницу"
+		"This will take some time Please dont close the page": "Это займет некоторое время. Пожалуйста, не закрывайте страницу",
+		"Do you need help finalizing your request": "Вам нужна помощь в доработке запроса?",
+		"Yes, help me": "Да, помоги мне",
+		"No, continue": "Нет, продолжить"
 	},
 	"CreateTest": {
 		"What are we creating?": "Что мы создаем?",
@@ -268,7 +271,10 @@
 
 		"Here is the title and description you chose": "Вот заголовок и описание, которые вы выбрали",
 		"Generating, wait a couple of seconds": "Генерация, подождите несколько секунд",
-		"An error occurred while creating the test": "Произошла ошибка при создании теста"
+		"An error occurred while creating the test": "Произошла ошибка при создании теста",
+		"Do you need help finalizing your request": "Вам нужна помощь в доработке запроса?",
+		"Yes, help me": "Да, помоги мне",
+		"No, continue": "Нет, продолжить"
 	},
 	"CreateLesson": {
 		"What are we creating?": "Что мы создаем?",
@@ -290,7 +296,10 @@
 		"No": "Нет",
 		"Need video tutorials from YouTube?": "Нужны видеоуроки с YouTube?",
 		"Generate pictures?": "Генерировать картинки?",
-		"Need homework?": "Нужны домашние задания?"
+		"Need homework?": "Нужны домашние задания?",
+		"Do you need help finalizing your request": "Вам нужна помощь в доработке запроса?",
+		"Yes, help me": "Да, помоги мне",
+		"No, continue": "Нет, продолжить"
 	},
 	"Quiz": {
 		"Your answer": "Ваш ответ",

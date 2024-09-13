@@ -20,7 +20,7 @@ import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { FC, useCallback, useEffect, useState } from 'react'
 import cls from './Lesson.module.scss'
 const ChatWithAI = dynamic(() => import('@/features/chatWithAI/ui/ChatWithAI'))
@@ -41,7 +41,7 @@ const Lesson: FC<LessonProps> = ({
 	isIndependent = false
 }) => {
 	const t = useTranslations('Lesson')
-
+	const { back, replace } = useRouter()
 	const [getPrevNextLesson, { data: prevNextData, loading: prevNextLoading }] =
 		useLazyQuery(GET_PREV_NEXT_LESSON)
 	const { updateLesson } = useUpdateLessonCompleted()
@@ -99,7 +99,20 @@ const Lesson: FC<LessonProps> = ({
 			return getLessonRoute(lessonId, topicId)
 		}
 	}
-
+	const toCourse = topicId => {
+		if (isIndependent) {
+			back()
+			return
+		}
+		replace(
+			getCourseByIdRoute(
+				lessonContentData?.courseId,
+				topicId,
+				lessonContentData?.subtopicId,
+				lessonContentData?.id
+			)
+		)
+	}
 	const renderBlock = useCallback((block: ILessonBlock) => {
 		switch (block.type) {
 			case 'CODE':
@@ -213,13 +226,7 @@ const Lesson: FC<LessonProps> = ({
 							onPress={() => {
 								completeLesson()
 							}}
-							as={Link}
-							href={getCourseByIdRoute(
-								lessonContentData?.courseId,
-								topicId,
-								lessonContentData?.subtopicId,
-								lessonContentData?.id
-							)}
+							onClick={() => toCourse(topicId)}
 							className='h-[60px] w-auto px-6 rounded-[20px]'
 							color='gray'
 						>
