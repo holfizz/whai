@@ -98,10 +98,10 @@ export const Footer = () => {
 				<h3 className='text-secondary text-sm'>©2024 Whai</h3>
 
 				<div className='flex gap-4 w-max'>
-					<Link href='https://vk.ru/whai_edu'>
+					<Link href='https://t.me/whai_edu'>
 						<TelegramIcon fontSize={32} fill='#bbb9b7' />
 					</Link>
-					<Link href='https://t.me/whai_edu'>
+					<Link href='https://vk.ru/whai_edu'>
 						<VKIcon fontSize={34} fill='#bbb9b7' />
 					</Link>
 				</div>

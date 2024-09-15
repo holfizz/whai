@@ -2,7 +2,7 @@
 import { AuthForm } from '@/features/auth'
 import { authConstants } from '@/shared/const/auth'
 import { useAuthRedirect } from '@/shared/lib/hooks/useAuthRedirect'
-import Loader from '@/shared/ui/Loader/Loader'
+import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import Logo from '@/shared/ui/Logo/Logo'
 import { useTranslations } from 'next-intl'
 import { Suspense } from 'react'
@@ -21,7 +21,7 @@ export default function Page() {
 			</div>
 			<div className={cls.mainScreen}>
 				<div className={cls.authFormWrapper}>
-					<Suspense fallback={<Loader />}>
+					<Suspense fallback={<BigDotsLoader />}>
 						<AuthForm type={authConstants.SIGNUP} />
 					</Suspense>
 				</div>

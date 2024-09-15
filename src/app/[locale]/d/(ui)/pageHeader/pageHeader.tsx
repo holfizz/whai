@@ -4,8 +4,8 @@ import { IUser } from '@/entities/Auth'
 import { ICourse, useGetAllCourses, useGetLastCourse } from '@/entities/course'
 import { Link } from '@/navigation'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
-import EngAvatar from '@/shared/assets/image/EnglishCourseAvatar.png'
-import UniverseImage from '@/shared/assets/image/UniversalLife.png'
+import EngAvatar from '@/shared/assets/image/EnglishCourseAvatar.webp'
+import UniverseImage from '@/shared/assets/image/UniversalLife.webp'
 import {
 	getCourseByIdRoute,
 	getCourseExampleByIdRoute
@@ -47,7 +47,10 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 								}
 							>
 								{lastCourseData ? (
-									<div className='flex w-full max-640:p-8 p-4 rounded-[40px] shadow-sm justify-between max-640:w-full'>
+									<div
+										data-tour-step='continue'
+										className='flex w-full max-640:p-8 p-4 rounded-[40px] shadow-sm justify-between max-640:w-full'
+									>
 										<div className={'flex max-640:flex-col'}>
 											<Link
 												href={getCourseByIdRoute(lastCourseData?.id)}

@@ -3,7 +3,7 @@
 import BodyCards from '@/app/[locale]/d/(ui)/pageBody/bodyCard/bodyCards'
 import { useGetAllCourses } from '@/entities/course/'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
-import HandsImage from '@/shared/assets/image/Hands.png'
+import HandsImage from '@/shared/assets/image/Hands.webp'
 import { getCoursesRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import Text from '@/shared/ui/Text/Text'

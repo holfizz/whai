@@ -12,11 +12,7 @@ interface LayoutProps {
 	sidebarChildren?: ReactNode
 }
 
-export const DashboardLayout: FC<LayoutProps> = ({
-	children,
-	sidebarChildren,
-	className
-}) => {
+export const DashboardLayout: FC<LayoutProps> = ({ children, className }) => {
 	const { isCollapsed } = useSidebar()
 	const [width] = useWindowSize()
 

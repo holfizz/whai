@@ -185,7 +185,8 @@
 		"Lesson is empty": "Lesson is empty",
 		"Try again": "Try again",
 		"You don't have chats": "You don't have chats",
-		"Complete lesson": "Complete lesson"
+		"Complete lesson": "Complete lesson",
+		"This will take a couple of minutes Please do not close the page": "This will take a couple of minutes. Please do not close the page."
 	},
 	"LessonTask": {
 		"Supported file formats for upload": "Supported file formats for upload:",
@@ -409,15 +410,7 @@
 		"Activate Trial": "Activate Trial",
 		"Trial end date": "Trial end date"
 	},
-	"Close": "Close",
-	"Open": "Open",
-	"User": "User",
-	"New chat": "New chat",
-	"Search": "Search",
-	"Workspace": "Workspace",
-	"Light": "Light",
-	"Dark": "Dark",
-	"Creator": "Creator",
-	"Student": "Student",
-	"Mode": "Mode"
+	"NotFound": {
+		"return to home": "Return to home"
+	}
 }

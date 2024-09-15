@@ -6,7 +6,7 @@ import { CREATE_LESSON_WITH_AI } from '@/entities/lesson/model/lesson.queries'
 import { Lesson } from '@/features/lesson'
 import logger from '@/shared/lib/utils/logger'
 import Button from '@/shared/ui/Button/Button'
-import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useMutation } from '@apollo/client'
 import { useTranslations } from 'next-intl'
@@ -75,9 +75,16 @@ const LessonPage = () => {
 	if (loadingLessonContent || creatingLesson) {
 		return (
 			<DashboardLayout>
-				<div className='mt-10 flex items-center w-full justify-center'>
-					<h1>{t('Lesson creation in progress')}</h1>
-					<DotsLoader />
+				<div className='mt-10 flex gap-4 flex-col items-center w-full justify-center'>
+					<h1 className='text-lg text-accent'>
+						{t('Lesson creation in progress')}
+					</h1>
+					<p className='text-sm text-secondary'>
+						{t(
+							'This will take a couple of minutes Please do not close the page'
+						)}
+					</p>
+					<BigDotsLoader />
 				</div>
 			</DashboardLayout>
 		)

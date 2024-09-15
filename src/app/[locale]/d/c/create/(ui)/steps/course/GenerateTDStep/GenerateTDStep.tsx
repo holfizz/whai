@@ -289,13 +289,19 @@ const GenerateTDStep = (): React.JSX.Element => {
 								</div>
 							</div>
 						) : (
-							<DataCards
-								isLoading={loadingTD}
-								mutationTDData={titleDescriptionData}
-								setSelectedCardIndex={setSelectedCardIndex}
-								selectedCardIndex={selectedCardIndex}
-								onEditSave={handleSaveEdit}
-							/>
+							<div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 max-640:w-[90vw]'>
+								{isLoading ? (
+									<Loader />
+								) : (
+									<DataCards
+										isLoading={loadingTD}
+										mutationTDData={titleDescriptionData}
+										setSelectedCardIndex={setSelectedCardIndex}
+										selectedCardIndex={selectedCardIndex}
+										onEditSave={handleSaveEdit}
+									/>
+								)}
+							</div>
 						)}
 					</div>
 				)}
@@ -314,13 +320,12 @@ const GenerateTDStep = (): React.JSX.Element => {
 							className='max-lg:w-[140px] max-lg:h-[60px] max-640:!w-[50vw]'
 							size={'xl'}
 							color={'main'}
-							onClick={nextStep}
+							onClick={handleNextStep}
 						>
 							{t('Next')}
 						</Button>
 					</div>
 				)}
-				{isLoading && <Loader />}
 			</div>
 		</DashboardLayout>
 	)

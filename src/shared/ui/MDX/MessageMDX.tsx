@@ -8,6 +8,7 @@ import remarkMath from 'remark-math'
 import remarkParse from 'remark-parse'
 
 import { ListWrapperUl } from './ListWrapper'
+import QuoteWrapper from './QuoteWrapper'
 const components = {
 	math: ({ node, ...props }) => <h1 className='red' {...props}></h1>,
 	h1: ({ node, ...props }) => (
@@ -29,7 +30,9 @@ const components = {
 		<h5 className='text-base font-normal pb-2 my-2' {...props} />
 	),
 	p: ({ node, ...props }) => (
-		<p className='text-left text-base pb-2 my-2 max-md:text-xl' {...props}></p>
+		<p className='text-left text-base pb-2 my-2 max-md:text-xl'>
+			<QuoteWrapper {...props}>{props.children}</QuoteWrapper>
+		</p>
 	),
 	pre: ({ node, ...props }) => (
 		<pre className='border-2 border-decor-4 rounded-2xl p-5' {...props}></pre>

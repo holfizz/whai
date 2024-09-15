@@ -6,7 +6,7 @@ import {
 } from '@/entities/plan/model/plan.queries'
 import { Link } from '@/navigation'
 import RegenerateIcon from '@/shared/assets/icons/Regenerate'
-import Error from '@/shared/assets/image/error.png'
+import Error from '@/shared/assets/image/error.webp'
 import {
 	getCourseByIdRoute,
 	getSubscriptionsRoute
@@ -174,7 +174,7 @@ const CreateCoursePlanPage = () => {
 		<DashboardLayout className='w-full flex justify-center'>
 			<div className='w-full max-w-[1200px] p-4 flex flex-col items-center  max-md:my-4 max-md:mx-0 h-[92vh] justify-between'>
 				{(createPlanLoading || coursePlanLoading) && (
-					<>
+					<div className='flex flex-col items-center'>
 						<h1 className='text-2xl font-bold max-md:w-[80vw] max-md:text-center'>
 							{t('We continue to create the course')}
 						</h1>
@@ -184,7 +184,7 @@ const CreateCoursePlanPage = () => {
 							)}
 						</h3>
 						<BigDotsLoader className='mt-8' />
-					</>
+					</div>
 				)}
 				{createPlanError && (
 					<div>

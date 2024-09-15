@@ -4,12 +4,10 @@ import {
 } from '@/entities/chatWithAI/model/chatWithAI.queries'
 import { GET_LESSON_NAME, ILesson } from '@/entities/lesson'
 import {
-	useChatWithAIAnswerSubscription,
 	useCreateMessageWithAI,
 	useGetAllMessagesInChatWithAI
 } from '@/entities/messageWithAI'
 import ChatUi from '@/features/chatWithAI/ui/ChatUI/ChatUI'
-import logger from '@/shared/lib/utils/logger'
 import Button from '@/shared/ui/Button/Button'
 import { Modal, ModalContent } from '@/shared/ui/Modal/Modal'
 import { useQuery } from '@apollo/client'
@@ -40,6 +38,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	const [skip, setSkip] = useState(0)
 	const [take] = useState(initialTake)
 	const [isLoadingMore, setIsLoadingMore] = useState(false)
+	const [loadingPost, setLoadingPost] = useState<boolean>(false)
 
 	// Queries
 	const { data: LessonData } = useQuery<{ getLesson: Pick<ILesson, 'name'> }>(
@@ -51,8 +50,11 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 	)
 	const { getAllChatsWithAI, refetch: refetchChats } =
 		useGetAllChatsWithAI(lessonId)
-	const { createMessageWithAI, createMessageWithAIData } =
-		useCreateMessageWithAI()
+	const {
+		createMessageWithAI,
+		createMessageWithAIData,
+		createMessageWithAILoading
+	} = useCreateMessageWithAI()
 	const {
 		createChatsWithAIData,
 		mutationCreateChatWithAI,
@@ -69,8 +71,6 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		initialTake: take,
 		initialSkip: skip
 	})
-	const { subscriptionChatWithAIData } =
-		useChatWithAIAnswerSubscription(selectedChatId)
 
 	// Effect for updating messages with new chat data
 	useEffect(() => {
@@ -78,57 +78,33 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			setMessages(messagesAllMessagesInChatWithAI)
 		}
 	}, [messagesAllMessagesInChatWithAI, selectedChatId])
-	useEffect(() => {
-		if (subscriptionChatWithAIData) {
-			console.log(
-				'Received data from subscription:',
-				subscriptionChatWithAIData
-			)
-		}
-	}, [subscriptionChatWithAIData])
+
 	useEffect(() => {
 		if (selectedChatId) {
 			setPartialMessage(null)
 			setSkip(0)
 			refetchMessages()
 				.then(() => {
-					setMessages(messagesAllMessagesInChatWithAI) // Убедитесь, что состояние обновляется
+					setMessages(messagesAllMessagesInChatWithAI) // Ensure state is updated
 				})
 				.catch(err => console.error('Error refetching messages:', err))
 		}
 	}, [selectedChatId, refetchMessages, messagesAllMessagesInChatWithAI])
-	// Effect for handling subscription updates
+
+	// Effect for handling message updates
 	useEffect(() => {
-		if (subscriptionChatWithAIData && !subscriptionChatWithAIData.is_finish) {
-			const { message, is_finish, conversation_id } = subscriptionChatWithAIData
-
-			setPartialMessage(prev => {
-				if (prev && prev.id === conversation_id) {
-					const newContent = prev.content + message.content
-					return { ...prev, content: newContent }
-				}
-				const updatedMessage = {
-					...message,
-					content: message.content,
-					id: conversation_id
-				}
-
-				if (is_finish) {
-					setMessages(prevMessages => [
-						{ ...updatedMessage, type: 'answer' },
-						...prevMessages.filter(msg => msg.id !== updatedMessage.id)
-					])
-					return null
-				}
-				return updatedMessage
+		if (createMessageWithAIData) {
+			setMessages(prevMessages => {
+				const updatedMessages = prevMessages.filter(
+					msg => msg?.role !== 'assistant' || msg?.type !== 'partial'
+				)
+				return [createMessageWithAIData, ...updatedMessages]
 			})
 		}
-	}, [subscriptionChatWithAIData])
-	useEffect(() => {
-		if (loadMore) {
-			logger.log('LOADMORR', loadMore)
-		}
-	}, [loadMore])
+	}, [createMessageWithAIData])
+
+	const isSendButtonDisabled = messageContent.trim().length < 3 || loading
+
 	const handleLoadMore = useCallback(() => {
 		if (!isLoadingMore) {
 			setIsLoadingMore(true)
@@ -171,6 +147,7 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		setLoading(true)
 
 		try {
+			setLoadingPost(true)
 			await createMessageWithAI({
 				variables: {
 					chatWithAIRequestDto: {
@@ -186,17 +163,9 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			console.error('Error sending message:', error)
 		} finally {
 			setLoading(false)
+			setLoadingPost(false)
 		}
 	}
-	useEffect(() => {
-		setMessages(prevMessages => {
-			const updatedMessages = prevMessages.filter(
-				msg => msg?.role !== 'assistant' || msg?.type !== 'partial'
-			)
-			return [createMessageWithAIData, ...updatedMessages]
-		})
-	}, [createMessageWithAIData])
-	const isSendButtonDisabled = messageContent.trim().length < 3 || loading
 
 	const handleCreateChat = useCallback(async () => {
 		try {
@@ -214,8 +183,8 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 			if (data?.createChatWithAI) {
 				setSelectedChatId(data.createChatWithAI.id)
 				setIsAdditionalParam(false)
-				await refetchChats() // Обновите список чатов
-				await refetchMessages() // Получите сообщения для нового чата
+				await refetchChats() // Update chat list
+				await refetchMessages() // Fetch messages for new chat
 			}
 		} catch (error) {
 			console.error('Error creating chat:', error)
@@ -227,8 +196,9 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		setSelectedChatId,
 		setIsAdditionalParam,
 		refetchChats,
-		refetchMessages // Добавьте refetchMessages сюда
+		refetchMessages
 	])
+
 	useEffect(() => {
 		if (createChatsWithAIData) {
 			const req = async () => {
@@ -242,9 +212,6 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [createChatsWithAIData, setSelectedChatId])
 
-	useEffect(() => {
-		logger.log(333, selectedChatId)
-	}, [selectedChatId])
 	return (
 		<>
 			<Modal
@@ -274,10 +241,11 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 									messages={
 										partialMessage ? [partialMessage, ...messages] : messages
 									}
-									loading={loadingAllMessagesInChatWithAI}
+									loading={loadingAllMessagesInChatWithAI || loadingPost}
 									isLoadingMore={isLoadingMore}
 									handleStartReached={handleStartReached}
 									skip={skip}
+									isSending={createMessageWithAILoading}
 								/>
 							) : (
 								<div className='w-full flex flex-col items-center justify-center'>
@@ -299,19 +267,19 @@ const ChatWithAI = ({ lessonId }: { lessonId: string }) => {
 								setMessageContent={setMessageContent}
 								handleSendMessage={handleSendMessage}
 								isSendButtonDisabled={isSendButtonDisabled}
-								loading={loading}
+								loading={false}
 							/>
 						</ModalFooter>
 					</>
 				</ModalContent>
-			</Modal>
+			</Modal>{' '}
 			<Button
 				onPress={() => handleOpen()}
 				className={cls.askAIBtn}
 				color={'accent'}
 			>
 				{t('Ask AI')}
-			</Button>
+			</Button>{' '}
 		</>
 	)
 }

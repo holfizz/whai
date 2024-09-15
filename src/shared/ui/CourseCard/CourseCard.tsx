@@ -1,7 +1,7 @@
 import { ICourse } from '@/entities/course'
 import { Link } from '@/navigation'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
-import UniverseImage from '@/shared/assets/image/UniversalLife.png'
+import UniverseImage from '@/shared/assets/image/UniversalLife.webp'
 import {
 	getCourseByIdRoute,
 	getCourseExampleByIdRoute

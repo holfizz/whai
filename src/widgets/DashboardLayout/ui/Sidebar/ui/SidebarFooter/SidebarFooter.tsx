@@ -7,7 +7,10 @@ const SidebarFooter = () => {
 	const { userData } = useGetProfile()
 	const { isCollapsed } = useSidebar()
 	return (
-		<div className='w-full h-[100px] flex flex-col items-center justify-center gap-4 mb-16 px-8'>
+		<div
+			data-tour-step='limits'
+			className='w-full h-auto flex flex-col items-center justify-center gap-4 mb-16 px-4'
+		>
 			<div
 				className={`flex w-full items-center ${
 					isCollapsed ? 'justify-center' : 'justify-between '
@@ -18,7 +21,7 @@ const SidebarFooter = () => {
 						{t('Generations of courses')}
 					</h3>
 				)}
-				<div className='w-[40px] h-[40px] rounded-md text-accent flex justify-center items-center bg-white'>
+				<div className='w-[40px] h-[40px] a rounded-md text-accent flex justify-center items-center bg-white'>
 					{userData?.currentCourseCount}
 				</div>
 			</div>

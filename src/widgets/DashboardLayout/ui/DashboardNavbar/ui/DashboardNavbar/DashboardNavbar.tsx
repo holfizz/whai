@@ -2,13 +2,14 @@
 import { useGetProfile } from '@/entities/Auth/model/auth.queries'
 import { logout } from '@/features/auth/model/auth.model'
 import { Link } from '@/navigation'
-import BaseAvatar from '@/shared/assets/image/BaseAvatar.png'
+import BaseAvatar from '@/shared/assets/image/BaseAvatar.webp'
 import {
 	getDashboardRoute,
 	getSubscriptionsRoute,
 	getSupportRoute
 } from '@/shared/const/router'
 
+import MenuIcon from '@/shared/assets/icons/Menu'
 import Button from '@/shared/ui/Button/Button'
 import {
 	Dropdown,
@@ -31,11 +32,10 @@ import { sidebarItems } from '../../../Sidebar/module/sidebar-items.data'
 import SidebarItem from '../../../Sidebar/ui/SidebarItem/SidebarItem'
 import cls from './DashboardNavbar.module.scss'
 
-interface IDashboardNavbar {}
-
-export function DashboardNavbar({}: IDashboardNavbar) {
+export function DashboardNavbar() {
 	const t = useTranslations('Navbar')
 	const { userData } = useGetProfile()
+
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	return (
 		<Navbar
@@ -51,6 +51,7 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 			</NavbarContent>
 			<NavbarContent justify='end'>
 				<Button
+					data-tour-step='subscription'
 					className='max-md:hidden'
 					size='md'
 					color='accent'
@@ -119,8 +120,14 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 					</Dropdown>
 				)}
 				<NavbarMenuToggle
+					data-tour-step='menu'
 					className='640:hidden'
 					aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+					icon={
+						<div className='w-auto h-[40px] aspect-square bg-decor-1 rounded-full flex items-center justify-center'>
+							<MenuIcon className={isMenuOpen && 'rotate-180'} />
+						</div>
+					}
 				/>
 			</NavbarContent>
 			<NavbarMenu onClick={() => setIsMenuOpen(false)} className={cls.MenuDark}>
@@ -135,7 +142,10 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 						</NavbarMenuItem>
 					))}
 				</div>
-				<div className='ml-[40px] w-[70vw] max-sm:w-[90vw] flex flex-col items-center gap-5 mb-10'>
+				<div
+					data-tour-step='mobile-limits'
+					className='ml-[40px] w-[70vw] max-sm:w-[90vw] flex flex-col items-center gap-5 mb-10'
+				>
 					<div className={`flex w-full items-center gap-5 text-secondary `}>
 						<div className='w-[30px] h-[30px] rounded-md text-accent flex justify-center items-center bg-white'>
 							{userData?.currentCourseCount}
@@ -158,7 +168,8 @@ export function DashboardNavbar({}: IDashboardNavbar) {
 					</div>
 				</div>
 				<Button
-					className='ml-[40px] w-[70vw] h-[60px] max-sm:w-[90vw] mb-10'
+					data-tour-step='mobile-subscription'
+					className='ml-[40px] w-[70vw] h-[60px] max-sm:w-[80vw] mb-10'
 					size='lg'
 					color='accent'
 					as={Link}

@@ -32,7 +32,7 @@ const GenerateBlockModal = ({
 	subtopicId?: string
 }) => {
 	const t = useTranslations('CreateCoursePlanPage')
-	const [mode, setMode] = useState('manual')
+	const [mode, setMode] = useState<'manual' | 'ai'>('ai')
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
 	const [userRequest, setUserRequest] = useState('')
@@ -77,7 +77,6 @@ const GenerateBlockModal = ({
 		}
 	}, [data])
 
-	// Handlers to clear error message when typing starts
 	const handleTitleChange = e => {
 		setTitle(e.target.value)
 		setErrorMessage('')
@@ -133,6 +132,8 @@ const GenerateBlockModal = ({
 								<>
 									<div className='flex gap-4 mb-4'>
 										<Button
+											isDisabled
+											disabled
 											className='rounded-2xl'
 											onPress={() => setMode('manual')}
 											color={mode === 'manual' ? 'primary' : 'gray'}

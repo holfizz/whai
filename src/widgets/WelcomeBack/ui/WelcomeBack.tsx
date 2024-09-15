@@ -1,7 +1,7 @@
 import { IUser } from '@/entities/Auth'
 import { useGetStatProfile } from '@/entities/Auth/model/auth.queries'
 import { Link } from '@/navigation'
-import BaseAvatar from '@/shared/assets/image/BaseAvatar.png'
+import BaseAvatar from '@/shared/assets/image/BaseAvatar.webp'
 import { getCreatePageRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import { Dropdown } from '@/shared/ui/Dropdown/Dropdown'
@@ -16,7 +16,7 @@ export const WelcomeBack: FC<{ userData: IUser }> = ({ userData }) => {
 	const { userStat } = useGetStatProfile()
 	return (
 		<div className={cls.welcomeBlocks}>
-			<div className={cls.personWelcomeBlock}>
+			<div className={cls.personWelcomeBlock} data-tour-step='welcome-block'>
 				<Avatar
 					classNames={{ base: 'bg-white' }}
 					className={cls.avatar}

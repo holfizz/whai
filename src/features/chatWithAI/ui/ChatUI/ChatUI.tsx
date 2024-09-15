@@ -1,6 +1,7 @@
 import { MessageWithAIRole } from '@/entities/messageWithAI'
-import Loader from '@/shared/ui/Loader/Loader'
+import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import Message from '@/shared/ui/Message/Message'
+import { Skeleton } from '@nextui-org/react'
 import { useEffect, useRef } from 'react'
 import { Virtuoso } from 'react-virtuoso'
 
@@ -9,7 +10,8 @@ const ChatUi = ({
 	loading,
 	isLoadingMore,
 	handleStartReached,
-	skip
+	skip,
+	isSending
 }) => {
 	const virtuosoRef = useRef(null)
 
@@ -20,8 +22,6 @@ const ChatUi = ({
 		}
 	}, [messages, skip])
 
-	const showLoader = (loading && skip === 0) || isLoadingMore
-
 	return (
 		<div
 			style={{
@@ -31,9 +31,9 @@ const ChatUi = ({
 				flexDirection: 'column'
 			}}
 		>
-			{showLoader && (
+			{isLoadingMore && (
 				<div className={'w-full flex justify-center'}>
-					<Loader />
+					<BigDotsLoader />
 				</div>
 			)}
 			<Virtuoso
@@ -53,6 +53,9 @@ const ChatUi = ({
 							>
 								{message.content}
 							</Message>
+						)}
+						{index === messages.length - 1 && isSending && (
+							<Skeleton className={'w-[220px] h-[70px] rounded-3xl mt-2'} />
 						)}
 					</div>
 				)}

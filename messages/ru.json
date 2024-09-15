@@ -186,7 +186,8 @@
 		"Lesson is empty": "Урок пустой",
 		"Try again": "Попробовать снова",
 		"You don't have chats": "У вас нет чатов",
-		"Complete lesson": "Завершить урок"
+		"Complete lesson": "Завершить урок",
+		"This will take a couple of minutes Please do not close the page": "Это займёт пару минут. Пожалуйста не закрывайте страницу."
 	},
 	"LessonTask": {
 		"Supported file formats for upload": "Поддерживаемые форматы файлов для загрузки:",
@@ -406,14 +407,7 @@
 		"Activate Trial": "Активировать",
 		"Trial end date": "Дата окончания пробного периода"
 	},
-	"Open": "Открыть",
-	"User": "Пользователь",
-	"New chat": "Новый чат",
-	"Search": "Поиск",
-	"Workspace": "Рабочее пространство",
-	"Light": "Светлая",
-	"Dark": "Темная",
-	"Creator": "Создатель",
-	"Student": "Студент",
-	"Mode": "Режим"
+	"NotFound": {
+		"return to home": "Вернутся на главную"
+	}
 }

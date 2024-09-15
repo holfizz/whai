@@ -17,7 +17,7 @@ export const getSubscriptionsRoute = () => `/subscriptions`
 
 //dashboard - d
 export const getDashboardRoute = () => `/d`
-export const getChatWithAIRoute = () => `/d/chat-ai`
+export const getChatWithAIRoute = () => `/chat-ai`
 export const getStatisticsRoute = () => `/statistics`
 
 //courses - c

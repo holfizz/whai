@@ -30,7 +30,7 @@ const Sidebar = () => {
 			<div className={cls.logoBlock}>
 				<Logo
 					color='var(--color-accent)'
-					logoType={'short'}
+					logoType={isCollapsed ? 'short' : 'long'}
 					className={cls.logo}
 				/>
 			</div>

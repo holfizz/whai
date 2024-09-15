@@ -5,10 +5,12 @@ import cls from './Message.module.scss'
 
 const Message = ({
 	children,
-	messageFrom = MessageWithAIRole.USER
+	messageFrom = MessageWithAIRole.USER,
+	loading
 }: {
 	children: string
 	messageFrom?: MessageWithAIRole
+	loading?: boolean
 }) => {
 	const mods: Mods = {
 		[cls[messageFrom]]: true
