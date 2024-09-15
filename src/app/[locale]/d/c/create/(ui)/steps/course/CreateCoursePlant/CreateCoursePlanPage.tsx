@@ -6,7 +6,7 @@ import {
 } from '@/entities/plan/model/plan.queries'
 import { Link } from '@/navigation'
 import RegenerateIcon from '@/shared/assets/icons/Regenerate'
-import Error from '@/shared/assets/image/error.webp'
+import Error from '@/shared/assets/image/Error.webp'
 import {
 	getCourseByIdRoute,
 	getSubscriptionsRoute
