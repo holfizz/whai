@@ -412,5 +412,21 @@
 	},
 	"NotFound": {
 		"return to home": "Return to home"
+	},
+	"FAQ": {
+		"faqtitle": "FAQ",
+		"faqDescription": "Below you will find answers to the most frequently asked questions regarding the use of our platform. If you do not find an answer to your question, feel free to contact our support team.",
+		"question1": "What can I learn here?",
+		"answer1": "On our platform, you can learn anything. The artificial intelligence technology has extensive knowledge in every field of life, and our AI can also retrieve information from the internet, articles, documents, and all fresh data.",
+		"question2": "What happens if my subscription ends and I haven’t finished the course?",
+		"answer2": "You can continue with the created content when it's convenient for you, but without a subscription, you will not have access to the chat with AI.",
+		"question3": "What are limits?",
+		"answer3": "Limits are restrictions on the number of created courses, lessons, and other features depending on the selected subscription. For example, a basic subscription has limits on the number of courses and lessons you can create, while a premium subscription provides significantly more possibilities.",
+		"question4": "Can I study multiple courses at once?",
+		"answer4": "Yes, you can take multiple courses at the same time. Depending on your subscription, you have a certain number of courses you can start in a month.",
+		"question5": "What is a flexible study plan?",
+		"answer5": "A flexible study plan allows you to tailor the learning program to your needs. You can choose only the topics and materials that are truly interesting and useful for you, excluding what you already know.",
+		"question6": "What types of homework are available on the platform?",
+		"answer6": "Homework includes completing tasks in text format, creating presentations, and adding photos or screenshots to demonstrate progress. Results are attached as photos, screenshots, files, and other formats."
 	}
 }

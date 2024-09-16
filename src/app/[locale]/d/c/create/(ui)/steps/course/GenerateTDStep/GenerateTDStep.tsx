@@ -250,6 +250,11 @@ const GenerateTDStep = (): React.JSX.Element => {
 						</h1>
 						<div className='flex gap-5 items-center justify-center'>
 							<Button
+								title={
+									userData?.additionalTitlesCount === 0
+										? 'У вас недостаточно генераций заголовков'
+										: null
+								}
 								disabled={userData?.additionalTitlesCount === 0}
 								isDisabled={userData?.additionalTitlesCount === 0}
 								color='main'

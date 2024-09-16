@@ -31,7 +31,7 @@ import { useState } from 'react'
 import { sidebarItems } from '../../../Sidebar/module/sidebar-items.data'
 import SidebarItem from '../../../Sidebar/ui/SidebarItem/SidebarItem'
 import cls from './DashboardNavbar.module.scss'
-
+import './MenuStyle.scss'
 export function DashboardNavbar() {
 	const t = useTranslations('Navbar')
 	const { userData } = useGetProfile()
@@ -64,7 +64,9 @@ export function DashboardNavbar() {
 				{userData?.email && (
 					<Dropdown
 						color='white'
-						classNames={{ base: 'bg-white rounded-[15px]' }}
+						classNames={{
+							base: 'bg-white rounded-[15px]'
+						}}
 						placement='bottom-end'
 					>
 						<DropdownTrigger>
@@ -121,7 +123,7 @@ export function DashboardNavbar() {
 				)}
 				<NavbarMenuToggle
 					data-tour-step='menu'
-					className='640:hidden'
+					className='640:hidden w-auto'
 					aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
 					icon={
 						<div className='w-auto h-[40px] aspect-square bg-decor-1 rounded-full flex items-center justify-center'>
@@ -134,11 +136,7 @@ export function DashboardNavbar() {
 				<div onClick={e => e.stopPropagation()} className={cls.Menu}>
 					{sidebarItems.map((item, index) => (
 						<NavbarMenuItem className={cls.MenuItem} key={index}>
-							<SidebarItem
-								item={item}
-								className=''
-								isCollapsed={false}
-							></SidebarItem>
+							<SidebarItem item={item} isCollapsed={false}></SidebarItem>
 						</NavbarMenuItem>
 					))}
 				</div>
