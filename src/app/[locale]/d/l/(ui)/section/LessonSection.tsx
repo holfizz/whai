@@ -4,6 +4,7 @@ import { getAllIndependentLessons } from '@/entities/lesson'
 import { Link } from '@/navigation'
 import ArrowUpRight from '@/shared/assets/icons/ArrowUpRight'
 import ListIcon from '@/shared/assets/icons/List'
+import LessonIcon from '@/shared/assets/image/LessonIcon.webp'
 import {
 	getLessonIndependentRoute,
 	getLessonTaskRoute
@@ -34,7 +35,26 @@ const LessonSection = () => {
 							key={i}
 							className='shadow-sm rounded-[25px] py-4 px-5 mb-4 w-[390px] h-min-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full bg-white'
 						>
-							<div className='w-full flex justify-between items-start'>
+							<div className='w-full flex flex-col justify-between items-start'>
+								<div className='flex justify-between w-full items-start'>
+									<Link href={getLessonIndependentRoute(lesson.id)}>
+										<img
+											width={100}
+											height={100}
+											src={LessonIcon.src}
+											alt='quiz'
+										/>
+									</Link>
+									<Button
+										size='sRound'
+										href={getLessonIndependentRoute(lesson.id)}
+										isIconOnly
+										startContent={<ArrowUpRight fill='var(--color-accents)' />}
+										variant='circle'
+										as={Link}
+										color='main'
+									></Button>
+								</div>
 								<div className='flex flex-col'>
 									<Link
 										href={getLessonIndependentRoute(lesson.id)}
@@ -48,15 +68,6 @@ const LessonSection = () => {
 										</p>
 									)}
 								</div>
-								<Button
-									size='sRound'
-									href={getLessonIndependentRoute(lesson.id)}
-									isIconOnly
-									startContent={<ArrowUpRight fill='var(--color-accents)' />}
-									variant='circle'
-									as={Link}
-									color='main'
-								></Button>
 							</div>
 							{lesson?.lessonTasks?.length > 0 && (
 								<Link
