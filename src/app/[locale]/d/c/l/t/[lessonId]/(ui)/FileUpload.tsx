@@ -12,7 +12,6 @@ interface FileUploadProps {
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({
-	taskIndex,
 	onDropCallback,
 	file,
 	fileNames

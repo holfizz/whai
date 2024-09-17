@@ -5,6 +5,7 @@ import {
 	useGetLessonTasks
 } from '@/entities/lesson/model/lesson.queries'
 import { Link } from '@/navigation'
+import ArrowDown from '@/shared/assets/icons/ArrowDown'
 import ArrowRight from '@/shared/assets/icons/ArrowRight'
 import BackArrow2 from '@/shared/assets/icons/BackArrow2'
 import { getCourseByIdRoute } from '@/shared/const/router'
@@ -32,6 +33,11 @@ const LessonTaskPage = () => {
 	const { lessonId } = useParams<{ lessonId: string }>()
 	const t = useTranslations('LessonTask')
 	const { taskData } = useGetLessonTasks(lessonId)
+	const [isOpen, setIsOpen] = useState(false)
+
+	const toggleSpoiler = () => {
+		setIsOpen(!isOpen)
+	}
 	const [selectedTaskIndex, setSelectedTaskIndex] = useState(0)
 	const [checkHomework, { loading, data }] = useMutation<{
 		checkHomework: TaskResponseInterface
@@ -256,6 +262,33 @@ const LessonTaskPage = () => {
 											{interaction.incorrectParts}
 										</p>
 									)}
+									{interaction.links.length > 0 && (
+										<div>
+											<button
+												className='w-full mt-2 bg-transparent border-none text-sm text-accent rounded-lg flex items-center justify-between'
+												onClick={toggleSpoiler}
+											>
+												<span>Доп материалы</span>
+												<ArrowDown className={`${isOpen && 'rotate-180'}`} />
+											</button>
+											{isOpen && (
+												<ul className='p-2 bg-black/5 rounded-lg list-none'>
+													{interaction.links.map((link, i) => (
+														<li key={i} className='mb-2 last:mb-0'>
+															<a
+																target='_blank'
+																rel='noopener noreferrer'
+																href={link}
+																className='text-secondary hover:underline'
+															>
+																{link}
+															</a>
+														</li>
+													))}
+												</ul>
+											)}
+										</div>
+									)}
 								</div>
 							))}
 						</div>
@@ -285,7 +318,7 @@ const LessonTaskPage = () => {
 							<Button
 								onClick={handleCheckHomework}
 								disabled={!fileUploads[selectedTaskIndex] || loading}
-								color='gray'
+								color={fileUploads[selectedTaskIndex] ? 'primary' : 'gray'}
 								className='w-[180px] h-[60px] rounded-[20px] mb-6'
 							>
 								{loading ? 'Checking...' : t('Check')}
@@ -304,9 +337,9 @@ const LessonTaskPage = () => {
 							startContent={<ArrowRight className='rotate-180' />}
 						/>
 						<Button
+							color='gray'
 							disabled={selectedTaskIndex === taskData?.lessonTasks.length - 1}
 							onClick={() => setSelectedTaskIndex(prev => prev + 1)}
-							color='gray'
 							isIconOnly
 							className={`h-[60px] w-[80px] rounded-[20px] ${
 								selectedTaskIndex === taskData?.lessonTasks.length - 1 &&

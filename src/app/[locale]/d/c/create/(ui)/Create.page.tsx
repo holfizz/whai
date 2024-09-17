@@ -18,6 +18,19 @@ import QuizStep from './steps/test/QuizStep'
 const CreatePage = () => {
 	const { choice, resetState, step } = useUnifiedStore()
 
+	// useEffect(() => {
+	// 	const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+	// 		const warningText = ''
+	// 		event.preventDefault()
+	// 		event.returnValue = warningText
+	// 		return warningText
+	// 	}
+
+	// 	window.addEventListener('beforeunload', handleBeforeUnload)
+	// 	return () => {
+	// 		window.removeEventListener('beforeunload', handleBeforeUnload)
+	// 	}
+	// }, [])
 	const renderCourseStep = () => {
 		switch (step) {
 			case 1:

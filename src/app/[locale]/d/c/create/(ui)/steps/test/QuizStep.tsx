@@ -2,7 +2,7 @@ import { useCreateIndependentQuizWithAI } from '@/entities/quiz'
 import { Quiz, useQuizStore } from '@/features/quiz'
 import { getQuizIndependentRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
-import DotsLoader from '@/shared/ui/Loader/DotsLoader'
+import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -63,7 +63,7 @@ const QuizStep = () => {
 	return (
 		<DashboardLayout>
 			<div className='w-full flex flex-col items-center justify-center'>
-				{loadingCreateQuiz && <DotsLoader />}
+				{loadingCreateQuiz && <BigDotsLoader />}
 				{quizId ? <Quiz quizIdProp={quizId} /> : <p>Создание викторины...</p>}
 				{quizResultId && (
 					<Button size={'3xl'} color={'main'} onClick={handleNext}>
