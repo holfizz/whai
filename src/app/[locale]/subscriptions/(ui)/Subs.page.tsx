@@ -17,7 +17,7 @@ import Button from '@/shared/ui/Button/Button'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { Layout } from '@/widgets/Layout'
 import { useMutation, useQuery } from '@apollo/client'
-import { sendGAEvent } from '@next/third-parties/google'
+import { sendGTMEvent } from '@next/third-parties/google'
 import {
 	ModalBody,
 	ModalContent,
@@ -298,7 +298,8 @@ const SubsPage = () => {
 												user?.getProfile?.isTrial
 											}
 											onClick={() => {
-												sendGAEvent('event', 'buttonClicked', {
+												sendGTMEvent({
+													event: 'buttonClicked',
 													value: 'payment_btn'
 												})
 												if (

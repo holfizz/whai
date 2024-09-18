@@ -8,6 +8,7 @@ export const GET_PROFILE = gql`
 			id
 			email
 			firstName
+			roles
 			lastName
 			isAutoRenewal
 			phoneNumber

@@ -12,8 +12,8 @@ import {
 } from '@/shared/const/router'
 
 import Button from '@/shared/ui/Button/Button'
-import { sendGAEvent } from '@next/third-parties/google'
 import { useTranslations } from 'next-intl'
+import { sendGTMEvent } from '@next/third-parties/google'
 
 interface ButtonsFormProps {
 	type: authConstants
@@ -31,7 +31,10 @@ const ButtonsForm: FC<ButtonsFormProps> = ({ type, setIsFormType }) => {
 				type={'submit'}
 				onClick={() => {
 					if (type === authConstants.SIGNUP) {
-						sendGAEvent('event', 'buttonClicked', { value: 'signup_btn' })
+						sendGTMEvent({
+							event: 'buttonClicked',
+							value: 'signup_btn'
+						})
 					}
 				}}
 				className={cls.submitButton}

@@ -172,7 +172,7 @@ const link = split(
 export const client = new ApolloClient({
 	link: ApolloLink.from([authLink, errorLink, link]),
 	cache: new InMemoryCache(),
-	connectToDevTools: true
+	connectToDevTools: true,
+	credentials: 'include'
 })
-
 export default client

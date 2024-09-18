@@ -87,11 +87,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 		}, [loginData])
 
 		useEffect(() => {
-			if (
-				loginData?.login?.accessToken &&
-				!loginError?.message?.length &&
-				type === authConstants.LOGIN
-			) {
+			if (loginData?.login?.accessToken && type === authConstants.LOGIN) {
 				router.push('/d')
 			}
 		}, [loginData, loginError, router, type])

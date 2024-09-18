@@ -21,6 +21,7 @@ export interface IUser {
 	avatarPath: string
 	isAutoRenewal: boolean
 	currentCourseCount: number
+	roles: string[]
 	currentLessonCount: number
 	additionalTitlesCount: number
 	activeSubscription?: ActiveSubscription

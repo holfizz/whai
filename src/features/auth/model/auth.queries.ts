@@ -147,10 +147,10 @@ export const LOGOUT = gql`
 `
 
 export const useLogoutQuery = () => {
-	const [query, { loading, error }] = useLazyQuery<any>(LOGOUT, {
+	const [query, { data, loading, error }] = useLazyQuery<any>(LOGOUT, {
 		onCompleted: () => {
 			logout()
 		}
 	})
-	return { logout: query, loading, error }
+	return { logout: query, logoutData: data, loading, error }
 }
