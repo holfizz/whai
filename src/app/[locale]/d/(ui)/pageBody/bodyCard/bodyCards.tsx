@@ -30,7 +30,7 @@ export default function BodyCards({
 			</div>
 		)
 	}
-	const filteredCourses = data?.slice(1, 3)
+	const filteredCourses = data?.slice(0, 3)
 	const t = useTranslations('Dashboard')
 
 	return (
@@ -44,7 +44,10 @@ export default function BodyCards({
 					return (
 						<>
 							<div className={`${isCourseLocked && 'blur-xl'}`}>
-								<CourseCard course={course} />
+								<CourseCard
+									className='!w-full !max-w-[390px]'
+									course={course}
+								/>
 							</div>
 							{isCourseLocked && (
 								<div className='absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center w-full h-full z-10 rounded-3xl'>

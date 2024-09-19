@@ -20,7 +20,7 @@ const CourseCard = ({
 	isSquare?: boolean
 }) => {
 	const styles = isSquare
-		? ' h-min-[330px] h-auto md:w-[90%] max-md:h-min-[252px] lg:w-[390px] max-sm:w-full'
+		? 'h-min-[330px] h-auto md:w-[90%] max-md:h-min-[252px] lg:w-[390px] max-sm:w-full'
 		: 'w-[390px] h-min-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full'
 	const getRoute = (id: string) => {
 		if (course?.isStatic) {
