@@ -4,6 +4,7 @@ import { z } from 'zod'
 export interface ICourse {
 	id: string
 	name: string
+	isTrial: boolean
 	description: string
 	imgUrl: string
 	totalTopics: number

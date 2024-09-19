@@ -153,7 +153,10 @@
 		"Start your first course": "Начните ваш первый курс",
 		"Finish your first lesson": "Закончите первый урок",
 		"Complete your first homework assignment": "Выполните ваше первое ДЗ",
-		"Complete your first test": "Завершите ваш первый тест"
+		"Complete your first test": "Завершите ваш первый тест",
+		"Blocked": "Заблокированно",
+		"You used the trial period to unlock, subscribe": "Вы использовали триал период, чтобы разблокировать навсегда, оформите подписку",
+		"Subscribe": "Подписаться"
 	},
 	"TopicsPage": {
 		"In notes": "В заметки",

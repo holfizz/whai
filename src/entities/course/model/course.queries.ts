@@ -8,6 +8,7 @@ export const GET_LAST_COURSE = gql`
 			name
 			id
 			totalTopics
+			isTrial
 			completionTime
 			progressPercents
 		}
@@ -32,6 +33,7 @@ export const GET_ALL_COURSES = gql`
 		getAllCourses {
 			id
 			name
+			isTrial
 			description
 			imgUrl
 			totalTopics

@@ -152,5 +152,5 @@ export const useLogoutQuery = () => {
 			logout()
 		}
 	})
-	return { logout: query, logoutData: data, loading, error }
+	return { logout: query, logoutData: data?.logout, loading, error }
 }

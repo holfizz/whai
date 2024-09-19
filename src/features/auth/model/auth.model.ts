@@ -1,9 +1,10 @@
 'use client'
 
+import client from '@/app/(providers)/ApolloProvider/ui/apollo-client'
 import { IUserData } from '@/entities/Auth'
 import { removeFromStorage } from '@/shared/api/auth/auth.helper'
 import { makeVar } from '@apollo/client'
-import { useLogoutQuery } from './auth.queries'
+import { LOGOUT } from './auth.queries'
 
 export const authUserVar = makeVar<IUserData>({
 	accessToken: null,
@@ -21,15 +22,14 @@ export function setAuthUser(authResponse: IUserData | null): void {
 
 export async function logout(isReload = false): Promise<void> {
 	try {
-		const { logout } = useLogoutQuery()
-		logout()
+		const { data } = await client.query({ query: LOGOUT })
 		localStorage.removeItem('authState')
 		removeFromStorage()
 		authUserVar({
 			user: null,
 			accessToken: null
 		})
-		if (isReload) {
+		if (isReload && data?.logout) {
 			window.location.reload()
 		}
 	} catch (error) {

@@ -9,5 +9,5 @@ export default function RootPage({
 }
 
 export async function generateStaticParams() {
-	return ['en', 'ru'].map(locale => ({ locale }))
+	return ['ru', 'en'].map(locale => ({ locale }))
 }

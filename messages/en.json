@@ -24,7 +24,7 @@
 	"Layout": {
 		"By using the site, you consent to the collection of cookies and agree to": "By using the site, you consent to the collection of cookies and agree to",
 		"personal data processing policy": "personal data processing policy",
-		"Okey": "Okey",
+		"Okey": "Okay",
 		"Where every lesson is a step into the future": "Where every lesson is a step into the future"
 	},
 	"confirmEmailPage": {
@@ -152,7 +152,10 @@
 		"Start your first course": "Start your first course",
 		"Finish your first lesson": "Finish your first lesson",
 		"Complete your first homework assignment": "Complete your first homework assignment",
-		"Complete your first test": "Complete your first test"
+		"Complete your first test": "Complete your first test",
+		"Blocked": "Blocked",
+		"You used the trial period to unlock, subscribe": "You used the trial period to unlock, subscribe",
+		"Subscribe": "Subscribe"
 	},
 	"TopicsPage": {
 		"In notes": "In notes",

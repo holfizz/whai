@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function PageBody() {
+export default function PageBody({ userData }) {
 	const t = useTranslations('Dashboard')
 	const { allCourseData, loadingAllCourse } = useGetAllCourses()
 	return (
@@ -37,6 +37,7 @@ export default function PageBody() {
 				className={'mt-8'}
 				data={allCourseData}
 				loading={loadingAllCourse}
+				userData={userData}
 			/>
 			<div className='w-full bg-decor-1 rounded-3xl flex flex-row justify-between mt-16 max-sm:flex-col-reverse'>
 				<div className='w-full p-4 max-640:w-full max-640:flex  max-640:items-start max-640:flex-col'>
