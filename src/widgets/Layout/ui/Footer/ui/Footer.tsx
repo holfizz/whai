@@ -32,32 +32,32 @@ export const Footer = () => {
 				</div>
 
 				<div className='space-y-2 flex flex-col items-start '>
-					<h3 className='text-lg font-semibold'>Разделы</h3>
+					<h3 className='text-lg font-semibold'>{t('Sections')}</h3>
 					<ul className='space-y-1 flex flex-col items-start '>
 						<li>
 							<Link href={getFAQRoute()}>FAQ</Link>
 						</li>
 						<li>
-							<Link href={getRouteAbout()}>О нас</Link>
+							<Link href={getRouteAbout()}>{t('About')}</Link>
 						</li>
 						<li>
-							<Link href={getRouteContacts()}>Контакты</Link>
+							<Link href={getRouteContacts()}>{t('Contacts')}</Link>
 						</li>
 						<li>
-							<Link href={getRoutePay()}>Способы оплаты</Link>
+							<Link href={getRoutePay()}>{t('Payment methods')}</Link>
 						</li>
 						<li>
-							<Link href={getReviewRoute()}>Отзывы</Link>
+							<Link href={getReviewRoute()}>{t('Reviews')}</Link>
 						</li>
 						<li>
-							<Link href={getSubscriptionsRoute()}>Подписки</Link>
+							<Link href={getSubscriptionsRoute()}>{t('Subscriptions')}</Link>
 						</li>
 					</ul>
 				</div>
 
 				{/* Column 3: Contact and Social Media */}
 				<div className='space-y-2 flex flex-col items-start '>
-					<h3 className='text-lg font-semibold'>Связаться с нами</h3>
+					<h3 className='text-lg font-semibold'>{t('Contact us')}</h3>
 					<a href='mailto:support@whai.ru?subject=Вопрос' className='underline'>
 						support@whai.ru
 					</a>
@@ -71,25 +71,27 @@ export const Footer = () => {
 					<ul className='space-y-1 flex flex-col items-start '>
 						<li>
 							<Link href={getRouteOffer()} className='underline'>
-								Договор оферты
+								{t('Offer agreement')}
 							</Link>
 						</li>
 						<li>
 							<Link href={getRoutePrivacy()} className='underline'>
-								Политика конфиденциальности
+								{t('Privacy Policy')}
 							</Link>
 						</li>
 						<li>
 							<Link href={getRouteCookiePolicy()} className='underline'>
-								Политика Cookies
+								{t('Cookie policy')}
 							</Link>
 						</li>
-						<li>ОГРНИП: 324750000037516</li>
-						<li>ИНН: 753614213399</li>
-						<li>ИП Горлачев Сергей Русланович</li>
+						<li>{t('OGRNIP')}: 324750000037516</li>
+						<li>{t('INN')}: 753614213399</li>
+						<li>{t('Gorlachev Sergey Ruslanovich')}</li>
 					</ul>
 					<Button color='accent' style={{ marginTop: '30px' }}>
-						<Link href={getSubscriptionsRoute()}>Отмена подписки</Link>
+						<Link href={getSubscriptionsRoute()}>
+							{t('Cancel subscription')}
+						</Link>
 					</Button>
 				</div>
 			</div>

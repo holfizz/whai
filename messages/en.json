@@ -25,7 +25,21 @@
 		"By using the site, you consent to the collection of cookies and agree to": "By using the site, you consent to the collection of cookies and agree to",
 		"personal data processing policy": "personal data processing policy",
 		"Okey": "Okay",
-		"Where every lesson is a step into the future": "Where every lesson is a step into the future"
+		"Where every lesson is a step into the future": "Where every lesson is a step into the future",
+		"Sections": "Sections",
+		"About": "About",
+		"Contacts": "Contacts",
+		"Payment methods": "Payment methods",
+		"Reviews": "Reviews",
+		"Subscriptions": "Subscriptions",
+		"Contact us": "Contact us",
+		"Offer agreement": "Offer agreement",
+		"Privacy Policy": "Privacy Policy",
+		"Cookie policy": "Cookie policy",
+		"OGRNIP": "OGRNIP",
+		"INN": "INN",
+		"Gorlachev Sergey Ruslanovich": "Gorlachev Sergey Ruslanovich",
+		"Cancel subscription": "Cancel subscription"
 	},
 	"confirmEmailPage": {
 		"Mail has been successfully activated You can close the page": "Mail has been successfully activated. You can close the page",
@@ -59,7 +73,7 @@
 		"Start for free": "Start for free",
 		"Home": "Home",
 		"About us": "About us",
-		"Reviews": "Отзывы",
+		"Reviews": "Reviews",
 		"Integrations": "Integrations",
 		"Customers": "Customers",
 		"Signed in as": "Signed in as",
@@ -155,7 +169,10 @@
 		"Complete your first test": "Complete your first test",
 		"Blocked": "Blocked",
 		"You used the trial period to unlock, subscribe": "You used the trial period to unlock, subscribe",
-		"Subscribe": "Subscribe"
+		"Subscribe": "Subscribe",
+		"Each journey begins with the first step Extend your hand towards knowledge, and we will help you achieve your goals Together we will overcome any obstacles on the way to success": "Each journey begins with the first step. Extend your hand towards knowledge, and we will help you achieve your goals. Together we will overcome any obstacles on the way to success.",
+		"Ready to start your way?": "Ready to start your way?",
+		"Take the first step": "Take the first step"
 	},
 	"TopicsPage": {
 		"In notes": "In notes",

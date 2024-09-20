@@ -42,14 +42,15 @@ export default function PageBody({ userData }) {
 			<div className='w-full bg-decor-1 rounded-3xl flex flex-row justify-between mt-16 max-sm:flex-col-reverse'>
 				<div className='w-full p-4 max-640:w-full max-640:flex  max-640:items-start max-640:flex-col'>
 					<h2 className='text-yellow-5 text-lg max-640:text-2xl'>
-						Проверь себя
+						{t('Take the first step')}
 					</h2>
 					<h1 className='text-yellow-10 text-lg max-640:text-2xl font-bold'>
-						Не знаете, с чего начать?
+						{t('Ready to start your way?')}
 					</h1>
 					<p className='text-yellow-5 text-sm max-640:text-lg mt-4'>
-						Предварительные выводы неутешительны: новая модель организационной
-						деятельности однозначно определяет каждого ...
+						{t(
+							'Each journey begins with the first step Extend your hand towards knowledge, and we will help you achieve your goals Together we will overcome any obstacles on the way to success'
+						)}
 					</p>
 				</div>
 				<div className='w-auto flex justify-end overflow-hidden max-640:justify-center'>
