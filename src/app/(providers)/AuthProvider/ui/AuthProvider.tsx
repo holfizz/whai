@@ -1,21 +1,16 @@
 'use client'
 
+import { logout } from '@/features/auth/model/auth.model'
 import { useGetNewTokenQuery } from '@/features/auth/model/auth.queries'
 import { getAccessToken, saveTokenStorage } from '@/shared/api/auth/auth.helper'
-import logger from '@/shared/lib/utils/logger'
-import { EnumTokens } from '@/shared/types/auth'
 import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
-import Cookies from 'js-cookie'
 
 import { ReactNode, useEffect, useState } from 'react'
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [loading, setLoading] = useState(true)
 	const { dataNewToken, loading: queryLoading, error } = useGetNewTokenQuery()
-	const refreshToken = Cookies.get(EnumTokens.REFRESH_TOKEN)
-	useEffect(() => {
-		logger.log('No refresh token, logging out', refreshToken)
-	}, [])
+
 	useEffect(() => {
 		const fetchNewToken = async () => {
 			try {
@@ -25,10 +20,12 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 					if (newAccessToken) {
 						saveTokenStorage(newAccessToken)
 					} else {
+						logout()
 						throw new Error('Failed to get new access token')
 					}
 				}
 			} catch (error) {
+				logout()
 				console.error('Failed to refresh token:', error)
 			} finally {
 				setLoading(false)

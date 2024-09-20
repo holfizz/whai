@@ -80,7 +80,11 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 											>
 												<div className={'flex max-640:flex-col'}>
 													<Link
-														href={getCourseByIdRoute(lastCourseData?.id)}
+														href={
+															isCourseLocked
+																? getSubscriptionsRoute()
+																: getCourseByIdRoute(lastCourseData?.id)
+														}
 														className={
 															'w-[150px] h-[150px] mr-4 flex justify-center items-center'
 														}
@@ -101,7 +105,11 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 																	className={
 																		'font-bold text-2xl w-2/3 line-clamp-2 text-ellipsis max-sm:w-full '
 																	}
-																	href={getCourseByIdRoute(lastCourseData?.id)}
+																	href={
+																		isCourseLocked
+																			? getSubscriptionsRoute()
+																			: getCourseByIdRoute(lastCourseData?.id)
+																	}
 																>
 																	{lastCourseData?.name}
 																</Link>
@@ -117,7 +125,11 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 												<div className='max-sm:hidden max-640:absolute max-640:right-[17vw]'>
 													<Button
 														size={'mRound'}
-														href={getCourseByIdRoute(lastCourseData?.id)}
+														href={
+															isCourseLocked
+																? getSubscriptionsRoute()
+																: getCourseByIdRoute(lastCourseData?.id)
+														}
 														isIconOnly
 														startContent={
 															<ArrowUpRight className={'w-[30px] h-[30px]'} />
@@ -132,7 +144,10 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 												</div>
 											</div>
 										) : (
-											<div className='flex w-full max-640:p-8 p-4 rounded-[40px] shadow-sm justify-between max-640:w-full'>
+											<div
+												data-tour-step='continue'
+												className='flex w-full max-640:p-8 p-4 rounded-[40px] shadow-sm justify-between max-640:w-full'
+											>
 												<div className={'flex max-640:flex-col'}>
 													<Link
 														href={getCourseExampleByIdRoute(

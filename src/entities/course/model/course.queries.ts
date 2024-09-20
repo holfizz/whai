@@ -60,6 +60,7 @@ export const GET_COURSE = gql`
 	query ($courseId: ID!) {
 		getCourse(courseId: $courseId) {
 			name
+			isTrial
 		}
 	}
 `

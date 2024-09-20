@@ -13,8 +13,11 @@ import Link from 'next/link'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
+import { useGetProfile } from '@/entities/Auth/model/auth.queries'
 import FlagIcon from '@/shared/assets/icons/Flag'
+import LockIcon from '@/shared/assets/icons/Lock'
 import VideoIcon from '@/shared/assets/icons/Video'
+import { getSubscriptionsRoute } from '@/shared/const/router'
 import ModalComponent from '../ModalComponent/ModalComponent'
 import cls from './topicPage.module.scss'
 
@@ -23,6 +26,7 @@ const TopicsPage = () => {
 		courseId: string
 		topicId?: string
 	}>()
+	const { userData } = useGetProfile()
 	const { topicsAllData } = useGetAllTopics(courseId)
 	const { courseData } = useGetCourse(courseId)
 	const searchParams = useSearchParams()
@@ -64,7 +68,31 @@ const TopicsPage = () => {
 		)
 		onOpen()
 	}
-
+	if (courseData?.isTrial && !userData?.isTrial) {
+		return (
+			<DashboardLayout className='w-full flex justify-center'>
+				<div className='w-full h-[90vh] flex items-center justify-center'>
+					<div className='absolute inset-0 bg-white bg-opacity-50  flex items-center justify-center w-full h-full'>
+						<div className='flex items-center justify-center flex-col'>
+							<LockIcon />
+							<h2 className='text-xl font-bold'>{t('Blocked')}</h2>
+							<p className='w-[80%] text-center'>
+								{t('You used the trial period to unlock, subscribe')}
+							</p>
+							<Button
+								color='accent'
+								as={Link}
+								className='mt-4 rounded-xl'
+								href={getSubscriptionsRoute()}
+							>
+								{t('Subscribe')}
+							</Button>
+						</div>
+					</div>
+				</div>
+			</DashboardLayout>
+		)
+	}
 	return (
 		<DashboardLayout className='w-full flex justify-center'>
 			<div className='w-full max-w-[800px]'>

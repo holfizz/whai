@@ -87,7 +87,7 @@ const AuthForm: FC<AuthFormProps> = memo(
 		}, [loginData])
 
 		useEffect(() => {
-			if (loginData?.login?.accessToken && type === authConstants.LOGIN) {
+			if (loginData?.login?.user?.email && type === authConstants.LOGIN) {
 				router.push('/d')
 			}
 		}, [loginData, loginError, router, type])

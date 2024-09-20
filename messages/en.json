@@ -174,7 +174,10 @@
 		"Choose what to view": "Choose what to view",
 		"Courses": "Courses",
 		"Tests": "Tests",
-		"Lessons": "Lessons"
+		"Lessons": "Lessons",
+		"Blocked": "Blocked",
+		"You used the trial period to unlock, subscribe": "You used the trial period to unlock, subscribe",
+		"Subscribe": "Subscribe"
 	},
 	"Lesson": {
 		"There was an error loading the lesson": "There was an error loading the lesson",
@@ -420,7 +423,7 @@
 		"faqtitle": "FAQ",
 		"faqDescription": "Below you will find answers to the most frequently asked questions regarding the use of our platform. If you do not find an answer to your question, feel free to contact our support team.",
 		"question1": "What can I learn here?",
-		"answer1": "On our platform, you can learn anything. The artificial intelligence technology has extensive knowledge in every field of life, and our AI can also retrieve information from the internet, articles, documents, and all fresh data.",
+		"answer1": "On our platform, you can learn anything you want. Our artificial intelligence technology has extensive knowledge in every sphere of life. Additionally, our AI can retrieve information from the internet, articles, documents, and all the latest data sources. We especially recommend language learning and applied subjects such as mathematics, physics, and chemistry.",
 		"question2": "What happens if my subscription ends and I haven’t finished the course?",
 		"answer2": "You can continue with the created content when it's convenient for you, but without a subscription, you will not have access to the chat with AI.",
 		"question3": "What are limits?",
