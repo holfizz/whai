@@ -9,7 +9,7 @@ export const Modal = extendVariants(ModalUI, {
 		color: {
 			white: {
 				base: 'bg-white rounded-xl',
-				backdrop: 'bg-[#41362ECC]'
+				backdrop: 'bg-[#41362E8C]'
 			}
 		},
 		variant: {

@@ -91,7 +91,7 @@ const AIKnowledgeSummary = () => {
 									</ul>
 								</div>
 							)}
-							{summaryData.strongPoints.length > 0 && (
+							{summaryData.strongPoints > 0 && (
 								<div className='mt-6'>
 									<h4 className='text-2xl font-bold mt-4 mb-3'>
 										{t('Strong Points')}

@@ -29,18 +29,18 @@ export const metadata: Metadata = {
 	},
 	viewport: { width: 'device-width', initialScale: 1 },
 	icons: {
-		icon: '/Whai_logo.svg',
-		shortcut: '/Whai_logo.svg',
-		apple: '/Whai_logo.svg',
+		icon: '/logo_bg_40x40.svg',
+		shortcut: '/logo_bg_40x40.svg',
+		apple: '/logo_bg_40x40.svg',
 		other: {
 			rel: 'touch-icons',
-			url: '/Whai_logo96x96.svg',
-			sizes: '96x96',
+			url: '/logo_bg_40x40.svg',
+			sizes: '40x40',
 			type: 'image/svg'
 		}
 	},
 	manifest: '../manifest.json',
-	themeColor: '#ffe8a3',
+	themeColor: '#ffb57f',
 	metadataBase: new URL('https://whai.ru'),
 	alternates: {
 		canonical: 'https://whai.ru',
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
 	}
 }
 export const viewport: Viewport = {
-	themeColor: '#ffe8a3',
+	themeColor: '#ffb57f',
 	width: 'device-width',
 	initialScale: 1
 }

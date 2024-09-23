@@ -427,8 +427,9 @@
 		"For questions, write to email": "По вопросам пишите на почту",
 		"Trial Subscription": "Пробная подписка",
 		"Three days access without paying is a great opportunity to try out our platform No risks, only benefits Start your trial today and see how we can help you achieve more": "Три дня доступа без оплаты – отличная возможность испытать нашу платформу. Никаких рисков, только преимущества. Начните пробный период сегодня и узнайте, как мы можем помочь вам достичь большего.",
-		"Activate Trial": "Активировать",
-		"Trial end date": "Дата окончания пробного периода"
+		"Activate Trial": "Активировать триал",
+		"Trial end date": "Дата окончания пробного периода",
+		"Buy a subscription": "Купить подписку"
 	},
 	"NotFound": {
 		"return to home": "Вернутся на главную"

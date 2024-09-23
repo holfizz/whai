@@ -41,12 +41,14 @@ const SubsPage = () => {
 	const router = useRouter()
 	const [isAutoRenewal, setIsAutoRenewal] = useState<boolean>(false)
 	const [isAutoRenewalModal, setIsAutoRenewalModal] = useState<boolean>(false)
-	const [isTrialModalOpen, setTrialModalOpen] = useState(false)
+	const [isTrialModalOpen, setTrialModalOpen] = useState<
+		'BASIC' | 'STANDARD' | 'PREMIUM' | null
+	>(null)
 	const [activateTrialSubscription] = useMutation(ACTIVATE_TRIAL_SUBSCRIPTION)
 	const handleTrialActivation = async () => {
 		try {
 			await activateTrialSubscription()
-			setTrialModalOpen(false)
+			setTrialModalOpen(null)
 			window.location.reload()
 		} catch (error) {
 			console.error('Error activating trial subscription:', error)
@@ -304,9 +306,10 @@ const SubsPage = () => {
 												})
 												if (
 													!user?.getProfile?.isTrial &&
-													!user?.getProfile?.isTrialUsed
+													!user?.getProfile?.isTrialUsed &&
+													user?.getProfile?.email
 												) {
-													setTrialModalOpen(true)
+													setTrialModalOpen(type)
 												} else if (user) {
 													openModal(type)
 												} else {
@@ -451,47 +454,68 @@ const SubsPage = () => {
 					</div>
 				</div>
 			</div>
-			{isTrialModalOpen && (
-				<Modal
-					color='white'
-					isOpen={isTrialModalOpen}
-					onOpenChange={() => setTrialModalOpen(false)}
-				>
-					<ModalContent>
-						{onClose => (
-							<>
-								<ModalHeader className='flex flex-col gap-1 text-xl'>
-									{t('Trial Subscription')}
-								</ModalHeader>
-								<ModalBody>
-									<p className='text-lg'>
-										{t(
-											'Three days access without paying is a great opportunity to try out our platform No risks, only benefits Start your trial today and see how we can help you achieve more'
-										)}
-									</p>
-									<p>
-										<a
-											href={getRouteSubscriptionTerm()}
-											className='text-secondary'
+			{['BASIC', 'STANDARD', 'PREMIUM'].map(
+				(type: 'BASIC' | 'STANDARD' | 'PREMIUM') => (
+					<Modal
+						key={type}
+						color='white'
+						isOpen={!!isTrialModalOpen}
+						onOpenChange={() => setTrialModalOpen(null)}
+					>
+						<ModalContent>
+							{onClose => (
+								<>
+									<ModalHeader className='flex flex-col gap-1 text-xl'>
+										{t('Trial Subscription')}
+									</ModalHeader>
+									<ModalBody>
+										<p className='text-lg'>
+											{t(
+												'Three days access without paying is a great opportunity to try out our platform No risks, only benefits Start your trial today and see how we can help you achieve more'
+											)}
+										</p>
+										<p>
+											<a
+												href={getRouteSubscriptionTerm()}
+												className='text-secondary'
+											>
+												{t('Read subscription terms')}
+											</a>
+										</p>
+									</ModalBody>
+									<ModalFooter>
+										<Button
+											size='xl'
+											className='rounded-3xl w-[auto]'
+											color='primary'
+											onPress={handleTrialActivation}
 										>
-											{t('Read subscription terms')}
-										</a>
-									</p>
-								</ModalBody>
-								<ModalFooter>
-									<Button
-										size='xl'
-										className='rounded-3xl w-[auto]'
-										color='primary'
-										onPress={handleTrialActivation}
-									>
-										{t('Activate Trial')}
-									</Button>
-								</ModalFooter>
-							</>
-						)}
-					</ModalContent>
-				</Modal>
+											{t('Activate Trial')}
+										</Button>
+										<Button
+											size='xl'
+											className='rounded-3xl w-[auto]'
+											color='accent'
+											onPress={() => {
+												makePaymentMutation({
+													variables: {
+														dto: {
+															months: isYear ? 12 : 1,
+															subscriptionType: isTrialModalOpen,
+															isAutoRenewal: isAutoRenewalModal
+														}
+													}
+												})
+											}}
+										>
+											{t('Buy a subscription')}
+										</Button>
+									</ModalFooter>
+								</>
+							)}
+						</ModalContent>
+					</Modal>
+				)
 			)}
 			{['BASIC', 'STANDARD', 'PREMIUM'].map(
 				(type: 'BASIC' | 'STANDARD' | 'PREMIUM') => (

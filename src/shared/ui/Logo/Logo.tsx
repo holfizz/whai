@@ -1,5 +1,6 @@
 'use client'
-import { Link, useRouter } from '@/navigation'
+import { Link } from '@/navigation'
+import { Whai_logo40x40 } from '@/shared/assets/logo/WhaiLogo'
 import { getDashboardRoute, getRouteMain } from '@/shared/const/router'
 import { classNames, Mods } from '@/shared/lib/classNames/classNames'
 import { FC, memo } from 'react'
@@ -25,40 +26,29 @@ const Logo: FC<LogoProps> = memo(
 		logoSize = LogoSize.S,
 		color = '#2E311D',
 		isDashboard = true,
-		logoType = 'long'
+		logoType = 'short'
 	}) => {
-		const router = useRouter()
-
 		const mods: Mods = {
 			[cls[logoSize]]: true
 		}
-		// const LOGO_TYPE = logoType === 'short' ? WhaiSmall : WhaiBig
 		return (
 			<Link
 				href={isDashboard ? getDashboardRoute() : getRouteMain()}
 				className={classNames(cls.logoButton, mods, [])}
 				type={'button'}
 			>
-				{/* <LogoIcon width={300} style={{ fill: color, width: '100px' }} /> */}
-				{/* ERROR*/}
-				{/* <LOGO_TYPE
-					style={{
-						fill: color
-					}}
-					className={classNames(cls.Logo, {}, [className])}
-				/> */}
-				<div className='flex items-center justify-center'>
-					<div className='w-[45px] h-[45px] bg-decor-3 rounded-xl text-[30px] font-extrabold flex items-center justify-center'>
-						W
+				<div
+					className={`flex items-center justify-center ${
+						logoType === 'long' ? 'w-[200px]' : 'w-[45px]'
+					}`}
+				>
+					<div
+						className={`${
+							logoType === 'long' ? 'w-[200px]' : 'w-[45px]'
+						} h-[45px] bg-decor-2 rounded-[11px] text-[30px] font-extrabold flex items-center justify-center`}
+					>
+						<Whai_logo40x40 />
 					</div>
-					{logoType === 'long' && (
-						<Link
-							className='text-3xl font-extrabold ml-4'
-							href={isDashboard ? getDashboardRoute() : getRouteMain()}
-						>
-							Whai
-						</Link>
-					)}
 				</div>
 			</Link>
 		)
