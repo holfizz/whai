@@ -155,7 +155,10 @@
 		"Topics": "Topics",
 		"Lessons": "Lessons",
 		"Tests": "Tests",
-		"Task": "Task"
+		"Task": "Task",
+		"Blocked": "Blocked",
+		"You used the trial period to unlock, subscribe": "You used the trial period to unlock, subscribe",
+		"Subscribe": "Subscribe"
 	},
 	"CoursesPage": {
 		"My courses": "My courses",
