@@ -1,14 +1,5 @@
-import { redirect } from '@/navigation'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { redirect } from 'next/navigation'
 
-export default function RootPage({
-	params: { locale }
-}: {
-	params: { locale: string }
-}) {
-	unstable_setRequestLocale(locale)
-}
-
-export async function generateStaticParams() {
+export default function RootPage() {
 	redirect('/ru')
 }
