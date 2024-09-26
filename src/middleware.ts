@@ -6,7 +6,8 @@ import { removeFromStorage } from './shared/api/auth/auth.helper'
 
 const nextIntlMiddleware = createIntlMiddleware({
 	locales,
-	defaultLocale: 'ru'
+	defaultLocale: 'ru',
+	localeDetection: false
 })
 
 // const GET_NEW_TOKEN = gql`
