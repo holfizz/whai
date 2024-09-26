@@ -1,3 +1,4 @@
+import { redirect } from '@/navigation'
 import { unstable_setRequestLocale } from 'next-intl/server'
 
 export default function RootPage({
@@ -9,5 +10,5 @@ export default function RootPage({
 }
 
 export async function generateStaticParams() {
-	return ['ru', 'en'].map(locale => ({ locale }))
+	redirect('/ru')
 }

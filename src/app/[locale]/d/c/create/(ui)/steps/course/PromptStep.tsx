@@ -17,7 +17,28 @@ const PromptStep = () => {
 	const [promptContent, setLocalPromptContent] = useState(storePromptContent)
 
 	const debouncedSetPromptContent = useDebounce(setPromptContent, 500)
+	const [minRows, setMinRows] = useState(1)
 
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth <= 640) {
+				setMinRows(3)
+			} else {
+				setMinRows(1)
+			}
+		}
+
+		// Set initial value
+		handleResize()
+
+		// Add event listener for window resize
+		window.addEventListener('resize', handleResize)
+
+		// Clean up the event listener on component unmount
+		return () => {
+			window.removeEventListener('resize', handleResize)
+		}
+	}, [])
 	useEffect(() => {
 		debouncedSetPromptContent(promptContent)
 	}, [promptContent, debouncedSetPromptContent])
@@ -28,7 +49,7 @@ const PromptStep = () => {
 				style={{ height: 'calc(100vh - var(--navbar-height))' }}
 				className='w-full flex justify-center items-center flex-col'
 			>
-				<h1>{t('What are we creating?')}</h1>
+				<h1 className='text-2xl mb-20'>{t('What are we creating?')}</h1>
 				<Textarea
 					placeholder={t(
 						'What should be in the know, describe in detail what you want to get'
@@ -46,10 +67,12 @@ const PromptStep = () => {
 							'w-full'
 						],
 						innerWrapper: ['flex justify-between', 'h-auto', 'w-full'],
-						input: ['w-full placeholder:text-medium'],
-						base: 'w-1/2 max-lg:w-[50vw] max-md:w-[70vw] max-640:w-[80vw]'
+						input: [
+							'w-full placeholder:text-medium text-medium data-[focus=true]:text-sm'
+						],
+						base: 'w-1/2 max-lg:w-[50vw] max-md:w-[70vw] max-640:w-[80vw] leading-none'
 					}}
-					minRows={1}
+					minRows={minRows}
 					value={promptContent}
 					onChange={e => setLocalPromptContent(e.target.value)}
 				/>

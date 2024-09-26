@@ -39,7 +39,11 @@ export function Navbar() {
 	}, [])
 
 	return (
-		<UINavbar className={cls.navbar} onMenuOpenChange={setIsMenuOpen}>
+		<UINavbar
+			height={'5rem'}
+			className={cls.navbar}
+			onMenuOpenChange={setIsMenuOpen}
+		>
 			<NavbarContent>
 				<NavbarMenuToggle
 					aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}

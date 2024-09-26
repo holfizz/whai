@@ -3,6 +3,7 @@ import { Layout } from '@/widgets/Layout'
 import { useRef } from 'react'
 import HeroSection from './blocks/Hero/HeroSection'
 import HowUse from './blocks/HowUse/HowUse'
+import PricingSection from './blocks/Pricing/PricingSection'
 import './main-page.scss'
 
 export default function MainPage() {
@@ -16,6 +17,7 @@ export default function MainPage() {
 		<Layout>
 			<HeroSection />
 			<HowUse />
+			<PricingSection />
 			{/* <BenefitSection /> */}
 			{/* <ComparisonSection />
 			<div ref={videoRef}>
