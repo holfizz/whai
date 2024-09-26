@@ -9,8 +9,8 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-	title: 'Page not found',
-	description: 'Page was not found - Error 404',
+	title: 'Страница не найдена',
+	description: 'Страница не найдена - Ошибка 404',
 	...NO_INDEX_PAGE
 }
 
