@@ -40,7 +40,7 @@ const authLink = setContext((operation, { headers }) => {
 	return {
 		headers: {
 			...headers,
-			authorization: token ? `Bearer ${token}` : ''
+			Authorization: token ? `Bearer ${token}` : ''
 		}
 	}
 })
@@ -49,9 +49,9 @@ const authLink = setContext((operation, { headers }) => {
 const refreshToken = async () => {
 	try {
 		const { data, error } = await client.query({
-			query: GET_NEW_TOKEN,
-			fetchPolicy: 'no-cache'
+			query: GET_NEW_TOKEN
 		})
+		logger.log(9001, data, error)
 		if (error) {
 			logout(true)
 			throw new GraphQLError('Empty AccessToken')

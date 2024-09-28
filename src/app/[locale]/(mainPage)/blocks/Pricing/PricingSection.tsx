@@ -7,17 +7,17 @@ import Link from 'next/link'
 const PricingSection = () => {
 	const t = useTranslations('Subscription')
 	const monthlyPrices = {
-		BASIC: 2999,
-		STANDARD: 3999,
-		PREMIUM: 4999
+		BASIC: 799,
+		STANDARD: 1299,
+		PREMIUM: 2499
 	}
 	const subscriptionDetails = {
 		BASIC: {
 			title: t('Base subscription'),
 			description: t('Base description'),
 			benefits: [
-				t('Courses per month', { count: 2 }),
-				t('Course titles', { count: 20 }),
+				t('Courses per month', { count: 1 }),
+				t('Course titles', { count: 15 }),
 				t('Lessons per course', { count: 10 })
 				// t('Analytics access')
 			]
@@ -26,9 +26,9 @@ const PricingSection = () => {
 			title: t('Standard subscription'),
 			description: t('Standard description'),
 			benefits: [
-				t('Courses per month', { count: 5 }),
-				t('Course titles', { count: 30 }),
-				t('Lessons per course', { count: 10 }),
+				t('Courses per month', { count: 2 }),
+				t('Course titles', { count: 20 }),
+				t('Lessons per course', { count: 15 }),
 				// t('Analytics access'),
 				t('AI homework check')
 			]
@@ -37,9 +37,9 @@ const PricingSection = () => {
 			title: t('Premium subscription'),
 			description: t('Premium description'),
 			benefits: [
-				t('Courses per month', { count: 10 }),
-				t('Course titles', { count: 50 }),
-				t('Lessons per course', { count: 30 }),
+				t('Courses per month', { count: 5 }),
+				t('Course titles', { count: 30 }),
+				t('Lessons per course', { count: 20 }),
 				// t('Analytics access', { count: 'visits, grades' }),
 				t('AI homework check'),
 				t('Document upload'),
@@ -50,10 +50,10 @@ const PricingSection = () => {
 	return (
 		<div className='w-full h-auto mt-20 flex justify-start items-center flex-col mb-10'>
 			<h1 className='text-3xl w-[80%] text-center'>
-				Получите 2 курса <b>ВСЕГО</b> ЗА 2999р, с доступом{' '}
+				Получите личный курс <b>ВСЕГО</b> ЗА 799р, с доступом{' '}
 				<span className='text-decor-2'>навсегда</span>
 			</h1>
-			<p className='w-[45%] max-lg:w-[70%] max-640:w-[90%] text-justify mt-4 text-sm text-secondary'>
+			<p className='w-[45%] max-lg:w-[70%] max-640:w-[90%] text-center mt-4 text-sm text-secondary'>
 				Специальное предложение: два полноценных курса всего за 2999 рублей.
 				Получите неограниченный доступ к материалам и обучайтесь в удобное для
 				вас время. Расширьте свои профессиональные горизонты прямо сейчас.

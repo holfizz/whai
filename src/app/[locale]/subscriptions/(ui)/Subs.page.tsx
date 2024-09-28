@@ -65,9 +65,9 @@ const SubsPage = () => {
 		}
 	}, [user?.getProfile?.isAutoRenewal])
 	const monthlyPrices = {
-		BASIC: 2999,
-		STANDARD: 3999,
-		PREMIUM: 4999
+		BASIC: 799,
+		STANDARD: 1299,
+		PREMIUM: 2499
 	}
 
 	const discountedPrices = {
@@ -89,20 +89,21 @@ const SubsPage = () => {
 			title: t('Base subscription'),
 			description: t('Base description'),
 			benefits: [
-				t('Courses per month', { count: 2 }),
-				t('Course titles', { count: 20 }),
+				t('Courses per month', { count: 1 }),
+				t('Course titles', { count: 15 }),
 				t('Lessons per course', { count: 10 }),
-				t('Analytics access')
+				// t('Analytics access')
+				t('AI homework check')
 			]
 		},
 		STANDARD: {
 			title: t('Standard subscription'),
 			description: t('Standard description'),
 			benefits: [
-				t('Courses per month', { count: 5 }),
-				t('Course titles', { count: 30 }),
-				t('Lessons per course', { count: 10 }),
-				t('Analytics access'),
+				t('Courses per month', { count: 2 }),
+				t('Course titles', { count: 20 }),
+				t('Lessons per course', { count: 15 }),
+				// t('Analytics access'),
 				t('AI homework check')
 			]
 		},
@@ -110,10 +111,10 @@ const SubsPage = () => {
 			title: t('Premium subscription'),
 			description: t('Premium description'),
 			benefits: [
-				t('Courses per month', { count: 10 }),
-				t('Course titles', { count: 50 }),
-				t('Lessons per course', { count: 30 }),
-				t('Analytics access', { count: 'visits, grades' }),
+				t('Courses per month', { count: 5 }),
+				t('Course titles', { count: 30 }),
+				t('Lessons per course', { count: 20 }),
+				// t('Analytics access', { count: 'visits, grades' }),
 				t('AI homework check'),
 				t('Document upload'),
 				t('Image generation')

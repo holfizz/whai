@@ -2,6 +2,7 @@
 
 import AnalyticsIcon from '@/shared/assets/icons/Analytics'
 import TextIcon from '@/shared/assets/icons/Text'
+import { WhaiLogoTransparent } from '@/shared/assets/logo/WhaiLogoTransparent'
 import {
 	CategoryScale,
 	Chart as ChartJS,
@@ -80,12 +81,25 @@ const Analytics = () => {
 				data: [10, 30, 20, 80, 50, 40, 10],
 				fill: true,
 				backgroundColor: 'rgba(0, 0, 0, 0)', // Цвет фона области
-				borderColor: 'black',
+				borderColor: context => {
+					const value =
+						context.chart.data.datasets[context.datasetIndex].data[
+							context.dataIndex
+						]
+					return value === 80 ? '#bbb9b7' : 'black'
+				},
 				borderWidth: 3,
-				pointRadius: 5,
+				pointRadius: 4,
+				pointBorderColor: context => {
+					const value =
+						context.chart.data.datasets[context.datasetIndex].data[
+							context.dataIndex
+						]
+					return value === 80 ? '#bbb9b7' : 'black' // Установка цвета границы точки
+				},
 				pointBackgroundColor: context => {
 					const value = context.dataset.data[context.dataIndex]
-					return value === 80 ? 'white' : 'black'
+					return value === 80 ? '#bbb9b7' : 'black'
 				},
 				tension: 0.4
 			}
@@ -112,21 +126,52 @@ const Analytics = () => {
 			legend: {
 				display: false
 			},
-			annotation: {
-				// Добавление плагина аннотации
-				annotations: {
-					label: {
-						type: 'label',
-						x: 'Apr', // Место на оси X
-						y: 80, // Место на оси Y
-						content: ['whai'],
-						font: {
-							size: 12
-						},
-						anchor: 'end'
-					}
+			tooltip: {
+				enabled: false // Отключаем отображение подсказок при наведении на точки
+			}
+		},
+		animations: {
+			// Анимация для отрисовки линии
+			default: {
+				duration: 2000, // Длительность анимации
+				easing: 'linear' // Линейная анимация
+			},
+			// Анимация для появления линии слева направо
+			clip: {
+				duration: 2000, // Длительность анимации
+				easing: 'linear', // Линейная анимация
+				// Используйте `onProgress` для постепенной отрисовки
+				onProgress: function (animation) {
+					const chart = animation.chart
+					const { ctx } = chart
+					const { datasets } = chart.data
+
+					datasets.forEach((dataset, index) => {
+						ctx.save()
+						ctx.beginPath()
+						ctx.moveTo(
+							chart.scales.x.getPixelForValue(0),
+							chart.scales.y.getPixelForValue(dataset.data[0])
+						)
+
+						// Отрисовка линии
+						for (let i = 1; i < dataset.data.length; i++) {
+							ctx.lineTo(
+								chart.scales.x.getPixelForValue(i),
+								chart.scales.y.getPixelForValue(dataset.data[i])
+							)
+						}
+
+						ctx.strokeStyle = dataset.borderColor
+						ctx.lineWidth = dataset.borderWidth
+						ctx.stroke()
+						ctx.restore()
+					})
 				}
 			}
+		},
+		interaction: {
+			mode: 'nearest' // Корректный режим для interaction.mode
 		}
 	}
 
@@ -168,8 +213,17 @@ const Analytics = () => {
 						</div>
 						<span className='text-yellow-5'>Аналитик</span>
 					</div>
-					<div className='w-[400px] h-[300px] bg-bg-accent rounded-3xl p-4'>
-						<Line data={data} options={options} ref={chartInstanceRef} />
+					<div className='w-[400px] h-[300px] bg-bg-accent rounded-3xl p-4 flex items-center justify-center flex-col '>
+						<h1 className='flex gap-1 items-center font-medium text-xl'>
+							<WhaiLogoTransparent />
+							<span className='text-secondary'>+48%</span>
+						</h1>
+						<Line
+							data={data}
+							options={options as any}
+							ref={chartInstanceRef}
+							className=''
+						/>
 					</div>
 				</div>
 			</div>
