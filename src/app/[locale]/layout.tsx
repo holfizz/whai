@@ -7,12 +7,9 @@ import { Metadata, Viewport } from 'next'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { unstable_setRequestLocale } from 'next-intl/server'
 import { Inter } from 'next/font/google'
-import localFont from 'next/font/local'
 import { FC } from 'react'
 import '../(styles)/index.scss'
 import Body from './body'
-
-const SrbijaSans = localFont({ src: '../../../public/Srbija_Sans.ttf' })
 
 const UbuntuSans = Inter({
 	subsets: ['latin', 'latin-ext', 'cyrillic'],
@@ -89,7 +86,7 @@ const LocaleLayout: FC<Props> = ({ children, params: { locale } }) => {
 	return (
 		<html lang={locale} suppressHydrationWarning>
 			<GoogleTagManager gtmId='GTM-TCX82LS8' />
-			<Body className={`${UbuntuSans.className} ${SrbijaSans.className}`}>
+			<Body className={UbuntuSans.className}>
 				<NextIntlClientProvider messages={messages} locale={locale}>
 					{children}
 				</NextIntlClientProvider>

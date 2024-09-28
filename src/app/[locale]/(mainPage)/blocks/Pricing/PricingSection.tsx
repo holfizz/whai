@@ -16,7 +16,7 @@ const PricingSection = () => {
 			title: t('Base subscription'),
 			description: t('Base description'),
 			benefits: [
-				t('Courses per month', { count: 1 }),
+				t('Course per month', { count: 1 }),
 				t('Course titles', { count: 15 }),
 				t('Lessons per course', { count: 10 })
 				// t('Analytics access')

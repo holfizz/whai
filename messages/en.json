@@ -377,6 +377,7 @@
 		"Standard description": "The standard subscription offers more content creation capabilities and includes AI-powered homework checks to enhance the learning experience.",
 		"Premium description": "The premium subscription provides maximum features for content creation and management, including advanced homework checking, document uploads, and image generation.",
 		"Courses per month": "Up to {count} courses per month",
+		"Course per month": "Up to {count} course per month",
 		"Course titles": "{count} additional titles for courses, modules, and topics",
 		"Lessons per course": "Ability to create up to {count} lessons or quizzes per course",
 		"Analytics access": "Access to basic user analytics",
