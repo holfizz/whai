@@ -108,6 +108,7 @@ const HeroSection = () => {
 										src='https://rutube.ru/play/embed/bf286bb1d9dd74d3c885df8839154a6a'
 										frameBorder='0'
 										allow='clipboard-write; autoplay'
+										//@ts-ignore
 										webkitAllowFullScreen
 										mozallowfullscreen
 										allowFullScreen
