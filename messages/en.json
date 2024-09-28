@@ -19,7 +19,8 @@
 		"Terms and Conditions": "Terms and Conditions",
 		"Personal data processing policy": "Personal data processing policy",
 		"You must complete the CAPTCHA validation": "You must complete the CAPTCHA validation",
-		"An error occurred during registration, check your email and password and try again": "An error occurred during registration, check your email and password and try again"
+		"An error occurred during registration, check your email and password and try again": "An error occurred during registration, check your email and password and try again",
+		"There was an error logging in, please check your email address and password and try again": "There was an error logging in, please check your email address and password and try again"
 	},
 	"Layout": {
 		"By using the site, you consent to the collection of cookies and agree to": "By using the site, you consent to the collection of cookies and agree to",

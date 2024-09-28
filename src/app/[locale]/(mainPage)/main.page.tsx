@@ -1,6 +1,7 @@
 'use client'
 import { Layout } from '@/widgets/Layout'
 import { useRef } from 'react'
+import Analytics from './blocks/Analytics/Analytics'
 import HeroSection from './blocks/Hero/HeroSection'
 import HowUse from './blocks/HowUse/HowUse'
 import PricingSection from './blocks/Pricing/PricingSection'
@@ -18,6 +19,7 @@ export default function MainPage() {
 			<HeroSection />
 			<HowUse />
 			<PricingSection />
+			<Analytics />
 			{/* <BenefitSection /> */}
 			{/* <ComparisonSection />
 			<div ref={videoRef}>

@@ -19,7 +19,8 @@
 		"Terms and Conditions": "Публичное Соглашение (оферту)",
 		"Personal data processing policy": "Политику обработки персональных данных",
 		"You must complete the CAPTCHA validation": "Вы должны пройти проверку CAPTCHA",
-		"An error occurred during registration, check your email and password and try again": "Во время регистрации произошла ошибка, проверьте почту и пароль и пробуйте еще раз"
+		"An error occurred during registration, check your email and password and try again": "Во время регистрации произошла ошибка, проверьте почту и пароль и пробуйте еще раз",
+		"There was an error logging in, please check your email address and password and try again": "При входе произошла ошибка, проверьте адрес электронной почты и пароль и повторите попытку."
 	},
 	"Layout": {
 		"By using the site, you consent to the collection of cookies and agree to": "Пользуясь сайтом, вы разрешаете сбор cookie-файлов и соглашаетесь c",

@@ -1,8 +1,8 @@
+import { Metadata } from 'next'
 import { unstable_setRequestLocale } from 'next-intl/server'
 import ExampleCoursePage from './(ui)/course.page'
-import { Metadata } from 'next'
 export const metadata: Metadata = {
-	title: 'Примеры курсов | Whai'
+	title: 'Примеры курсов'
 }
 export default function IndexPage({
 	params: { locale }
