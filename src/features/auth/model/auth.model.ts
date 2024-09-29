@@ -21,18 +21,28 @@ export function setAuthUser(authResponse: IUserData | null): void {
 }
 
 export async function logout(isReload = false): Promise<void> {
+	console.log('0logout')
+
 	try {
+		console.log('01logout')
 		const { data } = await client.query({ query: LOGOUT })
 		localStorage.removeItem('authState')
+		console.log('1logout', data)
 		removeFromStorage()
+		console.log('2logout')
+
 		authUserVar({
 			user: null,
 			accessToken: null
 		})
+		console.log('3logout')
+
 		if (isReload && data?.logout) {
 			window.location.reload()
 		}
 	} catch (error) {
+		console.log('error_logout')
+
 		console.error('Logout error:', error)
 	}
 }
