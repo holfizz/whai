@@ -39,7 +39,7 @@ export default function PageBody({ userData }) {
 				loading={loadingAllCourse}
 				userData={userData}
 			/>
-			<div className='w-full bg-decor-1 rounded-3xl flex flex-row justify-between mt-16 max-sm:flex-col-reverse'>
+			<div className='w-full bg-decor-1 rounded-3xl flex flex-row justify-between mt-16 max-640:flex-col-reverse'>
 				<div className='w-full p-4 max-640:w-full max-640:flex  max-640:items-start max-640:flex-col'>
 					<h2 className='text-yellow-5 text-lg max-640:text-2xl'>
 						{t('Take the first step')}
@@ -54,12 +54,7 @@ export default function PageBody({ userData }) {
 					</p>
 				</div>
 				<div className='w-auto flex justify-end overflow-hidden max-640:justify-center'>
-					<Image
-						width={222}
-						className='h-auto  max-640:w-[revert-layer]'
-						src={HandsImage}
-						alt='hands'
-					/>
+					<Image width={222} className='h-fit' src={HandsImage} alt='hands' />
 				</div>
 			</div>
 		</div>

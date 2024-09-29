@@ -37,7 +37,7 @@ export default function PageHeader({ userData }: { userData: IUser }) {
 						'flex w-full justify-between max-lg:items-center max-lg:flex-col-reverse'
 					}
 				>
-					<div className={'mt-5'}>
+					<div className={'mt-5 max-640:px-8'}>
 						<Text
 							title={t('Continue education')}
 							className={'mb-5 lg:hidden'}

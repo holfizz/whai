@@ -4,10 +4,13 @@ import { IUser } from '@/entities/Auth'
 import { ICourse } from '@/entities/course'
 import { Link } from '@/navigation'
 import LockIcon from '@/shared/assets/icons/Lock'
-import { getSubscriptionsRoute } from '@/shared/const/router'
+import PlusIcon from '@/shared/assets/icons/Plus'
+import {
+	getCreatePageRoute,
+	getSubscriptionsRoute
+} from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import CourseCard from '@/shared/ui/CourseCard/CourseCard'
-import Text, { TextTheme } from '@/shared/ui/Text/Text'
 import { Skeleton } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 
@@ -37,7 +40,7 @@ export default function BodyCards({
 		<div
 			className={`relative flex justify-between max-md:flex-wrap gap-4 ${className}`}
 		>
-			{filteredCourses ? (
+			{filteredCourses.length > 0 ? (
 				filteredCourses.map((course, i) => {
 					const isCourseLocked = course?.isTrial && !userData?.isTrial
 
@@ -75,7 +78,17 @@ export default function BodyCards({
 					)
 				})
 			) : (
-				<Text theme={TextTheme.ERROR} title={t('No courses found')}></Text>
+				<>
+					<Link
+						className='shadow-sm w-[390px] min-h-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full flex items-center justify-center rounded-3xl flex-col gap-4 cursor-pointer'
+						href={getCreatePageRoute()}
+					>
+						<PlusIcon fontSize={28}></PlusIcon>
+						<p className='text-sm max-640:text-lg text-secondary'>
+							{t('You dont have any courses, start creating them')}
+						</p>
+					</Link>
+				</>
 			)}
 		</div>
 	)

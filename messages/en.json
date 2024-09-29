@@ -146,7 +146,8 @@
 		"Subscribe": "Subscribe",
 		"Each journey begins with the first step Extend your hand towards knowledge, and we will help you achieve your goals Together we will overcome any obstacles on the way to success": "Each journey begins with the first step. Extend your hand towards knowledge, and we will help you achieve your goals. Together we will overcome any obstacles on the way to success.",
 		"Ready to start your way?": "Ready to start your way?",
-		"Take the first step": "Take the first step"
+		"Take the first step": "Take the first step",
+		"You dont have any courses, start creating them": "You don't have any courses, start creating them"
 	},
 	"TopicsPage": {
 		"In notes": "In notes",
@@ -327,7 +328,8 @@
 		"Oops Error please try again": "Oops. Error, please try again",
 		"Error when summing up results": "Error when summing up results",
 		"Options": "Options",
-		"Please do not close the page It will take no more than 2 minutes": "Please do not close the page. It will take no more than 2 minutes"
+		"Please do not close the page It will take no more than 2 minutes": "Please do not close the page. It will take no more than 2 minutes",
+		"In order to compare answer options, click on the button from the left column to the button from the right column": "In order to compare answer options, click on the button from the left column to the button from the right column"
 	},
 	"CreateCoursePlanPage": {
 		"Generate lesson": "Generate",

@@ -29,18 +29,19 @@ body {
 	position: relative;
 }
 ::-webkit-scrollbar {
-	width: 5px;
+	width: 8px;
 	height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	background: var(--main-color);
+	background: var(--color-decor-2);
+	border: 2px solid white;
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-	background: var(--main-color);
+	background: var(--color-decor-2);
 }
 
 h1 {

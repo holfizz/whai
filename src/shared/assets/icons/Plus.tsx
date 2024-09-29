@@ -1,10 +1,13 @@
 import React from 'react'
 
-const PlusIcon = (props: React.SVGProps<SVGSVGElement>) => {
+const PlusIcon = ({
+	fontSize = 14,
+	...props
+}: React.SVGProps<SVGSVGElement> & { fontSize?: number }) => {
 	return (
 		<svg
-			width='14'
-			height='14'
+			width={fontSize}
+			height={fontSize}
 			viewBox='0 0 14 14'
 			{...props}
 			xmlns='http://www.w3.org/2000/svg'

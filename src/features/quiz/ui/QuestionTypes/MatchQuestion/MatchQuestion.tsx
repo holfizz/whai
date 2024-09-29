@@ -35,6 +35,11 @@ const MatchQuestion: React.FC<MatchQuestionProps> = ({
 			<h3 className='w-[400px] text-accent text-center text-sm my-10'>
 				{question.prompt}
 			</h3>
+			<p className='text-sm text-secondary w-[60%] max-md:w-[80%] text-center mb-8'>
+				{t(
+					'In order to compare answer options, click on the button from the left column to the button from the right column'
+				)}
+			</p>
 
 			<Xwrapper>
 				<div className='relative flex justify-between w-full px-2'>

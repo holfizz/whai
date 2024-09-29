@@ -57,7 +57,7 @@ const HeroSection = () => {
 					<div className='absolute mx-auto top-1/3 animate-bounce'>
 						<Button
 							onPress={onOpen}
-							className='w-[100px] h-[100px] max-640:w-[80px] max-640:h-[80px]  rounded-full bg-decor-2 flex items-center justify-center'
+							className='w-[100px] h-[100px] max-640:w-[80px] max-640:h-[80px]  rounded-full bg-accent flex items-center justify-center'
 						>
 							<PlayIcon className='w-8 h-8 text-white' />
 						</Button>

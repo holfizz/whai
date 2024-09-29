@@ -2,7 +2,7 @@ import { Link, locales } from '@/navigation'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import Button from '@/shared/ui/Button/Button'
 import { useTranslations } from 'next-intl'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { FC, memo } from 'react'
 import { ISidebarItem } from '../../module/sidebar-items.data'
 import cls from './SidebarItem.module.scss'
@@ -17,6 +17,7 @@ const SidebarItem: FC<SidebarItemProps> = memo(
 	({ item, className, isCollapsed }) => {
 		const t = useTranslations('Sidebar')
 		const pathname = usePathname()
+		const searchParams = useSearchParams() // Get query parameters
 
 		// Function to remove locale from the pathname
 		const removeLocaleFromPathname = (pathname: string) => {
@@ -29,12 +30,13 @@ const SidebarItem: FC<SidebarItemProps> = memo(
 		}
 
 		const normalizedPathname = removeLocaleFromPathname(pathname)
+		const hasQueryParams = searchParams.has('view') // Check if query parameters are present
 
 		// Ensure that the exact match or nested routes apply correctly
 		const isActive =
 			item.link !== '/d'
 				? normalizedPathname.startsWith(item.link) &&
-				  normalizedPathname !== '/d'
+				  (normalizedPathname !== '/d' || hasQueryParams) // Consider query params if present
 				: normalizedPathname === item.link
 
 		return (

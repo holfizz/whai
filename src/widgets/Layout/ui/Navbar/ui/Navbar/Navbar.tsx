@@ -19,7 +19,6 @@ import {
 	NavbarMenu,
 	NavbarMenuItem,
 	NavbarMenuToggle,
-	Link as UILink,
 	Navbar as UINavbar
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
@@ -108,15 +107,44 @@ export function Navbar() {
 				)}
 			</NavbarContent>
 			<NavbarMenu>
-				{menuItems.map((item, index) => (
-					<NavbarMenuItem key={`${item}-${index}`}>
-						<Link href={'#'}>
-							<UILink color='foreground' className='w-full' href='#' size='lg'>
-								{t(item)}
-							</UILink>
+				<div className='mt-20 '>
+					<NavbarMenuItem>
+						<Link
+							className='text-2xl mt-2'
+							color='foreground'
+							href={getRouteMain()}
+						>
+							{t('Home')}
 						</Link>
 					</NavbarMenuItem>
-				))}
+					<NavbarMenuItem>
+						<Link
+							className='text-2xl mt-2'
+							color='foreground'
+							href={getRouteAbout()}
+						>
+							{t('About us')}
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem>
+						<Link
+							className='text-2xl mt-2'
+							color='foreground'
+							href={getReviewRoute()}
+						>
+							{t('Reviews')}
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem>
+						<Link
+							className='text-2xl mt-2'
+							color='foreground'
+							href={getFAQRoute()}
+						>
+							{t('FAQ')}
+						</Link>
+					</NavbarMenuItem>
+				</div>
 			</NavbarMenu>
 		</UINavbar>
 	)

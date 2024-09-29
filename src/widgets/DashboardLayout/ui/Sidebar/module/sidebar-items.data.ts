@@ -30,14 +30,14 @@ export const sidebarItems: ISidebarItem[] = [
 		link: getDashboardRoute()
 	},
 	{
-		text: 'Courses',
-		icon: MyCoursesIcon,
-		link: getCoursesRoute()
-	},
-	{
 		text: 'Library',
 		icon: LibraryIcon,
 		link: getLibraryRoute()
+	},
+	{
+		text: 'Courses',
+		icon: MyCoursesIcon,
+		link: getCoursesRoute()
 	},
 	{
 		text: 'Chat with AI',
