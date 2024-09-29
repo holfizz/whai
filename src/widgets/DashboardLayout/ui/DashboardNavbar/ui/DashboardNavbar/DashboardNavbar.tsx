@@ -110,10 +110,12 @@ export function DashboardNavbar() {
 								{t('Help Feedback')}
 							</DropdownItem>
 							<DropdownItem
-								className='data-[hover=true]:bg-[#FF9090]'
+								as={Button}
+								className='data-[hover=true]:bg-[#FF9090] text-left z-20'
 								onClick={() => {
 									logout(true)
 								}}
+								onTouchEnd={() => logout(true)}
 								key='logout'
 							>
 								{t('Log Out')}
