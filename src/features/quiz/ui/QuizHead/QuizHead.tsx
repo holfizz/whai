@@ -30,11 +30,11 @@ const QuizHead = ({ quizData }: { quizData: IQuizData }) => {
 	}
 
 	return (
-		<div className='w-full flex justify-center items-center'>
+		<div className='w-full flex justify-center items-center scrollbar-hide'>
 			{/* Для экранов больше чем md показываем линии */}
 			<div
 				className={
-					'hidden md:flex justify-start items-end gap-5 h-auto overflow-x-auto rounded-full'
+					'hidden md:flex justify-start items-end gap-5 h-auto overflow-x-auto rounded-full scrollbar-hide'
 				}
 			>
 				{quizData.questions.map((question, index) => {
@@ -47,7 +47,7 @@ const QuizHead = ({ quizData }: { quizData: IQuizData }) => {
 					return (
 						<div
 							key={index}
-							className={`w-[85px] h-[6px] rounded-full bg-decor-2 flex-shrink-0 cursor-pointer ${
+							className={`w-[85px] h-[6px] rounded-full bg-decor-2 flex-shrink-0 cursor-pointer scrollbar-hide ${
 								isAnswered ? 'opacity-100' : 'opacity-50'
 							}`}
 							onClick={() => handleQuestionClick(index)}

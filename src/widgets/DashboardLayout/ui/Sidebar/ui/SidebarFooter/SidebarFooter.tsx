@@ -9,10 +9,10 @@ const SidebarFooter = () => {
 	return (
 		<div
 			data-tour-step='limits'
-			className='w-full h-auto flex flex-col items-center justify-center gap-4 mb-16 px-4'
+			className='w-full h-auto flex flex-col items-center justify-center gap-4 mb-16 px-4 scrollbar-hide'
 		>
 			<div
-				className={`flex w-full items-center ${
+				className={`flex w-full items-center  ${
 					isCollapsed ? 'justify-center' : 'justify-between '
 				} text-secondary `}
 			>
