@@ -40,7 +40,7 @@ export default function BodyCards({
 		<div
 			className={`relative flex justify-between max-md:flex-wrap gap-4 ${className}`}
 		>
-			{filteredCourses.length > 0 ? (
+			{filteredCourses?.length > 0 ? (
 				filteredCourses.map((course, i) => {
 					const isCourseLocked = course?.isTrial && !userData?.isTrial
 
