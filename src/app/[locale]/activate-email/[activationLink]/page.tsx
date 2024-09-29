@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 		title: 'Активация аккаунта - Whai',
 		description:
 			'Завершите процесс регистрации, активировав ваш аккаунт на платформе Whai.',
-		url: new URL('/activate-email', 'https://whai.ru').toString(),
+		url: new URL('/activate-email', 'https://whai.ru/ru').toString(),
 		type: 'website'
 	},
 	...NO_INDEX_PAGE

@@ -1,6 +1,4 @@
 'use client'
-import BaseSchool from '@/shared/assets/icons/MainPage/BaseSchool'
-import ModernSchool from '@/shared/assets/icons/MainPage/ModernSchool'
 import {
 	Table,
 	TableBody,
@@ -13,8 +11,7 @@ import {
 const ComparisonSection = () => {
 	return (
 		<div className='w-screen h-fit p-8 flex mt-36 items-center justify-center z-10'>
-			<div className='flex items-end justify-between w-[80%] gap-20'>
-				<BaseSchool width={300} className='z-10' />
+			<div className='flex items-center justify-center w-[60%] max-lg:w-[70%] max-md:w-[80%] max-640:w-[90%] max-sm:w-full gap-20'>
 				<div className='flex flex-col gap-20 w-full justify-center items-center'>
 					<h2 className='text-3xl font-bold mb-4 z-10'>
 						Почему WHAI - ваш лучший выбор
@@ -22,8 +19,8 @@ const ComparisonSection = () => {
 					<Table
 						className='z-10 shadow-none w-full'
 						classNames={{
-							base: 'bg-white shadow-none',
-							wrapper: 'shadow-none',
+							base: 'bg-white shadow-none scrollbar-hide',
+							wrapper: 'shadow-none scrollbar-hide',
 							th: 'bg-decor-2 text-accent'
 						}}
 						aria-label='Comparison table'
@@ -75,7 +72,7 @@ const ComparisonSection = () => {
 									≈70 000 ₽ / курс
 								</TableCell>
 								<TableCell className='px-4 py-2 rounded-xl font-semibold'>
-									От 2 999 ₽ навсегда
+									От 799 ₽ навсегда
 								</TableCell>
 							</TableRow>
 							<TableRow>
@@ -90,7 +87,6 @@ const ComparisonSection = () => {
 						</TableBody>
 					</Table>
 				</div>
-				<ModernSchool width={300} className='z-10' />
 			</div>
 		</div>
 	)

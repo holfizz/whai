@@ -1,6 +1,6 @@
 import { getServerSideSitemap, ISitemapField } from 'next-sitemap'
 
-export async function GET(req: Request) {
+export async function GET() {
 	const url = process.env.CLIENT_URL
 	const fields: ISitemapField[] = [
 		{
@@ -25,31 +25,31 @@ export async function GET(req: Request) {
 			loc: `${url}/about`,
 			lastmod: new Date().toISOString(),
 			changefreq: 'daily',
-			priority: 0.9
+			priority: 0.5
 		},
 		{
 			loc: `${url}/privacy`,
 			lastmod: new Date().toISOString(),
 			changefreq: 'weekly',
-			priority: 0.5
+			priority: 0.1
 		},
 		{
 			loc: `${url}/subscription-term`,
 			lastmod: new Date().toISOString(),
 			changefreq: 'weekly',
-			priority: 0.5
+			priority: 0.1
 		},
 		{
 			loc: `${url}/support`,
 			lastmod: new Date().toISOString(),
 			changefreq: 'weekly',
-			priority: 0.6
+			priority: 0.5
 		},
 		{
 			loc: `${url}/cookie-policy`,
 			lastmod: new Date().toISOString(),
 			changefreq: 'weekly',
-			priority: 0.2
+			priority: 0.1
 		}
 	]
 	return getServerSideSitemap(fields)

@@ -432,5 +432,12 @@
 		"answer5": "A flexible study plan allows you to tailor the learning program to your needs. You can choose only the topics and materials that are truly interesting and useful for you, excluding what you already know.",
 		"question6": "What types of homework are available on the platform?",
 		"answer6": "Homework includes completing tasks in text format, creating presentations, and adding photos or screenshots to demonstrate progress. Results are attached as photos, screenshots, files, and other formats."
+	},
+	"Contacts": {
+		"Chat to us": "Chat to us",
+		"Our friendly team is here to help": "Our friendly team is here to help",
+		"Grow deeper in our social networks": "Grow deeper in our social networks",
+		"Telegram": "Telegram",
+		"Vkontakte": "Vkontakte"
 	}
 }

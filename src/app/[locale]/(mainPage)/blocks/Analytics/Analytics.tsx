@@ -183,13 +183,13 @@ const Analytics = () => {
 				Следим за вашей
 				<br /> успеваемостью
 			</h1>
-			<div className='absolute w-[80%]'>
+			<div className='absolute w-[80%] mt-20'>
 				<div className='relative w-[300px] left-10 top-8'>
-					<div className='w-[220px] h-[60px] rounded-[30px] bg-decor-3 px-2 flex items-center gap-8 absolute right-[-80px] mt-10 z-10'>
-						<div className='w-[50px] h-[50px] rounded-full bg-accent flex items-center justify-center'>
+					<div className='w-[220px] h-[60px] rounded-[30px] bg-decor-3 px-2 flex items-center gap-8 max-sm:gap-3 absolute right-[-80px] max-sm:w-[120px]   max-sm:h-[50px] max-sm:right-14 mt-10 z-10'>
+						<div className='w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[35px] rounded-full bg-accent flex items-center justify-center'>
 							<TextIcon />
 						</div>
-						<span className='text-yellow-5'>Русский язык</span>
+						<span className='text-yellow-5 max-sm:text-lg'>Русский язык</span>
 					</div>
 					<div className='mt-4 relative' ref={chartRef}>
 						<div className='relative w-[250px] h-[250px]'>
@@ -206,14 +206,14 @@ const Analytics = () => {
 						</div>
 					</div>
 				</div>
-				<div className='relative left-1/3 top-12'>
-					<div className='w-[200px] h-[60px] rounded-[30px] bg-decor-3 px-2 flex items-center gap-8 left-[-150px] mt-12 z-20 absolute'>
-						<div className='w-[50px] h-[50px] rounded-full bg-accent flex items-center justify-center'>
+				<div className='relative left-1/3 max-640:left-0 top-12 max-640:mt-20'>
+					<div className='w-[200px] h-[60px] rounded-[30px] max-sm:w-[120px]   max-sm:h-[50px] max-sm:right-14 bg-decor-3 px-2 flex items-center gap-8 max-sm:gap-3 left-[-150px] max-640:left-[-30px] max-640:bottom-[-30px] mt-12 z-20 absolute'>
+						<div className='w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[40px] rounded-full bg-accent flex items-center justify-center'>
 							<AnalyticsIcon />
 						</div>
-						<span className='text-yellow-5'>Аналитик</span>
+						<span className='text-yellow-5 max-sm:text-lg'>Аналитик</span>
 					</div>
-					<div className='w-[400px] h-[300px] bg-bg-accent rounded-3xl p-4 flex items-center justify-center flex-col '>
+					<div className='w-[400px] h-[300px] max-640:w-full bg-bg-accent rounded-3xl p-4 flex items-center justify-center flex-col '>
 						<h1 className='flex gap-1 items-center font-medium text-xl'>
 							<WhaiLogoTransparent />
 							<span className='text-secondary'>+48%</span>
