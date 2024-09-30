@@ -11,6 +11,7 @@ import {
 	getCourseByIdRoute,
 	getSubscriptionsRoute
 } from '@/shared/const/router'
+import logger from '@/shared/lib/utils/logger'
 import Button from '@/shared/ui/Button/Button'
 import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
@@ -75,12 +76,18 @@ const CreateCoursePlanPage = () => {
 	}, [coursePlanStateData, getCoursePlan])
 
 	useEffect(() => {
+		logger.log(1, courseId)
+		logger.log(2, courseAIHistory)
+		logger.log(3, selectedTitle)
+		logger.log(4, selectedDescription)
+		logger.log(5, !coursePlanStateData)
+		logger.log(6, !coursePlanData)
+		logger.log(7, !createPlanLoading)
+		logger.log(8, !hasError)
 		const createPlan = async () => {
 			if (
 				courseId &&
-				courseAIHistory &&
 				selectedTitle &&
-				selectedDescription &&
 				!coursePlanStateData &&
 				!coursePlanData &&
 				!createPlanLoading &&

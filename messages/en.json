@@ -263,7 +263,10 @@
 		"This will take some time Please dont close the page": "This will take some time. Please don't close the page",
 		"Do you need help finalizing your request": "Do you need help finalizing your request?",
 		"Yes, help me": "Yes, help me",
-		"No, continue": "No, continue"
+		"No, continue": "No, continue",
+		"Subscribe": "Subscribe",
+		"You have reached your creation limit, subscribe to continue using the service": "You have reached your creation limit, subscribe to continue using the service",
+		"An error occurred while summarizing your knowledge": "An error occurred while summarizing your knowledge"
 	},
 	"CreateTest": {
 		"What are we creating?": "What are we creating?",

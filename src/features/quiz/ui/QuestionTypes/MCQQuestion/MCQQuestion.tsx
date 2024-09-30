@@ -142,7 +142,7 @@ const MCQQuestion = ({
 								>
 									<div className='w-full h-auto'>
 										<h1
-											className={`opacity-100 w-full break-words h-auto ${
+											className={`opacity-100 w-full break-words text-wrap h-auto ${
 												checked
 													? 'text-lg font-medium text-center'
 													: 'text-left'

@@ -30,7 +30,7 @@ const components = {
 	),
 	p: ({ node, ...props }) => (
 		<p
-			className='text-center text-medium pb-2 my-2 max-md:text-xl'
+			className='text-center text-medium pb-2 my-2 max-md:text-xl text-wrap'
 			{...props}
 		></p>
 	),

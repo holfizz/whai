@@ -1,10 +1,12 @@
 import { useGetCourseAIHistoryByCourseId } from '@/entities/courseAIHistory'
 import { useCreateIndependentQuizWithAI } from '@/entities/quiz'
 import { Quiz } from '@/features/quiz'
+import { getSubscriptionsRoute } from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import BigDotsLoader from '@/shared/ui/Loader/BigDotsLoader'
 import { DashboardLayout } from '@/widgets/DashboardLayout'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { useEffect } from 'react'
 import useUnifiedStore from '../../../(model)/unified.state'
 
@@ -75,21 +77,49 @@ const CheckKnowledgeStep = () => {
 						<BigDotsLoader className='mt-8' />
 					</>
 				)}
-				{(errorFetchingHistory || errorCreateQuiz) && (
+				{errorCreateQuiz && (
 					<>
-						<h1 className='text-lg font-bold text-error-10'>
-							{t('An error occurred while creating the test')}
-						</h1>
+						{(() => {
+							switch (errorCreateQuiz.message) {
+								case 'You have reached your quiz creation limit for this month.':
+									return (
+										<div className='flex flex-col gap-5 w-[60%] max-md:w-[80%] max-sm:w-[90%] items-center justify-center mb-14'>
+											<h1 className='text-lg text-error-10 text-center'>
+												{t(
+													'You have reached your creation limit, subscribe to continue using the service'
+												)}
+											</h1>
+											<Button
+												color='accent'
+												as={Link}
+												className='mt-4 rounded-xl w-[200px]'
+												href={getSubscriptionsRoute()}
+											>
+												{t('Subscribe')}
+											</Button>
+										</div>
+									)
+								default:
+									return (
+										<h1 className='text-lg text-error-10 text-center'>
+											{t('An error occurred while creating the test')}
+										</h1>
+									)
+							}
+						})()}
 						<Button
 							className='mt-4'
 							size={'3xl'}
 							color={'secondary'}
-							onClick={handleNext}
+							onClick={() => {
+								window.location.reload()
+							}}
 						>
 							{t('Try again')}
 						</Button>
 					</>
 				)}
+
 				{quizId && (
 					<>
 						<h1 className='text-lg font-bold'>

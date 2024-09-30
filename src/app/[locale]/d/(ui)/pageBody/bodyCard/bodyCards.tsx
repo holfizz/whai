@@ -92,7 +92,7 @@ export default function BodyCards({
 					) : (
 						<Link
 							className='shadow-sm w-[390px] min-h-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full flex items-center justify-center rounded-3xl flex-col gap-4 cursor-pointer'
-							href={getCreatePageRoute()}
+							href={getSubscriptionsRoute()}
 						>
 							<Button
 								className='rounded-2xl'
