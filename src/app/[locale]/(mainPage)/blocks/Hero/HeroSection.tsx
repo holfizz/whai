@@ -30,7 +30,7 @@ const HeroSection = () => {
 				<p
 					className={'text-secondary text-lg text-center font-light mt-8  z-10'}
 				>
-					Наш ИИ подберёт персонализированную программу, основанная <br />
+					Наш ИИ подберёт персонализированную программу, основанную <br />
 					на актуальных данных и лучших практиках.
 				</p>
 				<div className='flex gap-5 mt-8'>

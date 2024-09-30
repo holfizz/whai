@@ -30,7 +30,7 @@ const ContactsPage = () => {
 							</div>
 						</div>
 						<h2 className='text-lg font-medium mt-4'>
-							{t('Grow deeper in our social networks')}:
+							{t('About development and education in social networks')}:
 						</h2>
 						<div className='flex gap-4'>
 							<Link href='https://t.me/whai_edu'>
