@@ -29,17 +29,30 @@ const InfoMessage: FC<InfoMessageProps> = ({ error, data, type }) => {
 			>
 				{type === authConstants.LOGIN ? t('Log in') : t('Sign up')}
 			</h1>
-
 			{error && (
-				<h1 className='text-xl max-md:text-2xl text-error-10 text-center'>
-					{type === authConstants.LOGIN
-						? t(
-								'There was an error logging in, please check your email address and password and try again'
-						  )
-						: t(
-								'An error occurred during registration, check your email and password and try again'
-						  )}
-				</h1>
+				<p className='text-lg max-md:text-2xl text-error-10 text-center'>
+					{(() => {
+						switch (true) {
+							case error.message ===
+								'Пользователь с таким email уже существует':
+								return t(
+									'A user with this email already exists, enter a different address or check the message in the mail'
+								)
+							case error.message === 'Подтвердите почту':
+								return t('Confirm your email')
+
+							case type === authConstants.LOGIN:
+								return t(
+									'There was an error logging in, please check your email address and password and try again'
+								)
+
+							default:
+								return t(
+									'An error occurred during registration, check your email and password and try again'
+								)
+						}
+					})()}
+				</p>
 			)}
 
 			{type === authConstants.SIGNUP && data && (

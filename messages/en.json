@@ -20,7 +20,8 @@
 		"Personal data processing policy": "Personal data processing policy",
 		"You must complete the CAPTCHA validation": "You must complete the CAPTCHA validation",
 		"An error occurred during registration, check your email and password and try again": "An error occurred during registration, check your email and password and try again",
-		"There was an error logging in, please check your email address and password and try again": "There was an error logging in, please check your email address and password and try again"
+		"There was an error logging in, please check your email address and password and try again": "There was an error logging in, please check your email address and password and try again",
+		"A user with this email already exists, enter a different address or check the message in the mail": "A user with this email already exists, enter a different address or check the message in the mail"
 	},
 	"Layout": {
 		"By using the site, you consent to the collection of cookies and agree to": "By using the site, you consent to the collection of cookies and agree to",
@@ -147,7 +148,10 @@
 		"Each journey begins with the first step Extend your hand towards knowledge, and we will help you achieve your goals Together we will overcome any obstacles on the way to success": "Each journey begins with the first step. Extend your hand towards knowledge, and we will help you achieve your goals. Together we will overcome any obstacles on the way to success.",
 		"Ready to start your way?": "Ready to start your way?",
 		"Take the first step": "Take the first step",
-		"You dont have any courses, start creating them": "You don't have any courses, start creating them"
+		"You dont have any courses, start creating them": "You don't have any courses, start creating them",
+		"Activate subscription": "Activate subscription",
+		"To create a course you need a subscription, you can activate the test one by clicking on the button": "To create a course you need a subscription, you can activate the test one by clicking on the button",
+		"To create a course, a subscription is required, you can activate it by clicking on the button": "To create a course, a subscription is required, you can activate it by clicking on the button"
 	},
 	"TopicsPage": {
 		"In notes": "In notes",

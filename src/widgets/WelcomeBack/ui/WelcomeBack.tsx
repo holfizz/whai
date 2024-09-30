@@ -2,7 +2,10 @@ import { IUser } from '@/entities/Auth'
 import { useGetStatProfile } from '@/entities/Auth/model/auth.queries'
 import { Link } from '@/navigation'
 import BaseAvatar from '@/shared/assets/image/BaseAvatar.webp'
-import { getCreatePageRoute } from '@/shared/const/router'
+import {
+	getCreatePageRoute,
+	getSubscriptionsRoute
+} from '@/shared/const/router'
 import Button from '@/shared/ui/Button/Button'
 import { Dropdown } from '@/shared/ui/Dropdown/Dropdown'
 import { Avatar, DropdownTrigger } from '@nextui-org/react'
@@ -51,15 +54,26 @@ export const WelcomeBack: FC<{ userData: IUser }> = ({ userData }) => {
 					</Dropdown>
 				</div>
 
-				<Button
-					color='accent'
-					size='xl'
-					className='mt-[40px] z-0'
-					as={Link}
-					href={getCreatePageRoute()}
-				>
-					{`${t('Create')}`}
-				</Button>
+				{userData?.isTrial || userData?.activeSubscription?.isActive ? (
+					<Button
+						color='accent'
+						size='xl'
+						className='mt-[40px] z-0'
+						as={Link}
+						href={getCreatePageRoute()}
+					>
+						{`${t('Create')}`}
+					</Button>
+				) : (
+					<Button
+						color='accent'
+						className='mt-[40px] z-0 rounded-2xl'
+						as={Link}
+						href={getSubscriptionsRoute()}
+					>
+						{`${t('Activate subscription')}`}
+					</Button>
+				)}
 			</div>
 		</div>
 	)

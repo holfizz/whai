@@ -79,15 +79,40 @@ export default function BodyCards({
 				})
 			) : (
 				<>
-					<Link
-						className='shadow-sm w-[390px] min-h-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full flex items-center justify-center rounded-3xl flex-col gap-4 cursor-pointer'
-						href={getCreatePageRoute()}
-					>
-						<PlusIcon fontSize={28}></PlusIcon>
-						<p className='text-sm max-640:text-lg text-secondary'>
-							{t('You dont have any courses, start creating them')}
-						</p>
-					</Link>
+					{userData?.isTrial || userData?.activeSubscription?.isActive ? (
+						<Link
+							className='shadow-sm w-[390px] min-h-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full flex items-center justify-center rounded-3xl flex-col gap-4 cursor-pointer'
+							href={getCreatePageRoute()}
+						>
+							<PlusIcon fontSize={28}></PlusIcon>
+							<p className='text-sm max-640:text-lg text-secondary'>
+								{t('You dont have any courses, start creating them')}
+							</p>
+						</Link>
+					) : (
+						<Link
+							className='shadow-sm w-[390px] min-h-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full flex items-center justify-center rounded-3xl flex-col gap-4 cursor-pointer'
+							href={getCreatePageRoute()}
+						>
+							<Button
+								className='rounded-2xl'
+								color='accent'
+								as={Link}
+								href={getSubscriptionsRoute()}
+							>
+								{t('Activate subscription')}
+							</Button>
+							<p className='text-sm max-640:text-lg text-secondary text-center w-[80%]'>
+								{!userData?.isTrialUsed
+									? t(
+											'To create a course you need a subscription, you can activate the test one by clicking on the button'
+									  )
+									: t(
+											'To create a course, a subscription is required, you can activate it by clicking on the button'
+									  )}
+							</p>
+						</Link>
+					)}
 				</>
 			)}
 		</div>
