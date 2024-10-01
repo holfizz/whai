@@ -38,7 +38,7 @@ export default function BodyCards({
 
 	return (
 		<div
-			className={`relative flex justify-between max-md:flex-wrap gap-4 ${className}`}
+			className={`relative flex justify-between max-md:flex-wrap gap-4 w-full ${className}`}
 		>
 			{filteredCourses?.length > 0 ? (
 				filteredCourses.map((course, i) => {
@@ -46,7 +46,7 @@ export default function BodyCards({
 
 					return (
 						<>
-							<div className={`${isCourseLocked && 'blur-xl'}`}>
+							<div className={`w-full ${isCourseLocked && 'blur-xl'}`}>
 								<CourseCard
 									className='!w-full !max-w-[390px]'
 									course={course}

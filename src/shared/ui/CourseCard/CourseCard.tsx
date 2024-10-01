@@ -20,8 +20,8 @@ const CourseCard = ({
 	isSquare?: boolean
 }) => {
 	const styles = isSquare
-		? 'h-min-[330px] h-auto md:w-[90%] max-md:h-min-[252px] lg:w-[390px] max-sm:w-full'
-		: 'w-[390px] h-min-[330px] h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full'
+		? 'h-auto md:w-[90%] max-md:h-min-[252px] lg:w-[390px] max-sm:w-full'
+		: 'w-[390px]  h-auto max-md:w-full max-md:h-min-[252px] lg:w-1/2 max-sm:w-full'
 	const getRoute = (id: string) => {
 		if (course?.isStatic) {
 			return getCourseExampleByIdRoute(id)
@@ -30,7 +30,7 @@ const CourseCard = ({
 	}
 	return (
 		<div
-			className={`${styles} shadow-sm rounded-[40px] py-4 px-5 ${className}  `}
+			className={`${styles} min-h-[330px] shadow-sm rounded-[40px] py-4 px-5 ${className}`}
 		>
 			<div className={'w-full flex justify-between'}>
 				{course.imgUrl ? (
@@ -65,8 +65,12 @@ const CourseCard = ({
 			<Link className={cls.link} href={getRoute(course?.id)}>
 				{course?.name}
 			</Link>
-			<p className={cls.paragraph}>{course?.description}</p>
-			<CourseStat data={course} className={' w-[95%]'} />
+			<p className={cls.paragraph}>
+				{course?.description
+					? course?.description
+					: `Курс с названием "${course?.name}", в котором количество модулей равно ${course?.totalTopics}. В данном курсе находиться большое количество полезной информации информации, подробнее с которой можно ознакомиться перейдя в сам курс `}
+			</p>
+			<CourseStat data={course} className={'mt-auto w-[95%]'} />
 		</div>
 	)
 }
