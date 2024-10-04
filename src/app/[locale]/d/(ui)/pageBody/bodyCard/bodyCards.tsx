@@ -33,7 +33,7 @@ export default function BodyCards({
 			</div>
 		)
 	}
-	const filteredCourses = data?.slice(0, 3)
+	const filteredCourses = data?.slice(1, 3)
 	const t = useTranslations('Dashboard')
 
 	return (

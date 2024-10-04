@@ -54,7 +54,7 @@ const SubtopicPlanAccordion = ({
 	}
 
 	return (
-		<div className='w-full'>
+		<div className='w-full ml-8'>
 			<Accordion>
 				{subtopics.map((subtopic, index) => (
 					<AccordionItem
